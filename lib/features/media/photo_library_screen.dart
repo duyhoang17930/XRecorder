@@ -12,6 +12,7 @@ class PhotoLibraryScreen extends StatefulWidget {
 
 class _PhotoLibraryScreenState extends State<PhotoLibraryScreen> {
   String filter = 'All';
+  String searchQuery = '';
   final favorites = <int>{};
   @override
   Widget build(BuildContext context) {
@@ -23,61 +24,67 @@ class _PhotoLibraryScreenState extends State<PhotoLibraryScreen> {
               (filter == 'Today' && i < 3) ||
               (filter == 'Favorites' && favorites.contains(i)),
         )
+        .where(
+          (i) => MockMediaRepository.photos[i].toLowerCase().contains(
+            searchQuery.toLowerCase(),
+          ),
+        )
         .toList();
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(AppSpacing.md),
       children: [
-        const Row(
+        Row(
           children: [
             Icon(
               Icons.movie_creation_outlined,
               color: AppColors.primary,
-              size: 32,
+              size: AppIconSize.feature,
             ),
-            SizedBox(width: 12),
+            SizedBox(width: AppSpacing.sm),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'SCREENFLOW',
-                    style: TextStyle(
+                    style: AppTypography.overline.copyWith(
                       color: AppColors.primary,
                       fontSize: 11,
                       letterSpacing: 2,
                     ),
                   ),
-                  Text(
-                    'Photo Gallery',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
-                  ),
+                  Text('Photo Gallery', style: AppTypography.display),
                 ],
               ),
             ),
           ],
         ),
         const MockBanner(),
-        const SizedBox(height: 16),
+        StudioSearchField(
+          hintText: 'Search photos',
+          onChanged: (value) => setState(() => searchQuery = value),
+        ),
+        const SizedBox(height: AppSpacing.md),
         const Row(
           children: [
             StudioBadge('● 1.4 GB USED'),
-            SizedBox(width: 8),
+            SizedBox(width: AppSpacing.xs),
             Expanded(
               child: Text(
                 '100% Lossless PNG',
-                style: TextStyle(color: AppColors.muted, fontSize: 12),
+                style: AppTypography.mutedBodySmall,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: AppSpacing.md),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: ['All', 'Today', 'This Week', 'Favorites']
                 .map(
                   (f) => Padding(
-                    padding: const EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.only(right: AppSpacing.xs),
                     child: ChoiceChip(
                       label: Text(f),
                       selected: f == filter,
@@ -105,7 +112,7 @@ class _PhotoLibraryScreenState extends State<PhotoLibraryScreen> {
               return Material(
                 color: AppColors.card,
                 clipBehavior: Clip.antiAlias,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(AppRadius.card),
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
@@ -117,11 +124,7 @@ class _PhotoLibraryScreenState extends State<PhotoLibraryScreen> {
                     const IgnorePointer(
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.center,
-                            end: Alignment.bottomCenter,
-                            colors: [Colors.transparent, Colors.black],
-                          ),
+                          gradient: AppGradients.photoScrim,
                         ),
                       ),
                     ),
@@ -143,7 +146,7 @@ class _PhotoLibraryScreenState extends State<PhotoLibraryScreen> {
                               : Icons.favorite_border,
                           color: favorites.contains(i)
                               ? AppColors.primary
-                              : Colors.white,
+                              : AppColors.text,
                         ),
                       ),
                     ),
@@ -164,19 +167,13 @@ class _PhotoLibraryScreenState extends State<PhotoLibraryScreen> {
                                 '12:30',
                                 '13:15',
                               ][i],
-                              style: const TextStyle(
-                                fontFamily: 'monospace',
-                                fontSize: 12,
-                              ),
+                              style: AppTypography.timecode,
                             ),
                             Text(
                               MockMediaRepository.photos[i],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w700,
-                              ),
+                              style: AppTypography.badge,
                             ),
                           ],
                         ),
@@ -189,29 +186,29 @@ class _PhotoLibraryScreenState extends State<PhotoLibraryScreen> {
           ),
         ),
         if (indices.isEmpty)
-          const StudioCard(
-            child: Text('No favorites yet. Tap a heart to add a sample photo.'),
+          const StudioEmptyState(
+            icon: Icons.search_off,
+            title: 'No photos found',
+            description: 'Try changing your search or filter.',
           ),
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
         StudioCard(
           child: Row(
             children: [
-              const Icon(Icons.auto_fix_high, color: AppColors.cyan, size: 32),
-              const SizedBox(width: 12),
+              const Icon(
+                Icons.auto_fix_high,
+                color: AppColors.cyan,
+                size: AppIconSize.feature,
+              ),
+              const SizedBox(width: AppSpacing.sm),
               const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Smart Stitch & Crop',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    Text('Smart Stitch & Crop', style: AppTypography.title),
                     Text(
                       'Merge scrolling chat receipts seamlessly',
-                      style: TextStyle(color: AppColors.muted, fontSize: 12),
+                      style: AppTypography.mutedBodySmall,
                     ),
                   ],
                 ),
@@ -224,7 +221,7 @@ class _PhotoLibraryScreenState extends State<PhotoLibraryScreen> {
             ],
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
         Align(
           alignment: Alignment.centerRight,
           child: OutlinedButton.icon(
@@ -237,10 +234,11 @@ class _PhotoLibraryScreenState extends State<PhotoLibraryScreen> {
     );
   }
 
-  void _preview(BuildContext context, int i) => showDialog<void>(
+  void _preview(BuildContext context, int i) => showStudioDialog<void>(
     context: context,
-    builder: (context) => Dialog(
-      child: Column(
+    builder: (context) => StudioDialog(
+      contentPadding: EdgeInsets.zero,
+      content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Flexible(
@@ -250,12 +248,20 @@ class _PhotoLibraryScreenState extends State<PhotoLibraryScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppSpacing.md),
             child: Text(MockMediaRepository.photos[i]),
           ),
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Close sample preview'),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.md,
+              0,
+              AppSpacing.md,
+              AppSpacing.md,
+            ),
+            child: TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Close sample preview'),
+            ),
           ),
         ],
       ),

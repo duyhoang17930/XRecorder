@@ -52,12 +52,9 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 720),
             child: ListView(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSpacing.md),
               children: [
-                Text(
-                  media.name,
-                  style: const TextStyle(color: AppColors.muted, fontSize: 12),
-                ),
+                Text(media.name, style: AppTypography.mutedBodySmall),
                 const MockBanner(),
                 MediaPreview(
                   asset: media.id == 'apex'
@@ -67,13 +64,13 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                   badge: '${media.fps} FPS · SAMPLE PREVIEW',
                   onTap: () => unsupported(context, 'Video playback'),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
                 PrimaryButton(
                   'Edit in Studio',
                   icon: Icons.content_cut,
                   onPressed: () => context.go('/editor'),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSpacing.xs),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -84,20 +81,20 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                         (Icons.content_cut, 'Quick Trim'),
                       ])
                         Padding(
-                          padding: const EdgeInsets.only(right: 8),
+                          padding: const EdgeInsets.only(right: AppSpacing.xs),
                           child: OutlinedButton.icon(
                             onPressed: () => unsupported(context, action.$2),
-                            icon: Icon(action.$1, size: 16),
+                            icon: Icon(action.$1, size: AppIconSize.small),
                             label: Text(
                               action.$2,
-                              style: const TextStyle(fontSize: 11),
+                              style: AppTypography.caption,
                             ),
                           ),
                         ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
@@ -158,33 +155,24 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                                 width: (constraints.maxWidth - 8) / 2,
                                 child: StudioCard(
                                   color: AppColors.surface,
-                                  padding: const EdgeInsets.all(12),
+                                  padding: const EdgeInsets.all(AppSpacing.sm),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         stat.$1,
-                                        style: const TextStyle(
-                                          color: AppColors.muted,
-                                          fontSize: 9,
-                                        ),
+                                        style: AppTypography.metricLabel,
                                       ),
-                                      const SizedBox(height: 4),
+                                      const SizedBox(height: AppSpacing.xxs),
                                       Text(
                                         stat.$2,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                        style: AppTypography.metric,
                                       ),
-                                      const SizedBox(height: 4),
+                                      const SizedBox(height: AppSpacing.xxs),
                                       Text(
                                         stat.$3,
-                                        style: const TextStyle(
-                                          color: AppColors.cyan,
-                                          fontSize: 9,
-                                        ),
+                                        style: AppTypography.metricAccent,
                                       ),
                                     ],
                                   ),
@@ -193,28 +181,28 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.md),
                       const Text(
                         'STORAGE DIRECTORY',
-                        style: TextStyle(color: AppColors.muted, fontSize: 10),
+                        style: AppTypography.mutedMicro,
                       ),
                       const Text(
                         'Internal > DCIM > ScreenFlow · Sample path',
-                        style: TextStyle(fontSize: 11),
+                        style: AppTypography.caption,
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
                 StudioCard(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'Audio Track Scrubber Peak',
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: AppTypography.bodyEmphasis,
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: AppSpacing.sm),
                       SizedBox(
                         height: 40,
                         child: LayoutBuilder(
@@ -233,7 +221,9 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                                       color: i % 9 == 0
                                           ? AppColors.primary
                                           : AppColors.cyan,
-                                      borderRadius: BorderRadius.circular(2),
+                                      borderRadius: BorderRadius.circular(
+                                        AppRadius.waveform,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -242,43 +232,33 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: AppSpacing.xs),
                       const Text(
                         'Sample waveform · No live audio signal',
-                        style: TextStyle(color: AppColors.muted, fontSize: 10),
+                        style: AppTypography.mutedMicro,
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
                 StudioCard(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'Director Quick Notes',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: AppTypography.title,
                       ),
-                      const SizedBox(height: 12),
-                      TextField(
+                      const SizedBox(height: AppSpacing.sm),
+                      StudioTextField(
                         controller: notes,
                         maxLines: 3,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: AppColors.surface,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                          ),
-                          hintText: 'Add a session note',
-                        ),
+                        hintText: 'Add a session note',
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: AppSpacing.xs),
                       const Text(
                         'Editable preview · Notes reset when this page closes',
-                        style: TextStyle(fontSize: 10, color: AppColors.muted),
+                        style: AppTypography.mutedMicro,
                       ),
                     ],
                   ),
@@ -298,7 +278,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                             onTap: () =>
                                 unsupported(context, 'Session take playback'),
                             child: StudioCard(
-                              padding: const EdgeInsets.all(8),
+                              padding: const EdgeInsets.all(AppSpacing.xs),
                               child: Column(
                                 children: [
                                   AspectRatio(
@@ -308,21 +288,18 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  const SizedBox(height: 8),
+                                  const SizedBox(height: AppSpacing.xs),
                                   Text(
                                     i == 1
                                         ? 'Apex_Sector04_Take01.mp4'
                                         : 'Apex_Sector04_Replay.mp4',
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(fontSize: 11),
+                                    style: AppTypography.caption,
                                   ),
                                   const Text(
                                     '1080p 60fps · Sample',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: AppColors.muted,
-                                    ),
+                                    style: AppTypography.mutedMicro,
                                   ),
                                 ],
                               ),
@@ -332,7 +309,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                       ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
               ],
             ),
           ),

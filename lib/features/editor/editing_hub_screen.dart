@@ -7,7 +7,7 @@ class EditingHubScreen extends StatelessWidget {
   const EditingHubScreen({super.key});
   @override
   Widget build(BuildContext context) => ListView(
-    padding: const EdgeInsets.all(16),
+    padding: const EdgeInsets.all(AppSpacing.md),
     children: [
       const SectionTitle(
         'Editing Studio',
@@ -18,18 +18,18 @@ class EditingHubScreen extends StatelessWidget {
         child: Row(
           children: [
             Icon(Icons.bolt, color: AppColors.cyan),
-            SizedBox(width: 12),
+            SizedBox(width: AppSpacing.sm),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Smart Engine CFR 4K Ready',
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                    style: AppTypography.bodyEmphasis,
                   ),
                   Text(
                     'Engine preview · Processing not connected',
-                    style: TextStyle(fontSize: 11, color: AppColors.muted),
+                    style: AppTypography.mutedCaption,
                   ),
                 ],
               ),
@@ -40,7 +40,7 @@ class EditingHubScreen extends StatelessWidget {
       ),
       const SectionTitle('Workstation Tools'),
       InkWell(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppRadius.card),
         onTap: () => unsupported(context, 'Video editing'),
         child: StudioCard(
           child: Column(
@@ -49,27 +49,18 @@ class EditingHubScreen extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.video_settings,
-                    size: 40,
+                    size: AppIconSize.featureLarge,
                     color: AppColors.primary,
                   ),
-                  SizedBox(width: 16),
+                  SizedBox(width: AppSpacing.md),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Edit Video',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
+                        Text('Edit Video', style: AppTypography.headline),
                         Text(
                           'Trim, split, text, filters, audio multitrack',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: AppColors.muted,
-                          ),
+                          style: AppTypography.mutedCaption,
                         ),
                       ],
                     ),
@@ -77,23 +68,19 @@ class EditingHubScreen extends StatelessWidget {
                   Icon(Icons.arrow_forward, color: AppColors.primary),
                 ],
               ),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.circular(12),
-                ),
+              const SizedBox(height: AppSpacing.md),
+              StudioInset(
+                padding: const EdgeInsets.all(AppSpacing.sm),
                 child: const Text(
                   '4 Audio Stems  •  Keyframes  •  HDR Color',
-                  style: TextStyle(fontSize: 10, color: AppColors.muted),
+                  style: AppTypography.mutedMicro,
                 ),
               ),
             ],
           ),
         ),
       ),
-      const SizedBox(height: 12),
+      const SizedBox(height: AppSpacing.sm),
       LayoutBuilder(
         builder: (context, constraints) => GridView.count(
           crossAxisCount: constraints.maxWidth > 600 ? 4 : 2,
@@ -126,7 +113,7 @@ class EditingHubScreen extends StatelessWidget {
               ),
             ])
               InkWell(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(AppRadius.card),
                 onTap: () => unsupported(context, tool.$2),
                 child: StudioCard(
                   child: Column(
@@ -134,20 +121,13 @@ class EditingHubScreen extends StatelessWidget {
                     children: [
                       Icon(tool.$1, color: AppColors.primary),
                       const Spacer(),
-                      Text(
-                        tool.$2,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
+                      Text(tool.$2, style: AppTypography.bodyEmphasis),
+                      const SizedBox(height: AppSpacing.xxs),
                       Text(
                         tool.$3,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 11,
+                        style: AppTypography.caption.copyWith(
                           color: AppColors.muted,
                         ),
                       ),
@@ -158,9 +138,9 @@ class EditingHubScreen extends StatelessWidget {
           ],
         ),
       ),
-      const SizedBox(height: 12),
+      const SizedBox(height: AppSpacing.sm),
       StudioCard(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(AppSpacing.xs),
         child: SettingsRow(
           'Edit Photo & Annotate',
           icon: Icons.draw_outlined,
@@ -174,14 +154,14 @@ class EditingHubScreen extends StatelessWidget {
       ),
       for (var i = 0; i < 2; i++)
         Padding(
-          padding: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.only(bottom: AppSpacing.sm),
           child: StudioCard(
             child: Column(
               children: [
                 Row(
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppRadius.icon),
                       child: Image.asset(
                         'assets/media/project_$i.jpg',
                         width: 104,
@@ -189,7 +169,7 @@ class EditingHubScreen extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: AppSpacing.sm),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,29 +180,26 @@ class EditingHubScreen extends StatelessWidget {
                                 : 'Flutter Tutorial Repro',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontWeight: FontWeight.w700),
+                            style: AppTypography.bodyEmphasis,
                           ),
-                          const SizedBox(height: 4),
+                          const SizedBox(height: AppSpacing.xxs),
                           const Text(
                             'Sample project · Multitrack',
-                            style: TextStyle(
-                              color: AppColors.muted,
-                              fontSize: 11,
-                            ),
+                            style: AppTypography.mutedCaption,
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: AppSpacing.xs),
                           const StudioBadge('DRAFT PREVIEW'),
                         ],
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: AppSpacing.sm),
                 Align(
                   alignment: Alignment.centerRight,
                   child: FilledButton.icon(
                     onPressed: () => unsupported(context, 'Resume edit'),
-                    icon: const Icon(Icons.play_arrow, size: 16),
+                    icon: const Icon(Icons.play_arrow, size: AppIconSize.small),
                     label: const Text('Resume Edit'),
                   ),
                 ),
@@ -236,19 +213,16 @@ class EditingHubScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(Icons.tips_and_updates_outlined, color: AppColors.cyan),
-            SizedBox(width: 12),
+            SizedBox(width: AppSpacing.sm),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Zero Re-encode Cut',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(height: 8),
+                  Text('Zero Re-encode Cut', style: AppTypography.bodyEmphasis),
+                  SizedBox(height: AppSpacing.xs),
                   Text(
                     'Future workflow: direct stream copy with original bitrate and no frame loss.',
-                    style: TextStyle(color: AppColors.muted, fontSize: 12),
+                    style: AppTypography.mutedBodySmall,
                   ),
                 ],
               ),

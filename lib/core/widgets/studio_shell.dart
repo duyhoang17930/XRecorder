@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/theme/app_theme.dart';
 import '../../features/recording/recording_setup_sheet.dart';
 import '../constants/design_tokens.dart';
 
@@ -75,8 +76,8 @@ class StudioShell extends StatelessWidget {
                         onPressed: () => openRecordingSetup(context),
                         child: const Icon(
                           Icons.radio_button_checked,
-                          color: Color(0xFF681E00),
-                          size: 32,
+                          color: AppColors.recordForeground,
+                          size: AppIconSize.feature,
                         ),
                       ),
                     ),
@@ -112,19 +113,15 @@ class StudioShell extends StatelessWidget {
       style: TextButton.styleFrom(
         foregroundColor: index == selected
             ? AppColors.primary
-            : const Color(0xFFDFC0B6),
+            : AppColors.navigationInactive,
         minimumSize: const Size(48, 64),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 25),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            maxLines: 1,
-            style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
-          ),
+          Icon(icon, size: AppIconSize.large),
+          const SizedBox(height: AppSpacing.xxs),
+          Text(label, maxLines: 1, style: AppTypography.navigation),
         ],
       ),
     ),

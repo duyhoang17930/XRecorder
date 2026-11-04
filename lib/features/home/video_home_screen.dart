@@ -15,6 +15,7 @@ class VideoHomeScreen extends StatefulWidget {
 
 class _VideoHomeScreenState extends State<VideoHomeScreen> {
   String filter = 'All';
+  String searchQuery = '';
   bool latest = true;
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,12 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
               (filter == '1080p 60fps' && v.fps == '60') ||
               filter == v.category,
         )
+        .where(
+          (v) =>
+              searchQuery.isEmpty ||
+              v.name.toLowerCase().contains(searchQuery.toLowerCase()) ||
+              v.category.toLowerCase().contains(searchQuery.toLowerCase()),
+        )
         .toList();
     if (!latest) videos = videos.reversed.toList();
     return CustomScrollView(
@@ -36,14 +43,14 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
           title: const Row(
             children: [
               Icon(Icons.movie_creation_outlined, color: AppColors.primary),
-              SizedBox(width: 8),
-              Text('ScreenFlow', style: TextStyle(fontSize: 17)),
-              SizedBox(width: 8),
+              SizedBox(width: AppSpacing.xs),
+              Text('ScreenFlow', style: AppTypography.title),
+              SizedBox(width: AppSpacing.xs),
               Expanded(
                 child: Text(
                   '/  Video Studio',
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: AppColors.primary, fontSize: 16),
+                  style: AppTypography.primaryTitle,
                 ),
               ),
             ],
@@ -57,13 +64,13 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
           ],
         ),
         SliverPadding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSpacing.md),
           sliver: SliverList.list(
             children: [
               Row(
                 children: [
                   const StudioBadge('PRO DESIGN', color: AppColors.primary),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: AppSpacing.xs),
                   const StudioBadge('● READY'),
                   const Spacer(),
                   PopupMenuButton<String>(
@@ -87,27 +94,29 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
                 ],
               ),
               const MockBanner(),
+              StudioSearchField(
+                hintText: 'Search recordings',
+                onChanged: (value) => setState(() => searchQuery = value),
+              ),
+              const SizedBox(height: AppSpacing.sm),
               StudioCard(
                 child: Column(
                   children: [
                     Row(
                       children: [
                         const Icon(Icons.storage, color: AppColors.primary),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: AppSpacing.sm),
                         const Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 'Internal Storage',
-                                style: TextStyle(fontWeight: FontWeight.w600),
+                                style: AppTypography.bodyEmphasis,
                               ),
                               Text(
                                 '48.2 GB free / 128 GB total',
-                                style: TextStyle(
-                                  color: AppColors.muted,
-                                  fontSize: 11,
-                                ),
+                                style: AppTypography.mutedCaption,
                               ),
                             ],
                           ),
@@ -116,12 +125,12 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
                           onPressed: () => unsupported(context, 'Clear cache'),
                           child: const Text(
                             'Clear Cache',
-                            style: TextStyle(fontSize: 11),
+                            style: AppTypography.caption,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: AppSpacing.sm),
                     const ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       child: LinearProgressIndicator(
@@ -130,28 +139,22 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
                         backgroundColor: AppColors.background,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: AppSpacing.xs),
                     const Row(
                       children: [
                         Expanded(
                           child: Text(
                             '● Video Captures (79.8 GB)',
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: AppColors.muted,
-                            ),
+                            style: AppTypography.mutedMicro,
                           ),
                         ),
-                        Text(
-                          '62% used',
-                          style: TextStyle(fontWeight: FontWeight.w800),
-                        ),
+                        Text('62% used', style: AppTypography.bodyEmphasis),
                       ],
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
               Row(
                 children: [
                   for (final tool in [
@@ -164,7 +167,7 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 3),
                         child: InkWell(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(AppRadius.card),
                           onTap: () => unsupported(context, tool.$2),
                           child: StudioCard(
                             padding: const EdgeInsets.symmetric(
@@ -179,17 +182,11 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
                                       ? AppColors.cyan
                                       : AppColors.primary,
                                 ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  tool.$2,
-                                  style: const TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
+                                const SizedBox(height: AppSpacing.xs),
+                                Text(tool.$2, style: AppTypography.caption),
                                 Text(
                                   tool.$3,
-                                  style: const TextStyle(
+                                  style: AppTypography.micro.copyWith(
                                     fontSize: 9,
                                     color: AppColors.muted,
                                   ),
@@ -204,12 +201,23 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
               ),
               SectionTitle(
                 'Recorded Clips',
-                trailing: TextButton.icon(
-                  onPressed: () => setState(() => latest = !latest),
-                  icon: const Icon(Icons.swap_vert, size: 16),
-                  label: Text(
-                    latest ? 'Latest First' : 'Oldest First',
-                    style: const TextStyle(fontSize: 11),
+                trailing: SizedBox(
+                  width: 148,
+                  child: StudioDropdown<bool>(
+                    value: latest,
+                    items: const [
+                      DropdownMenuItem(
+                        value: true,
+                        child: Text('Latest first'),
+                      ),
+                      DropdownMenuItem(
+                        value: false,
+                        child: Text('Oldest first'),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      if (value != null) setState(() => latest = value);
+                    },
                   ),
                 ),
               ),
@@ -219,7 +227,7 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
                   children: ['All', 'Today', '1080p 60fps', 'Gameplay', 'Work']
                       .map(
                         (label) => Padding(
-                          padding: const EdgeInsets.only(right: 8),
+                          padding: const EdgeInsets.only(right: AppSpacing.xs),
                           child: ChoiceChip(
                             label: Text(
                               label == 'All'
@@ -234,56 +242,69 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
                       .toList(),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
               if (widget.empty)
                 _empty(context)
               else
-                ...videos.map(
-                  (video) => Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: StudioCard(
-                      padding: EdgeInsets.zero,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          MediaPreview(
-                            asset: video.asset,
-                            duration: video.duration,
-                            badge: '${video.fps} FPS',
-                            onTap: () => context.push('/media/${video.id}'),
+                StudioAnimatedSwitcher(
+                  child: Column(
+                    key: ValueKey('$filter:$searchQuery:$latest'),
+                    children: [
+                      ...videos.map(
+                        (video) => Padding(
+                          padding: const EdgeInsets.only(bottom: AppSpacing.md),
+                          child: StudioCard(
+                            padding: EdgeInsets.zero,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                MediaPreview(
+                                  asset: video.asset,
+                                  duration: video.duration,
+                                  badge: '${video.fps} FPS',
+                                  onTap: () =>
+                                      context.push('/media/${video.id}'),
+                                ),
+                                ListTile(
+                                  onTap: () =>
+                                      context.push('/media/${video.id}'),
+                                  title: Text(
+                                    video.name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: AppTypography.bodyEmphasis.copyWith(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    '${video.category}  •  ${video.time}  •  ${video.size}',
+                                    style: AppTypography.caption.copyWith(
+                                      color: AppColors.muted,
+                                    ),
+                                  ),
+                                  trailing: IconButton(
+                                    tooltip: 'Share sample',
+                                    onPressed: () =>
+                                        unsupported(context, 'Share'),
+                                    icon: const Icon(
+                                      Icons.share_outlined,
+                                      size: AppIconSize.medium,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          ListTile(
-                            onTap: () => context.push('/media/${video.id}'),
-                            title: Text(
-                              video.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            subtitle: Text(
-                              '${video.category}  •  ${video.time}  •  ${video.size}',
-                              style: const TextStyle(
-                                fontSize: 11,
-                                color: AppColors.muted,
-                              ),
-                            ),
-                            trailing: IconButton(
-                              tooltip: 'Share sample',
-                              onPressed: () => unsupported(context, 'Share'),
-                              icon: const Icon(Icons.share_outlined, size: 20),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      if (!widget.empty && videos.isEmpty)
+                        const StudioEmptyState(
+                          icon: Icons.search_off,
+                          title: 'No recordings found',
+                          description: 'Try changing your search or filter.',
+                        ),
+                    ],
                   ),
-                ),
-              if (!widget.empty && videos.isEmpty)
-                const StudioCard(
-                  child: Text('No sample clips match this filter.'),
                 ),
             ],
           ),
@@ -295,10 +316,10 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
   Widget _empty(BuildContext context) => Column(
     children: [
       StudioCard(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
           children: [
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSpacing.md),
             Container(
               width: 112,
               height: 112,
@@ -312,23 +333,23 @@ class _VideoHomeScreenState extends State<VideoHomeScreen> {
               ),
               child: const Icon(
                 Icons.movie_filter_outlined,
-                size: 48,
+                size: AppIconSize.hero,
                 color: AppColors.primary,
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.lg),
             Text(
               'No recordings captured yet',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSpacing.sm),
             const Text(
               'Tap the orange record button below to configure your first gameplay or tutorial capture.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppColors.muted),
+              style: AppTypography.mutedBody,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.lg),
             PrimaryButton(
               'Quick Test',
               icon: Icons.videocam_outlined,

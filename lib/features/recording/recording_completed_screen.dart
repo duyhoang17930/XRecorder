@@ -17,27 +17,24 @@ class RecordingCompletedScreen extends StatelessWidget {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 720),
             child: ListView(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSpacing.md),
               children: [
                 const StudioCard(
                   child: Row(
                     children: [
                       Icon(Icons.check_circle_outline, color: AppColors.cyan),
-                      SizedBox(width: 12),
+                      SizedBox(width: AppSpacing.sm),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Recording Finalized · Demo',
-                              style: TextStyle(fontWeight: FontWeight.w700),
+                              style: AppTypography.bodyStrong,
                             ),
                             Text(
                               'Sample result · No recording was created',
-                              style: TextStyle(
-                                color: AppColors.muted,
-                                fontSize: 12,
-                              ),
+                              style: AppTypography.mutedBodySmall,
                             ),
                           ],
                         ),
@@ -45,14 +42,14 @@ class RecordingCompletedScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
                 MediaPreview(
                   asset: media.asset,
                   duration: media.duration,
                   badge: '1080p · 60 FPS · HIGH BITRATE',
                   onTap: () => context.push('/media/apex'),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
                 StudioCard(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +58,7 @@ class RecordingCompletedScreen extends StatelessWidget {
                         media.name,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.md),
                       Wrap(
                         spacing: 16,
                         runSpacing: 12,
@@ -72,7 +69,7 @@ class RecordingCompletedScreen extends StatelessWidget {
                           const Text('DCIM/ScreenFlow · Sample path'),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.md),
                       const Wrap(
                         spacing: 8,
                         runSpacing: 8,
@@ -85,13 +82,13 @@ class RecordingCompletedScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
                 PrimaryButton(
                   'Edit Clip · Open Studio',
                   icon: Icons.content_cut,
                   onPressed: () => context.go('/editor'),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSpacing.xs),
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
@@ -118,7 +115,7 @@ class RecordingCompletedScreen extends StatelessWidget {
                   trailing: StudioBadge('PREVIEW'),
                 ),
                 StudioCard(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(AppSpacing.xs),
                   child: Column(
                     children: [
                       SettingsRow(
@@ -142,7 +139,7 @@ class RecordingCompletedScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSpacing.lg),
                 TextButton.icon(
                   onPressed: () => context.go('/videos'),
                   icon: const Icon(Icons.home_outlined),

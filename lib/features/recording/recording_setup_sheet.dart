@@ -6,7 +6,7 @@ import '../../core/widgets/studio_widgets.dart';
 import '../settings/settings_controller.dart';
 
 Future<void> openRecordingSetup(BuildContext context) =>
-    showModalBottomSheet<void>(
+    showStudioBottomSheet<void>(
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
@@ -23,23 +23,20 @@ class RecordingSetupSheet extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.lg,
+            0,
+            AppSpacing.lg,
+            AppSpacing.lg,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  const Icon(Icons.tune, color: AppColors.primary),
-                  const SizedBox(width: 12),
-                  const Expanded(
-                    child: Text(
-                      'Recording Parameters',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
+              StudioSheetHeader(
+                title: 'Recording Parameters',
+                description: 'Configure hardware encoders & capture stream',
+                icon: Icons.tune,
+                actions: [
                   IconButton(
                     tooltip: 'Reset defaults',
                     onPressed: settings.reset,
@@ -51,10 +48,6 @@ class RecordingSetupSheet extends StatelessWidget {
                     icon: const Icon(Icons.close),
                   ),
                 ],
-              ),
-              const Text(
-                'Configure hardware encoders & capture stream',
-                style: TextStyle(color: AppColors.muted),
               ),
               const MockBanner(),
               ChoiceGroup(
@@ -77,10 +70,7 @@ class RecordingSetupSheet extends StatelessWidget {
                         const Expanded(child: Text('Input Gain Calibration')),
                         Text(
                           '${settings.gain.round()}%',
-                          style: const TextStyle(
-                            color: AppColors.cyan,
-                            fontWeight: FontWeight.w800,
-                          ),
+                          style: AppTypography.cyanBodyEmphasis,
                         ),
                       ],
                     ),
@@ -95,7 +85,7 @@ class RecordingSetupSheet extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.lg),
               ChoiceGroup(
                 label: 'Resolution Preset',
                 options: const [
@@ -143,9 +133,9 @@ class RecordingSetupSheet extends StatelessWidget {
               PrimaryButton(
                 'Start Recording',
                 icon: Icons.fiber_manual_record,
-                onPressed: () => showDialog<void>(
+                onPressed: () => showStudioDialog<void>(
                   context: context,
-                  builder: (dialogContext) => AlertDialog(
+                  builder: (dialogContext) => StudioDialog(
                     title: const Text('Recording engine not connected'),
                     content: const Text(
                       'This baseline configures the UI only. No screen recording or countdown will start. You can preview the completed screen with sample media.',
@@ -167,10 +157,10 @@ class RecordingSetupSheet extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: AppSpacing.xs),
               const Text(
                 'No screen or microphone access is requested.',
-                style: TextStyle(color: AppColors.muted, fontSize: 11),
+                style: AppTypography.mutedCaption,
               ),
             ],
           ),

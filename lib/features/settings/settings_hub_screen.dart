@@ -12,7 +12,7 @@ class SettingsHubScreen extends StatelessWidget {
     final s = SettingsScope.of(context);
     void av() => context.push('/settings/audio-video');
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(AppSpacing.md),
       children: [
         const SectionTitle(
           'Settings Hub',
@@ -28,25 +28,19 @@ class SettingsHubScreen extends StatelessWidget {
                     Icons.workspace_premium_outlined,
                     color: AppColors.primary,
                   ),
-                  SizedBox(width: 8),
+                  SizedBox(width: AppSpacing.xs),
                   Expanded(
-                    child: Text(
-                      'ScreenFlow Pro',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+                    child: Text('ScreenFlow Pro', style: AppTypography.title),
                   ),
                   StudioBadge('ULTRA', color: AppColors.primary),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
               const Text(
                 'Unlock 4K 120FPS capture, zero watermark, lossless 24-bit audio tracks, and custom RTMP multi-streaming.',
-                style: TextStyle(fontSize: 12),
+                style: AppTypography.bodySmall,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
               PrimaryButton(
                 'Upgrade to Pro',
                 icon: Icons.bolt,
@@ -98,19 +92,30 @@ class SettingsHubScreen extends StatelessWidget {
             subtitle: s.countdown == 'Off'
                 ? 'Off'
                 : '${s.countdown.replaceAll('s', '')} seconds',
-            onTap: () => showModalBottomSheet<void>(
+            onTap: () => showStudioBottomSheet<void>(
               context: context,
-              builder: (_) => SafeArea(
+              builder: (sheetContext) => SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: ChoiceGroup(
-                    label: 'Countdown Timer',
-                    options: const ['Off', '3s', '5s', '10s'],
-                    value: s.countdown,
-                    onChanged: (v) {
-                      s.update(() => s.countdown = v);
-                      Navigator.pop(context);
-                    },
+                  padding: const EdgeInsets.all(AppSpacing.lg),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const StudioSheetHeader(
+                        title: 'Countdown Timer',
+                        description: 'Choose a delay before recording begins.',
+                        icon: Icons.timer_outlined,
+                      ),
+                      ChoiceGroup(
+                        label: 'Countdown Timer',
+                        options: const ['Off', '3s', '5s', '10s'],
+                        value: s.countdown,
+                        onChanged: (v) {
+                          s.update(() => s.countdown = v);
+                          Navigator.pop(sheetContext);
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -164,9 +169,9 @@ class SettingsHubScreen extends StatelessWidget {
           SettingsRow(
             'FAQ & User Guide',
             icon: Icons.quiz_outlined,
-            onTap: () => showDialog<void>(
+            onTap: () => showStudioDialog<void>(
               context: context,
-              builder: (context) => AlertDialog(
+              builder: (context) => StudioDialog(
                 title: const Text('XRecorder baseline'),
                 content: const Text(
                   'Browse sample videos and photos, open Record to configure a session, and adjust settings. Capture, playback, editing, sharing, and export engines are not connected. UI preferences reset when the app restarts.',
@@ -202,32 +207,21 @@ class SettingsHubScreen extends StatelessWidget {
             ),
           ),
         ]),
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
         const Center(
           child: Text(
             'XRecorder · Studio UI baseline',
-            style: TextStyle(color: AppColors.muted, fontSize: 10),
+            style: AppTypography.mutedMicro,
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: AppSpacing.md),
       ],
     );
   }
 
-  Widget _label(String text) => Padding(
-    padding: const EdgeInsets.only(top: 24, bottom: 12),
-    child: Text(
-      text,
-      style: const TextStyle(
-        fontSize: 11,
-        fontWeight: FontWeight.w700,
-        color: AppColors.primary,
-        letterSpacing: .8,
-      ),
-    ),
-  );
+  Widget _label(String text) => StudioSectionLabel(text);
   Widget _group(List<Widget> rows) => StudioCard(
-    padding: const EdgeInsets.symmetric(horizontal: 8),
+    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
     child: Column(
       children: [
         for (var i = 0; i < rows.length; i++) ...[

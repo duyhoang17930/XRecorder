@@ -16,7 +16,7 @@ class AudioVideoSettingsScreen extends StatelessWidget {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 720),
             child: ListView(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSpacing.md),
               children: [
                 StudioCard(
                   child: Row(
@@ -24,26 +24,20 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                       const Icon(
                         Icons.fiber_manual_record,
                         color: AppColors.primary,
-                        size: 14,
+                        size: AppIconSize.tiny,
                       ),
-                      const SizedBox(width: 12),
+                      const SizedBox(width: AppSpacing.sm),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
                               'EST. BITSTREAM LOAD',
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: AppColors.muted,
-                              ),
+                              style: AppTypography.mutedMicro,
                             ),
                             Text(
                               '${s.resolution} · ${s.fps} FPS · ${s.bitrate}',
-                              style: const TextStyle(
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w700,
-                              ),
+                              style: AppTypography.primaryBodyEmphasis,
                             ),
                           ],
                         ),
@@ -94,20 +88,22 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                       ),
                       const Text(
                         'Video Codec',
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: AppTypography.bodyEmphasis,
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: AppSpacing.xs),
                       for (final codec in ['H.264 / AVC', 'H.265 / HEVC'])
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.only(bottom: AppSpacing.xs),
                           child: InkWell(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(
+                              AppRadius.control,
+                            ),
                             onTap: () => s.update(() => s.codec = codec),
                             child: StudioCard(
                               color: s.codec == codec
                                   ? AppColors.overlay
                                   : AppColors.elevated,
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(AppSpacing.sm),
                               child: Row(
                                 children: [
                                   Icon(
@@ -118,7 +114,7 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                                         ? AppColors.primary
                                         : AppColors.muted,
                                   ),
-                                  const SizedBox(width: 8),
+                                  const SizedBox(width: AppSpacing.xs),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:
@@ -126,18 +122,13 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                                       children: [
                                         Text(
                                           codec,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                          ),
+                                          style: AppTypography.bodyEmphasis,
                                         ),
                                         Text(
                                           codec.startsWith('H.264')
                                               ? 'Recommended · Maximum player compatibility'
                                               : 'High efficiency · Modern playback processors',
-                                          style: const TextStyle(
-                                            color: AppColors.muted,
-                                            fontSize: 11,
-                                          ),
+                                          style: AppTypography.mutedCaption,
                                         ),
                                       ],
                                     ),
@@ -147,7 +138,7 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.md),
                       ChoiceGroup(
                         label: 'Screen Orientation',
                         options: const ['Auto Sensor', 'Landscape', 'Portrait'],
@@ -167,9 +158,9 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Audio Capture Matrix',
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: AppTypography.bodyEmphasis,
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: AppSpacing.xs),
                       for (final source in [
                         'Mute',
                         'Microphone',
@@ -186,10 +177,7 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                                 ? AppColors.primary
                                 : AppColors.muted,
                           ),
-                          title: Text(
-                            source,
-                            style: const TextStyle(fontSize: 13),
-                          ),
+                          title: Text(source, style: AppTypography.body),
                           trailing: Icon(
                             s.audio == source
                                 ? Icons.check_circle
@@ -200,7 +188,7 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                           ),
                           onTap: () => s.update(() => s.audio = source),
                         ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.md),
                       Row(
                         children: [
                           const Expanded(
@@ -208,7 +196,7 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                           ),
                           Text(
                             '${s.gain.round()}%',
-                            style: const TextStyle(color: AppColors.primary),
+                            style: AppTypography.primaryBodyEmphasis,
                           ),
                         ],
                       ),
@@ -223,41 +211,23 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            '80%',
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: AppColors.muted,
-                            ),
-                          ),
-                          Text(
-                            '100% Unity',
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: AppColors.muted,
-                            ),
-                          ),
-                          Text(
-                            '200%',
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: AppColors.muted,
-                            ),
-                          ),
+                          Text('80%', style: AppTypography.mutedCaption),
+                          Text('100% Unity', style: AppTypography.mutedCaption),
+                          Text('200%', style: AppTypography.mutedCaption),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.md),
                       const StudioBadge(
                         'Sample meter · No microphone connected',
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.md),
                       const LinearProgressIndicator(
                         value: .72,
                         minHeight: 6,
                         color: AppColors.cyan,
                         backgroundColor: AppColors.overlay,
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: AppSpacing.lg),
                       const Row(
                         children: [
                           Expanded(
@@ -268,24 +238,18 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     'SAMPLE RATE',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: AppColors.muted,
-                                    ),
+                                    style: AppTypography.mutedMicro,
                                   ),
                                   Text('48.0 kHz'),
                                   Text(
                                     'Studio Quality',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: AppColors.cyan,
-                                    ),
+                                    style: AppTypography.cyanMicro,
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: AppSpacing.xs),
                           Expanded(
                             child: StudioCard(
                               color: AppColors.elevated,
@@ -294,18 +258,12 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     'CHANNEL ARRAY',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: AppColors.muted,
-                                    ),
+                                    style: AppTypography.mutedMicro,
                                   ),
                                   Text('Stereo'),
                                   Text(
                                     '2 Discrete Ch (L/R)',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: AppColors.muted,
-                                    ),
+                                    style: AppTypography.mutedMicro,
                                   ),
                                 ],
                               ),
@@ -318,7 +276,7 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                 ),
                 const SectionTitle('Performance & Stability'),
                 StudioCard(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(AppSpacing.xs),
                   child: Column(
                     children: [
                       SettingsRow(
@@ -339,13 +297,13 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSpacing.lg),
                 OutlinedButton.icon(
                   onPressed: s.reset,
                   icon: const Icon(Icons.restart_alt),
                   label: const Text('Restore Defaults'),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSpacing.xs),
                 PrimaryButton(
                   'Apply Config',
                   icon: Icons.check,
@@ -354,7 +312,7 @@ class AudioVideoSettingsScreen extends StatelessWidget {
                     'UI configuration applied for this session. Recording engine is not connected.',
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
               ],
             ),
           ),
