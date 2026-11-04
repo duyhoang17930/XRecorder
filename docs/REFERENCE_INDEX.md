@@ -132,3 +132,7 @@ R11/R63/R73/R75 map to native pause/resume/stop and persisted interruption state
 ## P6 capture tools (2026-11-04)
 
 R04–R08/R21/R24/R25/R69/R72/R75 map to screenshot capture, `/photo-tools/:id`, facecam permission/overlay and touch guidance. Image cropping/annotation is explicitly post-capture. Real saved screenshot, cropped annotated copy and encoded facecam pixels were checked on API 36. See [P6 evidence and limits](xrecorder/phase_6_validation.md).
+
+## P7 media actions (2026-11-04)
+
+R02/R18/R37/R62/R78/R79/R83/R84 map to real media preview/share/rename and `/trash`. Ownership and confirmation protect mutation; API 36 tests verified byte-preserving restore, name conflicts, playback clock and share handoff. See [P7 evidence](xrecorder/phase_7_validation.md).

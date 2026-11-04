@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
+import android.content.ClipData
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.MediaMetadataRetriever
@@ -24,11 +25,29 @@ import java.util.concurrent.Executors
 class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHandler {
     companion object { const val PICK_FOLDER = 701 }
     private val resolver = activity.contentResolver
+    private val actions=MediaActions(activity)
     private val worker = Executors.newSingleThreadExecutor()
     private val preferences = activity.getSharedPreferences("media_catalog", Context.MODE_PRIVATE)
     private var picker: MethodChannel.Result? = null
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        if(call.method=="playbackState") { result.success(VideoPreviewActivity.instance?.playbackState());return }
+        if(call.method=="preview" || call.method=="share") {
+            try {
+                val uri=Uri.parse(call.argument<String>("uri") ?: "");checkUri(uri)
+                val mime=resolver.getType(uri) ?: throw java.io.FileNotFoundException()
+                require(mime.startsWith("video/") || mime.startsWith("image/"))
+                resolver.openFileDescriptor(uri,"r")!!.use { }
+                if(call.method=="preview") activity.startActivity(Intent(activity,VideoPreviewActivity::class.java).setData(uri))
+                else {
+                    val intent=Intent(Intent.ACTION_SEND).setType(mime).putExtra(Intent.EXTRA_STREAM,uri).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    intent.clipData=ClipData.newUri(resolver,"Media",uri)
+                    activity.startActivity(Intent.createChooser(intent,"Share media"))
+                }
+                result.success(null)
+            } catch (_:Exception) { result.error("unavailable","Could not open the player or share sheet. Check media access.",null) }
+            return
+        }
         if (call.method == "selectFolder") {
             if (picker != null) { result.error("busy", "A folder picker is already open", null); return }
             picker = result
@@ -46,6 +65,11 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
                     "find" -> describe(Uri.parse(call.argument<String>("id") ?: ""))
                     "thumbnail" -> thumbnail(Uri.parse(call.argument<String>("uri") ?: ""))
                     "storage" -> storage()
+                    "rename" -> actions.rename(Uri.parse(call.argument<String>("uri")!!),call.argument<String>("name")!!.trim())
+                    "trash" -> { val uri=Uri.parse(call.argument<String>("uri")!!);actions.trash(uri,describe(uri) ?: throw java.io.FileNotFoundException()) }
+                    "listTrash" -> actions.listTrash()
+                    "restore" -> describe(Uri.parse(actions.restore(call.argument<String>("id")!!)))
+                    "permanentlyDelete" -> { actions.permanentlyDelete(call.argument<String>("id")!!);null }
                     "imageBytes" -> {
                         val uri = Uri.parse(call.argument<String>("uri") ?: ""); checkUri(uri)
                         require(resolver.getType(uri)?.startsWith("image/") == true)
@@ -75,6 +99,8 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
                     else -> { activity.runOnUiThread { result.notImplemented() }; return@execute }
                 }
                 activity.runOnUiThread { result.success(value) }
+            } catch(e:IllegalArgumentException) {
+                activity.runOnUiThread { result.error("invalid",e.message ?: "Invalid media operation.",null) }
             } catch (_: SecurityException) {
                 activity.runOnUiThread { result.error("revoked", "Folder or media access was revoked. Select the folder again.", null) }
             } catch (_: java.io.FileNotFoundException) {
@@ -158,6 +184,7 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
         if (!mime.startsWith("video/") && !mime.startsWith("image/")) return null
         val fields = mutableMapOf<String, Any?>("id" to uri.toString(), "uri" to uri.toString(), "mime" to mime,
             "source" to "imported", "created" to 0L, "modified" to 0L)
+        fields["owned"]=actions.owned(uri)
         resolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE), null, null, null)?.use { c ->
             if (!c.moveToFirst()) return null
             fields["name"] = c.getString(0); fields["size"] = c.getLong(1)

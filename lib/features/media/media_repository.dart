@@ -68,6 +68,7 @@ class AndroidMediaRepository implements CatalogRepository {
       bitrate: (map['bitrate'] as num?)?.toInt(),
       fps: (map['fps'] as num?)?.toDouble(),
       hasAudio: map['hasAudio'] as bool?,
+      owned: map['owned'] == true,
       folderUri: map['folder'] is String
           ? Uri.parse(map['folder'] as String)
           : null,

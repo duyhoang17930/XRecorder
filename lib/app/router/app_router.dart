@@ -6,6 +6,8 @@ import '../../features/home/video_home_screen.dart';
 import '../../features/media/photo_library_screen.dart';
 import '../../features/media/video_details_screen.dart';
 import '../../features/media/photo_tools_screen.dart';
+import '../../features/media/photo_preview_screen.dart';
+import '../../features/media/trash_screen.dart';
 import '../../features/editor/editing_hub_screen.dart';
 import '../../features/settings/settings_hub_screen.dart';
 import '../../features/settings/audio_video_settings_screen.dart';
@@ -60,6 +62,12 @@ GoRouter createRouter() => GoRouter(
       builder: (_, _) => const AudioVideoSettingsScreen(),
     ),
     GoRoute(path: '/recording/completed', redirect: (_, _) => '/videos'),
+    GoRoute(path: '/trash', builder: (_, _) => const TrashScreen()),
+    GoRoute(
+      path: '/photo-preview/:id',
+      builder: (_, state) =>
+          PhotoPreviewScreen(uri: state.pathParameters['id']!),
+    ),
     GoRoute(
       path: '/photo-tools/:id',
       builder: (_, state) => PhotoToolsScreen(uri: state.pathParameters['id']!),

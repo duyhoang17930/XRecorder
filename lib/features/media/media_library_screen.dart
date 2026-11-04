@@ -163,10 +163,20 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen>
         children: [
           SectionTitle(
             video ? 'Video Library' : 'Photo Library',
-            trailing: IconButton(
-              tooltip: 'Storage',
-              onPressed: _storage,
-              icon: const Icon(Icons.storage_outlined),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  tooltip: 'Trash',
+                  onPressed: () => context.push('/trash'),
+                  icon: const Icon(Icons.delete_outline),
+                ),
+                IconButton(
+                  tooltip: 'Storage',
+                  onPressed: _storage,
+                  icon: const Icon(Icons.storage_outlined),
+                ),
+              ],
             ),
           ),
           StudioSearchField(

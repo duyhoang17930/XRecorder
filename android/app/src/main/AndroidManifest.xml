@@ -12,6 +12,7 @@
         android:label="XRecorder"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <activity android:name=".media.VideoPreviewActivity" android:exported="false" android:theme="@android:style/Theme.Material.NoActionBar" />
         <service android:name=".recording.CaptureService" android:exported="false" android:foregroundServiceType="mediaProjection|microphone|camera" />
         <provider
             android:name="androidx.core.content.FileProvider"

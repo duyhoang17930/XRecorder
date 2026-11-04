@@ -1,0 +1,135 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../core/domain/models.dart';
+import '../../core/widgets/studio_widgets.dart';
+import 'media_actions.dart';
+import 'media_repository.dart';
+
+class TrashScreen extends StatefulWidget {
+  const TrashScreen({super.key});
+  @override
+  State<TrashScreen> createState() => _TrashScreenState();
+}
+
+class _TrashScreenState extends State<TrashScreen> {
+  final actions = AndroidMediaActions();
+  late Future<List<TrashEntry>> entries = actions.list();
+  bool busy = false;
+  Future<void> operate(TrashEntry entry, bool restore) async {
+    if (busy) return;
+    if (!restore) {
+      final confirmed = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Permanently delete?'),
+          content: Text(
+            '${entry.originalMetadata.displayName} cannot be restored after deletion.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Delete permanently'),
+            ),
+          ],
+        ),
+      );
+      if (confirmed != true || !mounted) return;
+    }
+    setState(() => busy = true);
+    try {
+      MediaItem? restored;
+      if (restore) {
+        restored = await actions.restore(entry.id);
+      } else {
+        await actions.permanentlyDelete(entry.id);
+      }
+      if (!mounted) return;
+      MediaScope.of(context).refresh();
+      setState(() => entries = actions.list());
+      if (restored != null) {
+        context.push('/media/${Uri.encodeComponent(restored.id)}');
+      }
+    } catch (e) {
+      if (mounted) showNotice(context, e.toString());
+    } finally {
+      if (mounted) setState(() => busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text('Trash')),
+    body: Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(16),
+          child: Text(
+            'App-owned media only. Items become eligible for permanent cleanup after 24 hours; cleanup runs when Trash is opened. Restoring creates a new item with a unique name.',
+          ),
+        ),
+        if (busy) const LinearProgressIndicator(),
+        Expanded(
+          child: FutureBuilder<List<TrashEntry>>(
+            future: entries,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(snapshot.error.toString()),
+                      TextButton(
+                        onPressed: () =>
+                            setState(() => entries = actions.list()),
+                        child: const Text('Retry'),
+                      ),
+                    ],
+                  ),
+                );
+              }
+              final items = snapshot.data ?? [];
+              if (items.isEmpty) {
+                return const Center(child: Text('Trash is empty'));
+              }
+              return ListView(
+                children: [
+                  for (final entry in items)
+                    ListTile(
+                      title: Text(entry.originalMetadata.displayName),
+                      subtitle: Text(
+                        '${formatBytes(entry.originalMetadata.sizeBytes)} · Expires ${entry.expiresAt.toLocal()}',
+                      ),
+                      trailing: Wrap(
+                        children: [
+                          IconButton(
+                            tooltip: 'Restore',
+                            onPressed: busy ? null : () => operate(entry, true),
+                            icon: const Icon(Icons.restore),
+                          ),
+                          IconButton(
+                            tooltip: 'Delete permanently',
+                            onPressed: busy
+                                ? null
+                                : () => operate(entry, false),
+                            icon: const Icon(Icons.delete_forever),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
+    ),
+  );
+}

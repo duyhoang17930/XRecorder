@@ -26,6 +26,7 @@ class MediaItem {
     this.thumbnailUri,
     this.originalMediaId,
     this.hasAudio,
+    this.owned = false,
   });
   final String id, displayName, mimeType;
   final Uri uri;
@@ -40,6 +41,7 @@ class MediaItem {
   final Uri? folderUri, thumbnailUri;
   final String? originalMediaId;
   final bool? hasAudio;
+  final bool owned;
 }
 
 enum RecordingMode { normal, performance }
