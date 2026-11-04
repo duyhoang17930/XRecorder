@@ -66,6 +66,23 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('CyberStrike_04.png'), findsOneWidget);
     expect(find.text('debug_stack_01.png'), findsNothing);
+    final position = tester
+        .state<ScrollableState>(find.byType(Scrollable).first)
+        .position;
+    final offset = position.pixels;
+    await tester.tap(find.text('Video'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Photo'));
+    await tester.pumpAndSettle();
+    expect(find.text('CyberStrike_04.png'), findsOneWidget);
+    expect(find.text('debug_stack_01.png'), findsNothing);
+    expect(
+      tester
+          .state<ScrollableState>(find.byType(Scrollable).first)
+          .position
+          .pixels,
+      offset,
+    );
     expect(tester.takeException(), isNull);
   });
 
@@ -127,6 +144,29 @@ void main() {
       }
     },
   );
+
+  testWidgets('Routes and missing media handle large text', (tester) async {
+    tester.platformDispatcher.textScaleFactorTestValue = 1.3;
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+    await start(tester, size: const Size(360, 800));
+    final router = GoRouter.of(tester.element(find.byType(MockBanner).first));
+    for (final route in [
+      '/photos',
+      '/editor',
+      '/settings',
+      '/settings/audio-video',
+      '/media/missing',
+    ]) {
+      router.go(route);
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: route);
+    }
+    expect(find.text('Media unavailable'), findsOneWidget);
+    expect(find.byTooltip('Record'), findsNothing);
+    router.go('/unknown');
+    await tester.pumpAndSettle();
+    expect(find.text('Page unavailable'), findsOneWidget);
+  });
 
   test('Session settings notify and restore defaults', () {
     final settings = SettingsController();

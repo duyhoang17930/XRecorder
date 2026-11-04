@@ -14,20 +14,44 @@ GoRouter createRouter() => GoRouter(
   initialLocation: '/videos',
   routes: [
     GoRoute(path: '/', redirect: (_, _) => '/videos'),
-    ShellRoute(
-      builder: (context, state, child) =>
-          StudioShell(location: state.uri.path, child: child),
-      routes: [
-        GoRoute(path: '/videos', builder: (_, _) => const VideoHomeScreen()),
-        GoRoute(
-          path: '/videos/empty',
-          builder: (_, _) => const VideoHomeScreen(empty: true),
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, shell) => StudioShell(navigationShell: shell),
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/videos',
+              builder: (_, _) => const VideoHomeScreen(),
+            ),
+            GoRoute(
+              path: '/videos/empty',
+              builder: (_, _) => const VideoHomeScreen(empty: true),
+            ),
+          ],
         ),
-        GoRoute(path: '/photos', builder: (_, _) => const PhotoLibraryScreen()),
-        GoRoute(path: '/editor', builder: (_, _) => const EditingHubScreen()),
-        GoRoute(
-          path: '/settings',
-          builder: (_, _) => const SettingsHubScreen(),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/photos',
+              builder: (_, _) => const PhotoLibraryScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/editor',
+              builder: (_, _) => const EditingHubScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/settings',
+              builder: (_, _) => const SettingsHubScreen(),
+            ),
+          ],
         ),
       ],
     ),

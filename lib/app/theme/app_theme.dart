@@ -240,10 +240,6 @@ abstract final class AppTheme {
         borderSide: const BorderSide(color: AppColors.warning),
       ),
     ),
-    dropdownButtonTheme: const DropdownButtonThemeData(
-      dropdownColor: AppColors.elevated,
-      style: AppTypography.body,
-    ),
     dropdownMenuTheme: DropdownMenuThemeData(
       textStyle: AppTypography.body,
       menuStyle: MenuStyle(

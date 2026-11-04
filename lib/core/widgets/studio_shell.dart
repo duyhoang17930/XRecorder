@@ -6,25 +6,19 @@ import '../../features/recording/recording_setup_sheet.dart';
 import '../constants/design_tokens.dart';
 
 class StudioShell extends StatelessWidget {
-  const StudioShell({super.key, required this.child, required this.location});
-  final Widget child;
-  final String location;
+  const StudioShell({super.key, required this.navigationShell});
+  final StatefulNavigationShell navigationShell;
   @override
   Widget build(BuildContext context) {
-    final index = location.startsWith('/photos')
-        ? 1
-        : location.startsWith('/editor')
-        ? 3
-        : location.startsWith('/settings')
-        ? 4
-        : 0;
+    final branch = navigationShell.currentIndex;
+    final index = branch > 1 ? branch + 1 : branch;
     return Scaffold(
       body: SafeArea(
         bottom: false,
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 840),
-            child: child,
+            child: navigationShell,
           ),
         ),
       ),
@@ -38,22 +32,8 @@ class StudioShell extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(
             children: [
-              _nav(
-                context,
-                'Video',
-                Icons.videocam_outlined,
-                0,
-                index,
-                '/videos',
-              ),
-              _nav(
-                context,
-                'Photo',
-                Icons.photo_camera_outlined,
-                1,
-                index,
-                '/photos',
-              ),
+              _nav('Video', Icons.videocam_outlined, 0, index),
+              _nav('Photo', Icons.photo_camera_outlined, 1, index),
               Expanded(
                 child: Center(
                   heightFactor: 1,
@@ -75,7 +55,7 @@ class StudioShell extends StatelessWidget {
                         backgroundColor: AppColors.primary,
                         onPressed: () => openRecordingSetup(context),
                         child: const Icon(
-                          Icons.radio_button_checked,
+                          Icons.add,
                           color: AppColors.recordForeground,
                           size: AppIconSize.feature,
                         ),
@@ -84,15 +64,8 @@ class StudioShell extends StatelessWidget {
                   ),
                 ),
               ),
-              _nav(context, 'Edit', Icons.auto_fix_high, 3, index, '/editor'),
-              _nav(
-                context,
-                'Settings',
-                Icons.settings_outlined,
-                4,
-                index,
-                '/settings',
-              ),
+              _nav('Edit', Icons.auto_fix_high, 3, index),
+              _nav('Settings', Icons.settings_outlined, 4, index),
             ],
           ),
         ),
@@ -100,16 +73,9 @@ class StudioShell extends StatelessWidget {
     );
   }
 
-  Widget _nav(
-    BuildContext context,
-    String label,
-    IconData icon,
-    int index,
-    int selected,
-    String route,
-  ) => Expanded(
+  Widget _nav(String label, IconData icon, int index, int selected) => Expanded(
     child: TextButton(
-      onPressed: () => context.go(route),
+      onPressed: () => navigationShell.goBranch(index > 1 ? index - 1 : index),
       style: TextButton.styleFrom(
         foregroundColor: index == selected
             ? AppColors.primary

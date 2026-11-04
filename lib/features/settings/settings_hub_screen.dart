@@ -18,38 +18,54 @@ class SettingsHubScreen extends StatelessWidget {
           'Settings Hub',
           trailing: StudioBadge('v0.1.0', color: AppColors.primary),
         ),
-        StudioCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Row(
-                children: [
-                  Icon(
-                    Icons.workspace_premium_outlined,
-                    color: AppColors.primary,
-                  ),
-                  SizedBox(width: AppSpacing.xs),
-                  Expanded(
-                    child: Text('ScreenFlow Pro', style: AppTypography.title),
-                  ),
-                  StudioBadge('ULTRA', color: AppColors.primary),
-                ],
-              ),
-              const SizedBox(height: AppSpacing.md),
-              const Text(
-                'Unlock 4K 120FPS capture, zero watermark, lossless 24-bit audio tracks, and custom RTMP multi-streaming.',
-                style: AppTypography.bodySmall,
-              ),
-              const SizedBox(height: AppSpacing.md),
-              PrimaryButton(
-                'Upgrade to Pro',
-                icon: Icons.bolt,
-                onPressed: () => unsupported(context, 'Subscriptions'),
-              ),
-            ],
-          ),
-        ),
         const MockBanner(),
+        if (s.persistenceError != null)
+          StudioCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(s.persistenceError!),
+                Wrap(
+                  children: [
+                    TextButton(
+                      onPressed: s.retryRestore,
+                      child: const Text('Retry loading'),
+                    ),
+                    if (s.canSave)
+                      TextButton(
+                        onPressed: s.retrySave,
+                        child: const Text('Retry saving'),
+                      ),
+                    TextButton(
+                      onPressed: () => showStudioDialog<void>(
+                        context: context,
+                        builder: (dialogContext) => StudioDialog(
+                          title: const Text('Reset preferences?'),
+                          content: const Text(
+                            'Replace saved preferences with the defaults?',
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(dialogContext),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                s.reset();
+                                Navigator.pop(dialogContext);
+                              },
+                              child: const Text('Reset'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      child: const Text('Reset preferences'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         _label('VIDEO & AUDIO CONFIGURATION'),
         _group([
           SettingsRow(
@@ -174,7 +190,7 @@ class SettingsHubScreen extends StatelessWidget {
               builder: (context) => StudioDialog(
                 title: const Text('XRecorder baseline'),
                 content: const Text(
-                  'Browse sample videos and photos, open Record to configure a session, and adjust settings. Capture, playback, editing, sharing, and export engines are not connected. UI preferences reset when the app restarts.',
+                  'Browse sample videos and photos, open Record to configure a session, and adjust settings. Capture, playback, editing, sharing, and export engines are not connected. Preferences are saved on this Android device. Capture settings will apply when the capture engine is connected.',
                 ),
                 actions: [
                   TextButton(
@@ -189,7 +205,6 @@ class SettingsHubScreen extends StatelessWidget {
             'Language',
             icon: Icons.translate,
             subtitle: 'English (US)',
-            onTap: () => unsupported(context, 'Additional languages'),
           ),
           SettingsRow(
             'App Version',

@@ -46,6 +46,11 @@ The repository is a working UI baseline, not the blank Flutter project assumed b
 
 ## Phase details
 
+### Implementation progress
+
+- P1 foundation code implemented: stateful four-tab shell, persisted Android preferences, typed domain/service contracts, and English/dark resource boundaries. See [audit](xrecorder/repository_audit.md) and [validation evidence](xrecorder/phase_1_validation.md).
+- P2 and subsequent phases remain pending. Phase gates require their own platform checks; sample media and settings must not be mistaken for implemented capture/media engines.
+
 ### P0 — Repository and product audit
 
 1. Record existing routes, design tokens, widgets, state handling, tests, assets, and current UI-only behavior. Keep the already-created shared theme/components as the starting point.

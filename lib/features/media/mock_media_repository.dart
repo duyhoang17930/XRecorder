@@ -1,5 +1,5 @@
-class MediaItem {
-  const MediaItem({
+class SampleMediaItem {
+  const SampleMediaItem({
     required this.id,
     required this.name,
     required this.asset,
@@ -15,7 +15,7 @@ class MediaItem {
 
 abstract final class MockMediaRepository {
   static const videos = [
-    MediaItem(
+    SampleMediaItem(
       id: 'pubg',
       name: 'PUBG_Clutch_FinalCircle_1080p.mp4',
       asset: 'assets/media/video_0.jpg',
@@ -24,7 +24,7 @@ abstract final class MockMediaRepository {
       category: 'Gameplay',
       time: 'Today, 14:28',
     ),
-    MediaItem(
+    SampleMediaItem(
       id: 'bug',
       name: 'App_BugReport_Checkout_Repro.mp4',
       asset: 'assets/media/video_1.jpg',
@@ -35,7 +35,7 @@ abstract final class MockMediaRepository {
       fps: '30',
       resolution: '1280 × 720',
     ),
-    MediaItem(
+    SampleMediaItem(
       id: 'tutorial',
       name: 'Tutorial_Flutter_CustomPaint.mp4',
       asset: 'assets/media/video_2.jpg',
@@ -45,7 +45,7 @@ abstract final class MockMediaRepository {
       time: 'Yesterday',
     ),
   ];
-  static const completed = MediaItem(
+  static const completed = SampleMediaItem(
     id: 'apex',
     name: 'Apex_Velocity_Sector04_Drift.mp4',
     asset: 'assets/media/completed_0.jpg',
@@ -54,7 +54,7 @@ abstract final class MockMediaRepository {
     category: 'Gameplay',
     time: 'Today, 09:41',
   );
-  static MediaItem? find(String id) {
+  static SampleMediaItem? find(String id) {
     if (id == completed.id) return completed;
     for (final video in videos) {
       if (video.id == id) return video;

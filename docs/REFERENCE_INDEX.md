@@ -1,5 +1,18 @@
 # Danh mục ảnh tham chiếu
 
+## Phase 1 implementation trace (2026-11-04)
+
+| References | Routes / foundation | Status and evidence |
+| --- | --- | --- |
+| R09, R60–R61 | `/videos`, `/photos`, `/editor` | Four-tab stateful shell; sample media remains until P2. Widget tests cover tab filter/favorite/scroll retention. |
+| R03, R28, R36 | `/settings`, `/settings/audio-video` | Preferences persist through the Android settings adapter; migration/restart/reset/error unit tests. Native capture application remains P4. |
+| R04–R05, R42 | Center record action | Existing recording sheet retained; settings shared with persisted controller; no false recording success. |
+| R15–R16 | App resource configuration | English/dark only; other locales/themes intentionally not selectable. Retaining the existing palette is a provisional implementation decision. |
+| R02, R62 | `/media/:id` | Fullscreen sample detail and missing-ID fallback tested; real playback/actions remain P7. |
+| R17–R19, R25, R50 | Shortcuts, trash, repair, capture, help | Later phases; P1 introduces contracts, not functioning native features or new placeholder routes. |
+
+See [repository audit](xrecorder/repository_audit.md) and [Phase 1 validation](xrecorder/phase_1_validation.md) for implementation limits and check results.
+
 Mã R dùng trong [bản đặc tả](APP_SPEC_VI.md). Tệp được đánh số theo tên tăng dần, không theo thứ tự thao tác. Nhấn tên màn hình để mở ảnh gốc. Ảnh gốc được giữ nguyên.
 
 | Mã | Màn hình / trạng thái | Kích thước |
