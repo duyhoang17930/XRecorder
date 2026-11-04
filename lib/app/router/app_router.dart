@@ -12,6 +12,8 @@ import '../../features/editor/editing_hub_screen.dart';
 import '../../features/editor/editor_screen.dart';
 import '../../features/editor/export_screen.dart';
 import '../../features/settings/settings_hub_screen.dart';
+import '../../features/settings/help_screen.dart';
+import '../../features/settings/support_screen.dart';
 import '../../features/settings/audio_video_settings_screen.dart';
 
 GoRouter createRouter() => GoRouter(
@@ -70,6 +72,8 @@ GoRouter createRouter() => GoRouter(
     ),
     GoRoute(path: '/trash', builder: (_, _) => const TrashScreen()),
     GoRoute(path: '/exports', builder: (_, _) => const ExportScreen()),
+    GoRoute(path: '/help', builder: (_, _) => const HelpScreen()),
+    GoRoute(path: '/support', builder: (_, _) => const SupportScreen()),
     GoRoute(
       path: '/photo-preview/:id',
       builder: (_, state) =>

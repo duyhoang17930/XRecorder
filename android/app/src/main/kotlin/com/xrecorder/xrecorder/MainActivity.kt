@@ -20,9 +20,13 @@ class MainActivity : FlutterActivity() {
     private var captureEvents: EventChannel? = null
     private var editorBridge: com.xrecorder.xrecorder.editor.EditorBridge? = null
     private var editorChannel: MethodChannel? = null
+    private var supportBridge:SupportBridge?=null
+    private var supportChannel:MethodChannel?=null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        supportBridge=SupportBridge(this)
+        supportChannel=MethodChannel(flutterEngine.dartExecutor.binaryMessenger,"com.xrecorder/support").also{it.setMethodCallHandler(supportBridge)}
         editorBridge=com.xrecorder.xrecorder.editor.EditorBridge(applicationContext)
         editorChannel=MethodChannel(flutterEngine.dartExecutor.binaryMessenger,"com.xrecorder/editor").also{it.setMethodCallHandler(editorBridge)}
         flutterEngine.platformViewsController.registry.registerViewFactory("com.xrecorder/editor_preview",com.xrecorder.xrecorder.editor.EditorPreviewFactory(flutterEngine.dartExecutor.binaryMessenger))
@@ -69,6 +73,7 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun cleanUpFlutterEngine(flutterEngine: FlutterEngine) {
+        supportChannel?.setMethodCallHandler(null);supportBridge?.dispose();supportBridge=null;supportChannel=null
         editorChannel?.setMethodCallHandler(null);editorBridge?.dispose();editorBridge=null;editorChannel=null
         captureChannel?.setMethodCallHandler(null)
         captureEvents?.setStreamHandler(null)
@@ -92,6 +97,7 @@ class MainActivity : FlutterActivity() {
     override fun onPause() { com.xrecorder.xrecorder.editor.EditorPreview.pauseAll();super.onPause() }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(supportBridge?.onActivityResult(requestCode,resultCode,data)==true)return
         if (captureBridge?.onActivityResult(requestCode, resultCode, data) == true) return
         if (mediaCatalog?.onActivityResult(requestCode, resultCode, data) == true) return
         super.onActivityResult(requestCode, resultCode, data)

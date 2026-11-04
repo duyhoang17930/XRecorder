@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../core/constants/design_tokens.dart';
 import '../../core/widgets/studio_widgets.dart';
 import 'settings_controller.dart';
 
@@ -9,241 +8,117 @@ class SettingsHubScreen extends StatelessWidget {
   const SettingsHubScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final s = SettingsScope.of(context);
-    void av() => context.push('/settings/audio-video');
+    final settings = SettingsScope.of(context);
     return ListView(
-      padding: const EdgeInsets.all(AppSpacing.md),
+      padding: const EdgeInsets.all(16),
       children: [
-        const SectionTitle(
-          'Settings Hub',
-          trailing: StudioBadge('v0.1.0', color: AppColors.primary),
+        const SectionTitle('Settings'),
+        if (settings.persistenceError != null) ...[
+          Text(settings.persistenceError!),
+          TextButton(
+            onPressed: settings.retryRestore,
+            child: const Text('Retry loading'),
+          ),
+          if (settings.canSave)
+            TextButton(
+              onPressed: settings.retrySave,
+              child: const Text('Retry saving'),
+            ),
+        ],
+        SettingsRow(
+          'Resolution & Video Quality',
+          icon: Icons.video_settings,
+          subtitle:
+              '${settings.resolution} · ${settings.fps} FPS · ${settings.bitrate}',
+          onTap: () => context.push('/settings/audio-video'),
         ),
-        const MockBanner(),
-        if (s.persistenceError != null)
-          StudioCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(s.persistenceError!),
-                Wrap(
-                  children: [
-                    TextButton(
-                      onPressed: s.retryRestore,
-                      child: const Text('Retry loading'),
-                    ),
-                    if (s.canSave)
-                      TextButton(
-                        onPressed: s.retrySave,
-                        child: const Text('Retry saving'),
-                      ),
-                    TextButton(
-                      onPressed: () => showStudioDialog<void>(
-                        context: context,
-                        builder: (dialogContext) => StudioDialog(
-                          title: const Text('Reset preferences?'),
-                          content: const Text(
-                            'Replace saved preferences with the defaults?',
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(dialogContext),
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                s.reset();
-                                Navigator.pop(dialogContext);
-                              },
-                              child: const Text('Reset'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      child: const Text('Reset preferences'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+        SettingsRow(
+          'Audio, countdown & facecam',
+          icon: Icons.mic_none,
+          subtitle: 'Capability-aware settings for your next recording',
+          onTap: () => context.push('/settings/audio-video'),
+        ),
+        const ListTile(
+          leading: Icon(Icons.folder_outlined),
+          title: Text('Media storage'),
+          subtitle: Text(
+            'Android 10+: Movies/XRecorder and Pictures/XRecorder. Older Android: app-specific external storage. Open the library storage button for actual usage.',
           ),
-        _label('VIDEO & AUDIO CONFIGURATION'),
-        _group([
-          SettingsRow(
-            'Resolution & Video Quality',
-            icon: Icons.video_settings,
-            subtitle: '${s.resolution} • ${s.fps} FPS • ${s.bitrate}',
-            onTap: av,
+        ),
+        SettingsRow(
+          'Trash & restore',
+          icon: Icons.delete_outline,
+          subtitle: 'Cleanup on opening Trash after 24 hours',
+          onTap: () => context.push('/trash'),
+        ),
+        SettingsRow(
+          'Export queue',
+          icon: Icons.file_upload_outlined,
+          subtitle: 'Progress, cancellation and retry',
+          onTap: () => context.push('/exports'),
+        ),
+        SettingsRow(
+          'FAQ & User Guide',
+          icon: Icons.help_outline,
+          onTap: () => context.push('/help'),
+        ),
+        SettingsRow(
+          'Feedback & issue report',
+          icon: Icons.feedback_outlined,
+          onTap: () => context.push('/support'),
+        ),
+        const ListTile(
+          leading: Icon(Icons.translate),
+          title: Text('Language & appearance'),
+          subtitle: Text('English · Dark theme'),
+        ),
+        const ListTile(
+          leading: Icon(Icons.privacy_tip_outlined),
+          title: Text('Privacy'),
+          subtitle: Text(
+            'Media processing stays on your device. No analytics, AI upload or livestream is enabled. Only explicit sharing hands content to another app.',
           ),
-          SettingsRow(
-            'Audio Source & Volume',
-            icon: Icons.mic_none,
-            subtitle: '${s.audio} • ${s.gain.round()}% gain',
-            onTap: av,
-          ),
-          SettingsRow(
-            'Audio Noise Reduction',
-            icon: Icons.graphic_eq,
-            subtitle: 'UI preference · No audio processing',
-            value: s.noise,
-            onChanged: (v) => s.update(() => s.noise = v),
-          ),
-          SettingsRow(
-            'Orientation',
-            icon: Icons.screen_rotation,
-            subtitle: s.orientation,
-            onTap: av,
-          ),
-        ]),
-        _label('RECORDING & GESTURE CONTROLS'),
-        _group([
-          SettingsRow(
-            'Floating Ball & HUD',
-            icon: Icons.radio_button_checked,
-            subtitle: 'Custom size, opacity, dock to edge',
-            onTap: () => unsupported(context, 'Floating overlay'),
-          ),
-          SettingsRow(
-            'Countdown Timer',
-            icon: Icons.timer_outlined,
-            subtitle: s.countdown == 'Off'
-                ? 'Off'
-                : '${s.countdown.replaceAll('s', '')} seconds',
-            onTap: () => showStudioBottomSheet<void>(
-              context: context,
-              builder: (sheetContext) => SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(AppSpacing.lg),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const StudioSheetHeader(
-                        title: 'Countdown Timer',
-                        description: 'Choose a delay before recording begins.',
-                        icon: Icons.timer_outlined,
-                      ),
-                      ChoiceGroup(
-                        label: 'Countdown Timer',
-                        options: const ['Off', '3s', '5s', '10s'],
-                        value: s.countdown,
-                        onChanged: (v) {
-                          s.update(() => s.countdown = v);
-                          Navigator.pop(sheetContext);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+        ),
+        SettingsRow(
+          'About & licenses',
+          icon: Icons.info_outline,
+          onTap: () => showAboutDialog(
+            context: context,
+            applicationName: 'XRecorder',
+          applicationVersion: '0.1.0+1',
+            children: [
+              const Text(
+                'Android screen recording and non-destructive media editing. AndroidX Media3 is licensed under Apache-2.0. Manrope uses the SIL Open Font License. See the bundled license list.',
               ),
-            ),
+            ],
           ),
-          SettingsRow(
-            'Shake to Stop Recording',
-            icon: Icons.vibration,
-            subtitle: 'UI preference · Gesture engine pending',
-            value: s.shake,
-            onChanged: (v) => s.update(() => s.shake = v),
-          ),
-          SettingsRow(
-            'Keep Recording Screen Off',
-            icon: Icons.screen_lock_portrait,
-            subtitle: 'UI preference · No background service',
-            value: s.screenOff,
-            onChanged: (v) => s.update(() => s.screenOff = v),
-          ),
-          SettingsRow(
-            'Show Screen Touches',
-            icon: Icons.fingerprint,
-            subtitle: 'Requires native implementation',
-            onTap: () => unsupported(context, 'Screen touches'),
-          ),
-        ]),
-        _label('STORAGE & ADVANCED'),
-        _group([
-          SettingsRow(
-            'Storage Directory',
-            icon: Icons.folder_outlined,
-            subtitle: 'Sample path · DCIM/ScreenFlow',
-            onTap: () => unsupported(context, 'Storage selection'),
-          ),
-          SettingsRow(
-            'Live RTMP Streaming',
-            icon: Icons.stream,
-            subtitle: 'Stream to YouTube, Twitch, Kick',
-            onTap: () => unsupported(context, 'RTMP streaming'),
-          ),
-          SettingsRow(
-            'Crash Prevention Cache',
-            icon: Icons.shield_outlined,
-            subtitle: 'UI preference · Capture engine pending',
-            value: s.cache,
-            onChanged: (v) => s.update(() => s.cache = v),
-          ),
-        ]),
-        _label('ABOUT & SUPPORT'),
-        _group([
-          SettingsRow(
-            'FAQ & User Guide',
-            icon: Icons.quiz_outlined,
-            onTap: () => showStudioDialog<void>(
+        ),
+        TextButton(
+          onPressed: () async {
+            final confirmed = await showDialog<bool>(
               context: context,
-              builder: (context) => StudioDialog(
-                title: const Text('XRecorder baseline'),
+              builder: (dialog) => AlertDialog(
+                title: const Text('Reset preferences?'),
                 content: const Text(
-                  'Browse sample videos and photos, open Record to configure a session, and adjust settings. Capture, playback, editing, sharing, and export engines are not connected. Preferences are saved on this Android device. Capture settings will apply when the capture engine is connected.',
+                  'Restore recording preferences to their defaults. Media and editor drafts are kept.',
                 ),
                 actions: [
                   TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('Close'),
+                    onPressed: () => Navigator.pop(dialog, false),
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pop(dialog, true),
+                    child: const Text('Reset'),
                   ),
                 ],
               ),
-            ),
-          ),
-          SettingsRow(
-            'Language',
-            icon: Icons.translate,
-            subtitle: 'English (US)',
-          ),
-          SettingsRow(
-            'App Version',
-            icon: Icons.verified_outlined,
-            subtitle: 'v0.1.0 (Build 1) · Flutter UI baseline',
-            onTap: () => showAboutDialog(
-              context: context,
-              applicationName: 'XRecorder',
-              applicationVersion: '0.1.0+1',
-              children: [
-                const Text(
-                  'Native Flutter baseline based on the supplied Stitch ScreenFlow design.',
-                ),
-              ],
-            ),
-          ),
-        ]),
-        const SizedBox(height: AppSpacing.lg),
-        const Center(
-          child: Text(
-            'XRecorder · Studio UI baseline',
-            style: AppTypography.mutedMicro,
-          ),
+            );
+            if (confirmed == true) settings.reset();
+          },
+          child: const Text('Reset preferences'),
         ),
-        const SizedBox(height: AppSpacing.md),
       ],
     );
   }
-
-  Widget _label(String text) => StudioSectionLabel(text);
-  Widget _group(List<Widget> rows) => StudioCard(
-    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
-    child: Column(
-      children: [
-        for (var i = 0; i < rows.length; i++) ...[
-          if (i > 0) const Divider(height: 1),
-          rows[i],
-        ],
-      ],
-    ),
-  );
 }
