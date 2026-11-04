@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
+import 'recording_service.dart';
 
 import '../../core/constants/design_tokens.dart';
 import '../../core/widgets/studio_widgets.dart';
@@ -34,7 +35,7 @@ class RecordingSetupSheet extends StatelessWidget {
             children: [
               StudioSheetHeader(
                 title: 'Recording Parameters',
-                description: 'Configure hardware encoders & capture stream',
+                description: 'Screen capture requires Android consent. Audio and quality configuration are not enabled yet.',
                 icon: Icons.tune,
                 actions: [
                   IconButton(
@@ -133,33 +134,19 @@ class RecordingSetupSheet extends StatelessWidget {
               PrimaryButton(
                 'Start Recording',
                 icon: Icons.fiber_manual_record,
-                onPressed: () => showStudioDialog<void>(
-                  context: context,
-                  builder: (dialogContext) => StudioDialog(
-                    title: const Text('Recording engine not connected'),
-                    content: const Text(
-                      'This baseline configures the UI only. No screen recording or countdown will start. You can preview the completed screen with sample media.',
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(dialogContext),
-                        child: const Text('Close'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(dialogContext);
-                          Navigator.pop(context);
-                          context.push('/recording/completed');
-                        },
-                        child: const Text('View sample result'),
-                      ),
-                    ],
-                  ),
-                ),
+                onPressed: () async {
+                  final capture = CaptureScope.of(context);
+                  try {
+                    await capture.start(settings.recordingSnapshot);
+                    if (context.mounted) Navigator.pop(context);
+                  } catch (e) {
+                    if (context.mounted) showNotice(context, e.toString());
+                  }
+                },
               ),
               const SizedBox(height: AppSpacing.xs),
               const Text(
-                'No screen or microphone access is requested.',
+                'Recording MVP: silent H.264 video targeting up to 30 FPS, with an automatic screen-sized resolution up to 1280 pixels. Preferences above are not applied until recording configuration ships. Android will ask permission to capture your screen.',
                 style: AppTypography.mutedCaption,
               ),
             ],

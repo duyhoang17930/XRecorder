@@ -5,7 +5,6 @@ import '../../core/widgets/studio_shell.dart';
 import '../../features/home/video_home_screen.dart';
 import '../../features/media/photo_library_screen.dart';
 import '../../features/media/video_details_screen.dart';
-import '../../features/recording/recording_completed_screen.dart';
 import '../../features/editor/editing_hub_screen.dart';
 import '../../features/settings/settings_hub_screen.dart';
 import '../../features/settings/audio_video_settings_screen.dart';
@@ -59,10 +58,7 @@ GoRouter createRouter() => GoRouter(
       path: '/settings/audio-video',
       builder: (_, _) => const AudioVideoSettingsScreen(),
     ),
-    GoRoute(
-      path: '/recording/completed',
-      builder: (_, _) => const RecordingCompletedScreen(),
-    ),
+    GoRoute(path: '/recording/completed', redirect: (_, _) => '/videos'),
     GoRoute(
       path: '/media/:id',
       builder: (_, state) =>

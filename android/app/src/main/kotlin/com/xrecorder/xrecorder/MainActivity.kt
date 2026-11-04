@@ -6,15 +6,26 @@ import io.flutter.plugin.common.MethodChannel
 import java.util.concurrent.Executors
 import android.content.Intent
 import com.xrecorder.xrecorder.media.MediaCatalog
+import com.xrecorder.xrecorder.recording.CaptureBridge
+import com.xrecorder.xrecorder.recording.CaptureState
+import io.flutter.plugin.common.EventChannel
 
 class MainActivity : FlutterActivity() {
     private val preferencesWorker = Executors.newSingleThreadExecutor()
     private var settingsChannel: MethodChannel? = null
     private var mediaChannel: MethodChannel? = null
     private var mediaCatalog: MediaCatalog? = null
+    private var captureBridge: CaptureBridge? = null
+    private var captureChannel: MethodChannel? = null
+    private var captureEvents: EventChannel? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        captureBridge = CaptureBridge(this)
+        captureChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.xrecorder/capture")
+        captureChannel?.setMethodCallHandler(captureBridge)
+        captureEvents = EventChannel(flutterEngine.dartExecutor.binaryMessenger, "com.xrecorder/capture/events")
+        captureEvents?.setStreamHandler(CaptureState)
         mediaCatalog = MediaCatalog(this)
         mediaChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.xrecorder/media")
         mediaChannel?.setMethodCallHandler(mediaCatalog)
@@ -52,6 +63,12 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun cleanUpFlutterEngine(flutterEngine: FlutterEngine) {
+        captureChannel?.setMethodCallHandler(null)
+        captureEvents?.setStreamHandler(null)
+        captureChannel = null
+        captureEvents = null
+        captureBridge = null
+        CaptureState.sink = null
         mediaChannel?.setMethodCallHandler(null)
         mediaChannel = null
         mediaCatalog?.dispose()
@@ -67,7 +84,13 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (captureBridge?.onActivityResult(requestCode, resultCode, data) == true) return
         if (mediaCatalog?.onActivityResult(requestCode, resultCode, data) == true) return
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (captureBridge?.onPermissionsResult(requestCode) == true) return
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }

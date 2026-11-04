@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme/app_theme.dart';
 import '../../features/recording/recording_setup_sheet.dart';
+import '../../features/recording/recording_service.dart';
 import '../constants/design_tokens.dart';
 
 class StudioShell extends StatelessWidget {
@@ -18,7 +19,12 @@ class StudioShell extends StatelessWidget {
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 840),
-            child: navigationShell,
+            child: Column(
+              children: [
+                Expanded(child: navigationShell),
+                const CaptureStatusBar(),
+              ],
+            ),
           ),
         ),
       ),

@@ -116,3 +116,7 @@ R48 và R49 trùng SHA-256. Tập ảnh có 89 tệp và 88 nội dung tệp kh�
 R09/R44/R60–R62/R83/R85–R86 now resolve to the real `/videos`, `/photos`, `/media/:id` catalog and system folder picker. Empty/error/revoked-access and search/tab-state cases are tested. External folder contents are not counted as app-owned storage. See [P2 evidence](xrecorder/phase_2_validation.md).
 
 P10/P12 are deferred by the product owner and tracked in [GitHub issue #1](https://github.com/duyhoang17930/XRecorder/issues/1).
+
+## P3 recording implementation (2026-11-04)
+
+R11/R63–R65/R88 now map to native MediaProjection consent, foreground capture, in-app/notification Stop, finalization, and real media detail. The 125-second API 36 integration capture passed and independently decoded as a 125.916-second H.264 MP4. See [P3 evidence](xrecorder/phase_3_validation.md). No sample-success route remains.
