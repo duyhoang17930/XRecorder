@@ -4,13 +4,20 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.util.concurrent.Executors
+import android.content.Intent
+import com.xrecorder.xrecorder.media.MediaCatalog
 
 class MainActivity : FlutterActivity() {
     private val preferencesWorker = Executors.newSingleThreadExecutor()
     private var settingsChannel: MethodChannel? = null
+    private var mediaChannel: MethodChannel? = null
+    private var mediaCatalog: MediaCatalog? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        mediaCatalog = MediaCatalog(this)
+        mediaChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.xrecorder/media")
+        mediaChannel?.setMethodCallHandler(mediaCatalog)
         val appContext = applicationContext
         settingsChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.xrecorder/settings")
         settingsChannel?.setMethodCallHandler { call, result ->
@@ -45,6 +52,10 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun cleanUpFlutterEngine(flutterEngine: FlutterEngine) {
+        mediaChannel?.setMethodCallHandler(null)
+        mediaChannel = null
+        mediaCatalog?.dispose()
+        mediaCatalog = null
         settingsChannel?.setMethodCallHandler(null)
         settingsChannel = null
         super.cleanUpFlutterEngine(flutterEngine)
@@ -53,5 +64,10 @@ class MainActivity : FlutterActivity() {
     override fun onDestroy() {
         preferencesWorker.shutdown()
         super.onDestroy()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (mediaCatalog?.onActivityResult(requestCode, resultCode, data) == true) return
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

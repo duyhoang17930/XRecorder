@@ -110,3 +110,9 @@ Mã R dùng trong [bản đặc tả](APP_SPEC_VI.md). Tệp được đánh s�
 Video mẫu: [1793760793016_1972596113707275102_g3052623449332817763.mp4](../images/1793760793016_1972596113707275102_g3052623449332817763.mp4). Metadata: khoảng 9,30 giây; kích thước mã hóa 1040 × 480. Phạm vi kiểm tra video: metadata và khung đầu; chưa đánh giá đầy đủ chuyển động/âm thanh.
 
 R48 và R49 trùng SHA-256. Tập ảnh có 89 tệp và 88 nội dung tệp khác nhau.
+
+## P2 catalog implementation (2026-11-04)
+
+R09/R44/R60–R62/R83/R85–R86 now resolve to the real `/videos`, `/photos`, `/media/:id` catalog and system folder picker. Empty/error/revoked-access and search/tab-state cases are tested. External folder contents are not counted as app-owned storage. See [P2 evidence](xrecorder/phase_2_validation.md).
+
+P10/P12 are deferred by the product owner and tracked in [GitHub issue #1](https://github.com/duyhoang17930/XRecorder/issues/1).

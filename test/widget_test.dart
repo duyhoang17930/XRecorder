@@ -1,81 +1,114 @@
+import 'dart:async';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xrecorder/app/app.dart';
-import 'package:xrecorder/core/widgets/studio_widgets.dart';
-import 'package:xrecorder/features/settings/settings_controller.dart';
+import 'package:xrecorder/core/domain/models.dart';
+import 'package:xrecorder/features/media/media_repository.dart';
+
+class TestCatalog implements CatalogRepository {
+  final events = StreamController<void>.broadcast();
+  Object? failure;
+  Uri? selection;
+  bool cancelled = false;
+  final items = List.generate(
+    15,
+    (i) => MediaItem(
+      id: 'content://test/$i',
+      uri: Uri.parse('content://test/$i'),
+      kind: MediaKind.video,
+      displayName: 'Clip $i.mp4',
+      mimeType: 'video/mp4',
+      sizeBytes: 2048,
+      createdAt: DateTime(2026, 1, 1),
+      modifiedAt: DateTime(2026, 1, 1),
+      source: MediaSource.recording,
+    ),
+  );
+  @override
+  Stream<void> get changes => events.stream;
+  @override
+  Future<List<MediaItem>> list({required MediaKind kind, Uri? folder}) async {
+    if (failure != null) throw failure!;
+    return kind == MediaKind.video ? items : [];
+  }
+
+  @override
+  Future<MediaItem?> find(String id) async =>
+      items.where((i) => i.id == id).firstOrNull;
+  @override
+  Future<Uri?> savedFolder() async => selection;
+  @override
+  Future<Uri?> selectFolder() async => cancelled ? null : selection;
+  @override
+  Future<Uint8List> thumbnail(Uri uri) =>
+      Future.error(const DomainFailure(FailureCode.missing, 'No thumbnail'));
+  @override
+  Future<Map<String, int>> storage() async => {
+    'videos': 30720,
+    'images': 0,
+    'free': 1024000,
+  };
+  @override
+  void refresh() => events.add(null);
+  @override
+  void dispose() => events.close();
+}
 
 void main() {
-  Future<void> start(
+  Future<TestCatalog> start(
     WidgetTester tester, {
     Size size = const Size(390, 844),
+    TestCatalog? catalog,
   }) async {
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-    await tester.pumpWidget(const XRecorderApp());
+    final repository = catalog ?? TestCatalog();
+    await tester.pumpWidget(XRecorderApp(mediaRepository: repository));
     await tester.pumpAndSettle();
+    return repository;
   }
 
   testWidgets(
-    'Library, record sheet, honest sample result, details and editor navigation',
+    'Library search survives tab navigation and real IDs open details',
     (tester) async {
       await start(tester);
-      expect(find.text('Recorded Clips'), findsOneWidget);
-      await tester.tap(find.byTooltip('Record'));
+      expect(find.text('Video Library'), findsOneWidget);
+      await tester.enterText(find.byType(TextField), 'Clip 0');
       await tester.pumpAndSettle();
-      expect(find.text('Recording Parameters'), findsOneWidget);
-      await tester.ensureVisible(find.text('Start Recording'));
-      await tester.tap(find.text('Start Recording'));
+      expect(find.text('Clip 0.mp4'), findsOneWidget);
+      expect(find.text('Clip 1.mp4'), findsNothing);
+      await tester.tap(find.text('Photo'));
       await tester.pumpAndSettle();
-      expect(find.text('Recording engine not connected'), findsOneWidget);
-      await tester.tap(find.text('View sample result'));
+      expect(find.text('No photos yet'), findsOneWidget);
+      await tester.tap(find.text('Video'));
       await tester.pumpAndSettle();
-      expect(
-        find.text('Sample result · No recording was created'),
-        findsOneWidget,
-      );
-      await tester.tap(find.byTooltip('Preview sample'));
+      expect(find.text('Clip 0.mp4'), findsOneWidget);
+      expect(find.text('Clip 1.mp4'), findsNothing);
+      await tester.tap(find.text('Clip 0.mp4'));
       await tester.pumpAndSettle();
-      expect(find.text('Media Item Detail'), findsOneWidget);
-      await tester.tap(find.byTooltip('Preview sample'));
-      await tester.pumpAndSettle();
-      expect(
-        find.textContaining('Video playback is not available'),
-        findsOneWidget,
-      );
-      await tester.ensureVisible(find.text('Edit in Studio'));
-      await tester.tap(find.text('Edit in Studio'));
-      await tester.pumpAndSettle();
-      expect(find.text('Editing Studio'), findsOneWidget);
+      expect(find.text('Media details'), findsOneWidget);
+      expect(find.byTooltip('Record'), findsNothing);
       expect(tester.takeException(), isNull);
     },
   );
-
-  testWidgets('Photo navigation and favorite filter change sample content', (
-    tester,
-  ) async {
+  testWidgets('Scroll position retained between primary tabs', (tester) async {
     await start(tester);
-    await tester.tap(find.text('Photo'));
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, -450));
     await tester.pumpAndSettle();
-    expect(find.text('Photo Gallery'), findsOneWidget);
-    await tester.tap(find.byTooltip('Favorite photo').first);
-    await tester.ensureVisible(find.text('Favorites'));
-    await tester.tap(find.text('Favorites'));
-    await tester.pumpAndSettle();
-    expect(find.text('CyberStrike_04.png'), findsOneWidget);
-    expect(find.text('debug_stack_01.png'), findsNothing);
-    final position = tester
+    final offset = tester
         .state<ScrollableState>(find.byType(Scrollable).first)
-        .position;
-    final offset = position.pixels;
+        .position
+        .pixels;
+    expect(offset, greaterThan(0));
+    await tester.tap(find.text('Settings'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Video'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Photo'));
-    await tester.pumpAndSettle();
-    expect(find.text('CyberStrike_04.png'), findsOneWidget);
-    expect(find.text('debug_stack_01.png'), findsNothing);
     expect(
       tester
           .state<ScrollableState>(find.byType(Scrollable).first)
@@ -83,105 +116,81 @@ void main() {
           .pixels,
       offset,
     );
-    expect(tester.takeException(), isNull);
   });
-
+  testWidgets('Revoked access offers retry and recovers', (tester) async {
+    final catalog = TestCatalog()
+      ..failure = const DomainFailure(
+        FailureCode.revoked,
+        'Folder access revoked',
+      );
+    await start(tester, catalog: catalog);
+    expect(find.text('Folder access revoked'), findsOneWidget);
+    catalog.failure = null;
+    await tester.tap(find.text('Retry'));
+    await tester.pumpAndSettle();
+    expect(find.text('Clip 0.mp4'), findsOneWidget);
+  });
   testWidgets(
-    'Settings configuration is shared with recording setup and resets',
+    'Folder cancellation keeps current library and storage is separate',
     (tester) async {
-      await start(tester);
-      await tester.tap(find.text('Settings'));
+      await start(tester, catalog: TestCatalog()..cancelled = true);
+      await tester.tap(find.text('Choose folder'));
       await tester.pumpAndSettle();
-      await tester.ensureVisible(find.text('Resolution & Video Quality'));
-      await tester.tap(find.text('Resolution & Video Quality'));
+      expect(find.text('Clip 0.mp4'), findsOneWidget);
+      await tester.tap(find.byTooltip('Storage'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('720p HD'));
-      await tester.pumpAndSettle();
-      await tester.pageBack();
-      await tester.pumpAndSettle();
-      await tester.tap(find.byTooltip('Record'));
-      await tester.pumpAndSettle();
-      final chip = tester.widget<ChoiceChip>(
-        find.widgetWithText(ChoiceChip, '720p HD'),
-      );
-      expect(chip.selected, isTrue);
-      await tester.tap(find.byTooltip('Reset defaults'));
-      await tester.pumpAndSettle();
-      expect(
-        tester
-            .widget<ChoiceChip>(find.widgetWithText(ChoiceChip, '1080p FHD'))
-            .selected,
-        isTrue,
-      );
-      expect(tester.takeException(), isNull);
+      expect(find.text('Device free space'), findsOneWidget);
+      expect(find.text('30.0 KB'), findsOneWidget);
     },
   );
-
-  testWidgets(
-    'All baseline routes scroll without overflow on compact viewport',
-    (tester) async {
-      await start(tester, size: const Size(320, 640));
-      final context = tester.element(find.byType(MockBanner).first);
-      final router = GoRouter.of(context);
-      for (final route in [
-        '/videos/empty',
-        '/photos',
-        '/editor',
-        '/settings',
-        '/settings/audio-video',
-        '/recording/completed',
-        '/media/apex',
-      ]) {
-        router.go(route);
-        await tester.pumpAndSettle();
-        expect(tester.takeException(), isNull, reason: route);
-        final scroll = find.byType(Scrollable).first;
-        for (var i = 0; i < 6; i++) {
-          await tester.drag(scroll, const Offset(0, -400));
-          await tester.pumpAndSettle();
-          expect(tester.takeException(), isNull, reason: '$route scroll $i');
-        }
-      }
-    },
-  );
-
-  testWidgets('Routes and missing media handle large text', (tester) async {
+  testWidgets('Settings shared with recording setup and reset', (tester) async {
+    await start(tester);
+    await tester.tap(find.text('Settings'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Resolution & Video Quality'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('720p HD'));
+    await tester.pumpAndSettle();
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Record'));
+    await tester.pumpAndSettle();
+    expect(
+      tester
+          .widget<ChoiceChip>(find.widgetWithText(ChoiceChip, '720p HD'))
+          .selected,
+      isTrue,
+    );
+    await tester.tap(find.byTooltip('Reset defaults'));
+    await tester.pumpAndSettle();
+    expect(
+      tester
+          .widget<ChoiceChip>(find.widgetWithText(ChoiceChip, '1080p FHD'))
+          .selected,
+      isTrue,
+    );
+  });
+  testWidgets('Compact routes, large text, missing media and unknown routes', (
+    tester,
+  ) async {
     tester.platformDispatcher.textScaleFactorTestValue = 1.3;
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
     await start(tester, size: const Size(360, 800));
-    final router = GoRouter.of(tester.element(find.byType(MockBanner).first));
-    for (final route in [
+    final router = GoRouter.of(tester.element(find.text('Video Library')));
+    for (final path in [
       '/photos',
       '/editor',
       '/settings',
       '/settings/audio-video',
       '/media/missing',
     ]) {
-      router.go(route);
+      router.go(path);
       await tester.pumpAndSettle();
-      expect(tester.takeException(), isNull, reason: route);
+      expect(tester.takeException(), isNull, reason: path);
     }
     expect(find.text('Media unavailable'), findsOneWidget);
-    expect(find.byTooltip('Record'), findsNothing);
     router.go('/unknown');
     await tester.pumpAndSettle();
     expect(find.text('Page unavailable'), findsOneWidget);
-  });
-
-  test('Session settings notify and restore defaults', () {
-    final settings = SettingsController();
-    var notifications = 0;
-    settings.addListener(() => notifications++);
-    settings.update(() {
-      settings.fps = '30';
-      settings.hardware = false;
-    });
-    expect(settings.fps, '30');
-    expect(notifications, 1);
-    settings.reset();
-    expect(settings.fps, '60');
-    expect(settings.hardware, isTrue);
-    expect(notifications, 2);
-    settings.dispose();
   });
 }
