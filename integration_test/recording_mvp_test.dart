@@ -29,15 +29,39 @@ void main() {
       final media = AndroidMediaRepository();
       final before = await media.list(kind: MediaKind.video);
       debugPrint('CAPTURE_TEST_CANCEL_PROMPT');
-      await service.start(const RecordingSettings());
+      await service.start(
+        const RecordingSettings(
+          width: 1280,
+          height: 720,
+          fps: 30,
+          bitrate: 8000000,
+          countdown: Duration.zero,
+        ),
+      );
       await expectLater(
-        service.start(const RecordingSettings()),
+        service.start(
+          const RecordingSettings(
+            width: 1280,
+            height: 720,
+            fps: 30,
+            bitrate: 8000000,
+            countdown: Duration.zero,
+          ),
+        ),
         throwsA(isA<DomainFailure>()),
       );
       await waitFor(service, RecordingState.idle);
       expect((await media.list(kind: MediaKind.video)).length, before.length);
       debugPrint('CAPTURE_TEST_ACCEPT_PROMPT');
-      await service.start(const RecordingSettings());
+      await service.start(
+        const RecordingSettings(
+          width: 1280,
+          height: 720,
+          fps: 30,
+          bitrate: 8000000,
+          countdown: Duration.zero,
+        ),
+      );
       final recording = await waitFor(service, RecordingState.recording);
       debugPrint('CAPTURE_TEST_RECORDING_${recording.id}');
       await Future<void>.delayed(const Duration(seconds: 125));

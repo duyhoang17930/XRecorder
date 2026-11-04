@@ -120,3 +120,7 @@ P10/P12 are deferred by the product owner and tracked in [GitHub issue #1](https
 ## P3 recording implementation (2026-11-04)
 
 R11/R63–R65/R88 now map to native MediaProjection consent, foreground capture, in-app/notification Stop, finalization, and real media detail. The 125-second API 36 integration capture passed and independently decoded as a 125.916-second H.264 MP4. See [P3 evidence](xrecorder/phase_3_validation.md). No sample-success route remains.
+
+## P4 configuration implementation (2026-11-04)
+
+R27–R36/R42/R70/R77/R88 map to the shared recording form and native configuration snapshot. All four audio modes and timed stop passed the API 36 integration test. See [P4 evidence and remaining device checks](xrecorder/phase_4_validation.md).

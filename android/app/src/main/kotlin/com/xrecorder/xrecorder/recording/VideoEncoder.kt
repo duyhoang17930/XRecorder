@@ -1,4 +1,4 @@
-﻿package com.xrecorder.xrecorder.recording
+package com.xrecorder.xrecorder.recording
 
 import android.media.MediaCodec
 import android.media.MediaCodecInfo
@@ -12,7 +12,7 @@ import java.nio.ByteBuffer
 /** Drains actual encoder packets; the MP4 timeline includes the final static frame. */
 class VideoEncoder(
     descriptor: ParcelFileDescriptor, legacyPath: String?, encoderName: String,
-    width: Int, height: Int, bitrate: Int, private val fps: Int,
+    width: Int, height: Int, bitrate: Int, private val fps: Int, private val mime: String = "video/avc",
     private val onFirstFrame: () -> Unit, private val onFailure: () -> Unit
 ) {
     private val codec = MediaCodec.createByCodecName(encoderName)
@@ -22,10 +22,14 @@ class VideoEncoder(
     @Volatile private var aborted = false
     @Volatile private var failure: Exception? = null
     @Volatile private var stopTimeNs = 0L
+    @Volatile var sourceStartNs = 0L
+        private set
+    @Volatile var durationUs = 0L
+        private set
     private val worker: Thread
     init {
         try {
-            val format = MediaFormat.createVideoFormat("video/avc", width, height).apply {
+            val format = MediaFormat.createVideoFormat(mime, width, height).apply {
                 setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface)
                 setInteger(MediaFormat.KEY_BIT_RATE, bitrate)
                 setInteger(MediaFormat.KEY_FRAME_RATE, fps)
@@ -56,7 +60,7 @@ class VideoEncoder(
                     val buffer = codec.getOutputBuffer(index) ?: throw IllegalStateException("Encoder output missing")
                     if (info.size > 0 && info.flags and MediaCodec.BUFFER_FLAG_CODEC_CONFIG == 0) {
                         check(muxing)
-                        if (originPts < 0) { originPts = info.presentationTimeUs; firstFrameNs = System.nanoTime() }
+                        if (originPts < 0) { originPts = info.presentationTimeUs; firstFrameNs = System.nanoTime(); sourceStartNs = if (kotlin.math.abs(originPts * 1000 - firstFrameNs) < 60000000000L) originPts * 1000 else firstFrameNs }
                         info.presentationTimeUs = maxOf(lastPts + 1, info.presentationTimeUs - originPts)
                         buffer.position(info.offset); buffer.limit(info.offset + info.size)
                         muxer.writeSampleData(track, buffer, info)
@@ -69,6 +73,7 @@ class VideoEncoder(
                         check(lastPts >= 0) { "No video frames were encoded" }
                         // Public MediaMuxer EOS semantics preserve the static tail of a recording.
                         val duration = maxOf(lastPts + 1000000L / fps, (stopTimeNs - firstFrameNs) / 1000)
+                        durationUs = duration
                         val endInfo = MediaCodec.BufferInfo().apply { set(0, 0, duration, MediaCodec.BUFFER_FLAG_END_OF_STREAM) }
                         muxer.writeSampleData(track, ByteBuffer.allocate(0), endInfo)
                         break

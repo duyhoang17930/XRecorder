@@ -145,6 +145,12 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
                 fields["width"] = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)?.toIntOrNull()
                 fields["height"] = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT)?.toIntOrNull()
                 fields["bitrate"] = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE)?.toIntOrNull()
+                fields["hasAudio"] = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_HAS_AUDIO) == "yes"
+                if (Build.VERSION.SDK_INT >= 28) {
+                    val frames = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_FRAME_COUNT)?.toDoubleOrNull()
+                    val duration = fields["duration"] as? Long
+                    if (frames != null && duration != null && duration > 0) fields["fps"] = frames * 1000 / duration
+                }
             } finally { retriever.release() }
         }
         return fields

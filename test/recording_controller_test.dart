@@ -6,6 +6,13 @@ import 'package:xrecorder/core/domain/repositories.dart';
 import 'package:xrecorder/features/recording/recording_service.dart';
 
 class TestRecorder implements RecordingService {
+  @override
+  Future<RecordingCapabilities> capabilities() async => RecordingCapabilities(
+    audioSources: AudioSource.values.toSet(),
+    configurations: [],
+    noiseReduction: false,
+    hevc: false,
+  );
   final events = StreamController<RecordingSession>.broadcast();
   RecordingSession? current;
   bool stopFails = false;

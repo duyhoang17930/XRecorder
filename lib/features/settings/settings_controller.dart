@@ -27,7 +27,7 @@ class SettingsController extends ChangeNotifier {
           throw const FormatException('Invalid preferences');
         }
         final version = decoded['version'] ?? 0;
-        if (version != 0 && version != 1) {
+        if (version != 0 && version != 1 && version != 2) {
           throw const FormatException('Unsupported preferences version');
         }
         // Version 0 was an unwrapped map. Preserve its recognized values.
@@ -36,7 +36,7 @@ class SettingsController extends ChangeNotifier {
           throw const FormatException('Invalid preference values');
         }
         _apply(values);
-        if (version == 0) {
+        if (version != 2) {
           await store.write(jsonEncode(_document()));
         }
       }
@@ -79,7 +79,7 @@ class SettingsController extends ChangeNotifier {
   void retrySave() => _save();
 
   Map<String, Object> _document() => {
-    'version': 1,
+    'version': 2,
     'values': {
       'resolution': resolution,
       'fps': fps,
@@ -96,6 +96,9 @@ class SettingsController extends ChangeNotifier {
       'screenOff': screenOff,
       'touches': touches,
       'cache': cache,
+      'internalGain': internalGain,
+      'durationSeconds': durationSeconds,
+      'mode': mode,
     },
   };
 
@@ -133,8 +136,17 @@ class SettingsController extends ChangeNotifier {
     countdown = choice('countdown', countdown, ['Off', '3s', '5s', '10s']);
     final savedGain = values['gain'];
     if (savedGain is num && savedGain.isFinite) {
-      gain = savedGain.toDouble().clamp(80, 200);
+      gain = savedGain.toDouble().clamp(0, 200);
     }
+    final internal = values['internalGain'];
+    if (internal is num && internal.isFinite) {
+      internalGain = internal.toDouble().clamp(0, 200);
+    }
+    final duration = values['durationSeconds'];
+    if (duration is int && duration >= 0 && duration <= 86400) {
+      durationSeconds = duration;
+    }
+    mode = choice('mode', mode, ['Normal', 'Performance']);
     cfr = flag('cfr', cfr);
     hardware = flag('hardware', hardware);
     noise = flag('noise', noise);
@@ -151,10 +163,13 @@ class SettingsController extends ChangeNotifier {
   String orientation = 'Auto Sensor';
   String audio = 'Mixed Stream';
   String countdown = '3s';
-  double gain = 140;
+  double gain = 100;
+  double internalGain = 100;
+  int durationSeconds = 0;
+  String mode = 'Normal';
   bool cfr = true;
   bool hardware = true;
-  bool noise = true;
+  bool noise = false;
   bool shake = true;
   bool screenOff = false;
   bool touches = false;
@@ -168,6 +183,12 @@ class SettingsController extends ChangeNotifier {
       _ => (1920, 1080),
     };
     return RecordingSettings(
+      mode: mode == 'Performance'
+          ? RecordingMode.performance
+          : RecordingMode.normal,
+      durationLimit: durationSeconds == 0
+          ? null
+          : Duration(seconds: durationSeconds),
       width: dimensions.$1,
       height: dimensions.$2,
       fps: int.parse(fps),
@@ -192,7 +213,7 @@ class SettingsController extends ChangeNotifier {
             : int.parse(countdown.replaceAll('s', '')),
       ),
       micGain: gain / 100,
-      internalGain: gain / 100,
+      internalGain: internalGain / 100,
       noiseReduction: noise,
       constantFrameRate: cfr,
       hardwareEncoding: hardware,
@@ -219,10 +240,13 @@ class SettingsController extends ChangeNotifier {
       orientation = 'Auto Sensor';
       audio = 'Mixed Stream';
       countdown = '3s';
-      gain = 140;
+      gain = 100;
+      internalGain = 100;
+      durationSeconds = 0;
+      mode = 'Normal';
       cfr = true;
       hardware = true;
-      noise = true;
+      noise = false;
       shake = true;
       screenOff = false;
       touches = false;

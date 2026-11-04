@@ -236,12 +236,14 @@ class ChoiceGroup extends StatelessWidget {
     required this.options,
     required this.value,
     required this.onChanged,
+    this.disabledOptions = const {},
   });
 
   final String label;
   final List<String> options;
   final String value;
   final ValueChanged<String> onChanged;
+  final Set<String> disabledOptions;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -254,15 +256,22 @@ class ChoiceGroup extends StatelessWidget {
         runSpacing: AppSpacing.xxs,
         children: options
             .map(
-              (option) => ChoiceChip(
-                label: Text(option),
-                selected: value == option,
-                labelStyle: AppTypography.bodySmall.copyWith(
-                  color: value == option
-                      ? AppColors.primaryForeground
-                      : AppColors.text,
+              (option) => Tooltip(
+                message: disabledOptions.contains(option)
+                    ? 'Not supported by this device or the selected mode'
+                    : '',
+                child: ChoiceChip(
+                  label: Text(option),
+                  selected: value == option,
+                  labelStyle: AppTypography.bodySmall.copyWith(
+                    color: value == option
+                        ? AppColors.primaryForeground
+                        : AppColors.text,
+                  ),
+                  onSelected: disabledOptions.contains(option)
+                      ? null
+                      : (_) => onChanged(option),
                 ),
-                onSelected: (_) => onChanged(option),
               ),
             )
             .toList(),

@@ -65,14 +65,14 @@ void main() {
     expect(settings.audio, 'Mixed Stream');
     expect(settings.gain, 200);
     expect(settings.hardware, true);
-    expect(jsonDecode(store.document!)['version'], 1);
+    expect(jsonDecode(store.document!)['version'], 2);
     settings.dispose();
   });
 
   test(
     'corrupt and future documents survive edits until explicit reset',
     () async {
-      for (final document in ['{broken', '{"version":2,"values":{}}']) {
+      for (final document in ['{broken', '{"version":3,"values":{}}']) {
         final store = MemoryStore()..document = document;
         final settings = SettingsController(store: store);
         await settings.restore();
@@ -83,7 +83,7 @@ void main() {
         settings.reset();
         await settings.flushed;
         expect(settings.persistenceError, isNull);
-        expect(jsonDecode(store.document!)['version'], 1);
+        expect(jsonDecode(store.document!)['version'], 2);
         settings.dispose();
       }
     },

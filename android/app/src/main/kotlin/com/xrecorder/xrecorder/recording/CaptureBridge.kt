@@ -1,4 +1,4 @@
-﻿package com.xrecorder.xrecorder.recording
+package com.xrecorder.xrecorder.recording
 
 import android.Manifest
 import android.app.Activity
@@ -11,18 +11,21 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
 class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHandler {
-    companion object { const val CONSENT = 702; const val NOTIFICATIONS = 703 }
+    companion object { const val CONSENT = 702; const val NOTIFICATIONS = 703; const val AUDIO_PERMISSION = 704 }
     private var requestedSession: String? = null
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
+            "capabilities" -> result.success(CaptureConfig.capabilities())
             "current" -> result.success(CaptureState.snapshot())
             "start" -> {
                 if (CaptureState.busy) { result.error("busy", "A recording is already being prepared or captured.", null); return }
-                CaptureState.prepare(); requestedSession = CaptureState.id
+                val config = try { CaptureConfig.from(activity, call.arguments as? Map<*,*>) }
+                    catch (e: Exception) { result.error("unsupported", e.message ?: "Unsupported capture settings", null); return }
+                CaptureState.prepare(config); requestedSession = CaptureState.id
                 try {
                     if (Build.VERSION.SDK_INT >= 33 && activity.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
                         activity.requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), NOTIFICATIONS)
-                    else launchConsent()
+                    else ensureAudioPermission()
                     result.success(CaptureState.snapshot())
                 } catch (_: Exception) {
                     CaptureState.transition("failed", "Screen capture consent is unavailable.")
@@ -38,6 +41,11 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
             else -> result.notImplemented()
         }
     }
+    private fun ensureAudioPermission() {
+        if (CaptureState.config.hasAudio && activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
+            activity.requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), AUDIO_PERMISSION)
+        else launchConsent()
+    }
     private fun launchConsent() {
         if (requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
         val manager = activity.getSystemService(MediaProjectionManager::class.java)
@@ -45,8 +53,13 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
         activity.startActivityForResult(intent, CONSENT)
     }
     fun onPermissionsResult(requestCode: Int): Boolean {
-        if (requestCode != NOTIFICATIONS) return false
-        try { launchConsent() } catch (_: Exception) { CaptureState.transition("failed", "Could not open screen capture consent.") }
+        if (requestCode != NOTIFICATIONS && requestCode != AUDIO_PERMISSION) return false
+        if (CaptureState.state != "awaitingPermission") return true
+        if (requestCode == AUDIO_PERMISSION && activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            requestedSession = null; CaptureState.transition("failed", "Audio permission was denied. Select mute to record without audio."); return true
+        }
+        try { if (requestCode == NOTIFICATIONS) ensureAudioPermission() else launchConsent() }
+        catch (_: Exception) { CaptureState.transition("failed", "Could not open screen capture consent.") }
         return true
     }
     fun onActivityResult(request: Int, code: Int, data: Intent?): Boolean {

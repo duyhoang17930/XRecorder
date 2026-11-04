@@ -10,35 +10,95 @@ import '../../core/domain/repositories.dart';
 class AndroidRecordingService implements RecordingService {
   static const commands = MethodChannel('com.xrecorder/capture');
   static const events = EventChannel('com.xrecorder/capture/events');
-  static RecordingSession decode(Map<Object?, Object?> data) =>
-      RecordingSession(
-        id: data['id'] as String? ?? '',
-        state: RecordingState.values.firstWhere(
-          (s) => s.name == data['state'],
-          orElse: () => RecordingState.failed,
+  static RecordingSession decode(Map<Object?, Object?> data) {
+    final config = (data['config'] as Map<Object?, Object?>?) ?? data;
+    return RecordingSession(
+      id: data['id'] as String? ?? '',
+      state: RecordingState.values.firstWhere(
+        (s) => s.name == data['state'],
+        orElse: () => RecordingState.failed,
+      ),
+      configSnapshot: RecordingSettings(
+        audioSource: AudioSource.values.firstWhere(
+          (a) => a.name == config['audio'],
+          orElse: () => AudioSource.mute,
         ),
-        configSnapshot: RecordingSettings(
-          audioSource: AudioSource.mute,
-          width: (data['width'] as num?)?.toInt() ?? 0,
-          height: (data['height'] as num?)?.toInt() ?? 0,
-          fps: (data['fps'] as num?)?.toInt() ?? 30,
-          bitrate: (data['bitrate'] as num?)?.toInt() ?? 8000000,
+        width: (config['width'] as num?)?.toInt() ?? 0,
+        height: (config['height'] as num?)?.toInt() ?? 0,
+        fps: (config['fps'] as num?)?.toInt() ?? 30,
+        bitrate: (config['bitrate'] as num?)?.toInt() ?? 8000000,
+        codec: config['codec'] == 'hevc' ? VideoCodec.hevc : VideoCodec.avc,
+        orientation: CaptureOrientation.values.firstWhere(
+          (o) => o.name == config['orientation'],
+          orElse: () => CaptureOrientation.automatic,
         ),
-        startedAt: data['startedAt'] is num && (data['startedAt'] as num) > 0
-            ? DateTime.fromMillisecondsSinceEpoch(
-                (data['startedAt'] as num).toInt(),
-              )
-            : null,
-        elapsedActive: Duration(
-          milliseconds: (data['elapsedMs'] as num?)?.toInt() ?? 0,
+        mode: config['mode'] == 'performance'
+            ? RecordingMode.performance
+            : RecordingMode.normal,
+        countdown: Duration(
+          seconds: (config['countdown'] as num?)?.toInt() ?? 0,
         ),
-        outputUri: data['outputUri'] is String
-            ? Uri.parse(data['outputUri'] as String)
-            : null,
-        error: data['error'] is String
-            ? DomainFailure(FailureCode.io, data['error'] as String)
-            : null,
+        durationLimit: (config['durationSeconds'] as num?) == 0
+            ? null
+            : Duration(
+                seconds: (config['durationSeconds'] as num?)?.toInt() ?? 0,
+              ),
+        micGain: (config['micGain'] as num?)?.toDouble() ?? 1,
+        internalGain: (config['internalGain'] as num?)?.toDouble() ?? 1,
+        noiseReduction: config['noiseReduction'] == true,
+      ),
+      startedAt: data['startedAt'] is num && (data['startedAt'] as num) > 0
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (data['startedAt'] as num).toInt(),
+            )
+          : null,
+      elapsedActive: Duration(
+        milliseconds: (data['elapsedMs'] as num?)?.toInt() ?? 0,
+      ),
+      countdownRemaining: Duration(
+        seconds: (data['countdownRemaining'] as num?)?.toInt() ?? 0,
+      ),
+      outputUri: data['outputUri'] is String
+          ? Uri.parse(data['outputUri'] as String)
+          : null,
+      error: data['error'] is String
+          ? DomainFailure(FailureCode.io, data['error'] as String)
+          : null,
+    );
+  }
+
+  @override
+  Future<RecordingCapabilities> capabilities() async {
+    try {
+      final data =
+          await commands.invokeMapMethod<Object?, Object?>('capabilities') ??
+          {};
+      return RecordingCapabilities(
+        audioSources: ((data['audioSources'] as List<Object?>?) ?? [])
+            .map((value) => AudioSource.values.byName(value as String))
+            .toSet(),
+        configurations: ((data['presets'] as List<Object?>?) ?? []).map((
+          value,
+        ) {
+          final p = value as Map<Object?, Object?>;
+          return VideoConfiguration(
+            width: (p['width'] as num).toInt(),
+            height: (p['height'] as num).toInt(),
+            fps: (p['fps'] as num).toInt(),
+            codec: p['codec'] == 'hevc' ? VideoCodec.hevc : VideoCodec.avc,
+          );
+        }).toList(),
+        noiseReduction: data['noiseReduction'] == true,
+        hevc: data['hevc'] == true,
       );
+    } on MissingPluginException {
+      throw const DomainFailure(
+        FailureCode.unavailable,
+        'Recording capabilities require Android.',
+      );
+    }
+  }
+
   Future<RecordingSession> _call(String method, [Object? arguments]) async {
     try {
       return decode(
@@ -65,7 +125,25 @@ class AndroidRecordingService implements RecordingService {
   @override
   Future<RecordingSession?> currentSession() async => _call('current');
   @override
-  Future<RecordingSession> start(RecordingSettings settings) => _call('start');
+  Future<RecordingSession> start(RecordingSettings settings) async {
+    final supported = await capabilities();
+    return _call('start', {
+      'width': settings.width,
+      'height': settings.height,
+      'fps': settings.fps,
+      'bitrate': settings.bitrate,
+      'codec': settings.codec.name,
+      'audio': settings.audioSource.name,
+      'micGain': settings.micGain,
+      'internalGain': settings.internalGain,
+      'noiseReduction': settings.noiseReduction && supported.noiseReduction,
+      'countdown': settings.countdown.inSeconds,
+      'durationSeconds': settings.durationLimit?.inSeconds ?? 0,
+      'orientation': settings.orientation.name,
+      'mode': settings.mode.name,
+    });
+  }
+
   @override
   Future<void> stop(String sessionId) async {
     await _call('stop', {'sessionId': sessionId});

@@ -25,6 +25,7 @@ class MediaItem {
     this.folderUri,
     this.thumbnailUri,
     this.originalMediaId,
+    this.hasAudio,
   });
   final String id, displayName, mimeType;
   final Uri uri;
@@ -38,6 +39,7 @@ class MediaItem {
   final double? fps;
   final Uri? folderUri, thumbnailUri;
   final String? originalMediaId;
+  final bool? hasAudio;
 }
 
 enum RecordingMode { normal, performance }
@@ -114,6 +116,7 @@ class RecordingSession {
     this.startedAt,
     this.outputUri,
     this.error,
+    this.countdownRemaining = Duration.zero,
   });
   final String id;
   final RecordingState state;
@@ -122,6 +125,31 @@ class RecordingSession {
   final Duration elapsedActive;
   final Uri? outputUri;
   final DomainFailure? error;
+  final Duration countdownRemaining;
+}
+
+class VideoConfiguration {
+  const VideoConfiguration({
+    required this.width,
+    required this.height,
+    required this.fps,
+    this.codec = VideoCodec.avc,
+  });
+  final int width, height, fps;
+  final VideoCodec codec;
+}
+
+class RecordingCapabilities {
+  RecordingCapabilities({
+    required Set<AudioSource> audioSources,
+    required List<VideoConfiguration> configurations,
+    required this.noiseReduction,
+    required this.hevc,
+  }) : audioSources = Set.unmodifiable(audioSources),
+       configurations = List.unmodifiable(configurations);
+  final Set<AudioSource> audioSources;
+  final List<VideoConfiguration> configurations;
+  final bool noiseReduction, hevc;
 }
 
 class TimelineClip {

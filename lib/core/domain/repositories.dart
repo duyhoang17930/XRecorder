@@ -9,6 +9,7 @@ abstract interface class MediaRepository {
 }
 
 abstract interface class RecordingService {
+  Future<RecordingCapabilities> capabilities();
   Future<RecordingSession?> currentSession();
   Stream<RecordingSession> get sessions;
   Future<RecordingSession> start(RecordingSettings settings);
