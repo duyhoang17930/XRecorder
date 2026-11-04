@@ -21,6 +21,7 @@ class MainActivity : FlutterActivity() {
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        com.xrecorder.xrecorder.recording.CaptureJournal.initialize(applicationContext)
         captureBridge = CaptureBridge(this)
         captureChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.xrecorder/capture")
         captureChannel?.setMethodCallHandler(captureBridge)

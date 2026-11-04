@@ -23,7 +23,7 @@ object CaptureState : EventChannel.StreamHandler {
         "elapsedMs" to if (state == "recording") elapsed + SystemClock.elapsedRealtime() - activeStart else elapsed,
         "outputUri" to output, "error" to error, "width" to width, "height" to height, "fps" to config.fps, "bitrate" to config.bitrate, "config" to config.map(), "countdownRemaining" to countdownRemaining)
     fun prepare(settings: CaptureConfig) { config = settings; width = settings.width; height = settings.height; countdownRemaining = settings.countdown; id = UUID.randomUUID().toString(); elapsed = 0; startedAt = 0; output = null; error = null; transition("awaitingPermission") }
-    fun transition(next: String, failure: String? = null) { state = next; error = failure; sink?.success(snapshot()) }
+    fun transition(next: String, failure: String? = null) { state = next; error = failure; CaptureJournal.save(); sink?.success(snapshot()) }
     fun emit() { sink?.success(snapshot()) }
     override fun onListen(arguments: Any?, events: EventChannel.EventSink) { sink = events; events.success(snapshot()) }
     override fun onCancel(arguments: Any?) { sink = null }

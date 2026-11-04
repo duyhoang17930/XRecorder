@@ -12,11 +12,16 @@ import io.flutter.plugin.common.MethodChannel
 
 class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHandler {
     companion object { const val CONSENT = 702; const val NOTIFICATIONS = 703; const val AUDIO_PERMISSION = 704 }
-    private var requestedSession: String? = null
+    private var requestedSession: String? = CaptureState.id.takeIf { CaptureState.state == "awaitingPermission" }
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
             "capabilities" -> result.success(CaptureConfig.capabilities())
             "current" -> result.success(CaptureState.snapshot())
+            "pause", "resume" -> {
+                if (call.argument<String>("sessionId") != CaptureState.id) { result.error("stale_session", "This session is no longer active.", null); return }
+                try { CaptureService.instance?.setPaused(call.method == "pause"); result.success(CaptureState.snapshot()) }
+                catch (_: Exception) { result.error("unavailable", "This encoder could not change pause state.", null) }
+            }
             "start" -> {
                 if (CaptureState.busy) { result.error("busy", "A recording is already being prepared or captured.", null); return }
                 val config = try { CaptureConfig.from(activity, call.arguments as? Map<*,*>) }

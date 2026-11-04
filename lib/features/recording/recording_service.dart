@@ -155,13 +155,14 @@ class AndroidRecordingService implements RecordingService {
   }
 
   @override
-  Future<void> pause(String sessionId) => Future.error(
-    const DomainFailure(FailureCode.unavailable, 'Pause is not enabled yet.'),
-  );
+  Future<void> pause(String sessionId) async {
+    await _call('pause', {'sessionId': sessionId});
+  }
+
   @override
-  Future<void> resume(String sessionId) => Future.error(
-    const DomainFailure(FailureCode.unavailable, 'Resume is not enabled yet.'),
-  );
+  Future<void> resume(String sessionId) async {
+    await _call('resume', {'sessionId': sessionId});
+  }
 }
 
 class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
@@ -244,6 +245,22 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     _notify();
   }
 
+  Future<void> togglePause() async {
+    final value = session;
+    if (value == null) return;
+    try {
+      if (value.state == RecordingState.paused) {
+        await service.resume(value.id);
+      } else if (value.state == RecordingState.recording) {
+        await service.pause(value.id);
+      }
+      await refresh();
+    } catch (e) {
+      error = e.toString();
+      _notify();
+    }
+  }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) refresh();
@@ -295,6 +312,14 @@ class CaptureStatusBar extends StatelessWidget {
                         : '${session.state.name} · ${session.elapsedActive.inSeconds}s'),
               ),
             ),
+            if (session.state == RecordingState.recording ||
+                session.state == RecordingState.paused)
+              TextButton(
+                onPressed: controller.togglePause,
+                child: Text(
+                  session.state == RecordingState.paused ? 'Resume' : 'Pause',
+                ),
+              ),
             if (active)
               TextButton(onPressed: controller.stop, child: const Text('Stop')),
             if (completed && session.outputUri != null)

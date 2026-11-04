@@ -16,6 +16,8 @@ class CaptureService : Service() {
     companion object {
         var instance: CaptureService? = null
         const val STOP = "com.xrecorder.STOP"
+        const val PAUSE = "com.xrecorder.PAUSE"
+        const val RESUME = "com.xrecorder.RESUME"
         const val NOTIFICATION = 2001
         const val CHANNEL = "screen_recording"
     }
@@ -30,10 +32,16 @@ class CaptureService : Service() {
     private var audioFile: File? = null
     private var started = false
     private var ending = false
+    private var lastStorageCheck = 0L
     private val config get() = CaptureState.config
     private val tick = object : Runnable {
         override fun run() {
             if (!ending && CaptureState.busy) {
+                val now = SystemClock.elapsedRealtime()
+                if (now - lastStorageCheck > 10000) {
+                    lastStorageCheck = now
+                    if (StatFs(cacheDir.absolutePath).availableBytes < 64L * 1024 * 1024) { stopCapture(); return }
+                }
                 if (config.durationSeconds > 0 && CaptureState.state == "recording" &&
                     CaptureState.elapsed + SystemClock.elapsedRealtime() - CaptureState.activeStart >= config.durationSeconds * 1000L) { stopCapture(); return }
                 CaptureState.emit(); handler.postDelayed(this, 250)
@@ -46,6 +54,12 @@ class CaptureService : Service() {
         if (Build.VERSION.SDK_INT >= 26) getSystemService(NotificationManager::class.java).createNotificationChannel(NotificationChannel(CHANNEL, "Screen recording", NotificationManager.IMPORTANCE_LOW))
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if (intent?.action == PAUSE || intent?.action == RESUME) {
+            if (intent.getStringExtra("sessionId") == CaptureState.id) {
+                try { setPaused(intent.action == PAUSE) } catch (_: Exception) { fail("The encoder could not change pause state.") }
+            }
+            return START_NOT_STICKY
+        }
         if (intent?.action == STOP) {
             if (intent.getStringExtra("sessionId") == CaptureState.id && CaptureState.busy) stopCapture()
             else if (!started) stopSelf()
@@ -111,12 +125,24 @@ class CaptureService : Service() {
         getSystemService(NotificationManager::class.java).notify(NOTIFICATION,notification(true))
     }
     private fun notification(active: Boolean): Notification {
+        val paused = CaptureState.state == "paused"
+        val toggle = PendingIntent.getService(this,3,Intent(this,CaptureService::class.java).setAction(if(paused) RESUME else PAUSE).putExtra("sessionId",CaptureState.id),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val stop = PendingIntent.getService(this,1,Intent(this,CaptureService::class.java).setAction(STOP).putExtra("sessionId",CaptureState.id),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val open = PendingIntent.getActivity(this,2,Intent(this,MainActivity::class.java),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val builder = if (Build.VERSION.SDK_INT >= 26) Notification.Builder(this,CHANNEL) else @Suppress("DEPRECATION") Notification.Builder(this)
-        return builder.setSmallIcon(android.R.drawable.presence_video_online).setContentTitle(if(active) "Screen recording" else "Preparing screen recording")
+        if (active) builder.addAction(Notification.Action.Builder(null,if(paused) "Resume" else "Pause",toggle).build())
+        return builder.setSmallIcon(android.R.drawable.presence_video_online).setContentTitle(if(paused) "Recording paused" else if(active) "Screen recording" else "Preparing screen recording")
             .setContentText(if(active) "Your screen is being captured. Tap Stop to finish." else "Waiting for capture to start.").setOngoing(true).setContentIntent(open)
             .addAction(Notification.Action.Builder(null,"Stop",stop).build()).build()
+    }
+    fun setPaused(paused: Boolean) {
+        if (ending || CaptureState.state != if(paused) "recording" else "paused") return
+        video!!.setPaused(paused)
+        audio?.paused = paused
+        if (paused) CaptureState.elapsed += SystemClock.elapsedRealtime() - CaptureState.activeStart
+        else CaptureState.activeStart = SystemClock.elapsedRealtime()
+        CaptureState.transition(if(paused) "paused" else "recording")
+        getSystemService(NotificationManager::class.java).notify(NOTIFICATION,notification(true))
     }
     fun stopCapture() {
         if (ending) return
@@ -159,7 +185,8 @@ class CaptureService : Service() {
         },"recording-finalizer").start()
     }
     private fun cleanupPartial() {
-        try { output?.abort(); descriptor?.close() } catch (_: Exception) { CaptureState.error = "A partial recording needs cleanup." }
+        try { output?.abort() } catch (_: Exception) { CaptureState.error = "A partial recording needs cleanup." }
+        try { descriptor?.close() } catch (_: Exception) { }
         videoFile?.delete(); audioFile?.delete()
     }
     private fun fail(message: String) {
