@@ -128,3 +128,7 @@ R27–R36/R42/R70/R77/R88 map to the shared recording form and native configurat
 ## P5 session controls (2026-11-04)
 
 R11/R63/R73/R75 map to native pause/resume/stop and persisted interruption state. Pause timeline and repeated stop passed API 36 capture and independent decode. Optional overlay/gesture controls remain unavailable. See [P5 evidence](xrecorder/phase_5_validation.md).
+
+## P6 capture tools (2026-11-04)
+
+R04–R08/R21/R24/R25/R69/R72/R75 map to screenshot capture, `/photo-tools/:id`, facecam permission/overlay and touch guidance. Image cropping/annotation is explicitly post-capture. Real saved screenshot, cropped annotated copy and encoded facecam pixels were checked on API 36. See [P6 evidence and limits](xrecorder/phase_6_validation.md).

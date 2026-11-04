@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/domain/models.dart';
 import '../../core/widgets/studio_widgets.dart';
@@ -61,6 +62,14 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
               child: MediaThumbnail(item: item),
             ),
             SectionTitle(item.displayName),
+            if (item.kind == MediaKind.image)
+              TextButton.icon(
+                onPressed: () => context.push(
+                  '/photo-tools/${Uri.encodeComponent(item.id)}',
+                ),
+                icon: const Icon(Icons.draw),
+                label: const Text('Crop & annotate a copy'),
+              ),
             ListTile(
               title: const Text('Size'),
               subtitle: Text(formatBytes(item.sizeBytes)),

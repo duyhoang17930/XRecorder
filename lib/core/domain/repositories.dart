@@ -13,6 +13,7 @@ abstract interface class RecordingService {
   Future<RecordingSession?> currentSession();
   Stream<RecordingSession> get sessions;
   Future<RecordingSession> start(RecordingSettings settings);
+  Future<RecordingSession> screenshot();
   Future<void> pause(String sessionId);
   Future<void> resume(String sessionId);
   Future<void> stop(String sessionId);

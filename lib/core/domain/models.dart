@@ -67,6 +67,7 @@ class RecordingSettings {
     this.micGain = 1,
     this.internalGain = 1,
     this.noiseReduction = false,
+    this.facecam = false,
     this.constantFrameRate = true,
     this.hardwareEncoding = true,
     this.shakeToStop = false,
@@ -85,6 +86,7 @@ class RecordingSettings {
   durationLimit; // Auto-stop, distinct from pre-start countdown.
   final double micGain, internalGain;
   final bool noiseReduction,
+      facecam,
       constantFrameRate,
       hardwareEncoding,
       shakeToStop,
@@ -117,6 +119,7 @@ class RecordingSession {
     this.outputUri,
     this.error,
     this.countdownRemaining = Duration.zero,
+    this.screenshot = false,
   });
   final String id;
   final RecordingState state;
@@ -126,6 +129,7 @@ class RecordingSession {
   final Uri? outputUri;
   final DomainFailure? error;
   final Duration countdownRemaining;
+  final bool screenshot;
 }
 
 class VideoConfiguration {
@@ -145,11 +149,12 @@ class RecordingCapabilities {
     required List<VideoConfiguration> configurations,
     required this.noiseReduction,
     required this.hevc,
+    this.facecam = false,
   }) : audioSources = Set.unmodifiable(audioSources),
        configurations = List.unmodifiable(configurations);
   final Set<AudioSource> audioSources;
   final List<VideoConfiguration> configurations;
-  final bool noiseReduction, hevc;
+  final bool noiseReduction, hevc, facecam;
 }
 
 class TimelineClip {

@@ -92,6 +92,7 @@ class SettingsController extends ChangeNotifier {
       'cfr': cfr,
       'hardware': hardware,
       'noise': noise,
+      'facecam': facecam,
       'shake': shake,
       'screenOff': screenOff,
       'touches': touches,
@@ -150,6 +151,7 @@ class SettingsController extends ChangeNotifier {
     cfr = flag('cfr', cfr);
     hardware = flag('hardware', hardware);
     noise = flag('noise', noise);
+    facecam = flag('facecam', facecam);
     shake = flag('shake', shake);
     screenOff = flag('screenOff', screenOff);
     touches = flag('touches', touches);
@@ -157,6 +159,7 @@ class SettingsController extends ChangeNotifier {
   }
 
   String resolution = '1080p FHD';
+  bool facecam = false;
   String fps = '60';
   String bitrate = '16 Mbps';
   String codec = 'H.264 / AVC';
@@ -215,6 +218,7 @@ class SettingsController extends ChangeNotifier {
       micGain: gain / 100,
       internalGain: internalGain / 100,
       noiseReduction: noise,
+      facecam: facecam,
       constantFrameRate: cfr,
       hardwareEncoding: hardware,
       shakeToStop: shake,
@@ -247,6 +251,7 @@ class SettingsController extends ChangeNotifier {
       cfr = true;
       hardware = true;
       noise = false;
+      facecam = false;
       shake = true;
       screenOff = false;
       touches = false;

@@ -187,6 +187,36 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
               value: s.countdown,
               onChanged: (v) => s.update(() => s.countdown = v),
             ),
+            SwitchListTile(
+              title: const Text('Facecam'),
+              subtitle: Text(
+                caps?.facecam == true
+                    ? 'Floating front camera appears in full-screen recordings. Requires camera and display-over-other-apps access. Turn off for camera-free capture.'
+                    : 'No front camera available. Turn facecam off to record without it.',
+              ),
+              value: s.facecam,
+              onChanged: caps?.facecam != true && !s.facecam
+                  ? null
+                  : (v) => s.update(() => s.facecam = v),
+            ),
+            TextButton(
+              onPressed: () => showDialog<void>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Show touches'),
+                  content: const Text(
+                    'Android can draw touch indicators when Show taps is enabled in Developer options. Enable it manually in system Settings if available. XRecorder cannot observe arbitrary touches in other apps. The system indicator may appear in full-screen recordings; turn it off afterward if you do not want it.',
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Close'),
+                    ),
+                  ],
+                ),
+              ),
+              child: const Text('Touch-indicator guidance'),
+            ),
             ListTile(
               contentPadding: EdgeInsets.zero,
               title: const Text('Recording duration / auto-stop'),

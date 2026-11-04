@@ -26,6 +26,8 @@ class CaptureService : Service() {
     private var display: VirtualDisplay? = null
     private var video: VideoEncoder? = null
     private var audio: SessionAudio? = null
+    private var imageReader: android.media.ImageReader? = null
+    private var facecam: FacecamOverlay? = null
     private var output: MediaOutput? = null
     private var descriptor: ParcelFileDescriptor? = null
     private var videoFile: File? = null
@@ -33,6 +35,7 @@ class CaptureService : Service() {
     private var started = false
     private var ending = false
     private var lastStorageCheck = 0L
+    private var cameraWaitStart = 0L
     private val config get() = CaptureState.config
     private val tick = object : Runnable {
         override fun run() {
@@ -72,6 +75,7 @@ class CaptureService : Service() {
             if (Build.VERSION.SDK_INT >= 29) {
                 var types = ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION
                 if (Build.VERSION.SDK_INT >= 30 && config.microphone) types = types or ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE
+                if (Build.VERSION.SDK_INT >= 30 && config.facecam) types = types or ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA
                 startForeground(NOTIFICATION, notification, types)
             } else startForeground(NOTIFICATION, notification)
             if (StatFs(getExternalFilesDir(null)?.absolutePath ?: filesDir.absolutePath).availableBytes < 128L * 1024 * 1024) throw java.io.IOException("Low storage")
@@ -81,6 +85,10 @@ class CaptureService : Service() {
             projection!!.registerCallback(object : MediaProjection.Callback() {
                 override fun onStop() { if (!ending) stopCapture() }
             }, handler)
+            if(config.facecam) {
+                facecam = FacecamOverlay(this) { fail("Front camera unavailable or in use. Disable facecam and retry.") }
+                facecam!!.show()
+            }
             if (config.countdown > 0) { CaptureState.transition("countdown"); countdown() } else startEncoder()
         } catch (_: Exception) { fail("Could not prepare capture. Check permissions and free storage, then retry.") }
         return START_NOT_STICKY
@@ -97,9 +105,15 @@ class CaptureService : Service() {
     }
     private fun startEncoder() {
         if (ending) return
+        if (config.facecam && facecam?.ready != true) {
+            if(cameraWaitStart==0L) cameraWaitStart=SystemClock.elapsedRealtime()
+            if(SystemClock.elapsedRealtime()-cameraWaitStart>10000) { fail("No camera frames arrived. Disable facecam and retry."); return }
+            handler.postDelayed({startEncoder()},100); return
+        }
         CaptureState.transition("starting")
+        if (CaptureState.screenshot) { captureImage(); return }
         try {
-            output = MediaOutput(this,"Recording_${System.currentTimeMillis()}.mp4")
+            output = MediaOutput(this,"Recording_${System.currentTimeMillis()}.mp4",journal=true)
             if (config.hasAudio) {
                 videoFile = File(cacheDir,"capture_${CaptureState.id}.mp4")
                 audioFile = File(cacheDir,"capture_${CaptureState.id}.m4a")
@@ -116,6 +130,47 @@ class CaptureService : Service() {
             started = true
             handler.postDelayed({ if (!ending && CaptureState.state == "starting") fail("No capture frames arrived. Check the audio source and retry.") },15000)
         } catch (_: Exception) { fail("Could not start the selected video/audio configuration. Choose a lower preset or mute.") }
+    }
+    private fun captureImage() {
+        try {
+            val metrics = resources.displayMetrics
+            val width = metrics.widthPixels; val height = metrics.heightPixels
+            val reader = android.media.ImageReader.newInstance(width,height,android.graphics.PixelFormat.RGBA_8888,2)
+            imageReader = reader
+            reader.setOnImageAvailableListener({ source ->
+                val image = source.acquireLatestImage() ?: return@setOnImageAvailableListener
+                if (ending) { image.close(); return@setOnImageAvailableListener }
+                ending = true; handler.removeCallbacksAndMessages(null)
+                CaptureState.transition("finalizing")
+                Thread({
+                    var saved: String? = null
+                    try {
+                        image.use {
+                            val plane = it.planes[0]
+                            val paddedWidth = plane.rowStride / plane.pixelStride
+                            val padded = android.graphics.Bitmap.createBitmap(paddedWidth,height,android.graphics.Bitmap.Config.ARGB_8888)
+                            padded.copyPixelsFromBuffer(plane.buffer)
+                            val cropped = android.graphics.Bitmap.createBitmap(padded,0,0,width,height)
+                            output = MediaOutput(this,"Screenshot_${System.currentTimeMillis()}.png","image/png",journal=true)
+                            val fd = output!!.open()
+                            ParcelFileDescriptor.AutoCloseOutputStream(ParcelFileDescriptor.dup(fd.fileDescriptor)).use { stream ->
+                                check(cropped.compress(android.graphics.Bitmap.CompressFormat.PNG,100,stream)); stream.flush()
+                            }
+                            if (cropped !== padded) cropped.recycle(); padded.recycle()
+                            saved = output!!.commit().toString()
+                        }
+                    } catch (_: Exception) { cleanupPartial() }
+                    handler.post {
+                        release()
+                        if (saved == null) CaptureState.transition("failed","Screenshot could not be saved.")
+                        else { CaptureState.output = saved; CaptureState.transition("completed") }
+                        stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
+                    }
+                },"screenshot-save").start()
+            },handler)
+            display = projection!!.createVirtualDisplay("XRecorder Screenshot",width,height,metrics.densityDpi,DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,reader.surface,null,handler)
+            handler.postDelayed({ if (!ending) fail("No screenshot arrived. Protected screens may block capture.") },10000)
+        } catch (_: Exception) { fail("Screenshot capture is unavailable.") }
     }
     private fun markRecording() {
         if (ending) return
@@ -153,6 +208,7 @@ class CaptureService : Service() {
         if (CaptureState.state == "recording") CaptureState.elapsed += SystemClock.elapsedRealtime() - CaptureState.activeStart
         CaptureState.transition("stopping")
         audio?.requestStop()
+        facecam?.close(); facecam = null
         display?.release(); display = null
         projection?.stop(); projection = null
         CaptureState.transition("finalizing")
@@ -196,6 +252,8 @@ class CaptureService : Service() {
         stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
     }
     private fun release() {
+        facecam?.close(); facecam = null
+        try { imageReader?.close() } catch (_: Exception) { }; imageReader = null
         try { audio?.abort() } catch (_: Exception) { }; audio = null
         try { video?.abort() } catch (_: Exception) { }; video = null
         try { display?.release() } catch (_: Exception) { }; display = null
@@ -205,4 +263,5 @@ class CaptureService : Service() {
         if (!ending && CaptureState.busy) fail("Recording service was interrupted.")
         instance = null; handler.removeCallbacksAndMessages(null); super.onDestroy()
     }
+    override fun onConfigurationChanged(config: android.content.res.Configuration) { super.onConfigurationChanged(config); facecam?.transform() }
 }

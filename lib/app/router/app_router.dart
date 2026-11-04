@@ -5,6 +5,7 @@ import '../../core/widgets/studio_shell.dart';
 import '../../features/home/video_home_screen.dart';
 import '../../features/media/photo_library_screen.dart';
 import '../../features/media/video_details_screen.dart';
+import '../../features/media/photo_tools_screen.dart';
 import '../../features/editor/editing_hub_screen.dart';
 import '../../features/settings/settings_hub_screen.dart';
 import '../../features/settings/audio_video_settings_screen.dart';
@@ -59,6 +60,10 @@ GoRouter createRouter() => GoRouter(
       builder: (_, _) => const AudioVideoSettingsScreen(),
     ),
     GoRoute(path: '/recording/completed', redirect: (_, _) => '/videos'),
+    GoRoute(
+      path: '/photo-tools/:id',
+      builder: (_, state) => PhotoToolsScreen(uri: state.pathParameters['id']!),
+    ),
     GoRoute(
       path: '/media/:id',
       builder: (_, state) =>

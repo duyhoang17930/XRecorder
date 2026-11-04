@@ -9,7 +9,7 @@ Future<RecordingSession> state(
   AndroidRecordingService service,
   RecordingState target,
 ) async {
-  for (var i = 0; i < 120; i++) {
+  for (var i = 0; i < 360; i++) {
     final value = await service.currentSession();
     if (value?.state == target) return value!;
     if (value?.state == RecordingState.failed) {

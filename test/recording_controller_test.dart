@@ -29,6 +29,9 @@ class TestRecorder implements RecordingService {
   @override
   Future<RecordingSession?> currentSession() async => current;
   @override
+  Future<RecordingSession> screenshot() async =>
+      current = make(RecordingState.awaitingPermission);
+  @override
   Future<RecordingSession> start(RecordingSettings settings) async =>
       current = make(RecordingState.awaitingPermission);
   @override

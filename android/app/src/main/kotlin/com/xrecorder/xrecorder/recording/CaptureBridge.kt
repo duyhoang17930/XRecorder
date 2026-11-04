@@ -11,21 +11,23 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
 class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHandler {
-    companion object { const val CONSENT = 702; const val NOTIFICATIONS = 703; const val AUDIO_PERMISSION = 704 }
+    companion object { const val CONSENT = 702; const val NOTIFICATIONS = 703; const val AUDIO_PERMISSION = 704; const val CAMERA_PERMISSION = 705; const val OVERLAY_PERMISSION = 706 }
     private var requestedSession: String? = CaptureState.id.takeIf { CaptureState.state == "awaitingPermission" }
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
-            "capabilities" -> result.success(CaptureConfig.capabilities())
+            "capabilities" -> result.success(CaptureConfig.capabilities() + mapOf("facecam" to hasFrontCamera()))
             "current" -> result.success(CaptureState.snapshot())
             "pause", "resume" -> {
                 if (call.argument<String>("sessionId") != CaptureState.id) { result.error("stale_session", "This session is no longer active.", null); return }
                 try { CaptureService.instance?.setPaused(call.method == "pause"); result.success(CaptureState.snapshot()) }
                 catch (_: Exception) { result.error("unavailable", "This encoder could not change pause state.", null) }
             }
-            "start" -> {
+            "start", "screenshot" -> {
                 if (CaptureState.busy) { result.error("busy", "A recording is already being prepared or captured.", null); return }
-                val config = try { CaptureConfig.from(activity, call.arguments as? Map<*,*>) }
+                val config = try { if(call.method == "screenshot") CaptureConfig(countdown=3) else CaptureConfig.from(activity, call.arguments as? Map<*,*>) }
                     catch (e: Exception) { result.error("unsupported", e.message ?: "Unsupported capture settings", null); return }
+                CaptureState.screenshot = call.method == "screenshot"
+                if (config.facecam && !hasFrontCamera()) { result.error("unavailable","This device has no available front camera. Disable facecam to record.",null); return }
                 CaptureState.prepare(config); requestedSession = CaptureState.id
                 try {
                     if (Build.VERSION.SDK_INT >= 33 && activity.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
@@ -49,7 +51,19 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
     private fun ensureAudioPermission() {
         if (CaptureState.config.hasAudio && activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
             activity.requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), AUDIO_PERMISSION)
-        else launchConsent()
+        else ensureCameraPermission()
+    }
+    private fun hasFrontCamera(): Boolean = try {
+        val manager=activity.getSystemService(android.hardware.camera2.CameraManager::class.java)
+        manager.cameraIdList.any { manager.getCameraCharacteristics(it).get(android.hardware.camera2.CameraCharacteristics.LENS_FACING)==android.hardware.camera2.CameraCharacteristics.LENS_FACING_FRONT }
+    } catch (_: Exception) { false }
+    private fun ensureCameraPermission() {
+        if (!CaptureState.config.facecam) { launchConsent(); return }
+        if (!android.provider.Settings.canDrawOverlays(activity)) {
+            activity.startActivityForResult(Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,android.net.Uri.parse("package:${activity.packageName}")),OVERLAY_PERMISSION)
+        } else if(activity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            activity.requestPermissions(arrayOf(Manifest.permission.CAMERA),CAMERA_PERMISSION)
+        } else launchConsent()
     }
     private fun launchConsent() {
         if (requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
@@ -58,16 +72,25 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
         activity.startActivityForResult(intent, CONSENT)
     }
     fun onPermissionsResult(requestCode: Int): Boolean {
-        if (requestCode != NOTIFICATIONS && requestCode != AUDIO_PERMISSION) return false
+        if (requestCode != NOTIFICATIONS && requestCode != AUDIO_PERMISSION && requestCode != CAMERA_PERMISSION) return false
         if (CaptureState.state != "awaitingPermission") return true
         if (requestCode == AUDIO_PERMISSION && activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             requestedSession = null; CaptureState.transition("failed", "Audio permission was denied. Select mute to record without audio."); return true
         }
-        try { if (requestCode == NOTIFICATIONS) ensureAudioPermission() else launchConsent() }
+        if (requestCode == CAMERA_PERMISSION && activity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestedSession=null; CaptureState.transition("failed","Camera permission was denied. Disable facecam to continue."); return true
+        }
+        try { if (requestCode == NOTIFICATIONS) ensureAudioPermission() else ensureCameraPermission() }
         catch (_: Exception) { CaptureState.transition("failed", "Could not open screen capture consent.") }
         return true
     }
     fun onActivityResult(request: Int, code: Int, data: Intent?): Boolean {
+        if (request == OVERLAY_PERMISSION) {
+            if (CaptureState.state != "awaitingPermission") return true
+            if (!android.provider.Settings.canDrawOverlays(activity)) { requestedSession=null; CaptureState.transition("failed","Floating camera access was not granted. Disable facecam to record without it.") }
+            else try { ensureCameraPermission() } catch (_: Exception) { CaptureState.transition("failed","Camera permission is unavailable.") }
+            return true
+        }
         if (request != CONSENT) return false
         if (requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return true
         requestedSession = null

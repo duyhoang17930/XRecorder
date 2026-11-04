@@ -46,6 +46,22 @@ class RecordingSetupSheet extends StatelessWidget {
                 ],
               ),
               const RecordingSettingsForm(),
+              TextButton.icon(
+                icon: const Icon(Icons.screenshot),
+                label: const Text('Take screenshot (3-second delay)'),
+                onPressed: capture.busy
+                    ? null
+                    : () async {
+                        try {
+                          await capture.screenshot();
+                          if (context.mounted) Navigator.pop(context);
+                        } catch (e) {
+                          if (context.mounted) {
+                            showNotice(context, e.toString());
+                          }
+                        }
+                      },
+              ),
               PrimaryButton(
                 capture.busy ? 'Session already active' : 'Start Recording',
                 icon: Icons.fiber_manual_record,

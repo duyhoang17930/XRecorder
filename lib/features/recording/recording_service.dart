@@ -14,6 +14,7 @@ class AndroidRecordingService implements RecordingService {
     final config = (data['config'] as Map<Object?, Object?>?) ?? data;
     return RecordingSession(
       id: data['id'] as String? ?? '',
+      screenshot: data['screenshot'] == true,
       state: RecordingState.values.firstWhere(
         (s) => s.name == data['state'],
         orElse: () => RecordingState.failed,
@@ -46,6 +47,7 @@ class AndroidRecordingService implements RecordingService {
         micGain: (config['micGain'] as num?)?.toDouble() ?? 1,
         internalGain: (config['internalGain'] as num?)?.toDouble() ?? 1,
         noiseReduction: config['noiseReduction'] == true,
+        facecam: config['facecam'] == true,
       ),
       startedAt: data['startedAt'] is num && (data['startedAt'] as num) > 0
           ? DateTime.fromMillisecondsSinceEpoch(
@@ -90,6 +92,7 @@ class AndroidRecordingService implements RecordingService {
         }).toList(),
         noiseReduction: data['noiseReduction'] == true,
         hevc: data['hevc'] == true,
+        facecam: data['facecam'] == true,
       );
     } on MissingPluginException {
       throw const DomainFailure(
@@ -125,6 +128,8 @@ class AndroidRecordingService implements RecordingService {
   @override
   Future<RecordingSession?> currentSession() async => _call('current');
   @override
+  Future<RecordingSession> screenshot() => _call('screenshot');
+  @override
   Future<RecordingSession> start(RecordingSettings settings) async {
     final supported = await capabilities();
     return _call('start', {
@@ -137,6 +142,7 @@ class AndroidRecordingService implements RecordingService {
       'micGain': settings.micGain,
       'internalGain': settings.internalGain,
       'noiseReduction': settings.noiseReduction && supported.noiseReduction,
+      'facecam': settings.facecam,
       'countdown': settings.countdown.inSeconds,
       'durationSeconds': settings.durationLimit?.inSeconds ?? 0,
       'orientation': settings.orientation.name,
@@ -228,6 +234,19 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     }
   }
 
+  Future<void> screenshot() async {
+    if (busy) return;
+    error = null;
+    dismissedId = null;
+    try {
+      _receive(await service.screenshot());
+    } catch (e) {
+      error = e.toString();
+      _notify();
+      rethrow;
+    }
+  }
+
   Future<void> stop() async {
     final value = session;
     if (value == null) return;
@@ -308,7 +327,9 @@ class CaptureStatusBar extends StatelessWidget {
               child: Text(
                 controller.error ??
                     (completed
-                        ? 'Recording saved'
+                        ? (session.screenshot
+                              ? 'Screenshot saved'
+                              : 'Recording saved')
                         : '${session.state.name} · ${session.elapsedActive.inSeconds}s'),
               ),
             ),

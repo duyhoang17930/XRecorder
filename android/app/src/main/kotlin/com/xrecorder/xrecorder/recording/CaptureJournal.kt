@@ -21,6 +21,7 @@ object CaptureJournal {
             CaptureState.state = data.optString("state", "idle")
             CaptureState.elapsed = data.optLong("elapsedMs")
             CaptureState.startedAt = data.optLong("startedAt")
+            CaptureState.screenshot = data.optBoolean("screenshot")
             CaptureState.output = data.optString("outputUri").takeUnless { it.isBlank() || it == "null" }
             CaptureState.error = data.optString("error").takeUnless { it.isBlank() || it == "null" }
             val config = data.optJSONObject("config")

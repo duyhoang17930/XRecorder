@@ -46,6 +46,32 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
                     "find" -> describe(Uri.parse(call.argument<String>("id") ?: ""))
                     "thumbnail" -> thumbnail(Uri.parse(call.argument<String>("uri") ?: ""))
                     "storage" -> storage()
+                    "imageBytes" -> {
+                        val uri = Uri.parse(call.argument<String>("uri") ?: ""); checkUri(uri)
+                        require(resolver.getType(uri)?.startsWith("image/") == true)
+                        resolver.openInputStream(uri)!!.use { input ->
+                            val out = ByteArrayOutputStream(); val buffer = ByteArray(16384)
+                            while(true) { val n = input.read(buffer); if(n < 0) break; require(out.size()+n <= 32*1024*1024); out.write(buffer,0,n) }
+                            val bytes=out.toByteArray()
+                            val bounds=BitmapFactory.Options().apply { inJustDecodeBounds=true }
+                            BitmapFactory.decodeByteArray(bytes,0,bytes.size,bounds)
+                            require(bounds.outWidth in 1..8192 && bounds.outHeight in 1..8192 && bounds.outWidth.toLong()*bounds.outHeight <= 20000000L)
+                            bytes
+                        }
+                    }
+                    "saveImage" -> {
+                        val bytes = call.argument<ByteArray>("bytes") ?: throw IllegalArgumentException()
+                        require(bytes.size in 1..32*1024*1024)
+                        val bounds = BitmapFactory.Options().apply { inJustDecodeBounds=true }
+                        BitmapFactory.decodeByteArray(bytes,0,bytes.size,bounds)
+                        require(bounds.outWidth > 0 && bounds.outHeight > 0 && bounds.outMimeType == "image/png")
+                        val output = com.xrecorder.xrecorder.recording.MediaOutput(activity,"Edited_${System.currentTimeMillis()}.png","image/png")
+                        try {
+                            val fd = output.open()
+                            android.os.ParcelFileDescriptor.AutoCloseOutputStream(android.os.ParcelFileDescriptor.dup(fd.fileDescriptor)).use { it.write(bytes) }
+                            output.commit().toString()
+                        } catch(e: Exception) { output.abort(); throw e }
+                    }
                     else -> { activity.runOnUiThread { result.notImplemented() }; return@execute }
                 }
                 activity.runOnUiThread { result.success(value) }
@@ -152,6 +178,10 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
                     if (frames != null && duration != null && duration > 0) fields["fps"] = frames * 1000 / duration
                 }
             } finally { retriever.release() }
+        } else {
+            val options=BitmapFactory.Options().apply { inJustDecodeBounds=true }
+            resolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it,null,options) }
+            fields["width"]=options.outWidth; fields["height"]=options.outHeight
         }
         return fields
     }

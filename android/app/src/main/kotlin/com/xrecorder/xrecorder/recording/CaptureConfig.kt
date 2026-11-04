@@ -11,14 +11,14 @@ data class CaptureConfig(
     val bitrate: Int = 8000000, val codec: String = "avc", val encoderName: String = "",
     val audio: String = "mute", val micGain: Double = 1.0, val internalGain: Double = 1.0,
     val noiseReduction: Boolean = false, val countdown: Int = 0, val durationSeconds: Int = 0,
-    val orientation: String = "automatic", val mode: String = "normal"
+    val orientation: String = "automatic", val mode: String = "normal", val facecam: Boolean = false
 ) {
     val microphone: Boolean get() = audio == "microphone" || audio == "mixed"
     val hasAudio: Boolean get() = audio != "mute"
     val mime: String get() = if (codec == "hevc") "video/hevc" else "video/avc"
     fun map(): Map<String, Any> = mapOf("width" to width,"height" to height,"fps" to fps,"bitrate" to bitrate,"codec" to codec,
         "audio" to audio,"micGain" to micGain,"internalGain" to internalGain,"noiseReduction" to noiseReduction,
-        "countdown" to countdown,"durationSeconds" to durationSeconds,"orientation" to orientation,"mode" to mode)
+        "countdown" to countdown,"durationSeconds" to durationSeconds,"orientation" to orientation,"mode" to mode,"facecam" to facecam)
     companion object {
         fun encoders(mime: String): List<MediaCodecInfo> = MediaCodecList(MediaCodecList.REGULAR_CODECS).codecInfos.filter {
             it.isEncoder && it.supportedTypes.any { type -> type.equals(mime,true) }
@@ -58,7 +58,7 @@ data class CaptureConfig(
             require(!noise || NoiseSuppressor.isAvailable()) { "Noise reduction is unavailable. Disable it in audio settings." }
             val countdown = number("countdown",0); val duration = number("durationSeconds",0)
             require(countdown in 0..10 && duration in 0..86400) { "Invalid countdown or recording duration" }
-            return CaptureConfig(width,height,fps,bitrate,codec,encoder.name,audio,micGain,internalGain,noise,countdown,duration,orientation,mode)
+            return CaptureConfig(width,height,fps,bitrate,codec,encoder.name,audio,micGain,internalGain,noise,countdown,duration,orientation,mode,data["facecam"]==true)
         }
         fun capabilities(): Map<String,Any> = mapOf(
             "audioSources" to if (Build.VERSION.SDK_INT >= 29) listOf("mute","microphone","internal","mixed") else listOf("mute","microphone"),
