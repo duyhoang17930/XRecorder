@@ -40,3 +40,7 @@ Supported release device range is not yet certified; SDK 24 is the current build
 - [Android preferences and background commit guidance](https://developer.android.com/training/data-storage/shared-preferences)
 
 No recording/editor library has been selected. Candidate licensing and device proofs remain required before adding those dependencies.
+
+## Current implementation after P13 (2026-11-04)
+
+The sections above preserve the initial audit. P1–P9 and P11 now have phase commits and native implementations; P10/P12 are deferred under GitHub issue #1. P13 replaces debug release signing with optional environment-configured production signing, excludes private backup/transfer, removes bundled sample media, and packages license notices. API 24/36 are explicit min/target values. Media3 1.11.1 transformer/effect/ui is the pinned native editor engine. Export jobs use bounded atomic JSON snapshots rather than a database; draft/job history is local and interruption is retryable, with no background execution guarantee. See phase validation documents and the open physical-device/signing/identity gates in `phase_13_validation.md` for current evidence.

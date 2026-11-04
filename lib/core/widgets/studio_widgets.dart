@@ -13,11 +13,6 @@ void showNotice(BuildContext context, String message) {
     ..showSnackBar(SnackBar(content: Text(message)));
 }
 
-void unsupported(BuildContext context, String feature) => showNotice(
-  context,
-  '$feature is not available in this UI baseline. No media was changed.',
-);
-
 class StudioCard extends StatelessWidget {
   const StudioCard({
     super.key,
@@ -325,80 +320,6 @@ class SettingsRow extends StatelessWidget {
                 ))
         : Switch(value: value!, onChanged: onChanged),
     onTap: onTap,
-  );
-}
-
-class MockBanner extends StatelessWidget {
-  const MockBanner({super.key});
-
-  @override
-  Widget build(BuildContext context) => const Padding(
-    padding: EdgeInsets.symmetric(vertical: AppSpacing.xs),
-    child: Text(
-      'DEMO LIBRARY · Sample media · UI settings only',
-      style: AppTypography.mutedMicro,
-    ),
-  );
-}
-
-class MediaPreview extends StatelessWidget {
-  const MediaPreview({
-    super.key,
-    required this.asset,
-    required this.duration,
-    this.onTap,
-    this.badge = '1080p · 60 FPS',
-  });
-
-  final String asset;
-  final String duration;
-  final String badge;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) => ClipRRect(
-    borderRadius: BorderRadius.circular(AppRadius.control),
-    child: AspectRatio(
-      aspectRatio: 16 / 9,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset(asset, fit: BoxFit.cover),
-          const DecoratedBox(
-            decoration: BoxDecoration(gradient: AppGradients.mediaScrim),
-          ),
-          Positioned(top: 8, left: 8, child: StudioBadge(badge)),
-          Center(
-            child: IconButton.filledTonal(
-              tooltip: 'Preview sample',
-              onPressed: onTap,
-              iconSize: AppIconSize.preview,
-              icon: const Icon(Icons.play_arrow_rounded),
-            ),
-          ),
-          Positioned(
-            right: 12,
-            bottom: 12,
-            child: Text(
-              duration,
-              style: AppTypography.timecode.copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: AppColors.text,
-              ),
-            ),
-          ),
-          const Positioned(
-            left: 12,
-            bottom: 12,
-            child: Text(
-              'FHD 1080p  •  Stereo',
-              style: AppTypography.primaryCaption,
-            ),
-          ),
-        ],
-      ),
-    ),
   );
 }
 

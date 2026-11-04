@@ -85,7 +85,7 @@ class SettingsHubScreen extends StatelessWidget {
           onTap: () => showAboutDialog(
             context: context,
             applicationName: 'XRecorder',
-          applicationVersion: '0.1.0+1',
+            applicationVersion: '0.1.0+1',
             children: [
               const Text(
                 'Android screen recording and non-destructive media editing. AndroidX Media3 is licensed under Apache-2.0. Manrope uses the SIL Open Font License. See the bundled license list.',

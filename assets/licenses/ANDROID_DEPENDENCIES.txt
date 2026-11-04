@@ -1,0 +1,69 @@
+Resolved release runtime dependencies, 2026-11-04.
+Apache-2.0 text is bundled separately. Flutter/Dart notices are in the generated Flutter license registry. checker-qual annotations use MIT (see bundled upstream license).
+
+androidx.activity:activity:1.8.1 | See upstream / inherited license
+androidx.annotation:annotation:1.8.1 | See upstream / inherited license
+androidx.annotation:annotation-experimental:1.4.0 | See upstream / inherited license
+androidx.annotation:annotation-jvm:1.8.1 | See upstream / inherited license
+androidx.arch.core:core-common:2.2.0 | See upstream / inherited license
+androidx.arch.core:core-runtime:2.2.0 | See upstream / inherited license
+androidx.collection:collection:1.1.0 | See upstream / inherited license
+androidx.concurrent:concurrent-futures:1.2.0 | The Apache Software License, Version 2.0
+androidx.core:core:1.13.1 | See upstream / inherited license
+androidx.core:core-ktx:1.13.1 | See upstream / inherited license
+androidx.customview:customview:1.0.0 | See upstream / inherited license
+androidx.customview:customview-poolingcontainer:1.0.0 | See upstream / inherited license
+androidx.exifinterface:exifinterface:1.4.1 | The Apache Software License, Version 2.0
+androidx.fragment:fragment:1.7.1 | See upstream / inherited license
+androidx.interpolator:interpolator:1.0.0 | See upstream / inherited license
+androidx.lifecycle:lifecycle-common:2.7.0 | See upstream / inherited license
+androidx.lifecycle:lifecycle-common-java8:2.7.0 | See upstream / inherited license
+androidx.lifecycle:lifecycle-livedata:2.7.0 | See upstream / inherited license
+androidx.lifecycle:lifecycle-livedata-core:2.7.0 | See upstream / inherited license
+androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0 | See upstream / inherited license
+androidx.lifecycle:lifecycle-process:2.7.0 | See upstream / inherited license
+androidx.lifecycle:lifecycle-runtime:2.7.0 | See upstream / inherited license
+androidx.lifecycle:lifecycle-viewmodel:2.7.0 | See upstream / inherited license
+androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0 | See upstream / inherited license
+androidx.loader:loader:1.0.0 | See upstream / inherited license
+androidx.media3:media3-common:1.11.1 | The Apache Software License, Version 2.0
+androidx.media3:media3-container:1.11.1 | The Apache Software License, Version 2.0
+androidx.media3:media3-database:1.11.1 | The Apache Software License, Version 2.0
+androidx.media3:media3-datasource:1.11.1 | The Apache Software License, Version 2.0
+androidx.media3:media3-decoder:1.11.1 | The Apache Software License, Version 2.0
+androidx.media3:media3-effect:1.11.1 | The Apache Software License, Version 2.0
+androidx.media3:media3-exoplayer:1.11.1 | The Apache Software License, Version 2.0
+androidx.media3:media3-extractor:1.11.1 | The Apache Software License, Version 2.0
+androidx.media3:media3-muxer:1.11.1 | The Apache Software License, Version 2.0
+androidx.media3:media3-transformer:1.11.1 | The Apache Software License, Version 2.0
+androidx.media3:media3-ui:1.11.1 | The Apache Software License, Version 2.0
+androidx.profileinstaller:profileinstaller:1.3.1 | See upstream / inherited license
+androidx.recyclerview:recyclerview:1.3.0 | The Apache Software License, Version 2.0
+androidx.savedstate:savedstate:1.2.1 | See upstream / inherited license
+androidx.startup:startup-runtime:1.1.1 | See upstream / inherited license
+androidx.tracing:tracing:1.2.0 | See upstream / inherited license
+androidx.versionedparcelable:versionedparcelable:1.1.1 | See upstream / inherited license
+androidx.viewpager:viewpager:1.0.0 | See upstream / inherited license
+androidx.window:window:1.2.0 | See upstream / inherited license
+androidx.window:window-java:1.2.0 | See upstream / inherited license
+androidx.window.extensions.core:core:1.0.0 | See upstream / inherited license
+com.getkeepsafe.relinker:relinker:1.4.5 | See upstream / inherited license
+com.google.code.findbugs:jsr305:3.0.2 | The Apache Software License, Version 2.0
+com.google.errorprone:error_prone_annotations:2.28.0 | Apache 2.0
+com.google.guava:failureaccess:1.0.2 | See upstream / inherited license
+com.google.guava:guava:33.3.1-android | See upstream / inherited license
+com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava | See upstream / inherited license
+com.google.j2objc:j2objc-annotations:3.0.0 | See upstream / inherited license
+io.flutter:arm64_v8a_release:1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8 | See upstream / inherited license
+io.flutter:armeabi_v7a_release:1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8 | See upstream / inherited license
+io.flutter:flutter_embedding_release:1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8 | See upstream / inherited license
+io.flutter:x86_64_release:1.0.0-cf636b1dfb818dd6a3ff16e390e93b1a036969c8 | See upstream / inherited license
+org.checkerframework:checker-qual:3.43.0 | See upstream / inherited license
+org.jetbrains:annotations:23.0.0 | See upstream / inherited license
+org.jetbrains.kotlin:kotlin-stdlib:2.4.0 | Apache-2.0
+org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0 | See upstream / inherited license
+org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.9.0 | See upstream / inherited license
+org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0 | See upstream / inherited license
+org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0 | See upstream / inherited license
+org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.9.0 | See upstream / inherited license
+org.jspecify:jspecify:1.0.0 | See upstream / inherited license

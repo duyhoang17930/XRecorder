@@ -49,7 +49,7 @@ The repository is a working UI baseline, not the blank Flutter project assumed b
 ### Implementation progress
 
 - P1 foundation code implemented: stateful four-tab shell, persisted Android preferences, typed domain/service contracts, and English/dark resource boundaries. See [audit](xrecorder/repository_audit.md) and [validation evidence](xrecorder/phase_1_validation.md).
-- P2–P6 implementations and remaining device gates are recorded in [P2](xrecorder/phase_2_validation.md), [P3](xrecorder/phase_3_validation.md), [P4](xrecorder/phase_4_validation.md), [P5](xrecorder/phase_5_validation.md) and [P6](xrecorder/phase_6_validation.md). P10/P12 are deferred at the product owner's request under [issue #1](https://github.com/duyhoang17930/XRecorder/issues/1). P7–P9, P11 and P13 remain pending. Emulator evidence is not a physical-device release signoff.
+- P2–P9 and P11 implementations are committed, with validation and remaining device gates in [P2](xrecorder/phase_2_validation.md), [P3](xrecorder/phase_3_validation.md), [P4](xrecorder/phase_4_validation.md), [P5](xrecorder/phase_5_validation.md), [P6](xrecorder/phase_6_validation.md), [P7](xrecorder/phase_7_validation.md), [P8](xrecorder/phase_8_validation.md), [P9](xrecorder/phase_9_validation.md) and [P11](xrecorder/phase_11_validation.md). P10/P12 are deferred at the product owner's request under [issue #1](https://github.com/duyhoang17930/XRecorder/issues/1). P13 hardening and open release gates are recorded in [P13](xrecorder/phase_13_validation.md). Emulator evidence is not a physical-device release signoff.
 
 ### P0 — Repository and product audit
 

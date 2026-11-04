@@ -4,6 +4,15 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val releaseStore = System.getenv("XRECORDER_STORE_FILE")
+val releaseStorePassword = System.getenv("XRECORDER_STORE_PASSWORD")
+val releaseAlias = System.getenv("XRECORDER_KEY_ALIAS")
+val releaseKeyPassword = System.getenv("XRECORDER_KEY_PASSWORD")
+val signingValues = listOf(releaseStore, releaseStorePassword, releaseAlias, releaseKeyPassword)
+require(signingValues.all { it.isNullOrBlank() } || signingValues.all { !it.isNullOrBlank() }) {
+    "Configure all four XRECORDER signing environment variables, or omit all for an unsigned release."
+}
+
 android {
     namespace = "com.xrecorder.xrecorder"
     compileSdk = flutter.compileSdkVersion
@@ -19,8 +28,8 @@ android {
         applicationId = "com.xrecorder.xrecorder"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdk = 24
+        targetSdk = 36
         // Uses the version code from pubspec.yaml. When using split APKs, 1000 * ABI_VERSION
         // is added automatically by Flutter. (https://developer.android.com/studio/build/configure-apk-splits#configure-APK-versions)
         // You can force using the value of versionCode by specifying the `-P force-version-code-ignoring-abi=true`
@@ -29,11 +38,19 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        if (!releaseStore.isNullOrBlank()) {
+            create("production") {
+                storeFile = file(releaseStore)
+                storePassword = releaseStorePassword
+                keyAlias = releaseAlias
+                keyPassword = releaseKeyPassword
+            }
+        }
+    }
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = if (!releaseStore.isNullOrBlank()) signingConfigs.getByName("production") else null
         }
     }
 }

@@ -136,3 +136,15 @@ R04–R08/R21/R24/R25/R69/R72/R75 map to screenshot capture, `/photo-tools/:id`,
 ## P7 media actions (2026-11-04)
 
 R02/R18/R37/R62/R78/R79/R83/R84 map to real media preview/share/rename and `/trash`. Ownership and confirmation protect mutation; API 36 tests verified byte-preserving restore, name conflicts, playback clock and share handoff. See [P7 evidence](xrecorder/phase_7_validation.md).
+
+## P8/P9 editor and exports (2026-11-04)
+
+R10/R37/R43–R49/R59/R60/R82/R84 map to `/editor`, `/editor/project/:id` and `/exports`: persisted non-destructive drafts, real playback/timeline, trim/split/merge/crop/rotate, effects/music, persistent export queue and MP4/GIF output. API 36 integration and independent decode evidence are in [P8](xrecorder/phase_8_validation.md) and [P9](xrecorder/phase_9_validation.md). No subtitle, premium or watermark capability is implied.
+
+## P11 settings and support (2026-11-04)
+
+R03/R12–R19/R21–R28/R36/R50–R59/R66–R76/R87 map to `/settings`, `/settings/audio-video`, `/help` and `/support`. Only real preferences are offered; diagnostics are opt-in and share-sheet launch does not claim delivery. See [P11 evidence](xrecorder/phase_11_validation.md).
+
+## P13 hardening (2026-11-04)
+
+Release packaging excludes sample art. Private data is excluded from backup/transfer, native permissions remain scoped to capture tools, license notices are bundled, and release signing no longer falls back to a debug key. Production identity, signing and physical/device-matrix gates remain explicit in [P13 validation](xrecorder/phase_13_validation.md).

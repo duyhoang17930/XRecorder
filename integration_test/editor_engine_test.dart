@@ -149,6 +149,48 @@ void main() {
       }
       expect(finished['state'], 'completed', reason: finished.toString());
       debugPrint('GIF_TEST_OUTPUT=${finished['uri']}');
+      final portrait = project.copyWith(
+        clips: project.clips
+            .map(
+              (clip) => clip.copyWith(rotation: 0, cropLeft: 0, cropRight: 1),
+            )
+            .toList(),
+      );
+      final portraitId = await channel.invokeMethod<String>(
+        'exportStart',
+        portrait.toJson(),
+      );
+      for (var i = 0; i < 120; i++) {
+        finished = await job(portraitId!);
+        if (['completed', 'failed'].contains(finished['state'])) break;
+        await Future<void>.delayed(const Duration(seconds: 1));
+      }
+      expect(finished['state'], 'completed', reason: finished.toString());
+      debugPrint('PORTRAIT_TEST_OUTPUT=${finished['uri']}');
+      final broken = EditProject(
+        id: 'missing_source',
+        updatedAt: DateTime.now(),
+        clips: [
+          TimelineClip(
+            mediaId: 'content://media/external/video/media/999999999',
+            inPoint: Duration.zero,
+            outPoint: const Duration(seconds: 1),
+            sourceDuration: const Duration(seconds: 1),
+          ),
+        ],
+      );
+      final brokenId = await channel.invokeMethod<String>(
+        'exportStart',
+        broken.toJson(),
+      );
+      for (var i = 0; i < 30; i++) {
+        finished = await job(brokenId!);
+        if (['completed', 'failed'].contains(finished['state'])) break;
+        await Future<void>.delayed(const Duration(seconds: 1));
+      }
+      expect(finished['state'], 'failed');
+      expect(finished['uri'], isNull);
+      expect((await media.find(source.id))!.sizeBytes, source.sizeBytes);
       media.dispose();
     },
     timeout: const Timeout(Duration(minutes: 6)),
