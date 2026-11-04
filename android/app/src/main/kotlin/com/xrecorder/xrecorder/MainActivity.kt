@@ -18,9 +18,14 @@ class MainActivity : FlutterActivity() {
     private var captureBridge: CaptureBridge? = null
     private var captureChannel: MethodChannel? = null
     private var captureEvents: EventChannel? = null
+    private var editorBridge: com.xrecorder.xrecorder.editor.EditorBridge? = null
+    private var editorChannel: MethodChannel? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        editorBridge=com.xrecorder.xrecorder.editor.EditorBridge(applicationContext)
+        editorChannel=MethodChannel(flutterEngine.dartExecutor.binaryMessenger,"com.xrecorder/editor").also{it.setMethodCallHandler(editorBridge)}
+        flutterEngine.platformViewsController.registry.registerViewFactory("com.xrecorder/editor_preview",com.xrecorder.xrecorder.editor.EditorPreviewFactory(flutterEngine.dartExecutor.binaryMessenger))
         com.xrecorder.xrecorder.recording.CaptureJournal.initialize(applicationContext)
         captureBridge = CaptureBridge(this)
         captureChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.xrecorder/capture")
@@ -64,6 +69,7 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun cleanUpFlutterEngine(flutterEngine: FlutterEngine) {
+        editorChannel?.setMethodCallHandler(null);editorBridge?.dispose();editorBridge=null;editorChannel=null
         captureChannel?.setMethodCallHandler(null)
         captureEvents?.setStreamHandler(null)
         captureChannel = null
@@ -83,6 +89,7 @@ class MainActivity : FlutterActivity() {
         preferencesWorker.shutdown()
         super.onDestroy()
     }
+    override fun onPause() { com.xrecorder.xrecorder.editor.EditorPreview.pauseAll();super.onPause() }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (captureBridge?.onActivityResult(requestCode, resultCode, data) == true) return

@@ -64,6 +64,7 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
                     "list" -> list(call.argument<String>("kind") ?: "video", call.argument<String>("folder"))
                     "find" -> describe(Uri.parse(call.argument<String>("id") ?: ""))
                     "thumbnail" -> thumbnail(Uri.parse(call.argument<String>("uri") ?: ""))
+                    "thumbnailAt" -> thumbnail(Uri.parse(call.argument<String>("uri") ?: ""),(call.argument<Number>("timeMs")?.toLong() ?: 0).coerceIn(0,86400000L)*1000)
                     "storage" -> storage()
                     "rename" -> actions.rename(Uri.parse(call.argument<String>("uri")!!),call.argument<String>("name")!!.trim())
                     "trash" -> { val uri=Uri.parse(call.argument<String>("uri")!!);actions.trash(uri,describe(uri) ?: throw java.io.FileNotFoundException()) }
@@ -213,10 +214,10 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
         return fields
     }
 
-    private fun thumbnail(uri: Uri): ByteArray {
+    private fun thumbnail(uri: Uri, timeUs:Long?=null): ByteArray {
         checkUri(uri)
         var bitmap: Bitmap? = null
-        if (Build.VERSION.SDK_INT >= 29) {
+        if (Build.VERSION.SDK_INT >= 29 && timeUs==null) {
             try { bitmap = resolver.loadThumbnail(uri, Size(320, 240), null) } catch (_: java.io.IOException) { }
         }
         if (bitmap == null) {
@@ -225,8 +226,8 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
                 val retriever = MediaMetadataRetriever()
                 try {
                     retriever.setDataSource(activity, uri)
-                    bitmap = if (Build.VERSION.SDK_INT >= 27) retriever.getScaledFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST_SYNC, 320, 240)
-                        else retriever.getFrameAtTime(0)
+                    bitmap = if (Build.VERSION.SDK_INT >= 27) retriever.getScaledFrameAtTime(timeUs ?: 0, MediaMetadataRetriever.OPTION_CLOSEST_SYNC, 320, 240)
+                        else retriever.getFrameAtTime(timeUs ?: 0)
                 } finally { retriever.release() }
             } else {
                 val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }

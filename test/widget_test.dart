@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:xrecorder/app/app.dart';
 import 'package:xrecorder/core/domain/models.dart';
 import 'package:xrecorder/features/media/media_repository.dart';
+import 'package:xrecorder/features/editor/project_repository.dart';
 
 class TestCatalog implements CatalogRepository {
   final events = StreamController<void>.broadcast();
@@ -58,6 +59,17 @@ class TestCatalog implements CatalogRepository {
 }
 
 void main() {
+  setUp(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+          AndroidEditProjectRepository.channel,
+          (call) async => call.method == 'list' ? <Object?>[] : null,
+        );
+  });
+  tearDown(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(AndroidEditProjectRepository.channel, null);
+  });
   Future<TestCatalog> start(
     WidgetTester tester, {
     Size size = const Size(390, 844),

@@ -24,18 +24,20 @@ object RecordingMuxer {
             val data = ByteBuffer.allocateDirect(16*1024*1024)
             val info = MediaCodec.BufferInfo()
             var lastVideo = -1L; var lastAudio = -1L
-            while (videoReader.sampleTime >= 0 || audioReader.sampleTime >= 0) {
+            while (videoReader.sampleTrackIndex >= 0 || audioReader.sampleTrackIndex >= 0) {
+                val hasVideo=videoReader.sampleTrackIndex>=0;val hasAudio=audioReader.sampleTrackIndex>=0
                 val vt = videoReader.sampleTime
-                val at = if (audioReader.sampleTime < 0) -1 else audioReader.sampleTime + audioOffsetUs
-                if (audioReader.sampleTime >= 0 && at < 0) { audioReader.advance(); continue }
-                val isVideo = vt >= 0 && (audioReader.sampleTime < 0 || vt <= at)
+                val at = audioReader.sampleTime + audioOffsetUs
+                // AAC priming can have a negative timestamp; track index identifies EOS.
+                if (hasAudio && at < 0) { audioReader.advance(); continue }
+                val isVideo = hasVideo && (!hasAudio || vt <= at)
                 val reader = if (isVideo) videoReader else audioReader
                 val time = if (isVideo) vt else at
                 if (time >= durationUs) { reader.advance(); continue }
                 data.clear(); val count = reader.readSampleData(data,0)
                 if (count < 0) { reader.advance(); continue }
                 require(count <= data.capacity()) { "Encoded frame is too large" }
-                val pts = maxOf(time, (if (isVideo) lastVideo else lastAudio)+1)
+                val pts = maxOf(time, (if (isVideo) lastVideo else lastAudio)+1,0)
                 info.set(0,count,pts,reader.sampleFlags and MediaCodec.BUFFER_FLAG_KEY_FRAME)
                 writer.writeSampleData(if (isVideo) vTrack else aTrack,data,info)
                 if (isVideo) lastVideo=pts else lastAudio=pts

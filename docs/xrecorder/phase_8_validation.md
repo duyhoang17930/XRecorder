@@ -1,0 +1,11 @@
+# Phase 8 — Non-destructive editor
+
+Implemented private atomic JSON drafts, source URI references, undo/redo, asynchronous timeline thumbnails, native playback clock, trim/split/reorder/remove/merge, normalized crop and rotation. Preview and export share the same validated Media3 Composition. Source files are never rewritten. Preview stops on background/disposal; revoked or unsupported sources surface errors.
+
+Engine selection: AndroidX Media3 1.11.1 (Apache-2.0), pinned transformer/effect/ui modules, built against this repository. Compared with pro_video_editor 2.12.0 and pro_image_editor (BSD-3-Clause): their Flutter editing UI overlaps our existing components; direct Media3 fits the existing native capture architecture and shares one composition between preview/export. CompositionPlayer remains an experimental API, so upgrades require regression tests. APK size and physical-device codec coverage remain release checks.
+
+Primary references: [Media3 releases](https://developer.android.com/jetpack/androidx/releases/media3), [composition](https://developer.android.com/media/media3/transformer/composition), [CompositionPlayer](https://developer.android.com/media/media3/transformer/compositionplayer). No FFmpeg runtime is bundled; desktop FFmpeg is only an independent verification tool.
+
+Validation on API 36 emulator (2026-11-04): integration test captured a real source, reopened its saved draft, played across a two-clip boundary, exported two trimmed/cropped/rotated clips and verified the source size was unchanged. Independent ffprobe reports H.264 1280×576, duration 3.000000 s; AAC starts at 0.010204 s and lasts 3.004626 s. Full FFmpeg decode succeeded. Artifact: ignored build/verification/phase8-merge.mp4. Sixteen host tests passed, including undo/redo, invalid ranges, persistence and failed-save retry.
+
+The spike discovered shortened static-frame tails and negative AAC priming timestamps. Final remux now preserves the intended last-frame duration and identifies extractor EOS by track index, discarding negative audio priming. Device matrix, long/mixed-resolution projects, perceptual preview parity and process-kill reopening remain release validation work. User-facing persistent export jobs belong to P9.

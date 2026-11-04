@@ -47,3 +47,10 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+// Android editor-engine spike: pin one version across preview/effects/export.
+dependencies {
+    implementation("androidx.media3:media3-transformer:1.11.1")
+    implementation("androidx.media3:media3-effect:1.11.1")
+    implementation("androidx.media3:media3-ui:1.11.1")
+}

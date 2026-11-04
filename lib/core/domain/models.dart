@@ -160,14 +160,84 @@ class RecordingCapabilities {
 }
 
 class TimelineClip {
-  const TimelineClip({
+  TimelineClip({
     required this.mediaId,
     required this.inPoint,
     required this.outPoint,
-  }) : assert(inPoint >= Duration.zero),
-       assert(outPoint > inPoint);
+    required this.sourceDuration,
+    this.title = 'Clip',
+    this.rotation = 0,
+    this.cropLeft = 0,
+    this.cropTop = 0,
+    this.cropRight = 1,
+    this.cropBottom = 1,
+  }) {
+    if (Uri.tryParse(mediaId)?.scheme != 'content' ||
+        inPoint < Duration.zero ||
+        outPoint - inPoint < const Duration(milliseconds: 200) ||
+        outPoint > sourceDuration ||
+        ![0, 90, 180, 270].contains(rotation) ||
+        ![
+          cropLeft,
+          cropTop,
+          cropRight,
+          cropBottom,
+        ].every((v) => v.isFinite && v >= 0 && v <= 1) ||
+        cropRight - cropLeft < .02 ||
+        cropBottom - cropTop < .02) {
+      throw const FormatException('Invalid clip range or crop');
+    }
+  }
   final String mediaId;
-  final Duration inPoint, outPoint;
+  final String title;
+  final Duration inPoint, outPoint, sourceDuration;
+  Duration get duration => outPoint - inPoint;
+  final int rotation;
+  final double cropLeft, cropTop, cropRight, cropBottom;
+  TimelineClip copyWith({
+    Duration? inPoint,
+    Duration? outPoint,
+    int? rotation,
+    double? cropLeft,
+    double? cropTop,
+    double? cropRight,
+    double? cropBottom,
+  }) => TimelineClip(
+    mediaId: mediaId,
+    title: title,
+    inPoint: inPoint ?? this.inPoint,
+    outPoint: outPoint ?? this.outPoint,
+    sourceDuration: sourceDuration,
+    rotation: rotation ?? this.rotation,
+    cropLeft: cropLeft ?? this.cropLeft,
+    cropTop: cropTop ?? this.cropTop,
+    cropRight: cropRight ?? this.cropRight,
+    cropBottom: cropBottom ?? this.cropBottom,
+  );
+  Map<String, Object> toJson() => {
+    'mediaId': mediaId,
+    'title': title,
+    'inMs': inPoint.inMilliseconds,
+    'outMs': outPoint.inMilliseconds,
+    'sourceDurationMs': sourceDuration.inMilliseconds,
+    'rotation': rotation,
+    'cropLeft': cropLeft,
+    'cropTop': cropTop,
+    'cropRight': cropRight,
+    'cropBottom': cropBottom,
+  };
+  factory TimelineClip.fromJson(Map<String, dynamic> json) => TimelineClip(
+    mediaId: json['mediaId'] as String,
+    title: json['title'] as String? ?? 'Clip',
+    inPoint: Duration(milliseconds: json['inMs'] as int),
+    outPoint: Duration(milliseconds: json['outMs'] as int),
+    sourceDuration: Duration(milliseconds: json['sourceDurationMs'] as int),
+    rotation: json['rotation'] as int? ?? 0,
+    cropLeft: (json['cropLeft'] as num?)?.toDouble() ?? 0,
+    cropTop: (json['cropTop'] as num?)?.toDouble() ?? 0,
+    cropRight: (json['cropRight'] as num?)?.toDouble() ?? 1,
+    cropBottom: (json['cropBottom'] as num?)?.toDouble() ?? 1,
+  );
 }
 
 class EditProject {
@@ -176,11 +246,48 @@ class EditProject {
     required List<TimelineClip> clips,
     required this.updatedAt,
     this.dirty = false,
+    this.title = 'Untitled project',
   }) : clips = List.unmodifiable(clips);
   final String id;
   final List<TimelineClip> clips;
   final DateTime updatedAt;
   final bool dirty;
+  final String title;
+  Duration get duration =>
+      clips.fold(Duration.zero, (total, clip) => total + clip.duration);
+  EditProject copyWith({
+    List<TimelineClip>? clips,
+    String? title,
+    bool? dirty,
+  }) => EditProject(
+    id: id,
+    clips: clips ?? this.clips,
+    title: title ?? this.title,
+    updatedAt: DateTime.now(),
+    dirty: dirty ?? true,
+  );
+  Map<String, Object> toJson() => {
+    'version': 1,
+    'id': id,
+    'title': title,
+    'updatedAt': updatedAt.millisecondsSinceEpoch,
+    'clips': clips.map((c) => c.toJson()).toList(),
+  };
+  factory EditProject.fromJson(Map<String, dynamic> json) {
+    if (json['version'] != 1 ||
+        json['clips'] is! List ||
+        (json['clips'] as List).length > 30) {
+      throw const FormatException('Unsupported project document');
+    }
+    return EditProject(
+      id: json['id'] as String,
+      title: json['title'] as String? ?? 'Untitled project',
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(json['updatedAt'] as int),
+      clips: (json['clips'] as List)
+          .map((c) => TimelineClip.fromJson(c as Map<String, dynamic>))
+          .toList(),
+    );
+  }
 }
 
 enum DeletionMode { appManaged, systemManaged }
