@@ -11,7 +11,7 @@ Ngày phân tích và cập nhật: 04/11/2026. Tên sản phẩm: **3HRecorder*
 - **Phụ đề AI xử lý qua máy chủ**, ưu tiên chất lượng và chấp nhận chi phí xử lý.
 - Chưa chọn quảng cáo, hình thức bán Pro, giá, thời gian dùng thử hoặc hạn mức AI.
 
-Thư mục dự án hiện có tư liệu trong `images` và tài liệu phân tích, chưa có mã nguồn ứng dụng để đánh giá hay tiếp nối. Tài liệu này là đặc tả phân tích; chưa có chức năng nào được triển khai hoặc kiểm thử trên thiết bị. Xem [khảo sát thư viện và phương án tích hợp](TECH_STACK_RESEARCH_VI.md) cho toàn bộ nhóm chức năng.
+Checkout hiện có khung Flutter: `lib/main.dart` hiển thị “Hello World”, cùng các host platform được sinh sẵn; chưa có chức năng sản phẩm. Tài liệu này là đặc tả phân tích, không phải kết quả chạy app trên thiết bị. Xem [khảo sát thư viện và phương án tích hợp](TECH_STACK_RESEARCH_VI.md) cho toàn bộ nhóm chức năng.
 
 ## 2. Nguồn và cách đọc bằng chứng
 

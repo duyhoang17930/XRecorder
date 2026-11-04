@@ -49,3 +49,4 @@ app.*.map.json
 .widget_preview/
 
 images/
+AGENTS.md
