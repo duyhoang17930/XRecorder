@@ -1,19 +1,22 @@
 name: xrecorder
-description: "A new Flutter project."
-publish_to: 'none'
+description: Native Android recording studio UI baseline from Stitch.
+publish_to: none
 version: 0.1.0+1
-
 environment:
-  sdk: ^3.13.7
-
+  sdk: ^3.13.5
 dependencies:
   flutter:
     sdk: flutter
-
+  go_router: ^18.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-
 flutter:
   uses-material-design: true
+  assets:
+    - assets/media/
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope.ttf

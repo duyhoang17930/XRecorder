@@ -17,7 +17,6 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
-requirements/*
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -48,5 +47,12 @@ app.*.map.json
 # Widget Preview related
 .widget_preview/
 
+# Local references and agent configuration
+requirements/*
 images/
 AGENTS.md
+.agents/
+.aws/
+.codex/
+.claude-local/
+stitch_screenflow_mobile_app_ui_system/
