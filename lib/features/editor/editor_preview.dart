@@ -35,7 +35,9 @@ class EditorPreviewState extends State<EditorPreview>
   void didUpdateWidget(EditorPreview oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (jsonEncode(oldWidget.project.toJson()['clips']) !=
-        jsonEncode(widget.project.toJson()['clips'])) {
+            jsonEncode(widget.project.toJson()['clips']) ||
+        jsonEncode(oldWidget.project.effects) !=
+            jsonEncode(widget.project.effects)) {
       load();
     }
   }

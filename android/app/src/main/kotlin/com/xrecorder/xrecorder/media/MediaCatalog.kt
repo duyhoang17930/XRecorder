@@ -48,6 +48,13 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
             } catch (_:Exception) { result.error("unavailable","Could not open the player or share sheet. Check media access.",null) }
             return
         }
+        if (call.method == "selectAudio") {
+            if(picker!=null){result.error("busy","A picker is already open",null);return}
+            picker=result
+            try {activity.startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).setType("audio/*").addCategory(Intent.CATEGORY_OPENABLE).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION),702)}
+            catch(_:Exception){picker=null;result.error("unavailable","No audio picker is installed",null)}
+            return
+        }
         if (call.method == "selectFolder") {
             if (picker != null) { result.error("busy", "A folder picker is already open", null); return }
             picker = result
@@ -113,7 +120,7 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
     }
 
     fun onActivityResult(request: Int, code: Int, data: Intent?): Boolean {
-        if (request != PICK_FOLDER) return false
+        if (request != PICK_FOLDER && request!=702) return false
         val result = picker ?: return true
         picker = null
         val uri = data?.data
@@ -121,7 +128,8 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
         worker.execute {
             try {
                 resolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                if (!preferences.edit().putString("folder", uri.toString()).commit()) throw java.io.IOException()
+                if(request==702) require(resolver.getType(uri)?.startsWith("audio/")==true)
+                else if (!preferences.edit().putString("folder", uri.toString()).commit()) throw java.io.IOException()
                 activity.runOnUiThread { result.success(uri.toString()) }
             } catch (_: Exception) {
                 activity.runOnUiThread { result.error("denied", "Could not retain access. Choose a supported local folder.", null) }

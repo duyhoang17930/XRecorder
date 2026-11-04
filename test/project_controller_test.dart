@@ -54,6 +54,21 @@ void main() {
       expect(reopened.toJson(), model.project.toJson());
       expect(original.clips.length, 1);
       expect(original.clips.single.inPoint, const Duration(seconds: 1));
+      model.change(
+        original.copyWith(effects: {'speed': 2.0, 'text': 'Caption'}),
+      );
+      model.split(const Duration(seconds: 1));
+      expect(model.project.clips.first.duration, const Duration(seconds: 2));
+      expect(model.project.duration, const Duration(seconds: 4));
+      await model.flushed;
+      expect((await repository.find('draft'))!.effects, {
+        'speed': 2.0,
+        'text': 'Caption',
+      });
+      expect(
+        () => original.copyWith(effects: {'speed': 0.0}),
+        throwsFormatException,
+      );
       expect(
         () => model.split(const Duration(milliseconds: 50)),
         throwsFormatException,

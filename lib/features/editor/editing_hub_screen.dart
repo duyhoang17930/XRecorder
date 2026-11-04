@@ -53,6 +53,11 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
         label: const Text('Crop & annotate a photo'),
       ),
       const SectionTitle('Saved drafts'),
+      TextButton.icon(
+        onPressed: () => context.push('/exports'),
+        icon: const Icon(Icons.file_upload_outlined),
+        label: const Text('Export queue'),
+      ),
       FutureBuilder<List<EditProject>>(
         future: projects,
         builder: (context, snapshot) {

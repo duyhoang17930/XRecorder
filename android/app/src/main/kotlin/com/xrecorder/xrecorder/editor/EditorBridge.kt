@@ -18,8 +18,22 @@ class EditorBridge(private val context:Context):MethodChannel.MethodCallHandler 
     private val directory=File(context.filesDir,"projects").apply{mkdirs()}
     private var probe:Transformer?=null
     private var probeResult:MethodChannel.Result?=null
+    private val exports by lazy { ExportQueue.get(context) }
     private fun file(id:String):File { require(id.matches(Regex("[a-zA-Z0-9_-]{1,80}")));return File(directory,"$id.json") }
     override fun onMethodCall(call:MethodCall,result:MethodChannel.Result) {
+        if(call.method.startsWith("export")) {
+            try {
+                val value:Any?=when(call.method) {
+                    "exportList" -> exports.list()
+                    "exportStart" -> exports.enqueue(call.arguments as Map<*,*>)
+                    "exportCancel" -> {exports.cancel(call.arguments as String);null}
+                    "exportRetry" -> {exports.retry(call.arguments as String);null}
+                    else -> {result.notImplemented();return}
+                }
+                result.success(value)
+            }catch(e:Exception){result.error("export",e.message,null)}
+            return
+        }
         if(call.method=="engineProbe") { probe(call.arguments as Map<*,*>,result);return }
         worker.execute {
             try {
@@ -53,7 +67,7 @@ class EditorBridge(private val context:Context):MethodChannel.MethodCallHandler 
                             try {
                                 require(exportResult.durationMs>0 && temporary.length()>0)
                                 val fd=output.open()
-                                val durationUs=(project["clips"] as List<*>).sumOf { value-> val clip=value as Map<*,*>;((clip["outMs"] as Number).toLong()-(clip["inMs"] as Number).toLong())*1000 }
+                                val durationUs=EditorComposition.durationUs(project)
                                 com.xrecorder.xrecorder.recording.RecordingMuxer.combine(temporary,temporary,output,fd,0,durationUs)
                                 val uri=output.commit().toString()
                                 main.post{probe=null;probeResult?.success(uri);probeResult=null}

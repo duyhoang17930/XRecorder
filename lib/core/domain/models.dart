@@ -247,24 +247,41 @@ class EditProject {
     required this.updatedAt,
     this.dirty = false,
     this.title = 'Untitled project',
-  }) : clips = List.unmodifiable(clips);
+    Map<String, Object> effects = const {},
+  }) : clips = List.unmodifiable(clips),
+       effects = Map.unmodifiable(effects) {
+    if (!speed.isFinite || speed < .5 || speed > 2) {
+      throw const FormatException('Unsupported project speed');
+    }
+  }
+  final Map<String, Object> effects;
+  double get speed => (effects['speed'] as num? ?? 1).toDouble();
   final String id;
   final List<TimelineClip> clips;
   final DateTime updatedAt;
   final bool dirty;
   final String title;
-  Duration get duration =>
-      clips.fold(Duration.zero, (total, clip) => total + clip.duration);
+  Duration get duration => Duration(
+    microseconds:
+        (clips.fold<int>(
+                  0,
+                  (total, clip) => total + clip.duration.inMicroseconds,
+                ) /
+                speed)
+            .round(),
+  );
   EditProject copyWith({
     List<TimelineClip>? clips,
     String? title,
     bool? dirty,
+    Map<String, Object>? effects,
   }) => EditProject(
     id: id,
     clips: clips ?? this.clips,
     title: title ?? this.title,
     updatedAt: DateTime.now(),
     dirty: dirty ?? true,
+    effects: effects ?? this.effects,
   );
   Map<String, Object> toJson() => {
     'version': 1,
@@ -272,6 +289,7 @@ class EditProject {
     'title': title,
     'updatedAt': updatedAt.millisecondsSinceEpoch,
     'clips': clips.map((c) => c.toJson()).toList(),
+    'effects': effects,
   };
   factory EditProject.fromJson(Map<String, dynamic> json) {
     if (json['version'] != 1 ||
@@ -282,6 +300,7 @@ class EditProject {
     return EditProject(
       id: json['id'] as String,
       title: json['title'] as String? ?? 'Untitled project',
+      effects: (json['effects'] as Map?)?.cast<String, Object>() ?? const {},
       updatedAt: DateTime.fromMillisecondsSinceEpoch(json['updatedAt'] as int),
       clips: (json['clips'] as List)
           .map((c) => TimelineClip.fromJson(c as Map<String, dynamic>))

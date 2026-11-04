@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/widgets/studio_widgets.dart';
 import 'project_controller.dart';
 import 'project_repository.dart';
 import 'editor_preview.dart';
 import 'media_picker.dart';
+import 'project_effects.dart';
 
 class EditorScreen extends StatefulWidget {
   const EditorScreen({super.key, required this.id});
@@ -95,6 +97,27 @@ class _EditorScreenState extends State<EditorScreen> {
             title: Text(project.title),
             actions: [
               IconButton(
+                tooltip: 'Export project',
+                icon: const Icon(Icons.file_upload_outlined),
+                onPressed: project.clips.isEmpty
+                    ? null
+                    : () async {
+                        try {
+                          await preview.currentState?.command('pause');
+                          await AndroidEditProjectRepository.channel
+                              .invokeMethod<String>(
+                                'exportStart',
+                                project.toJson(),
+                              );
+                          if (context.mounted) context.push('/exports');
+                        } catch (e) {
+                          if (context.mounted) {
+                            showNotice(context, e.toString());
+                          }
+                        }
+                      },
+              ),
+              IconButton(
                 tooltip: 'Undo edit',
                 onPressed: model.canUndo ? model.undo : null,
                 icon: const Icon(Icons.undo),
@@ -150,6 +173,21 @@ class _EditorScreenState extends State<EditorScreen> {
                 spacing: 8,
                 children: [
                   TextButton.icon(
+                    onPressed: () async {
+                      await preview.currentState?.command('pause');
+                      if (!context.mounted) return;
+                      final effects = await editProjectEffects(
+                        context,
+                        project.effects,
+                      );
+                      if (effects != null && mounted) {
+                        model.change(model.project.copyWith(effects: effects));
+                      }
+                    },
+                    icon: const Icon(Icons.tune),
+                    label: const Text('Video & audio effects'),
+                  ),
+                  TextButton.icon(
                     onPressed: add,
                     icon: const Icon(Icons.add),
                     label: const Text('Add clip / merge'),
@@ -178,12 +216,13 @@ class _EditorScreenState extends State<EditorScreen> {
                             preview.currentState?.command(
                               'seek',
                               project.clips
-                                  .take(i)
-                                  .fold<int>(
-                                    0,
-                                    (total, c) =>
-                                        total + c.duration.inMilliseconds,
-                                  ),
+                                      .take(i)
+                                      .fold<int>(
+                                        0,
+                                        (total, c) =>
+                                            total + c.duration.inMilliseconds,
+                                      ) ~/
+                                  project.speed,
                             );
                           },
                           child: Container(

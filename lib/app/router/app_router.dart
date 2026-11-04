@@ -10,6 +10,7 @@ import '../../features/media/photo_preview_screen.dart';
 import '../../features/media/trash_screen.dart';
 import '../../features/editor/editing_hub_screen.dart';
 import '../../features/editor/editor_screen.dart';
+import '../../features/editor/export_screen.dart';
 import '../../features/settings/settings_hub_screen.dart';
 import '../../features/settings/audio_video_settings_screen.dart';
 
@@ -68,6 +69,7 @@ GoRouter createRouter() => GoRouter(
       builder: (_, state) => EditorScreen(id: state.pathParameters['id']!),
     ),
     GoRoute(path: '/trash', builder: (_, _) => const TrashScreen()),
+    GoRoute(path: '/exports', builder: (_, _) => const ExportScreen()),
     GoRoute(
       path: '/photo-preview/:id',
       builder: (_, state) =>

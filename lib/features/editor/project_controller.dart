@@ -93,6 +93,9 @@ class ProjectController extends ChangeNotifier {
   }
 
   void split(Duration position) {
+    position = Duration(
+      microseconds: (position.inMicroseconds * project.speed).round(),
+    );
     var offset = Duration.zero;
     for (var i = 0; i < project.clips.length; i++) {
       final clip = project.clips[i];

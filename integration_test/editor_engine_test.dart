@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:xrecorder/core/domain/models.dart';
@@ -95,6 +98,57 @@ void main() {
       expect(output.width!, greaterThan(output.height!));
       expect((await media.find(source.id))!.sizeBytes, source.sizeBytes);
       debugPrint('EDITOR_TEST_OUTPUT=$uri');
+      final transformed = project.copyWith(
+        effects: {
+          'speed': 2.0,
+          'height': 480,
+          'fps': 24,
+          'volume': .5,
+          'pitch': 1.25,
+          'music': uri,
+          'musicVolume': .5,
+          'filter': 'grayscale',
+          'text': 'Export verification',
+        },
+      );
+      final channel = AndroidEditProjectRepository.channel;
+      final id = await channel.invokeMethod<String>(
+        'exportStart',
+        transformed.toJson(),
+      );
+      final cancelled = await channel.invokeMethod<String>(
+        'exportStart',
+        project.toJson(),
+      );
+      await channel.invokeMethod<void>('exportCancel', cancelled);
+      Future<Map<String, dynamic>> job(String id) async => (jsonDecode(
+        (await channel.invokeMethod<String>('exportList'))!,
+      ) as List).cast<Map<String, dynamic>>().firstWhere((j) => j['id'] == id);
+      expect((await job(cancelled!))['state'], 'cancelled');
+      Map<String, dynamic> finished = {};
+      for (var i = 0; i < 120; i++) {
+        finished = await job(id!);
+        if (['completed', 'failed'].contains(finished['state'])) break;
+        await Future<void>.delayed(const Duration(seconds: 1));
+      }
+      expect(finished['state'], 'completed', reason: finished.toString());
+      final exported = (await media.find(finished['uri'] as String))!;
+      expect(exported.duration!.inMilliseconds, inInclusiveRange(1400, 1600));
+      debugPrint('QUEUE_TEST_OUTPUT=${finished['uri']}');
+      await channel.invokeMethod<void>('exportRetry', cancelled);
+      await channel.invokeMethod<void>('exportCancel', cancelled);
+      expect((await job(cancelled))['state'], 'cancelled');
+      final gifId = await channel.invokeMethod<String>(
+        'exportStart',
+        project.copyWith(effects: {'format': 'gif', 'speed': 2.0}).toJson(),
+      );
+      for (var i = 0; i < 120; i++) {
+        finished = await job(gifId!);
+        if (['completed', 'failed'].contains(finished['state'])) break;
+        await Future<void>.delayed(const Duration(seconds: 1));
+      }
+      expect(finished['state'], 'completed', reason: finished.toString());
+      debugPrint('GIF_TEST_OUTPUT=${finished['uri']}');
       media.dispose();
     },
     timeout: const Timeout(Duration(minutes: 6)),

@@ -10,7 +10,7 @@ import androidx.core.content.FileProvider
 import java.io.File
 
 /** Never expose a partly written recording as a finished media item. */
-class MediaOutput(private val context: Context, val name: String, val mime: String = "video/mp4", private val journal: Boolean = false) {
+class MediaOutput(private val context: Context, val name: String, val mime: String = "video/mp4", private val journal: Boolean = false, private val onPending: ((Uri) -> Unit)? = null) {
     private var pendingUri: Uri? = null
     private var temporary: File? = null
     private var descriptor: ParcelFileDescriptor? = null
@@ -25,6 +25,7 @@ class MediaOutput(private val context: Context, val name: String, val mime: Stri
             }
             val collection = if (mime.startsWith("video/")) MediaStore.Video.Media.EXTERNAL_CONTENT_URI else MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             pendingUri = context.contentResolver.insert(collection, values) ?: throw java.io.IOException("Cannot create output")
+            onPending?.invoke(pendingUri!!)
             if (journal) CaptureJournal.pending(pendingUri!!)
             descriptor = context.contentResolver.openFileDescriptor(pendingUri!!, "rw") ?: throw java.io.IOException("Cannot open output")
         } else {

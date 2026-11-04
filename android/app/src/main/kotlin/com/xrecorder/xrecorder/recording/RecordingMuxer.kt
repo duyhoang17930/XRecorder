@@ -19,6 +19,12 @@ object RecordingMuxer {
             val aIndex = (0 until audioReader.trackCount).first { audioReader.getTrackFormat(it).getString(MediaFormat.KEY_MIME)?.startsWith("audio/") == true }
             val writer = if (Build.VERSION.SDK_INT >= 26) MediaMuxer(descriptor.fileDescriptor,MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4) else MediaMuxer(output.legacyPath!!,MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
             muxer = writer
+            val rotationReader=android.media.MediaMetadataRetriever()
+            try {
+                rotationReader.setDataSource(video.absolutePath)
+                val rotation=rotationReader.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION)?.toIntOrNull() ?: 0
+                if(rotation in listOf(0,90,180,270))writer.setOrientationHint(rotation)
+            } finally { rotationReader.release() }
             val vTrack = writer.addTrack(videoReader.getTrackFormat(vIndex)); val aTrack = writer.addTrack(audioReader.getTrackFormat(aIndex))
             videoReader.selectTrack(vIndex); audioReader.selectTrack(aIndex); writer.start(); muxing = true
             val data = ByteBuffer.allocateDirect(16*1024*1024)
