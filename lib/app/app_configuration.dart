@@ -4,5 +4,4 @@ import 'package:flutter/material.dart';
 abstract final class AppConfiguration {
   static const locale = Locale('en');
   static const supportedLocales = [locale];
-  static const themeMode = ThemeMode.dark;
 }

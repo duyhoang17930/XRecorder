@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../core/widgets/studio_widgets.dart';
+
 Future<Map<String, Object>?> editProjectEffects(
   BuildContext context,
   Map<String, Object> current,
@@ -17,6 +19,7 @@ class _EffectsDialog extends StatefulWidget {
 }
 
 class _EffectsDialogState extends State<_EffectsDialog> {
+  String? musicError;
   late final values = <String, Object>{
     'speed': 1.0,
     'volume': 1.0,
@@ -40,6 +43,7 @@ class _EffectsDialogState extends State<_EffectsDialog> {
 
   Widget choice(String key, String label, List<Object> options) =>
       DropdownButtonFormField<Object>(
+        icon: const Icon(AppIcons.chevronDown),
         isExpanded: true,
         initialValue: values[key],
         decoration: InputDecoration(labelText: label),
@@ -108,12 +112,19 @@ class _EffectsDialogState extends State<_EffectsDialog> {
                   final uri = await const MethodChannel('com.xrecorder/media')
                       .invokeMethod<String>('selectAudio');
                   if (uri != null && mounted) {
-                    setState(() => values['music'] = uri);
+                    setState(() {
+                      values['music'] = uri;
+                      musicError = null;
+                    });
                   }
                 } catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text(e.toString())));
+                  if (mounted) {
+                    setState(() {
+                      musicError = UserMessages.failure(
+                        e,
+                        operation: UserOperation.openMedia,
+                      ).text;
+                    });
                   }
                 }
               },
@@ -123,6 +134,13 @@ class _EffectsDialogState extends State<_EffectsDialog> {
                     : 'Replace background music',
               ),
             ),
+            if (musicError != null)
+              Text(
+                musicError!,
+                style: AppTypography.body.copyWith(
+                  color: context.studioColors.warning,
+                ),
+              ),
             if (values['music'] != null) ...[
               const Text('Music loops to the video duration.'),
               choice('musicVolume', 'Music gain', [0.0, .25, .5, .75, 1.0]),

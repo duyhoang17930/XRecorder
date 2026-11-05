@@ -1,0 +1,22 @@
+{
+  "nativeVerification": {
+    "screenshot": {
+      "mime": "image/png",
+      "bytes": 173704,
+      "width": 1080,
+      "height": 2400,
+      "pngDecoded": true,
+      "noSetupNavigation": true
+    },
+    "imageObserverWithoutExplicitRefresh": true,
+    "recording": {
+      "bytes": 221154,
+      "durationMs": 4441,
+      "pendingHidden": true,
+      "automaticLibraryUpdate": true
+    },
+    "exportUpdatesWhileQueueClosed": true,
+    "folderImportOnResumeReadOnly": true,
+    "deleteAndRestoreUpdateWithoutManualRefresh": true
+  }
+}

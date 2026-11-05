@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../core/persistence/settings_store.dart';
 import '../../core/domain/models.dart';
@@ -15,6 +16,13 @@ class SettingsController extends ChangeNotifier {
   String? persistenceError;
   bool get canSave => _writable;
   Future<void> get flushed => _pending;
+  final _themeMode = ValueNotifier(ThemeMode.dark);
+  ThemeMode get themeMode => _themeMode.value;
+  ValueListenable<ThemeMode> get themeModeListenable => _themeMode;
+
+  void setThemeMode(ThemeMode mode) {
+    if (mode != themeMode) update(() => _themeMode.value = mode);
+  }
 
   Future<void> restore() async {
     final store = this.store;
@@ -81,6 +89,7 @@ class SettingsController extends ChangeNotifier {
   Map<String, Object> _document() => {
     'version': 2,
     'values': {
+      'themeMode': themeMode.name,
       'resolution': resolution,
       'fps': fps,
       'bitrate': bitrate,
@@ -104,6 +113,10 @@ class SettingsController extends ChangeNotifier {
   };
 
   void _apply(Map<String, dynamic> values) {
+    _themeMode.value = ThemeMode.values.firstWhere(
+      (mode) => mode.name == values['themeMode'],
+      orElse: () => ThemeMode.dark,
+    );
     String choice(String key, String fallback, List<String> allowed) =>
         allowed.contains(values[key]) ? values[key] as String : fallback;
     bool flag(String key, bool fallback) =>
@@ -237,6 +250,7 @@ class SettingsController extends ChangeNotifier {
   void reset() {
     _writable = true;
     update(() {
+      _themeMode.value = ThemeMode.dark;
       resolution = '1080p FHD';
       fps = '60';
       bitrate = '16 Mbps';
@@ -262,6 +276,7 @@ class SettingsController extends ChangeNotifier {
   @override
   void dispose() {
     _disposed = true;
+    _themeMode.dispose();
     super.dispose();
   }
 }

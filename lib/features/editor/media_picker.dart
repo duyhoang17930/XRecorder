@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/domain/models.dart';
+import '../../core/widgets/studio_widgets.dart';
 import '../media/media_repository.dart';
 import '../media/media_library_screen.dart';
 
@@ -20,6 +21,15 @@ class _MediaPickerState extends State<_MediaPicker> {
   Future<List<MediaItem>>? items;
   String? error;
   bool busy = false;
+  void loadMedia({Uri? folder}) {
+    if (!mounted) return;
+    final next = MediaScope.of(context)
+        .list(kind: MediaKind.video, folder: folder);
+    setState(() {
+      items = next;
+    });
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -37,13 +47,7 @@ class _MediaPickerState extends State<_MediaPicker> {
           Wrap(
             children: [
               TextButton(
-                onPressed: busy
-                    ? null
-                    : () => setState(
-                        () =>
-                            items = MediaScope.of(context)
-                                .list(kind: MediaKind.video),
-                      ),
+                onPressed: busy ? null : loadMedia,
                 child: const Text('App media'),
               ),
               TextButton(
@@ -54,15 +58,17 @@ class _MediaPickerState extends State<_MediaPicker> {
                           final repository = MediaScope.of(context);
                           final folder = await repository.selectFolder();
                           if (folder != null && mounted) {
-                            setState(
-                              () => items = repository.list(
-                                kind: MediaKind.video,
-                                folder: folder,
-                              ),
-                            );
+                            loadMedia(folder: folder);
                           }
                         } catch (e) {
-                          if (mounted) setState(() => error = e.toString());
+                          if (mounted) {
+                            setState(
+                              () => error = UserMessages.failure(
+                                e,
+                                operation: UserOperation.chooseFolder,
+                              ).text,
+                            );
+                          }
                         }
                       },
                 child: const Text('Select folder'),
@@ -78,7 +84,14 @@ class _MediaPickerState extends State<_MediaPicker> {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                if (snapshot.hasError) return Text(snapshot.error.toString());
+                if (snapshot.hasError) {
+                  return Text(
+                    UserMessages.failure(
+                      snapshot.error,
+                      operation: UserOperation.loadLibrary,
+                    ).text,
+                  );
+                }
                 final rows = snapshot.data ?? [];
                 if (rows.isEmpty) {
                   return const Center(
@@ -117,7 +130,12 @@ class _MediaPickerState extends State<_MediaPicker> {
                                   }
                                 } catch (e) {
                                   if (mounted) {
-                                    setState(() => error = e.toString());
+                                    setState(
+                                      () => error = UserMessages.failure(
+                                        e,
+                                        operation: UserOperation.openMedia,
+                                      ).text,
+                                    );
                                   }
                                 } finally {
                                   if (mounted) setState(() => busy = false);

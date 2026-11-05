@@ -8,6 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^18.1.2
+  lucide_flutter: 1.66.0
 dev_dependencies:
   integration_test:
     sdk: flutter

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import '../../core/widgets/studio_widgets.dart';
+
 import 'package:flutter/services.dart';
 
 class SupportScreen extends StatefulWidget {
@@ -20,7 +23,14 @@ class _SupportScreenState extends State<SupportScreen> {
     try {
       await action();
     } catch (e) {
-      if (mounted) setState(() => message = e.toString());
+      if (mounted) {
+        setState(
+          () => message = UserMessages.failure(
+            e,
+            operation: UserOperation.support,
+          ).text,
+        );
+      }
     } finally {
       if (mounted) setState(() => busy = false);
     }
@@ -80,7 +90,7 @@ class _SupportScreenState extends State<SupportScreen> {
                     setState(() => attachment = selected);
                   }
                 }),
-          icon: const Icon(Icons.attach_file),
+          icon: const Icon(AppIcons.attachment),
           label: Text(
             attachment == null
                 ? 'Attach image or video (up to 25 MB)'

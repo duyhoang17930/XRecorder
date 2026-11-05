@@ -1,0 +1,25 @@
+{
+  "nativeKotlinFilesUnchangedVsTask02": 18,
+  "productionApk": {
+    "entryPoint": "lib/main.dart",
+    "zipCrcValid": true,
+    "integrationTestMarkersAbsent": true,
+    "bytes": 165369592,
+    "sha256": "4b2e5f114df20b3ef58bd0d79b13034c43914573aa38c662c625289467236dea",
+    "flutterLibraries": [
+      "lib/arm64-v8a/libflutter.so",
+      "lib/armeabi-v7a/libflutter.so",
+      "lib/x86_64/libflutter.so"
+    ]
+  },
+  "hostTests": 69,
+  "nativeScenariosPassed": 1,
+  "visualScenariosPassed": 2,
+  "testDevice": {
+    "serial": "emulator-5560",
+    "avd": "ThreeHRecorder_Task021",
+    "api": 36
+  },
+  "originalUserEmulatorMutated": false,
+  "independentReview": false
+}

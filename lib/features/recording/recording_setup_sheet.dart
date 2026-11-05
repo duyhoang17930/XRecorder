@@ -31,23 +31,23 @@ class RecordingSetupSheet extends StatelessWidget {
               StudioSheetHeader(
                 title: 'Recording Parameters',
                 description: 'Android will ask permission to share your screen. Sensitive content visible on screen may be recorded.',
-                icon: Icons.tune,
+                icon: AppIcons.settings,
                 actions: [
                   IconButton(
                     tooltip: 'Reset defaults',
                     onPressed: settings.reset,
-                    icon: const Icon(Icons.restart_alt),
+                    icon: const Icon(AppIcons.reset),
                   ),
                   IconButton(
                     tooltip: 'Close setup',
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.close),
+                    icon: const Icon(AppIcons.close),
                   ),
                 ],
               ),
               const RecordingSettingsForm(),
               TextButton.icon(
-                icon: const Icon(Icons.screenshot),
+                icon: const Icon(AppIcons.screenshot),
                 label: const Text('Take screenshot (3-second delay)'),
                 onPressed: capture.busy
                     ? null
@@ -57,14 +57,18 @@ class RecordingSetupSheet extends StatelessWidget {
                           if (context.mounted) Navigator.pop(context);
                         } catch (e) {
                           if (context.mounted) {
-                            showNotice(context, e.toString());
+                            showFailure(
+                              context,
+                              e,
+                              operation: UserOperation.screenshot,
+                            );
                           }
                         }
                       },
               ),
               PrimaryButton(
                 capture.busy ? 'Session already active' : 'Start Recording',
-                icon: Icons.fiber_manual_record,
+                icon: AppIcons.record,
                 onPressed: () async {
                   if (capture.busy) {
                     showNotice(
@@ -77,7 +81,13 @@ class RecordingSetupSheet extends StatelessWidget {
                     await capture.start(settings.recordingSnapshot);
                     if (context.mounted) Navigator.pop(context);
                   } catch (e) {
-                    if (context.mounted) showNotice(context, e.toString());
+                    if (context.mounted) {
+                      showFailure(
+                        context,
+                        e,
+                        operation: UserOperation.recording,
+                      );
+                    }
                   }
                 },
               ),

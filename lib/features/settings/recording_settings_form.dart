@@ -205,7 +205,7 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
                 builder: (context) => AlertDialog(
                   title: const Text('Show touches'),
                   content: const Text(
-                    'Android can draw touch indicators when Show taps is enabled in Developer options. Enable it manually in system Settings if available. XRecorder cannot observe arbitrary touches in other apps. The system indicator may appear in full-screen recordings; turn it off afterward if you do not want it.',
+                    'Android can draw touch indicators when Show taps is enabled in Developer options. Enable it manually in system Settings if available. 3HRecorder cannot observe arbitrary touches in other apps. The system indicator may appear in full-screen recordings; turn it off afterward if you do not want it.',
                   ),
                   actions: [
                     TextButton(
@@ -225,7 +225,7 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
                     ? 'No duration limit'
                     : '${s.durationSeconds} seconds',
               ),
-              trailing: const Icon(Icons.timer_outlined),
+              trailing: const Icon(AppIcons.countdown),
               onTap: () => _duration(context, s),
             ),
             const SizedBox(height: 16),

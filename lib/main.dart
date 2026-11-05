@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 
 import 'app/app.dart';
-import 'core/constants/design_tokens.dart';
 import 'core/persistence/settings_store.dart';
 import 'features/settings/settings_controller.dart';
 
@@ -13,6 +12,9 @@ Future<void> main() async {
     yield LicenseEntryWithLineBreaks([
       'Manrope',
     ], await rootBundle.loadString('assets/fonts/OFL.txt'));
+    yield LicenseEntryWithLineBreaks([
+      'Lucide artwork (ISC / Feather MIT)',
+    ], await rootBundle.loadString('assets/licenses/Lucide-LICENSE.txt'));
     yield LicenseEntryWithLineBreaks([
       'AndroidX Media3',
       'AndroidX',
@@ -36,12 +38,5 @@ Future<void> main() async {
   });
   final settings = SettingsController(store: const AndroidSettingsStore());
   await settings.restore();
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: AppColors.background,
-    ),
-  );
   runApp(XRecorderApp(settings: settings));
 }

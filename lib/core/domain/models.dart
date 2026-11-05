@@ -27,6 +27,7 @@ class MediaItem {
     this.originalMediaId,
     this.hasAudio,
     this.owned = false,
+    this.revision,
   });
   final String id, displayName, mimeType;
   final Uri uri;
@@ -42,6 +43,9 @@ class MediaItem {
   final String? originalMediaId;
   final bool? hasAudio;
   final bool owned;
+
+  /// MediaStore generation, when provided; cache invalidation only.
+  final int? revision;
 }
 
 enum RecordingMode { normal, performance }

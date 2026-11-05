@@ -1,62 +1,12 @@
-import 'dart:async';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xrecorder/app/app.dart';
 import 'package:xrecorder/core/domain/models.dart';
-import 'package:xrecorder/features/media/media_repository.dart';
+
+import 'fixtures/catalog.dart';
+
 import 'package:xrecorder/features/editor/project_repository.dart';
-
-class TestCatalog implements CatalogRepository {
-  final events = StreamController<void>.broadcast();
-  Object? failure;
-  Uri? selection;
-  bool cancelled = false;
-  final items = List.generate(
-    15,
-    (i) => MediaItem(
-      id: 'content://test/$i',
-      uri: Uri.parse('content://test/$i'),
-      kind: MediaKind.video,
-      displayName: 'Clip $i.mp4',
-      mimeType: 'video/mp4',
-      sizeBytes: 2048,
-      createdAt: DateTime(2026, 1, 1),
-      modifiedAt: DateTime(2026, 1, 1),
-      source: MediaSource.recording,
-    ),
-  );
-  @override
-  Stream<void> get changes => events.stream;
-  @override
-  Future<List<MediaItem>> list({required MediaKind kind, Uri? folder}) async {
-    if (failure != null) throw failure!;
-    return kind == MediaKind.video ? items : [];
-  }
-
-  @override
-  Future<MediaItem?> find(String id) async =>
-      items.where((i) => i.id == id).firstOrNull;
-  @override
-  Future<Uri?> savedFolder() async => selection;
-  @override
-  Future<Uri?> selectFolder() async => cancelled ? null : selection;
-  @override
-  Future<Uint8List> thumbnail(Uri uri) =>
-      Future.error(const DomainFailure(FailureCode.missing, 'No thumbnail'));
-  @override
-  Future<Map<String, int>> storage() async => {
-    'videos': 30720,
-    'images': 0,
-    'free': 1024000,
-  };
-  @override
-  void refresh() => events.add(null);
-  @override
-  void dispose() => events.close();
-}
 
 void main() {
   setUp(() {
@@ -92,6 +42,11 @@ void main() {
       expect(find.text('Video Library'), findsOneWidget);
       await tester.enterText(find.byType(TextField), 'Clip 0');
       await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(
+        find.text('Clip 0.mp4'),
+        300,
+        scrollable: find.byType(Scrollable).first,
+      );
       expect(find.text('Clip 0.mp4'), findsOneWidget);
       expect(find.text('Clip 1.mp4'), findsNothing);
       await tester.tap(find.text('Photo'));
@@ -101,10 +56,11 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Clip 0.mp4'), findsOneWidget);
       expect(find.text('Clip 1.mp4'), findsNothing);
+      await tester.ensureVisible(find.text('Clip 0.mp4'));
       await tester.tap(find.text('Clip 0.mp4'));
       await tester.pumpAndSettle();
       expect(find.text('Media details'), findsOneWidget);
-      expect(find.byTooltip('Record'), findsNothing);
+      expect(find.byTooltip('Create'), findsNothing);
       expect(tester.takeException(), isNull);
     },
   );
@@ -136,10 +92,25 @@ void main() {
         'Folder access revoked',
       );
     await start(tester, catalog: catalog);
-    expect(find.text('Folder access revoked'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('Folder access changed. Choose the folder again.'),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    expect(
+      find.text('Folder access changed. Choose the folder again.'),
+      findsOneWidget,
+    );
     catalog.failure = null;
+    await tester.ensureVisible(find.text('Retry'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Retry'));
     await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text('Clip 0.mp4'),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
     expect(find.text('Clip 0.mp4'), findsOneWidget);
   });
   testWidgets(
@@ -148,24 +119,38 @@ void main() {
       await start(tester, catalog: TestCatalog()..cancelled = true);
       await tester.tap(find.text('Choose folder'));
       await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(
+        find.text('Clip 0.mp4'),
+        300,
+        scrollable: find.byType(Scrollable).first,
+      );
       expect(find.text('Clip 0.mp4'), findsOneWidget);
+      await tester.ensureVisible(find.byTooltip('Storage'));
+      await tester.pumpAndSettle();
       await tester.tap(find.byTooltip('Storage'));
       await tester.pumpAndSettle();
-      expect(find.text('Device free space'), findsOneWidget);
       expect(find.text('30.0 KB'), findsOneWidget);
+      await tester.scrollUntilVisible(
+        find.text('Device free space'),
+        200,
+        scrollable: find.byType(Scrollable).last,
+      );
+      expect(find.text('Device free space'), findsOneWidget);
     },
   );
   testWidgets('Settings shared with recording setup and reset', (tester) async {
     await start(tester);
     await tester.tap(find.text('Settings'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Resolution & Video Quality'));
+    await tester.tap(find.text('Video quality'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('720p HD'));
     await tester.pumpAndSettle();
     await tester.pageBack();
     await tester.pumpAndSettle();
-    await tester.tap(find.byTooltip('Record'));
+    await tester.tap(find.byTooltip('Create'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Screen recording'));
     await tester.pumpAndSettle();
     expect(
       tester

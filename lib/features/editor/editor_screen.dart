@@ -58,7 +58,7 @@ class _EditorScreenState extends State<EditorScreen> {
     try {
       action();
     } catch (e) {
-      showNotice(context, e.toString());
+      showFailure(context, e, operation: UserOperation.editClip);
     }
   }
 
@@ -81,8 +81,13 @@ class _EditorScreenState extends State<EditorScreen> {
         appBar: AppBar(title: const Text('Editor')),
         body: Center(
           child: error == null
-              ? const CircularProgressIndicator()
-              : Text(error!),
+              ? const StudioLoadingState(label: 'Opening your project…')
+              : Text(
+                  UserMessages.failure(
+                    error,
+                    operation: UserOperation.loadDrafts,
+                  ).text,
+                ),
         ),
       );
     }
@@ -94,11 +99,18 @@ class _EditorScreenState extends State<EditorScreen> {
         final clip = project.clips.isEmpty ? null : project.clips[selected];
         return Scaffold(
           appBar: AppBar(
-            title: Text(project.title),
+            title: Tooltip(
+              message: project.title,
+              child: Text(
+                project.title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             actions: [
-              IconButton(
-                tooltip: 'Export project',
-                icon: const Icon(Icons.file_upload_outlined),
+              TextButton.icon(
+                label: const Text('Export'),
+                icon: const Icon(AppIcons.export),
                 onPressed: project.clips.isEmpty
                     ? null
                     : () async {
@@ -112,7 +124,11 @@ class _EditorScreenState extends State<EditorScreen> {
                           if (context.mounted) context.push('/exports');
                         } catch (e) {
                           if (context.mounted) {
-                            showNotice(context, e.toString());
+                            showFailure(
+                              context,
+                              e,
+                              operation: UserOperation.export,
+                            );
                           }
                         }
                       },
@@ -120,23 +136,27 @@ class _EditorScreenState extends State<EditorScreen> {
               IconButton(
                 tooltip: 'Undo edit',
                 onPressed: model.canUndo ? model.undo : null,
-                icon: const Icon(Icons.undo),
+                icon: const Icon(AppIcons.undo),
               ),
               IconButton(
                 tooltip: 'Redo edit',
                 onPressed: model.canRedo ? model.redo : null,
-                icon: const Icon(Icons.redo),
+                icon: const Icon(AppIcons.redo),
               ),
             ],
           ),
           body: ListView(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppSpacing.md),
             children: [
               Text(
-                model.saveError ??
-                    (model.saving
-                        ? 'Saving draft…'
-                        : 'Draft saved · Originals unchanged'),
+                model.saveError != null
+                    ? UserMessages.failure(
+                        model.saveError,
+                        operation: UserOperation.saveDraft,
+                      ).text
+                    : (model.saving
+                          ? 'Saving draft…'
+                          : 'Saved · Originals unchanged'),
               ),
               if (model.saveError != null)
                 TextButton(
@@ -153,8 +173,12 @@ class _EditorScreenState extends State<EditorScreen> {
                 )
               else
                 const Padding(
-                  padding: EdgeInsets.all(40),
-                  child: Text('Add videos to begin a non-destructive project.'),
+                  padding: EdgeInsets.symmetric(vertical: AppSpacing.lg),
+                  child: StudioEmptyState(
+                    title: 'Add your first clip',
+                    description: 'Edit a copy. Originals stay unchanged.',
+                    icon: AppIcons.videos,
+                  ),
                 ),
               Text(
                 '${(position.inMilliseconds / 1000).toStringAsFixed(1)} / ${(project.duration.inMilliseconds / 1000).toStringAsFixed(1)} seconds',
@@ -184,28 +208,32 @@ class _EditorScreenState extends State<EditorScreen> {
                         model.change(model.project.copyWith(effects: effects));
                       }
                     },
-                    icon: const Icon(Icons.tune),
-                    label: const Text('Video & audio effects'),
+                    icon: const Icon(AppIcons.settings),
+                    label: const Text('Effects'),
                   ),
                   TextButton.icon(
                     onPressed: add,
-                    icon: const Icon(Icons.add),
-                    label: const Text('Add clip / merge'),
+                    icon: const Icon(AppIcons.create),
+                    label: const Text('Add clip'),
                   ),
                   TextButton.icon(
                     onPressed: clip == null
                         ? null
                         : () => act(() => model.split(position)),
-                    icon: const Icon(Icons.content_cut),
-                    label: const Text('Split at playhead'),
+                    icon: const Icon(AppIcons.split),
+                    label: const Text('Split'),
                   ),
                 ],
               ),
-              if (project.clips.isNotEmpty)
-                const Text('Timeline · clips play in order'),
+              if (project.clips.isNotEmpty) const SectionTitle('Timeline'),
               if (project.clips.isNotEmpty)
                 SizedBox(
-                  height: 100,
+                  height:
+                      AppSize.timeline *
+                      (MediaQuery.textScalerOf(context).scale(14) / 14).clamp(
+                        1,
+                        2,
+                      ),
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -229,11 +257,15 @@ class _EditorScreenState extends State<EditorScreen> {
                             width: 150,
                             margin: const EdgeInsets.only(right: 8),
                             decoration: BoxDecoration(
+                              color: context.studioColors.elevated,
+                              borderRadius: BorderRadius.circular(
+                                AppRadius.control,
+                              ),
                               border: Border.all(
                                 color: selected == i
                                     ? Theme.of(context).colorScheme.primary
-                                    : Colors.grey,
-                                width: 2,
+                                    : context.studioColors.border,
+                                width: AppBorder.focused,
                               ),
                             ),
                             child: Column(
@@ -247,7 +279,7 @@ class _EditorScreenState extends State<EditorScreen> {
                                     builder: (context, snapshot) =>
                                         snapshot.data == null
                                         ? const Center(
-                                            child: Icon(Icons.movie_outlined),
+                                            child: Icon(AppIcons.videos),
                                           )
                                         : Image.memory(
                                             snapshot.data!,
@@ -255,8 +287,11 @@ class _EditorScreenState extends State<EditorScreen> {
                                           ),
                                   ),
                                 ),
-                                Text(
-                                  'Clip ${i + 1} · ${(project.clips[i].duration.inMilliseconds / 1000).toStringAsFixed(1)}s',
+                                Padding(
+                                  padding: const EdgeInsets.all(AppSpacing.xs),
+                                  child: Text(
+                                    'Clip ${i + 1} · ${(project.clips[i].duration.inMilliseconds / 1000).toStringAsFixed(1)}s',
+                                  ),
                                 ),
                               ],
                             ),
@@ -270,33 +305,46 @@ class _EditorScreenState extends State<EditorScreen> {
                   color: selected == i
                       ? Theme.of(context).colorScheme.primaryContainer
                       : null,
-                  child: ListTile(
-                    onTap: () => setState(() => selected = i),
-                    title: Text('${i + 1}. ${project.clips[i].title}'),
-                    subtitle: Text(
-                      '${(project.clips[i].duration.inMilliseconds / 1000).toStringAsFixed(1)}s',
-                    ),
-                    trailing: Wrap(
-                      children: [
-                        IconButton(
-                          tooltip: 'Move earlier',
-                          onPressed: i == 0 ? null : () => model.move(i, i - 1),
-                          icon: const Icon(Icons.arrow_upward),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ListTile(
+                        onTap: () => setState(() => selected = i),
+                        title: Text('${i + 1}. ${project.clips[i].title}'),
+                        subtitle: Text(
+                          '${(project.clips[i].duration.inMilliseconds / 1000).toStringAsFixed(1)}s',
                         ),
-                        IconButton(
-                          tooltip: 'Move later',
-                          onPressed: i == project.clips.length - 1
-                              ? null
-                              : () => model.move(i, i + 1),
-                          icon: const Icon(Icons.arrow_downward),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.xs,
                         ),
-                        IconButton(
-                          tooltip: 'Remove clip from project',
-                          onPressed: () => model.remove(i),
-                          icon: const Icon(Icons.close),
+                        child: Wrap(
+                          alignment: WrapAlignment.end,
+                          children: [
+                            IconButton(
+                              tooltip: 'Move earlier',
+                              onPressed: i == 0
+                                  ? null
+                                  : () => model.move(i, i - 1),
+                              icon: const Icon(AppIcons.moveEarlier),
+                            ),
+                            IconButton(
+                              tooltip: 'Move later',
+                              onPressed: i == project.clips.length - 1
+                                  ? null
+                                  : () => model.move(i, i + 1),
+                              icon: const Icon(AppIcons.moveLater),
+                            ),
+                            IconButton(
+                              tooltip: 'Remove clip from project',
+                              onPressed: () => model.remove(i),
+                              icon: const Icon(AppIcons.close),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               if (clip != null) ...[
@@ -330,7 +378,7 @@ class _EditorScreenState extends State<EditorScreen> {
                     selected,
                     clip.copyWith(rotation: (clip.rotation + 90) % 360),
                   ),
-                  icon: const Icon(Icons.rotate_90_degrees_ccw),
+                  icon: const Icon(AppIcons.rotate),
                   label: Text('Rotate · ${clip.rotation}°'),
                 ),
                 const Text('Crop left / right'),

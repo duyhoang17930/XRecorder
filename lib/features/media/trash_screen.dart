@@ -16,6 +16,14 @@ class _TrashScreenState extends State<TrashScreen> {
   final actions = AndroidMediaActions();
   late Future<List<TrashEntry>> entries = actions.list();
   bool busy = false;
+  void reloadEntries() {
+    if (!mounted) return;
+    final next = actions.list();
+    setState(() {
+      entries = next;
+    });
+  }
+
   Future<void> operate(TrashEntry entry, bool restore) async {
     if (busy) return;
     if (!restore) {
@@ -50,12 +58,20 @@ class _TrashScreenState extends State<TrashScreen> {
       }
       if (!mounted) return;
       MediaScope.of(context).refresh();
-      setState(() => entries = actions.list());
+      reloadEntries();
       if (restored != null) {
         context.push('/media/${Uri.encodeComponent(restored.id)}');
       }
     } catch (e) {
-      if (mounted) showNotice(context, e.toString());
+      if (mounted) {
+        showFailure(
+          context,
+          e,
+          operation: restore
+              ? UserOperation.restore
+              : UserOperation.deleteMedia,
+        );
+      }
     } finally {
       if (mounted) setState(() => busy = false);
     }
@@ -85,10 +101,14 @@ class _TrashScreenState extends State<TrashScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(snapshot.error.toString()),
+                      Text(
+                        UserMessages.failure(
+                          snapshot.error,
+                          operation: UserOperation.loadTrash,
+                        ).text,
+                      ),
                       TextButton(
-                        onPressed: () =>
-                            setState(() => entries = actions.list()),
+                        onPressed: reloadEntries,
                         child: const Text('Retry'),
                       ),
                     ],
@@ -112,14 +132,14 @@ class _TrashScreenState extends State<TrashScreen> {
                           IconButton(
                             tooltip: 'Restore',
                             onPressed: busy ? null : () => operate(entry, true),
-                            icon: const Icon(Icons.restore),
+                            icon: const Icon(AppIcons.restore),
                           ),
                           IconButton(
                             tooltip: 'Delete permanently',
                             onPressed: busy
                                 ? null
                                 : () => operate(entry, false),
-                            icon: const Icon(Icons.delete_forever),
+                            icon: const Icon(AppIcons.deleteForever),
                           ),
                         ],
                       ),

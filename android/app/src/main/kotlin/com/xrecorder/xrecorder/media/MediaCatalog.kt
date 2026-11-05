@@ -15,6 +15,11 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Size
+import android.database.ContentObserver
+import android.os.Handler
+import android.os.Looper
+import android.os.FileObserver
+import io.flutter.plugin.common.EventChannel
 import androidx.core.content.FileProvider
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -22,13 +27,71 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.concurrent.Executors
 
-class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHandler {
+class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHandler, EventChannel.StreamHandler {
     companion object { const val PICK_FOLDER = 701 }
     private val resolver = activity.contentResolver
     private val actions=MediaActions(activity)
     private val worker = Executors.newSingleThreadExecutor()
     private val preferences = activity.getSharedPreferences("media_catalog", Context.MODE_PRIVATE)
     private var picker: MethodChannel.Result? = null
+    private val handler = Handler(Looper.getMainLooper())
+    private var eventSink: EventChannel.EventSink? = null
+    @Volatile private var disposed = false
+    // Accessed only by the existing serial worker. No timer or database mutation.
+    private val signatures = mutableMapOf<Pair<String, String?>, List<List<Any?>>>()
+    private val observed = mutableSetOf<Uri>()
+    private val observer = object : ContentObserver(handler) {
+        override fun onChange(selfChange: Boolean) { scheduleCheck() }
+        override fun onChange(selfChange: Boolean, uri: Uri?) { scheduleCheck() }
+    }
+    private var legacyObserver: FileObserver? = null
+    private val checkTask = Runnable { if (!disposed) worker.execute { checkForChanges() } }
+
+    private fun fingerprint(rows: List<Map<String, Any?>>): List<List<Any?>> = rows.map { row ->
+        listOf(row["id"], row["name"], row["size"], row["modified"], row["created"], row["duration"], row["width"], row["height"], row["revision"])
+    }
+    private fun scheduleCheck() {
+        if (disposed) return
+        handler.removeCallbacks(checkTask)
+        handler.postDelayed(checkTask, 150)
+    }
+    private fun observe(uri: Uri) {
+        if (disposed || uri in observed) return
+        try { resolver.registerContentObserver(uri, true, observer); observed.add(uri) }
+        catch (_: SecurityException) { /* Resume checks still cover readable app media. */ }
+        catch (_: IllegalArgumentException) { /* Some document providers cannot be observed. */ }
+    }
+    override fun onListen(arguments: Any?, events: EventChannel.EventSink) {
+        eventSink = events
+        observe(MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
+        observe(MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        if (Build.VERSION.SDK_INT < 29) {
+            val directory = File(activity.getExternalFilesDir(null), "media").apply { mkdirs() }
+            @Suppress("DEPRECATION")
+            val watcher = object : FileObserver(directory.absolutePath, FileObserver.CLOSE_WRITE or FileObserver.MOVED_TO or FileObserver.MOVED_FROM or FileObserver.DELETE) {
+                override fun onEvent(event: Int, path: String?) { handler.post { scheduleCheck() } }
+            }
+            legacyObserver = watcher
+            watcher.startWatching()
+        }
+    }
+    override fun onCancel(arguments: Any?) {
+        eventSink = null
+        handler.removeCallbacks(checkTask)
+        resolver.unregisterContentObserver(observer)
+        observed.clear()
+        legacyObserver?.stopWatching(); legacyObserver = null
+    }
+    private fun checkForChanges() {
+        if (disposed) return
+        var changed = false
+        for ((query, previous) in signatures.toMap()) {
+            val next = try { fingerprint(readList(query.first, query.second)) }
+                catch (_: Exception) { listOf(listOf("unavailable")) }
+            if (next != previous) { signatures[query] = next; changed = true }
+        }
+        if (changed) handler.post { if (!disposed) eventSink?.success(null) }
+    }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         if(call.method=="playbackState") { result.success(VideoPreviewActivity.instance?.playbackState());return }
@@ -59,8 +122,16 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
             if (picker != null) { result.error("busy", "A folder picker is already open", null); return }
             picker = result
             try {
-                activity.startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).addFlags(
-                    Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION), PICK_FOLDER)
+                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).addFlags(
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+                if (Build.VERSION.SDK_INT >= 26) runCatching {
+                    preferences.getString("folder", null)?.let {
+                        val tree = Uri.parse(it)
+                        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI,
+                            DocumentsContract.buildDocumentUriUsingTree(tree, DocumentsContract.getTreeDocumentId(tree)))
+                    }
+                }
+                activity.startActivityForResult(intent, PICK_FOLDER)
             } catch (_: Exception) { picker = null; result.error("unavailable", "No folder picker is installed", null) }
             return
         }
@@ -68,6 +139,7 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
             try {
                 val value: Any? = when (call.method) {
                     "folder" -> preferences.getString("folder", null)
+                    "checkForChanges" -> { checkForChanges(); null }
                     "list" -> list(call.argument<String>("kind") ?: "video", call.argument<String>("folder"))
                     "find" -> describe(Uri.parse(call.argument<String>("id") ?: ""))
                     "thumbnail" -> thumbnail(Uri.parse(call.argument<String>("uri") ?: ""))
@@ -141,17 +213,35 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
     private fun checkUri(uri: Uri) { require(uri.scheme == "content") }
 
     fun list(kind: String, folder: String?): List<Map<String, Any?>> {
+        val rows = readList(kind, folder)
+        signatures[kind to folder] = fingerprint(rows)
+        if (folder != null) handler.post {
+            if (eventSink != null) runCatching {
+                val tree = Uri.parse(folder)
+                observe(tree)
+                observe(DocumentsContract.buildChildDocumentsUriUsingTree(tree, DocumentsContract.getTreeDocumentId(tree)))
+            }
+        }
+        return rows
+    }
+
+    private fun readList(kind: String, folder: String?): List<Map<String, Any?>> {
         val items = mutableListOf<Map<String, Any?>>()
         if (folder != null) {
             val tree = Uri.parse(folder)
             checkUri(tree)
             if (resolver.persistedUriPermissions.none { it.uri == tree && it.isReadPermission }) throw SecurityException()
+            val pending = pendingDocumentIds()
             val children = DocumentsContract.buildChildDocumentsUriUsingTree(tree, DocumentsContract.getTreeDocumentId(tree))
             resolver.query(children, arrayOf(DocumentsContract.Document.COLUMN_DOCUMENT_ID,
                 DocumentsContract.Document.COLUMN_MIME_TYPE, DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-                DocumentsContract.Document.COLUMN_SIZE, DocumentsContract.Document.COLUMN_LAST_MODIFIED), null, null, null)?.use { c ->
+                DocumentsContract.Document.COLUMN_SIZE, DocumentsContract.Document.COLUMN_LAST_MODIFIED,
+                DocumentsContract.Document.COLUMN_FLAGS), null, null, null)?.use { c ->
                 while (c.moveToNext()) {
                     val mime = c.getString(1) ?: ""
+                    val name = c.getString(2) ?: ""
+                    if (name.endsWith(".pending") || c.getString(0) in pending ||
+                        (Build.VERSION.SDK_INT >= 29 && (c.getInt(5) and DocumentsContract.Document.FLAG_PARTIAL) != 0)) continue
                     if ((kind == "video" && mime.startsWith("video/")) || (kind == "image" && mime.startsWith("image/"))) {
                         val uri = DocumentsContract.buildDocumentUriUsingTree(tree, c.getString(0))
                         items.add(mapOf("id" to uri.toString(), "uri" to uri.toString(), "name" to c.getString(2),
@@ -164,6 +254,7 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
             val collection = if (kind == "video") MediaStore.Video.Media.EXTERNAL_CONTENT_URI else MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             val projection = mutableListOf("_id", "_display_name", "mime_type", "_size", "date_added", "date_modified", "width", "height")
             if (kind == "video") projection.add("duration")
+            if (Build.VERSION.SDK_INT >= 30) projection.add(MediaStore.MediaColumns.GENERATION_MODIFIED)
             resolver.query(collection, projection.toTypedArray(), "owner_package_name=? AND is_pending=0",
                 arrayOf(activity.packageName), "date_added DESC")?.use { c ->
                 while (c.moveToNext()) {
@@ -171,7 +262,7 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
                     items.add(mapOf("id" to uri, "uri" to uri, "name" to c.getString(1), "mime" to c.getString(2),
                         "size" to c.getLong(3), "created" to c.getLong(4) * 1000, "modified" to c.getLong(5) * 1000,
                         "width" to c.getInt(6), "height" to c.getInt(7), "duration" to if (kind == "video") c.getLong(8) else null,
-                        "source" to "recording"))
+                        "source" to "recording", "revision" to if (Build.VERSION.SDK_INT >= 30) c.getLong(c.getColumnIndexOrThrow(MediaStore.MediaColumns.GENERATION_MODIFIED)) else null))
                 }
             } ?: throw java.io.IOException()
         } else {
@@ -185,6 +276,20 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
             }
         }
         return items.sortedByDescending { (it["created"] as? Long) ?: 0 }
+    }
+
+    private fun pendingDocumentIds(): Set<String> {
+        if (Build.VERSION.SDK_INT < 29) return emptySet()
+        val pending = mutableSetOf<String>()
+        for (collection in listOf(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)) {
+            @Suppress("DEPRECATION")
+            val uri = MediaStore.setIncludePending(collection)
+            resolver.query(uri, arrayOf(MediaStore.MediaColumns.RELATIVE_PATH, MediaStore.MediaColumns.DISPLAY_NAME),
+                "owner_package_name=? AND is_pending=1", arrayOf(activity.packageName), null)?.use { c ->
+                while (c.moveToNext()) pending.add("primary:${c.getString(0)}${c.getString(1)}")
+            }
+        }
+        return pending
     }
 
     fun describe(uri: Uri): Map<String, Any?>? {
@@ -260,5 +365,5 @@ class MediaCatalog(private val activity: Activity) : MethodChannel.MethodCallHan
         "cache" to directoryBytes(activity.cacheDir), "trash" to directoryBytes(File(activity.filesDir, "trash")),
         "free" to StatFs(activity.getExternalFilesDir(null)?.absolutePath ?: activity.filesDir.absolutePath).availableBytes)
 
-    fun dispose() { picker?.error("cancelled", "Folder selection interrupted", null); picker = null; worker.shutdown() }
+    fun dispose() { disposed = true; onCancel(null); picker?.error("cancelled", "Folder selection interrupted", null); picker = null; worker.shutdown() }
 }

@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/domain/models.dart';
-import '../../core/constants/design_tokens.dart';
 import '../../core/widgets/studio_widgets.dart';
-import '../recording/recording_setup_sheet.dart';
+import '../../core/widgets/studio_create_sheet.dart';
 import 'media_repository.dart';
 
 class MediaLibraryScreen extends StatefulWidget {
@@ -17,23 +16,19 @@ class MediaLibraryScreen extends StatefulWidget {
   State<MediaLibraryScreen> createState() => _MediaLibraryScreenState();
 }
 
-class _MediaLibraryScreenState extends State<MediaLibraryScreen>
-    with WidgetsBindingObserver {
+class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
   CatalogRepository? _repository;
   StreamSubscription<void>? _subscription;
   List<MediaItem> _items = [];
   Uri? _folder;
-  Uri? _savedFolder;
+  Uri? _displayedFolder;
+  bool _hasResult = false;
   bool _loading = true;
   bool _newest = true;
   String _query = '';
   String? _error;
-  int _generation = 0;
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
+  Future<void>? _inFlight;
+  bool _loadAgain = false;
 
   @override
   void didChangeDependencies() {
@@ -44,41 +39,100 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen>
       _repository = repository;
       _subscription = repository.changes.listen((_) => _load());
       _load();
-      repository
-          .savedFolder()
-          .then((value) {
-            if (mounted) setState(() => _savedFolder = value);
-          })
-          .catchError((Object _) {});
     }
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) _load();
+  Future<void> _load() {
+    if (!mounted) return Future.value();
+    if (_inFlight != null) {
+      _loadAgain = true;
+      return _inFlight!;
+    }
+    final result = _drainLoads();
+    _inFlight = result;
+    return result;
   }
 
-  Future<void> _load() async {
-    final generation = ++_generation;
-    setState(() {
-      _loading = true;
-      _error = null;
-    });
+  Future<void> _drainLoads() async {
     try {
-      final items = await _repository!.list(kind: widget.kind, folder: _folder);
-      if (!mounted || generation != _generation) return;
+      do {
+        _loadAgain = false;
+        await _fetch();
+      } while (mounted && _loadAgain);
+    } finally {
+      _inFlight = null;
+    }
+  }
+
+  Future<void> _fetch() async {
+    final folder = _folder;
+    final repository = _repository!;
+    final showLoading =
+        !_hasResult || _displayedFolder != folder || _error != null;
+    if (_loading != showLoading || _error != null) {
       setState(() {
-        _items = items;
-        _loading = false;
+        _loading = showLoading;
+        _error = null;
       });
+    }
+    try {
+      final items = await repository.list(kind: widget.kind, folder: folder);
+      if (!mounted || folder != _folder || repository != _repository) return;
+      final changed = !_sameItems(_items, items);
+      if (changed || _loading || !_hasResult) {
+        setState(() {
+          if (changed) _items = List.unmodifiable(items);
+          _loading = false;
+          _hasResult = true;
+          _displayedFolder = folder;
+        });
+      }
     } catch (e) {
-      if (!mounted || generation != _generation) return;
+      if (!mounted || folder != _folder || repository != _repository) return;
       setState(() {
-        _error = e.toString();
+        _error = UserMessages.failure(
+          e,
+          operation: UserOperation.loadLibrary,
+        ).text;
         _loading = false;
         _items = [];
       });
     }
+  }
+
+  bool _sameItems(List<MediaItem> a, List<MediaItem> b) {
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if ((
+            a[i].id,
+            a[i].uri,
+            a[i].displayName,
+            a[i].modifiedAt,
+            a[i].createdAt,
+            a[i].sizeBytes,
+            a[i].duration,
+            a[i].status,
+            a[i].width,
+            a[i].height,
+            a[i].revision,
+          ) !=
+          (
+            b[i].id,
+            b[i].uri,
+            b[i].displayName,
+            b[i].modifiedAt,
+            b[i].createdAt,
+            b[i].sizeBytes,
+            b[i].duration,
+            b[i].status,
+            b[i].width,
+            b[i].height,
+            b[i].revision,
+          )) {
+        return false;
+      }
+    }
+    return true;
   }
 
   Future<void> _pickFolder() async {
@@ -87,11 +141,12 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen>
       if (!mounted || folder == null) return;
       setState(() {
         _folder = folder;
-        _savedFolder = folder;
       });
       await _load();
     } catch (e) {
-      if (mounted) showNotice(context, e.toString());
+      if (mounted) {
+        showFailure(context, e, operation: UserOperation.chooseFolder);
+      }
     }
   }
 
@@ -110,7 +165,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen>
                 const StudioSheetHeader(
                   title: 'Storage',
                   description: 'App-owned media only. Selected external folders are excluded.',
-                  icon: Icons.storage,
+                  icon: AppIcons.storage,
                 ),
                 for (final entry in {
                   'Videos': 'videos',
@@ -129,13 +184,12 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen>
         ),
       );
     } catch (e) {
-      if (mounted) showNotice(context, e.toString());
+      if (mounted) showFailure(context, e, operation: UserOperation.storage);
     }
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
     _subscription?.cancel();
     super.dispose();
   }
@@ -143,6 +197,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen>
   @override
   Widget build(BuildContext context) {
     final video = widget.kind == MediaKind.video;
+    final c = context.studioColors;
     final items =
         _items
             .where(
@@ -154,157 +209,268 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen>
                 ? b.createdAt.compareTo(a.createdAt)
                 : a.createdAt.compareTo(b.createdAt),
           );
+    void details(MediaItem item) =>
+        context.push('/media/${Uri.encodeComponent(item.id)}');
     return RefreshIndicator(
       onRefresh: _load,
-      child: ListView(
+      child: CustomScrollView(
+        primary: true,
         key: PageStorageKey('library-${widget.kind.name}'),
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(AppSpacing.md),
-        children: [
-          SectionTitle(
-            video ? 'Video Library' : 'Photo Library',
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  tooltip: 'Trash',
-                  onPressed: () => context.push('/trash'),
-                  icon: const Icon(Icons.delete_outline),
-                ),
-                IconButton(
-                  tooltip: 'Storage',
-                  onPressed: _storage,
-                  icon: const Icon(Icons.storage_outlined),
-                ),
-              ],
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.md,
+              AppSpacing.md,
+              AppSpacing.md,
+              0,
+            ),
+            sliver: SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '3HRECORDER',
+                    style: AppTypography.section.copyWith(color: c.primary),
+                  ),
+                  SectionTitle(
+                    video ? 'Video Library' : 'Photo Library',
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          tooltip: 'Trash',
+                          onPressed: () => context.push('/trash'),
+                          icon: const Icon(AppIcons.trash),
+                        ),
+                        IconButton(
+                          tooltip: 'Storage',
+                          onPressed: _storage,
+                          icon: const Icon(AppIcons.storage),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (video) ...[
+                    const StudioRecordHero(),
+                    const SizedBox(height: AppSpacing.sm),
+                    const StudioQuickTools(compact: true),
+                    const SizedBox(height: AppSpacing.lg),
+                  ],
+                  StudioSearchField(
+                    hintText: video ? 'Search videos' : 'Search photos',
+                    onChanged: (value) => setState(() => _query = value),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Wrap(
+                    spacing: AppSpacing.xxs,
+                    runSpacing: AppSpacing.xxs,
+                    children: [
+                      ChoiceChip(
+                        label: const Text('App media'),
+                        selected: _folder == null,
+                        onSelected: (_) {
+                          if (_folder == null) return;
+                          setState(() => _folder = null);
+                          _load();
+                        },
+                      ),
+                      ChoiceChip(
+                        label: const Text('Choose folder'),
+                        avatar: const Icon(AppIcons.folderOpen),
+                        selected: _folder != null,
+                        onSelected: (_) => _pickFolder(),
+                      ),
+                      ActionChip(
+                        label: Text(_newest ? 'Newest' : 'Oldest'),
+                        avatar: const Icon(AppIcons.sort),
+                        onPressed: () => setState(() => _newest = !_newest),
+                      ),
+                    ],
+                  ),
+                  SectionTitle(
+                    _query.isNotEmpty
+                        ? 'Search results'
+                        : video
+                        ? 'Recent videos'
+                        : 'Your photos',
+                    trailing: Text(
+                      '${items.length} items',
+                      style: TextStyle(color: c.muted),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          StudioSearchField(
-            hintText: video ? 'Search videos' : 'Search photos',
-            onChanged: (value) => setState(() => _query = value),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          Wrap(
-            spacing: 8,
-            children: [
-              ChoiceChip(
-                label: const Text('App media'),
-                selected: _folder == null,
-                onSelected: (_) {
-                  setState(() => _folder = null);
-                  _load();
-                },
-              ),
-              if (_savedFolder != null)
-                ChoiceChip(
-                  label: const Text('Selected folder'),
-                  selected: _folder != null,
-                  onSelected: (_) {
-                    setState(() => _folder = _savedFolder);
-                    _load();
-                  },
-                ),
-              ActionChip(
-                label: const Text('Choose folder'),
-                avatar: const Icon(Icons.folder_open),
-                onPressed: _pickFolder,
-              ),
-              ActionChip(
-                label: Text(_newest ? 'Newest first' : 'Oldest first'),
-                onPressed: () => setState(() => _newest = !_newest),
-              ),
-              ActionChip(label: const Text('Refresh'), onPressed: _load),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.md),
           if (_loading)
-            const Center(
-              child: Padding(
-                padding: EdgeInsets.all(32),
-                child: CircularProgressIndicator(),
-              ),
+            const SliverToBoxAdapter(
+              child: StudioLoadingState(label: 'Loading your media…'),
             )
           else if (_error != null)
-            StudioCard(
-              child: Column(
-                children: [
-                  Text(_error!),
-                  TextButton(onPressed: _load, child: const Text('Retry')),
-                ],
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              sliver: SliverToBoxAdapter(
+                child: StudioEmptyState(
+                  title: 'Library unavailable',
+                  description: _error,
+                  icon: AppIcons.folderUnavailable,
+                  action: OutlinedButton(
+                    onPressed: _load,
+                    child: const Text('Retry'),
+                  ),
+                ),
               ),
             )
           else if (items.isEmpty)
-            StudioCard(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  children: [
-                    Icon(
-                      video
-                          ? Icons.video_library_outlined
-                          : Icons.photo_library_outlined,
-                      size: 48,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      _query.isEmpty
-                          ? (video ? 'No videos yet' : 'No photos yet')
-                          : 'No matching media',
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Choose a folder to browse existing media. Only files directly inside the selected folder are shown.',
-                    ),
-                  ],
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              sliver: SliverToBoxAdapter(
+                child: StudioEmptyState(
+                  title: _query.isEmpty
+                      ? (video ? 'No videos yet' : 'No photos yet')
+                      : 'No matching media',
+                  description: _query.isEmpty
+                      ? 'Choose a folder to browse existing media. Only files directly inside the selected folder are shown.'
+                      : 'Try a different name or browse another folder.',
+                  icon: video ? AppIcons.videos : AppIcons.photos,
                 ),
               ),
             )
           else
-            for (var index = 0; index < items.length; index++) ...[
-              if (index == 0 ||
-                  _day(items[index].createdAt) !=
-                      _day(items[index - 1].createdAt))
-                StudioSectionLabel(_day(items[index].createdAt)),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: StudioCard(
-                  padding: EdgeInsets.zero,
-                  child: ListTile(
-                    leading: SizedBox(
-                      width: 72,
-                      height: 54,
-                      child: MediaThumbnail(
-                        key: ValueKey('${items[index].id}-$_generation'),
-                        item: items[index],
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              sliver: SliverList.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (index == 0 ||
+                          _day(item.createdAt) !=
+                              _day(items[index - 1].createdAt))
+                        StudioSectionLabel(
+                          _day(item.createdAt),
+                          padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                        child: StudioCard(
+                          padding: EdgeInsets.zero,
+                          child: InkWell(
+                            onTap: () => details(item),
+                            child: Padding(
+                              padding: const EdgeInsets.all(AppSpacing.sm),
+                              child: Row(
+                                children: [
+                                  ExcludeSemantics(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                        AppRadius.icon,
+                                      ),
+                                      child: SizedBox(
+                                        width: AppSize.thumbnailWidth,
+                                        height: AppSize.thumbnailHeight,
+                                        child: Stack(
+                                          fit: StackFit.expand,
+                                          children: [
+                                            ColoredBox(
+                                              color: c.elevated,
+                                              child: MediaThumbnail(
+                                                key: ValueKey(
+                                                  '${item.id}-${item.modifiedAt.millisecondsSinceEpoch}-${item.sizeBytes}-${item.revision}',
+                                                ),
+                                                item: item,
+                                              ),
+                                            ),
+                                            if (item.duration != null)
+                                              Positioned(
+                                                bottom: AppSpacing.xxs,
+                                                right: AppSpacing.xxs,
+                                                child: DecoratedBox(
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.mediaScrim,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          AppRadius.icon / 2,
+                                                        ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                          horizontal:
+                                                              AppSpacing.xxs,
+                                                        ),
+                                                    child: Text(
+                                                      _duration(item.duration!),
+                                                      style: AppTypography.micro
+                                                          .copyWith(
+                                                            color: AppColors
+                                                                .onMedia,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: AppSpacing.sm),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          item.displayName,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: AppTypography.bodyEmphasis,
+                                        ),
+                                        const SizedBox(height: AppSpacing.xxs),
+                                        Text(
+                                          '${formatBytes(item.sizeBytes)}${item.duration == null ? '' : ' · ${_duration(item.duration!)}'}',
+                                          style: AppTypography.bodySmall
+                                              .copyWith(color: c.muted),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuButton<String>(
+                                    tooltip: 'Actions for ${item.displayName}',
+                                    onSelected: (_) => details(item),
+                                    itemBuilder: (_) => [
+                                      const PopupMenuItem(
+                                        value: 'details',
+                                        child: Text('Open details'),
+                                      ),
+                                    ],
+                                    icon: const Icon(AppIcons.more),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                    title: Text(
-                      items[index].displayName,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    subtitle: Text(
-                      '${formatBytes(items[index].sizeBytes)}${items[index].duration == null ? '' : ' · ${items[index].duration!.inSeconds}s'}',
-                    ),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () => context.push(
-                      '/media/${Uri.encodeComponent(items[index].id)}',
-                    ),
-                  ),
-                ),
+                    ],
+                  );
+                },
               ),
-            ],
-          if (video) ...[
-            const SizedBox(height: 16),
-            PrimaryButton(
-              'Record screen',
-              icon: Icons.videocam,
-              onPressed: () => openRecordingSetup(context),
             ),
-          ],
+          const SliverToBoxAdapter(child: SizedBox(height: AppSpacing.lg)),
         ],
       ),
     );
+  }
+
+  String _duration(Duration value) {
+    final seconds = value.inSeconds;
+    final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
+    return '$minutes:${(seconds % 60).toString().padLeft(2, '0')}';
   }
 
   String _day(DateTime value) => value.millisecondsSinceEpoch == 0
@@ -343,14 +509,14 @@ class _MediaThumbnailState extends State<MediaThumbnail> {
       if (snapshot.hasError) {
         return const Tooltip(
           message: 'Preview unavailable; open details or refresh',
-          child: Icon(Icons.broken_image_outlined),
+          child: Icon(AppIcons.imageUnavailable),
         );
       }
-      if (!snapshot.hasData) return const Icon(Icons.image_outlined);
+      if (!snapshot.hasData) return const Icon(AppIcons.image);
       return Image.memory(
         snapshot.data!,
         fit: BoxFit.cover,
-        errorBuilder: (_, _, _) => const Icon(Icons.broken_image_outlined),
+        errorBuilder: (_, _, _) => const Icon(AppIcons.imageUnavailable),
       );
     },
   );

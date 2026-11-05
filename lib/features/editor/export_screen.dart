@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'project_repository.dart';
+import '../../core/widgets/studio_widgets.dart';
 
 class ExportScreen extends StatefulWidget {
   const ExportScreen({super.key});
@@ -37,7 +38,14 @@ class _ExportScreenState extends State<ExportScreen> {
         });
       }
     } catch (e) {
-      if (mounted) setState(() => error = e.toString());
+      if (mounted) {
+        setState(
+          () => error = UserMessages.failure(
+            e,
+            operation: UserOperation.export,
+          ).text,
+        );
+      }
     } finally {
       loading = false;
     }
@@ -49,8 +57,7 @@ class _ExportScreenState extends State<ExportScreen> {
       await refresh();
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(e.toString())));
+        showFailure(context, e, operation: UserOperation.export);
       }
     }
   }
@@ -84,12 +91,27 @@ class _ExportScreenState extends State<ExportScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(job['project']['title'] as String? ?? 'Video project'),
-                  Text('${job['state']} · ${job['progress']}%'),
+                  Text(
+                    '${switch (job['state']) {
+                      'queued' => 'Waiting',
+                      'running' => 'Exporting',
+                      'completed' => 'Saved',
+                      'failed' => 'Could not export',
+                      'cancelled' => 'Cancelled',
+                      _ => 'Processing',
+                    }} · ${job['progress']}%',
+                  ),
                   if (job['state'] == 'running')
                     LinearProgressIndicator(
                       value: (job['progress'] as num).toDouble() / 100,
                     ),
-                  if (job['error'] != null) Text(job['error'] as String),
+                  if (job['error'] != null)
+                    Text(
+                      UserMessages.failure(
+                        job['error'],
+                        operation: UserOperation.export,
+                      ).text,
+                    ),
                   if (['queued', 'running'].contains(job['state']))
                     TextButton(
                       onPressed: () =>

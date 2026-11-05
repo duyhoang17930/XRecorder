@@ -1,0 +1,30 @@
+{
+  "renderer": "Flutter test engine; FontLoader using actual offline TTFs",
+  "canvas": "1248x1170 logical pixels",
+  "samples": "12/14/16/28 px; weights 400/600/700; Vietnamese marks, numbers, 200% body",
+  "selected": "Manrope",
+  "decision": "Direct comparison shows no clear improvement sufficient to replace existing Manrope. Vietnamese NFC and NFD samples render with identical pixels/widths; see font_shaping.json.",
+  "fonts": [
+    {
+      "family": "Manrope",
+      "file": "Manrope.ttf",
+      "bytes": 164700,
+      "sha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+      "source": "https://fonts.google.com/specimen/Manrope"
+    },
+    {
+      "family": "Inter",
+      "file": "Inter[opsz,wght].ttf",
+      "bytes": 876576,
+      "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+      "source": "https://fonts.google.com/specimen/Inter"
+    },
+    {
+      "family": "Be Vietnam Pro",
+      "file": "BeVietnamPro-Regular.ttf",
+      "bytes": 132948,
+      "sha256": "cd1ef6e9d7db28ad5cdb88a65ccbe693870e60d340b791f349d248342b4fe4c3",
+      "source": "https://fonts.google.com/specimen/Be+Vietnam+Pro"
+    }
+  ]
+}

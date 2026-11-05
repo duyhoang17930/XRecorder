@@ -18,13 +18,24 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
   Future<MediaItem?>? _item;
   final actions = AndroidMediaActions();
   bool busy = false;
-  Future<void> run(Future<void> Function() operation) async {
+  void reloadItem() {
+    if (!mounted) return;
+    final next = MediaScope.of(context).find(widget.id);
+    setState(() {
+      _item = next;
+    });
+  }
+
+  Future<void> run(
+    Future<void> Function() operation, {
+    UserOperation purpose = UserOperation.openMedia,
+  }) async {
     if (busy) return;
     setState(() => busy = true);
     try {
       await operation();
     } catch (e) {
-      if (mounted) showNotice(context, e.toString());
+      if (mounted) showFailure(context, e, operation: purpose);
     } finally {
       if (mounted) setState(() => busy = false);
     }
@@ -62,9 +73,9 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
       if (id != widget.id) {
         context.pushReplacement('/media/${Uri.encodeComponent(id)}');
       } else {
-        setState(() => _item = MediaScope.of(context).find(id));
+        reloadItem();
       }
-    });
+    }, purpose: UserOperation.rename);
   }
 
   Future<void> trash(MediaItem item) async {
@@ -94,7 +105,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
         MediaScope.of(context).refresh();
         context.pop();
       }
-    });
+    }, purpose: UserOperation.trash);
   }
 
   @override
@@ -121,15 +132,13 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 children: [
                   Text(
                     snapshot.hasError
-                        ? snapshot.error.toString()
+                        ? UserMessages.failure(
+                            snapshot.error,
+                            operation: UserOperation.openMedia,
+                          ).text
                         : 'Media unavailable',
                   ),
-                  TextButton(
-                    onPressed: () => setState(
-                      () => _item = MediaScope.of(context).find(widget.id),
-                    ),
-                    child: const Text('Retry'),
-                  ),
+                  TextButton(onPressed: reloadItem, child: const Text('Retry')),
                 ],
               ),
             ),
@@ -160,7 +169,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                             );
                           }
                         }),
-                  icon: const Icon(Icons.play_circle_outline),
+                  icon: const Icon(AppIcons.play),
                   label: const Text('Preview'),
                 ),
                 TextButton.icon(
@@ -168,19 +177,21 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                       ? null
                       : () => run(() async {
                           await actions.share(item.uri);
-                        }),
-                  icon: const Icon(Icons.share),
+                        }, purpose: UserOperation.share),
+                  icon: const Icon(AppIcons.share),
                   label: const Text('Share'),
                 ),
                 if (item.owned)
-                  TextButton(
+                  TextButton.icon(
                     onPressed: busy ? null : () => rename(item),
-                    child: const Text('Rename'),
+                    icon: const Icon(AppIcons.rename),
+                    label: const Text('Rename'),
                   ),
                 if (item.owned)
-                  TextButton(
+                  TextButton.icon(
                     onPressed: busy ? null : () => trash(item),
-                    child: const Text('Move to Trash'),
+                    icon: const Icon(AppIcons.trash),
+                    label: const Text('Move to Trash'),
                   ),
               ],
             ),
@@ -193,7 +204,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 onPressed: () => context.push(
                   '/photo-tools/${Uri.encodeComponent(item.id)}',
                 ),
-                icon: const Icon(Icons.draw),
+                icon: const Icon(AppIcons.photoEdit),
                 label: const Text('Crop & annotate a copy'),
               ),
             ListTile(

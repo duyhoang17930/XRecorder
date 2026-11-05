@@ -1,3 +1,6 @@
+import '../../core/widgets/studio_widgets.dart';
+import 'capture_status_presentation.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -203,6 +206,7 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
   }
 
   void _receive(RecordingSession value) {
+    if (_disposed) return;
     session = value;
     error = value.error?.message;
     if (value.state == RecordingState.completed &&
@@ -317,45 +321,107 @@ class CaptureStatusBar extends StatelessWidget {
     }
     final active = controller.busy;
     final completed = session.state == RecordingState.completed;
+    final status = CaptureStatusPresentation.from(
+      session,
+      error: controller.error,
+    );
+    final failure = controller.error ?? session.error?.message;
     return Material(
-      color: Theme.of(context).colorScheme.surface,
+      color: context.studioColors.surface,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Row(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.xs,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(
-              child: Text(
-                controller.error ??
-                    (completed
-                        ? (session.screenshot
-                              ? 'Screenshot saved'
-                              : 'Recording saved')
-                        : '${session.state.name} · ${session.elapsedActive.inSeconds}s'),
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Semantics(
+                    liveRegion: true,
+                    child: RecordingStatusIndicator(
+                      label: status.label,
+                      icon: status.icon,
+                      color:
+                          failure != null ||
+                              session.state == RecordingState.failed
+                          ? context.studioColors.warning
+                          : null,
+                      active: active,
+                    ),
+                  ),
+                ),
+                if (active)
+                  Text(
+                    '${session.elapsedActive.inMinutes.toString().padLeft(2, '0')}:${(session.elapsedActive.inSeconds % 60).toString().padLeft(2, '0')}',
+                    style: AppTypography.timecode,
+                    semanticsLabel:
+                        '${session.elapsedActive.inSeconds} seconds elapsed',
+                  ),
+              ],
             ),
-            if (session.state == RecordingState.recording ||
-                session.state == RecordingState.paused)
-              TextButton(
-                onPressed: controller.togglePause,
-                child: Text(
-                  session.state == RecordingState.paused ? 'Resume' : 'Pause',
+            if (failure != null) ...[
+              Text(
+                UserMessages.failure(
+                  failure,
+                  operation: session.screenshot
+                      ? UserOperation.screenshot
+                      : UserOperation.recording,
+                ).text,
+              ),
+              if (UserMessages.failure(
+                    failure,
+                    operation: UserOperation.recording,
+                  ).helpTopic
+                  case final String topic)
+                TextButton(
+                  onPressed: () => context.push('/help?topic=$topic'),
+                  child: const Text('Help'),
                 ),
-              ),
-            if (active)
-              TextButton(onPressed: controller.stop, child: const Text('Stop')),
-            if (completed && session.outputUri != null)
-              TextButton(
-                onPressed: () => context.push(
-                  '/media/${Uri.encodeComponent(session.outputUri.toString())}',
-                ),
-                child: const Text('View'),
-              ),
-            if (!active)
-              IconButton(
-                tooltip: 'Dismiss recording status',
-                onPressed: controller.dismiss,
-                icon: const Icon(Icons.close),
-              ),
+            ],
+            Wrap(
+              alignment: WrapAlignment.end,
+              spacing: AppSpacing.xs,
+              children: [
+                if (session.state == RecordingState.recording ||
+                    session.state == RecordingState.paused)
+                  TextButton.icon(
+                    onPressed: controller.togglePause,
+                    icon: Icon(
+                      session.state == RecordingState.paused
+                          ? AppIcons.play
+                          : AppIcons.pause,
+                    ),
+                    label: Text(
+                      session.state == RecordingState.paused
+                          ? 'Resume'
+                          : 'Pause',
+                    ),
+                  ),
+                if (active)
+                  TextButton.icon(
+                    onPressed: controller.stop,
+                    icon: const Icon(AppIcons.stop),
+                    label: const Text('Stop'),
+                  ),
+                if (completed && session.outputUri != null)
+                  TextButton(
+                    onPressed: () => context.push(
+                      '/media/${Uri.encodeComponent(session.outputUri.toString())}',
+                    ),
+                    child: const Text('View'),
+                  ),
+                if (!active)
+                  IconButton(
+                    tooltip: 'Dismiss recording status',
+                    onPressed: controller.dismiss,
+                    icon: const Icon(AppIcons.close),
+                  ),
+              ],
+            ),
           ],
         ),
       ),

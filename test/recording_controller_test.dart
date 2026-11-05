@@ -1,58 +1,39 @@
+import 'package:flutter_test/flutter_test.dart';
+
 import 'dart:async';
 
-import 'package:flutter_test/flutter_test.dart';
 import 'package:xrecorder/core/domain/models.dart';
-import 'package:xrecorder/core/domain/repositories.dart';
 import 'package:xrecorder/features/recording/recording_service.dart';
 
-class TestRecorder implements RecordingService {
-  @override
-  Future<RecordingCapabilities> capabilities() async => RecordingCapabilities(
-    audioSources: AudioSource.values.toSet(),
-    configurations: [],
-    noiseReduction: false,
-    hevc: false,
-  );
-  final events = StreamController<RecordingSession>.broadcast();
-  RecordingSession? current;
-  bool stopFails = false;
-  RecordingSession make(RecordingState state, {Uri? output}) =>
-      RecordingSession(
-        id: 'test',
-        state: state,
-        configSnapshot: const RecordingSettings(),
-        elapsedActive: Duration.zero,
-        outputUri: output,
-      );
-  @override
-  Stream<RecordingSession> get sessions => events.stream;
-  @override
-  Future<RecordingSession?> currentSession() async => current;
-  @override
-  Future<RecordingSession> screenshot() async =>
-      current = make(RecordingState.awaitingPermission);
-  @override
-  Future<RecordingSession> start(RecordingSettings settings) async =>
-      current = make(RecordingState.awaitingPermission);
-  @override
-  Future<void> stop(String id) async {
-    if (stopFails) throw const DomainFailure(FailureCode.io, 'Stop failed');
-  }
+import 'fixtures/recorder.dart';
 
+class DelayedScreenshot extends TestRecorder {
+  final pending = Completer<RecordingSession>();
   @override
-  Future<void> cancel(String id) async {
-    current = make(RecordingState.idle);
-    events.add(current!);
-  }
-
-  @override
-  Future<void> pause(String id) async {}
-  @override
-  Future<void> resume(String id) async {}
+  Future<RecordingSession> screenshot() => pending.future;
 }
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  test(
+    'late screenshot completion never notifies a disposed catalog',
+    () async {
+      final service = DelayedScreenshot();
+      var saved = 0;
+      final controller = CaptureController(service, onSaved: () => saved++);
+      final pending = controller.screenshot();
+      controller.dispose();
+      service.pending.complete(
+        service.make(
+          RecordingState.completed,
+          output: Uri.parse('content://test/late'),
+        ),
+      );
+      await pending;
+      expect(saved, 0);
+      await service.events.close();
+    },
+  );
   test('Consent pending/denied never fabricates an active recording or saved output', () async {
     final service = TestRecorder();
     var saved = 0;

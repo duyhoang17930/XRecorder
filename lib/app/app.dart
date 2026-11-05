@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+
+import '../core/constants/design_tokens.dart';
 
 import '../features/settings/settings_controller.dart';
 import 'router/app_router.dart';
@@ -40,14 +43,33 @@ class _XRecorderAppState extends State<XRecorderApp> {
       repository: media,
       child: CaptureScope(
         controller: capture,
-        child: MaterialApp.router(
-          title: 'XRecorder',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.dark,
-          themeMode: AppConfiguration.themeMode,
-          locale: AppConfiguration.locale,
-          supportedLocales: AppConfiguration.supportedLocales,
-          routerConfig: router,
+        child: ValueListenableBuilder<ThemeMode>(
+          valueListenable: settings.themeModeListenable,
+          builder: (context, mode, _) => MaterialApp.router(
+            title: '3HRecorder',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.light,
+            darkTheme: AppTheme.dark,
+            themeMode: mode,
+            themeAnimationDuration:
+                WidgetsBinding
+                    .instance
+                    .platformDispatcher
+                    .accessibilityFeatures
+                    .disableAnimations
+                ? Duration.zero
+                : AppMotion.standard,
+            locale: AppConfiguration.locale,
+            supportedLocales: AppConfiguration.supportedLocales,
+            routerConfig: router,
+            builder: (context, child) => AnnotatedRegion<SystemUiOverlayStyle>(
+              value: AppTheme.overlayStyle(
+                Theme.of(context).brightness,
+                Theme.of(context).scaffoldBackgroundColor,
+              ),
+              child: child!,
+            ),
+          ),
         ),
       ),
     ),

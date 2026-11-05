@@ -17,13 +17,19 @@ Future<T?> showStudioBottomSheet<T>({
   useSafeArea: useSafeArea,
   enableDrag: enableDrag,
   isDismissible: isDismissible,
-  backgroundColor: AppColors.surface,
-  barrierColor: AppColors.scrim,
+  backgroundColor: context.studioColors.surface,
+  barrierColor: AppColors.mediaScrim,
   elevation: 0,
   clipBehavior: Clip.antiAlias,
-  shape: const RoundedRectangleBorder(
-    borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.card)),
-    side: BorderSide(color: AppColors.border),
+  sheetAnimationStyle: AnimationStyle(
+    duration: context.motion(AppMotion.slow),
+    reverseDuration: context.motion(AppMotion.standard),
+  ),
+  shape: RoundedRectangleBorder(
+    borderRadius: const BorderRadius.vertical(
+      top: Radius.circular(AppRadius.feature),
+    ),
+    side: BorderSide(color: context.studioColors.border),
   ),
 );
 
@@ -34,8 +40,12 @@ Future<T?> showStudioDialog<T>({
 }) => showDialog<T>(
   context: context,
   barrierDismissible: barrierDismissible,
-  barrierColor: AppColors.scrim,
+  barrierColor: AppColors.mediaScrim,
   builder: builder,
+  animationStyle: AnimationStyle(
+    duration: context.motion(AppMotion.standard),
+    reverseDuration: context.motion(AppMotion.fast),
+  ),
 );
 
 class StudioDialog extends StatelessWidget {
@@ -66,13 +76,18 @@ class StudioDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
+    scrollable: true,
     insetPadding: insetPadding,
     title: title == null && icon == null
         ? null
         : Row(
             children: [
               if (icon != null) ...[
-                Icon(icon, color: AppColors.primary, size: AppIconSize.large),
+                Icon(
+                  icon,
+                  color: context.studioColors.primary,
+                  size: AppIconSize.large,
+                ),
                 const SizedBox(width: AppSpacing.xs),
               ],
               if (title != null) Expanded(child: title!),
@@ -81,7 +96,9 @@ class StudioDialog extends StatelessWidget {
     content: content == null
         ? null
         : DefaultTextStyle(
-            style: AppTypography.body.copyWith(color: AppColors.muted),
+            style: AppTypography.body.copyWith(
+              color: context.studioColors.muted,
+            ),
             child: content!,
           ),
     contentPadding: contentPadding,
@@ -112,7 +129,11 @@ class StudioSheetHeader extends StatelessWidget {
         Row(
           children: [
             if (icon != null) ...[
-              Icon(icon, color: AppColors.primary, size: AppIconSize.large),
+              Icon(
+                icon,
+                color: context.studioColors.primary,
+                size: AppIconSize.large,
+              ),
               const SizedBox(width: AppSpacing.xs),
             ],
             Expanded(
@@ -125,7 +146,9 @@ class StudioSheetHeader extends StatelessWidget {
           const SizedBox(height: AppSpacing.xxs),
           Text(
             description!,
-            style: AppTypography.body.copyWith(color: AppColors.muted),
+            style: AppTypography.body.copyWith(
+              color: context.studioColors.muted,
+            ),
           ),
         ],
       ],

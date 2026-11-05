@@ -2,6 +2,9 @@ import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+
+import '../../core/widgets/studio_widgets.dart';
+
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
@@ -79,7 +82,14 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
         frame.image.dispose();
       }
     } catch (e) {
-      if (mounted) setState(() => error = e.toString());
+      if (mounted) {
+        setState(
+          () => error = UserMessages.failure(
+            e,
+            operation: UserOperation.loadPhoto,
+          ).text,
+        );
+      }
     }
   }
 
@@ -118,7 +128,14 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
         context.pushReplacement('/media/${Uri.encodeComponent(uri)}');
       }
     } catch (e) {
-      if (mounted) setState(() => error = e.toString());
+      if (mounted) {
+        setState(
+          () => error = UserMessages.failure(
+            e,
+            operation: UserOperation.savePhoto,
+          ).text,
+        );
+      }
     } finally {
       if (mounted) setState(() => saving = false);
     }
@@ -183,30 +200,40 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                       onPressed: undoHistory.isEmpty || saving
                           ? null
                           : () => setState(undoMark),
-                      icon: const Icon(Icons.undo),
+                      icon: const Icon(AppIcons.undo),
                     ),
                     IconButton(
                       tooltip: 'Redo mark',
                       onPressed: redoHistory.isEmpty || saving
                           ? null
                           : () => setState(redoMark),
-                      icon: const Icon(Icons.redo),
+                      icon: const Icon(AppIcons.redo),
                     ),
-                    for (final value in [
-                      Colors.red,
-                      Colors.yellow,
-                      Colors.cyan,
-                      Colors.white,
-                      Colors.black,
+                    for (final ink in const [
+                      (Colors.red, 'Red'),
+                      (Colors.yellow, 'Yellow'),
+                      (Colors.cyan, 'Cyan'),
+                      (Colors.white, 'White'),
+                      (Colors.black, 'Black'),
                     ])
-                      IconButton(
-                        tooltip: 'Ink ${value.toARGB32().toRadixString(16)}',
-                        onPressed: saving
-                            ? null
-                            : () => setState(() => color = value),
-                        icon: Icon(
-                          color == value ? Icons.check_circle : Icons.circle,
-                          color: value,
+                      Semantics(
+                        selected: color == ink.$1,
+                        child: IconButton(
+                          tooltip: '${ink.$2} ink',
+                          style: IconButton.styleFrom(
+                            backgroundColor: ink.$1.computeLuminance() < .2
+                                ? const Color(0xFFDEE3EC)
+                                : const Color(0xFF242D3E),
+                          ),
+                          onPressed: saving
+                              ? null
+                              : () => setState(() => color = ink.$1),
+                          icon: Icon(
+                            color == ink.$1
+                                ? AppIcons.selected
+                                : AppIcons.unselected,
+                            color: ink.$1,
+                          ),
                         ),
                       ),
                   ],

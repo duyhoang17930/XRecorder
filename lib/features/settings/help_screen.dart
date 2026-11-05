@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/widgets/studio_widgets.dart';
+
 const helpTopics = <({String category, String question, String answer})>[
   (
     category: 'Recording',
@@ -64,13 +66,35 @@ const helpTopics = <({String category, String question, String answer})>[
 ];
 
 class HelpScreen extends StatefulWidget {
-  const HelpScreen({super.key});
+  const HelpScreen({super.key, this.initialTopic});
+  final String? initialTopic;
   @override
   State<HelpScreen> createState() => _HelpScreenState();
 }
 
 class _HelpScreenState extends State<HelpScreen> {
   String query = '';
+  final expanded = <String>{};
+  late final TextEditingController search;
+  @override
+  void initState() {
+    super.initState();
+    final question = switch (widget.initialTopic) {
+      'protected-capture' => 'Why is a video black or silent?',
+      'recording-stopped' => 'What if recording fails or the phone locks?',
+      _ => '',
+    };
+    query = question;
+    if (question.isNotEmpty) expanded.add(question);
+    search = TextEditingController(text: query);
+  }
+
+  @override
+  void dispose() {
+    search.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final matches = helpTopics.where(
@@ -83,11 +107,9 @@ class _HelpScreenState extends State<HelpScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          TextField(
-            decoration: const InputDecoration(
-              labelText: 'Search help',
-              prefixIcon: Icon(Icons.search),
-            ),
+          StudioSearchField(
+            controller: search,
+            hintText: 'Search help',
             onChanged: (v) => setState(() => query = v),
           ),
           if (matches.isEmpty)
@@ -97,12 +119,60 @@ class _HelpScreenState extends State<HelpScreen> {
             ),
           for (final topic in matches)
             ExpansionTile(
-              title: Text(topic.question),
-              subtitle: Text(topic.category),
+              key: ValueKey(topic.question),
+              initiallyExpanded: expanded.contains(topic.question),
+              tilePadding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.xs,
+                vertical: AppSpacing.xs,
+              ),
+              childrenPadding: const EdgeInsets.fromLTRB(
+                AppSpacing.md,
+                0,
+                AppSpacing.md,
+                AppSpacing.lg,
+              ),
+              iconColor: context.studioColors.primary,
+              collapsedIconColor: context.studioColors.muted,
+              expansionAnimationStyle: AnimationStyle(
+                duration: context.motion(AppMotion.standard),
+              ),
+              trailing: Icon(
+                expanded.contains(topic.question)
+                    ? AppIcons.chevronUp
+                    : AppIcons.chevronDown,
+              ),
+              onExpansionChanged: (value) => setState(() {
+                if (value) {
+                  expanded.add(topic.question);
+                } else {
+                  expanded.remove(topic.question);
+                }
+              }),
+              title: Text(
+                topic.question,
+                style: AppTypography.title.copyWith(
+                  color: context.studioColors.text,
+                ),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: AppSpacing.xxs),
+                child: Text(
+                  topic.category,
+                  style: AppTypography.caption.copyWith(
+                    color: context.studioColors.muted,
+                  ),
+                ),
+              ),
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(topic.answer),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    topic.answer,
+                    style: AppTypography.body.copyWith(
+                      color: context.studioColors.muted,
+                      height: 1.6,
+                    ),
+                  ),
                 ),
               ],
             ),

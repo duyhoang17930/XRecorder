@@ -1,3 +1,5 @@
+import '../constants/app_icons.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../app/theme/app_theme.dart';
@@ -55,7 +57,7 @@ class StudioTextField extends StatelessWidget {
     textCapitalization: textCapitalization,
     onChanged: onChanged,
     onSubmitted: onSubmitted,
-    style: AppTypography.body.copyWith(color: AppColors.text),
+    style: AppTypography.body.copyWith(color: context.studioColors.text),
     decoration: InputDecoration(
       hintText: hintText,
       labelText: labelText,
@@ -133,10 +135,10 @@ class _StudioSearchFieldState extends State<StudioSearchField> {
     textInputAction: TextInputAction.search,
     onChanged: widget.onChanged,
     onSubmitted: widget.onSubmitted,
-    prefixIcon: const Icon(
-      Icons.search,
+    prefixIcon: Icon(
+      AppIcons.search,
       size: AppIconSize.medium,
-      color: AppColors.muted,
+      color: context.studioColors.muted,
     ),
     suffixIcon: _controller.text.isEmpty
         ? null
@@ -146,7 +148,7 @@ class _StudioSearchFieldState extends State<StudioSearchField> {
               _controller.clear();
               widget.onChanged?.call('');
             },
-            icon: const Icon(Icons.close, size: AppIconSize.medium),
+            icon: const Icon(AppIcons.close, size: AppIconSize.medium),
           ),
   );
 }
@@ -176,11 +178,11 @@ class StudioDropdown<T> extends StatelessWidget {
     items: items,
     onChanged: enabled ? onChanged : null,
     isExpanded: true,
-    style: AppTypography.body.copyWith(color: AppColors.text),
-    icon: const Icon(Icons.expand_more, color: AppColors.muted),
+    style: AppTypography.body.copyWith(color: context.studioColors.text),
+    icon: Icon(AppIcons.chevronDown, color: context.studioColors.muted),
     hint: hintText == null ? null : Text(hintText!),
     decoration: InputDecoration(labelText: labelText),
     borderRadius: BorderRadius.circular(AppRadius.control),
-    dropdownColor: AppColors.elevated,
+    dropdownColor: context.studioColors.elevated,
   );
 }

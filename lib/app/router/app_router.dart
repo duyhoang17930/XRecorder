@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/widgets/studio_tab_scroll.dart';
+
 import '../../core/widgets/studio_shell.dart';
 import '../../features/home/video_home_screen.dart';
 import '../../features/media/photo_library_screen.dart';
@@ -27,11 +29,15 @@ GoRouter createRouter() => GoRouter(
           routes: [
             GoRoute(
               path: '/videos',
-              builder: (_, _) => const VideoHomeScreen(),
+              builder: (_, _) =>
+                  const StudioTabScroll(index: 0, child: VideoHomeScreen()),
             ),
             GoRoute(
               path: '/videos/empty',
-              builder: (_, _) => const VideoHomeScreen(empty: true),
+              builder: (_, _) => const StudioTabScroll(
+                index: 0,
+                child: VideoHomeScreen(empty: true),
+              ),
             ),
           ],
         ),
@@ -39,7 +45,8 @@ GoRouter createRouter() => GoRouter(
           routes: [
             GoRoute(
               path: '/photos',
-              builder: (_, _) => const PhotoLibraryScreen(),
+              builder: (_, _) =>
+                  const StudioTabScroll(index: 1, child: PhotoLibraryScreen()),
             ),
           ],
         ),
@@ -47,7 +54,8 @@ GoRouter createRouter() => GoRouter(
           routes: [
             GoRoute(
               path: '/editor',
-              builder: (_, _) => const EditingHubScreen(),
+              builder: (_, _) =>
+                  const StudioTabScroll(index: 2, child: EditingHubScreen()),
             ),
           ],
         ),
@@ -55,7 +63,8 @@ GoRouter createRouter() => GoRouter(
           routes: [
             GoRoute(
               path: '/settings',
-              builder: (_, _) => const SettingsHubScreen(),
+              builder: (_, _) =>
+                  const StudioTabScroll(index: 3, child: SettingsHubScreen()),
             ),
           ],
         ),
@@ -72,7 +81,11 @@ GoRouter createRouter() => GoRouter(
     ),
     GoRoute(path: '/trash', builder: (_, _) => const TrashScreen()),
     GoRoute(path: '/exports', builder: (_, _) => const ExportScreen()),
-    GoRoute(path: '/help', builder: (_, _) => const HelpScreen()),
+    GoRoute(
+      path: '/help',
+      builder: (_, state) =>
+          HelpScreen(initialTopic: state.uri.queryParameters['topic']),
+    ),
     GoRoute(path: '/support', builder: (_, _) => const SupportScreen()),
     GoRoute(
       path: '/photo-preview/:id',

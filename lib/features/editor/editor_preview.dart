@@ -2,6 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
+import '../../core/widgets/studio_widgets.dart';
+
 import 'package:flutter/services.dart';
 
 import '../../core/domain/models.dart';
@@ -112,12 +115,12 @@ class EditorPreviewState extends State<EditorPreview>
       ),
       if (error != null)
         Text(
-          error!,
+          UserMessages.failure(error, operation: UserOperation.preview).text,
           style: TextStyle(color: Theme.of(context).colorScheme.error),
         ),
       TextButton.icon(
         onPressed: () => command(playing ? 'pause' : 'play'),
-        icon: Icon(playing ? Icons.pause : Icons.play_arrow),
+        icon: Icon(playing ? AppIcons.pause : AppIcons.play),
         label: Text(playing ? 'Pause preview' : 'Play preview'),
       ),
     ],

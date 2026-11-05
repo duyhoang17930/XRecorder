@@ -14,9 +14,17 @@ class EditingHubScreen extends StatefulWidget {
 class _EditingHubScreenState extends State<EditingHubScreen> {
   final repository = AndroidEditProjectRepository();
   late Future<List<EditProject>> projects = repository.list();
+  void reloadProjects() {
+    if (!mounted) return;
+    final next = repository.list();
+    setState(() {
+      projects = next;
+    });
+  }
+
   Future<void> open(String id) async {
     await context.push('/editor/project/$id');
-    if (mounted) setState(() => projects = repository.list());
+    reloadProjects();
   }
 
   Future<void> create() async {
@@ -30,98 +38,128 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
       await repository.save(project);
       if (mounted) await open(project.id);
     } catch (e) {
-      if (mounted) showNotice(context, e.toString());
+      if (mounted) {
+        showFailure(context, e, operation: UserOperation.createDraft);
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) => ListView(
-    padding: const EdgeInsets.all(16),
+    primary: true,
+    padding: const EdgeInsets.all(AppSpacing.md),
     children: [
       const SectionTitle('Editing Studio'),
-      const Text(
-        'Non-destructive video drafts. Trim, split, reorder, merge, crop and rotate with a native preview.',
-      ),
-      TextButton.icon(
-        onPressed: create,
-        icon: const Icon(Icons.add),
-        label: const Text('New video project'),
-      ),
-      TextButton.icon(
-        onPressed: () => context.go('/photos'),
-        icon: const Icon(Icons.draw),
-        label: const Text('Crop & annotate a photo'),
+      StudioBentoGrid(
+        children: [
+          BentoCard(
+            title: 'New video project',
+            description: 'Trim, merge & effects',
+            icon: AppIcons.newProject,
+            onTap: create,
+          ),
+          BentoCard(
+            title: 'Edit photo',
+            description: 'Crop & annotate a copy',
+            icon: AppIcons.photoEdit,
+            accent: context.studioColors.cyan,
+            onTap: () => context.go('/photos'),
+          ),
+        ],
       ),
       const SectionTitle('Saved drafts'),
       TextButton.icon(
         onPressed: () => context.push('/exports'),
-        icon: const Icon(Icons.file_upload_outlined),
+        icon: const Icon(AppIcons.export),
         label: const Text('Export queue'),
       ),
       FutureBuilder<List<EditProject>>(
         future: projects,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(child: CircularProgressIndicator());
+            return const StudioLoadingState(label: 'Loading your drafts…');
           }
           if (snapshot.hasError) {
             return Column(
               children: [
-                Text(snapshot.error.toString()),
+                Text(
+                  UserMessages.failure(
+                    snapshot.error,
+                    operation: UserOperation.loadDrafts,
+                  ).text,
+                ),
                 TextButton(
-                  onPressed: () => setState(() => projects = repository.list()),
+                  onPressed: reloadProjects,
                   child: const Text('Retry drafts'),
                 ),
               ],
             );
           }
           final rows = snapshot.data ?? [];
-          if (rows.isEmpty) return const Text('No drafts yet');
+          if (rows.isEmpty) {
+            return const StudioEmptyState(
+              title: 'No drafts yet',
+              description: 'Create a project. Originals stay unchanged.',
+              icon: AppIcons.videos,
+            );
+          }
           return Column(
             children: [
               for (final project in rows)
-                ListTile(
-                  title: Text(project.title),
-                  subtitle: Text(
-                    '${project.clips.length} clips · ${(project.duration.inMilliseconds / 1000).toStringAsFixed(1)}s',
-                  ),
-                  onTap: () => open(project.id),
-                  trailing: IconButton(
-                    tooltip: 'Delete draft',
-                    icon: const Icon(Icons.delete_outline),
-                    onPressed: () async {
-                      final confirmed = await showDialog<bool>(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('Delete draft?'),
-                          content: const Text(
-                            'Source videos and exported files are kept.',
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, false),
-                              child: const Text('Cancel'),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                  child: StudioCard(
+                    padding: EdgeInsets.zero,
+                    child: ListTile(
+                      leading: const StudioIconTile(icon: AppIcons.videos),
+                      title: Text(project.title),
+                      subtitle: Text(
+                        '${project.clips.length} clips · ${(project.duration.inMilliseconds / 1000).toStringAsFixed(1)}s',
+                      ),
+                      onTap: () => open(project.id),
+                      trailing: IconButton(
+                        tooltip: 'Delete draft',
+                        icon: const Icon(AppIcons.trash),
+                        onPressed: () async {
+                          final confirmed = await showDialog<bool>(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text('Delete draft?'),
+                              content: const Text(
+                                'Source videos and exported files are kept.',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, false),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, true),
+                                  child: const Text('Delete draft'),
+                                ),
+                              ],
                             ),
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, true),
-                              child: const Text('Delete draft'),
-                            ),
-                          ],
-                        ),
-                      );
-                      if (confirmed == true) {
-                        try {
-                          await repository.delete(project.id);
-                          if (mounted) {
-                            setState(() => projects = repository.list());
+                          );
+                          if (confirmed == true) {
+                            try {
+                              await repository.delete(project.id);
+                              if (mounted) {
+                                reloadProjects();
+                              }
+                            } catch (e) {
+                              if (context.mounted) {
+                                showFailure(
+                                  context,
+                                  e,
+                                  operation: UserOperation.deleteDraft,
+                                );
+                              }
+                            }
                           }
-                        } catch (e) {
-                          if (context.mounted) {
-                            showNotice(context, e.toString());
-                          }
-                        }
-                      }
-                    },
+                        },
+                      ),
+                    ),
                   ),
                 ),
             ],

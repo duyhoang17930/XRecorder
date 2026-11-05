@@ -14,9 +14,39 @@ abstract interface class CatalogRepository implements MediaRepository {
   void dispose();
 }
 
-class AndroidMediaRepository implements CatalogRepository {
+class AndroidMediaRepository
+    with WidgetsBindingObserver
+    implements CatalogRepository {
   static const channel = MethodChannel('com.xrecorder/media');
+  static const events = EventChannel('com.xrecorder/media/events');
   final _changes = StreamController<void>.broadcast();
+  StreamSubscription<Object?>? _nativeEvents;
+  Timer? _refreshTimer;
+  bool _disposed = false;
+  bool _foreground = true;
+  bool _pendingRefresh = false;
+  AndroidMediaRepository() {
+    WidgetsBinding.instance.addObserver(this);
+    _nativeEvents = events.receiveBroadcastStream().listen(
+      (_) => refresh(),
+      onError: (Object _) {
+        // Providers can reject observers. Resume checks and explicit app events remain available.
+      },
+    );
+  }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && !_disposed) {
+      _foreground = true;
+      if (_pendingRefresh) refresh();
+      _call<void>('checkForChanges').catchError((Object _) {});
+    } else if (state != AppLifecycleState.resumed) {
+      _foreground = false;
+      if (_refreshTimer?.isActive ?? false) _pendingRefresh = true;
+      _refreshTimer?.cancel();
+    }
+  }
+
   @override
   Stream<void> get changes => _changes.stream;
   Future<T?> _call<T>(String method, [Object? arguments]) async {
@@ -69,6 +99,7 @@ class AndroidMediaRepository implements CatalogRepository {
       fps: (map['fps'] as num?)?.toDouble(),
       hasAudio: map['hasAudio'] as bool?,
       owned: map['owned'] == true,
+      revision: (map['revision'] as num?)?.toInt(),
       folderUri: map['folder'] is String
           ? Uri.parse(map['folder'] as String)
           : null,
@@ -114,9 +145,27 @@ class AndroidMediaRepository implements CatalogRepository {
         (k, v) => MapEntry(k as String, (v as num).toInt()),
       );
   @override
-  void refresh() => _changes.add(null);
+  void refresh() {
+    if (_disposed) return;
+    if (!_foreground) {
+      _pendingRefresh = true;
+      return;
+    }
+    _pendingRefresh = false;
+    _refreshTimer?.cancel();
+    _refreshTimer = Timer(const Duration(milliseconds: 250), () {
+      if (!_disposed) _changes.add(null);
+    });
+  }
+
   @override
-  void dispose() => _changes.close();
+  void dispose() {
+    _disposed = true;
+    WidgetsBinding.instance.removeObserver(this);
+    _refreshTimer?.cancel();
+    _nativeEvents?.cancel();
+    _changes.close();
+  }
 }
 
 class MediaScope extends InheritedWidget {

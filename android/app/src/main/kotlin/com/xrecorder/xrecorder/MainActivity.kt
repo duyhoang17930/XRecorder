@@ -15,6 +15,7 @@ class MainActivity : FlutterActivity() {
     private var settingsChannel: MethodChannel? = null
     private var mediaChannel: MethodChannel? = null
     private var mediaCatalog: MediaCatalog? = null
+    private var mediaEvents: EventChannel? = null
     private var captureBridge: CaptureBridge? = null
     private var captureChannel: MethodChannel? = null
     private var captureEvents: EventChannel? = null
@@ -37,6 +38,8 @@ class MainActivity : FlutterActivity() {
         captureEvents = EventChannel(flutterEngine.dartExecutor.binaryMessenger, "com.xrecorder/capture/events")
         captureEvents?.setStreamHandler(CaptureState)
         mediaCatalog = MediaCatalog(this)
+        mediaEvents = EventChannel(flutterEngine.dartExecutor.binaryMessenger, "com.xrecorder/media/events")
+        mediaEvents?.setStreamHandler(mediaCatalog)
         mediaChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.xrecorder/media")
         mediaChannel?.setMethodCallHandler(mediaCatalog)
         val appContext = applicationContext
@@ -83,6 +86,8 @@ class MainActivity : FlutterActivity() {
         CaptureState.sink = null
         mediaChannel?.setMethodCallHandler(null)
         mediaChannel = null
+        mediaEvents?.setStreamHandler(null)
+        mediaEvents = null
         mediaCatalog?.dispose()
         mediaCatalog = null
         settingsChannel?.setMethodCallHandler(null)
