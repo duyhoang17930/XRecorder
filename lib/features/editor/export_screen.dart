@@ -13,16 +13,49 @@ class ExportScreen extends StatefulWidget {
   State<ExportScreen> createState() => _ExportScreenState();
 }
 
-class _ExportScreenState extends State<ExportScreen> {
+class _ExportScreenState extends State<ExportScreen>
+    with WidgetsBindingObserver {
   Timer? timer;
   List<Map<String, dynamic>> jobs = [];
   String? error;
   bool loading = false;
+  bool foreground = true;
+  bool routeCurrent = true;
+  String? _document;
+  bool get active => jobs.any(
+    (job) => ['queued', 'running', 'finalizing'].contains(job['state']),
+  );
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     refresh();
-    timer = Timer.periodic(const Duration(seconds: 1), (_) => refresh());
+  }
+
+  void schedule() {
+    timer?.cancel();
+    if (mounted && foreground && routeCurrent && (active || error != null)) {
+      timer = Timer(const Duration(seconds: 1), () {
+        refresh();
+      });
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final current = ModalRoute.of(context)?.isCurrent ?? true;
+    final returned = !routeCurrent && current;
+    routeCurrent = current;
+    if (!current) timer?.cancel();
+    if (returned && foreground) refresh();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    foreground = state == AppLifecycleState.resumed;
+    timer?.cancel();
+    if (foreground && routeCurrent) refresh();
   }
 
   Future<void> refresh() async {
@@ -31,9 +64,10 @@ class _ExportScreenState extends State<ExportScreen> {
     try {
       final value = await AndroidEditProjectRepository.channel
           .invokeMethod<String>('exportList');
-      if (mounted) {
+      if (mounted && (value != _document || error != null)) {
         setState(() {
           jobs = (jsonDecode(value!) as List).cast<Map<String, dynamic>>();
+          _document = value;
           error = null;
         });
       }
@@ -48,6 +82,7 @@ class _ExportScreenState extends State<ExportScreen> {
       }
     } finally {
       loading = false;
+      schedule();
     }
   }
 
@@ -65,6 +100,7 @@ class _ExportScreenState extends State<ExportScreen> {
   @override
   void dispose() {
     timer?.cancel();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -95,6 +131,7 @@ class _ExportScreenState extends State<ExportScreen> {
                     '${switch (job['state']) {
                       'queued' => 'Waiting',
                       'running' => 'Exporting',
+                      'finalizing' => 'Saving…',
                       'completed' => 'Saved',
                       'failed' => 'Could not export',
                       'cancelled' => 'Cancelled',

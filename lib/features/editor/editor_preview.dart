@@ -28,6 +28,8 @@ class EditorPreviewState extends State<EditorPreview>
   String? error;
   bool playing = false, polling = false;
   int generation = 0;
+  Duration? _lastPosition;
+  bool _foreground = true;
   @override
   void initState() {
     super.initState();
@@ -37,6 +39,7 @@ class EditorPreviewState extends State<EditorPreview>
   @override
   void didUpdateWidget(EditorPreview oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (identical(oldWidget.project, widget.project)) return;
     if (jsonEncode(oldWidget.project.toJson()['clips']) !=
             jsonEncode(widget.project.toJson()['clips']) ||
         jsonEncode(oldWidget.project.effects) !=
@@ -49,6 +52,7 @@ class EditorPreviewState extends State<EditorPreview>
     if (channel == null || widget.project.clips.isEmpty) return;
     try {
       await channel!.invokeMethod<void>('load', widget.project.toJson());
+      _lastPosition = null;
       if (mounted) setState(() => error = null);
     } catch (e) {
       if (mounted) setState(() => error = e.toString());
@@ -58,24 +62,33 @@ class EditorPreviewState extends State<EditorPreview>
   Future<void> command(String method, [Object? value]) async {
     try {
       await channel?.invokeMethod<void>(method, value);
+      await poll();
     } catch (e) {
       if (mounted) setState(() => error = e.toString());
     }
   }
 
   Future<void> poll() async {
-    if (polling || channel == null) return;
+    if (polling || channel == null || !_foreground || !mounted) return;
     polling = true;
     try {
       final state = await channel!.invokeMapMethod<Object?, Object?>('state');
       if (mounted && state != null) {
-        widget.onPosition(
-          Duration(milliseconds: (state['positionMs'] as num).toInt()),
+        final position = Duration(
+          milliseconds: (state['positionMs'] as num).toInt(),
         );
-        setState(() {
-          playing = state['playing'] == true;
-          error = state['error'] as String? ?? error;
-        });
+        if (position != _lastPosition) {
+          _lastPosition = position;
+          widget.onPosition(position);
+        }
+        final nextPlaying = state['playing'] == true;
+        final nextError = state['error'] as String? ?? error;
+        if (playing != nextPlaying || error != nextError) {
+          setState(() {
+            playing = nextPlaying;
+            error = nextError;
+          });
+        }
       }
     } catch (e) {
       if (mounted) setState(() => error = e.toString());
@@ -86,7 +99,12 @@ class EditorPreviewState extends State<EditorPreview>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state != AppLifecycleState.resumed) command('pause');
+    _foreground = state == AppLifecycleState.resumed;
+    if (_foreground) {
+      poll();
+    } else {
+      command('pause');
+    }
   }
 
   @override

@@ -7,15 +7,33 @@ import android.content.pm.PackageManager
 import android.media.projection.MediaProjectionConfig
 import android.media.projection.MediaProjectionManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import java.util.concurrent.Executors
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
 class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHandler {
+    private val capabilitiesWorker = Executors.newSingleThreadExecutor()
+    private val main = Handler(Looper.getMainLooper())
+    private val pendingCapabilities = mutableSetOf<MethodChannel.Result>()
+    private var disposed = false
     companion object { const val CONSENT = 702; const val NOTIFICATIONS = 703; const val AUDIO_PERMISSION = 704; const val CAMERA_PERMISSION = 705; const val OVERLAY_PERMISSION = 706 }
     private var requestedSession: String? = CaptureState.id.takeIf { CaptureState.state == "awaitingPermission" }
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        if (disposed) { result.error("cancelled", "Capture screen closed.", null); return }
         when (call.method) {
-            "capabilities" -> result.success(CaptureConfig.capabilities() + mapOf("facecam" to hasFrontCamera()))
+            "capabilities" -> {
+                pendingCapabilities.add(result)
+                capabilitiesWorker.execute {
+                    val value = runCatching { CaptureConfig.capabilities() + mapOf("facecam" to hasFrontCamera()) }
+                    main.post {
+                        if (pendingCapabilities.remove(result)) {
+                            value.fold({ result.success(it) }, { result.error("unavailable", "Could not check device capabilities. Try again.", null) })
+                        }
+                    }
+                }
+            }
             "current" -> result.success(CaptureState.snapshot())
             "pause", "resume" -> {
                 if (call.argument<String>("sessionId") != CaptureState.id) { result.error("stale_session", "This session is no longer active.", null); return }
@@ -47,6 +65,12 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
             }
             else -> result.notImplemented()
         }
+    }
+    fun dispose() {
+        disposed = true
+        pendingCapabilities.toList().forEach { it.error("cancelled", "Capture screen closed.", null) }
+        pendingCapabilities.clear()
+        capabilitiesWorker.shutdownNow()
     }
     private fun ensureAudioPermission() {
         if (CaptureState.config.hasAudio && activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)

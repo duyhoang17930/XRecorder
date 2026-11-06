@@ -5,10 +5,12 @@ import 'package:integration_test/integration_test_driver_extended.dart';
 
 Future<void> main() async {
   final output =
-      Platform.environment['UI_ARTIFACT_DIRECTORY'] ?? 'docs/ui/task02';
+      Platform.environment['UI_ARTIFACT_DIRECTORY'] ??
+      'build/verification/ui/task02';
   final directory = Directory('$output/screenshots');
   await directory.create(recursive: true);
   await integrationDriver(
+    writeResponseOnFailure: true,
     onScreenshot:
         (String name, List<int> bytes, [Map<String, Object?>? args]) async {
           if (!RegExp(r'^[a-z0-9_]+$').hasMatch(name)) return false;

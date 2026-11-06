@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../core/widgets/studio_widgets.dart';
+
 class PhotoPreviewScreen extends StatefulWidget {
   const PhotoPreviewScreen({super.key, required this.uri});
   final String uri;
@@ -9,8 +11,17 @@ class PhotoPreviewScreen extends StatefulWidget {
 }
 
 class _PhotoPreviewScreenState extends State<PhotoPreviewScreen> {
-  late final data = const MethodChannel('com.xrecorder/media')
-      .invokeMethod<Uint8List>('imageBytes', {'uri': widget.uri});
+  late var data = read();
+  Future<Uint8List?> read() =>
+      const MethodChannel('com.xrecorder/media')
+          .invokeMethod<Uint8List>('imageBytes', {'uri': widget.uri});
+  void retry() {
+    final next = read();
+    setState(() {
+      data = next;
+    });
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: const Text('Photo preview')),
@@ -21,8 +32,19 @@ class _PhotoPreviewScreenState extends State<PhotoPreviewScreen> {
           return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError || snapshot.data == null) {
-          return const Center(
-            child: Text('Image unavailable, too large, or access revoked.'),
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  UserMessages.failure(
+                    snapshot.error,
+                    operation: UserOperation.loadPhoto,
+                  ).text,
+                ),
+                TextButton(onPressed: retry, child: const Text('Retry')),
+              ],
+            ),
           );
         }
         return Center(
@@ -32,8 +54,13 @@ class _PhotoPreviewScreenState extends State<PhotoPreviewScreen> {
               snapshot.data!,
               fit: BoxFit.contain,
               cacheWidth: 2048,
-              errorBuilder: (_, _, _) =>
-                  const Text('Image could not be decoded.'),
+              errorBuilder: (_, _, _) => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('Could not open this image. Try another photo.'),
+                  TextButton(onPressed: retry, child: const Text('Retry')),
+                ],
+              ),
             ),
           ),
         );

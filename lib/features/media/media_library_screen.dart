@@ -502,18 +502,23 @@ class MediaThumbnail extends StatefulWidget {
 
 class _MediaThumbnailState extends State<MediaThumbnail> {
   Future<Uint8List>? _image;
+  CatalogRepository? _repository;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _image ??= MediaScope.of(context).thumbnail(widget.item.uri);
+    final repository = MediaScope.of(context);
+    if (_repository != repository || _image == null) {
+      _repository = repository;
+      _image = MediaScope.thumbnail(context, widget.item);
+    }
   }
 
   @override
   void didUpdateWidget(MediaThumbnail oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.item.uri != widget.item.uri ||
-        oldWidget.item.modifiedAt != widget.item.modifiedAt) {
-      _image = MediaScope.of(context).thumbnail(widget.item.uri);
+    if (MediaScope.thumbnailKey(oldWidget.item) !=
+        MediaScope.thumbnailKey(widget.item)) {
+      _image = MediaScope.thumbnail(context, widget.item);
     }
   }
 

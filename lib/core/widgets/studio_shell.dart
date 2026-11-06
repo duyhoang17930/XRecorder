@@ -204,10 +204,14 @@ class StudioBottomNavigation extends StatelessWidget {
                 const SizedBox(height: AppSpacing.xxs),
                 MediaQuery.withClampedTextScaling(
                   maxScaleFactor: AppSize.navigationLabelScale,
-                  child: Text(
-                    label,
-                    textAlign: TextAlign.center,
-                    style: AppTypography.navigation,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      label,
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
+                      style: AppTypography.navigation,
+                    ),
                   ),
                 ),
               ],

@@ -202,6 +202,9 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
   Timer? _feedbackTimer;
   CaptureFeedback? feedback;
   String? _terminalId;
+  final _presentationChanges = ChangeNotifier();
+  Listenable get presentationChanges => _presentationChanges;
+  Object? _lastPresentation;
   bool get busy =>
       _requesting ||
       (session != null &&
@@ -211,7 +214,24 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
             RecordingState.failed,
           ].contains(session!.state));
   void _notify() {
-    if (!_disposed) notifyListeners();
+    if (_disposed) return;
+    // Keep every native snapshot/raw listener; only repaint when visible values change.
+    final presentation = (
+      session?.id,
+      session?.state,
+      session?.screenshot,
+      session?.elapsedActive.inSeconds,
+      session?.countdownRemaining.inSeconds,
+      busy,
+      error,
+      dismissedId,
+      feedback,
+    );
+    notifyListeners();
+    if (!_disposed && presentation != _lastPresentation) {
+      _lastPresentation = presentation;
+      _presentationChanges.notifyListeners();
+    }
   }
 
   void _receive(RecordingSession value) {
@@ -451,6 +471,7 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     _feedbackTimer?.cancel();
     WidgetsBinding.instance.removeObserver(this);
     subscription.cancel();
+    _presentationChanges.dispose();
     super.dispose();
   }
 }
@@ -468,14 +489,12 @@ class CaptureFeedback {
   final bool screenshot;
 }
 
-class CaptureScope extends InheritedNotifier<CaptureController> {
-  const CaptureScope({
-    super.key,
-    required CaptureController controller,
-    required super.child,
-  }) : super(notifier: controller);
+class CaptureScope extends InheritedNotifier<Listenable> {
+  CaptureScope({super.key, required this.controller, required super.child})
+    : super(notifier: controller.presentationChanges);
+  final CaptureController controller;
   static CaptureController of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<CaptureScope>()!.notifier!;
+      context.dependOnInheritedWidgetOfExactType<CaptureScope>()!.controller;
 }
 
 class CaptureStatusBar extends StatelessWidget {

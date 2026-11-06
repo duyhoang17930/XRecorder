@@ -240,13 +240,17 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('$label: ${value.round()}%'),
-          Slider(
-            value: value,
-            min: 0,
-            max: 200,
-            divisions: 40,
-            label: '${value.round()}%',
-            onChanged: change,
+          Semantics(
+            label: label,
+            child: Slider(
+              value: value,
+              min: 0,
+              max: 200,
+              divisions: 40,
+              label: '${value.round()}%',
+              onChanged: change,
+              semanticFormatterCallback: (v) => '${v.round()} percent',
+            ),
           ),
         ],
       );

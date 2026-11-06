@@ -576,6 +576,29 @@ void main() {
     },
   );
 
+  testWidgets(
+    'app thumbnail cache clears on memory pressure and media change',
+    (tester) async {
+      final catalog = TestCatalog()..items.clear();
+      await start(tester, catalog: catalog);
+      final cache = tester
+          .widget<MediaScope>(find.byType(MediaScope))
+          .thumbnails!;
+      var pending = cache.load('pressure', () async => Uint8List(4));
+      await tester.pump();
+      await pending;
+      expect(cache.retainedBytes, 4);
+      tester.binding.handleMemoryPressure();
+      expect(cache.retainedBytes, 0);
+      pending = cache.load('changed', () async => Uint8List(4));
+      await tester.pump();
+      await pending;
+      catalog.refresh();
+      await tester.pump();
+      expect(cache.retainedBytes, 0);
+    },
+  );
+
   testWidgets('capture Help opens the related expanded guide', (tester) async {
     final router = await start(tester);
     showFailure(

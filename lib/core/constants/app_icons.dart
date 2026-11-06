@@ -41,6 +41,7 @@ abstract final class AppIcons {
   static const captions = LucideIcons.captions;
   static const microphone = LucideIcons.mic;
   static const export = LucideIcons.upload;
+  static const save = LucideIcons.save;
   static const undo = LucideIcons.undo2;
   static const redo = LucideIcons.redo2;
   static const split = LucideIcons.scissors;

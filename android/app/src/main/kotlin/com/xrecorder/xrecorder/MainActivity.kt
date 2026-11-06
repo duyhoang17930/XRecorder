@@ -79,6 +79,7 @@ class MainActivity : FlutterActivity() {
         supportChannel?.setMethodCallHandler(null);supportBridge?.dispose();supportBridge=null;supportChannel=null
         editorChannel?.setMethodCallHandler(null);editorBridge?.dispose();editorBridge=null;editorChannel=null
         captureChannel?.setMethodCallHandler(null)
+        captureBridge?.dispose()
         captureEvents?.setStreamHandler(null)
         captureChannel = null
         captureEvents = null

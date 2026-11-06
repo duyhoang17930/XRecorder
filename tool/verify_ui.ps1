@@ -1,10 +1,13 @@
 param(
-    [ValidateSet('visual', 'native', 'screenshot-visual', 'screenshot-native')][string]$Mode = 'visual',
+    [ValidateSet('visual', 'native', 'screenshot-visual', 'screenshot-native', 'performance', 'ux')][string]$Mode = 'visual',
     [string]$Device = 'emulator-5560',
     [string]$ExpectedAvdName = 'ThreeHRecorder_Task021',
     [string]$ApplicationBinary,
     [string]$ArtifactDirectory,
-    [switch]$Before
+    [switch]$Before,
+    [ValidateSet('debug', 'profile')][string]$BuildMode = 'debug',
+    [ValidateSet('before', 'after')][string]$PerformancePhase = 'before',
+    [switch]$PreserveTestOutputs
 )
 
 $ErrorActionPreference = 'Stop'
@@ -21,21 +24,32 @@ $name = (& $adb -s $Device shell getprop ro.boot.qemu.avd_name).Trim()
 if ($LASTEXITCODE -ne 0 -or $name -ne $ExpectedAvdName) {
     throw "Refusing device $Device ($name). Use a dedicated test AVD named $ExpectedAvdName."
 }
+if ((& $adb -s $Device shell dumpsys activity services com.xrecorder.xrecorder) -match '\.recording\.CaptureService') {
+    throw 'Refusing to stop/install while CaptureService is active on the test AVD.'
+}
+if ($Mode -eq 'performance' -and $BuildMode -ne 'profile') { throw 'Performance mode requires -BuildMode profile.' }
 
 $target = switch ($Mode) {
+    'ux' { 'integration_test/ux_interaction_test.dart' }
+    'performance' { 'integration_test/performance_benchmark_test.dart' }
     'native' { 'integration_test/refinement_native_test.dart' }
     'screenshot-native' { 'integration_test/screenshot_native_test.dart' }
     'screenshot-visual' { 'integration_test/screenshot_visual_test.dart' }
     default { 'integration_test/refinement_visual_test.dart' }
 }
 $output = switch ($Mode) {
-    'native' { 'docs/ui/task021/native' }
-    'screenshot-native' { 'docs/ui/task022/native' }
-    'screenshot-visual' { if ($Before) { 'docs/ui/task022/before' } else { 'docs/ui/task022/after' } }
-    default { 'docs/ui/task021/after' }
+    'ux' { if ($Before) { 'build/verification/ui/task031/before' } else { 'build/verification/ui/task031/after' } }
+    'performance' { "build/verification/performance/task03/$PerformancePhase" }
+    'native' { 'build/verification/ui/task021/native' }
+    'screenshot-native' { 'build/verification/ui/task022/native' }
+    'screenshot-visual' { if ($Before) { 'build/verification/ui/task022/before' } else { 'build/verification/ui/task022/after' } }
+    default { 'build/verification/ui/task021/after' }
 }
 if ($ArtifactDirectory) { $output = $ArtifactDirectory }
-$arguments = @('drive', '--no-dds', '--debug', '--keep-app-running', '--driver=test_driver/design_system_driver.dart', "--target=$target", '-d', $Device)
+$arguments = @('drive', '--no-dds', "--$BuildMode", '--keep-app-running', '--driver=test_driver/design_system_driver.dart', "--target=$target", '-d', $Device)
+if ($Mode -eq 'performance') { $arguments += "--dart-define=PERF_LABEL=$PerformancePhase" }
+if ($Mode -eq 'ux' -and -not $Before) { $arguments += '--dart-define=UX_AFTER=true' }
+if ($PreserveTestOutputs) { $arguments += '--dart-define=PRESERVE_TEST_OUTPUTS=true' }
 if ($Mode -eq 'visual') { $arguments += '--dart-define=TASK021_AFTER=true' }
 if ($Mode -eq 'screenshot-visual' -and -not $Before) { $arguments += '--dart-define=TASK022_AFTER=true' }
 if ($ApplicationBinary) { $arguments += "--use-application-binary=$ApplicationBinary" }

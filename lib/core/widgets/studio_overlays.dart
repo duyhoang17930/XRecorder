@@ -10,43 +10,49 @@ Future<T?> showStudioBottomSheet<T>({
   bool useSafeArea = true,
   bool enableDrag = true,
   bool isDismissible = true,
-}) => showModalBottomSheet<T>(
-  context: context,
-  builder: builder,
-  isScrollControlled: isScrollControlled,
-  useSafeArea: useSafeArea,
-  enableDrag: enableDrag,
-  isDismissible: isDismissible,
-  backgroundColor: context.studioColors.surface,
-  barrierColor: AppColors.mediaScrim,
-  elevation: 0,
-  clipBehavior: Clip.antiAlias,
-  sheetAnimationStyle: AnimationStyle(
-    duration: context.motion(AppMotion.slow),
-    reverseDuration: context.motion(AppMotion.standard),
-  ),
-  shape: RoundedRectangleBorder(
-    borderRadius: const BorderRadius.vertical(
-      top: Radius.circular(AppRadius.feature),
+}) {
+  if (ModalRoute.of(context)?.isCurrent == false) return Future<T?>.value();
+  return showModalBottomSheet<T>(
+    context: context,
+    builder: builder,
+    isScrollControlled: isScrollControlled,
+    useSafeArea: useSafeArea,
+    enableDrag: enableDrag,
+    isDismissible: isDismissible,
+    backgroundColor: context.studioColors.surface,
+    barrierColor: AppColors.mediaScrim,
+    elevation: 0,
+    clipBehavior: Clip.antiAlias,
+    sheetAnimationStyle: AnimationStyle(
+      duration: context.motion(AppMotion.slow),
+      reverseDuration: context.motion(AppMotion.standard),
     ),
-    side: BorderSide(color: context.studioColors.border),
-  ),
-);
+    shape: RoundedRectangleBorder(
+      borderRadius: const BorderRadius.vertical(
+        top: Radius.circular(AppRadius.feature),
+      ),
+      side: BorderSide(color: context.studioColors.border),
+    ),
+  );
+}
 
 Future<T?> showStudioDialog<T>({
   required BuildContext context,
   required WidgetBuilder builder,
   bool barrierDismissible = true,
-}) => showDialog<T>(
-  context: context,
-  barrierDismissible: barrierDismissible,
-  barrierColor: AppColors.mediaScrim,
-  builder: builder,
-  animationStyle: AnimationStyle(
-    duration: context.motion(AppMotion.standard),
-    reverseDuration: context.motion(AppMotion.fast),
-  ),
-);
+}) {
+  if (ModalRoute.of(context)?.isCurrent == false) return Future<T?>.value();
+  return showDialog<T>(
+    context: context,
+    barrierDismissible: barrierDismissible,
+    barrierColor: AppColors.mediaScrim,
+    builder: builder,
+    animationStyle: AnimationStyle(
+      duration: context.motion(AppMotion.standard),
+      reverseDuration: context.motion(AppMotion.fast),
+    ),
+  );
+}
 
 class StudioDialog extends StatelessWidget {
   const StudioDialog({

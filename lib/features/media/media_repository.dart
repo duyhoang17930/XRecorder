@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../core/domain/models.dart';
 import '../../core/domain/repositories.dart';
+import '../../core/presentation/thumbnail_cache.dart';
 
 abstract interface class CatalogRepository implements MediaRepository {
   Future<Uri?> savedFolder();
@@ -169,13 +170,30 @@ class AndroidMediaRepository
 }
 
 class MediaScope extends InheritedWidget {
-  const MediaScope({super.key, required this.repository, required super.child});
+  const MediaScope({
+    super.key,
+    required this.repository,
+    this.thumbnails,
+    required super.child,
+  });
   final CatalogRepository repository;
+  final ThumbnailCache? thumbnails;
+  static Object thumbnailKey(MediaItem item) =>
+      (item.uri, item.modifiedAt, item.sizeBytes, item.revision);
+  static Future<Uint8List> thumbnail(BuildContext context, MediaItem item) {
+    final scope = context.dependOnInheritedWidgetOfExactType<MediaScope>()!;
+    return scope.thumbnails?.load(
+          thumbnailKey(item),
+          () => scope.repository.thumbnail(item.uri),
+        ) ??
+        scope.repository.thumbnail(item.uri);
+  }
+
   static CatalogRepository of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<MediaScope>()!.repository;
   @override
   bool updateShouldNotify(MediaScope oldWidget) =>
-      oldWidget.repository != repository;
+      oldWidget.repository != repository || oldWidget.thumbnails != thumbnails;
 }
 
 String formatBytes(int bytes) {

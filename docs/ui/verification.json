@@ -1,0 +1,110 @@
+{
+  "measuredDate": "2026-11-06",
+  "historicalEvidenceOnly": true,
+  "fullSuite": {
+    "passed": 107,
+    "newUxCases": 11,
+    "analyze": "No issues found",
+    "format": "pass",
+    "diffCheck": "pass"
+  },
+  "environment": {
+    "avd": "ThreeHRecorder_Task021",
+    "serial": "emulator-5560",
+    "api": 36,
+    "density": 420,
+    "widthsDp": [
+      320,
+      411
+    ],
+    "textScaleUpTo": 2
+  },
+  "uxBefore": {
+    "exportRequestsForDoubleCallback": 2,
+    "protectsUnsavedPhotoEdits": false
+  },
+  "uxAfter": {
+    "exportRequestsForDoubleCallback": 1,
+    "protectsUnsavedPhotoEdits": true
+  },
+  "nativeScreenshot": {
+    "cancelAndBackWithoutFiles": true,
+    "repeatedTapNoExtraOutput": true,
+    "nativeCountdown321": true,
+    "autoPhotoLibrary": true,
+    "viewActualImage": true,
+    "feedbackExpires": true,
+    "videoPauseResumeAudioSaved": true,
+    "videoDurationMs": 4714
+  },
+  "productionSmoke": {
+    "avd": "ThreeHRecorder_Task021",
+    "serial": "emulator-5560",
+    "productionEntrypointRestored": true,
+    "readyWithoutOldFeedback": true,
+    "backgroundResumeIdle": true,
+    "rotationIdleSurvives": true,
+    "sleepWakeIdleSurvives": true,
+    "syntheticRunningLowTrimReceived": true,
+    "trimResult": "",
+    "serviceAbsent": true,
+    "projectionReleased": true,
+    "mediaDeleted": false,
+    "limits": "Idle only. No rotation/lock during active capture or real RAM exhaustion."
+  },
+  "apk": {
+    "artifact": "build\\task031\\main-debug.apk",
+    "bytes": 192044437,
+    "sha256": "d352deb73c13a656acf8137299a2908b22b91ac6ff2481d71821d9c3843c20b6",
+    "zipIntegrityError": null,
+    "abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "x86_64"
+    ],
+    "syntheticUxTestMarkerPresent": false,
+    "benchmarkMarkerPresent": false,
+    "canonicalApkSameHash": true
+  },
+  "nativeAndDependenciesUnchangedDuringTask031": true,
+  "screenshots": {
+    "home_light.png": {
+      "sha256": "a8caaef643eb13bac4698effc2dc2b84796d069e5549c40a6213d10dd091442e",
+      "archiveMember": "docs/ui/task031/screenshot411/screenshots/01_home_light.png"
+    },
+    "screenshot_saved_dark.png": {
+      "sha256": "ae76f196c0c33bc9df6d2bc0e4fef0bfee17f45d500cd212cc483d510ae28145",
+      "archiveMember": "docs/ui/task031/screenshot411/screenshots/06_saved_dark.png"
+    },
+    "editor_before.png": {
+      "sha256": "bbbf60a7f3e787da7f1fb5db853cb1f6f53fc6ed2c5902c0ad57c49f7335bd65",
+      "archiveMember": "docs/ui/task031/before411/screenshots/01_editor_light.png"
+    },
+    "editor_light.png": {
+      "sha256": "6eac215ca91727ddf4fd1352405e47857c114243cc80f54b31059d079ef769f7",
+      "archiveMember": "docs/ui/task031/after411-verified/screenshots/01_editor_light.png"
+    },
+    "photo_editor_large_text.png": {
+      "sha256": "c9493f293f7955d17caf22abdc253989e89723f1962b199f15dffcafc5163ca8",
+      "archiveMember": "docs/ui/task031/after320/screenshots/08_photo_large.png"
+    },
+    "photo_discard_dialog.png": {
+      "sha256": "adc2596fd206e4a84cdd6f8dcc72adec0c2838b90bdf5b3eb5f5a523bae9cf3b",
+      "archiveMember": "docs/ui/task031/after411-verified/screenshots/04_photo_leave.png"
+    },
+    "video_picker_before.png": {
+      "sha256": "5811097a6239e5ab1ede980df711d84cd8e2ef9237f343eb92b6fcc68a6b9931",
+      "archiveMember": "docs/ui/task031/before320/screenshots/06_picker_dark_large_text.png"
+    },
+    "video_picker_large_text.png": {
+      "sha256": "6cd958f1116c3bac644bd406108685e9673ff742ea2f32eb8cba67bede8de262",
+      "archiveMember": "docs/ui/task031/after320/screenshots/06_picker_dark_large_text.png"
+    }
+  },
+  "limits": [
+    "Physical usability and TalkBack not tested; user will test later.",
+    "Audio metadata is not A/V sync validation.",
+    "Rotation/lock only tested idle; memory pressure is a trim signal."
+  ],
+  "originalEvidenceLocalArchive": ".claude-local/scratchpad/docs_cleanup_20261106/original_evidence.zip"
+}

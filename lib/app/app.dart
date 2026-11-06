@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +12,7 @@ import 'theme/app_theme.dart';
 import 'app_configuration.dart';
 import '../features/media/media_repository.dart';
 import '../features/recording/recording_service.dart';
+import '../core/presentation/thumbnail_cache.dart';
 
 class XRecorderApp extends StatefulWidget {
   const XRecorderApp({super.key, this.settings, this.mediaRepository});
@@ -19,7 +22,19 @@ class XRecorderApp extends StatefulWidget {
   State<XRecorderApp> createState() => _XRecorderAppState();
 }
 
-class _XRecorderAppState extends State<XRecorderApp> {
+class _XRecorderAppState extends State<XRecorderApp>
+    with WidgetsBindingObserver {
+  final thumbnails = ThumbnailCache();
+  StreamSubscription<void>? _thumbnailInvalidation;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _thumbnailInvalidation = media.changes.listen((_) => thumbnails.clear());
+  }
+
+  @override
+  void didHaveMemoryPressure() => thumbnails.clear();
   late final media = widget.mediaRepository ?? AndroidMediaRepository();
   late final capture = CaptureController(
     AndroidRecordingService(),
@@ -29,6 +44,9 @@ class _XRecorderAppState extends State<XRecorderApp> {
   late final GoRouter router = createRouter();
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _thumbnailInvalidation?.cancel();
+    thumbnails.clear();
     router.dispose();
     capture.dispose();
     media.dispose();
@@ -41,6 +59,7 @@ class _XRecorderAppState extends State<XRecorderApp> {
     controller: settings,
     child: MediaScope(
       repository: media,
+      thumbnails: thumbnails,
       child: CaptureScope(
         controller: capture,
         child: ValueListenableBuilder<ThemeMode>(

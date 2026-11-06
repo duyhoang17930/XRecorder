@@ -218,7 +218,10 @@ void main() {
         }
         await subscription.cancel();
         await tester.pumpWidget(const SizedBox.shrink());
-        for (final uri in created) {
+        for (final uri
+            in const bool.fromEnvironment('PRESERVE_TEST_OUTPUTS')
+                ? <Uri>{}
+                : created) {
           final raw = await actions.call<Map<Object?, Object?>>('find', {
             'id': uri.toString(),
           });

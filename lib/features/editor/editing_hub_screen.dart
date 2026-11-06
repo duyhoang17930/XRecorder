@@ -14,6 +14,7 @@ class EditingHubScreen extends StatefulWidget {
 class _EditingHubScreenState extends State<EditingHubScreen> {
   final repository = AndroidEditProjectRepository();
   late Future<List<EditProject>> projects = repository.list();
+  bool creating = false, opening = false;
   void reloadProjects() {
     if (!mounted) return;
     final next = repository.list();
@@ -23,11 +24,19 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
   }
 
   Future<void> open(String id) async {
-    await context.push('/editor/project/$id');
-    reloadProjects();
+    if (opening) return;
+    opening = true;
+    try {
+      await context.push('/editor/project/$id');
+      reloadProjects();
+    } finally {
+      opening = false;
+    }
   }
 
   Future<void> create() async {
+    if (creating) return;
+    setState(() => creating = true);
     try {
       final project = EditProject(
         id: 'project_${DateTime.now().microsecondsSinceEpoch}',
@@ -41,6 +50,8 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
       if (mounted) {
         showFailure(context, e, operation: UserOperation.createDraft);
       }
+    } finally {
+      if (mounted) setState(() => creating = false);
     }
   }
 
@@ -56,7 +67,8 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
             title: 'New video project',
             description: 'Trim, merge & effects',
             icon: AppIcons.newProject,
-            onTap: create,
+            onTap: creating ? null : create,
+            badge: creating ? 'Opening…' : null,
           ),
           BentoCard(
             title: 'Edit photo',

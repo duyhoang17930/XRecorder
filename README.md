@@ -9,7 +9,7 @@ flutter run -d <android-device-id>
 
 Implemented: real media catalog and SAF folder access; recording with audio, pause/resume, timers and interruption recovery; screenshot/crop/annotation and facecam; preview/share/rename/trash/restore; persisted editor drafts, trim/split/merge/crop/rotate/effects; MP4/GIF export queue; settings, searchable help and consent-based support handoff. Settings and drafts persist locally. Export should run with the app open.
 
-The UI uses Dark Bento Studio, with persisted Dark/Light/System appearance across the app and video editor. The video preview keeps a black media surface. UI language is English. The five-position navigation keeps Create (+) as an action menu; reselecting a tab scrolls its content to the top. See the [design system and validation report](docs/ui/task01/DESIGN_SYSTEM.md) and [emulator screenshots](docs/ui/task01/SCREENSHOTS.md).
+The UI uses Dark Bento Studio, with persisted Dark/Light/System appearance across the app and video editor. The video preview keeps a black media surface. UI language is English. The five-position navigation keeps Create (+) as an action menu; reselecting a tab scrolls its content to the top. See the [design system](docs/ui/DESIGN_SYSTEM.md) and [UI/UX summary with screenshots](docs/ui/README.md).
 
 AI subtitles and livestream are intentionally deferred under [issue #1](https://github.com/duyhoang17930/XRecorder/issues/1). Ads, premium entitlements, floating recording controls and shake-to-stop are not exposed. Physical-device and production release gates remain open; see [release validation](docs/xrecorder/phase_13_validation.md).
 
@@ -27,12 +27,11 @@ Project references:
 - [Product specification](docs/APP_SPEC_VI.md)
 - [Technology research](docs/TECH_STACK_RESEARCH_VI.md)
 - [Reference index](docs/REFERENCE_INDEX.md)
-- [Global UI design system — TASK 01](docs/ui/task01/DESIGN_SYSTEM.md)
-- [Typography, Lucide and minimal UX — TASK 02](docs/ui/task02/REPORT_VI.md)
-- [UI refinement and bug fixes — TASK 02.1](docs/ui/task021/REPORT_VI.md)
-- [Screenshot UX and visual polish — TASK 02.2](docs/ui/task022/REPORT_VI.md)
+- [UI/UX, design system and representative screenshots](docs/ui/README.md)
+- [Performance measurements and limitations](docs/performance/README.md)
+- [Physical-device usability scenarios](docs/ui/USABILITY_TEST_VI.md)
 
-The current UI keeps offline Manrope, uses Lucide through `AppIcons`, and shows capture states with both an icon and a label. See [16 updated screenshots](docs/ui/task02/SCREENSHOTS.md).
+The current UI keeps offline Manrope, uses Lucide through `AppIcons`, and shows capture states with both an icon and a label. See [representative screenshots](docs/ui/README.md#ảnh-đại-diện).
 
 Screenshot asks for fresh system consent, minimizes the app after approval, then captures one PNG after three seconds. Return to the app for a compact `Screenshot saved` notification with View/close; it hides after five foreground seconds. Screenshot has no recording timer, Pause or Stop controls. Light surfaces and the idle primary action use the existing brand colors; recording-active states remain red.
 
@@ -51,4 +50,4 @@ Task 02.1 has a guarded runner which verifies the dedicated AVD name before touc
 .\tool\verify_ui.ps1 -Mode native
 ```
 
-It requires `ThreeHRecorder_Task021` on `emulator-5560`, uses debug assertions and `--keep-app-running`, and saves evidence under `docs/ui/task021/`. Media updates use Android content events plus a change check on resume; there is no periodic library polling. Build `lib/main.dart` afterward and reinstall that APK with `adb -s <verified-test-device> install -r`, without uninstalling.
+It requires `ThreeHRecorder_Task021` on `emulator-5560`, uses debug assertions and `--keep-app-running`, and saves generated evidence under `build/verification/`. The `docs/ui/` and `docs/performance/` folders keep curated summaries only. Media updates use Android content events plus a change check on resume; there is no periodic library polling. Build `lib/main.dart` afterward and reinstall that APK with `adb -s <verified-test-device> install -r`, without uninstalling.
