@@ -223,7 +223,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(screenshots, 1);
       expect(starts, 0);
-      expect(find.text('Recording Parameters'), findsNothing);
+      expect(find.text('Recording settings'), findsNothing);
       final tile = tester.widget<QuickActionTile>(
         find.widgetWithText(QuickActionTile, 'Screenshot'),
       );
@@ -550,6 +550,29 @@ void main() {
       expect(find.text('first'), findsNothing);
       expect(find.text('second'), findsNothing);
       expect(find.text('latest'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'empty copy follows app media, folder, search, and photo context',
+    (tester) async {
+      final catalog = TestCatalog()..items.clear();
+      catalog.selection = Uri.parse('content://test/tree/empty');
+      final router = await start(tester, catalog: catalog);
+      expect(find.text('No recordings yet'), findsOneWidget);
+      expect(find.text('Your videos will appear here.'), findsOneWidget);
+      await tester.tap(find.text('Choose folder'));
+      await tester.pumpAndSettle();
+      expect(find.text('No videos in this folder'), findsOneWidget);
+      await tester.enterText(find.byType(TextField), 'absent');
+      await tester.pumpAndSettle();
+      expect(find.text('No matching media'), findsOneWidget);
+      router.go('/photos');
+      await tester.pumpAndSettle();
+      expect(find.text('No screenshots yet'), findsOneWidget);
+      await tester.tap(find.text('Choose folder'));
+      await tester.pumpAndSettle();
+      expect(find.text('No photos in this folder'), findsOneWidget);
     },
   );
 

@@ -30,8 +30,11 @@ Project references:
 - [Global UI design system — TASK 01](docs/ui/task01/DESIGN_SYSTEM.md)
 - [Typography, Lucide and minimal UX — TASK 02](docs/ui/task02/REPORT_VI.md)
 - [UI refinement and bug fixes — TASK 02.1](docs/ui/task021/REPORT_VI.md)
+- [Screenshot UX and visual polish — TASK 02.2](docs/ui/task022/REPORT_VI.md)
 
 The current UI keeps offline Manrope, uses Lucide through `AppIcons`, and shows capture states with both an icon and a label. See [16 updated screenshots](docs/ui/task02/SCREENSHOTS.md).
+
+Screenshot asks for fresh system consent, minimizes the app after approval, then captures one PNG after three seconds. Return to the app for a compact `Screenshot saved` notification with View/close; it hides after five foreground seconds. Screenshot has no recording timer, Pause or Stop controls. Light surfaces and the idle primary action use the existing brand colors; recording-active states remain red.
 
 Run visual/profile checks only on a test emulator with data you can replace. On this Flutter SDK, `flutter drive` uninstalls its app when it finishes unless `--keep-app-running` is supplied; this resets private app data. Use the following command and reinstall the production entry point afterward without uninstalling:
 

@@ -16,6 +16,34 @@ class CaptureStatusPresentation {
     if (error != null || session?.state == RecordingState.failed) {
       return const CaptureStatusPresentation('Error', AppIcons.error);
     }
+    if (session?.screenshot == true) {
+      return switch (session!.state) {
+        RecordingState.idle => const CaptureStatusPresentation(
+          'Ready',
+          AppIcons.ready,
+        ),
+        RecordingState.awaitingPermission => const CaptureStatusPresentation(
+          'Allow screenshot',
+          AppIcons.screenshot,
+        ),
+        RecordingState.countdown => CaptureStatusPresentation(
+          'Screenshot in ${session.countdownRemaining.inSeconds}s',
+          AppIcons.countdown,
+        ),
+        RecordingState.finalizing => const CaptureStatusPresentation(
+          'Saving screenshot',
+          AppIcons.screenshot,
+        ),
+        RecordingState.completed => const CaptureStatusPresentation(
+          'Screenshot saved',
+          AppIcons.ready,
+        ),
+        _ => const CaptureStatusPresentation(
+          'Capturing screenshot',
+          AppIcons.screenshot,
+        ),
+      };
+    }
     return switch (session?.state ?? RecordingState.idle) {
       RecordingState.idle => const CaptureStatusPresentation(
         'Ready',

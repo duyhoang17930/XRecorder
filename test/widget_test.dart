@@ -51,7 +51,7 @@ void main() {
       expect(find.text('Clip 1.mp4'), findsNothing);
       await tester.tap(find.text('Photo'));
       await tester.pumpAndSettle();
-      expect(find.text('No photos yet'), findsOneWidget);
+      expect(find.text('No screenshots yet'), findsOneWidget);
       await tester.tap(find.text('Video'));
       await tester.pumpAndSettle();
       expect(find.text('Clip 0.mp4'), findsOneWidget);

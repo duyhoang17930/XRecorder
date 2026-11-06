@@ -13,6 +13,10 @@ import '../../core/domain/repositories.dart';
 class AndroidRecordingService implements RecordingService {
   static const commands = MethodChannel('com.xrecorder/capture');
   static const events = EventChannel('com.xrecorder/capture/events');
+  // One native subscription, shared by every observer/service instance.
+  static final Stream<RecordingSession> _sessions = events
+      .receiveBroadcastStream()
+      .map((value) => decode(value as Map<Object?, Object?>));
   static RecordingSession decode(Map<Object?, Object?> data) {
     final config = (data['config'] as Map<Object?, Object?>?) ?? data;
     return RecordingSession(
@@ -125,9 +129,7 @@ class AndroidRecordingService implements RecordingService {
   }
 
   @override
-  Stream<RecordingSession> get sessions => events.receiveBroadcastStream().map(
-    (value) => decode(value as Map<Object?, Object?>),
-  );
+  Stream<RecordingSession> get sessions => _sessions;
   @override
   Future<RecordingSession?> currentSession() async => _call('current');
   @override
@@ -194,26 +196,88 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
   String? _savedId;
   String? dismissedId;
   bool _disposed = false;
+  bool _requesting = false;
+  bool _receivedSession = false;
+  bool _foreground = true;
+  Timer? _feedbackTimer;
+  CaptureFeedback? feedback;
+  String? _terminalId;
   bool get busy =>
-      session != null &&
-      ![
-        RecordingState.idle,
-        RecordingState.completed,
-        RecordingState.failed,
-      ].contains(session!.state);
+      _requesting ||
+      (session != null &&
+          ![
+            RecordingState.idle,
+            RecordingState.completed,
+            RecordingState.failed,
+          ].contains(session!.state));
   void _notify() {
     if (!_disposed) notifyListeners();
   }
 
   void _receive(RecordingSession value) {
     if (_disposed) return;
+    final previous = session;
+    final announce = _receivedSession || _requesting;
+    _receivedSession = true;
+    if (previous?.id == value.id &&
+        previous?.screenshot == true &&
+        previous?.state == RecordingState.completed &&
+        ![
+          RecordingState.completed,
+          RecordingState.idle,
+        ].contains(value.state)) {
+      return; // A late command acknowledgement cannot resurrect a finished shot.
+    }
     session = value;
     error = value.error?.message;
+    if (![
+      RecordingState.idle,
+      RecordingState.completed,
+      RecordingState.failed,
+    ].contains(value.state)) {
+      _clearFeedback();
+    }
     if (value.state == RecordingState.completed &&
         value.outputUri != null &&
         value.id != _savedId) {
       _savedId = value.id;
       onSaved();
+      if (announce) {
+        _showFeedback(
+          CaptureFeedback(
+            id: value.id,
+            notice: UserNotice(
+              value.screenshot ? 'Screenshot saved' : 'Video saved',
+              kind: NoticeKind.success,
+            ),
+            output: value.outputUri,
+            screenshot: value.screenshot,
+          ),
+        );
+      }
+    } else if (value.screenshot &&
+        announce &&
+        _terminalId != value.id &&
+        (value.state == RecordingState.failed ||
+            (value.state == RecordingState.idle &&
+                previous?.id == value.id &&
+                previous?.screenshot == true &&
+                previous?.state != RecordingState.idle))) {
+      _showFeedback(
+        CaptureFeedback(
+          id: value.id,
+          notice: value.state == RecordingState.failed
+              ? UserMessages.failure(
+                  value.error,
+                  operation: UserOperation.screenshot,
+                )
+              : const UserNotice(
+                  'Screenshot cancelled.',
+                  kind: NoticeKind.info,
+                ),
+          screenshot: true,
+        ),
+      );
     }
     _notify();
   }
@@ -227,6 +291,8 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
 
   Future<void> start(RecordingSettings settings) async {
     if (busy) return;
+    _requesting = true;
+    _clearFeedback();
     error = null;
     dismissedId = null;
     try {
@@ -235,19 +301,45 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
       error = e.toString();
       _notify();
       rethrow;
+    } finally {
+      _requesting = false;
+      _notify();
     }
   }
 
   Future<void> screenshot() async {
     if (busy) return;
+    _requesting = true;
+    _clearFeedback();
     error = null;
     dismissedId = null;
     try {
       _receive(await service.screenshot());
     } catch (e) {
+      if (e is DomainFailure ||
+          e is PlatformException ||
+          e is MissingPluginException) {
+        if (!_disposed) {
+          _showFeedback(
+            CaptureFeedback(
+              id: session?.id ?? 'screenshot-request',
+              notice: UserMessages.failure(
+                e,
+                operation: UserOperation.screenshot,
+              ),
+              screenshot: true,
+            ),
+          );
+          _notify();
+        }
+        return; // One UI owner for operational failures; avoid a second snackbar.
+      }
       error = e.toString();
       _notify();
       rethrow;
+    } finally {
+      _requesting = false;
+      _notify();
     }
   }
 
@@ -265,7 +357,59 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
 
   void dismiss() {
     dismissedId = session?.id;
+    _clearFeedback();
     _notify();
+  }
+
+  void _clearFeedback() {
+    _feedbackTimer?.cancel();
+    feedback = null;
+  }
+
+  void _showFeedback(CaptureFeedback value) {
+    _clearFeedback();
+    _terminalId = value.id;
+    feedback = value;
+    _armFeedback();
+  }
+
+  void _armFeedback() {
+    _feedbackTimer?.cancel();
+    if (!_foreground || feedback == null || _disposed) return;
+    _feedbackTimer = Timer(
+      feedback!.notice.kind == NoticeKind.error
+          ? const Duration(seconds: 10)
+          : const Duration(seconds: 5),
+      () {
+        feedback = null;
+        _notify();
+      },
+    );
+  }
+
+  Future<void> cancelScreenshot() async {
+    final value = session;
+    if (value?.screenshot != true || value?.state != RecordingState.countdown) {
+      return;
+    }
+    try {
+      await service.cancel(value!.id);
+      await refresh();
+    } catch (e) {
+      if (!_disposed) {
+        _showFeedback(
+          CaptureFeedback(
+            id: value!.id,
+            notice: UserMessages.failure(
+              e,
+              operation: UserOperation.screenshot,
+            ),
+            screenshot: true,
+          ),
+        );
+        _notify();
+      }
+    }
   }
 
   Future<void> togglePause() async {
@@ -286,16 +430,42 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) refresh();
+    if (_disposed) return;
+    if (state == AppLifecycleState.resumed) {
+      if (!_foreground) _armOnResume();
+      refresh();
+    } else {
+      _foreground = false;
+      _feedbackTimer?.cancel();
+    }
+  }
+
+  void _armOnResume() {
+    _foreground = true;
+    _armFeedback();
   }
 
   @override
   void dispose() {
     _disposed = true;
+    _feedbackTimer?.cancel();
     WidgetsBinding.instance.removeObserver(this);
     subscription.cancel();
     super.dispose();
   }
+}
+
+class CaptureFeedback {
+  const CaptureFeedback({
+    required this.id,
+    required this.notice,
+    this.output,
+    this.screenshot = false,
+  });
+  final String id;
+  final UserNotice notice;
+  final Uri? output;
+  final bool screenshot;
 }
 
 class CaptureScope extends InheritedNotifier<CaptureController> {
@@ -314,13 +484,50 @@ class CaptureStatusBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = CaptureScope.of(context);
     final session = controller.session;
+    if (controller.feedback case final CaptureFeedback feedback) {
+      return CaptureFeedbackCard(
+        feedback: feedback,
+        onDismiss: controller.dismiss,
+      );
+    }
     if (session == null ||
         session.state == RecordingState.idle ||
         controller.dismissedId == session.id) {
       return const SizedBox.shrink();
     }
+    if (session.screenshot) {
+      if (session.state != RecordingState.countdown) {
+        return const SizedBox.shrink();
+      }
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+        child: StudioCard(
+          padding: const EdgeInsets.only(left: 16, right: 4),
+          child: Row(
+            children: [
+              Text(
+                '${session.countdownRemaining.inSeconds}',
+                style: AppTypography.headline.copyWith(
+                  color: context.studioColors.primary,
+                ),
+                semanticsLabel:
+                    'Screenshot in ${session.countdownRemaining.inSeconds} seconds',
+              ),
+              const SizedBox(width: 12),
+              const Expanded(child: Text('Switch to the screen you want')),
+              TextButton(
+                onPressed: controller.cancelScreenshot,
+                child: const Text('Cancel'),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    if (session.state == RecordingState.completed) {
+      return const SizedBox.shrink();
+    }
     final active = controller.busy;
-    final completed = session.state == RecordingState.completed;
     final status = CaptureStatusPresentation.from(
       session,
       error: controller.error,
@@ -349,6 +556,11 @@ class CaptureStatusBar extends StatelessWidget {
                           failure != null ||
                               session.state == RecordingState.failed
                           ? context.studioColors.warning
+                          : ![
+                              RecordingState.recording,
+                              RecordingState.paused,
+                            ].contains(session.state)
+                          ? context.studioColors.primary
                           : null,
                       active: active,
                     ),
@@ -407,13 +619,6 @@ class CaptureStatusBar extends StatelessWidget {
                     icon: const Icon(AppIcons.stop),
                     label: const Text('Stop'),
                   ),
-                if (completed && session.outputUri != null)
-                  TextButton(
-                    onPressed: () => context.push(
-                      '/media/${Uri.encodeComponent(session.outputUri.toString())}',
-                    ),
-                    child: const Text('View'),
-                  ),
                 if (!active)
                   IconButton(
                     tooltip: 'Dismiss recording status',
@@ -423,6 +628,82 @@ class CaptureStatusBar extends StatelessWidget {
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// A transient, compact result above navigation. No video controls or timer.
+class CaptureFeedbackCard extends StatelessWidget {
+  const CaptureFeedbackCard({
+    super.key,
+    required this.feedback,
+    required this.onDismiss,
+  });
+  final CaptureFeedback feedback;
+  final VoidCallback onDismiss;
+  @override
+  Widget build(BuildContext context) {
+    final c = context.studioColors;
+    final success = feedback.notice.kind == NoticeKind.success;
+    final accent = success
+        ? c.cyan
+        : feedback.notice.kind == NoticeKind.error
+        ? c.warning
+        : c.muted;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+      child: Semantics(
+        liveRegion: true,
+        child: StudioCard(
+          color: Color.alphaBlend(accent.withValues(alpha: .05), c.card),
+          borderColor: accent.withValues(alpha: .24),
+          padding: const EdgeInsets.only(left: 12, right: 4),
+          child: Row(
+            children: [
+              Icon(
+                success
+                    ? AppIcons.ready
+                    : feedback.notice.kind == NoticeKind.error
+                    ? AppIcons.error
+                    : AppIcons.info,
+                size: 20,
+                color: accent,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Text(
+                    feedback.notice.text,
+                    style: AppTypography.bodySmall.copyWith(
+                      color: c.text,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              if (feedback.output != null)
+                TextButton(
+                  onPressed: () {
+                    final uri = feedback.output.toString();
+                    onDismiss();
+                    context.push(
+                      feedback.screenshot
+                          ? '/photo-preview/${Uri.encodeComponent(uri)}'
+                          : '/media/${Uri.encodeComponent(uri)}',
+                    );
+                  },
+                  child: const Text('View'),
+                ),
+              IconButton(
+                tooltip: 'Dismiss capture notification',
+                onPressed: onDismiss,
+                icon: const Icon(AppIcons.close, size: 20),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -255,6 +255,11 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                     const StudioRecordHero(),
                     const SizedBox(height: AppSpacing.sm),
                     const StudioQuickTools(compact: true),
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      'Screenshot minimizes the app after approval · 3s delay.',
+                      style: AppTypography.caption.copyWith(color: c.muted),
+                    ),
                     const SizedBox(height: AppSpacing.lg),
                   ],
                   StudioSearchField(
@@ -328,10 +333,20 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
               sliver: SliverToBoxAdapter(
                 child: StudioEmptyState(
                   title: _query.isEmpty
-                      ? (video ? 'No videos yet' : 'No photos yet')
+                      ? (_folder != null
+                            ? (video
+                                  ? 'No videos in this folder'
+                                  : 'No photos in this folder')
+                            : (video
+                                  ? 'No recordings yet'
+                                  : 'No screenshots yet'))
                       : 'No matching media',
                   description: _query.isEmpty
-                      ? 'Choose a folder to browse existing media. Only files directly inside the selected folder are shown.'
+                      ? (_folder != null
+                            ? 'Only files in this folder are shown.'
+                            : video
+                            ? 'Your videos will appear here.'
+                            : 'Your screenshots and edited photos will appear here.')
                       : 'Try a different name or browse another folder.',
                   icon: video ? AppIcons.videos : AppIcons.photos,
                 ),

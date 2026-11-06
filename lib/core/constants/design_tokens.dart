@@ -62,7 +62,7 @@ class StudioColors extends ThemeExtension<StudioColors> {
     onRecording: Color(0xFF35070B),
   );
   static const light = StudioColors(
-    background: Color(0xFFF3F5FA),
+    background: Color(0xFFF0F3F8),
     surface: Color(0xFFFFFFFF),
     card: Color(0xFFFFFFFF),
     elevated: Color(0xFFE7ECF5),

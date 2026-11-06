@@ -96,6 +96,7 @@ class CaptureService : Service() {
     private fun countdown() {
         if (ending) return
         CaptureState.emit()
+        if (CaptureState.screenshot) getSystemService(NotificationManager::class.java).notify(NOTIFICATION,notification(false))
         handler.postDelayed({
             if (!ending) {
                 CaptureState.countdownRemaining--
@@ -135,13 +136,20 @@ class CaptureService : Service() {
         try {
             val metrics = resources.displayMetrics
             val width = metrics.widthPixels; val height = metrics.heightPixels
+            CaptureState.width = width; CaptureState.height = height
             val reader = android.media.ImageReader.newInstance(width,height,android.graphics.PixelFormat.RGBA_8888,2)
             imageReader = reader
             reader.setOnImageAvailableListener({ source ->
                 val image = source.acquireLatestImage() ?: return@setOnImageAvailableListener
                 if (ending) { image.close(); return@setOnImageAvailableListener }
                 ending = true; handler.removeCallbacksAndMessages(null)
+                // Stop projecting as soon as the one required image is acquired.
+                // Keep its reader alive until the worker has consumed that image.
+                reader.setOnImageAvailableListener(null, null)
+                display?.release(); display = null
+                projection?.stop(); projection = null
                 CaptureState.transition("finalizing")
+                getSystemService(NotificationManager::class.java).notify(NOTIFICATION,notification(false))
                 Thread({
                     var saved: String? = null
                     try {
@@ -149,17 +157,21 @@ class CaptureService : Service() {
                             val plane = it.planes[0]
                             val paddedWidth = plane.rowStride / plane.pixelStride
                             val padded = android.graphics.Bitmap.createBitmap(paddedWidth,height,android.graphics.Bitmap.Config.ARGB_8888)
-                            padded.copyPixelsFromBuffer(plane.buffer)
-                            val cropped = android.graphics.Bitmap.createBitmap(padded,0,0,width,height)
-                            output = MediaOutput(this,"Screenshot_${System.currentTimeMillis()}.png","image/png",journal=true)
-                            val fd = output!!.open()
-                            ParcelFileDescriptor.AutoCloseOutputStream(ParcelFileDescriptor.dup(fd.fileDescriptor)).use { stream ->
-                                check(cropped.compress(android.graphics.Bitmap.CompressFormat.PNG,100,stream)); stream.flush()
-                            }
-                            if (cropped !== padded) cropped.recycle(); padded.recycle()
-                            saved = output!!.commit().toString()
+                            try {
+                                padded.copyPixelsFromBuffer(plane.buffer)
+                                val cropped = android.graphics.Bitmap.createBitmap(padded,0,0,width,height)
+                                try {
+                                    output = MediaOutput(this,"Screenshot_${System.currentTimeMillis()}.png","image/png",journal=true)
+                                    val fd = output!!.open()
+                                    ParcelFileDescriptor.AutoCloseOutputStream(ParcelFileDescriptor.dup(fd.fileDescriptor)).use { stream ->
+                                        check(cropped.compress(android.graphics.Bitmap.CompressFormat.PNG,100,stream)); stream.flush()
+                                    }
+                                    saved = output!!.commit().toString()
+                                } finally { if (cropped !== padded) cropped.recycle() }
+                            } finally { padded.recycle() }
                         }
                     } catch (_: Exception) { cleanupPartial() }
+                    catch (_: OutOfMemoryError) { cleanupPartial() }
                     handler.post {
                         release()
                         if (saved == null) CaptureState.transition("failed","Screenshot could not be saved.")
@@ -185,6 +197,16 @@ class CaptureService : Service() {
         val stop = PendingIntent.getService(this,1,Intent(this,CaptureService::class.java).setAction(STOP).putExtra("sessionId",CaptureState.id),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val open = PendingIntent.getActivity(this,2,Intent(this,MainActivity::class.java),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val builder = if (Build.VERSION.SDK_INT >= 26) Notification.Builder(this,CHANNEL) else @Suppress("DEPRECATION") Notification.Builder(this)
+        if (CaptureState.screenshot) {
+            if (CaptureState.state == "countdown") builder.addAction(Notification.Action.Builder(null,"Cancel",stop).build())
+            val title = when (CaptureState.state) {
+                "countdown" -> "Screenshot in ${CaptureState.countdownRemaining}s"
+                "finalizing" -> "Saving screenshot"
+                else -> "Taking screenshot"
+            }
+            return builder.setSmallIcon(android.R.drawable.ic_menu_camera).setContentTitle(title)
+                .setContentText("One image. Capture ends automatically.").setOngoing(true).setOnlyAlertOnce(true).setContentIntent(open).build()
+        }
         if (active) builder.addAction(Notification.Action.Builder(null,if(paused) "Resume" else "Pause",toggle).build())
         return builder.setSmallIcon(android.R.drawable.presence_video_online).setContentTitle(if(paused) "Recording paused" else if(active) "Screen recording" else "Preparing screen recording")
             .setContentText(if(active) "Your screen is being captured. Tap Stop to finish." else "Waiting for capture to start.").setOngoing(true).setContentIntent(open)

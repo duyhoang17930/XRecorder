@@ -59,19 +59,24 @@ void main() {
           ),
         );
         await tester.pumpAndSettle();
-        expect(find.text('Saved'), findsOneWidget);
+        expect(find.text('Video saved'), findsOneWidget);
         expect(find.text('View'), findsOneWidget);
         expect(find.text('Pause'), findsNothing);
-        await tester.tap(find.byTooltip('Dismiss recording status'));
+        await tester.tap(find.byTooltip('Dismiss capture notification'));
         await tester.pumpAndSettle();
-        expect(find.text('Saved'), findsNothing);
+        expect(find.text('Video saved'), findsNothing);
         service.events.add(
-          const RecordingSession(
+          RecordingSession(
             id: 'screenshot',
             state: RecordingState.completed,
-            configSnapshot: RecordingSettings(),
+            configSnapshot: const RecordingSettings(),
             elapsedActive: Duration.zero,
             screenshot: true,
+            outputUri: Uri(
+              scheme: 'content',
+              host: 'test',
+              path: '/screenshot',
+            ),
           ),
         );
         await tester.pumpAndSettle();

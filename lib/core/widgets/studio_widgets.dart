@@ -356,8 +356,8 @@ class RecordActionButton extends StatelessWidget {
   Widget build(BuildContext context) => FilledButton.icon(
     onPressed: onPressed,
     style: FilledButton.styleFrom(
-      backgroundColor: context.studioColors.recording,
-      foregroundColor: context.studioColors.onRecording,
+      backgroundColor: context.studioColors.primary,
+      foregroundColor: context.studioColors.primaryForeground,
     ),
     icon: const Icon(AppIcons.record, size: AppIconSize.medium),
     label: Text(label, textAlign: TextAlign.center),

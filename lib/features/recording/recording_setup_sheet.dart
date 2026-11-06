@@ -29,8 +29,8 @@ class RecordingSetupSheet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               StudioSheetHeader(
-                title: 'Recording Parameters',
-                description: 'Android will ask permission to share your screen. Sensitive content visible on screen may be recorded.',
+                title: 'Recording settings',
+                description: 'Your device may ask for screen access before recording. Visible content may be captured.',
                 icon: AppIcons.settings,
                 actions: [
                   IconButton(
@@ -48,23 +48,30 @@ class RecordingSetupSheet extends StatelessWidget {
               const RecordingSettingsForm(),
               TextButton.icon(
                 icon: const Icon(AppIcons.screenshot),
-                label: const Text('Take screenshot (3-second delay)'),
+                label: const Text('Screenshot · 3s delay'),
                 onPressed: capture.busy
                     ? null
                     : () async {
+                        final target = Navigator.of(context).context;
+                        Navigator.pop(context);
                         try {
                           await capture.screenshot();
-                          if (context.mounted) Navigator.pop(context);
                         } catch (e) {
-                          if (context.mounted) {
+                          if (target.mounted) {
                             showFailure(
-                              context,
+                              target,
                               e,
                               operation: UserOperation.screenshot,
                             );
                           }
                         }
                       },
+              ),
+              Text(
+                'Screenshot minimizes the app after approval.',
+                style: AppTypography.caption.copyWith(
+                  color: context.studioColors.muted,
+                ),
               ),
               PrimaryButton(
                 capture.busy ? 'Session already active' : 'Start Recording',

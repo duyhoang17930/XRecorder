@@ -30,7 +30,7 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
                 if (config.facecam && !hasFrontCamera()) { result.error("unavailable","This device has no available front camera. Disable facecam to record.",null); return }
                 CaptureState.prepare(config); requestedSession = CaptureState.id
                 try {
-                    if (Build.VERSION.SDK_INT >= 33 && activity.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
+                    if (!CaptureState.screenshot && Build.VERSION.SDK_INT >= 33 && activity.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
                         activity.requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), NOTIFICATIONS)
                     else ensureAudioPermission()
                     result.success(CaptureState.snapshot())
@@ -98,6 +98,12 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
         try {
             val intent = Intent(activity, CaptureService::class.java).putExtra("sessionId", CaptureState.id).putExtra("consent", data)
             if (Build.VERSION.SDK_INT >= 26) activity.startForegroundService(intent) else activity.startService(intent)
+            // One-shot capture: leave our controls behind, then count down in the service.
+            // No overlay/accessibility permission and no projection token reuse.
+            if (CaptureState.screenshot && !activity.moveTaskToBack(true)) {
+                CaptureService.instance?.stopCapture()
+                CaptureState.transition("failed", "Could not switch screens for the screenshot. Try again.")
+            }
         } catch (_: Exception) { CaptureState.transition("failed", "Android did not allow the recording service to start.") }
         return true
     }

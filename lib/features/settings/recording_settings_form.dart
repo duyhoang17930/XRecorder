@@ -55,7 +55,7 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
                 'Device capability information is unavailable. Preferences are checked again before capture.',
               ),
             const Text(
-              'Settings apply to the next session. Target FPS may vary with device load and static screen content.',
+              'Video quality and FPS depend on your device. Changes apply next time.',
             ),
             const SizedBox(height: 16),
             ChoiceGroup(
@@ -152,7 +152,7 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
             ),
             if (s.audio == 'Internal Audio' || s.audio == 'Mixed Stream') ...[
               const Text(
-                'Only playback allowed by the source app can be captured. Protected content may be silent. Audio permission is required by Android.',
+                'Playback audio depends on the source app. Protected audio may be silent. Your device may request audio access.',
               ),
               const SizedBox(height: 8),
               _gain(

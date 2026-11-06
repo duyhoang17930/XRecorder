@@ -87,7 +87,7 @@ void main() {
         await tester.tap(find.text('Stop'));
         final saved = await state(service, RecordingState.completed);
         await tester.pumpAndSettle();
-        expect(find.text('Saved'), findsOneWidget);
+        expect(find.text('Video saved'), findsOneWidget);
         expect(saved.id, request.id);
         expect(saved.outputUri, isNotNull);
         expect(existing.any((item) => item.uri == saved.outputUri), isFalse);

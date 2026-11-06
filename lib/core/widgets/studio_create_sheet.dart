@@ -52,20 +52,21 @@ class StudioRecordHero extends StatelessWidget {
     final capture = CaptureScope.of(context);
     final c = context.studioColors;
     final settings = SettingsScope.of(context);
+    final videoBusy = capture.busy && capture.session?.screenshot != true;
     final failed =
-        capture.error != null ||
-        capture.session?.state == RecordingState.failed;
+        capture.session?.screenshot != true &&
+        (capture.error != null ||
+            capture.session?.state == RecordingState.failed);
     final status = CaptureStatusPresentation.from(
-      capture.busy || failed ? capture.session : null,
-      error: capture.error,
+      videoBusy || failed ? capture.session : null,
+      error: failed ? capture.error : null,
     );
     return SizedBox(
       width: double.infinity,
       child: StudioCard(
         radius: AppRadius.feature,
-        // A single translucent tint and fine border give a glass accent without a blur layer.
-        color: Color.alphaBlend(c.primary.withValues(alpha: .07), c.card),
-        borderColor: c.primary.withValues(alpha: .28),
+        color: Color.alphaBlend(c.primary.withValues(alpha: .03), c.card),
+        borderColor: c.border,
         padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,10 +74,18 @@ class StudioRecordHero extends StatelessWidget {
             RecordingStatusIndicator(
               label: status.label,
               icon: status.icon,
-              color: failed ? c.warning : null,
-              active: capture.busy,
+              color: failed
+                  ? c.warning
+                  : videoBusy &&
+                        ![
+                          RecordingState.recording,
+                          RecordingState.paused,
+                        ].contains(capture.session?.state)
+                  ? c.primary
+                  : null,
+              active: videoBusy,
             ),
-            if (!capture.busy) ...[
+            if (!videoBusy) ...[
               const SizedBox(height: AppSpacing.md),
               Text(
                 'Screen recorder',
@@ -127,7 +136,7 @@ class StudioQuickTools extends StatelessWidget {
 
     final screenshot = BentoCard(
       title: 'Screenshot',
-      description: '3-second delay',
+      description: 'Minimizes after approval · 3s delay',
       icon: AppIcons.screenshot,
       accent: context.studioColors.cyan,
       badge: capture.busy ? 'Session active' : null,

@@ -1,9 +1,10 @@
 param(
-    [ValidateSet('visual', 'native')][string]$Mode = 'visual',
+    [ValidateSet('visual', 'native', 'screenshot-visual', 'screenshot-native')][string]$Mode = 'visual',
     [string]$Device = 'emulator-5560',
     [string]$ExpectedAvdName = 'ThreeHRecorder_Task021',
     [string]$ApplicationBinary,
-    [string]$ArtifactDirectory
+    [string]$ArtifactDirectory,
+    [switch]$Before
 )
 
 $ErrorActionPreference = 'Stop'
@@ -21,11 +22,22 @@ if ($LASTEXITCODE -ne 0 -or $name -ne $ExpectedAvdName) {
     throw "Refusing device $Device ($name). Use a dedicated test AVD named $ExpectedAvdName."
 }
 
-$target = if ($Mode -eq 'native') { 'integration_test/refinement_native_test.dart' } else { 'integration_test/refinement_visual_test.dart' }
-$output = if ($Mode -eq 'native') { 'docs/ui/task021/native' } else { 'docs/ui/task021/after' }
+$target = switch ($Mode) {
+    'native' { 'integration_test/refinement_native_test.dart' }
+    'screenshot-native' { 'integration_test/screenshot_native_test.dart' }
+    'screenshot-visual' { 'integration_test/screenshot_visual_test.dart' }
+    default { 'integration_test/refinement_visual_test.dart' }
+}
+$output = switch ($Mode) {
+    'native' { 'docs/ui/task021/native' }
+    'screenshot-native' { 'docs/ui/task022/native' }
+    'screenshot-visual' { if ($Before) { 'docs/ui/task022/before' } else { 'docs/ui/task022/after' } }
+    default { 'docs/ui/task021/after' }
+}
 if ($ArtifactDirectory) { $output = $ArtifactDirectory }
 $arguments = @('drive', '--no-dds', '--debug', '--keep-app-running', '--driver=test_driver/design_system_driver.dart', "--target=$target", '-d', $Device)
 if ($Mode -eq 'visual') { $arguments += '--dart-define=TASK021_AFTER=true' }
+if ($Mode -eq 'screenshot-visual' -and -not $Before) { $arguments += '--dart-define=TASK022_AFTER=true' }
 if ($ApplicationBinary) { $arguments += "--use-application-binary=$ApplicationBinary" }
 $previousDirectory = Get-Location
 $previousOutput = $env:UI_ARTIFACT_DIRECTORY
