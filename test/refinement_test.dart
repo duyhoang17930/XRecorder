@@ -238,7 +238,11 @@ void main() {
       await start(tester, catalog: catalog);
       await tester.enterText(find.byType(TextField).first, 'Clip 1');
       await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('Newest'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Newest'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(ListTile, 'Oldest'));
       await tester.pumpAndSettle();
       await tester.drag(find.byType(Scrollable).first, const Offset(0, -450));
       await tester.pumpAndSettle();
@@ -318,6 +322,8 @@ void main() {
         await tester.ensureVisible(newest);
         await tester.pumpAndSettle();
         await tester.tap(newest);
+        await tester.pumpAndSettle();
+        await tester.tap(find.widgetWithText(ListTile, 'Oldest'));
         await tester.pumpAndSettle();
         expect(find.text('Oldest'), findsOneWidget);
         expect(tester.takeException(), isNull);
@@ -564,6 +570,11 @@ void main() {
       await tester.tap(find.text('Choose folder'));
       await tester.pumpAndSettle();
       expect(find.text('No videos in this folder'), findsOneWidget);
+      expect(find.byType(TextField), findsNothing);
+      expect(find.text('Newest'), findsNothing);
+      catalog.items.add(TestCatalog().items.first);
+      catalog.refresh();
+      await tester.pumpAndSettle();
       await tester.enterText(find.byType(TextField), 'absent');
       await tester.pumpAndSettle();
       expect(find.text('No matching media'), findsOneWidget);
@@ -657,7 +668,11 @@ void main() {
             );
           });
       unawaited(
-        editProjectEffects(tester.element(find.text('Video Library')), {}),
+        editProjectEffects(
+          tester.element(find.text('Video Library')),
+          {},
+          durationMs: 5000,
+        ),
       );
       await tester.pumpAndSettle();
       await tester.scrollUntilVisible(

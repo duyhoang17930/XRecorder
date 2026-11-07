@@ -23,14 +23,27 @@ class AndroidEditProjectRepository implements EditProjectRepository {
     }
   }
 
-  Future<List<EditProject>> list() async =>
-      (await call<List<Object?>>('list') ?? [])
-          .map(
-            (v) => EditProject.fromJson(
-              jsonDecode(v as String) as Map<String, dynamic>,
-            ),
-          )
-          .toList();
+  int unreadableCount = 0;
+  Future<List<EditProject>> list() async {
+    final documents = await call<List<Object?>>('list') ?? [];
+    final projects = <EditProject>[];
+    unreadableCount = 0;
+    for (final document in documents) {
+      try {
+        projects.add(
+          EditProject.fromJson(
+            jsonDecode(document as String) as Map<String, dynamic>,
+          ),
+        );
+      } on FormatException {
+        unreadableCount++;
+      } on TypeError {
+        unreadableCount++;
+      }
+    }
+    return projects;
+  }
+
   @override
   Future<EditProject?> find(String id) async {
     final value = await call<String>('find', id);

@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/widgets/studio_widgets.dart';
+import '../../core/domain/models.dart';
 import 'project_controller.dart';
 import 'project_repository.dart';
 import 'editor_preview.dart';
 import 'media_picker.dart';
 import 'project_effects.dart';
+import 'subtitles.dart';
+import 'subtitle_editor.dart';
 
 class EditorScreen extends StatefulWidget {
   const EditorScreen({super.key, required this.id});
@@ -65,6 +68,39 @@ class _EditorScreenState extends State<EditorScreen> {
   }
 
   final frames = <String, Future<Uint8List?>>{};
+  Future<void> renameProject() async {
+    final field = TextEditingController(text: controller!.project.title);
+    final name = await showStudioDialog<String>(
+      context: context,
+      builder: (dialog) => StudioDialog(
+        title: const Text('Project name'),
+        content: TextField(
+          controller: field,
+          maxLength: 80,
+          decoration: const InputDecoration(labelText: 'Name'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialog),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              if (field.text.trim().isNotEmpty) {
+                Navigator.pop(dialog, field.text.trim());
+              }
+            },
+            child: const Text('Save name'),
+          ),
+        ],
+      ),
+    );
+    if (mounted && name != null) {
+      controller!.change(controller!.project.copyWith(title: name));
+    }
+    field.dispose();
+  }
+
   Future<Uint8List?> frame(String uri, int milliseconds) {
     final key = '$uri@$milliseconds';
     if (frames.length > 60) frames.remove(frames.keys.first);
@@ -109,6 +145,35 @@ class _EditorScreenState extends State<EditorScreen> {
     try {
       final media = await pickEditorMedia(context);
       if (media != null && mounted) act(() => controller!.add(media));
+    } finally {
+      if (mounted) setState(() => pickingMedia = false);
+    }
+  }
+
+  Future<void> relink(int index) async {
+    if (pickingMedia) return;
+    setState(() => pickingMedia = true);
+    try {
+      final source = await pickEditorMedia(context);
+      if (!mounted || source == null) return;
+      final clip = controller!.project.clips[index];
+      if (clip.isImage != (source.kind == MediaKind.image) ||
+          (!clip.isImage &&
+              (source.duration == null || source.duration! < clip.outPoint))) {
+        throw const FormatException(
+          'Choose the same media type with enough duration for this clip.',
+        );
+      }
+      controller!.update(
+        index,
+        clip.copyWith(
+          mediaId: source.uri.toString(),
+          title: source.displayName,
+          sourceDuration: clip.isImage ? clip.sourceDuration : source.duration,
+        ),
+      );
+    } catch (e) {
+      if (mounted) showFailure(context, e, operation: UserOperation.openMedia);
     } finally {
       if (mounted) setState(() => pickingMedia = false);
     }
@@ -182,6 +247,13 @@ class _EditorScreenState extends State<EditorScreen> {
           child: Scaffold(
             appBar: AppBar(
               leading: BackButton(onPressed: leave),
+              actions: [
+                IconButton(
+                  tooltip: 'Rename project',
+                  onPressed: renameProject,
+                  icon: const Icon(AppIcons.rename),
+                ),
+              ],
               title: Tooltip(
                 message: project.title,
                 child: Text(
@@ -282,12 +354,51 @@ class _EditorScreenState extends State<EditorScreen> {
                   spacing: 8,
                   children: [
                     TextButton.icon(
+                      onPressed: project.clips.isEmpty
+                          ? null
+                          : () async {
+                              try {
+                                await preview.currentState?.command('pause');
+                                if (!context.mounted) return;
+                                final track = await editSubtitles(
+                                  context,
+                                  SubtitleTrack.decode(
+                                    model.project.effects['subtitles'],
+                                    model.project.duration.inMilliseconds,
+                                  ),
+                                  project: model.project,
+                                );
+                                if (mounted && track != null) {
+                                  model.change(
+                                    model.project.copyWith(
+                                      effects: {
+                                        ...model.project.effects,
+                                        'subtitles': track.toJson(),
+                                      },
+                                    ),
+                                  );
+                                }
+                              } catch (e) {
+                                if (context.mounted) {
+                                  showFailure(
+                                    context,
+                                    e,
+                                    operation: UserOperation.editClip,
+                                  );
+                                }
+                              }
+                            },
+                      icon: const Icon(AppIcons.captions),
+                      label: const Text('Subtitles'),
+                    ),
+                    TextButton.icon(
                       onPressed: () async {
                         await preview.currentState?.command('pause');
                         if (!context.mounted) return;
                         final effects = await editProjectEffects(
                           context,
                           project.effects,
+                          durationMs: project.duration.inMilliseconds,
                         );
                         if (effects != null && mounted) {
                           model.change(
@@ -426,6 +537,18 @@ class _EditorScreenState extends State<EditorScreen> {
                                 icon: const Icon(AppIcons.moveLater),
                               ),
                               IconButton(
+                                tooltip: 'Duplicate clip',
+                                onPressed: () => act(() => model.duplicate(i)),
+                                icon: const Icon(AppIcons.create),
+                              ),
+                              IconButton(
+                                tooltip: 'Replace source',
+                                onPressed: pickingMedia
+                                    ? null
+                                    : () => relink(i),
+                                icon: const Icon(AppIcons.folderOpen),
+                              ),
+                              IconButton(
                                 tooltip: 'Remove clip from project',
                                 onPressed: () => model.remove(i),
                                 icon: const Icon(AppIcons.close),
@@ -472,6 +595,41 @@ class _EditorScreenState extends State<EditorScreen> {
                     icon: const Icon(AppIcons.rotate),
                     label: Text('Rotate · ${clip.rotation}°'),
                   ),
+                  Wrap(
+                    children: [
+                      TextButton(
+                        onPressed: () => model.update(
+                          selected,
+                          clip.copyWith(flipH: !clip.flipH),
+                        ),
+                        child: Text(
+                          'Flip horizontal${clip.flipH ? ' · On' : ''}',
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () => model.update(
+                          selected,
+                          clip.copyWith(flipV: !clip.flipV),
+                        ),
+                        child: Text(
+                          'Flip vertical${clip.flipV ? ' · On' : ''}',
+                        ),
+                      ),
+                      if (clip.isImage)
+                        for (final seconds in [2, 5, 10])
+                          TextButton(
+                            onPressed: () => model.update(
+                              selected,
+                              clip.copyWith(
+                                inPoint: Duration.zero,
+                                outPoint: Duration(seconds: seconds),
+                                sourceDuration: Duration(seconds: seconds),
+                              ),
+                            ),
+                            child: Text('Photo ${seconds}s'),
+                          ),
+                    ],
+                  ),
                   const Text('Crop left / right'),
                   _EditRange(
                     label: 'Crop left and right',
@@ -513,6 +671,8 @@ class _EditorScreenState extends State<EditorScreen> {
                         cropRight: 1,
                         cropBottom: 1,
                         rotation: 0,
+                        flipH: false,
+                        flipV: false,
                       ),
                     ),
                     child: const Text('Reset crop & rotation'),

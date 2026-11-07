@@ -26,30 +26,30 @@ class _TrashScreenState extends State<TrashScreen> {
 
   Future<void> operate(TrashEntry entry, bool restore) async {
     if (busy) return;
-    if (!restore) {
-      final confirmed = await showDialog<bool>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Permanently delete?'),
-          content: Text(
-            '${entry.originalMetadata.displayName} cannot be restored after deletion.',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, true),
-              child: const Text('Delete permanently'),
-            ),
-          ],
-        ),
-      );
-      if (confirmed != true || !mounted) return;
-    }
     setState(() => busy = true);
     try {
+      if (!restore) {
+        final confirmed = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Permanently delete?'),
+            content: Text(
+              '${entry.originalMetadata.displayName} cannot be restored after deletion.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: const Text('Delete permanently'),
+              ),
+            ],
+          ),
+        );
+        if (confirmed != true || !mounted) return;
+      }
       MediaItem? restored;
       if (restore) {
         restored = await actions.restore(entry.id);
@@ -116,11 +116,18 @@ class _TrashScreenState extends State<TrashScreen> {
                 );
               }
               final items = snapshot.data ?? [];
-              if (items.isEmpty) {
+              if (items.isEmpty && actions.unreadableTrashCount == 0) {
                 return const Center(child: Text('Trash is empty'));
               }
               return ListView(
                 children: [
+                  if (actions.unreadableTrashCount > 0)
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        '${actions.unreadableTrashCount} trash entries need recovery. Their files have been kept.',
+                      ),
+                    ),
                   for (final entry in items)
                     ListTile(
                       title: Text(entry.originalMetadata.displayName),

@@ -41,7 +41,7 @@ const helpTopics = <({String category, String question, String answer})>[
   (
     category: 'Editing',
     question: 'What are the GIF and audio limits?',
-    answer: 'GIF exports have no audio and are limited to 15 seconds, 10 FPS and 320 pixels on the longest edge with 256 colors. Audio gain and pitch affect all audio in each clip; they do not isolate a voice from other sounds. Added music loops to the project duration.',
+    answer: 'GIF uses the trimmed timeline, has no audio and is limited to 15 seconds. Choose 5/10/20 FPS and 160/320/480 pixels on the longest edge; colors are reduced to 256. Audio gain and pitch affect all audio in each clip; they do not isolate a voice. Added music loops to the project duration.',
   ),
   (
     category: 'Storage',

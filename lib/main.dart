@@ -35,6 +35,10 @@ Future<void> main() async {
     yield LicenseEntryWithLineBreaks([
       'Android runtime dependency inventory',
     ], await rootBundle.loadString('assets/licenses/ANDROID_DEPENDENCIES.txt'));
+    yield LicenseEntryWithLineBreaks(
+      ['whisper.cpp', 'ggml', 'RNNoise'],
+      await rootBundle.loadString('assets/licenses/EDITOR_NATIVE_LICENSES.txt'),
+    );
   });
   final settings = SettingsController(store: const AndroidSettingsStore());
   await settings.restore();

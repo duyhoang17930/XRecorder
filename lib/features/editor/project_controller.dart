@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../core/domain/models.dart';
 import '../../core/domain/repositories.dart';
+import 'timeline_effects.dart';
 
 class ProjectController extends ChangeNotifier {
   ProjectController(this.project, this.repository);
@@ -10,6 +11,8 @@ class ProjectController extends ChangeNotifier {
   final _undo = <EditProject>[], _redo = <EditProject>[];
   Future<void> _pending = Future.value();
   Future<void> get flushed => _pending;
+  EditProject? _queued;
+  bool _draining = false;
   bool _disposed = false;
   String? saveError;
   bool saving = false;
@@ -20,27 +23,44 @@ class ProjectController extends ChangeNotifier {
   }
 
   void _save() {
-    final snapshot = project;
+    _queued = project;
     saving = true;
     saveError = null;
-    _pending = _pending.then((_) async {
+    if (!_draining) {
+      _draining = true;
+      _pending = Future<void>.microtask(_drainSaves);
+    }
+    _notify();
+  }
+
+  Future<void> _drainSaves() async {
+    while (_queued != null) {
+      final snapshot = _queued!;
+      _queued = null;
       try {
         await repository.save(snapshot);
+        if (identical(project, snapshot)) saveError = null;
+      } catch (_) {
         if (identical(project, snapshot)) {
-          saving = false;
-          saveError = null;
+          saveError = 'Draft could not be saved. Free some storage and retry.';
         }
-      } catch (e) {
-        saveError = 'Draft not saved: $e';
-        saving = false;
       }
-      _notify();
-    });
+    }
+    _draining = false;
+    saving = false;
     _notify();
   }
 
   void retrySave() => _save();
   void change(EditProject value) {
+    if (value.duration < project.duration && value.speed == project.speed) {
+      value = value.copyWith(
+        effects: fitTimelineEffects(
+          value.effects,
+          value.duration.inMilliseconds,
+        ),
+      );
+    }
     _undo.add(project);
     if (_undo.length > 50) _undo.removeAt(0);
     _redo.clear();
@@ -49,9 +69,11 @@ class ProjectController extends ChangeNotifier {
   }
 
   void add(MediaItem item) {
-    final duration = item.duration;
+    final duration = item.kind == MediaKind.image
+        ? const Duration(seconds: 5)
+        : item.duration;
     if (project.clips.length >= 30 ||
-        item.kind != MediaKind.video ||
+        (item.kind != MediaKind.video && item.kind != MediaKind.image) ||
         duration == null ||
         duration < const Duration(milliseconds: 200)) {
       throw const FormatException(
@@ -68,6 +90,7 @@ class ProjectController extends ChangeNotifier {
             inPoint: Duration.zero,
             outPoint: duration,
             sourceDuration: duration,
+            isImage: item.kind == MediaKind.image,
           ),
         ],
       ),
@@ -77,6 +100,15 @@ class ProjectController extends ChangeNotifier {
   void update(int index, TimelineClip clip) {
     final clips = project.clips.toList();
     clips[index] = clip;
+    change(project.copyWith(clips: clips));
+  }
+
+  void duplicate(int index) {
+    if (project.clips.length >= 30) {
+      throw const FormatException('Maximum 30 clips.');
+    }
+    final clips = project.clips.toList();
+    clips.insert(index + 1, clips[index]);
     change(project.copyWith(clips: clips));
   }
 

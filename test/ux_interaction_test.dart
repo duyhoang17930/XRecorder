@@ -104,7 +104,7 @@ void main() {
     );
     messenger.setMockMethodCallHandler(
       const MethodChannel('com.xrecorder/media'),
-      (call) async => call.method == 'imageBytes' ? image : null,
+      (call) async => call.method == 'decodePhoto' ? image : null,
     );
   });
   testWidgets(
@@ -258,7 +258,7 @@ void main() {
       messenger.setMockMethodCallHandler(
         const MethodChannel('com.xrecorder/media'),
         (call) async {
-          if (call.method == 'imageBytes') return image;
+          if (call.method == 'decodePhoto') return image;
           if (call.method == 'saveImage') {
             writes++;
             return pending.future;
