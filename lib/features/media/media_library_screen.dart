@@ -8,6 +8,8 @@ import '../../core/domain/models.dart';
 import '../../core/widgets/studio_widgets.dart';
 import '../../core/widgets/studio_create_sheet.dart';
 import 'media_repository.dart';
+import 'media_sort.dart';
+import 'media_actions.dart';
 
 class MediaLibraryScreen extends StatefulWidget {
   const MediaLibraryScreen({super.key, required this.kind});
@@ -24,8 +26,10 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
   Uri? _displayedFolder;
   bool _hasResult = false;
   bool _loading = true;
-  bool _newest = true;
+  MediaSort _sort = MediaSort.newest;
+  bool _pickingFolder = false;
   String _query = '';
+  final _search = TextEditingController();
   String? _error;
   Future<void>? _inFlight;
   bool _loadAgain = false;
@@ -136,6 +140,8 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
   }
 
   Future<void> _pickFolder() async {
+    if (_pickingFolder) return;
+    setState(() => _pickingFolder = true);
     try {
       final folder = await _repository!.selectFolder();
       if (!mounted || folder == null) return;
@@ -147,7 +153,75 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
       if (mounted) {
         showFailure(context, e, operation: UserOperation.chooseFolder);
       }
+    } finally {
+      if (mounted) setState(() => _pickingFolder = false);
     }
+  }
+
+  Future<void> _disconnectFolder() async {
+    if (_pickingFolder || _folder == null) return;
+    final folder = _folder!;
+    setState(() => _pickingFolder = true);
+    try {
+      final confirmed = await showStudioDialog<bool>(
+        context: context,
+        builder: (dialog) => StudioDialog(
+          title: const Text('Disconnect this folder?'),
+          content: const Text(
+            'Files stay in the folder. Drafts using these files may need you to select the folder again.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialog, false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(dialog, true),
+              child: const Text('Disconnect'),
+            ),
+          ],
+        ),
+      );
+      if (confirmed != true || !mounted) return;
+      await AndroidMediaActions().call<void>(
+        'releaseFolder',
+        folder.toString(),
+      );
+      if (!mounted) return;
+      setState(() => _folder = null);
+      await _load();
+    } catch (e) {
+      if (mounted) {
+        showFailure(context, e, operation: UserOperation.chooseFolder);
+      }
+    } finally {
+      if (mounted) setState(() => _pickingFolder = false);
+    }
+  }
+
+  Future<void> _chooseSort() async {
+    final result = await showStudioBottomSheet<MediaSort>(
+      context: context,
+      builder: (sheet) => SafeArea(
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            const StudioSheetHeader(title: 'Sort media'),
+            for (final value in MediaSort.values)
+              if (value != MediaSort.duration || widget.kind == MediaKind.video)
+                ListTile(
+                  title: Text(value.label),
+                  selected: value == _sort,
+                  leading: Icon(
+                    value == _sort ? AppIcons.selected : AppIcons.unselected,
+                  ),
+                  onTap: () => Navigator.pop(sheet, value),
+                ),
+          ],
+        ),
+      ),
+    );
+    if (mounted && result != null) setState(() => _sort = result);
   }
 
   Future<void> _storage() async {
@@ -191,6 +265,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
   @override
   void dispose() {
     _subscription?.cancel();
+    _search.dispose();
     super.dispose();
   }
 
@@ -198,17 +273,12 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
   Widget build(BuildContext context) {
     final video = widget.kind == MediaKind.video;
     final c = context.studioColors;
+    final query = _query.trim().toLowerCase();
     final items =
         _items
-            .where(
-              (i) => i.displayName.toLowerCase().contains(_query.toLowerCase()),
-            )
+            .where((i) => i.displayName.toLowerCase().contains(query))
             .toList()
-          ..sort(
-            (a, b) => _newest
-                ? b.createdAt.compareTo(a.createdAt)
-                : a.createdAt.compareTo(b.createdAt),
-          );
+          ..sort(_sort.compare);
     void details(MediaItem item) =>
         context.push('/media/${Uri.encodeComponent(item.id)}');
     return RefreshIndicator(
@@ -254,19 +324,22 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                   if (video) ...[
                     const StudioRecordHero(),
                     const SizedBox(height: AppSpacing.sm),
-                    const StudioQuickTools(compact: true),
-                    const SizedBox(height: AppSpacing.xs),
-                    Text(
-                      'Screenshot minimizes the app after approval · 3s delay.',
-                      style: AppTypography.caption.copyWith(color: c.muted),
-                    ),
-                    const SizedBox(height: AppSpacing.lg),
                   ],
-                  StudioSearchField(
-                    hintText: video ? 'Search videos' : 'Search photos',
-                    onChanged: (value) => setState(() => _query = value),
+                  const StudioQuickTools(compact: true),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(
+                    'Screenshot minimizes the app after approval · 3s delay.',
+                    style: AppTypography.caption.copyWith(color: c.muted),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
+                  const SizedBox(height: AppSpacing.md),
+                  if (_items.isNotEmpty || _query.isNotEmpty) ...[
+                    StudioSearchField(
+                      controller: _search,
+                      hintText: video ? 'Search videos' : 'Search photos',
+                      onChanged: (value) => setState(() => _query = value),
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                  ],
                   Wrap(
                     spacing: AppSpacing.xxs,
                     runSpacing: AppSpacing.xxs,
@@ -284,13 +357,21 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                         label: const Text('Choose folder'),
                         avatar: const Icon(AppIcons.folderOpen),
                         selected: _folder != null,
-                        onSelected: (_) => _pickFolder(),
+                        onSelected: _pickingFolder
+                            ? null
+                            : (_) => _pickFolder(),
                       ),
-                      ActionChip(
-                        label: Text(_newest ? 'Newest' : 'Oldest'),
-                        avatar: const Icon(AppIcons.sort),
-                        onPressed: () => setState(() => _newest = !_newest),
-                      ),
+                      if (_folder != null)
+                        TextButton(
+                          onPressed: _pickingFolder ? null : _disconnectFolder,
+                          child: const Text('Disconnect folder'),
+                        ),
+                      if (_items.length > 1)
+                        ActionChip(
+                          label: Text(_sort.label),
+                          avatar: const Icon(AppIcons.sort),
+                          onPressed: _chooseSort,
+                        ),
                     ],
                   ),
                   SectionTitle(
@@ -349,6 +430,23 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                             : 'Your screenshots and edited photos will appear here.')
                       : 'Try a different name or browse another folder.',
                   icon: video ? AppIcons.videos : AppIcons.photos,
+                  action: _query.isNotEmpty
+                      ? TextButton(
+                          onPressed: () {
+                            _search.clear();
+                            setState(() => _query = '');
+                          },
+                          child: const Text('Clear search'),
+                        )
+                      : _folder != null
+                      ? TextButton(
+                          onPressed: () {
+                            setState(() => _folder = null);
+                            _load();
+                          },
+                          child: const Text('Show app media'),
+                        )
+                      : null,
                 ),
               ),
             )
@@ -362,9 +460,10 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      if (index == 0 ||
-                          _day(item.createdAt) !=
-                              _day(items[index - 1].createdAt))
+                      if (_sort.groupsByDate &&
+                          (index == 0 ||
+                              _day(item.createdAt) !=
+                                  _day(items[index - 1].createdAt)))
                         StudioSectionLabel(
                           _day(item.createdAt),
                           padding: const EdgeInsets.only(bottom: AppSpacing.sm),
@@ -373,6 +472,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                         padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                         child: StudioCard(
                           padding: EdgeInsets.zero,
+                          clipBehavior: Clip.hardEdge,
                           child: InkWell(
                             onTap: () => details(item),
                             child: Padding(
@@ -381,6 +481,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                                 children: [
                                   ExcludeSemantics(
                                     child: ClipRRect(
+                                      clipBehavior: Clip.hardEdge,
                                       borderRadius: BorderRadius.circular(
                                         AppRadius.icon,
                                       ),
@@ -533,10 +634,23 @@ class _MediaThumbnailState extends State<MediaThumbnail> {
         );
       }
       if (!snapshot.hasData) return const Icon(AppIcons.image);
-      return Image.memory(
-        snapshot.data!,
-        fit: BoxFit.cover,
-        errorBuilder: (_, _, _) => const Icon(AppIcons.imageUnavailable),
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          final ratio = MediaQuery.devicePixelRatioOf(context);
+          final compact = constraints.maxWidth <= AppSize.thumbnailWidth;
+          final scale = compact && ratio > 2 ? 2.0 : ratio;
+          final width = constraints.maxWidth.isFinite
+              ? (constraints.maxWidth * scale).ceil().clamp(1, 320)
+              : 320;
+          return Image.memory(
+            snapshot.data!,
+            fit: BoxFit.cover,
+            cacheWidth: width,
+            filterQuality: FilterQuality.low,
+            gaplessPlayback: true,
+            errorBuilder: (_, _, _) => const Icon(AppIcons.imageUnavailable),
+          );
+        },
       );
     },
   );

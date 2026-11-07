@@ -5,12 +5,19 @@ import '../../core/domain/repositories.dart';
 import 'media_repository.dart';
 
 class AndroidMediaActions implements TrashRepository {
+  int unreadableTrashCount = 0;
   static const channel = MethodChannel('com.xrecorder/media');
   Future<T?> call<T>(String method, [Object? arguments]) async {
     try {
       return await channel.invokeMethod<T>(method, arguments);
     } on PlatformException catch (e) {
-      throw DomainFailure(FailureCode.io, e.message ?? 'Media action failed.');
+      throw DomainFailure(
+        FailureCode.values.firstWhere(
+          (v) => v.name == e.code,
+          orElse: () => FailureCode.io,
+        ),
+        e.message ?? 'Media action failed.',
+      );
     } on MissingPluginException {
       throw const DomainFailure(
         FailureCode.unavailable,
@@ -24,6 +31,16 @@ class AndroidMediaActions implements TrashRepository {
   Future<void> share(Uri uri) => call<void>('share', {'uri': uri.toString()});
   Future<String> rename(Uri uri, String name) async =>
       (await call<String>('rename', {'uri': uri.toString(), 'name': name}))!;
+  Future<Map<Object?, Object?>?> transfer(Uri uri, {required bool move}) async {
+    final destination = await call<String>('selectDestination');
+    if (destination == null) return null;
+    return call<Map<Object?, Object?>>('transfer', {
+      'uri': uri.toString(),
+      'destination': destination,
+      'move': move,
+    });
+  }
+
   TrashEntry decode(Map<Object?, Object?> row) => TrashEntry(
     id: row['id'] as String,
     originalMetadata: AndroidMediaRepository.decode(
@@ -38,10 +55,20 @@ class AndroidMediaActions implements TrashRepository {
     mode: DeletionMode.appManaged,
   );
   @override
-  Future<List<TrashEntry>> list() async =>
-      (await call<List<Object?>>('listTrash') ?? [])
-          .map((v) => decode(v as Map<Object?, Object?>))
-          .toList();
+  Future<List<TrashEntry>> list() async {
+    final values = await call<List<Object?>>('listTrash') ?? [];
+    final entries = <TrashEntry>[];
+    unreadableTrashCount = 0;
+    for (final value in values) {
+      try {
+        entries.add(decode(value as Map<Object?, Object?>));
+      } catch (_) {
+        unreadableTrashCount++;
+      }
+    }
+    return entries;
+  }
+
   @override
   Future<TrashEntry> trash(MediaItem item) async => decode(
     (await call<Map<Object?, Object?>>('trash', {'uri': item.uri.toString()}))!,

@@ -175,11 +175,15 @@ class TimelineClip {
     this.cropTop = 0,
     this.cropRight = 1,
     this.cropBottom = 1,
+    this.isImage = false,
+    this.flipH = false,
+    this.flipV = false,
   }) {
     if (Uri.tryParse(mediaId)?.scheme != 'content' ||
         inPoint < Duration.zero ||
         outPoint - inPoint < const Duration(milliseconds: 200) ||
         outPoint > sourceDuration ||
+        sourceDuration > const Duration(hours: 24) ||
         ![0, 90, 180, 270].contains(rotation) ||
         ![
           cropLeft,
@@ -197,6 +201,7 @@ class TimelineClip {
   final Duration inPoint, outPoint, sourceDuration;
   Duration get duration => outPoint - inPoint;
   final int rotation;
+  final bool isImage, flipH, flipV;
   final double cropLeft, cropTop, cropRight, cropBottom;
   TimelineClip copyWith({
     Duration? inPoint,
@@ -206,12 +211,20 @@ class TimelineClip {
     double? cropTop,
     double? cropRight,
     double? cropBottom,
+    String? mediaId,
+    String? title,
+    Duration? sourceDuration,
+    bool? flipH,
+    bool? flipV,
   }) => TimelineClip(
-    mediaId: mediaId,
-    title: title,
+    mediaId: mediaId ?? this.mediaId,
+    title: title ?? this.title,
     inPoint: inPoint ?? this.inPoint,
     outPoint: outPoint ?? this.outPoint,
-    sourceDuration: sourceDuration,
+    sourceDuration: sourceDuration ?? this.sourceDuration,
+    isImage: isImage,
+    flipH: flipH ?? this.flipH,
+    flipV: flipV ?? this.flipV,
     rotation: rotation ?? this.rotation,
     cropLeft: cropLeft ?? this.cropLeft,
     cropTop: cropTop ?? this.cropTop,
@@ -225,6 +238,9 @@ class TimelineClip {
     'outMs': outPoint.inMilliseconds,
     'sourceDurationMs': sourceDuration.inMilliseconds,
     'rotation': rotation,
+    'isImage': isImage,
+    'flipH': flipH,
+    'flipV': flipV,
     'cropLeft': cropLeft,
     'cropTop': cropTop,
     'cropRight': cropRight,
@@ -237,11 +253,31 @@ class TimelineClip {
     outPoint: Duration(milliseconds: json['outMs'] as int),
     sourceDuration: Duration(milliseconds: json['sourceDurationMs'] as int),
     rotation: json['rotation'] as int? ?? 0,
+    isImage: json['isImage'] as bool? ?? false,
+    flipH: json['flipH'] as bool? ?? false,
+    flipV: json['flipV'] as bool? ?? false,
     cropLeft: (json['cropLeft'] as num?)?.toDouble() ?? 0,
     cropTop: (json['cropTop'] as num?)?.toDouble() ?? 0,
     cropRight: (json['cropRight'] as num?)?.toDouble() ?? 1,
     cropBottom: (json['cropBottom'] as num?)?.toDouble() ?? 1,
   );
+}
+
+Object _immutableEditorValue(Object value) {
+  if (value is List) {
+    return List<Object>.unmodifiable(
+      value.cast<Object>().map(_immutableEditorValue),
+    );
+  }
+  if (value is Map) {
+    return Map<String, Object>.unmodifiable(
+      value.map(
+        (key, value) =>
+            MapEntry(key as String, _immutableEditorValue(value as Object)),
+      ),
+    );
+  }
+  return value;
 }
 
 class EditProject {
@@ -253,7 +289,11 @@ class EditProject {
     this.title = 'Untitled project',
     Map<String, Object> effects = const {},
   }) : clips = List.unmodifiable(clips),
-       effects = Map.unmodifiable(effects) {
+       effects = Map<String, Object>.unmodifiable(
+         effects.map(
+           (key, value) => MapEntry(key, _immutableEditorValue(value)),
+         ),
+       ) {
     if (!speed.isFinite || speed < .5 || speed > 2) {
       throw const FormatException('Unsupported project speed');
     }

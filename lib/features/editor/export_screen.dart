@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import 'project_repository.dart';
 import '../../core/widgets/studio_widgets.dart';
+import '../media/media_repository.dart';
 
 class ExportScreen extends StatefulWidget {
   const ExportScreen({super.key});
@@ -22,6 +23,8 @@ class _ExportScreenState extends State<ExportScreen>
   bool foreground = true;
   bool routeCurrent = true;
   String? _document;
+  final pendingCommands = <String>{};
+  final notifiedUris = <String>{};
   bool get active => jobs.any(
     (job) => ['queued', 'running', 'finalizing'].contains(job['state']),
   );
@@ -70,6 +73,16 @@ class _ExportScreenState extends State<ExportScreen>
           _document = value;
           error = null;
         });
+        for (final job in jobs) {
+          if (job['state'] == 'completed' &&
+              job['uri'] is String &&
+              notifiedUris.add(job['uri'] as String)) {
+            context
+                .getInheritedWidgetOfExactType<MediaScope>()
+                ?.repository
+                .refresh();
+          }
+        }
       }
     } catch (e) {
       if (mounted) {
@@ -87,6 +100,8 @@ class _ExportScreenState extends State<ExportScreen>
   }
 
   Future<void> command(String method, String id) async {
+    if (!pendingCommands.add(id)) return;
+    setState(() {});
     try {
       await AndroidEditProjectRepository.channel.invokeMethod<void>(method, id);
       await refresh();
@@ -94,6 +109,9 @@ class _ExportScreenState extends State<ExportScreen>
       if (mounted) {
         showFailure(context, e, operation: UserOperation.export);
       }
+    } finally {
+      pendingCommands.remove(id);
+      if (mounted) setState(() {});
     }
   }
 
@@ -114,12 +132,14 @@ class _ExportScreenState extends State<ExportScreen>
           'Keep the app open while exporting. Interrupted jobs can be retried. Each export saves a new file; your draft and original media are kept.',
         ),
         if (error != null) Text(error!),
+        for (final notice in jobs.where((j) => j['type'] == 'notice'))
+          Text(notice['message'] as String),
         if (jobs.isEmpty)
           const Padding(
             padding: EdgeInsets.all(24),
             child: Text('No exports yet'),
           ),
-        for (final job in jobs.reversed)
+        for (final job in jobs.reversed.where((j) => j['type'] != 'notice'))
           Card(
             child: Padding(
               padding: const EdgeInsets.all(12),
@@ -149,16 +169,24 @@ class _ExportScreenState extends State<ExportScreen>
                         operation: UserOperation.export,
                       ).text,
                     ),
+                  if (job['warning'] is String) Text(job['warning'] as String),
+                  if (job['state'] == 'completed' &&
+                      (job['outputBytes'] as num? ?? 0) > 0)
+                    Text(
+                      'Saved file: ${formatBytes((job['outputBytes'] as num).toInt())}',
+                    ),
                   if (['queued', 'running'].contains(job['state']))
                     TextButton(
-                      onPressed: () =>
-                          command('exportCancel', job['id'] as String),
+                      onPressed: pendingCommands.contains(job['id'])
+                          ? null
+                          : () => command('exportCancel', job['id'] as String),
                       child: const Text('Cancel export'),
                     ),
                   if (['failed', 'cancelled'].contains(job['state']))
                     TextButton(
-                      onPressed: () =>
-                          command('exportRetry', job['id'] as String),
+                      onPressed: pendingCommands.contains(job['id'])
+                          ? null
+                          : () => command('exportRetry', job['id'] as String),
                       child: const Text('Retry export'),
                     ),
                   if (job['state'] == 'completed')

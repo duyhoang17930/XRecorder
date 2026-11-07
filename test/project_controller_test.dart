@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:xrecorder/core/domain/models.dart';
@@ -24,7 +25,94 @@ class MemoryProjects implements EditProjectRepository {
   }
 }
 
+class SlowProjects extends MemoryProjects {
+  final gate = Completer<void>();
+  final saved = <EditProject>[];
+  @override
+  Future<void> save(EditProject project) async {
+    saved.add(project);
+    if (saved.length == 1) await gate.future;
+    await super.save(project);
+  }
+}
+
 void main() {
+  test('export snapshot freezes nested lists and maps', () {
+    final layers = <Object>[
+      <String, Object>{'text': 'Original'},
+    ];
+    final project = EditProject(
+      id: 'snapshot',
+      clips: [],
+      updatedAt: DateTime(2026),
+      effects: {'layers': layers},
+    );
+    (layers.first as Map)['text'] = 'Changed';
+    layers.clear();
+    expect(
+      ((project.effects['layers'] as List).first as Map)['text'],
+      'Original',
+    );
+    expect(
+      () => (project.effects['layers'] as List).clear(),
+      throwsUnsupportedError,
+    );
+  });
+  test('autosave coalesces edits while write is active and flush stores newest snapshot', () async {
+    final repository = SlowProjects();
+    final model = ProjectController(
+      EditProject(id: 'coalesce', clips: [], updatedAt: DateTime(2026)),
+      repository,
+    );
+    model.change(model.project.copyWith(title: 'First'));
+    await Future<void>.delayed(Duration.zero);
+    for (var i = 0; i < 40; i++) {
+      model.change(model.project.copyWith(title: 'Edit $i'));
+    }
+    expect(repository.saved.length, 1);
+    expect(model.saving, isTrue);
+    repository.gate.complete();
+    await model.flushed;
+    expect(repository.saved.length, 2);
+    expect((await repository.find('coalesce'))!.title, 'Edit 39');
+    expect(model.saving, isFalse);
+    expect(model.saveError, isNull);
+    model.dispose();
+  });
+  test('still photo, duplicate, flip and legacy document reopen without modifying source', () async {
+    final repository = MemoryProjects();
+    final model = ProjectController(
+      EditProject(id: 'photo', clips: [], updatedAt: DateTime(2026)),
+      repository,
+    );
+    model.add(
+      MediaItem(
+        id: 'content://photo/1',
+        uri: Uri.parse('content://photo/1'),
+        kind: MediaKind.image,
+        displayName: 'Photo.png',
+        mimeType: 'image/png',
+        sizeBytes: 100,
+        createdAt: DateTime(2026),
+        modifiedAt: DateTime(2026),
+        source: MediaSource.imported,
+      ),
+    );
+    model.duplicate(0);
+    model.update(0, model.project.clips[0].copyWith(flipH: true));
+    expect(model.project.duration, const Duration(seconds: 10));
+    expect(model.project.clips[1].flipH, false);
+    await model.flushed;
+    final reopened = (await repository.find('photo'))!;
+    expect(reopened.clips.first.isImage, true);
+    expect(reopened.clips.first.flipH, true);
+    final legacy = Map<String, dynamic>.from(reopened.clips.first.toJson())
+      ..remove('isImage')
+      ..remove('flipH')
+      ..remove('flipV');
+    expect(TimelineClip.fromJson(legacy).isImage, false);
+    model.dispose();
+  });
   test(
     'Split, reorder, undo and reopened draft preserve sources and total time',
     () async {

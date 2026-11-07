@@ -66,16 +66,14 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
     );
     field.dispose();
     if (name == null || !mounted) return;
-    await run(() async {
-      final id = await actions.rename(item.uri, name);
-      if (!mounted) return;
-      MediaScope.of(context).refresh();
-      if (id != widget.id) {
-        context.pushReplacement('/media/${Uri.encodeComponent(id)}');
-      } else {
-        reloadItem();
-      }
-    }, purpose: UserOperation.rename);
+    final id = await actions.rename(item.uri, name);
+    if (!mounted) return;
+    MediaScope.of(context).refresh();
+    if (id != widget.id) {
+      context.pushReplacement('/media/${Uri.encodeComponent(id)}');
+    } else {
+      reloadItem();
+    }
   }
 
   Future<void> trash(MediaItem item) async {
@@ -99,13 +97,47 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
       ),
     );
     if (confirm != true || !mounted) return;
-    await run(() async {
-      await actions.trash(item);
-      if (mounted) {
-        MediaScope.of(context).refresh();
-        context.pop();
-      }
-    }, purpose: UserOperation.trash);
+    await actions.trash(item);
+    if (mounted) {
+      MediaScope.of(context).refresh();
+      context.pop();
+    }
+  }
+
+  Future<void> transfer(MediaItem item, bool move) async {
+    if (move) {
+      final confirmed = await showStudioDialog<bool>(
+        context: context,
+        builder: (dialog) => StudioDialog(
+          title: const Text('Move to another folder?'),
+          content: const Text(
+            'The copy will be verified first. The original is removed only when Android allows it. If permission is unavailable, both copies are kept.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialog, false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(dialog, true),
+              child: const Text('Choose destination'),
+            ),
+          ],
+        ),
+      );
+      if (confirmed != true || !mounted) return;
+    }
+    final result = await actions.transfer(item.uri, move: move);
+    if (result == null || !mounted) return;
+    MediaScope.of(context).refresh();
+    final message =
+        result['warning'] as String? ??
+        (result['moved'] == true
+            ? 'Move verified and completed.'
+            : 'Copy verified and saved.');
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+    if (result['moved'] == true) context.pop();
   }
 
   @override
@@ -183,21 +215,45 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 ),
                 if (item.owned)
                   TextButton.icon(
-                    onPressed: busy ? null : () => rename(item),
+                    onPressed: busy
+                        ? null
+                        : () => run(
+                            () => rename(item),
+                            purpose: UserOperation.rename,
+                          ),
                     icon: const Icon(AppIcons.rename),
                     label: const Text('Rename'),
                   ),
                 if (item.owned)
                   TextButton.icon(
-                    onPressed: busy ? null : () => trash(item),
+                    onPressed: busy
+                        ? null
+                        : () => run(
+                            () => trash(item),
+                            purpose: UserOperation.trash,
+                          ),
                     icon: const Icon(AppIcons.trash),
                     label: const Text('Move to Trash'),
                   ),
+                TextButton.icon(
+                  onPressed: busy
+                      ? null
+                      : () => run(() => transfer(item, false)),
+                  icon: const Icon(AppIcons.folder),
+                  label: const Text('Copy to folder'),
+                ),
+                TextButton.icon(
+                  onPressed: busy
+                      ? null
+                      : () => run(() => transfer(item, true)),
+                  icon: const Icon(AppIcons.folderOpen),
+                  label: const Text('Move to folder'),
+                ),
               ],
             ),
             if (!item.owned)
               const Text(
-                'External media is read-only here. Use the owning app to rename or delete it.',
+                'External files can be copied. Moving requires permission from the Android document provider.',
               ),
             if (item.kind == MediaKind.image)
               TextButton.icon(

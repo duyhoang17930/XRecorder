@@ -44,18 +44,34 @@ class EditorPreviewState extends State<EditorPreview>
             jsonEncode(widget.project.toJson()['clips']) ||
         jsonEncode(oldWidget.project.effects) !=
             jsonEncode(widget.project.effects)) {
-      load();
+      load(
+        position: Duration(
+          microseconds:
+              ((_lastPosition ?? Duration.zero).inMicroseconds *
+                      oldWidget.project.speed /
+                      widget.project.speed)
+                  .round(),
+        ),
+      );
     }
   }
 
-  Future<void> load() async {
+  Future<void> load({Duration? position}) async {
     if (channel == null || widget.project.clips.isEmpty) return;
+    final revision = ++generation;
+    final target = (position ?? _lastPosition ?? Duration.zero).inMilliseconds
+        .clamp(0, widget.project.duration.inMilliseconds);
     try {
       await channel!.invokeMethod<void>('load', widget.project.toJson());
-      _lastPosition = null;
-      if (mounted) setState(() => error = null);
+      if (!mounted || revision != generation) return;
+      if (target > 0) await channel!.invokeMethod<void>('seek', target);
+      if (!mounted || revision != generation) return;
+      _lastPosition = Duration(milliseconds: target);
+      setState(() => error = null);
     } catch (e) {
-      if (mounted) setState(() => error = e.toString());
+      if (mounted && revision == generation) {
+        setState(() => error = e.toString());
+      }
     }
   }
 
@@ -109,6 +125,7 @@ class EditorPreviewState extends State<EditorPreview>
 
   @override
   void dispose() {
+    generation++;
     timer?.cancel();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();

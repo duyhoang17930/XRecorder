@@ -24,10 +24,10 @@ class _MediaPickerState extends State<_MediaPicker> {
   String? error;
   bool busy = false;
   Uri? selectedFolder;
+  MediaKind kind = MediaKind.video;
   void loadMedia({Uri? folder}) {
     if (!mounted) return;
-    final next = MediaScope.of(context)
-        .list(kind: MediaKind.video, folder: folder);
+    final next = MediaScope.of(context).list(kind: kind, folder: folder);
     setState(() {
       items = next;
       selectedFolder = folder;
@@ -63,9 +63,14 @@ class _MediaPickerState extends State<_MediaPicker> {
     });
     try {
       final loaded = await MediaScope.of(context).find(item.id);
-      if (loaded?.duration == null ||
-          loaded!.duration! < const Duration(milliseconds: 200)) {
-        throw const FormatException('Choose a playable video.');
+      if (loaded == null ||
+          (loaded.kind == MediaKind.video &&
+              (loaded.duration == null ||
+                  loaded.duration! < const Duration(milliseconds: 200))) ||
+          (loaded.kind != MediaKind.video && loaded.kind != MediaKind.image)) {
+        throw const FormatException(
+          'Choose a playable video or a still photo.',
+        );
       }
       if (mounted) Navigator.pop(context, loaded);
     } catch (e) {
@@ -106,7 +111,7 @@ class _MediaPickerState extends State<_MediaPicker> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const StudioSheetHeader(title: 'Choose a video'),
+            const StudioSheetHeader(title: 'Choose media'),
             if (busy) const LinearProgressIndicator(),
             Expanded(
               child: FutureBuilder<List<MediaItem>>(
@@ -119,6 +124,22 @@ class _MediaPickerState extends State<_MediaPicker> {
                         child: Wrap(
                           spacing: 8,
                           children: [
+                            for (final type in [
+                              MediaKind.video,
+                              MediaKind.image,
+                            ])
+                              ChoiceChip(
+                                label: Text(
+                                  type == MediaKind.video ? 'Videos' : 'Photos',
+                                ),
+                                selected: kind == type,
+                                onSelected: busy
+                                    ? null
+                                    : (_) {
+                                        kind = type;
+                                        loadMedia(folder: selectedFolder);
+                                      },
+                              ),
                             ChoiceChip(
                               label: const Text('App media'),
                               selected: selectedFolder == null,
@@ -164,7 +185,7 @@ class _MediaPickerState extends State<_MediaPicker> {
                           hasScrollBody: false,
                           child: Center(
                             child: Text(
-                              'No videos here. Record a video or choose a folder.',
+                              'No media here. Choose another source or media type.',
                             ),
                           ),
                         )
