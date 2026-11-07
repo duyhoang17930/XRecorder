@@ -67,3 +67,5 @@ org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0 | See upstream / inherited l
 org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0 | See upstream / inherited license
 org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.9.0 | See upstream / inherited license
 org.jspecify:jspecify:1.0.0 | See upstream / inherited license
+
+Editor native CPU components: whisper.cpp v1.9.5 (MIT), ggml (MIT), RNNoise v0.1 (BSD-3-Clause). Full notices: EDITOR_NATIVE_LICENSES.txt. Optional ASR model weights are not APK assets.
