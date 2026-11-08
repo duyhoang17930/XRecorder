@@ -1,3 +1,4 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -129,8 +130,8 @@ class _EffectsDialogState extends State<_EffectsDialog> {
                 value: v,
                 child: Text(
                   v == 0 && (key == 'height' || key == 'aspect')
-                      ? 'Original dimensions'
-                      : v.toString(),
+                      ? context.l10n.originalDimensions
+                      : context.effectValue(v),
                 ),
               ),
             )
@@ -139,51 +140,51 @@ class _EffectsDialogState extends State<_EffectsDialog> {
       );
   @override
   Widget build(BuildContext context) => AlertDialog(
-    title: const Text('Video & audio effects'),
+    title: Text(context.l10n.videoAudioEffects),
     content: SizedBox(
       width: 420,
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            choice('speed', 'Playback speed (audio pitch also changes)', [
+            choice('speed', context.l10n.playbackSpeedAudioPitchAlsoChanges, [
               .5,
               1.0,
               1.5,
               2.0,
             ]),
-            choice('volume', 'Original audio gain (0 mutes)', [
+            choice('volume', context.l10n.originalAudioGain0Mutes, [
               0.0,
               .5,
               1.0,
               1.5,
               2.0,
             ]),
-            choice('pitch', 'Audio pitch (applies to all clip audio)', [
+            choice('pitch', context.l10n.audioPitchAppliesToAllClipAudio, [
               .75,
               1.0,
               1.25,
             ]),
-            choice('voice', 'Original audio voice effect', [
+            choice('voice', context.l10n.originalAudioVoiceEffect, [
               'none',
               'deep',
               'bright',
               'robot',
             ]),
             SwitchListTile(
-              title: const Text('Reduce background noise'),
-              subtitle: const Text('Offline speech noise reduction'),
+              title: Text(context.l10n.reduceBackgroundNoise),
+              subtitle: Text(context.l10n.offlineSpeechNoiseReduction),
               value: values['noiseReduction'] == true,
               onChanged: (v) => setState(() => values['noiseReduction'] = v),
             ),
             choice(
               'fadeInMs',
-              'Original audio fade in (milliseconds)',
+              context.l10n.originalAudioFadeInMilliseconds,
               [0, 100, 250, 500, 1000].where((v) => v <= durationMs).toList(),
             ),
             choice(
               'fadeOutMs',
-              'Original audio fade out (milliseconds)',
+              context.l10n.originalAudioFadeOutMilliseconds,
               [0, 100, 250, 500, 1000].where((v) => v <= durationMs).toList(),
             ),
             TextButton(
@@ -200,7 +201,11 @@ class _EffectsDialogState extends State<_EffectsDialog> {
                 }
               },
               child: Text(
-                'Audio tracks (${(values['audioTracks'] as List?)?.length ?? 0})',
+                context.l10n.audioTrackCount(
+                  context.displayValue(
+                    (values['audioTracks'] as List?)?.length ?? 0,
+                  ),
+                ),
               ),
             ),
             TextButton(
@@ -217,40 +222,58 @@ class _EffectsDialogState extends State<_EffectsDialog> {
                 }
               },
               child: Text(
-                'Text, stickers & drawing (${(values['layers'] as List?)?.length ?? 0})',
+                context.l10n.layerCount(
+                  context.displayValue(
+                    (values['layers'] as List?)?.length ?? 0,
+                  ),
+                ),
               ),
             ),
-            choice('height', 'Output height / compression', [
+            choice('height', context.l10n.outputHeightCompression, [
               0,
               480,
               720,
               1080,
             ]),
-            choice('fps', 'Target output FPS (variable)', [24, 30, 60]),
-            choice('bitrate', 'Target video bitrate (bits/s; 0 = automatic)', [
+            choice('fps', context.l10n.targetOutputFpsVariable, [24, 30, 60]),
+            choice('bitrate', context.l10n.targetVideoBitrateBitsS0Automatic, [
               0,
               1000000,
               2000000,
               4000000,
               8000000,
             ]),
-            choice('filter', 'Color filter', ['none', 'grayscale', 'invert']),
-            choice('subtitleColor', 'Subtitle color', ['white', 'yellow']),
-            choice('subtitleSize', 'Subtitle text size', [
+            choice('filter', context.l10n.colorFilter, [
+              'none',
+              'grayscale',
+              'invert',
+            ]),
+            choice('subtitleColor', context.l10n.subtitleColor, [
+              'white',
+              'yellow',
+            ]),
+            choice('subtitleSize', context.l10n.subtitleTextSize, [
               'small',
               'normal',
               'large',
             ]),
-            choice('subtitleBackground', 'Subtitle background', [
+            choice('subtitleBackground', context.l10n.subtitleBackground, [
               'dark',
               'none',
             ]),
-            choice('subtitlePosition', 'Subtitle position', ['bottom', 'top']),
-            choice('format', 'Export format', ['mp4', 'gif']),
+            choice('subtitlePosition', context.l10n.subtitlePosition, [
+              'bottom',
+              'top',
+            ]),
+            choice('format', context.l10n.exportFormat, ['mp4', 'gif']),
             if (values['format'] == 'gif') ...[
-              choice('gifFps', 'GIF frames per second', [5, 10, 20]),
-              choice('gifEdge', 'GIF longest edge (pixels)', [160, 320, 480]),
-              choice('gifRepeats', 'GIF repeat count (0 = forever)', [
+              choice('gifFps', context.l10n.gifFramesPerSecond, [5, 10, 20]),
+              choice('gifEdge', context.l10n.gifLongestEdgePixels, [
+                160,
+                320,
+                480,
+              ]),
+              choice('gifRepeats', context.l10n.gifRepeatCount0Forever, [
                 0,
                 1,
                 2,
@@ -259,10 +282,8 @@ class _EffectsDialogState extends State<_EffectsDialog> {
                 20,
               ]),
             ],
-            const Text(
-              'GIF uses the trimmed timeline, has no audio and is limited to 15 seconds. Colors are reduced to 256. GIF files can be larger than MP4.',
-            ),
-            choice('aspect', 'Black background / aspect ratio', [
+            Text(context.l10n.gifUsesTheTrimmedTimelineHasNoa3b084),
+            choice('aspect', context.l10n.blackBackgroundAspectRatio, [
               0.0,
               1.0,
               16 / 9,
@@ -292,39 +313,43 @@ class _EffectsDialogState extends State<_EffectsDialog> {
               },
               child: Text(
                 values['music'] == null
-                    ? 'Add background music'
-                    : 'Replace background music',
+                    ? context.l10n.addBackgroundMusic
+                    : context.l10n.replaceBackgroundMusic,
               ),
             ),
             if (musicError != null)
               Text(
-                musicError!,
+                context.message(musicError!),
                 style: AppTypography.body.copyWith(
                   color: context.studioColors.warning,
                 ),
               ),
             if (values['music'] != null) ...[
-              const Text('Music loops to the video duration.'),
-              choice('musicVolume', 'Music gain', [0.0, .25, .5, .75, 1.0]),
+              Text(context.l10n.musicLoopsToTheVideoDuration),
+              choice('musicVolume', context.l10n.musicGain, [
+                0.0,
+                .25,
+                .5,
+                .75,
+                1.0,
+              ]),
               TextButton(
                 onPressed: () => setState(() => values.remove('music')),
-                child: const Text('Remove music'),
+                child: Text(context.l10n.removeMusic),
               ),
             ],
             TextField(
               controller: text,
               maxLength: 120,
               maxLines: 3,
-              decoration: const InputDecoration(
-                labelText: 'Centered text throughout video',
+              decoration: InputDecoration(
+                labelText: context.l10n.centeredTextThroughoutVideo,
               ),
             ),
-            const Text(
-              'Smaller dimensions can reduce file size; the final size depends on your media and device encoder.',
-            ),
+            Text(context.l10n.smallerDimensionsCanReduceFileSizeThe),
             if (validationError != null)
               Text(
-                validationError!,
+                context.message(validationError!),
                 style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
           ],
@@ -334,9 +359,9 @@ class _EffectsDialogState extends State<_EffectsDialog> {
     actions: [
       TextButton(
         onPressed: () => Navigator.pop(context),
-        child: const Text('Cancel'),
+        child: Text(context.l10n.cancel),
       ),
-      TextButton(onPressed: apply, child: const Text('Apply to project')),
+      TextButton(onPressed: apply, child: Text(context.l10n.applyToProject)),
     ],
   );
 }

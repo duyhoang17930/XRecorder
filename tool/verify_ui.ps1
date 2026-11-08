@@ -46,24 +46,28 @@ $output = switch ($Mode) {
     default { 'build/verification/ui/task021/after' }
 }
 if ($ArtifactDirectory) { $output = $ArtifactDirectory }
-$arguments = @('drive', '--no-dds', "--$BuildMode", '--keep-app-running', '--driver=test_driver/design_system_driver.dart', "--target=$target", '-d', $Device)
+$arguments = @('build', 'apk', "--$BuildMode", '--no-tree-shake-icons', "--target=$target")
 if ($Mode -eq 'performance') { $arguments += "--dart-define=PERF_LABEL=$PerformancePhase" }
 if ($Mode -eq 'ux' -and -not $Before) { $arguments += '--dart-define=UX_AFTER=true' }
 if ($PreserveTestOutputs) { $arguments += '--dart-define=PRESERVE_TEST_OUTPUTS=true' }
 if ($Mode -eq 'visual') { $arguments += '--dart-define=TASK021_AFTER=true' }
 if ($Mode -eq 'screenshot-visual' -and -not $Before) { $arguments += '--dart-define=TASK022_AFTER=true' }
-if ($ApplicationBinary) { $arguments += "--use-application-binary=$ApplicationBinary" }
 $previousDirectory = Get-Location
 $previousOutput = $env:UI_ARTIFACT_DIRECTORY
 try {
     Set-Location -LiteralPath $repoRoot
     $env:UI_ARTIFACT_DIRECTORY = $output
-    # Only stop the test process. No uninstall, clear-data or AVD wipe.
-    & $adb -s $Device shell am force-stop com.xrecorder.xrecorder
-    # Windows PowerShell wraps normal driver stderr as NativeCommandError.
-    # The Flutter process exit code, rather than stderr text, determines success.
+    # Flutter's Android install fallback can uninstall after install -r fails.
+    # Build separately; the QA runner only updates with adb and attaches to the
+    # running VM. Its capacity/backup/UID checks abort without an uninstall.
     $ErrorActionPreference = 'Continue'
-    & $flutter @arguments
+    if (-not $ApplicationBinary) {
+        & $flutter @arguments
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        $ApplicationBinary = Join-Path $repoRoot "build/app/outputs/flutter-apk/app-$BuildMode.apk"
+    }
+    $dart = Join-Path (LocalSdkPath 'flutter.sdk') 'bin/cache/dart-sdk/bin/dart.exe'
+    & python tool/run_qa_existing_app.py --serial $Device --avd $ExpectedAvdName --apk $ApplicationBinary --output $output --adb $adb --dart $dart --driver test_driver/design_system_driver.dart
     $result = $LASTEXITCODE
 } finally {
     Set-Location -LiteralPath $previousDirectory.Path

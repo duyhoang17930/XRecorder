@@ -8,11 +8,20 @@ apk = Path(sys.argv[1])
 failures = []
 with zipfile.ZipFile(apk) as archive, apk.open('rb') as source:
     names = archive.namelist()
+    # --target-platform alone can leave CMake libraries for extra ABIs in an
+    # analysis APK. Android must never select an ABI without its Flutter engine.
+    abis = {name.split('/')[1] for name in names if name.startswith('lib/') and name.endswith('.so')}
+    for abi in sorted(abis):
+        required = {'libapp.so', 'libflutter.so', 'libthreeh_whisper.so', 'libc++_shared.so'}
+        actual = {name.split('/')[-1] for name in names if name.startswith(f'lib/{abi}/') and name.endswith('.so')}
+        if required - actual:
+            failures.append(f'Incomplete ABI {abi}: missing {sorted(required - actual)}')
     if any('/assets/media/' in name for name in names):
         failures.append('Reference/sample media is packaged')
     for asset in ('assets/fonts/OFL.txt', 'assets/licenses/Media3-APACHE-2.0.txt',
                   'assets/licenses/CheckerFramework-LICENSE.txt',
-                  'assets/licenses/ANDROID_DEPENDENCIES.txt'):
+                  'assets/licenses/ANDROID_DEPENDENCIES.txt',
+                  'assets/licenses/CLDR-LICENSE.txt'):
         if 'assets/flutter_assets/' + asset not in names:
             failures.append('Missing license: ' + asset)
     for item in archive.infolist():

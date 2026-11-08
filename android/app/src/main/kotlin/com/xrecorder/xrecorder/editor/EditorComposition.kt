@@ -106,6 +106,7 @@ object EditorComposition {
             val start = (cue["startMs"] as Number).toLong()
             val end = (cue["endMs"] as Number).toLong()
             val content = cue["text"] as String
+            SubtitleText.requireValid(content)
             require(
                 start >= previousEnd &&
                     end > start &&

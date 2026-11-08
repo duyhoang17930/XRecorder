@@ -1,3 +1,4 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
@@ -28,8 +29,8 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
           SnackBar(
             content: Text(
               supported == true
-                  ? 'Confirm the shortcut with your launcher.'
-                  : 'This launcher does not support pinned shortcuts.',
+                  ? context.l10n.confirmTheShortcutWithYourLauncher
+                  : context.l10n.thisLauncherDoesNotSupportPinnedShortcuts,
             ),
           ),
         );
@@ -66,7 +67,7 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
     try {
       final project = EditProject(
         id: 'project_${DateTime.now().microsecondsSinceEpoch}',
-        title: 'Video project',
+        title: context.l10n.videoProject,
         clips: [],
         updatedAt: DateTime.now(),
       );
@@ -108,59 +109,63 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
     primary: true,
     padding: const EdgeInsets.all(AppSpacing.md),
     children: [
-      const SectionTitle('Editing Studio'),
+      SectionTitle(context.l10n.editingStudio),
       Wrap(
         children: [
           for (final kind in ['video', 'photo'])
             TextButton.icon(
               onPressed: pinning ? null : () => pin(kind),
               icon: const Icon(AppIcons.create),
-              label: Text('Add $kind editor to Home'),
+              label: Text(
+                context.l10n.pinEditorShortcut(context.effectValue(kind)),
+              ),
             ),
         ],
       ),
       StudioBentoGrid(
         children: [
           BentoCard(
-            title: 'New video project',
-            description: 'Trim, merge & effects',
+            title: context.l10n.newVideoProject,
+            description: context.l10n.trimMergeEffects,
             icon: AppIcons.newProject,
             onTap: creating ? null : create,
-            badge: creating ? 'Opening…' : null,
+            badge: creating ? context.l10n.openingYourProject : null,
           ),
           BentoCard(
-            title: 'Edit photo',
-            description: 'Crop & annotate a copy',
+            title: context.l10n.editPhoto,
+            description: context.l10n.cropAnnotateACopy,
             icon: AppIcons.photoEdit,
             accent: context.studioColors.cyan,
             onTap: () => context.go('/photos'),
           ),
         ],
       ),
-      const SectionTitle('Saved drafts'),
+      SectionTitle(context.l10n.savedDrafts),
       TextButton.icon(
         onPressed: () => context.push('/exports'),
         icon: const Icon(AppIcons.export),
-        label: const Text('Export queue'),
+        label: Text(context.l10n.exportQueue),
       ),
       FutureBuilder<List<EditProject>>(
         future: projects,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return const StudioLoadingState(label: 'Loading your drafts…');
+            return StudioLoadingState(label: context.l10n.loadingYourDrafts);
           }
           if (snapshot.hasError) {
             return Column(
               children: [
                 Text(
-                  UserMessages.failure(
-                    snapshot.error,
-                    operation: UserOperation.loadDrafts,
-                  ).text,
+                  context.message(
+                    UserMessages.failure(
+                      snapshot.error,
+                      operation: UserOperation.loadDrafts,
+                    ).text,
+                  ),
                 ),
                 TextButton(
                   onPressed: reloadProjects,
-                  child: const Text('Retry drafts'),
+                  child: Text(context.l10n.retryDrafts),
                 ),
               ],
             );
@@ -169,15 +174,18 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
           final warning = repository.unreadableCount == 0
               ? const SizedBox.shrink()
               : Text(
-                  '${repository.unreadableCount} drafts could not be read. Their files are kept. Other drafts are available below.',
+                  context.l10n.unreadableDraftCount(
+                    context.displayValue(repository.unreadableCount),
+                  ),
                 );
           if (rows.isEmpty) {
             return Column(
               children: [
                 warning,
-                const StudioEmptyState(
-                  title: 'No drafts yet',
-                  description: 'Create a project. Originals stay unchanged.',
+                StudioEmptyState(
+                  title: context.l10n.noDraftsYet,
+                  description:
+                      context.l10n.createAProjectOriginalsStayUnchanged,
                   icon: AppIcons.videos,
                 ),
               ],
@@ -195,39 +203,49 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
                       leading: const StudioIconTile(icon: AppIcons.videos),
                       title: Text(project.title),
                       subtitle: Text(
-                        '${project.clips.length} clips · ${(project.duration.inMilliseconds / 1000).toStringAsFixed(1)}s',
+                        context.l10n.projectClipSummary(
+                          context.displayValue(project.clips.length),
+                          context.displayValue(
+                            context.decimal(
+                              (project.duration.inMilliseconds / 1000),
+                              digits: 1,
+                            ),
+                          ),
+                        ),
                       ),
                       onTap: () => open(project.id),
                       trailing: Wrap(
                         children: [
                           IconButton(
-                            tooltip: 'Duplicate draft',
+                            tooltip: context.l10n.duplicateDraft,
                             onPressed: creating
                                 ? null
                                 : () => duplicate(project),
                             icon: const Icon(AppIcons.newProject),
                           ),
                           IconButton(
-                            tooltip: 'Delete draft',
+                            tooltip: context.l10n.deleteDraft,
                             icon: const Icon(AppIcons.trash),
                             onPressed: () async {
                               final confirmed = await showDialog<bool>(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  title: const Text('Delete draft?'),
-                                  content: const Text(
-                                    'Source videos and exported files are kept.',
+                                  title: Text(context.l10n.deleteDraft785099),
+                                  content: Text(
+                                    context
+                                        .l10n
+                                        .sourceVideosAndExportedFilesAreKept,
                                   ),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.pop(context, false),
-                                      child: const Text('Cancel'),
+                                      child: Text(context.l10n.cancel),
                                     ),
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.pop(context, true),
-                                      child: const Text('Delete draft'),
+                                      child: Text(context.l10n.deleteDraft),
                                     ),
                                   ],
                                 ),

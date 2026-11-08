@@ -1,243 +1,159 @@
 # P2/P3 executed checks and evidence
 
-Updated 07/11/2026. Current continuation supersedes historical PARTIAL/BLOCKED
-engine/DSP/photo statements. Raw milestone logs and outputs remain under ignored
-`build/`; this document indexes proof without duplicating the entire work log.
+Updated07/11/2026. Current quality baseline b9aea926c1ab024dd32a139e5ab43b0e0e584908.
+All paths below are relative to `build/verification/final_p2_p3/` unless explicitly
+marked historical. No commit/push; no uninstall/clear-data/wipe. Sources and QA
+outputs/models retained. Flutter CLI sequential, drive always keeps app running.
 
-## Environment and safety
+## Current host checkpoint
 
-- Baseline `5cdda32084be772f61153bc453ef3675b932ab41`, main, no commit/push.
-- Flutter3.47.8/Dart3.13.7; JVM21/JVM target17; Media3 1.11.1; min24/target36.
-- Only dedicated `emulator-5560`, AVD `ThreeHRecorder_Task021`, API36 x86_64.
-  Current performance comparison uses SwiftShader, 1080×2400/density420≈411dp.
-- Flutter CLI sequential. All drive commands include `--no-dds --keep-app-running`.
-  No uninstall/clear-data/wipe/reset; main.dart APK restored by install-r at delivery.
-- Sources, models and generated media retained. Tests move/trash only explicitly
-  created QA fixtures and verify original bytes; they do not run existing trash TTL cleanup.
+- `flutter analyze --no-pub`: final clean,3.7s (`delivery_source_analyze.log`).
+- `flutter test --no-pub --reporter expanded`:143 PASS,26s (`delivery_tests.log`).
+- Android `gradlew :app:testDebugUnitTest`:3 JUnit PASS,23s (`native_unit.log`;
+  build/app/test-results/testDebugUnitTest/*.xml). Includes legacy GIF/JPEG policy.
+- Scoped Dart/ktfmt formatting; Python tools parsed/exercised. P1 SHA256 baseline
+  contains16 files; final integrity report is recorded at delivery.
 
-## Current host and native unit checks
-
-```powershell
-flutter analyze --no-pub
-flutter test --no-pub --reporter expanded
-# Android Gradle environment uses the repository's configured JBR/SDK.
-./gradlew :app:testDebugUnitTest
-```
-
-Final source-freeze checks: analyze clean and138 unit/widget PASS (27s); logs
-`build/p2_p3_continuation_analyze.log`, `p2_p3_continuation_tests.log`.
-Includes existing P1 regression tests; audio/layer validation; trim/Undo full-graph
-restoration; long subtitles/styles/retime;320/411dp text200; durable drafts; command
-guards; source preservation. Native storage reserve/boundary/overflow:2 PASS,
-`build/p2_p3_native_unit.log`.
-
-Baseline M0 was107 tests (`p2_p3_baseline_tests.log`). Subsequent checkpoints
-115/120/123/129/131 are historical counts, not additional current tests.
+Earlier host checkpoints138/142 are historical counts, not extra current tests.
+An analyzer brace warning and missing rendering import were corrected; failed
+attempt logs remain. No silent skip counted as PASS.
 
 ## Native command pattern
 
 ```powershell
-$env:UI_ARTIFACT_DIRECTORY='build/verification/p2_p3/<area>/native'
-flutter drive --no-dds --keep-app-running `
-  --driver=test_driver/design_system_driver.dart `
-  --target=integration_test/<target>.dart -d emulator-5560
+$env:UI_ARTIFACT_DIRECTORY='build/verification/final_p2_p3/<area>/native'
+flutter drive --no-dds --keep-app-running --driver=test_driver/design_system_driver.dart --target=integration_test/<target>.dart -d emulator-5560
 ```
 
-Fixtures are synthetic tones/images/video plus genuine JFK and FLEURS speech.
-No recorded user media is used. Host FFmpeg/ffprobe are under
-`build/task03/ffmpeg`; Pillow and ktfmt are host QA tools only.
+Only QA AVD ThreeHRecorder_Task021/API36 uses5560. API34 testing uses the new
+ThreeHRecorder_Final_API34/5562. User emulator5554 is never operated. Final
+main.dart APK is installed with `adb install -r` after integration targets.
 
-## Audio, layers and preview/export
+## Library and UX
 
-Target `p2_p3_audio_layers_test.dart`:12 actual H.264/AAC MP4 outputs, native
-preview play/seek, RNNoise preview and playhead retention after effect edits PASS.
-`audio/native/emulator_verification.json` lists exact output URIs.
+- `p2_p3_library_profile_test.dart`, profile mode, three before/after trials.
+ 1009 identical images,30 timed drags400ms each. Raw frames/cache/VM traces in
+ `performance/before_1..3`, `after_1..3`; `comparison.json`. Median per-trial
+ raster p95 43.711 to40.515ms; ranges overlap. Not60fps/physical proof.
+- `p2_p3_catalog_stress_test.dart`, current1012-image catalog,30 instant drags
+ and4 theme/text-scale screenshots at each width. `ux/320`, `ux/411`; real PNG
+ dimensions840x2400 and1080x2400, DPR2.625. No new fixtures seeded. This is a
+ different workload from the profile experiment; do not compare timings causally.
+- Widget regressions cover320/411dp text200 editor dialogs, command guards,
+ stale poll and metadata, crop/rotation aspect, ASR installed/default/restore.
+- Preview images `matrix/portrait_before_clean.png`, `portrait_hybrid.png`,
+ `portrait_after.png`: player position500ms; SurfaceView embedding fix makes
+ the independently decoded white frame visible. `portrait_before.png` contains
+ System UI ANR and is not accepted as clean visual proof.
 
-```powershell
-python tool/validate_editor_audio.py
-```
+## Real media/audio/layers/subtitles
 
-`build/verification/p2_p3/audio/signal_validation.json`: all12 full decode,
-strict video PTS, duration, gain saturation, legacy+new-track headroom, source
-trim, offset/tail silence, linear fades, bright/deep pitch, robot sidebands and
-timed layer pixels PASS. Files are pulled from verified QA MediaStore URIs.
+- `p2_p3_audio_layers_test.dart`:12 new H264/AAC outputs, real preview processing,
+ effect reload/playhead preservation PASS. `audio/native`, `audio.log`.
+- `python tool/validate_editor_audio.py --directory build/verification/final_p2_p3/audio --check-preview-parity`
+ requires host Pillow (`PYTHONPATH=build/qa_python`). All12 full decode, duration,
+ PTS/signals/fades/headroom/gain saturation/trim/pitch/RNNoise and timed pixels
+ PASS; `audio/signal_validation.json`, `audio_signals_parity.log`.
+- Native preview screenshots at800/1800/2500/3500ms compare with actual exported
+ frames: symmetric2px layer-mask coverage >=94.4%, inactive frame empty. QA debug
+ banner excluded; not bit-identical or human listening proof.
+- Same target `P2_P3_MATRIX=true`:six input cases; `matrix/before`, `outputs_before`.
+ `validate_p2_p3_outputs.py ... --check-input-matrix`: full decode, strict PTS,
+ 0/10ms flash/tone offsets at0.5/3/5.5s, distinct stereo tones, silent source,
+ 200ms duration,60-to24 cap and rotation metadata PASS.
+- `MATRIX_CODECS=true`:H264 source and Media3 upstream1s HEVC/B-frame fixture
+ export PASS; `matrix/codecs`, `codec_outputs/validation.json`. Upstream URL and
+ SHA retained in `matrix/hevc_source.json`; not bundled in APK.
+- `p2_p3_photo_subtitle_test.dart`:EXIF1-8 actual pixels + catalog dimensions,
+ DisplayP3/sRGB, alpha/2048 decode, JPEG480x240, mixed media, long styles,
+ edited audio to ASR/SRT/burn-in PASS (`photo/native`, `photo.log`).
+ `validate_p2_p3_outputs.py ... --check-subtitle-speed`:4 full-decode outputs;
+ speed2 cue pixels0/16170/16171/0/0 at0.1/0.4/0.65/1/1.5s.
+- `p2_p3_native_test.dart --dart-define=P2_P3_ADVANCED=true`:catalog/rename/draft,
+ real MP4/GIF, queue cancel/retry PASS (`outputs/native`, `native.log`). Pulled
+ files full-decode/PTS PASS (`outputs/validation.json`); GIF90x160,10 frames,
+ 200ms/frame, loop2 verified with Pillow.
 
-- AAC/video duration difference ≤30.708ms; fixture duration≈4.031s.
-- Fade RMS ratios at0.2/0.7/3.1/3.7s:0.229/0.758/0.859/0.260.
-- Mix440/880Hz amplitudes0.2995/0.2996; robot405/475Hz0.2997/0.2999;
-  deep330Hz0.5977. Gain2 saturates rather than wrapping PCM16 sign.
-- Flash onset1.000s and tone onset1.000s: **0ms difference** on fixture.
-- RNNoise genuine Vietnamese speech+seeded white noise SI-SDR:
-  −5.0026→3.0373dB, **+8.0398dB**, alignment9.25→19.25ms.
-  Quiet noise RMS ratio0.04151; output frame count/duration retained.
-- Layer active-frame pixel differences474/853/938; inactive frames0.
+## Offline ASR
 
-These are actual audible PCM/signal checks, not human listening, broad speech
-quality or long-duration lip-sync signoff. RNNoise adds about10ms measured
-lookahead on this sample; unprocessed A/V flash test is distinct.
+- Corpus mode `p2_p3_whisper_test.dart --dart-define=ASR_CORPUS=true`:38 jobs,
+35 actual JNI inferences,12 stimuli. `asr/corpus_native.log`, `corpus_native`,
+`corpus/manifest.json`, `evaluation.json`;222 sampled memory rows in `asr/memory.json`.
+- `analyze_whisper_benchmark.py --prepare-corpus OUT` retains licensed originals,
+reference/hash; `--evaluate-corpus OUT --native-report REPORT --output JSON`
+computes disclosed CER/WER/RTF and deduplicates repeated samples.
+- `--dart-define=ASR_MODELS=tiny --dart-define=MODEL_FAULTS=true`: invalid import,
+actual import byte-progress cancellation, old verified model retention, silence,
+vi/en/auto, active-model removal rejection and native abort PASS (`asr/faults`).
+Measured drain+next decode9616ms exposed slow cancellation despite2ms UI response.
+- Local whisper scheduler abort-propagation patch, then
+`--dart-define=ASR_MODELS=tiny,base,small-q5_1 --dart-define=MODEL_FAULTS=true`:
+9 uncancelled multilingual jobs + cancellation/fault controls PASS;
+request8ms, drain+next decode518ms (`asr/faults_after`). Same inference math/params.
+- Rejected file URI originally left a queued job: real before failure
+`asr/invalid_request_before.log`, corrected corpus regression PASS. Default Base,
+installed-model fallback and restored language/model have widget regression.
+- Small music-control caption `(Bell)` retained as a quality limitation. Regions,
+all speakers/long-form accuracy and human listening are not certified.
 
-## Offline speech recognition
+## SAF, data safety and lifecycle
 
-Target `p2_p3_whisper_test.dart`, genuine upstream multilingual weights:
+- Actual DocumentsUI `p2_p3_platform_test.dart` + `drive_p2_p3_picker.py --folder
+P2P3_QA_QUALITY_20261107 --log build/verification/final_p2_p3/platform.log` PASS.
+Verified copy/move, source bytes intact, real audio picker4000ms, SRT65 exact
+UTF8 bytes pulled independently, tiny HTTPS download48 progress samples/checksum,
+pinned ID and disconnected destination rejection. `platform/native`,
+`platform/srt_validation.json`, `platform_picker.log`. Existing pinned ID may
+already be present; prior-task fresh launcher consent proof is historical.
+- `p2_p3_recovery_test.dart` + `p2_p3_recovery_fixture.py --log .../recovery.log`:
+new QA-only backup/corrupt fixture, >1MiB UTF8 rejection, exact source/trash/restore,
+missing-source Failed PASS. `recovery/native`, `recovery_injection.log`.
+- `p2_p3_process_recovery_test.dart --dart-define=PUBLICATION_REPLAY=true`, then
+`kill_p2_p3_qa_process.py --publication-replay`, resume with
+`--dart-define=PUBLICATION_RESUME=true`: real published URI, simulated finalizing
+checkpoint, actual process stop/restart, no duplicate and exact source/draft PASS.
+`publication/before`, `after`, `injection.json`. Not an instruction-level commit kill.
+- Soak modes of `p2_p3_native_test.dart`:initial active-view assertions missed
+release timeouts found in log. Release-before-detach attempt FAIL (`soak_release_order`).
+Pause+stop before detach/release:30 previews/20 actual Transformer cancels PASS,
+releaseFailures0, max741ms (`soak/stopped`, `soak_stopped.log`). Explicit retained
+heap/class/source-string observations are in `soak_stopped_retained.json` and
+`soak_retained_strings.json`; no universal leak-free claim.
 
-```powershell
-# Default benchmarks tiny/base; small tested separately with ASR_MODELS.
-flutter drive <same flags> --target=integration_test/p2_p3_whisper_test.dart `
-  --dart-define=ASR_MODELS=small-q5_1 -d emulator-5560
-python tool/analyze_whisper_benchmark.py
-```
+## Historical proof retained separately
 
-Real native JNI inference, timed vi/en segments and cancellation PASS.
-Original benchmark retained in `whisper/native`, `whisper/small` and merged
-`whisper/benchmark.json`. Tiny EN/VI8.826/8.749s; base19.849/18.195s;
-small49.743/43.625s. VI CER28.125%/9.375%/0%, measured on **one** FLEURS sample.
-Small sampled peak PSS594017KiB. This is not broad accuracy or physical performance.
+Under `build/verification/p2_p3/`:actual encoding force-stop/re-export, EACCES on
+journal parent with restoration watchdog,7200s sparse-input storage preflight,
+AtomicFile/SAF/model tests, earlier APK checks and TalkBack16 service smoke.
+These are previous-task executions, not fresh runtime PASS on every current build.
+No current ExportQueue/recording changes invalidate those contracts; current
+publication/recovery/positive export regressions are listed above. Actual disk
+filling, power loss, SD/OEM, human focus/gestures/listening remain NOT RUN.
 
-FLEURS vi_vn/test filename10057024225045006889.wav/id1886, CC-BY4.0.
-Reference: “Văn hóa và bộ lạc cổ xưa đã bắt đầu giữ những con vật này để dễ lấy
-sữa, tóc, thịt, và da.” Attribution/SHA256 in `models/fleurs_vi_fixture.json`.
-JFK is genuine upstream public-domain speech. Engine outputs are never replaced
-with the references. Silent WAV assertion requires empty segments.
+## Delivery
 
-Final regression in `whisper/regression` PASS: vi/en/auto, digital silence,
-native cancel and rejection of removal of an active model. Tiny timings in this
-run5.476/4.518/7.745s; original cold benchmark retained separately.
-Recognition ≤10minutes/job; conservative RAM preflight; CPU only, no upload.
+Device-specific results and external gates: [DEVICE_MATRIX](P2_P3_DEVICE_MATRIX.md).
+APK hashes/entrypoint/packaging and P1 integrity: final quality report and
+`apk/verification.json`, `source_integrity.json`. Debug192045080bytes; unsigned
+release64954063bytes. ThreeABIs, native notices, no speech weights, ELF/ZIP16KiB
+and SDK zipalign PASS. Release has no integration-test plugin; debug main.dart
+kernel has no QA harness markers. No user release signing material used.
+Failed release `--no-pub` attempt retained: stale generated integration-test
+registrant. Regenerate through the normal Flutter build, never hand-edit it.
 
-## Photo and subtitle output
+Final `main_smoke.json`: actual main APK Video/Photo/Editing Studio/Settings
+routes verified with unique screen content; capture not invoked. First editor
+matcher used a grouped tile label and was corrected to the unique screen title.
+`publication/readback_replay.json`: stronger checkpoint read-back plus main APK
+real Export queue initialization recovers the same URI; all other jobs, row
+count, source and draft unchanged. Initial host expectation of eager startup
+recovery was corrected: ExportQueue is deliberately lazy on first queue access.
+The fault helper now uses file-sync and exact checkpoint read-back.
 
-Target `p2_p3_photo_subtitle_test.dart` PASS after audio-only ASR/model-store refactor.
-`photo/native/emulator_verification.json` and actual MP4 outputs retained.
-
-```powershell
-python tool/validate_p2_p3_outputs.py build/verification/p2_p3/photo `
-  --ffmpeg-directory build/task03/ffmpeg `
-  --native-report build/verification/p2_p3/photo/native/emulator_verification.json `
-  --check-subtitle-speed
-```
-
-- All8 EXIF orientations:0 mean absolute pixel error against independent reference.
-- DisplayP3 ICC→sRGB:0 error on reference fixture.
--3000×1500 alpha decode bounded2048×1024; JPEG480×240 with white alpha backing.
-- Real image/video mixed export; long wrapped subtitle/styles; output speed2:
-  cues visible0.4/0.65s, absent0.1/1.0/1.5s.
-- Edited image+JFK audio track→native audio-only composition→Whisper→reviewed
-  cues/SRT→burn-in MP4. `asrComposition:true`, recognized SRT includes “country”.
-- Host full decode/strict PTS checks PASS in `photo/validation.json`.
-
-## SAF, MediaStore and shortcuts
-
-Target `p2_p3_platform_test.dart` uses actual DocumentsUI and optional real device
-HTTPS model download. Helper operates only the QA picker/launcher:
-
-```powershell
-python tool/drive_p2_p3_picker.py --folder P2P3_QA_20261107_final --seconds 240
-```
-
-Previous native PASS:1474-byte JPEG verified copy/move, source preserved; UTF-8
-SRT65bytes pulled/read exactly; tiny download real byte progress+checksum.
-Final expanded regression PASS: audio picker/read duration4000ms, actual launcher
-pin confirmation and pinned ID, disconnect then rejected move without source mutation.
-Final SRT pulled independently:65 UTF-8 bytes exactly match; `platform/srt_validation.json`.
-Current proof lives at `platform/native/emulator_verification.json`.
-
-Failures retained and fixed:
-
-- Real picker exposed P2 request702 collision with P1 consent and704 with Support.
-  P2 now uses1701–1705; P1/Support unchanged. `platform/requestcode_collision.log`.
-- Expanded audio test found `audioInfo` unreachable inside export-only branch.
-  Moved metadata operation to editor worker; actual picker regression rerun.
-  `platform/audio_info_routing_failure.log`; corrected actual picker regression PASS.
-- Launcher helper initially missed lowercase “home screen”; pin confirmation
-  accepted manually on QA launcher, case-insensitive helper fixed and rerun.
-  `platform/pin_automation_timeout.log`. Earlier folder automation timeout retained.
-- QA System UI ANR dialog occurred during emulator/host load; selected Wait on
-  verified dialog, DocumentsUI resumed. This is not labeled an app crash.
-
-Static cold/warm editor/photo deep links passed earlier (`p2_p3_m6_*` evidence).
-Physical SD/OEM providers and legacy permission matrix are not certified.
-
-## Recovery and fault injection
-
-`p2_p3_recovery_test.dart` + `tool/p2_p3_recovery_fixture.py` PASS:
-actual backup-only AtomicFile recovery, unreadable empty fixture isolation,
->1MiB UTF-8 rejection preserving old draft, PNG Trash→Restore exact bytes,
-missing source export Failed/no URI. Fixtures repaired/retained.
-`recovery/final/emulator_verification.json` and `p2_p3_recovery_final_native.log`.
-
-`p2_p3_process_recovery_test.dart` + `tool/kill_p2_p3_qa_process.py`:
-
-- Storage preflight: actual sparse7200s video rejected before enqueue; draft intact.
-- Force-stop only QA app while native encoder temporary file had402848bytes.
-  Reopen with `--dart-define=RECOVERY_RESUME=true`: interrupted job Failed,
-  exact draft/source retained, new export completed.
-  `process/start`, `process/before_kill.json`, `process/resumed`.
-- `--dart-define=IO_FAULT=true` and helper `--io-fault`: actual app files-directory
-  EACCES during journal checkpoint. Job Failed/no publication, draft unchanged,
-  Retry completed. Mode771 restored by device watchdog and host finally.
-  `process/io/injection.json` records restored:true; emulator report passes.
-- Final positive MP4/GIF/cancel/retry native regression PASS (17s) in
-  `recovery/export-regression`; fresh outputs pulled into `outputs` and full
-  decode/strict PTS PASS again (`build/p2_p3_export_decode_final.log`).
-
-No destructive disk filling/ENOSPC test. Exact force-stop at MediaStore commit,
-provider power-loss and long leak soak remain unexecuted; preflight/EACCES/process
-kill are distinct tests and do not substitute for those windows.
-
-## Comparable library profile
-
-Target `p2_p3_library_profile_test.dart`, profile mode, same1006 images,
-30 continuous400ms drags, SwiftShader. `performance/comparison.json`:
-
-| Run | Frames | Build p95ms | Raster p50/p95ms | Raster >16.7ms |
-|---|---:|---:|---:|---:|
-| Before |641|5.617|22.327 /41.138|418|
-| Width only |641|5.661|21.627 /42.333|410|
-| Width +hardEdge |652|4.631|19.930 /37.864|400|
-
-Compressed cache269248bytes throughout. Width alone did not improve p95;
-hardEdge clipping improves about8%. Raster remains over budget on emulator.
-Earlier62-frame midnight profile used a different workload/GPU and is historical,
-not a valid before measurement for this comparison. No physical60fps claim.
-
-## Final delivery checks
-
-Final host/native regressions described above PASS. Production entrypoint
-`flutter build apk --debug --target lib/main.dart` PASS; unsigned
-`flutter build apk --release --target lib/main.dart` PASS (222.1s, three nativeABIs).
-All XRECORDER signing environment variables removed in that child process only;
-no keys read/requested/stored. Logs `p2_p3_continuation_debug_build.log` and
-`p2_p3_continuation_release_build.log`. Missing unused Cupertino font warning
-observed; actual app uses Lucide/Material fonts and build succeeds.
-
-`python tool/verify_release.py <APK>` PASS for both APKs. SDK36 zipalign16KB PASS;
-aapt min24/target36, threeABIs, release not debuggable. New JNI/libc++ present in
-allABIs, packaged MIT/BSD3 notice equals source, no bundled speech models.
-apksigner verify exits1/Missing META-INF/MANIFEST.MF as expected for **unsigned**
-release. `build/p2_p3_*_packaging.log`, `p2_p3_unsigned_signature.log` and
-`apk/verification.json` retain proof/hashes. Main QA installed with install-r on
-verified AVD, editor route opened, sources/models/drafts remain.
-
-Real TalkBack16.0.0.738667889 smoke: service bound, touchExplorationEnabled=true,
-app active and routes respond. Screenshots/dumpsys in `accessibility/`.
-**PARTIAL focus/gesture verification:** ADB tap/swipe and
-[documented keyboard shortcuts](https://support.google.com/accessibility/android/answer/6110948?hl=en)
-did not establish TalkBack focus proof. Native permission dialog showed real
-TalkBack focus; this does not certify Flutter controls. Lower-level sendevent
-failed Permission denied; adb root returned “adbd cannot run as root in production
-builds”. No code workaround or fake PASS. All four altered secure settings restored
-exactly; notification permission/flags unchanged. `accessibility/emulator_verification.json`
-records service PASS and focus false. Need authorized physical input/device and
-human screen-reader session for full acceptance; no claim of real-user testing.
-
-Final `git diff --check` and protected P1-path diff against baseline PASS.
-Generator `tool/write_p2_p3_report.py` gates the single HTML on current evidence,
-unchanged P1 paths, restored accessibility settings, packaging and APK freshness.
-Source vendor now145 whisper/ggml CPU inputs +18 RNNoise inputs; duplicate ASR
-contract/Markdown report and1311 unused vendor files removed. Five working docs
-plus one HTML remain; generated outputs/research stay ignored under build/.
-
-External acceptance needs: user-authorized physical Android devices (including
-OEM/SD and legacy API), representative speech/listening corpus and human usability
-sessions; P1-ready capture build for final P1→P2→P3 run. Independent P2/P3 work does
-not wait for that gate. No fabricated transcript/UI-only DONE or production signoff.
+API34 current additions: native catalog/rename/drafts/MP4/GIF/retry PASS, H264/HEVC
+outputs full decode PASS,6 real Tiny/Base vi/en/auto jobs + silence/cancel PASS
+(request3ms, drain+next decode515ms). `api34_*` logs and `api34/` reports. External
+fixture EACCES and binary-stdin truncation were harness failures; corrected with
+adb file-sync plus app-UID private copy and SHA256 before running. No chmod/root.
+Warm portrait screenshot after native/Flutter settle is clean; earlier stale-overlay
+capture retained, not accepted as visual PASS. Main APK installed with-r afterward.

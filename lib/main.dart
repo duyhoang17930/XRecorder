@@ -39,6 +39,10 @@ Future<void> main() async {
       ['whisper.cpp', 'ggml', 'RNNoise'],
       await rootBundle.loadString('assets/licenses/EDITOR_NATIVE_LICENSES.txt'),
     );
+    yield LicenseEntryWithLineBreaks([
+      'Unicode CLDR language names',
+      'Babel',
+    ], await rootBundle.loadString('assets/licenses/CLDR-LICENSE.txt'));
   });
   final settings = SettingsController(store: const AndroidSettingsStore());
   await settings.restore();

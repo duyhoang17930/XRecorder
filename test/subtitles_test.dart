@@ -115,6 +115,32 @@ void main() {
     },
   );
   test(
+    'speech request bounds reject unsupported work before native enqueue',
+    () {
+      TranscriptionRequest request({
+        int duration = 100,
+        String model = 'base',
+        String id = 'valid',
+      }) => TranscriptionRequest(
+        audioUri: Uri.parse('content://fixture/audio'),
+        durationMs: duration,
+        language: 'vi',
+        operationId: id,
+        model: model,
+      );
+      expect(request().toJson()['durationMs'], 100);
+      expect(request(duration: 600000).toJson()['durationMs'], 600000);
+      for (final duration in [0, 99, 600001]) {
+        expect(
+          () => request(duration: duration).toJson(),
+          throwsFormatException,
+        );
+      }
+      expect(() => request(model: 'unknown').toJson(), throwsFormatException);
+      expect(() => request(id: '../invalid').toJson(), throwsFormatException);
+    },
+  );
+  test(
     'unconfigured or unsupported remote ASR never receives the source',
     () async {
       var starts = 0;

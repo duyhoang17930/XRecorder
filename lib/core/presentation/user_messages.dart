@@ -22,6 +22,7 @@ enum UserOperation {
   export,
   loadPhoto,
   savePhoto,
+  saveSubtitles,
   share,
   rename,
   trash,
@@ -158,6 +159,8 @@ abstract final class UserMessages {
         "Couldn't open this photo. Check access or choose another file.",
       UserOperation.savePhoto =>
         "Couldn't save the photo. Check storage and try again.",
+      UserOperation.saveSubtitles =>
+        "Couldn't save the subtitle file. Choose another location and try again.",
       UserOperation.share =>
         "Couldn't open sharing. Check the file and try again.",
       UserOperation.rename =>

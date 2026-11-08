@@ -1,3 +1,4 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -107,8 +108,8 @@ class StudioBottomNavigation extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _destination(context, 'Video', AppIcons.videos, 0),
-                  _destination(context, 'Photo', AppIcons.photos, 1),
+                  _destination(context, context.l10n.video, AppIcons.videos, 0),
+                  _destination(context, context.l10n.photo, AppIcons.photos, 1),
                   Expanded(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -116,7 +117,7 @@ class StudioBottomNavigation extends StatelessWidget {
                         SizedBox.square(
                           dimension: AppSize.create,
                           child: Tooltip(
-                            message: 'Create',
+                            message: context.l10n.create,
                             child: FilledButton(
                               onPressed: onCreate,
                               style: FilledButton.styleFrom(
@@ -127,9 +128,9 @@ class StudioBottomNavigation extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 AppIcons.create,
-                                semanticLabel: 'Create',
+                                semanticLabel: context.l10n.create,
                                 size: AppIconSize.primary,
                               ),
                             ),
@@ -139,7 +140,7 @@ class StudioBottomNavigation extends StatelessWidget {
                         MediaQuery.withClampedTextScaling(
                           maxScaleFactor: AppSize.navigationLabelScale,
                           child: Text(
-                            'Create',
+                            context.l10n.create,
                             textAlign: TextAlign.center,
                             style: AppTypography.navigation.copyWith(
                               color: c.primary,
@@ -149,8 +150,13 @@ class StudioBottomNavigation extends StatelessWidget {
                       ],
                     ),
                   ),
-                  _destination(context, 'Edit', AppIcons.edit, 2),
-                  _destination(context, 'Settings', AppIcons.settings, 3),
+                  _destination(context, context.l10n.edit, AppIcons.edit, 2),
+                  _destination(
+                    context,
+                    context.l10n.settings,
+                    AppIcons.settings,
+                    3,
+                  ),
                 ],
               ),
             ),

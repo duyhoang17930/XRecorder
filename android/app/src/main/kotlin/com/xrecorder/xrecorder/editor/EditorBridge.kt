@@ -66,6 +66,27 @@ class EditorBridge(private val context: Context) : MethodChannel.MethodCallHandl
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        if (call.method == "subtitleDiagnostics") {
+            worker.execute {
+                try {
+                    val data = SubtitleDiagnostics.probe(call.arguments as Map<*, *>)
+                    main.post { result.success(data) }
+                } catch (error: Exception) {
+                    main.post { result.error("subtitle_probe", error.message, null) }
+                }
+            }
+            return
+        }
+        if (call.method == "editorDiagnostics") {
+            result.success(
+                mapOf(
+                    "activePreviews" to EditorPreview.activeCount(),
+                    "previewReleaseFailures" to EditorPreview.releaseFailureCount(),
+                    "previewLoads" to EditorPreview.loadCount(),
+                ),
+            )
+            return
+        }
         if (call.method.startsWith("transcription")) {
             transcription.handle(call, result)
             return
@@ -197,7 +218,9 @@ class EditorBridge(private val context: Context) : MethodChannel.MethodCallHandl
                                     try {
                                         require(
                                             exportResult.durationMs > 0 && temporary.length() > 0,
-                                        )
+                                        ) {
+                                            "Export produced no playable video (durationMs=${exportResult.durationMs}, bytes=${temporary.length()})."
+                                        }
                                         EditorOutput.publish(temporary, output)
                                         val uri = output.commit().toString()
                                         main.post {
@@ -223,6 +246,7 @@ class EditorBridge(private val context: Context) : MethodChannel.MethodCallHandl
                                 exportResult: ExportResult,
                                 exception: ExportException,
                             ) {
+                                android.util.Log.e("EditorProbe", "Media3 export failed", exception)
                                 temporary.delete()
                                 probe = null
                                 probeResult?.error("export_failed", exception.message, null)
@@ -233,6 +257,7 @@ class EditorBridge(private val context: Context) : MethodChannel.MethodCallHandl
                     .build()
             probe!!.start(composition, temporary.absolutePath)
         } catch (e: Exception) {
+            android.util.Log.e("EditorProbe", "Could not start export", e)
             temporary.delete()
             probe = null
             probeResult = null

@@ -1,3 +1,4 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/widgets/studio_widgets.dart';
@@ -44,26 +45,22 @@ class _SupportScreenState extends State<SupportScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Feedback & issue report')),
+    appBar: AppBar(title: Text(context.l10n.feedbackIssueReport)),
     body: ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        const Text(
-          'Describe what happened, what you expected, and how to reproduce it. Remove passwords, account details and private content before sharing. Nothing is uploaded here.',
-        ),
+        Text(context.l10n.describeWhatHappenedWhatYouExpectedAnd),
         TextField(
           controller: text,
           maxLength: 8000,
           minLines: 5,
           maxLines: 12,
-          decoration: const InputDecoration(labelText: 'Your report'),
+          decoration: InputDecoration(labelText: context.l10n.yourReport),
         ),
         CheckboxListTile(
           value: consent,
-          title: const Text('Include device diagnostics'),
-          subtitle: const Text(
-            'App version, Android API, manufacturer, model and ABI only. No logs, media paths or identifiers.',
-          ),
+          title: Text(context.l10n.includeDeviceDiagnostics),
+          subtitle: Text(context.l10n.appVersionAndroidApiManufacturerModelAnd),
           onChanged: busy
               ? null
               : (v) => run(() async {
@@ -93,17 +90,17 @@ class _SupportScreenState extends State<SupportScreen> {
           icon: const Icon(AppIcons.attachment),
           label: Text(
             attachment == null
-                ? 'Attach image or video (up to 25 MB)'
-                : 'Replace selected attachment',
+                ? context.l10n.attachImageOrVideoUpTo25
+                : context.l10n.replaceSelectedAttachment,
           ),
         ),
         if (attachment != null)
           TextButton(
             onPressed: busy ? null : () => setState(() => attachment = null),
-            child: const Text('Remove attachment'),
+            child: Text(context.l10n.removeAttachment),
           ),
         if (busy) const LinearProgressIndicator(),
-        if (message != null) Text(message!),
+        if (message != null) Text(context.message(message!)),
         FilledButton(
           onPressed: busy
               ? null
@@ -124,17 +121,15 @@ class _SupportScreenState extends State<SupportScreen> {
                     );
                   }
                 }),
-          child: const Text('Open share sheet'),
+          child: Text(context.l10n.openShareSheet),
         ),
         TextButton(
           onPressed: busy
               ? null
               : () => run(() => channel.invokeMethod<void>('openIssues')),
-          child: const Text('Open GitHub issues in browser'),
+          child: Text(context.l10n.openGithubIssuesInBrowser),
         ),
-        const Text(
-          'GitHub issues are public. Opening the browser does not submit this report.',
-        ),
+        Text(context.l10n.githubIssuesArePublicOpeningTheBrowser),
       ],
     ),
   );

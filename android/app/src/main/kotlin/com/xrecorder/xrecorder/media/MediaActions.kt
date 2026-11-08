@@ -16,6 +16,12 @@ import org.json.JSONObject
 
 /** Mutations are restricted to owned media. External folder grants remain read-only. */
 class MediaActions(private val context: Context) {
+    companion object {
+        // Only names emitted by this trash writer belong to its cleanup policy.
+        // Foreign imports/models in the directory must never become orphans.
+        private val managedTrashId =
+            Regex("[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}")
+    }
     private val resolver = context.contentResolver
     private val directory = File(context.filesDir, "trash").apply { mkdirs() }
 
@@ -216,7 +222,8 @@ class MediaActions(private val context: Context) {
         directory
             .listFiles()
             ?.filter { file ->
-                file.lastModified() < stale &&
+                managedTrashId.matches(file.nameWithoutExtension) &&
+                    file.lastModified() < stale &&
                     (file.extension == "part" ||
                         (file.extension == "bin" &&
                             listOf(".json", ".json.bak", ".json.new").none {
@@ -229,6 +236,7 @@ class MediaActions(private val context: Context) {
             .listFiles()
             ?.filter { it.name.endsWith(".json") || it.name.endsWith(".json.bak") }
             ?.map { it.name.removeSuffix(".bak").removeSuffix(".json") }
+            ?.filter { managedTrashId.matches(it) }
             ?.distinct()
             ?.forEach { id ->
                 try {

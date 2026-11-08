@@ -1,3 +1,4 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -41,18 +42,16 @@ class _EditorScreenState extends State<EditorScreen> {
         final discard = await showStudioDialog<bool>(
           context: context,
           builder: (dialog) => StudioDialog(
-            title: const Text('Leave without saving?'),
-            content: const Text(
-              'Recent edits could not be saved. Keep editing to retry. Your original videos are unchanged.',
-            ),
+            title: Text(context.l10n.leaveWithoutSaving),
+            content: Text(context.l10n.recentEditsCouldNotBeSavedKeep),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(dialog, false),
-                child: const Text('Keep editing'),
+                child: Text(context.l10n.keepEditing),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(dialog, true),
-                child: const Text('Leave'),
+                child: Text(context.l10n.leave),
               ),
             ],
           ),
@@ -73,16 +72,16 @@ class _EditorScreenState extends State<EditorScreen> {
     final name = await showStudioDialog<String>(
       context: context,
       builder: (dialog) => StudioDialog(
-        title: const Text('Project name'),
+        title: Text(context.l10n.projectName),
         content: TextField(
           controller: field,
           maxLength: 80,
-          decoration: const InputDecoration(labelText: 'Name'),
+          decoration: InputDecoration(labelText: context.l10n.name),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialog),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -90,7 +89,7 @@ class _EditorScreenState extends State<EditorScreen> {
                 Navigator.pop(dialog, field.text.trim());
               }
             },
-            child: const Text('Save name'),
+            child: Text(context.l10n.saveName),
           ),
         ],
       ),
@@ -208,25 +207,27 @@ class _EditorScreenState extends State<EditorScreen> {
     final model = controller;
     if (model == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Editor')),
+        appBar: AppBar(title: Text(context.l10n.editor)),
         body: Center(
           child: error == null
-              ? const StudioLoadingState(label: 'Opening your project…')
+              ? StudioLoadingState(label: context.l10n.openingYourProject)
               : Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      UserMessages.failure(
-                        error,
-                        operation: UserOperation.loadDrafts,
-                      ).text,
+                      context.message(
+                        UserMessages.failure(
+                          error,
+                          operation: UserOperation.loadDrafts,
+                        ).text,
+                      ),
                     ),
                     TextButton(
                       onPressed: () {
                         setState(() => error = null);
                         load();
                       },
-                      child: const Text('Retry'),
+                      child: Text(context.l10n.retry),
                     ),
                   ],
                 ),
@@ -249,7 +250,7 @@ class _EditorScreenState extends State<EditorScreen> {
               leading: BackButton(onPressed: leave),
               actions: [
                 IconButton(
-                  tooltip: 'Rename project',
+                  tooltip: context.l10n.renameProject,
                   onPressed: renameProject,
                   icon: const Icon(AppIcons.rename),
                 ),
@@ -275,12 +276,12 @@ class _EditorScreenState extends State<EditorScreen> {
                   spacing: 8,
                   children: [
                     IconButton(
-                      tooltip: 'Undo edit',
+                      tooltip: context.l10n.undoEdit,
                       onPressed: model.canUndo ? model.undo : null,
                       icon: const Icon(AppIcons.undo),
                     ),
                     IconButton(
-                      tooltip: 'Redo edit',
+                      tooltip: context.l10n.redoEdit,
                       onPressed: model.canRedo ? model.redo : null,
                       icon: const Icon(AppIcons.redo),
                     ),
@@ -291,7 +292,9 @@ class _EditorScreenState extends State<EditorScreen> {
                       icon: Icon(
                         exporting ? AppIcons.processing : AppIcons.export,
                       ),
-                      label: Text(exporting ? 'Starting…' : 'Export'),
+                      label: Text(
+                        exporting ? context.l10n.starting : context.l10n.export,
+                      ),
                     ),
                   ],
                 ),
@@ -301,19 +304,21 @@ class _EditorScreenState extends State<EditorScreen> {
               padding: const EdgeInsets.all(AppSpacing.md),
               children: [
                 Text(
-                  model.saveError != null
-                      ? UserMessages.failure(
-                          model.saveError,
-                          operation: UserOperation.saveDraft,
-                        ).text
-                      : (model.saving
-                            ? 'Saving draft…'
-                            : 'Saved · Originals unchanged'),
+                  context.message(
+                    model.saveError != null
+                        ? UserMessages.failure(
+                            model.saveError,
+                            operation: UserOperation.saveDraft,
+                          ).text
+                        : (model.saving
+                              ? context.l10n.savingDraft
+                              : context.l10n.savedOriginalsUnchanged),
+                  ),
                 ),
                 if (model.saveError != null)
                   TextButton(
                     onPressed: model.retrySave,
-                    child: const Text('Retry saving'),
+                    child: Text(context.l10n.retrySaving),
                   ),
                 if (project.clips.isNotEmpty)
                   EditorPreview(
@@ -324,30 +329,49 @@ class _EditorScreenState extends State<EditorScreen> {
                     },
                   )
                 else
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(vertical: AppSpacing.lg),
                     child: StudioEmptyState(
-                      title: 'Add your first clip',
-                      description: 'Edit a copy. Originals stay unchanged.',
+                      title: context.l10n.addYourFirstClip,
+                      description: context.l10n.editACopyOriginalsStayUnchanged,
                       icon: AppIcons.videos,
                     ),
                   ),
                 Text(
-                  '${(position.inMilliseconds / 1000).toStringAsFixed(1)} / ${(project.duration.inMilliseconds / 1000).toStringAsFixed(1)} seconds',
+                  context.l10n.playheadTime(
+                    context.displayValue(
+                      context.decimal(
+                        (position.inMilliseconds / 1000),
+                        digits: 1,
+                      ),
+                    ),
+                    context.displayValue(
+                      context.decimal(
+                        (project.duration.inMilliseconds / 1000),
+                        digits: 1,
+                      ),
+                    ),
+                  ),
                 ),
                 if (project.duration > Duration.zero)
                   Semantics(
-                    label: 'Preview position',
-                    child: Slider(
-                      value: position.inMilliseconds.toDouble().clamp(
-                        0,
-                        project.duration.inMilliseconds.toDouble(),
+                    label: context.l10n.previewPosition,
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: Slider(
+                        value: position.inMilliseconds.toDouble().clamp(
+                          0,
+                          project.duration.inMilliseconds.toDouble(),
+                        ),
+                        max: project.duration.inMilliseconds.toDouble(),
+                        onChanged: (v) =>
+                            preview.currentState?.command('seek', v.round()),
+                        semanticFormatterCallback: context.spokenValue(
+                          (strings, value) => strings.secondsValue(value),
+                          multiplier: .001,
+                          digits: 1,
+                        ),
                       ),
-                      max: project.duration.inMilliseconds.toDouble(),
-                      onChanged: (v) =>
-                          preview.currentState?.command('seek', v.round()),
-                      semanticFormatterCallback: (v) =>
-                          '${(v / 1000).toStringAsFixed(1)} seconds',
                     ),
                   ),
                 Wrap(
@@ -389,7 +413,7 @@ class _EditorScreenState extends State<EditorScreen> {
                               }
                             },
                       icon: const Icon(AppIcons.captions),
-                      label: const Text('Subtitles'),
+                      label: Text(context.l10n.subtitles),
                     ),
                     TextButton.icon(
                       onPressed: () async {
@@ -407,23 +431,24 @@ class _EditorScreenState extends State<EditorScreen> {
                         }
                       },
                       icon: const Icon(AppIcons.settings),
-                      label: const Text('Effects'),
+                      label: Text(context.l10n.effects),
                     ),
                     TextButton.icon(
                       onPressed: pickingMedia ? null : add,
                       icon: const Icon(AppIcons.create),
-                      label: const Text('Add clip'),
+                      label: Text(context.l10n.addClip),
                     ),
                     TextButton.icon(
                       onPressed: clip == null
                           ? null
                           : () => act(() => model.split(position)),
                       icon: const Icon(AppIcons.split),
-                      label: const Text('Split'),
+                      label: Text(context.l10n.split),
                     ),
                   ],
                 ),
-                if (project.clips.isNotEmpty) const SectionTitle('Timeline'),
+                if (project.clips.isNotEmpty)
+                  SectionTitle(context.l10n.timeline),
                 if (project.clips.isNotEmpty)
                   SizedBox(
                     height:
@@ -432,72 +457,91 @@ class _EditorScreenState extends State<EditorScreen> {
                           1,
                           2,
                         ),
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        for (var i = 0; i < project.clips.length; i++)
-                          InkWell(
-                            onTap: () {
-                              setState(() => selected = i);
-                              preview.currentState?.command(
-                                'seek',
-                                project.clips
-                                        .take(i)
-                                        .fold<int>(
-                                          0,
-                                          (total, c) =>
-                                              total + c.duration.inMilliseconds,
-                                        ) ~/
-                                    project.speed,
-                              );
-                            },
-                            child: Container(
-                              width: 150,
-                              margin: const EdgeInsets.only(right: 8),
-                              decoration: BoxDecoration(
-                                color: context.studioColors.elevated,
-                                borderRadius: BorderRadius.circular(
-                                  AppRadius.control,
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          for (var i = 0; i < project.clips.length; i++)
+                            InkWell(
+                              onTap: () {
+                                setState(() => selected = i);
+                                preview.currentState?.command(
+                                  'seek',
+                                  project.clips
+                                          .take(i)
+                                          .fold<int>(
+                                            0,
+                                            (total, c) =>
+                                                total +
+                                                c.duration.inMilliseconds,
+                                          ) ~/
+                                      project.speed,
+                                );
+                              },
+                              child: Container(
+                                width: 150,
+                                margin: const EdgeInsets.only(right: 8),
+                                decoration: BoxDecoration(
+                                  color: context.studioColors.elevated,
+                                  borderRadius: BorderRadius.circular(
+                                    AppRadius.control,
+                                  ),
+                                  border: Border.all(
+                                    color: selected == i
+                                        ? Theme.of(context).colorScheme.primary
+                                        : context.studioColors.border,
+                                    width: AppBorder.focused,
+                                  ),
                                 ),
-                                border: Border.all(
-                                  color: selected == i
-                                      ? Theme.of(context).colorScheme.primary
-                                      : context.studioColors.border,
-                                  width: AppBorder.focused,
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: FutureBuilder<Uint8List?>(
-                                      future: frame(
-                                        project.clips[i].mediaId,
-                                        project.clips[i].inPoint.inMilliseconds,
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: FutureBuilder<Uint8List?>(
+                                        future: frame(
+                                          project.clips[i].mediaId,
+                                          project
+                                              .clips[i]
+                                              .inPoint
+                                              .inMilliseconds,
+                                        ),
+                                        builder: (context, snapshot) =>
+                                            snapshot.data == null
+                                            ? const Center(
+                                                child: Icon(AppIcons.videos),
+                                              )
+                                            : Image.memory(
+                                                snapshot.data!,
+                                                fit: BoxFit.cover,
+                                              ),
                                       ),
-                                      builder: (context, snapshot) =>
-                                          snapshot.data == null
-                                          ? const Center(
-                                              child: Icon(AppIcons.videos),
-                                            )
-                                          : Image.memory(
-                                              snapshot.data!,
-                                              fit: BoxFit.cover,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(
+                                        AppSpacing.xs,
+                                      ),
+                                      child: Text(
+                                        context.l10n.clipDurationLabel(
+                                          context.displayValue(i + 1),
+                                          context.displayValue(
+                                            context.decimal(
+                                              (project
+                                                      .clips[i]
+                                                      .duration
+                                                      .inMilliseconds /
+                                                  1000),
+                                              digits: 1,
                                             ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(
-                                      AppSpacing.xs,
-                                    ),
-                                    child: Text(
-                                      'Clip ${i + 1} · ${(project.clips[i].duration.inMilliseconds / 1000).toStringAsFixed(1)}s',
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 for (var i = 0; i < project.clips.length; i++)
@@ -510,9 +554,22 @@ class _EditorScreenState extends State<EditorScreen> {
                       children: [
                         ListTile(
                           onTap: () => setState(() => selected = i),
-                          title: Text('${i + 1}. ${project.clips[i].title}'),
+                          title: Text(
+                            context.l10n.sequenceLabel(
+                              context.displayValue(i + 1),
+                              context.displayValue(project.clips[i].title),
+                            ),
+                          ),
                           subtitle: Text(
-                            '${(project.clips[i].duration.inMilliseconds / 1000).toStringAsFixed(1)}s',
+                            context.l10n.secondsShort(
+                              context.displayValue(
+                                context.decimal(
+                                  (project.clips[i].duration.inMilliseconds /
+                                      1000),
+                                  digits: 1,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                         Padding(
@@ -523,33 +580,33 @@ class _EditorScreenState extends State<EditorScreen> {
                             alignment: WrapAlignment.end,
                             children: [
                               IconButton(
-                                tooltip: 'Move earlier',
+                                tooltip: context.l10n.moveEarlier,
                                 onPressed: i == 0
                                     ? null
                                     : () => model.move(i, i - 1),
                                 icon: const Icon(AppIcons.moveEarlier),
                               ),
                               IconButton(
-                                tooltip: 'Move later',
+                                tooltip: context.l10n.moveLater,
                                 onPressed: i == project.clips.length - 1
                                     ? null
                                     : () => model.move(i, i + 1),
                                 icon: const Icon(AppIcons.moveLater),
                               ),
                               IconButton(
-                                tooltip: 'Duplicate clip',
+                                tooltip: context.l10n.duplicateClip,
                                 onPressed: () => act(() => model.duplicate(i)),
                                 icon: const Icon(AppIcons.create),
                               ),
                               IconButton(
-                                tooltip: 'Replace source',
+                                tooltip: context.l10n.replaceSource,
                                 onPressed: pickingMedia
                                     ? null
                                     : () => relink(i),
                                 icon: const Icon(AppIcons.folderOpen),
                               ),
                               IconButton(
-                                tooltip: 'Remove clip from project',
+                                tooltip: context.l10n.removeClipFromProject,
                                 onPressed: () => model.remove(i),
                                 icon: const Icon(AppIcons.close),
                               ),
@@ -561,12 +618,29 @@ class _EditorScreenState extends State<EditorScreen> {
                   ),
                 if (clip != null) ...[
                   const Divider(),
-                  Text('Selected clip: ${clip.title}'),
                   Text(
-                    'Trim ${(clip.inPoint.inMilliseconds / 1000).toStringAsFixed(1)}–${(clip.outPoint.inMilliseconds / 1000).toStringAsFixed(1)}s',
+                    context.l10n.selectedClipName(
+                      context.displayValue(clip.title),
+                    ),
+                  ),
+                  Text(
+                    context.l10n.trimTimeRange(
+                      context.displayValue(
+                        context.decimal(
+                          (clip.inPoint.inMilliseconds / 1000),
+                          digits: 1,
+                        ),
+                      ),
+                      context.displayValue(
+                        context.decimal(
+                          (clip.outPoint.inMilliseconds / 1000),
+                          digits: 1,
+                        ),
+                      ),
+                    ),
                   ),
                   _EditRange(
-                    label: 'Trim clip',
+                    label: context.l10n.trimClip,
                     seconds: true,
                     key: ValueKey(
                       'trim-$selected-${clip.inPoint}-${clip.outPoint}',
@@ -593,7 +667,11 @@ class _EditorScreenState extends State<EditorScreen> {
                       clip.copyWith(rotation: (clip.rotation + 90) % 360),
                     ),
                     icon: const Icon(AppIcons.rotate),
-                    label: Text('Rotate · ${clip.rotation}°'),
+                    label: Text(
+                      context.l10n.rotationValue(
+                        context.displayValue(clip.rotation),
+                      ),
+                    ),
                   ),
                   Wrap(
                     children: [
@@ -603,7 +681,9 @@ class _EditorScreenState extends State<EditorScreen> {
                           clip.copyWith(flipH: !clip.flipH),
                         ),
                         child: Text(
-                          'Flip horizontal${clip.flipH ? ' · On' : ''}',
+                          context.l10n.flipHorizontalState(
+                            clip.flipH ? ' · ${context.l10n.on}' : '',
+                          ),
                         ),
                       ),
                       TextButton(
@@ -612,7 +692,9 @@ class _EditorScreenState extends State<EditorScreen> {
                           clip.copyWith(flipV: !clip.flipV),
                         ),
                         child: Text(
-                          'Flip vertical${clip.flipV ? ' · On' : ''}',
+                          context.l10n.flipVerticalState(
+                            clip.flipV ? ' · ${context.l10n.on}' : '',
+                          ),
                         ),
                       ),
                       if (clip.isImage)
@@ -626,13 +708,17 @@ class _EditorScreenState extends State<EditorScreen> {
                                 sourceDuration: Duration(seconds: seconds),
                               ),
                             ),
-                            child: Text('Photo ${seconds}s'),
+                            child: Text(
+                              context.l10n.photoDuration(
+                                context.displayValue(seconds),
+                              ),
+                            ),
                           ),
                     ],
                   ),
-                  const Text('Crop left / right'),
+                  Text(context.l10n.cropLeftRight),
                   _EditRange(
-                    label: 'Crop left and right',
+                    label: context.l10n.cropLeftAndRight,
                     key: ValueKey(
                       'horizontal-$selected-${clip.cropLeft}-${clip.cropRight}',
                     ),
@@ -646,9 +732,9 @@ class _EditorScreenState extends State<EditorScreen> {
                       ),
                     ),
                   ),
-                  const Text('Crop top / bottom'),
+                  Text(context.l10n.cropTopBottom),
                   _EditRange(
-                    label: 'Crop top and bottom',
+                    label: context.l10n.cropTopAndBottom,
                     key: ValueKey(
                       'vertical-$selected-${clip.cropTop}-${clip.cropBottom}',
                     ),
@@ -675,7 +761,7 @@ class _EditorScreenState extends State<EditorScreen> {
                         flipV: false,
                       ),
                     ),
-                    child: const Text('Reset crop & rotation'),
+                    child: Text(context.l10n.resetCropRotation),
                   ),
                 ],
               ],
@@ -711,16 +797,19 @@ class _EditRangeState extends State<_EditRange> {
   @override
   Widget build(BuildContext context) => Semantics(
     label: widget.label,
-    child: RangeSlider(
-      values: value,
-      max: widget.max,
-      onChanged: (v) {
-        if (v.end - v.start >= widget.minimum) setState(() => value = v);
-      },
-      onChangeEnd: (_) => widget.onCommit(value),
-      semanticFormatterCallback: (v) => widget.seconds
-          ? '${(v / 1000).toStringAsFixed(1)} seconds'
-          : '${(v * 100).round()} percent',
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: RangeSlider(
+        values: value,
+        max: widget.max,
+        onChanged: (v) {
+          if (v.end - v.start >= widget.minimum) setState(() => value = v);
+        },
+        onChangeEnd: (_) => widget.onCommit(value),
+        semanticFormatterCallback: widget.seconds
+            ? context.spokenValue((strings, value) => strings.secondsValue(value), multiplier: .001, digits: 1)
+            : context.spokenValue((strings, value) => strings.accessibilityValue40(value), multiplier: 100),
+      ),
     ),
   );
 }

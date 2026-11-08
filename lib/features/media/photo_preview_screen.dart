@@ -1,3 +1,4 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,7 +25,7 @@ class _PhotoPreviewScreenState extends State<PhotoPreviewScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Photo preview')),
+    appBar: AppBar(title: Text(context.l10n.photoPreview)),
     body: FutureBuilder<Uint8List?>(
       future: data,
       builder: (context, snapshot) {
@@ -37,12 +38,14 @@ class _PhotoPreviewScreenState extends State<PhotoPreviewScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  UserMessages.failure(
-                    snapshot.error,
-                    operation: UserOperation.loadPhoto,
-                  ).text,
+                  context.message(
+                    UserMessages.failure(
+                      snapshot.error,
+                      operation: UserOperation.loadPhoto,
+                    ).text,
+                  ),
                 ),
-                TextButton(onPressed: retry, child: const Text('Retry')),
+                TextButton(onPressed: retry, child: Text(context.l10n.retry)),
               ],
             ),
           );
@@ -57,8 +60,8 @@ class _PhotoPreviewScreenState extends State<PhotoPreviewScreen> {
               errorBuilder: (_, _, _) => Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('Could not open this image. Try another photo.'),
-                  TextButton(onPressed: retry, child: const Text('Retry')),
+                  Text(context.l10n.couldNotOpenThisImageTryAnother),
+                  TextButton(onPressed: retry, child: Text(context.l10n.retry)),
                 ],
               ),
             ),

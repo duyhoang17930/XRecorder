@@ -44,6 +44,7 @@ class SubtitleOverlay(
     private val fill = Paint().apply { color = background }
     private var previous: String? = null
     private var width = 0
+    private var height = 0
     private var layout: StaticLayout? = null
 
     override fun onDraw(canvas: Canvas, presentationTimeUs: Long) {
@@ -54,9 +55,10 @@ class SubtitleOverlay(
         }
         val text = cue?.get("text") as? String ?: return
         val available = (canvas.width * .86f).roundToInt().coerceAtLeast(1)
-        if (previous != text || width != available) {
+        if (previous != text || width != available || height != canvas.height) {
             previous = text
             width = available
+            height = canvas.height
             paint.textSize = min(canvas.width, canvas.height) * fraction
             fun build() =
                 StaticLayout.Builder.obtain(text, 0, text.length, paint, available)

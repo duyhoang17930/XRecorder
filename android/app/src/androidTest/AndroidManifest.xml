@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <instrumentation
+        android:name="com.xrecorder.xrecorder.qa.Task07AccessibilityInstrumentation"
+        android:targetPackage="com.xrecorder.xrecorder"
+        android:functionalTest="true" />
+</manifest>

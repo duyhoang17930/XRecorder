@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:ui' as ui;
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,6 +27,10 @@ void main() {
           home: Scaffold(body: Text('P2/P3 synthetic media verification')),
         ),
       );
+      if (const bool.fromEnvironment('P2_P3_SOAK')) {
+        await _soakEditor(tester, binding);
+        return;
+      }
       final catalog = AndroidMediaRepository();
       final actions = AndroidMediaActions();
       addTearDown(catalog.dispose);
@@ -276,4 +281,110 @@ void main() {
     },
     timeout: const Timeout(Duration(minutes: 5)),
   );
+}
+
+Future<void> _soakEditor(
+  WidgetTester tester,
+  IntegrationTestWidgetsFlutterBinding binding,
+) async {
+  const engine = AndroidEditProjectRepository.channel;
+  const privateFixtures = bool.fromEnvironment('QA_PRIVATE_FIXTURES');
+  final sourceFile = File(
+    privateFixtures
+        ? '/data/user/0/com.xrecorder.xrecorder/files/trash/p2_p3_audio_video.mp4'
+        : '/sdcard/Android/data/com.xrecorder.xrecorder/files/media/p2_p3_audio_video.mp4',
+  );
+  final originalBytes = await sourceFile.readAsBytes();
+  final source = TimelineClip(
+    mediaId: privateFixtures
+        ? 'content://com.xrecorder.xrecorder.files/trash/p2_p3_audio_video.mp4'
+        : 'content://com.xrecorder.xrecorder.files/media/p2_p3_audio_video.mp4',
+    inPoint: Duration.zero,
+    outPoint: const Duration(seconds: 4),
+    sourceDuration: const Duration(seconds: 4),
+  );
+  final project = EditProject(
+    id: 'quality_soak',
+    updatedAt: DateTime.now(),
+    clips: [source],
+    effects: {'height': 480, 'fps': 30, 'bitrate': 1000000},
+  );
+  final disposeMs = <int>[];
+  for (var cycle = 0; cycle < 30; cycle++) {
+    final key = GlobalKey<EditorPreviewState>();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: EditorPreview(key: key, project: project, onPosition: (_) {}),
+        ),
+      ),
+    );
+    for (var n = 0; n < 30 && key.currentState?.channel == null; n++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    expect(key.currentState?.channel, isNotNull);
+    await key.currentState!.command('play');
+    await tester.pump(const Duration(milliseconds: 500));
+    await key.currentState!.command('seek', 1000);
+    expect(key.currentState!.error, isNull);
+    final elapsed = Stopwatch()..start();
+    await tester.pumpWidget(const SizedBox());
+    Map<String, dynamic> state = {};
+    for (var n = 0; n < 30; n++) {
+      await tester.pump(const Duration(milliseconds: 100));
+      state = (await engine.invokeMapMethod<String, dynamic>(
+        'editorDiagnostics',
+      ))!;
+      if (state['activePreviews'] == 0) break;
+    }
+    expect(state['activePreviews'], 0);
+    expect(
+      state['previewReleaseFailures'],
+      0,
+      reason: 'A removed view must not hide a native player release timeout',
+    );
+    disposeMs.add(elapsed.elapsedMilliseconds);
+    debugPrint('FINALQA_SOAK=preview_${cycle + 1}');
+  }
+  Future<Map<String, dynamic>> job(String id) async =>
+      (jsonDecode((await engine.invokeMethod<String>('exportList'))!) as List)
+          .cast<Map<String, dynamic>>()
+          .firstWhere((row) => row['id'] == id);
+  final cancelled = <String>[];
+  final long = project.copyWith(clips: List.generate(30, (_) => source));
+  for (var cycle = 0; cycle < 20; cycle++) {
+    final id = (await engine.invokeMethod<String>(
+      'exportStart',
+      long.toJson(),
+    ))!;
+    for (var n = 0; n < 150 && (await job(id))['state'] == 'queued'; n++) {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    }
+    await Future<void>.delayed(const Duration(milliseconds: 900));
+    expect((await job(id))['state'], 'running');
+    await engine.invokeMethod<void>('exportCancel', id);
+    expect((await job(id))['state'], 'cancelled');
+    expect((await job(id))['uri'], isNull);
+    cancelled.add(id);
+    debugPrint('FINALQA_SOAK=export_cancel_${cycle + 1}');
+    await tester.pump(const Duration(milliseconds: 200));
+  }
+  await tester.pumpWidget(
+    const MaterialApp(home: Scaffold(body: Text('Soak completed'))),
+  );
+  expect(await sourceFile.readAsBytes(), orderedEquals(originalBytes));
+  binding.reportData = {
+    'previewCycles': 30,
+    'activePreviewsAfter': 0,
+    'previewReleaseFailures': 0,
+    'disposeMs': disposeMs,
+    'exportCancelCycles': cancelled.length,
+    'cancelledJobIds': cancelled,
+    'sourcePreserved': true,
+    'scope': 'Real platform views/CompositionPlayer and actual Transformer start/cancel; sampled process memory is separate.',
+  };
+  if (const bool.fromEnvironment('SOAK_RETAINED')) {
+    debugPrint('FINALQA_SOAK=retained_idle');
+    await Future<void>.delayed(const Duration(seconds: 15));
+  }
 }

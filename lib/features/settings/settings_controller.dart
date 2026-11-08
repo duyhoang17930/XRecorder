@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 
 import '../../core/persistence/settings_store.dart';
 import '../../core/domain/models.dart';
+import '../../l10n/app_languages.dart';
+import '../editor/speech_languages.dart';
 
 /// Preferences for future capture sessions; not a claim of device capability.
 class SettingsController extends ChangeNotifier {
@@ -19,6 +21,21 @@ class SettingsController extends ChangeNotifier {
   final _themeMode = ValueNotifier(ThemeMode.dark);
   ThemeMode get themeMode => _themeMode.value;
   ValueListenable<ThemeMode> get themeModeListenable => _themeMode;
+  final _appLocale = ValueNotifier<Locale?>(null);
+  Locale? get appLocale => _appLocale.value;
+  ValueListenable<Locale?> get appLocaleListenable => _appLocale;
+  String preferredSpeechLanguage = 'auto';
+
+  void setSpeechLanguage(String code) {
+    if (SpeechLanguages.supports(code) && code != preferredSpeechLanguage) {
+      update(() => preferredSpeechLanguage = code);
+    }
+  }
+
+  void setAppLocale(Locale? locale) {
+    final supported = AppLanguages.resolveSaved(locale?.toLanguageTag());
+    if (supported != appLocale) update(() => _appLocale.value = supported);
+  }
 
   void setThemeMode(ThemeMode mode) {
     if (mode != themeMode) update(() => _themeMode.value = mode);
@@ -90,6 +107,8 @@ class SettingsController extends ChangeNotifier {
     'version': 2,
     'values': {
       'themeMode': themeMode.name,
+      'appLocale': appLocale?.toLanguageTag() ?? 'system',
+      'speechLanguage': preferredSpeechLanguage,
       'resolution': resolution,
       'fps': fps,
       'bitrate': bitrate,
@@ -113,6 +132,13 @@ class SettingsController extends ChangeNotifier {
   };
 
   void _apply(Map<String, dynamic> values) {
+    _appLocale.value = AppLanguages.resolveSaved(values['appLocale']);
+    final savedSpeechLanguage = values['speechLanguage'];
+    preferredSpeechLanguage =
+        savedSpeechLanguage is String &&
+            SpeechLanguages.supports(savedSpeechLanguage)
+        ? savedSpeechLanguage
+        : 'auto';
     _themeMode.value = ThemeMode.values.firstWhere(
       (mode) => mode.name == values['themeMode'],
       orElse: () => ThemeMode.dark,
@@ -251,6 +277,8 @@ class SettingsController extends ChangeNotifier {
     _writable = true;
     update(() {
       _themeMode.value = ThemeMode.dark;
+      _appLocale.value = null;
+      preferredSpeechLanguage = 'auto';
       resolution = '1080p FHD';
       fps = '60';
       bitrate = '16 Mbps';
@@ -277,6 +305,7 @@ class SettingsController extends ChangeNotifier {
   void dispose() {
     _disposed = true;
     _themeMode.dispose();
+    _appLocale.dispose();
     super.dispose();
   }
 }
@@ -289,4 +318,6 @@ class SettingsScope extends InheritedNotifier<SettingsController> {
   }) : super(notifier: controller);
   static SettingsController of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<SettingsScope>()!.notifier!;
+  static SettingsController? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<SettingsScope>()?.notifier;
 }

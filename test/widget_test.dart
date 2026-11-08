@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xrecorder/app/app.dart';
 import 'package:xrecorder/core/domain/models.dart';
+import 'package:xrecorder/core/widgets/studio_widgets.dart';
 
 import 'fixtures/catalog.dart';
 
@@ -34,6 +35,37 @@ void main() {
     await tester.pumpAndSettle();
     return repository;
   }
+
+  testWidgets('Library date headings group by calendar day, not minute', (
+    tester,
+  ) async {
+    final catalog = TestCatalog();
+    catalog.items.clear();
+    for (final (index, date) in [
+      DateTime(2026, 11, 8, 11, 45),
+      DateTime(2026, 11, 8, 12, 30),
+      DateTime(2026, 11, 9, 12, 30),
+    ].indexed) {
+      catalog.items.add(
+        MediaItem(
+          id: 'content://test/date_$index',
+          uri: Uri.parse('content://test/date_$index'),
+          kind: MediaKind.video,
+          displayName: 'Day clip $index.mp4',
+          mimeType: 'video/mp4',
+          sizeBytes: 2048,
+          createdAt: date,
+          modifiedAt: date,
+          source: MediaSource.recording,
+        ),
+      );
+    }
+    await start(tester, catalog: catalog, size: const Size(1000, 1600));
+    expect(find.byType(StudioSectionLabel), findsNWidgets(2));
+    expect(find.text('11/8/2026'), findsOneWidget);
+    expect(find.text('11/9/2026'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets(
     'Library search survives tab navigation and real IDs open details',
@@ -129,7 +161,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byTooltip('Storage'));
       await tester.pumpAndSettle();
-      expect(find.text('30.0 KB'), findsOneWidget);
+      expect(find.text('30.0 KiB'), findsOneWidget);
       await tester.scrollUntilVisible(
         find.text('Device free space'),
         200,

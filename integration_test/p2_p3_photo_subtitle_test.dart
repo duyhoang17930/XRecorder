@@ -22,7 +22,9 @@ void main() {
       );
       const media = AndroidMediaRepository.channel;
       const engine = AndroidEditProjectRepository.channel;
-      const root = 'content://com.xrecorder.xrecorder.files/media/';
+      const root = bool.fromEnvironment('QA_PRIVATE_FIXTURES')
+          ? 'content://com.xrecorder.xrecorder.files/trash/'
+          : 'content://com.xrecorder.xrecorder.files/media/';
       final catalog = AndroidMediaRepository();
       addTearDown(catalog.dispose);
       Future<ui.Image> image(Uint8List bytes) async {
@@ -47,6 +49,14 @@ void main() {
         expect(
           (actual.width, actual.height),
           (expected.width, expected.height),
+        );
+        final metadata = await catalog.find(
+          '${root}p2_p3_$name.${name == 'wide' ? 'png' : 'jpg'}',
+        );
+        expect(
+          (metadata!.width, metadata.height),
+          (expected.width, expected.height),
+          reason: 'Library/editor display dimensions must agree with EXIF-normalized pixels',
         );
         final a = (await actual.toByteData())!.buffer.asUint8List(),
             b = (await expected.toByteData())!.buffer.asUint8List();

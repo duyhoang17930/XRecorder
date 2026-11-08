@@ -1,10 +1,12 @@
+import 'package:xrecorder/l10n/localization.dart';
+
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/domain/models.dart';
+import '../../core/presentation/thumbnail_image.dart';
 import '../../core/widgets/studio_widgets.dart';
 import '../../core/widgets/studio_create_sheet.dart';
 import 'media_repository.dart';
@@ -166,18 +168,16 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
       final confirmed = await showStudioDialog<bool>(
         context: context,
         builder: (dialog) => StudioDialog(
-          title: const Text('Disconnect this folder?'),
-          content: const Text(
-            'Files stay in the folder. Drafts using these files may need you to select the folder again.',
-          ),
+          title: Text(context.l10n.disconnectThisFolder),
+          content: Text(context.l10n.filesStayInTheFolderDraftsUsing),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialog, false),
-              child: const Text('Cancel'),
+              child: Text(context.l10n.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.pop(dialog, true),
-              child: const Text('Disconnect'),
+              child: Text(context.l10n.disconnect),
             ),
           ],
         ),
@@ -206,11 +206,11 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
         child: ListView(
           shrinkWrap: true,
           children: [
-            const StudioSheetHeader(title: 'Sort media'),
+            StudioSheetHeader(title: context.l10n.sortMedia),
             for (final value in MediaSort.values)
               if (value != MediaSort.duration || widget.kind == MediaKind.video)
                 ListTile(
-                  title: Text(value.label),
+                  title: Text(context.message(value.label)),
                   selected: value == _sort,
                   leading: Icon(
                     value == _sort ? AppIcons.selected : AppIcons.unselected,
@@ -236,9 +236,10 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
             child: ListView(
               shrinkWrap: true,
               children: [
-                const StudioSheetHeader(
-                  title: 'Storage',
-                  description: 'App-owned media only. Selected external folders are excluded.',
+                StudioSheetHeader(
+                  title: context.l10n.storage,
+                  description:
+                      context.l10n.appOwnedMediaOnlySelectedExternalFolders,
                   icon: AppIcons.storage,
                 ),
                 for (final entry in {
@@ -249,8 +250,8 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                   'Device free space': 'free',
                 }.entries)
                   ListTile(
-                    title: Text(entry.key),
-                    trailing: Text(formatBytes(values[entry.value] ?? 0)),
+                    title: Text(context.message(entry.key)),
+                    trailing: Text(context.fileSize(values[entry.value] ?? 0)),
                   ),
               ],
             ),
@@ -304,17 +305,19 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                     style: AppTypography.section.copyWith(color: c.primary),
                   ),
                   SectionTitle(
-                    video ? 'Video Library' : 'Photo Library',
+                    video
+                        ? context.l10n.videoLibrary
+                        : context.l10n.photoLibrary,
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          tooltip: 'Trash',
+                          tooltip: context.l10n.trash,
                           onPressed: () => context.push('/trash'),
                           icon: const Icon(AppIcons.trash),
                         ),
                         IconButton(
-                          tooltip: 'Storage',
+                          tooltip: context.l10n.storage,
                           onPressed: _storage,
                           icon: const Icon(AppIcons.storage),
                         ),
@@ -328,14 +331,16 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                   const StudioQuickTools(compact: true),
                   const SizedBox(height: AppSpacing.xs),
                   Text(
-                    'Screenshot minimizes the app after approval · 3s delay.',
+                    context.l10n.screenshotMinimizesTheAppAfterApproval3s,
                     style: AppTypography.caption.copyWith(color: c.muted),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   if (_items.isNotEmpty || _query.isNotEmpty) ...[
                     StudioSearchField(
                       controller: _search,
-                      hintText: video ? 'Search videos' : 'Search photos',
+                      hintText: video
+                          ? context.l10n.searchVideos
+                          : context.l10n.searchPhotos,
                       onChanged: (value) => setState(() => _query = value),
                     ),
                     const SizedBox(height: AppSpacing.sm),
@@ -345,7 +350,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                     runSpacing: AppSpacing.xxs,
                     children: [
                       ChoiceChip(
-                        label: const Text('App media'),
+                        label: Text(context.l10n.appMedia),
                         selected: _folder == null,
                         onSelected: (_) {
                           if (_folder == null) return;
@@ -354,7 +359,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                         },
                       ),
                       ChoiceChip(
-                        label: const Text('Choose folder'),
+                        label: Text(context.l10n.chooseFolder),
                         avatar: const Icon(AppIcons.folderOpen),
                         selected: _folder != null,
                         onSelected: _pickingFolder
@@ -364,11 +369,11 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                       if (_folder != null)
                         TextButton(
                           onPressed: _pickingFolder ? null : _disconnectFolder,
-                          child: const Text('Disconnect folder'),
+                          child: Text(context.l10n.disconnectFolder),
                         ),
                       if (_items.length > 1)
                         ActionChip(
-                          label: Text(_sort.label),
+                          label: Text(context.message(_sort.label)),
                           avatar: const Icon(AppIcons.sort),
                           onPressed: _chooseSort,
                         ),
@@ -376,12 +381,12 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                   ),
                   SectionTitle(
                     _query.isNotEmpty
-                        ? 'Search results'
+                        ? context.l10n.searchResults
                         : video
-                        ? 'Recent videos'
-                        : 'Your photos',
+                        ? context.l10n.recentVideos
+                        : context.l10n.yourPhotos,
                     trailing: Text(
-                      '${items.length} items',
+                      context.l10n.itemCount(items.length),
                       style: TextStyle(color: c.muted),
                     ),
                   ),
@@ -390,20 +395,20 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
             ),
           ),
           if (_loading)
-            const SliverToBoxAdapter(
-              child: StudioLoadingState(label: 'Loading your media…'),
+            SliverToBoxAdapter(
+              child: StudioLoadingState(label: context.l10n.loadingYourMedia),
             )
           else if (_error != null)
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
               sliver: SliverToBoxAdapter(
                 child: StudioEmptyState(
-                  title: 'Library unavailable',
-                  description: _error,
+                  title: context.l10n.libraryUnavailable,
+                  description: context.message(_error!),
                   icon: AppIcons.folderUnavailable,
                   action: OutlinedButton(
                     onPressed: _load,
-                    child: const Text('Retry'),
+                    child: Text(context.l10n.retry),
                   ),
                 ),
               ),
@@ -416,19 +421,21 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                   title: _query.isEmpty
                       ? (_folder != null
                             ? (video
-                                  ? 'No videos in this folder'
-                                  : 'No photos in this folder')
+                                  ? context.l10n.noVideosInThisFolder
+                                  : context.l10n.noPhotosInThisFolder)
                             : (video
-                                  ? 'No recordings yet'
-                                  : 'No screenshots yet'))
-                      : 'No matching media',
+                                  ? context.l10n.noRecordingsYet
+                                  : context.l10n.noScreenshotsYet))
+                      : context.l10n.noMatchingMedia,
                   description: _query.isEmpty
                       ? (_folder != null
-                            ? 'Only files in this folder are shown.'
+                            ? context.l10n.onlyFilesInThisFolderAreShown
                             : video
-                            ? 'Your videos will appear here.'
-                            : 'Your screenshots and edited photos will appear here.')
-                      : 'Try a different name or browse another folder.',
+                            ? context.l10n.yourVideosWillAppearHere
+                            : context
+                                  .l10n
+                                  .yourScreenshotsAndEditedPhotosWillAppear)
+                      : context.l10n.tryADifferentNameOrBrowseAnother,
                   icon: video ? AppIcons.videos : AppIcons.photos,
                   action: _query.isNotEmpty
                       ? TextButton(
@@ -436,7 +443,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                             _search.clear();
                             setState(() => _query = '');
                           },
-                          child: const Text('Clear search'),
+                          child: Text(context.l10n.clearSearch),
                         )
                       : _folder != null
                       ? TextButton(
@@ -444,7 +451,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                             setState(() => _folder = null);
                             _load();
                           },
-                          child: const Text('Show app media'),
+                          child: Text(context.l10n.showAppMedia),
                         )
                       : null,
                 ),
@@ -472,8 +479,11 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                         padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                         child: StudioCard(
                           padding: EdgeInsets.zero,
-                          clipBehavior: Clip.hardEdge,
+                          // Content is inset and thumbnails clip themselves. Bound
+                          // ink at the source rather than clipping every scroll frame.
+                          clipBehavior: Clip.none,
                           child: InkWell(
+                            borderRadius: BorderRadius.circular(AppRadius.card),
                             onTap: () => details(item),
                             child: Padding(
                               padding: const EdgeInsets.all(AppSpacing.sm),
@@ -548,7 +558,16 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                                         ),
                                         const SizedBox(height: AppSpacing.xxs),
                                         Text(
-                                          '${formatBytes(item.sizeBytes)}${item.duration == null ? '' : ' · ${_duration(item.duration!)}'}',
+                                          context.l10n.mediaSizeDuration(
+                                            context.displayValue(
+                                              context.fileSize(item.sizeBytes),
+                                            ),
+                                            context.displayValue(
+                                              item.duration == null
+                                                  ? ''
+                                                  : ' · ${_duration(item.duration!)}',
+                                            ),
+                                          ),
                                           style: AppTypography.bodySmall
                                               .copyWith(color: c.muted),
                                         ),
@@ -556,12 +575,14 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                                     ),
                                   ),
                                   PopupMenuButton<String>(
-                                    tooltip: 'Actions for ${item.displayName}',
+                                    tooltip: context.l10n.mediaActionsFor(
+                                      context.displayValue(item.displayName),
+                                    ),
                                     onSelected: (_) => details(item),
                                     itemBuilder: (_) => [
-                                      const PopupMenuItem(
+                                      PopupMenuItem(
                                         value: 'details',
-                                        child: Text('Open details'),
+                                        child: Text(context.l10n.openDetails),
                                       ),
                                     ],
                                     icon: const Icon(AppIcons.more),
@@ -590,8 +611,8 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
   }
 
   String _day(DateTime value) => value.millisecondsSinceEpoch == 0
-      ? 'Date unavailable'
-      : '${value.year}-${value.month.toString().padLeft(2, '0')}-${value.day.toString().padLeft(2, '0')}';
+      ? context.l10n.dateUnavailable
+      : context.calendarDate(value);
 }
 
 class MediaThumbnail extends StatefulWidget {
@@ -602,15 +623,17 @@ class MediaThumbnail extends StatefulWidget {
 }
 
 class _MediaThumbnailState extends State<MediaThumbnail> {
-  Future<Uint8List>? _image;
+  Future<ThumbnailImage>? _image;
   CatalogRepository? _repository;
+  Future<ThumbnailImage> _loadImage() =>
+      MediaScope.thumbnail(context, widget.item).then(ThumbnailImage.new);
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final repository = MediaScope.of(context);
     if (_repository != repository || _image == null) {
       _repository = repository;
-      _image = MediaScope.thumbnail(context, widget.item);
+      _image = _loadImage();
     }
   }
 
@@ -619,17 +642,17 @@ class _MediaThumbnailState extends State<MediaThumbnail> {
     super.didUpdateWidget(oldWidget);
     if (MediaScope.thumbnailKey(oldWidget.item) !=
         MediaScope.thumbnailKey(widget.item)) {
-      _image = MediaScope.thumbnail(context, widget.item);
+      _image = _loadImage();
     }
   }
 
   @override
-  Widget build(BuildContext context) => FutureBuilder<Uint8List>(
+  Widget build(BuildContext context) => FutureBuilder<ThumbnailImage>(
     future: _image,
     builder: (_, snapshot) {
       if (snapshot.hasError) {
-        return const Tooltip(
-          message: 'Preview unavailable; open details or refresh',
+        return Tooltip(
+          message: context.l10n.previewUnavailableOpenDetailsOrRefresh,
           child: Icon(AppIcons.imageUnavailable),
         );
       }
@@ -642,10 +665,9 @@ class _MediaThumbnailState extends State<MediaThumbnail> {
           final width = constraints.maxWidth.isFinite
               ? (constraints.maxWidth * scale).ceil().clamp(1, 320)
               : 320;
-          return Image.memory(
-            snapshot.data!,
+          return Image(
+            image: ResizeImage.resizeIfNeeded(width, null, snapshot.data!),
             fit: BoxFit.cover,
-            cacheWidth: width,
             filterQuality: FilterQuality.low,
             gaplessPlayback: true,
             errorBuilder: (_, _, _) => const Icon(AppIcons.imageUnavailable),

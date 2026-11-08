@@ -1,8 +1,11 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/widgets/studio_widgets.dart';
 import 'settings_controller.dart';
+import '../../l10n/app_languages.dart';
+import 'app_language_dialog.dart';
 
 class SettingsHubScreen extends StatelessWidget {
   const SettingsHubScreen({super.key});
@@ -16,7 +19,7 @@ class SettingsHubScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialog),
-            child: const Text('Close'),
+            child: Text(dialog.l10n.close),
           ),
         ],
       ),
@@ -30,24 +33,24 @@ class SettingsHubScreen extends StatelessWidget {
       primary: true,
       padding: const EdgeInsets.all(AppSpacing.md),
       children: [
-        const SectionTitle('Settings'),
+        SectionTitle(context.l10n.settings),
         if (settings.persistenceError != null) ...[
           const SizedBox(height: AppSpacing.md),
           StudioCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(settings.persistenceError!),
+                Text(context.message(settings.persistenceError!)),
                 Wrap(
                   children: [
                     TextButton(
                       onPressed: settings.retryRestore,
-                      child: const Text('Retry loading'),
+                      child: Text(context.l10n.retryLoading),
                     ),
                     if (settings.canSave)
                       TextButton(
                         onPressed: settings.retrySave,
-                        child: const Text('Retry saving'),
+                        child: Text(context.l10n.retrySaving),
                       ),
                   ],
                 ),
@@ -55,13 +58,13 @@ class SettingsHubScreen extends StatelessWidget {
             ),
           ),
         ],
-        const StudioSectionLabel('CAPTURE'),
+        StudioSectionLabel(context.l10n.capture),
         StudioCard(
           padding: EdgeInsets.zero,
           child: Column(
             children: [
               SettingsRow(
-                'Video quality',
+                context.l10n.videoQuality,
                 icon: AppIcons.videoSettings,
                 subtitle:
                     '${settings.resolution} · ${settings.fps} FPS · ${settings.bitrate}',
@@ -69,21 +72,22 @@ class SettingsHubScreen extends StatelessWidget {
               ),
               const Divider(height: 1, indent: 72),
               SettingsRow(
-                'Audio, countdown & facecam',
+                context.l10n.audioCountdownFacecam,
                 icon: AppIcons.microphone,
                 onTap: () => context.push('/settings/audio-video'),
               ),
             ],
           ),
         ),
-        const StudioSectionLabel('APPEARANCE'),
+        StudioSectionLabel(context.l10n.appearance),
         StudioCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ChoiceGroup(
-                label: 'Theme',
+                label: context.l10n.theme,
                 options: const ['Dark', 'Light', 'System'],
+                optionLabelBuilder: (value) => context.message(value),
                 value: switch (settings.themeMode) {
                   ThemeMode.dark => 'Dark',
                   ThemeMode.light => 'Light',
@@ -96,80 +100,89 @@ class SettingsHubScreen extends StatelessWidget {
                 }),
               ),
               Text(
-                'System follows your device appearance.',
+                context.l10n.systemFollowsYourDeviceAppearance,
                 style: TextStyle(color: context.studioColors.muted),
               ),
               const SizedBox(height: AppSpacing.sm),
-              const Text('Language · English'),
+              SettingsRow(
+                context.l10n.appLanguage,
+                icon: AppIcons.settings,
+                subtitle: settings.appLocale == null
+                    ? context.l10n.followSystem
+                    : AppLanguages.nativeName(settings.appLocale!),
+                onTap: () => showAppLanguageDialog(context),
+              ),
             ],
           ),
         ),
-        const StudioSectionLabel('YOUR WORKSPACE'),
+        StudioSectionLabel(context.l10n.yourWorkspace),
         StudioCard(
           padding: EdgeInsets.zero,
           child: Column(
             children: [
               SettingsRow(
-                'Media storage',
+                context.l10n.mediaStorage,
                 icon: AppIcons.folder,
-                subtitle: 'Save locations',
+                subtitle: context.l10n.saveLocations,
                 onTap: () => _details(
                   context,
-                  'Media storage',
-                  'Android 10+: Movies/XRecorder and Pictures/XRecorder. Older Android: app-specific external storage. Open library storage for actual usage.',
+                  context.l10n.mediaStorage,
+                  context.l10n.android10MoviesXrecorderAndPicturesXrecorder,
                 ),
               ),
               const Divider(height: 1, indent: 72),
               SettingsRow(
-                'Trash & restore',
+                context.l10n.trashRestore,
                 icon: AppIcons.trash,
-                subtitle: 'Cleanup on opening Trash after 24 hours',
+                subtitle: context.l10n.cleanupOnOpeningTrashAfter24Hours,
                 onTap: () => context.push('/trash'),
               ),
               const Divider(height: 1, indent: 72),
               SettingsRow(
-                'Export queue',
+                context.l10n.exportQueue,
                 icon: AppIcons.export,
                 onTap: () => context.push('/exports'),
               ),
             ],
           ),
         ),
-        const StudioSectionLabel('HELP & ABOUT'),
+        StudioSectionLabel(context.l10n.helpAbout),
         StudioCard(
           padding: EdgeInsets.zero,
           child: Column(
             children: [
               SettingsRow(
-                'Help & guides',
+                context.l10n.helpGuides,
                 icon: AppIcons.help,
                 onTap: () => context.push('/help'),
               ),
               SettingsRow(
-                'Feedback',
+                context.l10n.feedback,
                 icon: AppIcons.feedback,
                 onTap: () => context.push('/support'),
               ),
               SettingsRow(
-                'Privacy',
+                context.l10n.privacy,
                 icon: AppIcons.privacy,
-                subtitle: 'On-device processing',
+                subtitle: context.l10n.onDeviceProcessing,
                 onTap: () => _details(
                   context,
-                  'Privacy',
-                  'Media processing stays on your device. No analytics, AI upload or livestream is enabled. Only explicit sharing hands content to another app.',
+                  context.l10n.privacy,
+                  context.l10n.mediaProcessingStaysOnYourDeviceNo,
                 ),
               ),
               SettingsRow(
-                'About & licenses',
+                context.l10n.aboutLicenses,
                 icon: AppIcons.info,
                 onTap: () => showAboutDialog(
                   context: context,
                   applicationName: '3HRecorder',
                   applicationVersion: '0.1.0+1',
                   children: [
-                    const Text(
-                      'Android screen recording and non-destructive editing. Media3: Apache-2.0. Manrope: SIL OFL. Lucide Flutter: MIT; Lucide artwork: ISC. See licenses for details.',
+                    Text(
+                      context
+                          .l10n
+                          .androidScreenRecordingAndNonDestructiveEditing,
                     ),
                   ],
                 ),
@@ -180,23 +193,23 @@ class SettingsHubScreen extends StatelessWidget {
         const SizedBox(height: AppSpacing.lg),
         OutlinedButton.icon(
           icon: const Icon(AppIcons.reset),
-          label: const Text('Reset preferences'),
+          label: Text(context.l10n.resetPreferences),
           onPressed: () async {
             final confirmed = await showStudioDialog<bool>(
               context: context,
               builder: (dialog) => StudioDialog(
-                title: const Text('Reset preferences?'),
-                content: const Text(
-                  'Restore recording and appearance preferences to their defaults. Media and editor drafts are kept.',
+                title: Text(dialog.l10n.resetPreferences550bf6),
+                content: Text(
+                  dialog.l10n.restoreRecordingAndAppearancePreferencesToTheir,
                 ),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(dialog, false),
-                    child: const Text('Cancel'),
+                    child: Text(dialog.l10n.cancel),
                   ),
                   TextButton(
                     onPressed: () => Navigator.pop(dialog, true),
-                    child: const Text('Reset'),
+                    child: Text(dialog.l10n.reset),
                   ),
                 ],
               ),

@@ -13,6 +13,8 @@ import 'app_configuration.dart';
 import '../features/media/media_repository.dart';
 import '../features/recording/recording_service.dart';
 import '../core/presentation/thumbnail_cache.dart';
+import '../l10n/localization.dart';
+import '../l10n/native_locale_sync.dart';
 
 class XRecorderApp extends StatefulWidget {
   const XRecorderApp({super.key, this.settings, this.mediaRepository});
@@ -64,29 +66,34 @@ class _XRecorderAppState extends State<XRecorderApp>
         controller: capture,
         child: ValueListenableBuilder<ThemeMode>(
           valueListenable: settings.themeModeListenable,
-          builder: (context, mode, _) => MaterialApp.router(
-            title: '3HRecorder',
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.light,
-            darkTheme: AppTheme.dark,
-            themeMode: mode,
-            themeAnimationDuration:
-                WidgetsBinding
-                    .instance
-                    .platformDispatcher
-                    .accessibilityFeatures
-                    .disableAnimations
-                ? Duration.zero
-                : AppMotion.standard,
-            locale: AppConfiguration.locale,
-            supportedLocales: AppConfiguration.supportedLocales,
-            routerConfig: router,
-            builder: (context, child) => AnnotatedRegion<SystemUiOverlayStyle>(
-              value: AppTheme.overlayStyle(
-                Theme.of(context).brightness,
-                Theme.of(context).scaffoldBackgroundColor,
-              ),
-              child: child!,
+          builder: (context, mode, _) => ValueListenableBuilder<Locale?>(
+            valueListenable: settings.appLocaleListenable,
+            builder: (context, locale, _) => MaterialApp.router(
+              title: '3HRecorder',
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.light,
+              darkTheme: AppTheme.dark,
+              themeMode: mode,
+              themeAnimationDuration:
+                  WidgetsBinding
+                      .instance
+                      .platformDispatcher
+                      .accessibilityFeatures
+                      .disableAnimations
+                  ? Duration.zero
+                  : AppMotion.standard,
+              locale: locale,
+              supportedLocales: AppConfiguration.supportedLocales,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              routerConfig: router,
+              builder: (context, child) =>
+                  AnnotatedRegion<SystemUiOverlayStyle>(
+                    value: AppTheme.overlayStyle(
+                      Theme.of(context).brightness,
+                      Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                    child: NativeLocaleSync(child: child!),
+                  ),
             ),
           ),
         ),

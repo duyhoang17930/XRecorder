@@ -1,3 +1,4 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -75,7 +76,7 @@ void showNotice(
             const SizedBox(width: AppSpacing.sm),
             Expanded(
               child: Text(
-                message,
+                context.message(message),
                 style: AppTypography.body.copyWith(color: c.text),
               ),
             ),
@@ -84,7 +85,7 @@ void showNotice(
         action: helpTopic == null
             ? null
             : SnackBarAction(
-                label: 'Help',
+                label: context.l10n.help,
                 textColor: c.primary,
                 onPressed: () => context.push(
                   Uri(
@@ -209,20 +210,37 @@ class SectionTitle extends StatelessWidget {
   final String title;
   final Widget? trailing;
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-    child: Row(
-      children: [
-        Expanded(
-          child: Semantics(
-            header: true,
-            child: Text(title, style: Theme.of(context).textTheme.titleLarge),
-          ),
-        ),
-        ?trailing,
-      ],
-    ),
-  );
+  Widget build(BuildContext context) {
+    final heading = Semantics(
+      header: true,
+      child: Text(title, style: Theme.of(context).textTheme.titleLarge),
+    );
+    // Long translated counts/actions must not consume the entire heading row
+    // at large text sizes. Both pieces keep full text and their touch targets.
+    final stacked =
+        trailing != null && MediaQuery.textScalerOf(context).scale(14) > 20;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+      child: stacked
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                heading,
+                const SizedBox(height: AppSpacing.xxs),
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: trailing,
+                ),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(child: heading),
+                ?trailing,
+              ],
+            ),
+    );
+  }
 }
 
 class StudioSectionLabel extends StatelessWidget {
@@ -563,12 +581,14 @@ class ChoiceGroup extends StatelessWidget {
     required this.value,
     required this.onChanged,
     this.disabledOptions = const {},
+    this.optionLabelBuilder,
   });
   final String label;
   final List<String> options;
   final String value;
   final ValueChanged<String> onChanged;
   final Set<String> disabledOptions;
+  final String Function(String)? optionLabelBuilder;
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -582,10 +602,10 @@ class ChoiceGroup extends StatelessWidget {
             .map(
               (option) => Tooltip(
                 message: disabledOptions.contains(option)
-                    ? 'Not supported by this device or the selected mode'
+                    ? context.l10n.notSupportedByThisDeviceOrThe
                     : '',
                 child: ChoiceChip(
-                  label: Text(option),
+                  label: Text(optionLabelBuilder?.call(option) ?? option),
                   selected: value == option,
                   labelStyle: AppTypography.bodySmall.copyWith(
                     color: disabledOptions.contains(option)
@@ -645,7 +665,9 @@ class SettingsRow extends StatelessWidget {
         ? (onTap == null
               ? null
               : Icon(
-                  AppIcons.chevronRight,
+                  Directionality.of(context) == TextDirection.rtl
+                      ? AppIcons.back
+                      : AppIcons.chevronRight,
                   size: AppIconSize.medium,
                   color: context.studioColors.muted,
                 ))

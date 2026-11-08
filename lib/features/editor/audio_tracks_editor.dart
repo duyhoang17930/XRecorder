@@ -1,3 +1,7 @@
+import '../../l10n/editor_numbers.dart';
+
+import 'package:xrecorder/l10n/localization.dart';
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -69,20 +73,24 @@ class _TracksEditorState extends State<_TracksEditor> {
 
   @override
   Widget build(BuildContext context) => StudioDialog(
-    title: const Text('Audio tracks'),
+    title: Text(context.l10n.audioTracks),
     content: SizedBox(
       width: 480,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-            'Trim and align up to 8 tracks. Gains share headroom to prevent clipping. Times refer to the exported video.',
-          ),
+          Text(context.l10n.trimAndAlignUpTo8Tracks),
           for (var i = 0; i < tracks.length; i++)
             ListTile(
-              title: Text('Track ${i + 1}'),
+              title: Text(
+                context.l10n.trackNumber(context.displayValue(i + 1)),
+              ),
               subtitle: Text(
-                '${(tracks[i]['offsetMs'] as num) / 1000}s · source ${(tracks[i]['inMs'] as num) / 1000}–${(tracks[i]['outMs'] as num) / 1000}s',
+                context.l10n.audioSourceRange(
+                  context.displayValue((tracks[i]['offsetMs'] as num) / 1000),
+                  context.displayValue((tracks[i]['inMs'] as num) / 1000),
+                  context.displayValue((tracks[i]['outMs'] as num) / 1000),
+                ),
               ),
               onTap: busy
                   ? null
@@ -97,7 +105,9 @@ class _TracksEditorState extends State<_TracksEditor> {
                       }
                     },
               trailing: IconButton(
-                tooltip: 'Remove audio track ${i + 1}',
+                tooltip: context.l10n.removeAudioTrackNumber(
+                  context.displayValue(i + 1),
+                ),
                 icon: const Icon(AppIcons.trash),
                 onPressed: busy
                     ? null
@@ -106,12 +116,14 @@ class _TracksEditorState extends State<_TracksEditor> {
             ),
           if (error != null)
             Text(
-              error!,
+              context.message(error!),
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           TextButton(
             onPressed: busy || tracks.length >= 8 ? null : add,
-            child: Text(busy ? 'Opening audio…' : 'Add audio file'),
+            child: Text(
+              busy ? context.l10n.openingAudio : context.l10n.addAudioFile,
+            ),
           ),
         ],
       ),
@@ -119,11 +131,11 @@ class _TracksEditorState extends State<_TracksEditor> {
     actions: [
       TextButton(
         onPressed: busy ? null : () => Navigator.pop(context),
-        child: const Text('Cancel'),
+        child: Text(context.l10n.cancel),
       ),
       TextButton(
         onPressed: busy ? null : () => Navigator.pop(context, tracks),
-        child: const Text('Use tracks'),
+        child: Text(context.l10n.useTracks),
       ),
     ],
   );
@@ -179,7 +191,7 @@ class _TrackDialogState extends State<_TrackDialog> {
   void save() {
     try {
       final times = fields.values.map((v) {
-        final n = double.tryParse(v.text);
+        final n = parseEditorDecimal(v.text);
         if (n == null || !n.isFinite) {
           throw const FormatException('Enter valid times in seconds.');
         }
@@ -206,14 +218,17 @@ class _TrackDialogState extends State<_TrackDialog> {
 
   @override
   Widget build(BuildContext context) => StudioDialog(
-    title: const Text('Trim & mix audio'),
+    title: Text(context.l10n.trimMixAudio),
     content: SizedBox(
       width: 420,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Audio length: ${widget.track.sourceDurationMs / 1000}s. Video length: ${widget.durationMs / 1000}s.',
+            context.l10n.audioVideoLength(
+              context.displayValue(widget.track.sourceDurationMs / 1000),
+              context.displayValue(widget.durationMs / 1000),
+            ),
           ),
           for (final entry in fields.entries)
             TextField(
@@ -221,41 +236,49 @@ class _TrackDialogState extends State<_TrackDialog> {
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
-              decoration: InputDecoration(labelText: entry.key),
+              decoration: InputDecoration(
+                labelText: context.message(entry.key),
+              ),
             ),
-          Text('Volume: ${(volume * 100).round()}%'),
+          Text(
+            context.l10n.volumePercent(
+              context.displayValue((volume * 100).round()),
+            ),
+          ),
           Semantics(
-            label: 'Audio track volume',
+            label: context.l10n.audioTrackVolume,
             child: Slider(
               value: volume,
               min: 0,
               max: 2,
               divisions: 40,
-              semanticFormatterCallback: (v) => '${(v * 100).round()} percent',
+              semanticFormatterCallback: context.spokenValue((strings, value) => strings.accessibilityValue40(value), multiplier: 100),
               onChanged: (v) => setState(() => volume = v),
             ),
           ),
           DropdownButtonFormField<String>(
             isExpanded: true,
             initialValue: voice,
-            decoration: const InputDecoration(labelText: 'Voice effect'),
-            items: [
-              'none',
-              'deep',
-              'bright',
-              'robot',
-            ].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
+            decoration: InputDecoration(labelText: context.l10n.voiceEffect),
+            items: ['none', 'deep', 'bright', 'robot']
+                .map(
+                  (v) => DropdownMenuItem(
+                    value: v,
+                    child: Text(context.effectValue(v)),
+                  ),
+                )
+                .toList(),
             onChanged: (v) => setState(() => voice = v!),
           ),
           SwitchListTile(
-            title: const Text('Reduce background noise'),
-            subtitle: const Text('Offline speech noise reduction'),
+            title: Text(context.l10n.reduceBackgroundNoise),
+            subtitle: Text(context.l10n.offlineSpeechNoiseReduction),
             value: noise,
             onChanged: (v) => setState(() => noise = v),
           ),
           if (error != null)
             Text(
-              error!,
+              context.message(error!),
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
         ],
@@ -264,9 +287,9 @@ class _TrackDialogState extends State<_TrackDialog> {
     actions: [
       TextButton(
         onPressed: () => Navigator.pop(context),
-        child: const Text('Cancel'),
+        child: Text(context.l10n.cancel),
       ),
-      TextButton(onPressed: save, child: const Text('Use audio')),
+      TextButton(onPressed: save, child: Text(context.l10n.useAudio)),
     ],
   );
 }

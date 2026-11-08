@@ -10,6 +10,31 @@ adb='C:/Users/dangh/AppData/Local/Android/Sdk/platform-tools/adb.exe'
 def command(*words):return subprocess.check_output([adb,'-s','emulator-5560',*words],text=True,encoding='utf-8')
 assert command('shell','getprop','ro.boot.qemu.avd_name').strip()=='ThreeHRecorder_Task021'
 assert 'CaptureService' not in command('shell','dumpsys','activity','services','com.xrecorder.xrecorder'),'Capture is active; refusing process kill'
+if '--publication-replay' in sys.argv:
+    root=Path('build/verification/final_p2_p3/publication');root.mkdir(parents=True,exist_ok=True)
+    expected=json.loads((root/'before/emulator_verification.json').read_text(encoding='utf-8'))
+    raw=command('shell','run-as','com.xrecorder.xrecorder','cat','files/export_jobs.json')
+    rows=json.loads(raw)
+    assert all(j['state'] not in ['running','queued','finalizing'] for j in rows), 'Another export is active'
+    target=next(j for j in rows if j['id']==expected['jobId'])
+    assert target['project']['id']==expected['projectId'] and target['project']['title']=='publication_qa'
+    assert target['state']=='completed' and target['uri']==expected['uri']
+    others=json.dumps([j for j in rows if j['id']!=target['id']],sort_keys=True)
+    (root/'journal_before.json').write_text(raw,encoding='utf-8')
+    command('shell','am','force-stop','com.xrecorder.xrecorder')
+    target['state']='finalizing';target['pending']=expected['uri'];target.pop('uri')
+    assert json.dumps([j for j in rows if j['id']!=target['id']],sort_keys=True)==others
+    injected=root/'journal_injected.json'
+    injected.write_text(json.dumps(rows),encoding='utf-8')
+    # File-sync avoids stdin truncation seen with older Android shell transports.
+    stage='/data/local/tmp/3h_quality_publication.json'
+    subprocess.run([adb,'-s','emulator-5560','push',str(injected),stage],check=True,capture_output=True)
+    script='cp '+stage+' files/export_jobs.quality_new && mv files/export_jobs.quality_new files/export_jobs.json'
+    command('shell','run-as','com.xrecorder.xrecorder','sh','-c',shlex.quote(script))
+    assert json.loads(command('shell','run-as','com.xrecorder.xrecorder','cat','files/export_jobs.json'))==rows, 'Injected checkpoint read-back differs'
+    (root/'injection.json').write_text(json.dumps({'jobId':target['id'],'uri':expected['uri'],'otherRowsPreserved':True,'injectedReadBackVerified':True,'action':'Simulated finalizing checkpoint for this QA job only; actual process stopped and restarted separately. Published media not modified.'},indent=2),encoding='utf-8')
+    print('Publication replay checkpoint prepared; original source and published output retained')
+    raise SystemExit(0)
 if '--io-fault' in sys.argv:
     original=command('shell','run-as','com.xrecorder.xrecorder','stat','-c','%a','files').strip()
     assert original.isdigit() and len(original) in (3,4)

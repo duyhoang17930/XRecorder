@@ -149,6 +149,15 @@ class MediaCatalog(private val activity: Activity) :
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        if (call.method == "setAppLocale") {
+            try {
+                P2Locale.save(activity, call.arguments as String)
+                result.success(null)
+            } catch (_: Exception) {
+                result.error("invalid_locale", "Unsupported app locale", null)
+            }
+            return
+        }
         if (call.method == "shortcutStatus") {
             val manager =
                 if (Build.VERSION.SDK_INT >= 26)
@@ -158,6 +167,9 @@ class MediaCatalog(private val activity: Activity) :
                 mapOf(
                     "supported" to (manager?.isRequestPinShortcutSupported == true),
                     "pinned" to (manager?.pinnedShortcuts?.map { it.id } ?: emptyList<String>()),
+                    "labels" to
+                        (manager?.pinnedShortcuts?.associate { it.id to it.shortLabel.toString() }
+                            ?: emptyMap<String, String>()),
                 ),
             )
             return
@@ -177,7 +189,12 @@ class MediaCatalog(private val activity: Activity) :
                     return
                 }
                 val route = if (kind == "video") "editor" else "photos"
-                val label = if (kind == "video") "Edit video" else "Edit photo"
+                val label =
+                    P2Locale.context(activity)
+                        .getString(
+                            if (kind == "video") com.xrecorder.xrecorder.R.string.p2_edit_video
+                            else com.xrecorder.xrecorder.R.string.p2_edit_photo,
+                        )
                 val intent =
                     Intent(
                         Intent.ACTION_VIEW,
@@ -208,7 +225,17 @@ class MediaCatalog(private val activity: Activity) :
                 return
             }
             try {
-                val text = call.arguments as String
+                val options = call.arguments as? Map<*, *>
+                val text = options?.get("text") as? String ?: call.arguments as String
+                val filename =
+                    options?.get("fileName") as? String
+                        ?: "Subtitles_${System.currentTimeMillis()}.srt"
+                require(
+                    filename.isNotBlank() &&
+                        filename.endsWith(".srt", ignoreCase = true) &&
+                        filename.toByteArray(Charsets.UTF_8).size <= 240 &&
+                        filename.none { it == '/' || it == '\\' || it.code < 32 || it.code == 127 },
+                )
                 require(text.isNotBlank() && text.toByteArray(Charsets.UTF_8).size <= 1048576)
                 subtitleBytes = text.toByteArray(Charsets.UTF_8)
                 picker = result
@@ -216,9 +243,14 @@ class MediaCatalog(private val activity: Activity) :
                     Intent(Intent.ACTION_CREATE_DOCUMENT)
                         .setType("application/x-subrip")
                         .addCategory(Intent.CATEGORY_OPENABLE)
+                        .addFlags(
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                                Intent.FLAG_GRANT_WRITE_URI_PERMISSION or
+                                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION,
+                        )
                         .putExtra(
                             Intent.EXTRA_TITLE,
-                            "Subtitles_${System.currentTimeMillis()}.srt",
+                            filename,
                         ),
                     CREATE_SRT,
                 )
@@ -434,6 +466,37 @@ class MediaCatalog(private val activity: Activity) :
                                 bytes
                             }
                         }
+                        "readSubtitleDocument" -> {
+                            val uri = Uri.parse(call.argument<String>("uri") ?: "")
+                            checkUri(uri)
+                            val name =
+                                resolver
+                                    .query(
+                                        uri,
+                                        arrayOf(OpenableColumns.DISPLAY_NAME),
+                                        null,
+                                        null,
+                                        null,
+                                    )
+                                    ?.use { cursor ->
+                                        if (cursor.moveToFirst()) cursor.getString(0) else null
+                                    }
+                            val bytes =
+                                resolver.openInputStream(uri)!!.use { input ->
+                                    val out = ByteArrayOutputStream()
+                                    val buffer = ByteArray(8192)
+                                    while (true) {
+                                        val count = input.read(buffer)
+                                        if (count < 0) break
+                                        require(out.size() + count <= 1048576) {
+                                            "Subtitle document is too large"
+                                        }
+                                        out.write(buffer, 0, count)
+                                    }
+                                    out.toByteArray()
+                                }
+                            mapOf("bytes" to bytes, "name" to name)
+                        }
                         "decodePhoto" ->
                             PhotoCodec.decode(activity, Uri.parse(call.argument<String>("uri")!!))
                         "saveImage" -> {
@@ -532,6 +595,20 @@ class MediaCatalog(private val activity: Activity) :
         worker.execute {
             try {
                 if (request == CREATE_SRT) {
+                    val grants =
+                        data!!.flags and
+                            (Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                                Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                    if (
+                        data.flags and Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION != 0 &&
+                            grants != 0
+                    ) {
+                        try {
+                            resolver.takePersistableUriPermission(uri, grants)
+                        } catch (_: SecurityException) {
+                            /* Provider may grant session access only. */
+                        }
+                    }
                     resolver.openOutputStream(uri, "w")!!.use {
                         it.write(srt ?: error("Subtitle data is unavailable"))
                     }
@@ -713,14 +790,7 @@ class MediaCatalog(private val activity: Activity) :
                 .listFiles()
                 ?.filter { it.isFile }
                 ?.forEach { file ->
-                    val mime =
-                        when (file.extension.lowercase()) {
-                            "mp4" -> "video/mp4"
-                            "png" -> "image/png"
-                            "jpg",
-                            "jpeg" -> "image/jpeg"
-                            else -> ""
-                        }
+                    val mime = legacyMediaMime(file.extension)
                     if (mime.startsWith("$kind/")) {
                         val uri =
                             FileProvider.getUriForFile(
@@ -849,8 +919,22 @@ class MediaCatalog(private val activity: Activity) :
         } else {
             val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
             resolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, options) }
-            fields["width"] = options.outWidth
-            fields["height"] = options.outHeight
+            val orientation =
+                try {
+                    resolver.openInputStream(uri)?.use {
+                        android.media
+                            .ExifInterface(it)
+                            .getAttributeInt(
+                                android.media.ExifInterface.TAG_ORIENTATION,
+                                android.media.ExifInterface.ORIENTATION_NORMAL,
+                            )
+                    } ?: android.media.ExifInterface.ORIENTATION_NORMAL
+                } catch (_: java.io.IOException) {
+                    android.media.ExifInterface.ORIENTATION_NORMAL
+                }
+            val swap = orientation in 5..8
+            fields["width"] = if (swap) options.outHeight else options.outWidth
+            fields["height"] = if (swap) options.outWidth else options.outHeight
         }
         return fields
     }
@@ -939,3 +1023,14 @@ class MediaCatalog(private val activity: Activity) :
         worker.shutdown()
     }
 }
+
+/** API24-28 app-file discovery must include the same image formats as MediaStore. */
+internal fun legacyMediaMime(extension: String): String =
+    when (extension.lowercase()) {
+        "mp4" -> "video/mp4"
+        "png" -> "image/png"
+        "jpg",
+        "jpeg" -> "image/jpeg"
+        "gif" -> "image/gif"
+        else -> ""
+    }

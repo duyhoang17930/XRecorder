@@ -19,6 +19,15 @@ void main() {
       final tree = (await channel
           .invokeMethod<String>('selectDestination')
           .timeout(const Duration(minutes: 3)))!;
+      const safetyOnly = bool.fromEnvironment('SAF_COPY_SAFETY_ONLY');
+      if (safetyOnly) {
+        const folder = String.fromEnvironment('SAF_QA_FOLDER');
+        expect(RegExp(r'^P2P3_QA_TASK07_[0-9]+$').hasMatch(folder), isTrue);
+        expect(
+          Uri.decodeComponent(Uri.parse(tree).path).endsWith('/$folder'),
+          isTrue,
+        );
+      }
       const source =
           'content://com.xrecorder.xrecorder.files/media/p2_p3_exif_6.jpg';
       final original = (await channel.invokeMethod<Uint8List>('imageBytes', {
@@ -36,6 +45,41 @@ void main() {
         }),
         orderedEquals(original),
       );
+      if (safetyOnly) {
+        // Release only the freshly selected QA folder, never an existing grant.
+        // A move request must fail before any publication or source deletion.
+        final checkpoint = await channel.invokeMapMethod<String, dynamic>(
+          'transferRecovery',
+        );
+        await channel.invokeMethod<void>('releaseFolder', tree);
+        await expectLater(
+          channel.invokeMethod<Object>('transfer', {
+            'uri': source,
+            'destination': tree,
+            'move': true,
+          }),
+          throwsA(isA<PlatformException>()),
+        );
+        expect(
+          await channel.invokeMethod<Uint8List>('imageBytes', {'uri': source}),
+          orderedEquals(original),
+        );
+        expect(
+          await channel.invokeMapMethod<String, dynamic>('transferRecovery'),
+          checkpoint,
+        );
+        binding.reportData = {
+          'destination': tree,
+          'copy': copied,
+          'sourceByteExact': true,
+          'copyByteExactBeforeDisconnect': true,
+          'revokedDestinationRejected': true,
+          'transferJournalUnchangedAfterRejectedMove': true,
+          'fixturesRetained': true,
+          'sourceOrCopyDeleted': false,
+        };
+        return;
+      }
       final moved = (await channel.invokeMapMethod<String, dynamic>(
         'transfer',
         {'uri': copied['uri'], 'destination': tree, 'move': true},

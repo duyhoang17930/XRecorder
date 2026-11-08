@@ -9,6 +9,30 @@ import java.security.MessageDigest
 
 internal data class SpeechModel(val id: String, val bytes: Long, val sha256: String)
 
+/** Keep the measured working set plus Android's own reserve available. */
+internal fun speechMemoryRequiredBytes(
+    model: String,
+    durationMs: Long,
+    systemThreshold: Long,
+): Long {
+    require(durationMs in 100..600000 && systemThreshold >= 0)
+    val mib = 1024L * 1024
+    // Measured peaks include274MiB Tiny/381MiB Base/493MiB Small on API36;
+    // API37 16KB/2GiB killed Tiny at316MiB RSS. Leave allocation headroom.
+    val workingMiB =
+        when (model) {
+            "tiny" -> 384L
+            "base" -> 512L
+            "small-q5_1" -> 768L
+            else -> throw IllegalArgumentException("Unsupported speech model")
+        }
+    val buffers = durationMs * 16 * 4 * 3
+    return Math.addExact(
+        (workingMiB + 128) * mib + buffers,
+        systemThreshold.coerceAtLeast(128 * mib),
+    )
+}
+
 /** Model storage/verification is separate from speech-job and Flutter lifecycle. */
 internal class SpeechModels(context: Context) {
     private val context = context.applicationContext
@@ -134,6 +158,14 @@ object WhisperNative {
     ): ByteArray
 
     external fun progress(handle: Long): Int
+
+    external fun languageId(handle: Long): Int
+
+    external fun activity(handle: Long, audio: FloatArray): FloatArray
+
+    external fun languages(): ByteArray
+
+    external fun timings(handle: Long): LongArray
 
     external fun cancel(handle: Long)
 

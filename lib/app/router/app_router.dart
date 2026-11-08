@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../l10n/localization.dart';
+
 import '../../core/widgets/studio_tab_scroll.dart';
 
 import '../../core/widgets/studio_shell.dart';
@@ -103,11 +105,11 @@ GoRouter createRouter() => GoRouter(
     ),
   ],
   errorBuilder: (context, state) => Scaffold(
-    appBar: AppBar(title: const Text('Page unavailable')),
+    appBar: AppBar(title: Text(context.l10n.pageUnavailable)),
     body: Center(
       child: TextButton(
         onPressed: () => context.go('/videos'),
-        child: const Text('Return to Video Studio'),
+        child: Text(context.l10n.returnToVideoStudio),
       ),
     ),
   ),

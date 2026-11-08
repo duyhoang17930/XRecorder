@@ -1,3 +1,5 @@
+import 'package:xrecorder/l10n/localization.dart';
+
 import '../constants/app_icons.dart';
 
 import 'package:flutter/material.dart';
@@ -130,7 +132,7 @@ class _StudioSearchFieldState extends State<StudioSearchField> {
   Widget build(BuildContext context) => StudioTextField(
     controller: _controller,
     focusNode: widget.focusNode,
-    hintText: widget.hintText,
+    hintText: context.message(widget.hintText),
     autofocus: widget.autofocus,
     textInputAction: TextInputAction.search,
     onChanged: widget.onChanged,
@@ -143,7 +145,7 @@ class _StudioSearchFieldState extends State<StudioSearchField> {
     suffixIcon: _controller.text.isEmpty
         ? null
         : IconButton(
-            tooltip: 'Clear search',
+            tooltip: context.l10n.clearSearch,
             onPressed: () {
               _controller.clear();
               widget.onChanged?.call('');

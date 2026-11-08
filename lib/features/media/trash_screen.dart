@@ -1,3 +1,4 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,18 +33,20 @@ class _TrashScreenState extends State<TrashScreen> {
         final confirmed = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Permanently delete?'),
+            title: Text(context.l10n.permanentlyDelete),
             content: Text(
-              '${entry.originalMetadata.displayName} cannot be restored after deletion.',
+              context.l10n.permanentDeleteName(
+                context.displayValue(entry.originalMetadata.displayName),
+              ),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: const Text('Cancel'),
+                child: Text(context.l10n.cancel),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: const Text('Delete permanently'),
+                child: Text(context.l10n.deletePermanently),
               ),
             ],
           ),
@@ -79,70 +82,92 @@ class _TrashScreenState extends State<TrashScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Trash')),
-    body: Column(
-      children: [
-        const Padding(
+    appBar: AppBar(title: Text(context.l10n.trash)),
+    body: CustomScrollView(
+      slivers: [
+        SliverPadding(
           padding: EdgeInsets.all(16),
-          child: Text(
-            'App-owned media only. Items become eligible for permanent cleanup after 24 hours; cleanup runs when Trash is opened. Restoring creates a new item with a unique name.',
+          sliver: SliverToBoxAdapter(
+            child: Text(context.l10n.appOwnedMediaOnlyItemsBecomeEligible),
           ),
         ),
-        if (busy) const LinearProgressIndicator(),
-        Expanded(
-          child: FutureBuilder<List<TrashEntry>>(
-            future: entries,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState != ConnectionState.done) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                return Center(
+        if (busy) const SliverToBoxAdapter(child: LinearProgressIndicator()),
+        FutureBuilder<List<TrashEntry>>(
+          future: entries,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return const SliverFillRemaining(
+                hasScrollBody: false,
+                child: Center(child: CircularProgressIndicator()),
+              );
+            }
+            if (snapshot.hasError) {
+              return SliverFillRemaining(
+                hasScrollBody: false,
+                child: Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        UserMessages.failure(
-                          snapshot.error,
-                          operation: UserOperation.loadTrash,
-                        ).text,
+                        context.message(
+                          UserMessages.failure(
+                            snapshot.error,
+                            operation: UserOperation.loadTrash,
+                          ).text,
+                        ),
                       ),
                       TextButton(
                         onPressed: reloadEntries,
-                        child: const Text('Retry'),
+                        child: Text(context.l10n.retry),
                       ),
                     ],
                   ),
-                );
-              }
-              final items = snapshot.data ?? [];
-              if (items.isEmpty && actions.unreadableTrashCount == 0) {
-                return const Center(child: Text('Trash is empty'));
-              }
-              return ListView(
-                children: [
-                  if (actions.unreadableTrashCount > 0)
-                    Padding(
-                      padding: const EdgeInsets.all(16),
+                ),
+              );
+            }
+            final items = snapshot.data ?? [];
+            if (items.isEmpty && actions.unreadableTrashCount == 0) {
+              return SliverFillRemaining(
+                hasScrollBody: false,
+                child: Center(child: Text(context.l10n.trashIsEmpty)),
+              );
+            }
+            return SliverMainAxisGroup(
+              slivers: [
+                if (actions.unreadableTrashCount > 0)
+                  SliverPadding(
+                    padding: const EdgeInsets.all(16),
+                    sliver: SliverToBoxAdapter(
                       child: Text(
-                        '${actions.unreadableTrashCount} trash entries need recovery. Their files have been kept.',
+                        context.l10n.unreadableTrashCount(
+                          context.displayValue(actions.unreadableTrashCount),
+                        ),
                       ),
                     ),
-                  for (final entry in items)
-                    ListTile(
+                  ),
+                SliverList.builder(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    final entry = items[index];
+                    return ListTile(
                       title: Text(entry.originalMetadata.displayName),
                       subtitle: Text(
-                        '${formatBytes(entry.originalMetadata.sizeBytes)} · Expires ${entry.expiresAt.toLocal()}',
+                        context.l10n.trashEntryExpiry(
+                          context.displayValue(
+                            context.fileSize(entry.originalMetadata.sizeBytes),
+                          ),
+                          context.displayValue(entry.expiresAt.toLocal()),
+                        ),
                       ),
                       trailing: Wrap(
                         children: [
                           IconButton(
-                            tooltip: 'Restore',
+                            tooltip: context.l10n.restore,
                             onPressed: busy ? null : () => operate(entry, true),
                             icon: const Icon(AppIcons.restore),
                           ),
                           IconButton(
-                            tooltip: 'Delete permanently',
+                            tooltip: context.l10n.deletePermanently,
                             onPressed: busy
                                 ? null
                                 : () => operate(entry, false),
@@ -150,11 +175,12 @@ class _TrashScreenState extends State<TrashScreen> {
                           ),
                         ],
                       ),
-                    ),
-                ],
-              );
-            },
-          ),
+                    );
+                  },
+                ),
+              ],
+            );
+          },
         ),
       ],
     ),

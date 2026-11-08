@@ -1,3 +1,4 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -46,20 +47,20 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
     final name = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Rename media'),
+        title: Text(context.l10n.renameMedia),
         content: TextField(
           controller: field,
           maxLength: 120,
-          decoration: const InputDecoration(labelText: 'Filename'),
+          decoration: InputDecoration(labelText: context.l10n.filename),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, field.text),
-            child: const Text('Rename'),
+            child: Text(context.l10n.rename),
           ),
         ],
       ),
@@ -80,18 +81,20 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Move to Trash?'),
+        title: Text(context.l10n.moveToTrash756188),
         content: Text(
-          '${item.displayName} will be copied to private trash, then removed from the library. It becomes eligible for permanent cleanup after 24 hours.',
+          context.l10n.moveMediaToTrashName(
+            context.displayValue(item.displayName),
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Move to Trash'),
+            child: Text(context.l10n.moveToTrash),
           ),
         ],
       ),
@@ -109,18 +112,16 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
       final confirmed = await showStudioDialog<bool>(
         context: context,
         builder: (dialog) => StudioDialog(
-          title: const Text('Move to another folder?'),
-          content: const Text(
-            'The copy will be verified first. The original is removed only when Android allows it. If permission is unavailable, both copies are kept.',
-          ),
+          title: Text(dialog.l10n.moveToAnotherFolder),
+          content: Text(dialog.l10n.theCopyWillBeVerifiedFirstThe),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialog, false),
-              child: const Text('Cancel'),
+              child: Text(context.l10n.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.pop(dialog, true),
-              child: const Text('Choose destination'),
+              child: Text(dialog.l10n.chooseDestination),
             ),
           ],
         ),
@@ -136,7 +137,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
             ? 'Move verified and completed.'
             : 'Copy verified and saved.');
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
+        .showSnackBar(SnackBar(content: Text(context.message(message))));
     if (result['moved'] == true) context.pop();
   }
 
@@ -148,7 +149,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Media details')),
+    appBar: AppBar(title: Text(context.l10n.mediaDetails)),
     body: FutureBuilder<MediaItem?>(
       future: _item,
       builder: (context, snapshot) {
@@ -163,14 +164,19 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    snapshot.hasError
-                        ? UserMessages.failure(
-                            snapshot.error,
-                            operation: UserOperation.openMedia,
-                          ).text
-                        : 'Media unavailable',
+                    context.message(
+                      snapshot.hasError
+                          ? UserMessages.failure(
+                              snapshot.error,
+                              operation: UserOperation.openMedia,
+                            ).text
+                          : context.l10n.mediaUnavailable,
+                    ),
                   ),
-                  TextButton(onPressed: reloadItem, child: const Text('Retry')),
+                  TextButton(
+                    onPressed: reloadItem,
+                    child: Text(context.l10n.retry),
+                  ),
                 ],
               ),
             ),
@@ -202,7 +208,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                           }
                         }),
                   icon: const Icon(AppIcons.play),
-                  label: const Text('Preview'),
+                  label: Text(context.l10n.preview),
                 ),
                 TextButton.icon(
                   onPressed: busy
@@ -211,7 +217,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                           await actions.share(item.uri);
                         }, purpose: UserOperation.share),
                   icon: const Icon(AppIcons.share),
-                  label: const Text('Share'),
+                  label: Text(context.l10n.share),
                 ),
                 if (item.owned)
                   TextButton.icon(
@@ -222,7 +228,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                             purpose: UserOperation.rename,
                           ),
                     icon: const Icon(AppIcons.rename),
-                    label: const Text('Rename'),
+                    label: Text(context.l10n.rename),
                   ),
                 if (item.owned)
                   TextButton.icon(
@@ -233,53 +239,60 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                             purpose: UserOperation.trash,
                           ),
                     icon: const Icon(AppIcons.trash),
-                    label: const Text('Move to Trash'),
+                    label: Text(context.l10n.moveToTrash),
                   ),
                 TextButton.icon(
                   onPressed: busy
                       ? null
                       : () => run(() => transfer(item, false)),
                   icon: const Icon(AppIcons.folder),
-                  label: const Text('Copy to folder'),
+                  label: Text(context.l10n.copyToFolder),
                 ),
                 TextButton.icon(
                   onPressed: busy
                       ? null
                       : () => run(() => transfer(item, true)),
                   icon: const Icon(AppIcons.folderOpen),
-                  label: const Text('Move to folder'),
+                  label: Text(context.l10n.moveToFolder),
                 ),
               ],
             ),
             if (!item.owned)
-              const Text(
-                'External files can be copied. Moving requires permission from the Android document provider.',
-              ),
+              Text(context.l10n.externalFilesCanBeCopiedMovingRequires),
             if (item.kind == MediaKind.image)
               TextButton.icon(
                 onPressed: () => context.push(
                   '/photo-tools/${Uri.encodeComponent(item.id)}',
                 ),
                 icon: const Icon(AppIcons.photoEdit),
-                label: const Text('Crop & annotate a copy'),
+                label: Text(context.l10n.cropAnnotateACopy),
               ),
             ListTile(
-              title: const Text('Size'),
-              subtitle: Text(formatBytes(item.sizeBytes)),
+              title: Text(context.l10n.size),
+              subtitle: Text(context.fileSize(item.sizeBytes)),
             ),
             ListTile(
-              title: const Text('Format'),
+              title: Text(context.l10n.format),
               subtitle: Text(item.mimeType),
             ),
             if (item.duration != null)
               ListTile(
-                title: const Text('Duration'),
-                subtitle: Text('${item.duration!.inSeconds} seconds'),
+                title: Text(context.l10n.duration),
+                subtitle: Text(
+                  context.l10n.secondsValue(
+                    context.displayValue(item.duration!.inSeconds),
+                  ),
+                ),
               ),
             if (item.width != null)
               ListTile(
-                title: const Text('Dimensions'),
-                subtitle: Text('${item.width} × ${item.height}'),
+                title: Text(context.l10n.dimensions),
+                subtitle: Text(
+                  context.l10n.dimensionsValue(
+                    context.displayValue(item.width),
+                    context.displayValue(item.height),
+                  ),
+                ),
               ),
           ],
         );

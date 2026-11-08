@@ -1,3 +1,10 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+
+import '../../l10n/editor_numbers.dart';
+
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -51,15 +58,13 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
 
   @override
   Widget build(BuildContext context) => StudioDialog(
-    title: const Text('Subtitles'),
+    title: Text(context.l10n.subtitles),
     content: SizedBox(
       width: 480,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-            'Edit timed subtitles on this device. Automatic recognition uses a downloaded offline model.',
-          ),
+          Text(context.l10n.editTimedSubtitlesOnThisDeviceAutomatic),
           if (widget.project != null)
             TextButton(
               onPressed: () async {
@@ -74,13 +79,16 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                   });
                 }
               },
-              child: const Text('Generate offline subtitles'),
+              child: Text(context.l10n.generateOfflineSubtitles),
             ),
           for (var i = 0; i < cues.length; i++)
             ListTile(
               title: Text(cues[i].text),
               subtitle: Text(
-                '${cues[i].startMs / 1000}–${cues[i].endMs / 1000}s',
+                context.l10n.timeRangeSeconds(
+                  context.displayValue(cues[i].startMs / 1000),
+                  context.displayValue(cues[i].endMs / 1000),
+                ),
               ),
               selected: selected == i,
               onTap: () => setState(() {
@@ -90,7 +98,7 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                 end.text = '${cues[i].endMs / 1000}';
               }),
               trailing: IconButton(
-                tooltip: 'Delete subtitle',
+                tooltip: context.l10n.deleteSubtitle,
                 icon: const Icon(AppIcons.trash),
                 onPressed: () => setState(() {
                   cues.removeAt(i);
@@ -100,23 +108,24 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
             ),
           TextField(
             controller: text,
-            maxLength: 2000,
             maxLines: 6,
-            decoration: const InputDecoration(labelText: 'Subtitle text'),
+            decoration: InputDecoration(labelText: context.l10n.subtitleText),
           ),
           TextField(
             controller: start,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: 'Start (seconds)'),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            textDirection: TextDirection.ltr,
+            decoration: InputDecoration(labelText: context.l10n.startSeconds),
           ),
           TextField(
             controller: end,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: 'End (seconds)'),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            textDirection: TextDirection.ltr,
+            decoration: InputDecoration(labelText: context.l10n.endSeconds),
           ),
           if (error != null)
             Text(
-              error!,
+              context.message(error!),
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           Wrap(
@@ -126,24 +135,65 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                     ? null
                     : () async {
                         try {
-                          await const MethodChannel('com.xrecorder/media')
-                              .invokeMethod<String>('exportSrt', track.toSrt());
+                          final body = track.toSrt();
+                          const media = MethodChannel('com.xrecorder/media');
+                          final uri = await media.invokeMethod<String>(
+                            'exportSrt',
+                            {
+                              'text': body,
+                              'fileName':
+                                  '${context.l10n.subtitles}_${DateTime.now().millisecondsSinceEpoch}.srt',
+                            },
+                          );
+                          if (uri == null || !context.mounted) return;
+                          var verified = false;
+                          try {
+                            final read = await media
+                                .invokeMapMethod<String, dynamic>(
+                                  'readSubtitleDocument',
+                                  {'uri': uri},
+                                );
+                            verified = listEquals(
+                              read?['bytes'] as Uint8List?,
+                              utf8.encode(body),
+                            );
+                          } catch (_) {
+                            /* Some providers grant write-only access. */
+                          }
+                          if (!context.mounted) return;
+                          showNotice(
+                            context,
+                            verified
+                                ? context.l10n.subtitleSaved
+                                : context.l10n.subtitleSavedUnverified,
+                            kind: verified
+                                ? NoticeKind.success
+                                : NoticeKind.warning,
+                          );
+                        } on FormatException catch (e) {
+                          if (context.mounted) {
+                            showNotice(
+                              context,
+                              context.message(e.message.toString()),
+                              kind: NoticeKind.warning,
+                            );
+                          }
                         } catch (e) {
                           if (context.mounted) {
                             showFailure(
                               context,
                               e,
-                              operation: UserOperation.savePhoto,
+                              operation: UserOperation.saveSubtitles,
                             );
                           }
                         }
                       },
-                child: const Text('Save SRT file'),
+                child: Text(context.l10n.saveSrtFile),
               ),
               TextButton(
                 onPressed: () => apply(() {
-                  final a = double.tryParse(start.text),
-                      b = double.tryParse(end.text);
+                  final a = parseEditorDecimal(start.text),
+                      b = parseEditorDecimal(end.text);
                   if (a == null ||
                       b == null ||
                       !a.isFinite ||
@@ -158,7 +208,10 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                   final cue = SubtitleCue(
                     startMs: (a * 1000).round(),
                     endMs: (b * 1000).round(),
-                    text: text.text.trim(),
+                    text: text.text,
+                    joinerBefore: selected == null
+                        ? ' '
+                        : cues[selected!].joinerBefore,
                   );
                   final next = cues.toList();
                   if (selected == null) {
@@ -174,7 +227,9 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                   text.clear();
                 }),
                 child: Text(
-                  selected == null ? 'Add subtitle' : 'Update subtitle',
+                  selected == null
+                      ? context.l10n.addSubtitle
+                      : context.l10n.updateSubtitle,
                 ),
               ),
               TextButton(
@@ -184,7 +239,7 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                         cues = track.split(selected!).cues.toList();
                         selected = null;
                       }),
-                child: const Text('Split'),
+                child: Text(context.l10n.split),
               ),
               TextButton(
                 onPressed: selected == null || selected! >= cues.length - 1
@@ -193,7 +248,7 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                         cues = track.merge(selected!).cues.toList();
                         selected = null;
                       }),
-                child: const Text('Merge next'),
+                child: Text(context.l10n.mergeNext),
               ),
               TextButton(
                 onPressed: cues.isEmpty
@@ -201,7 +256,7 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                     : () => apply(() {
                         Clipboard.setData(ClipboardData(text: track.toSrt()));
                       }),
-                child: const Text('Copy SRT'),
+                child: Text(context.l10n.copySrt),
               ),
             ],
           ),
@@ -211,11 +266,11 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
     actions: [
       TextButton(
         onPressed: () => Navigator.pop(context),
-        child: const Text('Cancel'),
+        child: Text(context.l10n.cancel),
       ),
       TextButton(
         onPressed: () => apply(() => Navigator.pop(context, track)),
-        child: const Text('Apply subtitles'),
+        child: Text(context.l10n.applySubtitles),
       ),
     ],
   );

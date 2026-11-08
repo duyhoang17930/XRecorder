@@ -1,3 +1,5 @@
+import 'package:xrecorder/l10n/localization.dart';
+
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
@@ -96,18 +98,16 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
           await showStudioDialog<bool>(
                 context: context,
                 builder: (dialog) => StudioDialog(
-                  title: const Text('Discard photo edits?'),
-                  content: const Text(
-                    'Your original photo is unchanged. Save a copy to keep these edits.',
-                  ),
+                  title: Text(dialog.l10n.discardPhotoEdits),
+                  content: Text(dialog.l10n.yourOriginalPhotoIsUnchangedSaveA),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(dialog, false),
-                      child: const Text('Keep editing'),
+                      child: Text(dialog.l10n.keepEditing),
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(dialog, true),
-                      child: const Text('Discard edits'),
+                      child: Text(dialog.l10n.discardEdits),
                     ),
                   ],
                 ),
@@ -301,7 +301,7 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
       child: Scaffold(
         appBar: AppBar(
           leading: BackButton(onPressed: saving ? null : leave),
-          title: const Text('Photo editor'),
+          title: Text(context.l10n.photoEditor),
         ),
         bottomNavigationBar: SafeArea(
           top: false,
@@ -310,7 +310,7 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
             child: FilledButton.icon(
               onPressed: source == null || saving ? null : save,
               icon: Icon(saving ? AppIcons.processing : AppIcons.save),
-              label: Text(saving ? 'Saving…' : 'Save copy'),
+              label: Text(saving ? context.l10n.saving : context.l10n.saveCopy),
             ),
           ),
         ),
@@ -321,13 +321,13 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                     : Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(error!),
+                          Text(context.message(error!)),
                           TextButton(
                             onPressed: () {
                               setState(() => error = null);
                               load();
                             },
-                            child: const Text('Retry'),
+                            child: Text(context.l10n.retry),
                           ),
                         ],
                       ),
@@ -335,23 +335,21 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
             : ListView(
                 padding: const EdgeInsets.all(16),
                 children: [
-                  const Text(
-                    'Edit an sRGB copy with orientation applied. Up to 2048px on the longest edge. JPEG uses a white background for transparency.',
-                  ),
+                  Text(context.l10n.editAnSrgbCopyWithOrientationApplied),
                   DropdownButtonFormField<String>(
                     isExpanded: true,
                     initialValue: exportFormat,
-                    decoration: const InputDecoration(
-                      labelText: 'Export image format',
+                    decoration: InputDecoration(
+                      labelText: context.l10n.exportImageFormat,
                     ),
-                    items: const [
+                    items: [
                       DropdownMenuItem(
                         value: 'png',
-                        child: Text('PNG · lossless'),
+                        child: Text(context.l10n.pngLossless),
                       ),
                       DropdownMenuItem(
                         value: 'jpeg',
-                        child: Text('JPEG · smaller file'),
+                        child: Text(context.l10n.jpegSmallerFile),
                       ),
                     ],
                     onChanged: saving
@@ -361,14 +359,16 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                   DropdownButtonFormField<int>(
                     isExpanded: true,
                     initialValue: exportEdge,
-                    decoration: const InputDecoration(
-                      labelText: 'Longest edge (no enlargement)',
+                    decoration: InputDecoration(
+                      labelText: context.l10n.longestEdgeNoEnlargement,
                     ),
                     items: [480, 720, 1080, 2048]
                         .map(
                           (v) => DropdownMenuItem(
                             value: v,
-                            child: Text('$v pixels'),
+                            child: Text(
+                              context.l10n.pixelCount(context.displayValue(v)),
+                            ),
                           ),
                         )
                         .toList(),
@@ -380,13 +380,19 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                     DropdownButtonFormField<int>(
                       isExpanded: true,
                       initialValue: jpegQuality,
-                      decoration: const InputDecoration(
-                        labelText: 'JPEG quality',
+                      decoration: InputDecoration(
+                        labelText: context.l10n.jpegQuality,
                       ),
                       items: [70, 85, 95, 100]
                           .map(
-                            (v) =>
-                                DropdownMenuItem(value: v, child: Text('$v%')),
+                            (v) => DropdownMenuItem(
+                              value: v,
+                              child: Text(
+                                context.l10n.percentValue(
+                                  context.displayValue(v),
+                                ),
+                              ),
+                            ),
                           )
                           .toList(),
                       onChanged: saving
@@ -395,7 +401,7 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                     ),
                   if (error != null)
                     Text(
-                      error!,
+                      context.message(error!),
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.error,
                       ),
@@ -412,21 +418,21 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                         'Eraser',
                       ])
                         ChoiceChip(
-                          label: Text(value),
+                          label: Text(context.message(value)),
                           selected: tool == value,
                           onSelected: saving
                               ? null
                               : (_) => setState(() => tool = value),
                         ),
                       IconButton(
-                        tooltip: 'Undo photo edit',
+                        tooltip: context.l10n.undoPhotoEdit,
                         onPressed: undoHistory.isEmpty || saving
                             ? null
                             : () => setState(undoMark),
                         icon: const Icon(AppIcons.undo),
                       ),
                       IconButton(
-                        tooltip: 'Redo photo edit',
+                        tooltip: context.l10n.redoPhotoEdit,
                         onPressed: redoHistory.isEmpty || saving
                             ? null
                             : () => setState(redoMark),
@@ -442,7 +448,9 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                         Semantics(
                           selected: color == ink.$1,
                           child: IconButton(
-                            tooltip: '${ink.$2} ink',
+                            tooltip: context.l10n.inkColor(
+                              context.message(ink.$2),
+                            ),
                             style: IconButton.styleFrom(
                               backgroundColor: ink.$1.computeLuminance() < .2
                                   ? const Color(0xFFDEE3EC)
@@ -470,7 +478,7 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                                 remember();
                                 turns = (turns + 1) % 4;
                               }),
-                        child: const Text('Rotate 90°'),
+                        child: Text(context.l10n.rotate90),
                       ),
                       TextButton(
                         onPressed: saving
@@ -479,7 +487,11 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                                 remember();
                                 flipH = !flipH;
                               }),
-                        child: Text('Flip horizontal${flipH ? ' · On' : ''}'),
+                        child: Text(
+                          context.l10n.flipHorizontalState(
+                            flipH ? ' · ${context.l10n.on}' : '',
+                          ),
+                        ),
                       ),
                       TextButton(
                         onPressed: saving
@@ -488,7 +500,11 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                                 remember();
                                 flipV = !flipV;
                               }),
-                        child: Text('Flip vertical${flipV ? ' · On' : ''}'),
+                        child: Text(
+                          context.l10n.flipVerticalState(
+                            flipV ? ' · ${context.l10n.on}' : '',
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -496,21 +512,27 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                     TextField(
                       controller: label,
                       maxLength: 120,
-                      decoration: const InputDecoration(
-                        labelText: 'Text to place on photo',
+                      decoration: InputDecoration(
+                        labelText: context.l10n.textToPlaceOnPhoto,
                       ),
                     ),
                   Semantics(
-                    label: 'Stroke width',
-                    child: Slider(
-                      value: strokeWidth,
-                      min: .002,
-                      max: .02,
-                      onChanged: saving
-                          ? null
-                          : (value) => setState(() => strokeWidth = value),
-                      semanticFormatterCallback: (value) =>
-                          '${(value * 2048).round()} pixels at 2048 pixels wide',
+                    label: context.l10n.strokeWidth,
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: Slider(
+                        value: strokeWidth,
+                        min: .002,
+                        max: .02,
+                        onChanged: saving
+                            ? null
+                            : (value) => setState(() => strokeWidth = value),
+                        semanticFormatterCallback: context.spokenValue(
+                          (strings, value) =>
+                              strings.accessibilityValue42(value),
+                          multiplier: 2048,
+                        ),
+                      ),
                     ),
                   ),
                   RotatedBox(
@@ -566,15 +588,18 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                                         );
                                       }
                                     },
-                              child: CustomPaint(
-                                painter: PhotoPainter(
-                                  source,
-                                  marks,
-                                  crop: Rect.fromLTRB(
-                                    horizontal.start,
-                                    vertical.start,
-                                    horizontal.end,
-                                    vertical.end,
+                              child: Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: CustomPaint(
+                                  painter: PhotoPainter(
+                                    source,
+                                    marks,
+                                    crop: Rect.fromLTRB(
+                                      horizontal.start,
+                                      vertical.start,
+                                      horizontal.end,
+                                      vertical.end,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -584,38 +609,50 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                       ),
                     ),
                   ),
-                  const Text('Crop left / right'),
+                  Text(context.l10n.cropLeftRight),
                   Semantics(
-                    label: 'Crop left and right',
-                    child: RangeSlider(
-                      values: horizontal,
-                      onChangeStart: saving ? null : (_) => remember(),
-                      onChanged: saving
-                          ? null
-                          : (v) {
-                              if (v.end - v.start >= .02) {
-                                setState(() => horizontal = v);
-                              }
-                            },
-                      semanticFormatterCallback: (v) =>
-                          '${(v * 100).round()} percent',
+                    label: context.l10n.cropLeftAndRight,
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: RangeSlider(
+                        values: horizontal,
+                        onChangeStart: saving ? null : (_) => remember(),
+                        onChanged: saving
+                            ? null
+                            : (v) {
+                                if (v.end - v.start >= .02) {
+                                  setState(() => horizontal = v);
+                                }
+                              },
+                        semanticFormatterCallback: context.spokenValue(
+                          (strings, value) =>
+                              strings.accessibilityValue40(value),
+                          multiplier: 100,
+                        ),
+                      ),
                     ),
                   ),
-                  const Text('Crop top / bottom'),
+                  Text(context.l10n.cropTopBottom),
                   Semantics(
-                    label: 'Crop top and bottom',
-                    child: RangeSlider(
-                      values: vertical,
-                      onChangeStart: saving ? null : (_) => remember(),
-                      onChanged: saving
-                          ? null
-                          : (v) {
-                              if (v.end - v.start >= .02) {
-                                setState(() => vertical = v);
-                              }
-                            },
-                      semanticFormatterCallback: (v) =>
-                          '${(v * 100).round()} percent',
+                    label: context.l10n.cropTopAndBottom,
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: RangeSlider(
+                        values: vertical,
+                        onChangeStart: saving ? null : (_) => remember(),
+                        onChanged: saving
+                            ? null
+                            : (v) {
+                                if (v.end - v.start >= .02) {
+                                  setState(() => vertical = v);
+                                }
+                              },
+                        semanticFormatterCallback: context.spokenValue(
+                          (strings, value) =>
+                              strings.accessibilityValue40(value),
+                          multiplier: 100,
+                        ),
+                      ),
                     ),
                   ),
                   TextButton(
@@ -626,7 +663,7 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                             horizontal = const RangeValues(0, 1);
                             vertical = const RangeValues(0, 1);
                           }),
-                    child: const Text('Reset crop'),
+                    child: Text(context.l10n.resetCrop),
                   ),
                 ],
               ),

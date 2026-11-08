@@ -89,10 +89,12 @@ void main() {
       binding.reportData = {
         ...binding.reportData ?? {},
         'items': (await catalog.list(kind: MediaKind.image)).length,
-        'newFixtures': 1000 - before,
+        'newFixtures': before < 1000 ? 1000 - before : 0,
         'swipes': 30,
         'debugSwipeAndSettleMs': timings,
         'profileMode': kProfileMode,
+        'physicalSize': tester.view.physicalSize.toString(),
+        'devicePixelRatio': tester.view.devicePixelRatio,
         'frameBuildUs': frames
             .map((f) => f.buildDuration.inMicroseconds)
             .toList(),

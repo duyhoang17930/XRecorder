@@ -4,6 +4,13 @@ Ngày khảo sát: **04/11/2026**. Nền tảng đầu tiên: **Android**. Ứng
 
 ## 1. Kết luận lựa chọn
 
+**Cập nhật quyết định07/11/2026:** AI đã chuyển sang whisper.cpp offline theo yêu
+cầu chủ sản phẩm. Các dòng faster-whisper/server và “offline trong tương lai”
+bên dưới là nghiên cứu lịch sử04/11, không phải kiến trúc hiện tại. Runtime dùng
+Media3 1.11.1, whisper.cpp1.9.5 CPU/JNI (local CPU abort patch), RNNoise0.1;
+xem [reuse/provenance](implementation/REUSE_REGISTER.md) và
+[AI evaluation](implementation/P2_P3_AI_SUBTITLE_EVALUATION.md) cho bằng chứng thực thi.
+
 Có thể tham khảo và tái sử dụng dự án ở nhiều ngôn ngữ để xây 3HRecorder bằng Flutter. Phương án ưu tiên là giữ các lõi media tốt ở ngôn ngữ gốc, kết nối chúng với Flutter; chỉ chuyển sang Dart các phần phù hợp như giao diện, cấu hình, mô hình dự án và quy tắc nghiệp vụ.
 
 **Bộ ứng viên ưu tiên thử nghiệm:**

@@ -1,3 +1,6 @@
+import '../../l10n/editor_numbers.dart';
+
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/widgets/studio_widgets.dart';
@@ -47,7 +50,7 @@ class _LayersEditorState extends State<_LayersEditor> {
 
   @override
   Widget build(BuildContext context) => StudioDialog(
-    title: const Text('Text, stickers & drawing'),
+    title: Text(context.l10n.textStickersDrawing),
     content: SizedBox(
       width: 480,
       child: Column(
@@ -55,15 +58,23 @@ class _LayersEditorState extends State<_LayersEditor> {
         children: [
           for (var i = 0; i < layers.length; i++)
             ListTile(
-              title: Text('${i + 1}. ${layers[i]['kind']}'),
+              title: Text(
+                context.l10n.sequenceLabel(
+                  context.displayValue(i + 1),
+                  context.effectValue(layers[i]['kind']!),
+                ),
+              ),
               subtitle: Text(
-                '${(layers[i]['startMs'] as num) / 1000}–${(layers[i]['endMs'] as num) / 1000}s',
+                context.l10n.timeRangeSeconds(
+                  context.displayValue((layers[i]['startMs'] as num) / 1000),
+                  context.displayValue((layers[i]['endMs'] as num) / 1000),
+                ),
               ),
               onTap: () => edit(i, layers[i]['kind'] as String),
               trailing: Wrap(
                 children: [
                   IconButton(
-                    tooltip: 'Move layer forward',
+                    tooltip: context.l10n.moveLayerForward,
                     icon: const Icon(AppIcons.chevronUp),
                     onPressed: i == layers.length - 1
                         ? null
@@ -73,16 +84,16 @@ class _LayersEditorState extends State<_LayersEditor> {
                           }),
                   ),
                   IconButton(
-                    tooltip: 'Delete layer ${i + 1}',
+                    tooltip: context.l10n.deleteLayerNumber(
+                      context.displayValue(i + 1),
+                    ),
                     icon: const Icon(AppIcons.trash),
                     onPressed: () => setState(() => layers.removeAt(i)),
                   ),
                 ],
               ),
             ),
-          const Text(
-            'Later layers appear in front. Position and size are relative to the exported frame.',
-          ),
+          Text(context.l10n.laterLayersAppearInFrontPositionAnd),
           Wrap(
             children: [
               for (final kind in ['text', 'sticker', 'drawing'])
@@ -90,7 +101,9 @@ class _LayersEditorState extends State<_LayersEditor> {
                   onPressed: layers.length >= 40
                       ? null
                       : () => edit(null, kind),
-                  child: Text('Add $kind'),
+                  child: Text(
+                    context.l10n.addLayerKind(context.effectValue(kind)),
+                  ),
                 ),
             ],
           ),
@@ -100,11 +113,11 @@ class _LayersEditorState extends State<_LayersEditor> {
     actions: [
       TextButton(
         onPressed: () => Navigator.pop(context),
-        child: const Text('Cancel'),
+        child: Text(context.l10n.cancel),
       ),
       TextButton(
         onPressed: () => Navigator.pop(context, layers),
-        child: const Text('Use layers'),
+        child: Text(context.l10n.useLayers),
       ),
     ],
   );
@@ -150,13 +163,24 @@ class _LayerDialogState extends State<_LayerDialog> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('$label: ${v.toStringAsFixed(2)}'),
-        Slider(
-          value: v,
-          min: min,
-          max: max,
-          semanticFormatterCallback: (n) => '$label ${n.toStringAsFixed(2)}',
-          onChanged: (n) => setState(() => value[key] = n),
+        Text(
+          context.l10n.controlValue(
+            context.displayValue(label),
+            context.displayValue(context.decimal(v, digits: 2)),
+          ),
+        ),
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: Slider(
+            value: v,
+            min: min,
+            max: max,
+            semanticFormatterCallback: context.spokenValue(
+              (strings, number) => strings.accessibilityValue41(label, number),
+              digits: 2,
+            ),
+            onChanged: (n) => setState(() => value[key] = n),
+          ),
         ),
       ],
     );
@@ -164,7 +188,8 @@ class _LayerDialogState extends State<_LayerDialog> {
 
   void save() {
     try {
-      final a = double.tryParse(start.text), b = double.tryParse(end.text);
+      final a = parseEditorDecimal(start.text),
+          b = parseEditorDecimal(end.text);
       if (a == null || b == null || !a.isFinite || !b.isFinite) {
         throw const FormatException('Enter valid times in seconds.');
       }
@@ -184,7 +209,9 @@ class _LayerDialogState extends State<_LayerDialog> {
 
   @override
   Widget build(BuildContext context) => StudioDialog(
-    title: Text('Edit ${value['kind']} layer'),
+    title: Text(
+      context.l10n.editLayerKind(context.effectValue(value['kind']!)),
+    ),
     content: SizedBox(
       width: 440,
       child: Column(
@@ -195,23 +222,26 @@ class _LayerDialogState extends State<_LayerDialog> {
               controller: text,
               maxLength: 2000,
               maxLines: 4,
-              decoration: const InputDecoration(labelText: 'Layer text'),
+              decoration: InputDecoration(labelText: context.l10n.layerText),
             ),
           if (value['kind'] == 'sticker')
             DropdownButtonFormField<String>(
               isExpanded: true,
               initialValue: value['sticker'] as String,
-              decoration: const InputDecoration(labelText: 'Sticker'),
-              items: [
-                'star',
-                'heart',
-                'circle',
-              ].map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(),
+              decoration: InputDecoration(labelText: context.l10n.sticker),
+              items: ['star', 'heart', 'circle']
+                  .map(
+                    (v) => DropdownMenuItem(
+                      value: v,
+                      child: Text(context.effectValue(v)),
+                    ),
+                  )
+                  .toList(),
               onChanged: (v) => setState(() => value['sticker'] = v!),
             ),
           if (value['kind'] == 'drawing') ...[
             Semantics(
-              label: 'Drawing pad. Drag to draw; use position and size controls below to place it.',
+              label: context.l10n.drawingPadDragToDrawUsePosition,
               child: AspectRatio(
                 aspectRatio: 1,
                 child: LayoutBuilder(
@@ -233,12 +263,15 @@ class _LayerDialogState extends State<_LayerDialog> {
                         ]);
                       }
                     }),
-                    child: CustomPaint(
-                      painter: _DrawingPainter(
-                        List.of(points),
-                        Color(value['color'] as int),
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: CustomPaint(
+                        painter: _DrawingPainter(
+                          List.of(points),
+                          Color(value['color'] as int),
+                        ),
+                        child: const SizedBox.expand(),
                       ),
-                      child: const SizedBox.expand(),
                     ),
                   ),
                 ),
@@ -246,7 +279,7 @@ class _LayerDialogState extends State<_LayerDialog> {
             ),
             TextButton(
               onPressed: () => setState(points.clear),
-              child: const Text('Clear drawing'),
+              child: Text(context.l10n.clearDrawing),
             ),
             TextButton(
               onPressed: () => setState(
@@ -256,7 +289,7 @@ class _LayerDialogState extends State<_LayerDialog> {
                   [.8, .5],
                 ]),
               ),
-              child: const Text('Add straight line'),
+              child: Text(context.l10n.addStraightLine),
             ),
           ],
           Wrap(
@@ -271,12 +304,12 @@ class _LayerDialogState extends State<_LayerDialog> {
                 Semantics(
                   selected: value['color'] == color,
                   child: IconButton(
-                    tooltip: const {
-                      0xFFFFFFFF: 'White',
-                      0xFFFFD54F: 'Yellow',
-                      0xFFEF5350: 'Red',
-                      0xFF42A5F5: 'Blue',
-                      0xFF000000: 'Black',
+                    tooltip: {
+                      0xFFFFFFFF: context.l10n.white,
+                      0xFFFFD54F: context.l10n.yellow,
+                      0xFFEF5350: context.l10n.red,
+                      0xFF42A5F5: context.l10n.blue,
+                      0xFF000000: context.l10n.black,
                     }[color],
                     icon: Icon(AppIcons.selected, color: Color(color)),
                     onPressed: () => setState(() => value['color'] = color),
@@ -287,20 +320,20 @@ class _LayerDialogState extends State<_LayerDialog> {
           TextField(
             controller: start,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(labelText: 'Start (seconds)'),
+            decoration: InputDecoration(labelText: context.l10n.startSeconds),
           ),
           TextField(
             controller: end,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(labelText: 'End (seconds)'),
+            decoration: InputDecoration(labelText: context.l10n.endSeconds),
           ),
-          slider('x', 'Horizontal position', 0, 1),
-          slider('y', 'Vertical position', 0, 1),
-          slider('scale', 'Size', .1, 4),
-          slider('rotation', 'Rotation in degrees', -360, 360),
+          slider('x', context.l10n.horizontalPosition, 0, 1),
+          slider('y', context.l10n.verticalPosition, 0, 1),
+          slider('scale', context.l10n.size, .1, 4),
+          slider('rotation', context.l10n.rotationInDegrees, -360, 360),
           if (error != null)
             Text(
-              error!,
+              context.message(error!),
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
         ],
@@ -309,9 +342,9 @@ class _LayerDialogState extends State<_LayerDialog> {
     actions: [
       TextButton(
         onPressed: () => Navigator.pop(context),
-        child: const Text('Cancel'),
+        child: Text(context.l10n.cancel),
       ),
-      TextButton(onPressed: save, child: const Text('Use layer')),
+      TextButton(onPressed: save, child: Text(context.l10n.useLayer)),
     ],
   );
 }

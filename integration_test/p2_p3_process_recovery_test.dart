@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,6 +21,104 @@ void main() {
     const source =
         'content://com.xrecorder.xrecorder.files/media/p2_p3_audio_video.mp4';
     final repo = AndroidEditProjectRepository();
+    if (const bool.fromEnvironment('PUBLICATION_REPLAY')) {
+      final marker = File(
+        '/sdcard/Android/data/com.xrecorder.xrecorder/files/media/quality_publication.json',
+      );
+      final original = File(
+        '/sdcard/Android/data/com.xrecorder.xrecorder/files/media/p2_p3_audio_video.mp4',
+      );
+      if (!const bool.fromEnvironment('PUBLICATION_RESUME')) {
+        final project = EditProject(
+          id: 'publication_qa_${DateTime.now().microsecondsSinceEpoch}',
+          title: 'publication_qa',
+          updatedAt: DateTime.now(),
+          clips: [
+            TimelineClip(
+              mediaId: source,
+              inPoint: Duration.zero,
+              outPoint: const Duration(seconds: 4),
+              sourceDuration: const Duration(seconds: 4),
+            ),
+          ],
+        );
+        await repo.save(project);
+        final id = (await engine.invokeMethod<String>(
+          'exportStart',
+          project.toJson(),
+        ))!;
+        Map<String, dynamic> job = {};
+        for (var n = 0; n < 240; n++) {
+          final rows = (jsonDecode(
+            (await engine.invokeMethod<String>('exportList'))!,
+          ) as List).cast<Map<String, dynamic>>();
+          job = rows.firstWhere((row) => row['id'] == id);
+          if (['completed', 'failed', 'cancelled'].contains(job['state'])) {
+            break;
+          }
+          await Future<void>.delayed(const Duration(milliseconds: 500));
+        }
+        expect(job['state'], 'completed', reason: job.toString());
+        final count = (await media.invokeListMethod<dynamic>('list', {
+          'kind': 'video',
+        }))!.length;
+        final data = {
+          'jobId': id,
+          'projectId': project.id,
+          'uri': job['uri'],
+          'videoCount': count,
+          'project': project.toJson(),
+          'sourceBytes': base64Encode(await original.readAsBytes()),
+        };
+        await marker.writeAsString(jsonEncode(data));
+        binding.reportData = {
+          'phase': 'publication_before',
+          'jobId': id,
+          'projectId': project.id,
+          'uri': job['uri'],
+          'videoCount': count,
+        };
+      } else {
+        final data =
+            jsonDecode(await marker.readAsString()) as Map<String, dynamic>;
+        final rows = (jsonDecode(
+          (await engine.invokeMethod<String>('exportList'))!,
+        ) as List).cast<Map<String, dynamic>>();
+        final recovered = rows.firstWhere((row) => row['id'] == data['jobId']);
+        expect(recovered['state'], 'completed');
+        expect(recovered['uri'], data['uri']);
+        expect(
+          (await media.invokeListMethod<dynamic>('list', {
+            'kind': 'video',
+          }))!.length,
+          data['videoCount'],
+        );
+        expect(
+          (await repo.find(data['projectId'] as String))!.toJson(),
+          data['project'],
+        );
+        expect(
+          await original.readAsBytes(),
+          orderedEquals(base64Decode(data['sourceBytes'] as String)),
+        );
+        expect(
+          await media.invokeMethod<Uint8List>('thumbnail', {
+            'uri': data['uri'],
+          }),
+          isNotEmpty,
+        );
+        binding.reportData = {
+          'phase': 'publication_after',
+          'jobId': data['jobId'],
+          'uri': data['uri'],
+          'completedWithoutDuplicate': true,
+          'draftUnchanged': true,
+          'sourceUnchanged': true,
+          'scope': 'Real published MediaStore URI recovered from a simulated finalizing checkpoint, followed by actual process restart.',
+        };
+      }
+      return;
+    }
     if (const bool.fromEnvironment('IO_FAULT')) {
       final project = EditProject(
         id: 'io_fault_qa_${DateTime.now().microsecondsSinceEpoch}',

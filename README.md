@@ -11,7 +11,7 @@ Implemented: real media catalog and SAF folder access; recording with audio, pau
 
 The UI uses Dark Bento Studio, with persisted Dark/Light/System appearance across the app and video editor. The video preview keeps a black media surface. UI language is English. The five-position navigation keeps Create (+) as an action menu; reselecting a tab scrolls its content to the top. See the [design system](docs/ui/DESIGN_SYSTEM.md) and [UI/UX summary with screenshots](docs/ui/README.md).
 
-AI subtitles and livestream are intentionally deferred under [issue #1](https://github.com/duyhoang17930/XRecorder/issues/1). Ads, premium entitlements, floating recording controls and shake-to-stop are not exposed. Physical-device and production release gates remain open; see [release validation](docs/xrecorder/phase_13_validation.md).
+Offline AI subtitles use whisper.cpp on Android, with optional multilingual model download/import, timed subtitle editing, SRT and MP4 burn-in. Audio stays on device. See the [P2/P3 quality report](docs/implementation/P2_P3_FINAL_QUALITY_REPORT_VI.md) for measured scope and open gates. Livestream remains deferred under [issue #1](https://github.com/duyhoang17930/XRecorder/issues/1). Ads, premium entitlements, floating recording controls and shake-to-stop are not exposed. Physical-device and production release gates remain open; see [release validation](docs/xrecorder/phase_13_validation.md).
 
 ```sh
 flutter analyze
@@ -24,6 +24,7 @@ Integration recording tests require accepting Android permission and screen-shar
 
 Project references:
 
+- [TASK07 P2/P3 globalization, native regression and remaining gates](docs/implementation/TASK_07_FINAL_REPORT_VI.md)
 - [Product specification](docs/APP_SPEC_VI.md)
 - [Technology research](docs/TECH_STACK_RESEARCH_VI.md)
 - [Reference index](docs/REFERENCE_INDEX.md)

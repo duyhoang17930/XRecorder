@@ -4,7 +4,12 @@ Source: https://github.com/ggml-org/whisper.cpp
 Release v1.9.5, commit d1be6fde11ac6e0407606b4e42fe72d34add8037.
 Downloaded 2026-11-07. MIT license is retained in whisper.cpp/LICENSE.
 Vendored build inputs: CMakeLists.txt, cmake/, include/, src/, ggml/.
-Remaining source files are unmodified. Only Android CPU build inputs are retained
+Local patch in src/whisper.cpp: scheduler compute helper propagates the existing
+abort callback to CPU backends in four encoder/decoder call sites. This lets
+cancellation stop between graph nodes, rather than waiting for a complete graph.
+No inference math/model/decoding parameters changed. Native cancellation latency
+and subsequent inference are regression-tested. Other source files are unmodified.
+Only Android CPU build inputs are retained
 (145 files after pruning); unused GPU/server backends and CoreML/OpenVINO/VitisAI
 directories are excluded, as are examples, models, CI and Git metadata. Root app
 CMake explicitly disables excluded backends. All three Android ABI builds are required.

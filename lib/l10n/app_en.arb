@@ -1,0 +1,3086 @@
+{
+  "@@locale": "en",
+  "label1080pFhd": "1080p FHD",
+  "@label1080pFhd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "label12Mbps": "12 Mbps",
+  "@label12Mbps": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "label16Mbps": "16 Mbps",
+  "@label16Mbps": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "label24Mbps": "24 Mbps",
+  "@label24Mbps": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "label2kQhd": "2K QHD",
+  "@label2kQhd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "label4kUhd": "4K UHD",
+  "@label4kUhd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "label720pHd": "720p HD",
+  "@label720pHd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "label8Mbps": "8 Mbps",
+  "@label8Mbps": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "aDocumentProviderMovedFileOrRevoked": "A document provider, moved file or revoked permission can invalidate a saved URI. Select the folder again. Projects keep their original references and may require re-adding a moved clip.",
+  "@aDocumentProviderMovedFileOrRevoked": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "appearance": "APPEARANCE",
+  "@appearance": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "aboutLicenses": "About & licenses",
+  "@aboutLicenses": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "accessWasnTGrantedChooseTheFile": "Access wasn''t granted. Choose the file or folder again.",
+  "@accessWasnTGrantedChooseTheFile": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "addAudioFile": "Add audio file",
+  "@addAudioFile": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "addBackgroundMusic": "Add background music",
+  "@addBackgroundMusic": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "addClip": "Add clip",
+  "@addClip": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "addStraightLine": "Add straight line",
+  "@addStraightLine": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "addSubtitle": "Add subtitle",
+  "@addSubtitle": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "addYourFirstClip": "Add your first clip",
+  "@addYourFirstClip": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "android10MoviesXrecorderAndPicturesXrecorder": "Android 10+: Movies/XRecorder and Pictures/XRecorder. Older Android: app-specific external storage. Open library storage for actual usage.",
+  "@android10MoviesXrecorderAndPicturesXrecorder": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "androidBlocksProtectedWindowsAndSomeApps": "Android blocks protected windows and some apps disallow playback-audio capture. Internal audio requires Android 10 or later. Choose microphone audio to record your voice; protected app audio cannot be bypassed.",
+  "@androidBlocksProtectedWindowsAndSomeApps": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "androidCanRevokeScreenCaptureAndDevice": "Android can revoke screen capture, and device behavior varies when locked. Reopen the app to see native session status. Interrupted sessions are not shown as saved. Free storage and retry; reduce resolution or frame rate if the encoder is overloaded.",
+  "@androidCanRevokeScreenCaptureAndDevice": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "androidRuntimeDependencyInventory": "Android runtime dependency inventory",
+  "@androidRuntimeDependencyInventory": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "androidScreenRecordingAndNonDestructiveEditing": "Android screen recording and non-destructive editing. Media3: Apache-2.0. Manrope: SIL OFL. Lucide Flutter: MIT; Lucide artwork: ISC. See licenses for details.",
+  "@androidScreenRecordingAndNonDestructiveEditing": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "androidShareSheetOpenedDeliveryDependsOn": "Android share sheet opened. Delivery depends on the app and recipient you choose.",
+  "@androidShareSheetOpenedDeliveryDependsOn": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "androidx": "AndroidX",
+  "@androidx": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "androidxMedia3": "AndroidX Media3",
+  "@androidxMedia3": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "appLanguage": "App language",
+  "@appLanguage": {
+    "description": "Language of navigation and editing controls."
+  },
+  "appMedia": "App media",
+  "@appMedia": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/media_picker.dart. Keep product names, technical identifiers and units intact."
+  },
+  "appVersionAndroidApiManufacturerModelAnd": "App version, Android API, manufacturer, model and ABI only. No logs, media paths or identifiers.",
+  "@appVersionAndroidApiManufacturerModelAnd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "appOwnedMediaOnlyItemsBecomeEligible": "App-owned media only. Items become eligible for permanent cleanup after 24 hours; cleanup runs when Trash is opened. Restoring creates a new item with a unique name.",
+  "@appOwnedMediaOnlyItemsBecomeEligible": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/trash_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "appOwnedMediaOnlySelectedExternalFolders": "App-owned media only. Selected external folders are excluded.",
+  "@appOwnedMediaOnlySelectedExternalFolders": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "applySubtitles": "Apply subtitles",
+  "@applySubtitles": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "applyToProject": "Apply to project",
+  "@applyToProject": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "arrow": "Arrow",
+  "@arrow": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "attachImageOrVideoUpTo25": "Attach image or video (up to 25 MB)",
+  "@attachImageOrVideoUpTo25": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "audioPitchAppliesToAllClipAudio": "Audio pitch (applies to all clip audio)",
+  "@audioPitchAppliesToAllClipAudio": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "audioStaysOnThisDeviceTheFirst": "Audio stays on this device. The first use requires a multilingual model. Tiny is smaller and faster; Base balances speed and recognition. Small may recognize more accurately, but needs more memory and time. Recognize up to 10 minutes at a time. Results need review.",
+  "@audioStaysOnThisDeviceTheFirst": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "audioTrackVolume": "Audio track volume",
+  "@audioTrackVolume": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "audioTracks": "Audio tracks",
+  "@audioTracks": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "audioCountdownFacecam": "Audio, countdown & facecam",
+  "@audioCountdownFacecam": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "auto": "Auto",
+  "@auto": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "autoDetect": "Auto Detect",
+  "@autoDetect": {
+    "description": "Let the offline speech model detect the source language."
+  },
+  "autoSensor": "Auto Sensor",
+  "@autoSensor": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "balancedBase141Mib": "Balanced · base · 141 MiB",
+  "@balancedBase141Mib": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "black": "Black",
+  "@black": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "blackBackgroundAspectRatio": "Black background / aspect ratio",
+  "@blackBackgroundAspectRatio": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "blue": "Blue",
+  "@blue": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "capture": "CAPTURE",
+  "@capture": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cache": "Cache",
+  "@cache": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cancelExport": "Cancel export",
+  "@cancelExport": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/export_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cancelOperation": "Cancel operation",
+  "@cancelOperation": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "captureEditingDraftsAndExportsRunLocally": "Capture, editing, drafts, exports and offline subtitles run on your device. Speech models need a download or local import; transcription does not upload your media. Sharing opens an Android chooser; you decide the receiving app. A support report includes only your text, optional selected attachment and device details if you explicitly enable them.",
+  "@captureEditingDraftsAndExportsRunLocally": {
+    "description": "Localized P2/P3 help, sticker name or lossless subtitle export validation."
+  },
+  "carefulSmall181MibSlower": "Careful · small · 181 MiB · slower",
+  "@carefulSmall181MibSlower": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "centeredTextThroughoutVideo": "Centered text throughout video",
+  "@centeredTextThroughoutVideo": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "checkAudioTrimTimelinePositionGainAnd": "Check audio trim, timeline position, gain and fades. Fades must fit the audible track.",
+  "@checkAudioTrimTimelinePositionGainAnd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/timeline_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "checkLayerTextPositionSizeRotationAnd": "Check layer text, position, size, rotation and times.",
+  "@checkLayerTextPositionSizeRotationAnd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/timeline_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "chooseAPlayableVideoOfAtLeast": "Choose a playable video of at least 0.2 seconds. Maximum 30 clips.",
+  "@chooseAPlayableVideoOfAtLeast": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "chooseAPlayableVideoOrAStill": "Choose a playable video or a still photo.",
+  "@chooseAPlayableVideoOrAStill": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/media_picker.dart. Keep product names, technical identifiers and units intact."
+  },
+  "chooseDestination": "Choose destination",
+  "@chooseDestination": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "chooseFolder": "Choose folder",
+  "@chooseFolder": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/media_picker.dart. Keep product names, technical identifiers and units intact."
+  },
+  "chooseMedia": "Choose media",
+  "@chooseMedia": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/media_picker.dart. Keep product names, technical identifiers and units intact."
+  },
+  "chooseTheSameMediaTypeWithEnough": "Choose the same media type with enough duration for this clip.",
+  "@chooseTheSameMediaTypeWithEnough": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "circle": "Circle",
+  "@circle": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cleanupOnOpeningTrashAfter24Hours": "Cleanup on opening Trash after 24 hours",
+  "@cleanupOnOpeningTrashAfter24Hours": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "clearDrawing": "Clear drawing",
+  "@clearDrawing": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "clearSearch": "Clear search",
+  "@clearSearch": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_fields.dart. Keep product names, technical identifiers and units intact."
+  },
+  "clip": "Clip",
+  "@clip": {
+    "description": "P2/P3 interface copy. Origin: lib/core/domain/models.dart. Keep product names, technical identifiers and units intact."
+  },
+  "close": "Close",
+  "@close": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "colorFilter": "Color filter",
+  "@colorFilter": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "confirmTheShortcutWithYourLauncher": "Confirm the shortcut with your launcher.",
+  "@confirmTheShortcutWithYourLauncher": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "copySrt": "Copy SRT",
+  "@copySrt": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "copyToFolder": "Copy to folder",
+  "@copyToFolder": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "copyVerifiedAndSaved": "Copy verified and saved.",
+  "@copyVerifiedAndSaved": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldNotOpenThisImageTryAnother": "Could not open this image. Try another photo.",
+  "@couldNotOpenThisImageTryAnother": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_preview_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTApplyThisEditCheckThe": "Couldn''t apply this edit. Check the clip and try again.",
+  "@couldnTApplyThisEditCheckThe": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTCheckStorageTryAgain": "Couldn''t check storage. Try again.",
+  "@couldnTCheckStorageTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTCreateAProjectCheckStorage": "Couldn''t create a project. Check storage and try again.",
+  "@couldnTCreateAProjectCheckStorage": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTDeleteThisDraftTryAgain": "Couldn''t delete this draft. Try again.",
+  "@couldnTDeleteThisDraftTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTDeleteThisFileTryAgain": "Couldn''t delete this file. Try again.",
+  "@couldnTDeleteThisFileTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTExportThisVideoCheckStorage": "Couldn''t export this video. Check storage and try again.",
+  "@couldnTExportThisVideoCheckStorage": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTLoadTrashTryAgain": "Couldn''t load Trash. Try again.",
+  "@couldnTLoadTrashTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTLoadYourDraftsTryAgain": "Couldn''t load your drafts. Try again.",
+  "@couldnTLoadYourDraftsTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTLoadYourMediaTryAgain": "Couldn''t load your media. Try again or choose a folder.",
+  "@couldnTLoadYourMediaTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTMoveThisFileToTrash": "Couldn''t move this file to Trash. Try again.",
+  "@couldnTMoveThisFileToTrash": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTOpenSharingCheckTheFile": "Couldn''t open sharing. Check the file and try again.",
+  "@couldnTOpenSharingCheckTheFile": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTOpenThisFileCheckAccess": "Couldn''t open this file. Check access and try again.",
+  "@couldnTOpenThisFileCheckAccess": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTOpenThisFolderChooseIt": "Couldn''t open this folder. Choose it again.",
+  "@couldnTOpenThisFolderChooseIt": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTOpenThisPhotoCheckAccess": "Couldn''t open this photo. Check access or choose another file.",
+  "@couldnTOpenThisPhotoCheckAccess": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTPauseRecordingTryAgain": "Couldn''t pause recording. Try again.",
+  "@couldnTPauseRecordingTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTPlayThisVideoCheckAccess": "Couldn''t play this video. Check access or choose another file.",
+  "@couldnTPlayThisVideoCheckAccess": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTPrepareYourReportCheckThe": "Couldn''t prepare your report. Check the attachment and try again.",
+  "@couldnTPrepareYourReportCheckThe": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTRecordYourScreenCheckPermissions": "Couldn''t record your screen. Check permissions and try again.",
+  "@couldnTRecordYourScreenCheckPermissions": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTRenameThisFileCheckThe": "Couldn''t rename this file. Check the name and try again.",
+  "@couldnTRenameThisFileCheckThe": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTRestoreThisFileCheckStorage": "Couldn''t restore this file. Check storage and try again.",
+  "@couldnTRestoreThisFileCheckStorage": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTResumeRecordingTryAgain": "Couldn''t resume recording. Try again.",
+  "@couldnTResumeRecordingTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTSaveTheFileFreeSome": "Couldn''t save the file. Free some storage and try again.",
+  "@couldnTSaveTheFileFreeSome": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTSaveThePhotoCheckStorage": "Couldn''t save the photo. Check storage and try again.",
+  "@couldnTSaveThePhotoCheckStorage": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTSaveTheScreenshotCheckPermissions": "Couldn''t save the screenshot. Check permissions and storage, then try again.",
+  "@couldnTSaveTheScreenshotCheckPermissions": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTSaveYourDraftCheckStorage": "Couldn''t save your draft. Check storage and try again.",
+  "@couldnTSaveYourDraftCheckStorage": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTStopRecordingTryAgain": "Couldn''t stop recording. Try again.",
+  "@couldnTStopRecordingTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "couldnTUpdateTheRecordingTryAgain": "Couldn''t update the recording. Try again.",
+  "@couldnTUpdateTheRecordingTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "countdownDelaysTheStartAfterConsentDuration": "Countdown delays the start after consent. Duration limits active recording time and stops automatically; paused time does not count. Settings apply to the next session.",
+  "@countdownDelaysTheStartAfterConsentDuration": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "create": "Create",
+  "@create": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_shell.dart. Keep product names, technical identifiers and units intact."
+  },
+  "createAProjectOriginalsStayUnchanged": "Create a project. Originals stay unchanged.",
+  "@createAProjectOriginalsStayUnchanged": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "createAVideoProjectAddClipsAnd": "Create a video project, add clips and reorder them. Use the playhead to split and range handles to trim. Crop and rotate each clip. Apply project effects, then tap Export. Keep the app open; interrupted exports can be retried in Export queue.",
+  "@createAVideoProjectAddClipsAnd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cropAnnotateACopy": "Crop & annotate a copy",
+  "@cropAnnotateACopy": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cropLeftRight": "Crop left / right",
+  "@cropLeftRight": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cropLeftAndRight": "Crop left and right",
+  "@cropLeftAndRight": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cropTopBottom": "Crop top / bottom",
+  "@cropTopBottom": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cropTopAndBottom": "Crop top and bottom",
+  "@cropTopAndBottom": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "cyan": "Cyan",
+  "@cyan": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "dateUnavailable": "Date unavailable",
+  "@dateUnavailable": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "deleteDraft": "Delete draft",
+  "@deleteDraft": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "deleteDraft785099": "Delete draft?",
+  "@deleteDraft785099": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "deletePermanently": "Delete permanently",
+  "@deletePermanently": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/trash_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "deleteSubtitle": "Delete subtitle",
+  "@deleteSubtitle": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "describeWhatHappenedWhatYouExpectedAnd": "Describe what happened, what you expected, and how to reproduce it. Remove passwords, account details and private content before sharing. Nothing is uploaded here.",
+  "@describeWhatHappenedWhatYouExpectedAnd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "detectLanguage": "Detect language",
+  "@detectLanguage": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "deviceFreeSpace": "Device free space",
+  "@deviceFreeSpace": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "dimensions": "Dimensions",
+  "@dimensions": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "discardEdits": "Discard edits",
+  "@discardEdits": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "discardPhotoEdits": "Discard photo edits?",
+  "@discardPhotoEdits": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "disconnect": "Disconnect",
+  "@disconnect": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "disconnectFolder": "Disconnect folder",
+  "@disconnectFolder": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "disconnectThisFolder": "Disconnect this folder?",
+  "@disconnectThisFolder": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "downloadModel": "Download model",
+  "@downloadModel": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "downloadOrImportAMultilingualSpeechModel": "Download or import a multilingual speech model before generating subtitles.",
+  "@downloadOrImportAMultilingualSpeechModel": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_service.dart. Keep product names, technical identifiers and units intact."
+  },
+  "draftCouldNotBeSavedFreeSome": "Draft could not be saved. Free some storage and retry.",
+  "@draftCouldNotBeSavedFreeSome": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "draftNotFound": "Draft not found",
+  "@draftNotFound": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "draftOperationFailed": "Draft operation failed.",
+  "@draftOperationFailed": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_repository.dart. Keep product names, technical identifiers and units intact."
+  },
+  "draftStorageRequiresAndroid": "Draft storage requires Android.",
+  "@draftStorageRequiresAndroid": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_repository.dart. Keep product names, technical identifiers and units intact."
+  },
+  "drawAtLeastOneStrokeUpTo": "Draw at least one stroke (up to 2048 points).",
+  "@drawAtLeastOneStrokeUpTo": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/timeline_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "drawingPadDragToDrawUsePosition": "Drawing pad. Drag to draw; use position and size controls below to place it.",
+  "@drawingPadDragToDrawUsePosition": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "duplicateClip": "Duplicate clip",
+  "@duplicateClip": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "duplicateDraft": "Duplicate draft",
+  "@duplicateDraft": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "duration": "Duration",
+  "@duration": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_shell.dart. Keep product names, technical identifiers and units intact."
+  },
+  "editACopyOriginalsStayUnchanged": "Edit a copy. Originals stay unchanged.",
+  "@editACopyOriginalsStayUnchanged": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "editAnSrgbCopyWithOrientationApplied": "Edit an sRGB copy with orientation applied. Up to 2048px on the longest edge. JPEG uses a white background for transparency.",
+  "@editAnSrgbCopyWithOrientationApplied": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "editPhoto": "Edit photo",
+  "@editPhoto": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "editTimedSubtitlesOnThisDeviceAutomatic": "Edit timed subtitles on this device. Automatic recognition uses a downloaded offline model.",
+  "@editTimedSubtitlesOnThisDeviceAutomatic": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "editing": "Editing",
+  "@editing": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "editingStudio": "Editing Studio",
+  "@editingStudio": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "editor": "Editor",
+  "@editor": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "effects": "Effects",
+  "@effects": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "endSeconds": "End (seconds)",
+  "@endSeconds": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "endInAudioSeconds": "End in audio (seconds)",
+  "@endInAudioSeconds": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "english": "English",
+  "@english": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "enterSubtitleTextAndAnEndTime": "Enter subtitle text and an end time after its start.",
+  "@enterSubtitleTextAndAnEndTime": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitles.dart. Keep product names, technical identifiers and units intact."
+  },
+  "enterValidTimesInSeconds": "Enter valid times in seconds.",
+  "@enterValidTimesInSeconds": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "enterValidTimesWithinTheVideo": "Enter valid times within the video.",
+  "@enterValidTimesWithinTheVideo": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "eraser": "Eraser",
+  "@eraser": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "errorProne": "Error Prone",
+  "@errorProne": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "export": "Export",
+  "@export": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "exportFormat": "Export format",
+  "@exportFormat": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "exportImageFormat": "Export image format",
+  "@exportImageFormat": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "exportQueue": "Export queue",
+  "@exportQueue": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "exports": "Exports",
+  "@exports": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/export_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "externalFilesCanBeCopiedMovingRequires": "External files can be copied. Moving requires permission from the Android document provider.",
+  "@externalFilesCanBeCopiedMovingRequires": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "facecamNeedsAFrontCameraCameraPermission": "Facecam needs a front camera, camera permission and display-over-other-apps access. Its visible preview is captured with your screen. For taps, enable Show taps in Android Developer options yourself. The app cannot observe arbitrary touches in other apps.",
+  "@facecamNeedsAFrontCameraCameraPermission": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "fadeInSeconds": "Fade in (seconds)",
+  "@fadeInSeconds": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "fadeOutSeconds": "Fade out (seconds)",
+  "@fadeOutSeconds": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "fastTiny74Mib": "Fast · tiny · 74 MiB",
+  "@fastTiny74Mib": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "feedback": "Feedback",
+  "@feedback": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "feedbackIssueReport": "Feedback & issue report",
+  "@feedbackIssueReport": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "filename": "Filename",
+  "@filename": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "filesStayInTheFolderDraftsUsing": "Files stay in the folder. Drafts using these files may need you to select the folder again.",
+  "@filesStayInTheFolderDraftsUsing": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "finishTheCurrentRecordingFirst": "Finish the current recording first.",
+  "@finishTheCurrentRecordingFirst": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "folderAccessChangedChooseTheFolderAgain": "Folder access changed. Choose the folder again.",
+  "@folderAccessChangedChooseTheFolderAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "followSystem": "Follow system",
+  "@followSystem": {
+    "description": "App language preference; speech recognition is configured separately."
+  },
+  "format": "Format",
+  "@format": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "gifFramesPerSecond": "GIF frames per second",
+  "@gifFramesPerSecond": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "gifLongestEdgePixels": "GIF longest edge (pixels)",
+  "@gifLongestEdgePixels": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "gifRepeatCount0Forever": "GIF repeat count (0 = forever)",
+  "@gifRepeatCount0Forever": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "gifUsesTheTrimmedTimelineHasNo": "GIF uses the trimmed timeline, has no audio and is limited to 15 seconds. Choose 5/10/20 FPS and 160/320/480 pixels on the longest edge; colors are reduced to 256. Audio gain and pitch affect all audio in each clip; they do not isolate a voice. Added music loops to the project duration.",
+  "@gifUsesTheTrimmedTimelineHasNo": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "gifUsesTheTrimmedTimelineHasNoa3b084": "GIF uses the trimmed timeline, has no audio and is limited to 15 seconds. Colors are reduced to 256. GIF files can be larger than MP4.",
+  "@gifUsesTheTrimmedTimelineHasNoa3b084": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "generateOfflineSubtitles": "Generate offline subtitles",
+  "@generateOfflineSubtitles": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "githubIssuesArePublicOpeningTheBrowser": "GitHub issues are public. Opening the browser does not submit this report.",
+  "@githubIssuesArePublicOpeningTheBrowser": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "guava": "Guava",
+  "@guava": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "h264Avc": "H.264 / AVC",
+  "@h264Avc": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "h265Hevc": "H.265 / HEVC",
+  "@h265Hevc": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "helpAbout": "HELP & ABOUT",
+  "@helpAbout": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "help": "Help",
+  "@help": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_widgets.dart. Keep product names, technical identifiers and units intact."
+  },
+  "helpGuides": "Help & guides",
+  "@helpGuides": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "horizontalPosition": "Horizontal position",
+  "@horizontalPosition": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "howDoIMergeCropAndExport": "How do I merge, crop and export?",
+  "@howDoIMergeCropAndExport": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "howDoIRecordMyScreen": "How do I record my screen?",
+  "@howDoIRecordMyScreen": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "howDoCountdownAndDurationDiffer": "How do countdown and duration differ?",
+  "@howDoCountdownAndDurationDiffer": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "howDoFacecamAndTouchIndicatorsWork": "How do facecam and touch indicators work?",
+  "@howDoFacecamAndTouchIndicatorsWork": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "howDoesTrashWork": "How does Trash work?",
+  "@howDoesTrashWork": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "imageUnavailable": "Image unavailable",
+  "@imageUnavailable": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "importDownloadedBin": "Import downloaded .bin",
+  "@importDownloadedBin": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "includeDeviceDiagnostics": "Include device diagnostics",
+  "@includeDeviceDiagnostics": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "internalAudio": "Internal Audio",
+  "@internalAudio": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "invalidClipRangeOrCrop": "Invalid clip range or crop",
+  "@invalidClipRangeOrCrop": {
+    "description": "P2/P3 interface copy. Origin: lib/core/domain/models.dart. Keep product names, technical identifiers and units intact."
+  },
+  "invalidDrawingCoordinates": "Invalid drawing coordinates.",
+  "@invalidDrawingCoordinates": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/timeline_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "invalidPreferenceValues": "Invalid preference values",
+  "@invalidPreferenceValues": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "invalidPreferences": "Invalid preferences",
+  "@invalidPreferences": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "invalidSubtitlePlaybackSpeed": "Invalid subtitle playback speed.",
+  "@invalidSubtitlePlaybackSpeed": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitles.dart. Keep product names, technical identifiers and units intact."
+  },
+  "invalidTranscriptionInput": "Invalid transcription input.",
+  "@invalidTranscriptionInput": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_service.dart. Keep product names, technical identifiers and units intact."
+  },
+  "invalidTranscriptionProgress": "Invalid transcription progress.",
+  "@invalidTranscriptionProgress": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_service.dart. Keep product names, technical identifiers and units intact."
+  },
+  "jpegQuality": "JPEG quality",
+  "@jpegQuality": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "jpegSmallerFile": "JPEG · smaller file",
+  "@jpegSmallerFile": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "jspecify": "JSpecify",
+  "@jspecify": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "keepEditing": "Keep editing",
+  "@keepEditing": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "keepTheAppOpenWhileExportingInterrupted": "Keep the app open while exporting. Interrupted jobs can be retried. Each export saves a new file; your draft and original media are kept.",
+  "@keepTheAppOpenWhileExportingInterrupted": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/export_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "kotlin": "Kotlin",
+  "@kotlin": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "landscape": "Landscape",
+  "@landscape": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language selector title."
+  },
+  "languageEnglish": "Language · English",
+  "@languageEnglish": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "largest": "Largest",
+  "@largest": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_sort.dart. Keep product names, technical identifiers and units intact."
+  },
+  "laterLayersAppearInFrontPositionAnd": "Later layers appear in front. Position and size are relative to the exported frame.",
+  "@laterLayersAppearInFrontPositionAnd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "layerText": "Layer text",
+  "@layerText": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "leave": "Leave",
+  "@leave": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "leaveAtLeast02SecondsOn": "Leave at least 0.2 seconds on both sides of the split.",
+  "@leaveAtLeast02SecondsOn": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "leaveWithoutSaving": "Leave without saving?",
+  "@leaveWithoutSaving": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "libraryUnavailable": "Library unavailable",
+  "@libraryUnavailable": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "light": "Light",
+  "@light": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "loadingVideos": "Loading videos...",
+  "@loadingVideos": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/media_picker.dart. Keep product names, technical identifiers and units intact."
+  },
+  "loadingYourDrafts": "Loading your drafts…",
+  "@loadingYourDrafts": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "loadingYourMedia": "Loading your media…",
+  "@loadingYourMedia": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "loadingYourStudio": "Loading your studio…",
+  "@loadingYourStudio": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_widgets.dart. Keep product names, technical identifiers and units intact."
+  },
+  "longest": "Longest",
+  "@longest": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_sort.dart. Keep product names, technical identifiers and units intact."
+  },
+  "longestEdgeNoEnlargement": "Longest edge (no enlargement)",
+  "@longestEdgeNoEnlargement": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "lucideArtworkIscFeatherMit": "Lucide artwork (ISC / Feather MIT)",
+  "@lucideArtworkIscFeatherMit": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "maximum200SubtitleSegments": "Maximum 200 subtitle segments.",
+  "@maximum200SubtitleSegments": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitles.dart. Keep product names, technical identifiers and units intact."
+  },
+  "maximum30Clips": "Maximum 30 clips.",
+  "@maximum30Clips": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "mediaActionFailed": "Media action failed.",
+  "@mediaActionFailed": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_actions.dart. Keep product names, technical identifiers and units intact."
+  },
+  "mediaDetails": "Media details",
+  "@mediaDetails": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "mediaOperationFailed": "Media operation failed.",
+  "@mediaOperationFailed": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_repository.dart. Keep product names, technical identifiers and units intact."
+  },
+  "mediaProcessingStaysOnYourDeviceNo": "Media processing stays on your device. No analytics, AI upload or livestream is enabled. Only explicit sharing hands content to another app.",
+  "@mediaProcessingStaysOnYourDeviceNo": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "mediaStorage": "Media storage",
+  "@mediaStorage": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "mediaUnavailable": "Media unavailable",
+  "@mediaUnavailable": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "mergeNext": "Merge next",
+  "@mergeNext": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "microphone": "Microphone",
+  "@microphone": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "mixedStream": "Mixed Stream",
+  "@mixedStream": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "modelInstalledAndVerified": "Model installed and verified",
+  "@modelInstalledAndVerified": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "modelNotInstalled": "Model not installed",
+  "@modelNotInstalled": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "moveEarlier": "Move earlier",
+  "@moveEarlier": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "moveLater": "Move later",
+  "@moveLater": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "moveLayerForward": "Move layer forward",
+  "@moveLayerForward": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "moveThePlayheadInsideAClipBefore": "Move the playhead inside a clip before splitting.",
+  "@moveThePlayheadInsideAClipBefore": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "moveToTrash": "Move to Trash",
+  "@moveToTrash": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "moveToTrash756188": "Move to Trash?",
+  "@moveToTrash756188": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "moveToAnotherFolder": "Move to another folder?",
+  "@moveToAnotherFolder": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "moveToFolder": "Move to folder",
+  "@moveToFolder": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "moveVerifiedAndCompleted": "Move verified and completed.",
+  "@moveVerifiedAndCompleted": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "musicGain": "Music gain",
+  "@musicGain": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "musicLoopsToTheVideoDuration": "Music loops to the video duration.",
+  "@musicLoopsToTheVideoDuration": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "mute": "Mute",
+  "@mute": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "name": "Name",
+  "@name": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "newVideoProject": "New video project",
+  "@newVideoProject": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "newest": "Newest",
+  "@newest": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_sort.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noDraftsYet": "No drafts yet",
+  "@noDraftsYet": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noExportsYet": "No exports yet",
+  "@noExportsYet": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/export_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noImageWasSaved": "No image was saved",
+  "@noImageWasSaved": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noMatchingGuides": "No matching guides",
+  "@noMatchingGuides": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noMatchingMedia": "No matching media",
+  "@noMatchingMedia": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noMediaHereChooseAnotherSourceOr": "No media here. Choose another source or media type.",
+  "@noMediaHereChooseAnotherSourceOr": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/media_picker.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noPhotosInThisFolder": "No photos in this folder",
+  "@noPhotosInThisFolder": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noRecordingsYet": "No recordings yet",
+  "@noRecordingsYet": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noScreenshotsYet": "No screenshots yet",
+  "@noScreenshotsYet": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noSpeechRecognizedCheckTheAudioAnd": "No speech recognized. Check the audio and language.",
+  "@noSpeechRecognizedCheckTheAudioAnd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noVideosInThisFolder": "No videos in this folder",
+  "@noVideosInThisFolder": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noDraftsStoreClipReferencesRangesAnd": "No. Drafts store clip references, ranges and effects. Export creates a new file. Keep source media available until export finishes. Undo and redo operate on the current editing session; saved drafts survive restart.",
+  "@noDraftsStoreClipReferencesRangesAnd": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "normal": "Normal",
+  "@normal": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "notSupportedByThisDeviceOrThe": "Not supported by this device or the selected mode",
+  "@notSupportedByThisDeviceOrThe": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_widgets.dart. Keep product names, technical identifiers and units intact."
+  },
+  "off": "Off",
+  "@off": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "offlineAutomaticSubtitles": "Offline automatic subtitles",
+  "@offlineAutomaticSubtitles": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "offlineSpeechNoiseReduction": "Offline speech noise reduction",
+  "@offlineSpeechNoiseReduction": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "oldest": "Oldest",
+  "@oldest": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_sort.dart. Keep product names, technical identifiers and units intact."
+  },
+  "onAndroid10AndLaterVideosGo": "On Android 10 and later, videos go to Movies/XRecorder and images to Pictures/XRecorder through MediaStore. Older versions use app-specific external storage, which Android may remove on uninstall. Drafts and trash are private app data.",
+  "@onAndroid10AndLaterVideosGo": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "onDeviceProcessing": "On-device processing",
+  "@onDeviceProcessing": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "onlyAppOwnedMediaCanBeMoved": "Only app-owned media can be moved to private Trash. Restore creates a new file after verifying its backup. Items become eligible for permanent cleanup after 24 hours when Trash is opened. Permanent deletion cannot be undone. External selected media stays read-only.",
+  "@onlyAppOwnedMediaCanBeMoved": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "onlyFilesInThisFolderAreShown": "Only files in this folder are shown.",
+  "@onlyFilesInThisFolderAreShown": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "openGithubIssuesInBrowser": "Open GitHub issues in browser",
+  "@openGithubIssuesInBrowser": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "openDetails": "Open details",
+  "@openDetails": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "openSavedMedia": "Open saved media",
+  "@openSavedMedia": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/export_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "openShareSheet": "Open share sheet",
+  "@openShareSheet": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "openingAudio": "Opening audio…",
+  "@openingAudio": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "openingYourProject": "Opening your project…",
+  "@openingYourProject": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "originalAudioFadeInMilliseconds": "Original audio fade in (milliseconds)",
+  "@originalAudioFadeInMilliseconds": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "originalAudioFadeOutMilliseconds": "Original audio fade out (milliseconds)",
+  "@originalAudioFadeOutMilliseconds": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "originalAudioFadesMustFitTheVideo": "Original audio fades must fit the video duration.",
+  "@originalAudioFadesMustFitTheVideo": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "originalAudioGain0Mutes": "Original audio gain (0 mutes)",
+  "@originalAudioGain0Mutes": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "originalAudioVoiceEffect": "Original audio voice effect",
+  "@originalAudioVoiceEffect": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "originalDimensions": "Original dimensions",
+  "@originalDimensions": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "outputHeightCompression": "Output height / compression",
+  "@outputHeightCompression": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "pngLossless": "PNG · lossless",
+  "@pngLossless": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "pageUnavailable": "Page unavailable",
+  "@pageUnavailable": {
+    "description": "P2/P3 interface copy. Origin: lib/app/router/app_router.dart. Keep product names, technical identifiers and units intact."
+  },
+  "pausePreview": "Pause preview",
+  "@pausePreview": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_preview.dart. Keep product names, technical identifiers and units intact."
+  },
+  "pen": "Pen",
+  "@pen": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "performance": "Performance",
+  "@performance": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "permanentlyDelete": "Permanently delete?",
+  "@permanentlyDelete": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/trash_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "photo": "Photo",
+  "@photo": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_shell.dart. Keep product names, technical identifiers and units intact."
+  },
+  "photoLibrary": "Photo Library",
+  "@photoLibrary": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "photoEditor": "Photo editor",
+  "@photoEditor": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "photoPreview": "Photo preview",
+  "@photoPreview": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_preview_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "photos": "Photos",
+  "@photos": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/media_picker.dart. Keep product names, technical identifiers and units intact."
+  },
+  "placeThePlayheadInsideTheClipTo": "Place the playhead inside the clip to split it.",
+  "@placeThePlayheadInsideTheClipTo": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "playPreview": "Play preview",
+  "@playPreview": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_preview.dart. Keep product names, technical identifiers and units intact."
+  },
+  "playbackSpeedAudioPitchAlsoChanges": "Playback speed (audio pitch also changes)",
+  "@playbackSpeedAudioPitchAlsoChanges": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "portrait": "Portrait",
+  "@portrait": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "preferencesCouldNotBeSavedYourChanges": "Preferences could not be saved. Your changes are temporary. Retry saving.",
+  "@preferencesCouldNotBeSavedYourChanges": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "preview": "Preview",
+  "@preview": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "previewPosition": "Preview position",
+  "@previewPosition": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "previewUnavailableOpenDetailsOrRefresh": "Preview unavailable; open details or refresh",
+  "@previewUnavailableOpenDetailsOrRefresh": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "privacy": "Privacy",
+  "@privacy": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "projectName": "Project name",
+  "@projectName": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "protectedScreensMayBlockCapture": "Protected screens may block capture.",
+  "@protectedScreensMayBlockCapture": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "rnnoise": "RNNoise",
+  "@rnnoise": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "relinker": "ReLinker",
+  "@relinker": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "recentEditsCouldNotBeSavedKeep": "Recent edits could not be saved. Keep editing to retry. Your original videos are unchanged.",
+  "@recentEditsCouldNotBeSavedKeep": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "recentVideos": "Recent videos",
+  "@recentVideos": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "recognizeEditedAudio": "Recognize edited audio",
+  "@recognizeEditedAudio": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "recordScreen": "Record screen",
+  "@recordScreen": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_widgets.dart. Keep product names, technical identifiers and units intact."
+  },
+  "recording": "Recording",
+  "@recording": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "recordingStoppedUnexpectedlySeeHelpGuides": "Recording stopped unexpectedly. See Help & Guides.",
+  "@recordingStoppedUnexpectedlySeeHelpGuides": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "rectangle": "Rectangle",
+  "@rectangle": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "red": "Red",
+  "@red": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "redoEdit": "Redo edit",
+  "@redoEdit": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "redoPhotoEdit": "Redo photo edit",
+  "@redoPhotoEdit": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "reduceBackgroundNoise": "Reduce background noise",
+  "@reduceBackgroundNoise": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "removeAttachment": "Remove attachment",
+  "@removeAttachment": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "removeClipFromProject": "Remove clip from project",
+  "@removeClipFromProject": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "removeDownloadedModel": "Remove downloaded model",
+  "@removeDownloadedModel": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "removeMusic": "Remove music",
+  "@removeMusic": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "rename": "Rename",
+  "@rename": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "renameMedia": "Rename media",
+  "@renameMedia": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "renameProject": "Rename project",
+  "@renameProject": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "replaceBackgroundMusic": "Replace background music",
+  "@replaceBackgroundMusic": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "replaceSelectedAttachment": "Replace selected attachment",
+  "@replaceSelectedAttachment": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "replaceSource": "Replace source",
+  "@replaceSource": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "resetCrop": "Reset crop",
+  "@resetCrop": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "resetCropRotation": "Reset crop & rotation",
+  "@resetCropRotation": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "resetPreferences": "Reset preferences",
+  "@resetPreferences": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "resetPreferences550bf6": "Reset preferences?",
+  "@resetPreferences550bf6": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "restore": "Restore",
+  "@restore": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/trash_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "restoreRecordingAndAppearancePreferencesToTheir": "Restore recording and appearance preferences to their defaults. Media and editor drafts are kept.",
+  "@restoreRecordingAndAppearancePreferencesToTheir": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "retryDrafts": "Retry drafts",
+  "@retryDrafts": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "retryExport": "Retry export",
+  "@retryExport": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/export_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "retryLoading": "Retry loading",
+  "@retryLoading": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "retrySaving": "Retry saving",
+  "@retrySaving": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "returnToVideoStudio": "Return to Video Studio",
+  "@returnToVideoStudio": {
+    "description": "P2/P3 interface copy. Origin: lib/app/router/app_router.dart. Keep product names, technical identifiers and units intact."
+  },
+  "reviewSubtitles": "Review subtitles",
+  "@reviewSubtitles": {
+    "description": "Review recognized text before exporting; recognition can be inaccurate."
+  },
+  "rotate90": "Rotate 90°",
+  "@rotate90": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "rotationInDegrees": "Rotation in degrees",
+  "@rotationInDegrees": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "saveSrtFile": "Save SRT file",
+  "@saveSrtFile": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "saveCopy": "Save copy",
+  "@saveCopy": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "saveLocations": "Save locations",
+  "@saveLocations": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "saveName": "Save name",
+  "@saveName": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "savedDrafts": "Saved drafts",
+  "@savedDrafts": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "savedPreferencesCouldNotBeLoadedChanges": "Saved preferences could not be loaded. Changes are temporary. Retry loading or reset preferences.",
+  "@savedPreferencesCouldNotBeLoadedChanges": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "savedOriginalsUnchanged": "Saved · Originals unchanged",
+  "@savedOriginalsUnchanged": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "savingDraft": "Saving draft…",
+  "@savingDraft": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "screenRecordingPermissionWasnTGranted": "Screen recording permission wasn''t granted.",
+  "@screenRecordingPermissionWasnTGranted": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "screenshotMinimizesTheAppAfterApproval3s": "Screenshot minimizes the app after approval · 3s delay.",
+  "@screenshotMinimizesTheAppAfterApproval3s": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "screenshotPermissionWasnTGranted": "Screenshot permission wasn''t granted.",
+  "@screenshotPermissionWasnTGranted": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "search": "Search",
+  "@search": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_fields.dart. Keep product names, technical identifiers and units intact."
+  },
+  "searchHelp": "Search help",
+  "@searchHelp": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "searchLanguages": "Search languages",
+  "@searchLanguages": {
+    "description": "Search a language by its name or code."
+  },
+  "searchPhotos": "Search photos",
+  "@searchPhotos": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "searchResults": "Search results",
+  "@searchResults": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "searchVideos": "Search videos",
+  "@searchVideos": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_shell.dart. Keep product names, technical identifiers and units intact."
+  },
+  "share": "Share",
+  "@share": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "showAppMedia": "Show app media",
+  "@showAppMedia": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "size": "Size",
+  "@size": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "smallerDimensionsCanReduceFileSizeThe": "Smaller dimensions can reduce file size; the final size depends on your media and device encoder.",
+  "@smallerDimensionsCanReduceFileSizeThe": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "sortMedia": "Sort media",
+  "@sortMedia": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "sourceVideosAndExportedFilesAreKept": "Source videos and exported files are kept.",
+  "@sourceVideosAndExportedFilesAreKept": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "speechLanguage": "Speech language",
+  "@speechLanguage": {
+    "description": "Spoken language of the source audio, independent of the app language."
+  },
+  "speechModel": "Speech model",
+  "@speechModel": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "speechOperationFailedRetryOrChooseA": "Speech operation failed. Retry or choose a smaller model.",
+  "@speechOperationFailedRetryOrChooseA": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "speechOperationProgress": "Speech operation progress",
+  "@speechOperationProgress": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "split": "Split",
+  "@split": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "spokenLanguage": "Spoken language",
+  "@spokenLanguage": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "startSeconds": "Start (seconds)",
+  "@startSeconds": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "startInAudioSeconds": "Start in audio (seconds)",
+  "@startInAudioSeconds": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "startInVideoSeconds": "Start in video (seconds)",
+  "@startInVideoSeconds": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "sticker": "Sticker",
+  "@sticker": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "storage": "Storage",
+  "@storage": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "strokeWidth": "Stroke width",
+  "@strokeWidth": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "subtitleBackground": "Subtitle background",
+  "@subtitleBackground": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "subtitleColor": "Subtitle color",
+  "@subtitleColor": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "subtitlePosition": "Subtitle position",
+  "@subtitlePosition": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "subtitleText": "Subtitle text",
+  "@subtitleText": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "subtitleTextSize": "Subtitle text size",
+  "@subtitleTextSize": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "subtitles": "Subtitles",
+  "@subtitles": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "subtitlesMustFitTheTimelineWithoutOverlapping": "Subtitles must fit the timeline without overlapping.",
+  "@subtitlesMustFitTheTimelineWithoutOverlapping": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitles.dart. Keep product names, technical identifiers and units intact."
+  },
+  "system": "System",
+  "@system": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "systemFollowsYourDeviceAppearance": "System follows your device appearance.",
+  "@systemFollowsYourDeviceAppearance": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "tapChooseYourRecordingSettingsThenAccept": "Tap +, choose your recording settings, then accept the Android screen-sharing prompt. Use the in-app controls or recording notification to pause, resume or stop. A file appears only after saving finishes.",
+  "@tapChooseYourRecordingSettingsThenAccept": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "targetOutputFpsVariable": "Target output FPS (variable)",
+  "@targetOutputFpsVariable": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "targetVideoBitrateBitsS0Automatic": "Target video bitrate (bits/s; 0 = automatic)",
+  "@targetVideoBitrateBitsS0Automatic": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "text": "Text",
+  "@text": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "textToPlaceOnPhoto": "Text to place on photo",
+  "@textToPlaceOnPhoto": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "textStickersDrawing": "Text, stickers & drawing",
+  "@textStickersDrawing": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "theCopyWillBeVerifiedFirstThe": "The copy will be verified first. The original is removed only when Android allows it. If permission is unavailable, both copies are kept.",
+  "@theCopyWillBeVerifiedFirstThe": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/video_details_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "theMediaLibraryRequiresAndroid": "The media library requires Android.",
+  "@theMediaLibraryRequiresAndroid": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_repository.dart. Keep product names, technical identifiers and units intact."
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "thisActionIsnTAvailableRightNow": "This action isn''t available right now. Try again.",
+  "@thisActionIsnTAvailableRightNow": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "thisActionRequiresAndroid": "This action requires Android.",
+  "@thisActionRequiresAndroid": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_actions.dart. Keep product names, technical identifiers and units intact."
+  },
+  "thisFileIsNoLongerAvailableChoose": "This file is no longer available. Choose another file.",
+  "@thisFileIsNoLongerAvailableChoose": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "thisLauncherDoesNotSupportPinnedShortcuts": "This launcher does not support pinned shortcuts.",
+  "@thisLauncherDoesNotSupportPinnedShortcuts": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "timeline": "Timeline",
+  "@timeline": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "tiNgViT": "Tiếng Việt",
+  "@tiNgViT": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
+  },
+  "trash": "Trash",
+  "@trash": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "trashRestore": "Trash & restore",
+  "@trashRestore": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "trashIsEmpty": "Trash is empty",
+  "@trashIsEmpty": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/trash_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "trimMixAudio": "Trim & mix audio",
+  "@trimMixAudio": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "trimAndAlignUpTo8Tracks": "Trim and align up to 8 tracks. Gains share headroom to prevent clipping. Times refer to the exported video.",
+  "@trimAndAlignUpTo8Tracks": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "trimClip": "Trim clip",
+  "@trimClip": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "trimMergeEffects": "Trim, merge & effects",
+  "@trimMergeEffects": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "tryADifferentNameOrBrowseAnother": "Try a different name or browse another folder.",
+  "@tryADifferentNameOrBrowseAnother": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "undoEdit": "Undo edit",
+  "@undoEdit": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "undoPhotoEdit": "Undo photo edit",
+  "@undoPhotoEdit": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "unsupportedPreferencesVersion": "Unsupported preferences version",
+  "@unsupportedPreferencesVersion": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
+  },
+  "unsupportedProjectDocument": "Unsupported project document",
+  "@unsupportedProjectDocument": {
+    "description": "P2/P3 interface copy. Origin: lib/core/domain/models.dart. Keep product names, technical identifiers and units intact."
+  },
+  "unsupportedProjectSpeed": "Unsupported project speed",
+  "@unsupportedProjectSpeed": {
+    "description": "P2/P3 interface copy. Origin: lib/core/domain/models.dart. Keep product names, technical identifiers and units intact."
+  },
+  "untitled": "Untitled",
+  "@untitled": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_repository.dart. Keep product names, technical identifiers and units intact."
+  },
+  "untitledProject": "Untitled project",
+  "@untitledProject": {
+    "description": "P2/P3 interface copy. Origin: lib/core/domain/models.dart. Keep product names, technical identifiers and units intact."
+  },
+  "updateSubtitle": "Update subtitle",
+  "@updateSubtitle": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitle_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "useAValidFilenameAndTryAgain": "Use a valid filename and try again.",
+  "@useAValidFilenameAndTryAgain": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "useAtLeastTwoWordsAnd0": "Use at least two characters or words and 0.4 seconds to split.",
+  "@useAtLeastTwoWordsAnd0": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/subtitles.dart. Keep product names, technical identifiers and units intact."
+  },
+  "useAudio": "Use audio",
+  "@useAudio": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "useLayer": "Use layer",
+  "@useLayer": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "useLayers": "Use layers",
+  "@useLayers": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "useTracks": "Use tracks",
+  "@useTracks": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "verticalPosition": "Vertical position",
+  "@verticalPosition": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "video": "Video",
+  "@video": {
+    "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_shell.dart. Keep product names, technical identifiers and units intact."
+  },
+  "videoAudioEffects": "Video & audio effects",
+  "@videoAudioEffects": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
+  },
+  "videoLibrary": "Video Library",
+  "@videoLibrary": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "videoProject": "Video project",
+  "@videoProject": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "videoQuality": "Video quality",
+  "@videoQuality": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "videos": "Videos",
+  "@videos": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/media_picker.dart. Keep product names, technical identifiers and units intact."
+  },
+  "voiceEffect": "Voice effect",
+  "@voiceEffect": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/audio_tracks_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "whatAreTheGifAndAudioLimits": "What are the GIF and audio limits?",
+  "@whatAreTheGifAndAudioLimits": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "whatIfRecordingFailsOrThePhone": "What if recording fails or the phone locks?",
+  "@whatIfRecordingFailsOrThePhone": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "whatLeavesMyDevice": "What leaves my device?",
+  "@whatLeavesMyDevice": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "whereAreFilesSaved": "Where are files saved?",
+  "@whereAreFilesSaved": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "white": "White",
+  "@white": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "whyDidFolderAccessStopWorking": "Why did folder access stop working?",
+  "@whyDidFolderAccessStopWorking": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "whyIsAVideoBlackOrSilent": "Why is a video black or silent?",
+  "@whyIsAVideoBlackOrSilent": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "willEditingChangeMyOriginals": "Will editing change my originals?",
+  "@willEditingChangeMyOriginals": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "writeAReportBeforeSharing": "Write a report before sharing.",
+  "@writeAReportBeforeSharing": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "yourWorkspace": "YOUR WORKSPACE",
+  "@yourWorkspace": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "yellow": "Yellow",
+  "@yellow": {
+    "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
+  },
+  "yourOriginalPhotoIsUnchangedSaveA": "Your original photo is unchanged. Save a copy to keep these edits.",
+  "@yourOriginalPhotoIsUnchangedSaveA": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "yourPhotos": "Your photos",
+  "@yourPhotos": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "yourReport": "Your report",
+  "@yourReport": {
+    "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "yourScreenshotsAndEditedPhotosWillAppear": "Your screenshots and edited photos will appear here.",
+  "@yourScreenshotsAndEditedPhotosWillAppear": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "yourVideosWillAppearHere": "Your videos will appear here.",
+  "@yourVideosWillAppearHere": {
+    "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
+  },
+  "activeSession": "active session",
+  "@activeSession": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "checkerQualMitAnnotations": "checker-qual (MIT annotations)",
+  "@checkerQualMitAnnotations": {
+    "description": "P2/P3 interface copy. Origin: lib/main.dart. Keep product names, technical identifiers and units intact."
+  },
+  "diskFull": "disk full",
+  "@diskFull": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "noSpace": "no space",
+  "@noSpace": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "permissionDenied": "permission denied",
+  "@permissionDenied": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "permissionWasDenied": "permission was denied",
+  "@permissionWasDenied": {
+    "description": "P2/P3 interface copy. Origin: lib/core/presentation/user_messages.dart. Keep product names, technical identifiers and units intact."
+  },
+  "bottom": "Bottom",
+  "@bottom": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "brightVoice": "Bright voice",
+  "@brightVoice": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "bytes": "Bytes",
+  "@bytes": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "cancelled": "Cancelled",
+  "@cancelled": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "couldNotExport": "Could not export",
+  "@couldNotExport": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "deepVoice": "Deep voice",
+  "@deepVoice": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "drawing": "Drawing",
+  "@drawing": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "editVideo": "Edit video",
+  "@editVideo": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "exporting": "Exporting",
+  "@exporting": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "gib": "GiB",
+  "@gib": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "grayscale": "Grayscale",
+  "@grayscale": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "green": "Green",
+  "@green": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "invertColors": "Invert colors",
+  "@invertColors": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "kib": "KiB",
+  "@kib": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "large": "Large",
+  "@large": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "mib": "MiB",
+  "@mib": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "none": "None",
+  "@none": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "on": "On",
+  "@on": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "processing": "Processing",
+  "@processing": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "robotVoice": "Robot voice",
+  "@robotVoice": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "save": "Save",
+  "@save": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "saved": "Saved",
+  "@saved": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "saving": "Saving…",
+  "@saving": {
+    "description": "P2/P3 display copy from lib/features/media/photo_tools_screen.dart."
+  },
+  "small": "Small",
+  "@small": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "starting": "Starting…",
+  "@starting": {
+    "description": "P2/P3 display copy from lib/features/editor/editor_screen.dart."
+  },
+  "thisVideoCannotBePlayedOrAccess": "This video cannot be played or access was revoked.",
+  "@thisVideoCannotBePlayedOrAccess": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "top": "Top",
+  "@top": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "volume": "Volume",
+  "@volume": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "waiting": "Waiting",
+  "@waiting": {
+    "description": "P2/P3 display label or accessibility value."
+  },
+  "trackNumber": "Track {value1}",
+  "@trackNumber": {
+    "description": "P2/P3 display message from lib/features/editor/audio_tracks_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "audioSourceRange": "{value1}s · source {value2}–{value3}s",
+  "@audioSourceRange": {
+    "description": "P2/P3 display message from lib/features/editor/audio_tracks_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value3": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "removeAudioTrackNumber": "Remove audio track {value1}",
+  "@removeAudioTrackNumber": {
+    "description": "P2/P3 display message from lib/features/editor/audio_tracks_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "audioVideoLength": "Audio length: {value1}s. Video length: {value2}s.",
+  "@audioVideoLength": {
+    "description": "P2/P3 display message from lib/features/editor/audio_tracks_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "volumePercent": "Volume: {value1}%",
+  "@volumePercent": {
+    "description": "P2/P3 display message from lib/features/editor/audio_tracks_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "pinEditorShortcut": "Add {value1} editor to Home",
+  "@pinEditorShortcut": {
+    "description": "P2/P3 display message from lib/features/editor/editing_hub_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "unreadableDraftCount": "{value1} drafts could not be read. Their files are kept. Other drafts are available below.",
+  "@unreadableDraftCount": {
+    "description": "P2/P3 display message from lib/features/editor/editing_hub_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "projectClipSummary": "{value1} clips · {value2}s",
+  "@projectClipSummary": {
+    "description": "P2/P3 display message from lib/features/editor/editing_hub_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "playheadTime": "{value1} / {value2} seconds",
+  "@playheadTime": {
+    "description": "P2/P3 display message from lib/features/editor/editor_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "clipDurationLabel": "Clip {value1} · {value2}s",
+  "@clipDurationLabel": {
+    "description": "P2/P3 display message from lib/features/editor/editor_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "sequenceLabel": "{value1}. {value2}",
+  "@sequenceLabel": {
+    "description": "P2/P3 display message from lib/features/editor/layers_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "secondsShort": "{value1}s",
+  "@secondsShort": {
+    "description": "P2/P3 display message from lib/features/editor/editor_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "selectedClipName": "Selected clip: {value1}",
+  "@selectedClipName": {
+    "description": "P2/P3 display message from lib/features/editor/editor_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "trimTimeRange": "Trim {value1}–{value2}s",
+  "@trimTimeRange": {
+    "description": "P2/P3 display message from lib/features/editor/editor_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "rotationValue": "Rotate · {value1}°",
+  "@rotationValue": {
+    "description": "P2/P3 display message from lib/features/editor/editor_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "flipHorizontalState": "Flip horizontal{value1}",
+  "@flipHorizontalState": {
+    "description": "P2/P3 display message from lib/features/media/photo_tools_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "flipVerticalState": "Flip vertical{value1}",
+  "@flipVerticalState": {
+    "description": "P2/P3 display message from lib/features/media/photo_tools_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "photoDuration": "Photo {value1}s",
+  "@photoDuration": {
+    "description": "P2/P3 display message from lib/features/editor/editor_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "operationProgress": "{value1} · {value2}%",
+  "@operationProgress": {
+    "description": "P2/P3 display message from lib/features/editor/transcription_dialog.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "savedFileSize": "Saved file: {value1}",
+  "@savedFileSize": {
+    "description": "P2/P3 display message from lib/features/editor/export_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "timeRangeSeconds": "{value1}–{value2}s",
+  "@timeRangeSeconds": {
+    "description": "P2/P3 display message from lib/features/editor/subtitle_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "deleteLayerNumber": "Delete layer {value1}",
+  "@deleteLayerNumber": {
+    "description": "P2/P3 display message from lib/features/editor/layers_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "addLayerKind": "Add {value1}",
+  "@addLayerKind": {
+    "description": "P2/P3 display message from lib/features/editor/layers_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "controlValue": "{value1}: {value2}",
+  "@controlValue": {
+    "description": "P2/P3 display message from lib/features/editor/layers_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "editLayerKind": "Edit {value1} layer",
+  "@editLayerKind": {
+    "description": "P2/P3 display message from lib/features/editor/layers_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "audioTrackCount": "Audio tracks ({value1})",
+  "@audioTrackCount": {
+    "description": "P2/P3 display message from lib/features/editor/project_effects.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "layerCount": "Text, stickers & drawing ({value1})",
+  "@layerCount": {
+    "description": "P2/P3 display message from lib/features/editor/project_effects.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "recognizedSegmentReview": "{value1} timed segments. Review and edit them before export.",
+  "@recognizedSegmentReview": {
+    "description": "P2/P3 display message from lib/features/editor/transcription_dialog.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "libraryItemCount": "{value1} items",
+  "@libraryItemCount": {
+    "description": "P2/P3 display message from lib/features/media/media_library_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "mediaSizeDuration": "{value1}{value2}",
+  "@mediaSizeDuration": {
+    "description": "P2/P3 display message from lib/features/media/media_library_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "mediaActionsFor": "Actions for {value1}",
+  "@mediaActionsFor": {
+    "description": "P2/P3 display message from lib/features/media/media_library_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "pixelCount": "{value1} pixels",
+  "@pixelCount": {
+    "description": "P2/P3 display message from lib/features/media/photo_tools_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "percentValue": "{value1}%",
+  "@percentValue": {
+    "description": "P2/P3 display message from lib/features/media/photo_tools_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "inkColor": "{value1} ink",
+  "@inkColor": {
+    "description": "P2/P3 display message from lib/features/media/photo_tools_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "permanentDeleteName": "{value1} cannot be restored after deletion.",
+  "@permanentDeleteName": {
+    "description": "P2/P3 display message from lib/features/media/trash_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "unreadableTrashCount": "{value1} trash entries need recovery. Their files have been kept.",
+  "@unreadableTrashCount": {
+    "description": "P2/P3 display message from lib/features/media/trash_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "trashEntryExpiry": "{value1} · Expires {value2}",
+  "@trashEntryExpiry": {
+    "description": "P2/P3 display message from lib/features/media/trash_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "moveMediaToTrashName": "{value1} will be copied to private trash, then removed from the library. It becomes eligible for permanent cleanup after 24 hours.",
+  "@moveMediaToTrashName": {
+    "description": "P2/P3 display message from lib/features/media/video_details_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "secondsValue": "{value1} seconds",
+  "@secondsValue": {
+    "description": "P2/P3 display message from lib/features/editor/editor_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "dimensionsValue": "{value1} × {value2}",
+  "@dimensionsValue": {
+    "description": "P2/P3 display message from lib/features/media/video_details_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "accessibilityValue40": "{value1} percent",
+  "@accessibilityValue40": {
+    "description": "P2/P3 display message from lib/features/media/photo_tools_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "accessibilityValue41": "{value1} {value2}",
+  "@accessibilityValue41": {
+    "description": "P2/P3 display message from lib/features/editor/layers_editor.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      },
+      "value2": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "accessibilityValue42": "{value1} pixels at 2048 pixels wide",
+  "@accessibilityValue42": {
+    "description": "P2/P3 display message from lib/features/media/photo_tools_screen.dart. Preserve placeholders; do not translate user content.",
+    "placeholders": {
+      "value1": {
+        "type": "String",
+        "example": "1",
+        "description": "Display value; preserve this placeholder unchanged."
+      }
+    }
+  },
+  "itemCount": "{count, plural, one{{count} item} other{{count} items}}",
+  "@itemCount": {
+    "description": "Localized count, with ICU plural rules.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Number of items, never a preformatted string."
+      }
+    }
+  },
+  "clipCount": "{count, plural, one{{count} clip} other{{count} clips}}",
+  "@clipCount": {
+    "description": "Localized count, with ICU plural rules.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Number of items, never a preformatted string."
+      }
+    }
+  },
+  "segmentCount": "{count, plural, one{{count} timed segment} other{{count} timed segments}}",
+  "@segmentCount": {
+    "description": "Localized count, with ICU plural rules.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern",
+        "description": "Number of items, never a preformatted string."
+      }
+    }
+  },
+  "speechLanguageEn": "English",
+  "@speechLanguageEn": {
+    "description": "CLDR display name for Whisper language en, native engine ID 0. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageZh": "Chinese",
+  "@speechLanguageZh": {
+    "description": "CLDR display name for Whisper language zh, native engine ID 1. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageDe": "German",
+  "@speechLanguageDe": {
+    "description": "CLDR display name for Whisper language de, native engine ID 2. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageEs": "Spanish",
+  "@speechLanguageEs": {
+    "description": "CLDR display name for Whisper language es, native engine ID 3. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageRu": "Russian",
+  "@speechLanguageRu": {
+    "description": "CLDR display name for Whisper language ru, native engine ID 4. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageKo": "Korean",
+  "@speechLanguageKo": {
+    "description": "CLDR display name for Whisper language ko, native engine ID 5. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageFr": "French",
+  "@speechLanguageFr": {
+    "description": "CLDR display name for Whisper language fr, native engine ID 6. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageJa": "Japanese",
+  "@speechLanguageJa": {
+    "description": "CLDR display name for Whisper language ja, native engine ID 7. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguagePt": "Portuguese",
+  "@speechLanguagePt": {
+    "description": "CLDR display name for Whisper language pt, native engine ID 8. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageTr": "Turkish",
+  "@speechLanguageTr": {
+    "description": "CLDR display name for Whisper language tr, native engine ID 9. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguagePl": "Polish",
+  "@speechLanguagePl": {
+    "description": "CLDR display name for Whisper language pl, native engine ID 10. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageCa": "Catalan",
+  "@speechLanguageCa": {
+    "description": "CLDR display name for Whisper language ca, native engine ID 11. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageNl": "Dutch",
+  "@speechLanguageNl": {
+    "description": "CLDR display name for Whisper language nl, native engine ID 12. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageAr": "Arabic",
+  "@speechLanguageAr": {
+    "description": "CLDR display name for Whisper language ar, native engine ID 13. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSv": "Swedish",
+  "@speechLanguageSv": {
+    "description": "CLDR display name for Whisper language sv, native engine ID 14. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageIt": "Italian",
+  "@speechLanguageIt": {
+    "description": "CLDR display name for Whisper language it, native engine ID 15. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageId": "Indonesian",
+  "@speechLanguageId": {
+    "description": "CLDR display name for Whisper language id, native engine ID 16. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageHi": "Hindi",
+  "@speechLanguageHi": {
+    "description": "CLDR display name for Whisper language hi, native engine ID 17. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageFi": "Finnish",
+  "@speechLanguageFi": {
+    "description": "CLDR display name for Whisper language fi, native engine ID 18. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageVi": "Vietnamese",
+  "@speechLanguageVi": {
+    "description": "CLDR display name for Whisper language vi, native engine ID 19. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageHe": "Hebrew",
+  "@speechLanguageHe": {
+    "description": "CLDR display name for Whisper language he, native engine ID 20. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageUk": "Ukrainian",
+  "@speechLanguageUk": {
+    "description": "CLDR display name for Whisper language uk, native engine ID 21. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageEl": "Greek",
+  "@speechLanguageEl": {
+    "description": "CLDR display name for Whisper language el, native engine ID 22. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageMs": "Malay",
+  "@speechLanguageMs": {
+    "description": "CLDR display name for Whisper language ms, native engine ID 23. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageCs": "Czech",
+  "@speechLanguageCs": {
+    "description": "CLDR display name for Whisper language cs, native engine ID 24. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageRo": "Romanian",
+  "@speechLanguageRo": {
+    "description": "CLDR display name for Whisper language ro, native engine ID 25. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageDa": "Danish",
+  "@speechLanguageDa": {
+    "description": "CLDR display name for Whisper language da, native engine ID 26. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageHu": "Hungarian",
+  "@speechLanguageHu": {
+    "description": "CLDR display name for Whisper language hu, native engine ID 27. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageTa": "Tamil",
+  "@speechLanguageTa": {
+    "description": "CLDR display name for Whisper language ta, native engine ID 28. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageNo": "Norwegian",
+  "@speechLanguageNo": {
+    "description": "CLDR display name for Whisper language no, native engine ID 29. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageTh": "Thai",
+  "@speechLanguageTh": {
+    "description": "CLDR display name for Whisper language th, native engine ID 30. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageUr": "Urdu",
+  "@speechLanguageUr": {
+    "description": "CLDR display name for Whisper language ur, native engine ID 31. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageHr": "Croatian",
+  "@speechLanguageHr": {
+    "description": "CLDR display name for Whisper language hr, native engine ID 32. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageBg": "Bulgarian",
+  "@speechLanguageBg": {
+    "description": "CLDR display name for Whisper language bg, native engine ID 33. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageLt": "Lithuanian",
+  "@speechLanguageLt": {
+    "description": "CLDR display name for Whisper language lt, native engine ID 34. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageLa": "Latin",
+  "@speechLanguageLa": {
+    "description": "CLDR display name for Whisper language la, native engine ID 35. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageMi": "Māori",
+  "@speechLanguageMi": {
+    "description": "CLDR display name for Whisper language mi, native engine ID 36. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageMl": "Malayalam",
+  "@speechLanguageMl": {
+    "description": "CLDR display name for Whisper language ml, native engine ID 37. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageCy": "Welsh",
+  "@speechLanguageCy": {
+    "description": "CLDR display name for Whisper language cy, native engine ID 38. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSk": "Slovak",
+  "@speechLanguageSk": {
+    "description": "CLDR display name for Whisper language sk, native engine ID 39. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageTe": "Telugu",
+  "@speechLanguageTe": {
+    "description": "CLDR display name for Whisper language te, native engine ID 40. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageFa": "Persian",
+  "@speechLanguageFa": {
+    "description": "CLDR display name for Whisper language fa, native engine ID 41. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageLv": "Latvian",
+  "@speechLanguageLv": {
+    "description": "CLDR display name for Whisper language lv, native engine ID 42. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageBn": "Bangla",
+  "@speechLanguageBn": {
+    "description": "CLDR display name for Whisper language bn, native engine ID 43. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSr": "Serbian",
+  "@speechLanguageSr": {
+    "description": "CLDR display name for Whisper language sr, native engine ID 44. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageAz": "Azerbaijani",
+  "@speechLanguageAz": {
+    "description": "CLDR display name for Whisper language az, native engine ID 45. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSl": "Slovenian",
+  "@speechLanguageSl": {
+    "description": "CLDR display name for Whisper language sl, native engine ID 46. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageKn": "Kannada",
+  "@speechLanguageKn": {
+    "description": "CLDR display name for Whisper language kn, native engine ID 47. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageEt": "Estonian",
+  "@speechLanguageEt": {
+    "description": "CLDR display name for Whisper language et, native engine ID 48. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageMk": "Macedonian",
+  "@speechLanguageMk": {
+    "description": "CLDR display name for Whisper language mk, native engine ID 49. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageBr": "Breton",
+  "@speechLanguageBr": {
+    "description": "CLDR display name for Whisper language br, native engine ID 50. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageEu": "Basque",
+  "@speechLanguageEu": {
+    "description": "CLDR display name for Whisper language eu, native engine ID 51. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageIs": "Icelandic",
+  "@speechLanguageIs": {
+    "description": "CLDR display name for Whisper language is, native engine ID 52. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageHy": "Armenian",
+  "@speechLanguageHy": {
+    "description": "CLDR display name for Whisper language hy, native engine ID 53. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageNe": "Nepali",
+  "@speechLanguageNe": {
+    "description": "CLDR display name for Whisper language ne, native engine ID 54. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageMn": "Mongolian",
+  "@speechLanguageMn": {
+    "description": "CLDR display name for Whisper language mn, native engine ID 55. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageBs": "Bosnian",
+  "@speechLanguageBs": {
+    "description": "CLDR display name for Whisper language bs, native engine ID 56. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageKk": "Kazakh",
+  "@speechLanguageKk": {
+    "description": "CLDR display name for Whisper language kk, native engine ID 57. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSq": "Albanian",
+  "@speechLanguageSq": {
+    "description": "CLDR display name for Whisper language sq, native engine ID 58. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSw": "Swahili",
+  "@speechLanguageSw": {
+    "description": "CLDR display name for Whisper language sw, native engine ID 59. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageGl": "Galician",
+  "@speechLanguageGl": {
+    "description": "CLDR display name for Whisper language gl, native engine ID 60. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageMr": "Marathi",
+  "@speechLanguageMr": {
+    "description": "CLDR display name for Whisper language mr, native engine ID 61. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguagePa": "Punjabi",
+  "@speechLanguagePa": {
+    "description": "CLDR display name for Whisper language pa, native engine ID 62. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSi": "Sinhala",
+  "@speechLanguageSi": {
+    "description": "CLDR display name for Whisper language si, native engine ID 63. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageKm": "Khmer",
+  "@speechLanguageKm": {
+    "description": "CLDR display name for Whisper language km, native engine ID 64. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSn": "Shona",
+  "@speechLanguageSn": {
+    "description": "CLDR display name for Whisper language sn, native engine ID 65. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageYo": "Yoruba",
+  "@speechLanguageYo": {
+    "description": "CLDR display name for Whisper language yo, native engine ID 66. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSo": "Somali",
+  "@speechLanguageSo": {
+    "description": "CLDR display name for Whisper language so, native engine ID 67. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageAf": "Afrikaans",
+  "@speechLanguageAf": {
+    "description": "CLDR display name for Whisper language af, native engine ID 68. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageOc": "Occitan",
+  "@speechLanguageOc": {
+    "description": "CLDR display name for Whisper language oc, native engine ID 69. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageKa": "Georgian",
+  "@speechLanguageKa": {
+    "description": "CLDR display name for Whisper language ka, native engine ID 70. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageBe": "Belarusian",
+  "@speechLanguageBe": {
+    "description": "CLDR display name for Whisper language be, native engine ID 71. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageTg": "Tajik",
+  "@speechLanguageTg": {
+    "description": "CLDR display name for Whisper language tg, native engine ID 72. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSd": "Sindhi",
+  "@speechLanguageSd": {
+    "description": "CLDR display name for Whisper language sd, native engine ID 73. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageGu": "Gujarati",
+  "@speechLanguageGu": {
+    "description": "CLDR display name for Whisper language gu, native engine ID 74. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageAm": "Amharic",
+  "@speechLanguageAm": {
+    "description": "CLDR display name for Whisper language am, native engine ID 75. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageYi": "Yiddish",
+  "@speechLanguageYi": {
+    "description": "CLDR display name for Whisper language yi, native engine ID 76. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageLo": "Lao",
+  "@speechLanguageLo": {
+    "description": "CLDR display name for Whisper language lo, native engine ID 77. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageUz": "Uzbek",
+  "@speechLanguageUz": {
+    "description": "CLDR display name for Whisper language uz, native engine ID 78. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageFo": "Faroese",
+  "@speechLanguageFo": {
+    "description": "CLDR display name for Whisper language fo, native engine ID 79. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageHt": "Haitian Creole",
+  "@speechLanguageHt": {
+    "description": "CLDR display name for Whisper language ht, native engine ID 80. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguagePs": "Pashto",
+  "@speechLanguagePs": {
+    "description": "CLDR display name for Whisper language ps, native engine ID 81. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageTk": "Turkmen",
+  "@speechLanguageTk": {
+    "description": "CLDR display name for Whisper language tk, native engine ID 82. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageNn": "Norwegian Nynorsk",
+  "@speechLanguageNn": {
+    "description": "CLDR display name for Whisper language nn, native engine ID 83. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageMt": "Maltese",
+  "@speechLanguageMt": {
+    "description": "CLDR display name for Whisper language mt, native engine ID 84. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSa": "Sanskrit",
+  "@speechLanguageSa": {
+    "description": "CLDR display name for Whisper language sa, native engine ID 85. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageLb": "Luxembourgish",
+  "@speechLanguageLb": {
+    "description": "CLDR display name for Whisper language lb, native engine ID 86. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageMy": "Burmese",
+  "@speechLanguageMy": {
+    "description": "CLDR display name for Whisper language my, native engine ID 87. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageBo": "Tibetan",
+  "@speechLanguageBo": {
+    "description": "CLDR display name for Whisper language bo, native engine ID 88. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageTl": "Tagalog",
+  "@speechLanguageTl": {
+    "description": "CLDR display name for Whisper language tl, native engine ID 89. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageMg": "Malagasy",
+  "@speechLanguageMg": {
+    "description": "CLDR display name for Whisper language mg, native engine ID 90. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageAs": "Assamese",
+  "@speechLanguageAs": {
+    "description": "CLDR display name for Whisper language as, native engine ID 91. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageTt": "Tatar",
+  "@speechLanguageTt": {
+    "description": "CLDR display name for Whisper language tt, native engine ID 92. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageHaw": "Hawaiian",
+  "@speechLanguageHaw": {
+    "description": "CLDR display name for Whisper language haw, native engine ID 93. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageLn": "Lingala",
+  "@speechLanguageLn": {
+    "description": "CLDR display name for Whisper language ln, native engine ID 94. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageHa": "Hausa",
+  "@speechLanguageHa": {
+    "description": "CLDR display name for Whisper language ha, native engine ID 95. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageBa": "Bashkir",
+  "@speechLanguageBa": {
+    "description": "CLDR display name for Whisper language ba, native engine ID 96. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageJw": "Javanese",
+  "@speechLanguageJw": {
+    "description": "CLDR display name for Whisper language jw, native engine ID 97. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageSu": "Sundanese",
+  "@speechLanguageSu": {
+    "description": "CLDR display name for Whisper language su, native engine ID 98. Proper language name; speech language is independent of app locale."
+  },
+  "speechLanguageYue": "Cantonese",
+  "@speechLanguageYue": {
+    "description": "CLDR display name for Whisper language yue, native engine ID 99. Proper language name; speech language is independent of app locale."
+  },
+  "speechQueued": "Waiting for speech recognition",
+  "@speechQueued": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechDownloading": "Downloading speech model",
+  "@speechDownloading": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechVerifying": "Verifying speech model",
+  "@speechVerifying": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechPreparing": "Preparing edited audio",
+  "@speechPreparing": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechDecoding": "Decoding source audio",
+  "@speechDecoding": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechLoading": "Loading model on this device",
+  "@speechLoading": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechRecognizing": "Recognizing speech on this device",
+  "@speechRecognizing": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechInterrupted": "Speech recognition was interrupted. Start again; your draft and media are kept.",
+  "@speechInterrupted": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechLowMemory": "Not enough memory. Choose Tiny or a shorter video.",
+  "@speechLowMemory": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechPermissionDenied": "Audio access changed. Choose the file or folder again.",
+  "@speechPermissionDenied": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechModelInstallFailed": "The speech model could not be installed or verified. Check the file or connection and retry.",
+  "@speechModelInstallFailed": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechAudioPrepareFailed": "Edited audio could not be prepared. Check the source clips and retry.",
+  "@speechAudioPrepareFailed": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechLanguageUnavailable": "This language is unavailable in the current speech models.",
+  "@speechLanguageUnavailable": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechDetectedLanguage": "{language} detected. Review the language and subtitles before export.",
+  "@speechDetectedLanguage": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation.",
+    "placeholders": {
+      "language": {
+        "type": "String",
+        "description": "Localized language name detected by the model for an Auto Detect job."
+      }
+    }
+  },
+  "speechNotDetected": "No clear speech detected",
+  "@speechNotDetected": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechCheckingActivity": "Checking for speech",
+  "@speechCheckingActivity": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechActivityReview": "No clear speech was detected. If the audio contains a quiet voice, you can recognize anyway. Results may contain unrelated text.",
+  "@speechActivityReview": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechRecognizeAnyway": "Recognize anyway",
+  "@speechRecognizeAnyway": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "speechWritingSystemWarning": "The writing system may not match the selected language. Review the text or try a different speech model.",
+  "@speechWritingSystemWarning": {
+    "description": "Offline speech job state, error or language metadata. No media upload or translation."
+  },
+  "subtitleInvalidCharacters": "Subtitle text contains unsupported control characters or incomplete symbols.",
+  "@subtitleInvalidCharacters": {
+    "description": "Subtitle validation or real document-save feedback. Never imply saved before native write completes."
+  },
+  "subtitleTooLong": "Subtitle text is too long. Shorten it before applying.",
+  "@subtitleTooLong": {
+    "description": "Subtitle validation or real document-save feedback. Never imply saved before native write completes."
+  },
+  "subtitleSeparatorInvalid": "Invalid subtitle separator.",
+  "@subtitleSeparatorInvalid": {
+    "description": "Subtitle validation or real document-save feedback. Never imply saved before native write completes."
+  },
+  "subtitleSaveFailed": "Couldn''t save the subtitle file. Choose another location and try again.",
+  "@subtitleSaveFailed": {
+    "description": "Subtitle validation or real document-save feedback. Never imply saved before native write completes."
+  },
+  "subtitleSaved": "Subtitle file saved and verified.",
+  "@subtitleSaved": {
+    "description": "Subtitle validation or real document-save feedback. Never imply saved before native write completes."
+  },
+  "subtitleSavedUnverified": "Subtitle file saved, but its contents could not be verified. Open it before sharing.",
+  "@subtitleSavedUnverified": {
+    "description": "Subtitle validation or real document-save feedback. Never imply saved before native write completes."
+  },
+  "stickerStar": "Star",
+  "@stickerStar": {
+    "description": "Localized P2/P3 help, sticker name or lossless subtitle export validation."
+  },
+  "stickerHeart": "Heart",
+  "@stickerHeart": {
+    "description": "Localized P2/P3 help, sticker name or lossless subtitle export validation."
+  },
+  "subtitleBlankLines": "SRT uses blank lines between cues. Remove empty lines within a cue before saving SRT. Your draft and MP4 keep the original text.",
+  "@subtitleBlankLines": {
+    "description": "Localized P2/P3 help, sticker name or lossless subtitle export validation."
+  },
+  "speechHistoryUnavailable": "Saved speech history could not be loaded. Existing data was kept. Restart the app or restore a backup before trying again.",
+  "@speechHistoryUnavailable": {
+    "description": "Real native speech-history persistence failure. Preserve existing data, never imply a successful save."
+  },
+  "speechHistoryNotSaved": "Speech history could not be saved. Free storage or check app storage access, then retry. Review and save any generated subtitles before closing.",
+  "@speechHistoryNotSaved": {
+    "description": "Real native speech-history persistence failure. Preserve existing data, never imply a successful save."
+  },
+  "speechJobFailed": "Operation failed",
+  "@speechJobFailed": {
+    "description": "Real native speech-history persistence failure. Preserve existing data, never imply a successful save."
+  },
+  "speechSavingHistory": "Saving job history…",
+  "@speechSavingHistory": {
+    "description": "Real native speech-history persistence failure. Preserve existing data, never imply a successful save."
+  }
+}

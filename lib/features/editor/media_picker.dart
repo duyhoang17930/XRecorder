@@ -1,3 +1,5 @@
+import 'package:xrecorder/l10n/localization.dart';
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -111,7 +113,7 @@ class _MediaPickerState extends State<_MediaPicker> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const StudioSheetHeader(title: 'Choose media'),
+            StudioSheetHeader(title: context.l10n.chooseMedia),
             if (busy) const LinearProgressIndicator(),
             Expanded(
               child: FutureBuilder<List<MediaItem>>(
@@ -130,7 +132,9 @@ class _MediaPickerState extends State<_MediaPicker> {
                             ])
                               ChoiceChip(
                                 label: Text(
-                                  type == MediaKind.video ? 'Videos' : 'Photos',
+                                  type == MediaKind.video
+                                      ? context.l10n.videos
+                                      : context.l10n.photos,
                                 ),
                                 selected: kind == type,
                                 onSelected: busy
@@ -141,12 +145,12 @@ class _MediaPickerState extends State<_MediaPicker> {
                                       },
                               ),
                             ChoiceChip(
-                              label: const Text('App media'),
+                              label: Text(context.l10n.appMedia),
                               selected: selectedFolder == null,
                               onSelected: busy ? null : (_) => loadMedia(),
                             ),
                             ChoiceChip(
-                              label: const Text('Choose folder'),
+                              label: Text(context.l10n.chooseFolder),
                               selected: selectedFolder != null,
                               onSelected: busy ? null : (_) => chooseFolder(),
                             ),
@@ -154,11 +158,15 @@ class _MediaPickerState extends State<_MediaPicker> {
                         ),
                       ),
                       if (error != null)
-                        SliverToBoxAdapter(child: Text(error!)),
+                        SliverToBoxAdapter(
+                          child: Text(context.message(error!)),
+                        ),
                       if (snapshot.connectionState != ConnectionState.done)
-                        const SliverFillRemaining(
+                        SliverFillRemaining(
                           hasScrollBody: false,
-                          child: StudioLoadingState(label: 'Loading videos...'),
+                          child: StudioLoadingState(
+                            label: context.l10n.loadingVideos,
+                          ),
                         )
                       else if (snapshot.hasError)
                         SliverFillRemaining(
@@ -167,25 +175,27 @@ class _MediaPickerState extends State<_MediaPicker> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                UserMessages.failure(
-                                  snapshot.error,
-                                  operation: UserOperation.loadLibrary,
-                                ).text,
+                                context.message(
+                                  UserMessages.failure(
+                                    snapshot.error,
+                                    operation: UserOperation.loadLibrary,
+                                  ).text,
+                                ),
                               ),
                               TextButton(
                                 onPressed: () =>
                                     loadMedia(folder: selectedFolder),
-                                child: const Text('Retry'),
+                                child: Text(context.l10n.retry),
                               ),
                             ],
                           ),
                         )
                       else if (rows.isEmpty)
-                        const SliverFillRemaining(
+                        SliverFillRemaining(
                           hasScrollBody: false,
                           child: Center(
                             child: Text(
-                              'No media here. Choose another source or media type.',
+                              context.l10n.noMediaHereChooseAnotherSourceOr,
                             ),
                           ),
                         )
@@ -201,7 +211,7 @@ class _MediaPickerState extends State<_MediaPicker> {
                                 child: MediaThumbnail(item: item),
                               ),
                               title: Text(item.displayName),
-                              subtitle: Text(formatBytes(item.sizeBytes)),
+                              subtitle: Text(context.fileSize(item.sizeBytes)),
                               onTap: busy ? null : () => choose(item),
                             );
                           },
@@ -215,7 +225,7 @@ class _MediaPickerState extends State<_MediaPicker> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
+                child: Text(context.l10n.cancel),
               ),
             ),
           ],

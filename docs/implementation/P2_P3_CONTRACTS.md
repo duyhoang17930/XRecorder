@@ -1,5 +1,12 @@
 # Ownership & contracts
 
+TASK07 additive locale/speech/versioned-language/Unicode/history contracts:
+[ASR contract](TASK_07_ASR_CONTRACT_AND_BENCHMARK.md) và
+[globalization matrix](TASK_07_GLOBALIZATION_MATRIX.md). TASK07 dùng17 protected
+file hashes từ working tree ban đầu, không lấy commit cũ làm proof P1; MainActivity
+giữ byte-exact. Preferences vẫn v2, capture fields/defaults/migrations giữ nguyên.
+Proof cũ bên dưới được giữ như lịch sử.
+
 ## P1 immutable boundary
 
 `lib/features/recording/**`, `android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/**`, `lib/features/settings/recording_settings_form.dart`, `audio_video_settings_screen.dart` read-only. `studio_create_sheet.dart` chứa capture UI: không extract/sửa capture semantics. `MainActivity` nếu cần chỉ thêm P2/P3 registrations, giữ capture channel.
@@ -81,4 +88,22 @@ duration lấy bằng MediaMetadataRetriever. Native DocumentsUI regression ki�
 retime theo speed và bỏ kết quả load cũ bằng generation guard.
 
 Real tiny/base/small multilingual, edited-audio→ASR→SRT/burn-in và model download trên AVD
-đã chạy. Physical thermal/battery, rộng corpus và final P1→P2→P3 là gate riêng.
+đã chạy. Physical thermal/battery, vùng miền có annotation và final P1→P2→P3 là gate riêng.
+
+Final quality additive contract07/11: transcription snapshots/checkpoints include
+`model`, `language`, `modelLoadMs`, `inferenceMs`; older jobs default language auto
+and missing timings0. Completed snapshots expose finalized elapsed/timings.
+Reject invalid content URI before reserving queue slot. Flutter validates100..600000ms
+and supported model/operation ID. Dialog defaults Base/VI, prefers an already
+installed model when Base is absent, and restores matching job selections.
+
+Editor preview uses the same Media3 composition with SurfaceView hybrid fallback;
+async metadata/poll are generation-guarded. `editorDiagnostics.activePreviews`
+is read-only lifecycle instrumentation. `media.find` image dimensions now mean
+EXIF-normalized display dimensions too; orientations5–8 swap bounds without
+decoding a full bitmap. Legacy discovery includes GIF as an image.
+
+Callback audit: P1 audio permission704 is delivered to `onRequestPermissionsResult`;
+SupportBridge attachment704 is delivered to `onActivityResult`. These are distinct
+callback namespaces; no reproduced collision between those two paths. P2/P3 picker
+codes1701–1705 stay separate. MainActivity/P1 source unchanged.

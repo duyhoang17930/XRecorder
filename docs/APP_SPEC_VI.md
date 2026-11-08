@@ -8,10 +8,10 @@ Ngày phân tích và cập nhật: 04/11/2026. Tên sản phẩm: **3HRecorder*
 - Dùng **Flutter/Dart** cho ứng dụng; được khảo sát và tái sử dụng thư viện, website và repo ở mọi ngôn ngữ phù hợp, gồm C/C++, Java/Kotlin, C#/.NET và backend. Giữ thư viện native và kết nối khi có lợi, không bắt buộc chuyển mọi thuật toán sang Dart.
 - Giữ luồng chức năng của app tham chiếu, xây dựng **nhận diện và giao diện riêng**.
 - Phạm vi cần đầy đủ: quay màn hình, thư viện, chỉnh sửa, livestream, phụ đề AI và công cụ Pro. Các giai đoạn ở cuối tài liệu chỉ là thứ tự triển khai, không giảm phạm vi đã chọn.
-- **Phụ đề AI xử lý qua máy chủ**, ưu tiên chất lượng và chấp nhận chi phí xử lý.
+- **Phụ đề AI offline bằng whisper.cpp** (quyết định cập nhật07/11/2026 của chủ sản phẩm, thay phương án server ban đầu). Download/import model multilingual có xác minh; không upload audio hoặc dùng paid API. Kết quả cần review. Xem [đánh giá thực thi](implementation/P2_P3_AI_SUBTITLE_EVALUATION.md).
 - Chưa chọn quảng cáo, hình thức bán Pro, giá, thời gian dùng thử hoặc hạn mức AI.
 
-Checkout hiện có khung Flutter: `lib/main.dart` hiển thị “Hello World”, cùng các host platform được sinh sẵn; chưa có chức năng sản phẩm. Tài liệu này là đặc tả phân tích, không phải kết quả chạy app trên thiết bị. Xem [khảo sát thư viện và phương án tích hợp](TECH_STACK_RESEARCH_VI.md) cho toàn bộ nhóm chức năng.
+Đây là đặc tả yêu cầu, không phải kết quả chạy app trên thiết bị. Mô tả scaffold “Hello World” của bản04/11 đã lỗi thời; implementation hiện tại có native recording/media/editor và offline ASR. Xem [quality report](implementation/P2_P3_FINAL_QUALITY_REPORT_VI.md) để phân biệt chức năng đã kiểm thử và gate còn mở; [khảo sát thư viện](TECH_STACK_RESEARCH_VI.md) giữ các phương án nghiên cứu lịch sử.
 
 ## 2. Nguồn và cách đọc bằng chứng
 
@@ -109,29 +109,29 @@ Các mô tả dưới đây là đặc tả đề xuất cho app mới, không p
 | Video sang GIF | Nút Pro ở R59–R60 | Chọn đoạn, kích thước, FPS và lặp; xem trước rồi xuất GIF, giới hạn cấu hình theo bộ nhớ |
 | Chữ trên ảnh | Nhãn Pro ở R37 | Nhập chữ, font, màu, cỡ, căn lề, nền/viền, kéo và xoay trước khi lưu bản sao |
 | Xóa watermark khi xuất | Công tắc kim cương ở R45 | Bỏ lớp watermark do trình chỉnh sửa của app mới thêm vào; không hiểu đây là công cụ xóa watermark có sẵn của bên thứ ba |
-| Phụ đề tự động | Nút Pro ở R60 và nút phụ đề trong editor | Luồng AI qua máy chủ, mô tả tại mục 7 |
+| Phụ đề tự động | Nút Pro ở R60 và nút phụ đề trong editor | Luồng AI offline whisper.cpp, mô tả tại mục 7; quyền Pro chưa chốt |
 | Màn mua Pro | Có banner dùng thử nhưng chưa có màn mua trong bộ ảnh | Trình bày quyền lợi, thông tin gói khi đã chốt, trạng thái mua/khôi phục/lỗi; không tự đặt giá, kỳ hạn hay thời gian dùng thử |
 | Bỏ quảng cáo | Quan sát có quảng cáo, chưa có bảng quyền lợi Pro | Chỉ đưa vào quyền lợi nếu chủ sản phẩm chọn mô hình tương ứng |
 
 **Tách trạng thái phát triển và kinh doanh:** xây dựng đủ công cụ nâng cao, tập trung quyết định quyền truy cập tại một lớp cấu hình. Khi chưa chốt kinh doanh, bản nội bộ có thể mở các công cụ để nghiệm thu; đây không phải quyết định miễn phí toàn bộ khi phát hành.
 
-## 7. Phụ đề AI qua máy chủ
+## 7. Phụ đề AI offline
 
-**Đã chốt:** xử lý qua máy chủ. **Chưa chốt:** nhà cung cấp nhận dạng giọng nói, hạ tầng và hạn mức.
+**Đã chốt07/11/2026:** whisper.cpp trên thiết bị, multilingual tiny/base/small-q5_1; không upload audio hoặc gọi paid API. Mỗi job tối đa10 phút, model được tải/import theo lựa chọn người dùng và xác minh trước khi cài.
 
 Luồng đề xuất:
 
 1. Chọn video hoặc đoạn trong dự án; kiểm tra có âm thanh.
 2. Chọn ngôn ngữ/tự nhận diện; đề xuất hỗ trợ tiếng Việt và tiếng Anh trước, chưa chốt danh sách cuối.
-3. Giải thích dữ liệu sẽ gửi lên máy chủ và cho người dùng bắt đầu tác vụ. Ưu tiên trích xuất và gửi phần âm thanh cần nhận dạng thay vì cả video nếu dịch vụ cho phép.
-4. Theo dõi các trạng thái tải lên, chờ xử lý, đang nhận dạng, hoàn tất/lỗi/hủy. Dùng mã tác vụ để tra lại tiến độ khi mở app.
+3. Giải thích audio ở lại thiết bị; chọn model phù hợp dung lượng, RAM và thời gian. Trích xuất edited audio theo trim/speed/mix/DSP của dự án, mono16k để nhận dạng.
+4. Theo dõi tải/import model, chuẩn bị audio, load model, nhận dạng, hoàn tất/lỗi/hủy. Checkpoint job và khôi phục trạng thái sau khi mở lại app; không áp dụng kết quả đã hủy.
 5. Nhận các đoạn phụ đề gồm chữ, thời điểm bắt đầu/kết thúc; sửa nội dung, ghép/tách câu và chỉnh mốc thời gian.
 6. Chọn font, màu, nền, vị trí; xem trước đồng bộ với video.
 7. Ghép chữ trực tiếp vào video khi xuất. Đề xuất thêm xuất SRT để dùng ngoài app; **chưa có bằng chứng app tham chiếu hỗ trợ SRT**.
 
-Backend giữ khóa dịch vụ, quản lý tác vụ và hạn mức; không nhúng khóa dịch vụ AI vào APK. Cần chốt thời gian lưu/xóa âm thanh tải lên và kết quả. Không mặc định phụ đề tự động bao gồm dịch, lồng tiếng hoặc phụ đề trực tiếp lúc livestream.
+Model nằm trong app private/no-backup, có SHA256/size check và atomic install. Không cần khóa dịch vụ AI. Tách riêng tác vụ Delete model do người dùng chọn; không xóa draft/media khi cleanup. Không mặc định phụ đề tự động bao gồm dịch, lồng tiếng hoặc phụ đề trực tiếp lúc livestream.
 
-Tiêu chí nghiệm thu: sửa được câu và thời gian, không có đoạn có thời gian âm/đảo thứ tự, xuất đúng nội dung xem trước, báo rõ trường hợp video không có giọng nói hoặc tác vụ thất bại, thử lại không tạo tác vụ tính phí trùng ngoài ý muốn.
+Tiêu chí nghiệm thu: sửa được câu và thời gian, không có đoạn có thời gian âm/đảo thứ tự, xuất đúng nội dung xem trước, báo rõ trường hợp video không có giọng nói hoặc tác vụ thất bại, hủy thật và không tạo job/output trùng. Cần review kết quả và benchmark corpus/device; không suy độ chính xác chung từ một mẫu.
 
 ## 8. Livestream YouTube và RTMP
 

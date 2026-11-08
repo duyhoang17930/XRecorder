@@ -16,12 +16,26 @@ import org.json.JSONArray
 
 /** Offline-only speech jobs and checksum-verified multilingual model storage. */
 class TranscriptionBridge(private val context: Context) {
+    private class HistoryWriteException(cause: Exception) :
+        java.io.IOException("Speech history could not be saved.", cause)
+
+    private val historyUnavailableMessage =
+        "Saved speech history could not be loaded. Existing data was kept. Restart the app or restore a backup before trying again."
     private val modelStore = SpeechModels(context)
     private val models
         get() = modelStore.available
 
     private class Job(val id: String, val type: String, val model: String) {
         var projectId: String? = null
+        var sourceSignature: String? = null
+        var language = "auto"
+        @Volatile var resultLanguage: String? = null
+        @Volatile var detectedLanguage: String? = null
+        @Volatile var errorCode: String? = null
+        var allowUncertainSpeech = false
+        @Volatile var noSpeechDetected = false
+        @Volatile var speechActivity: SpeechActivity? = null
+        @Volatile var memoryPreflight: Map<String, Long>? = null
         var createdAt = System.currentTimeMillis()
         @Volatile var state = "queued"
         @Volatile var phase = "queued"
@@ -30,24 +44,40 @@ class TranscriptionBridge(private val context: Context) {
         @Volatile var error: String? = null
         @Volatile var segments: List<Map<String, Any>> = emptyList()
         @Volatile var elapsedMs = 0L
+        @Volatile var modelLoadMs = 0L
+        @Volatile var inferenceMs = 0L
         var handle = 0L
         var transformer: Transformer? = null
         var temporary: File? = null
 
         fun snapshot() =
-            mapOf(
-                "id" to id,
-                "type" to type,
-                "model" to model,
-                "projectId" to projectId,
-                "createdAt" to createdAt,
-                "state" to state,
-                "phase" to phase,
-                "progress" to progress,
-                "segments" to segments,
-                "error" to error,
-                "elapsedMs" to elapsedMs,
-            )
+            synchronized(this) {
+                mapOf(
+                    "id" to id,
+                    "type" to type,
+                    "model" to model,
+                    "language" to language,
+                    "contractVersion" to 2,
+                    "resultLanguage" to resultLanguage,
+                    "detectedLanguage" to detectedLanguage,
+                    "errorCode" to errorCode,
+                    "allowUncertainSpeech" to allowUncertainSpeech,
+                    "noSpeechDetected" to noSpeechDetected,
+                    "speechActivity" to speechActivity?.snapshot(),
+                    "memoryPreflight" to memoryPreflight,
+                    "projectId" to projectId,
+                    "sourceSignature" to sourceSignature,
+                    "createdAt" to createdAt,
+                    "state" to state,
+                    "phase" to phase,
+                    "progress" to progress,
+                    "segments" to segments,
+                    "error" to error,
+                    "elapsedMs" to elapsedMs,
+                    "modelLoadMs" to modelLoadMs,
+                    "inferenceMs" to inferenceMs,
+                )
+            }
     }
 
     private val worker = Executors.newSingleThreadExecutor()
@@ -56,14 +86,28 @@ class TranscriptionBridge(private val context: Context) {
     private val jobs = ConcurrentHashMap<String, Job>()
     private val deletingModels = ConcurrentHashMap.newKeySet<String>()
     private val journal = AtomicFile(File(context.filesDir, "transcription_jobs.json"))
+    @Volatile private var journalRestored = false
+    @Volatile private var historyReadError = false
 
     init {
         worker.execute {
             try {
                 if (journal.baseFile.exists() || File(journal.baseFile.path + ".bak").exists()) {
-                    val array = JSONArray(journal.openRead().bufferedReader().use { it.readText() })
+                    val decoder =
+                        Charsets.UTF_8.newDecoder()
+                            .onMalformedInput(java.nio.charset.CodingErrorAction.REPORT)
+                            .onUnmappableCharacter(java.nio.charset.CodingErrorAction.REPORT)
+                    val array =
+                        JSONArray(
+                            java.io.InputStreamReader(journal.openRead(), decoder).buffered().use {
+                                it.readText()
+                            },
+                        )
                     for (i in 0 until array.length()) {
                         val value = array.getJSONObject(i)
+                        require(value.optInt("contractVersion", 1) in 1..2) {
+                            "Unsupported speech history version"
+                        }
                         val job =
                             Job(
                                 value.getString("id"),
@@ -72,7 +116,38 @@ class TranscriptionBridge(private val context: Context) {
                             )
                         job.projectId =
                             value.optString("projectId").takeIf { it.isNotEmpty() && it != "null" }
+                        job.sourceSignature =
+                            value.optString("sourceSignature").takeIf {
+                                it.isNotEmpty() && it != "null"
+                            }
                         job.createdAt = value.optLong("createdAt", 0)
+                        job.language = value.optString("language", "auto")
+                        job.allowUncertainSpeech = value.optBoolean("allowUncertainSpeech", false)
+                        job.noSpeechDetected = value.optBoolean("noSpeechDetected", false)
+                        value.optJSONObject("memoryPreflight")?.let { memory ->
+                            job.memoryPreflight =
+                                memory.keys().asSequence().associateWith { memory.getLong(it) }
+                        }
+                        value.optJSONObject("speechActivity")?.let { activity ->
+                            runCatching {
+                                job.speechActivity =
+                                    SpeechActivity(
+                                        activity.getDouble("mean"),
+                                        activity.getDouble("max"),
+                                        activity.getDouble("voicedRatio"),
+                                        activity.getInt("longestVoicedMs"),
+                                        activity.getInt("observedFrames"),
+                                    )
+                            }
+                        }
+                        job.resultLanguage =
+                            value.optString("resultLanguage").takeIf {
+                                it.isNotBlank() && it != "null"
+                            }
+                        job.detectedLanguage =
+                            value.optString("detectedLanguage").takeIf {
+                                it.isNotBlank() && it != "null"
+                            }
                         val oldState = value.getString("state")
                         job.state =
                             if (oldState in listOf("queued", "running")) "failed" else oldState
@@ -82,14 +157,32 @@ class TranscriptionBridge(private val context: Context) {
                             if (job.state != oldState)
                                 "Interrupted when the application stopped. Start again; your draft and media are unchanged."
                             else value.optString("error").takeIf { it != "null" && it.isNotEmpty() }
+                        job.errorCode =
+                            if (job.state != oldState) "interrupted"
+                            else
+                                value.optString("errorCode").takeIf {
+                                    it.isNotBlank() && it != "null"
+                                }
                         job.elapsedMs = value.optLong("elapsedMs", 0)
+                        job.modelLoadMs = value.optLong("modelLoadMs", 0)
+                        job.inferenceMs = value.optLong("inferenceMs", 0)
                         job.segments =
                             segments(value.optJSONArray("segments") ?: JSONArray(), 600000)
-                        jobs.putIfAbsent(job.id, job)
+                        check(jobs.putIfAbsent(job.id, job) == null) {
+                            "Duplicate speech history identity"
+                        }
                     }
                 }
-            } catch (_: Exception) {
-                /* An unreadable ASR journal never invalidates editor drafts. */
+            } catch (error: Exception) {
+                // Keep unreadable/future history byte-for-byte. Never turn an
+                // empty recovery result into permission to overwrite the file.
+                historyReadError = true
+                android.util.Log.w(
+                    "TranscriptionBridge",
+                    "Speech history kept read-only (${error.javaClass.simpleName})",
+                )
+            } finally {
+                journalRestored = true
             }
         }
     }
@@ -100,26 +193,137 @@ class TranscriptionBridge(private val context: Context) {
 
     private fun ready(model: SpeechModel) = modelStore.ready(model)
 
-    private fun persist() {
-        val bytes =
-            JSONArray(jobs.values.sortedBy { it.createdAt }.takeLast(20).map { it.snapshot() })
-                .toString()
-                .toByteArray()
+    private fun persist(completing: Job? = null, completedPhase: String = "completed") {
         synchronized(journal) {
-            val out = journal.startWrite()
+            check(!historyReadError) { historyUnavailableMessage }
+            // Snapshot inside the write lock: download and recognition workers
+            // must not commit an older snapshot after a newer one. Results are
+            // user data, so generating job21 must not erase the first job.
+            val bytes =
+                JSONArray(
+                        jobs.values
+                            .sortedBy { it.createdAt }
+                            .map {
+                                val record = it.snapshot()
+                                if (it === completing)
+                                    record +
+                                        mapOf(
+                                            "state" to "completed",
+                                            "phase" to completedPhase,
+                                            "progress" to 1.0,
+                                        )
+                                else record
+                            },
+                    )
+                    .toString()
+                    .toByteArray(Charsets.UTF_8)
+            var out: java.io.FileOutputStream? = null
+            var committed = false
             try {
+                out = journal.startWrite()
                 out.write(bytes)
                 journal.finishWrite(out)
+                committed = true
+                check(journal.openRead().use { it.readBytes() }.contentEquals(bytes)) {
+                    "Speech history read-back did not match."
+                }
             } catch (e: Exception) {
-                journal.failWrite(out)
-                throw e
+                // finishWrite can return before a failed rename becomes visible.
+                // Never roll back a possibly committed file after read-back.
+                if (!committed && out != null) journal.failWrite(out)
+                throw HistoryWriteException(e)
             }
+        }
+    }
+
+    private fun replyJobs(result: MethodChannel.Result) {
+        if (historyReadError) result.error("history_unavailable", historyUnavailableMessage, null)
+        else result.success(jobs.values.map { it.snapshot() })
+    }
+
+    private fun persistOrWarn(job: Job) {
+        try {
+            persist()
+        } catch (_: Exception) {
+            job.errorCode = "history_write_failed"
+        }
+    }
+
+    private fun completeAndPersist(job: Job, phase: String) {
+        val finishing =
+            synchronized(job) {
+                if (job.cancelled) false
+                else {
+                    job.phase = "saving job history"
+                    job.progress = maxOf(job.progress, .99)
+                    if (job.errorCode == "history_write_failed") job.errorCode = null
+                    true
+                }
+            }
+        if (!finishing) {
+            persistOrWarn(job)
+            return
+        }
+        try {
+            persist(job, phase)
+        } catch (_: Exception) {
+            job.errorCode = "history_write_failed"
+        }
+        // Completed becomes observable only after read-back succeeds or a
+        // visible persistence warning has been attached to the real result.
+        synchronized(job) {
+            job.progress = 1.0
+            job.phase = phase
+            job.state = "completed"
         }
     }
 
     fun handle(call: MethodCall, result: MethodChannel.Result) {
         try {
+            if (
+                call.method in
+                    setOf(
+                        "transcriptionStart",
+                        "transcriptionDownloadModel",
+                        "transcriptionImportModel",
+                        "transcriptionDeleteModel",
+                    )
+            ) {
+                if (!journalRestored) {
+                    // The model can already be installed on the first call
+                    // while its history is still restoring. Queue behind that
+                    // read without blocking main or asking callers to race it.
+                    worker.execute { main.post { handle(call, result) } }
+                    return
+                }
+                if (historyReadError) {
+                    result.error("history_unavailable", historyUnavailableMessage, null)
+                    return
+                }
+            }
             when (call.method) {
+                "transcriptionSpeechActivity" -> {
+                    val input = call.arguments as Map<*, *>
+                    val duration = (input["durationMs"] as Number).toLong()
+                    val uri = Uri.parse(input["uri"] as String)
+                    require(duration in 100..30000 && uri.scheme == "content")
+                    worker.execute {
+                        var handle = 0L
+                        try {
+                            val pcm =
+                                SpeechAudioDecoder.decode(context, uri, duration, { false }) {}
+                            handle = WhisperNative.create()
+                            val values = WhisperNative.activity(handle, pcm)
+                            val data = SpeechActivity.from(values).snapshot()
+                            main.post { result.success(data) }
+                        } catch (error: Exception) {
+                            main.post { result.error("speech_activity", error.message, null) }
+                        } finally {
+                            if (handle != 0L) WhisperNative.destroy(handle)
+                        }
+                    }
+                }
+                "transcriptionLanguages" -> result.success(SpeechLanguages.catalog)
                 "transcriptionDeleteModel" -> {
                     val selected = model(call.arguments as String)
                     require(
@@ -151,6 +355,7 @@ class TranscriptionBridge(private val context: Context) {
                                 "bytes" to it.bytes,
                                 "installed" to ready(it),
                                 "multilingual" to true,
+                                "supportedLanguageCount" to 99,
                             )
                         },
                     )
@@ -162,32 +367,67 @@ class TranscriptionBridge(private val context: Context) {
                             job.progress = maxOf(job.progress, .05 * holder.progress / 100.0)
                     }
                     synchronized(job) {
-                        if (job.handle != 0L && job.state == "running")
+                        if (job.handle != 0L && job.state == "running") {
+                            nativeTimings(job)
                             job.progress =
                                 maxOf(
                                     job.progress,
                                     .25 + .74 * WhisperNative.progress(job.handle) / 100.0,
                                 )
+                        }
                     }
                     result.success(job.snapshot())
                 }
-                "transcriptionJobs" ->
-                    worker.execute {
-                        val values = jobs.values.map { it.snapshot() }
-                        main.post { result.success(values) }
+                "transcriptionJobs" -> {
+                    if (journalRestored) {
+                        replyJobs(result)
+                    } else
+                        worker.execute {
+                            main.post { replyJobs(result) }
+                        }
+                }
+                "transcriptionSaveHistory" -> {
+                    if (historyReadError) {
+                        result.error("history_unavailable", historyUnavailableMessage, null)
+                        return
                     }
+                    val job = jobs[call.arguments as String] ?: error("Speech job not found")
+                    require(job.state !in listOf("queued", "running")) {
+                        "Wait for the operation to finish."
+                    }
+                    worker.execute {
+                        val previous = job.errorCode
+                        if (previous == "history_write_failed") job.errorCode = null
+                        try {
+                            persist()
+                            main.post { result.success(null) }
+                        } catch (error: Exception) {
+                            job.errorCode = previous ?: "history_write_failed"
+                            main.post { result.error("history_write_failed", error.message, null) }
+                        }
+                    }
+                }
                 "transcriptionCancel" -> {
                     val job = jobs[call.arguments as String] ?: error("Speech job not found")
-                    if (job.state in listOf("queued", "running")) {
-                        job.cancelled = true
-                        synchronized(job) { if (job.handle != 0L) WhisperNative.cancel(job.handle) }
+                    val cancellable =
+                        synchronized(job) {
+                            if (
+                                job.state in listOf("queued", "running") &&
+                                    job.phase != "saving job history"
+                            ) {
+                                job.cancelled = true
+                                if (job.handle != 0L) WhisperNative.cancel(job.handle)
+                                job.state = "cancelled"
+                                job.phase = "cancelled"
+                                true
+                            } else false
+                        }
+                    if (cancellable) {
                         job.transformer?.cancel()
                         job.transformer = null
-                        job.state = "cancelled"
-                        job.phase = "cancelled"
                         worker.execute {
                             job.temporary?.delete()
-                            persist()
+                            persistOrWarn(job)
                         }
                     }
                     result.success(null)
@@ -230,17 +470,24 @@ class TranscriptionBridge(private val context: Context) {
                     val id = value["operationId"] as String
                     require(id.matches(Regex("[A-Za-z0-9_-]{1,80}")) && !jobs.containsKey(id))
                     val language = value["language"] as? String ?: "auto"
-                    require(language in listOf("vi", "en", "auto"))
+                    require(SpeechLanguages.supports(language)) {
+                        "The selected language is not supported by this speech model."
+                    }
                     val duration = (value["durationMs"] as Number).toLong()
                     require(duration in 100..600000)
+                    // Validate before reserving the single speech slot. A rejected
+                    // URI must not leave a queued job blocking future requests.
+                    val uri = Uri.parse(value["audioUri"] as String)
+                    require(uri.scheme == "content") { "Choose audio from the media picker." }
                     val job = Job(id, "speech", selected.id)
-                    jobs[id] = job
+                    job.language = language
+                    job.allowUncertainSpeech = value["allowUncertainSpeech"] as? Boolean ?: false
                     val project = value["project"] as? Map<*, *>
                     job.projectId = project?.get("id") as? String
+                    job.sourceSignature = value["sourceSignature"] as? String
+                    jobs[id] = job
                     if (project != null) render(job, project, duration, language)
                     else {
-                        val uri = Uri.parse(value["audioUri"] as String)
-                        require(uri.scheme == "content")
                         worker.execute { recognize(job, selected, uri, duration, language, null) }
                     }
                     result.success(id)
@@ -253,6 +500,7 @@ class TranscriptionBridge(private val context: Context) {
     }
 
     private fun install(job: Job, selected: SpeechModel, source: String?) {
+        var installed = false
         try {
             job.state = "running"
             job.phase = "downloading"
@@ -265,16 +513,14 @@ class TranscriptionBridge(private val context: Context) {
                 { job.progress = it },
                 { job.phase = "verifying" },
             )
-            job.progress = 1.0
-            job.state = "completed"
-            job.phase = "ready"
+            installed = true
         } catch (e: Exception) {
             job.state = if (job.cancelled) "cancelled" else "failed"
             job.error = e.message
+            job.errorCode = if (job.cancelled) "cancelled" else "model_install_failed"
         } finally {
-            try {
-                persist()
-            } catch (_: Exception) {}
+            if (installed && !job.cancelled) completeAndPersist(job, "ready")
+            else persistOrWarn(job)
         }
     }
 
@@ -316,21 +562,24 @@ class TranscriptionBridge(private val context: Context) {
                                 job.transformer = null
                                 job.state = if (job.cancelled) "cancelled" else "failed"
                                 job.error = exception.message
+                                job.errorCode =
+                                    if (job.cancelled) "cancelled" else "audio_prepare_failed"
                                 worker.execute {
                                     temporary.delete()
-                                    persist()
+                                    persistOrWarn(job)
                                 }
                             }
                         },
                     )
                     .build()
-            worker.execute { persist() }
+            worker.execute { persistOrWarn(job) }
             job.transformer!!.start(composition, temporary.path)
         } catch (e: Exception) {
             temporary.delete()
             job.state = "failed"
             job.error = e.message
-            worker.execute { persist() }
+            job.errorCode = "audio_prepare_failed"
+            worker.execute { persistOrWarn(job) }
         }
     }
 
@@ -343,20 +592,24 @@ class TranscriptionBridge(private val context: Context) {
         temporary: File?,
     ) {
         val began = System.currentTimeMillis()
+        var completed = false
         try {
             check(!job.cancelled)
             job.state = "running"
             job.phase = "decoding audio"
-            persist()
             val memory = android.app.ActivityManager.MemoryInfo()
             context.getSystemService(android.app.ActivityManager::class.java).getMemoryInfo(memory)
-            val reserveMiB =
-                when (selected.id) {
-                    "tiny" -> 192L
-                    "base" -> 320L
-                    else -> 640L
-                }
-            val required = reserveMiB * 1024 * 1024 + duration * 16 * 4 * 3
+            val required = speechMemoryRequiredBytes(selected.id, duration, memory.threshold)
+            job.memoryPreflight =
+                mapOf(
+                    "availableBytes" to memory.availMem,
+                    "requiredBytes" to required,
+                    "systemThresholdBytes" to memory.threshold,
+                    "totalBytes" to memory.totalMem,
+                    "pageBytes" to
+                        android.system.Os.sysconf(android.system.OsConstants._SC_PAGESIZE),
+                )
+            persist()
             require(!memory.lowMemory && memory.availMem >= required) {
                 "Not enough memory for this speech model. Choose tiny or a shorter video."
             }
@@ -364,13 +617,27 @@ class TranscriptionBridge(private val context: Context) {
                 SpeechAudioDecoder.decode(context, uri, duration, { job.cancelled }) {
                     job.progress = .05 + .2 * it
                 }
-            if(pcm.none{kotlin.math.abs(it)>0.00001f}){
-                job.segments=emptyList();job.progress=1.0;job.state="completed";job.phase="completed"
+            if (pcm.none { kotlin.math.abs(it) > 0.00001f }) {
+                job.segments = emptyList()
+                job.noSpeechDetected = true
+                completed = true
                 return
             }
             check(!job.cancelled)
-            job.phase = "recognizing on device"
             synchronized(job) { job.handle = WhisperNative.create() }
+            if (pcm.size >= 16000) {
+                job.phase = "checking speech activity"
+                val activity = SpeechActivity.from(WhisperNative.activity(job.handle, pcm))
+                job.speechActivity = activity
+                job.noSpeechDetected = activity.noClearSpeech
+                if (activity.noClearSpeech && !job.allowUncertainSpeech) {
+                    job.segments = emptyList()
+                    completed = true
+                    return
+                }
+            }
+            check(!job.cancelled)
+            job.phase = "loading model on device"
             val raw =
                 WhisperNative.run(
                     job.handle,
@@ -380,29 +647,48 @@ class TranscriptionBridge(private val context: Context) {
                     Runtime.getRuntime().availableProcessors().coerceAtMost(4),
                 )
             check(!job.cancelled)
+            job.resultLanguage = SpeechLanguages.code(WhisperNative.languageId(job.handle))
+            job.detectedLanguage = if (language == "auto") job.resultLanguage else null
             job.segments = segments(JSONArray(raw.toString(Charsets.UTF_8)), duration)
-            job.progress = 1.0
-            job.state = "completed"
-            job.phase = "completed"
+            completed = true
         } catch (e: Exception) {
             job.state = if (job.cancelled) "cancelled" else "failed"
             job.error = e.message
+            job.errorCode =
+                when {
+                    job.cancelled -> "cancelled"
+                    e is HistoryWriteException -> "history_write_failed"
+                    e is SecurityException -> "permission_denied"
+                    e.message?.contains("Not enough memory", ignoreCase = true) == true ->
+                        "low_memory"
+                    else -> "speech_failed"
+                }
         } catch (e: OutOfMemoryError) {
             job.state = "failed"
             job.error = "Not enough memory for this model. Try tiny or a shorter video."
+            job.errorCode = "low_memory"
         } finally {
             synchronized(job) {
                 if (job.handle != 0L) {
+                    nativeTimings(job)
                     WhisperNative.destroy(job.handle)
                     job.handle = 0
                 }
             }
             job.elapsedMs = System.currentTimeMillis() - began
             temporary?.delete()
-            try {
-                persist()
-            } catch (_: Exception) {}
+            if (completed && !job.cancelled) {
+                completeAndPersist(job, "completed")
+            } else persistOrWarn(job)
         }
+    }
+
+    /** Called under the job lock, before releasing the native handle. */
+    private fun nativeTimings(job: Job) {
+        val values = WhisperNative.timings(job.handle)
+        job.modelLoadMs = values[1]
+        job.inferenceMs = values[2]
+        if (job.state == "running" && values[0] >= 2) job.phase = "recognizing on device"
     }
 
     private fun segments(array: JSONArray, duration: Long): List<Map<String, Any>> {
@@ -416,7 +702,7 @@ class TranscriptionBridge(private val context: Context) {
             if (end <= start || text.isEmpty()) continue
             // whisper max_len bounds normal segments. Defensively split unusually
             // long text into timed portions rather than discarding recognized words.
-            val pieces = text.chunked(240)
+            val pieces = SubtitleText.chunks(text)
             pieces.forEachIndexed { p, content ->
                 val a = start + (end - start) * p / pieces.size
                 val b = start + (end - start) * (p + 1) / pieces.size

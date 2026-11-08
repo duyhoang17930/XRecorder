@@ -11,21 +11,28 @@ p=argparse.ArgumentParser()
 p.add_argument('--adb',default='C:/Users/dangh/AppData/Local/Android/Sdk/platform-tools/adb.exe')
 p.add_argument('--serial',default='emulator-5560')
 p.add_argument('--directory',default='build/verification/p2_p3/audio')
+p.add_argument('--check-preview-parity',action='store_true')
+p.add_argument('--offline',action='store_true',help='Validate already-pulled native outputs without accessing a device.')
+p.add_argument('--exclude-capture-outline',action='store_true',help='Exclude the capture-only outer1px at320x180; reject fixtures with expected media on that border.')
 args=p.parse_args()
 root=Path(args.directory)
 ffmpeg=Path('build/task03/ffmpeg/ffmpeg.exe').resolve()
 ffprobe=ffmpeg.with_name('ffprobe.exe')
 def adb(*words):
     return subprocess.check_output([args.adb,'-s',args.serial,*words],text=True).strip()
-assert adb('shell','getprop','ro.boot.qemu.avd_name')=='ThreeHRecorder_Task021'
+if not args.offline:
+    assert adb('shell','getprop','ro.boot.qemu.avd_name')=='ThreeHRecorder_Task021'
 uris=json.loads((root/'native/emulator_verification.json').read_text())['outputs']
 files={}
 for name,uri in uris.items():
-    row=adb('shell','content','query','--uri',uri,'--projection','_data')
-    match=re.search(r'_data=(.*)',row)
-    assert match,row
+    assert re.fullmatch(r'[A-Za-z0-9_-]+',name)
     path=root/f'{name}.mp4'
-    subprocess.run([args.adb,'-s',args.serial,'pull',match[1].strip(),str(path)],check=True,capture_output=True)
+    if not args.offline:
+        row=adb('shell','content','query','--uri',uri,'--projection','_data')
+        match=re.search(r'_data=(.*)',row)
+        assert match,row
+        subprocess.run([args.adb,'-s',args.serial,'pull',match[1].strip(),str(path)],check=True,capture_output=True)
+    assert path.is_file() and path.stat().st_size>0,path
     files[name]=path
 def pcm(path):
     data=subprocess.check_output([str(ffmpeg),'-v','error','-i',str(path),'-vn','-ac','1','-ar','48000','-f','f32le','-'])
@@ -119,5 +126,49 @@ if flash.exists():
     result['flashToneSync']={'videoSeconds':videoOnset,'audioSeconds':audioOnset,'differenceMs':abs(videoOnset-audioOnset)*1000}
     assert abs(videoOnset-audioOnset)<.07,result['flashToneSync']
 result['scope']='Signal, timing, full decode and pixel checks on AVD; no claim of human listening or lip-sync testing.'
+if args.check_preview_parity:
+    import io
+    from PIL import Image
+    rows=json.loads((root/'native/emulator_verification.json').read_text(encoding='utf-8'))['previewParity']
+    assert [r['timeMs'] for r in rows]==[800,1800,2500,3500]
+    parity=[]
+    for row in rows:
+        time_ms=row['timeMs']
+        screen=Image.open(root/f'preview_{time_ms}.png').convert('RGB')
+        left,top,width,height=[round(row[k]*row['dpr']) for k in ('left','top','width','height')]
+        preview=screen.crop((left,top,left+width,top+height)).resize((320,180))
+        raw=subprocess.check_output([str(ffmpeg),'-v','error','-ss',str(time_ms/1000),'-i',str(files['mix']),'-frames:v','1','-f','image2pipe','-vcodec','png','-'])
+        exported=Image.open(io.BytesIO(raw)).convert('RGB')
+        assert exported.size==(320,180)
+        def mask(img):
+            found=set()
+            for i,(r,g,b) in enumerate(img.getdata()):
+                x,y=i%320,i//320
+                # Flutter's QA debug banner is not part of native media output.
+                if x>270 and y<50:continue
+                selected=(r>100 and g>100 and b<min(r,g)*.6) if time_ms==800 else (r>100 and max(g,b)<r*.6) if time_ms==2500 else (g>100 and max(r,b)<g*.6) if time_ms==3500 else ((r>120 and g>120 and b<100) or (r>120 and max(g,b)<100) or (g>120 and max(r,b)<100))
+                if selected:found.add((x,y))
+            return found
+        a,b=mask(preview),mask(exported)
+        if args.exclude_capture_outline:
+            # Only a capture-window outline is excluded. The controlled layers
+            # are inset; reject media at the boundary and keep coverage strict.
+            interior=lambda points:{(x,y) for x,y in points if 0<x<319 and 0<y<179}
+            assert b==interior(b),'Cannot exclude an edge containing expected media'
+            a=interior(a)
+        metric={'timeMs':time_ms,'previewMaskPixels':len(a),'exportMaskPixels':len(b)}
+        if time_ms==1800:
+            assert not a and not b,metric
+        else:
+            assert len(a)>100 and len(b)>100,metric
+            def dilate(points):return {(x+dx,y+dy) for x,y in points for dx in range(-2,3) for dy in range(-2,3)}
+            coverage_a=len(a&dilate(b))/len(a);coverage_b=len(b&dilate(a))/len(b)
+            assert min(coverage_a,coverage_b)>.9,(time_ms,coverage_a,coverage_b)
+            metric.update(previewWithin2pxOfExport=coverage_a,exportWithin2pxOfPreview=coverage_b)
+        parity.append(metric)
+        preview.save(root/f'preview_crop_{time_ms}.png');exported.save(root/f'export_frame_{time_ms}.png')
+    result['previewExportParity']={'frames':parity,'method':'Known fixture layer color masks after resizing native screen crop to320x180; symmetric2px tolerance for codec/raster edges. Excludes QA debug banner; no claim of bit-identical rendering.'}
+result['archivedFilesOnly']=args.offline
+result['excludedCaptureBoundaryPxAt320x180']=1 if args.exclude_capture_outline else 0
 (root/'signal_validation.json').write_text(json.dumps(result,indent=2))
 print(json.dumps(result,indent=2))

@@ -1,3 +1,4 @@
+import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/widgets/studio_widgets.dart';
@@ -61,7 +62,7 @@ const helpTopics = <({String category, String question, String answer})>[
   (
     category: 'Privacy',
     question: 'What leaves my device?',
-    answer: 'Capture, editing, drafts and exports run locally. No transcription or livestream connection is enabled. Sharing opens an Android chooser; you decide the receiving app. A support report includes only your text, optional selected attachment and device details if you explicitly enable them.',
+    answer: 'Capture, editing, drafts, exports and offline subtitles run on your device. Speech models need a download or local import; transcription does not upload your media. Sharing opens an Android chooser; you decide the receiving app. A support report includes only your text, optional selected attachment and device details if you explicitly enable them.',
   ),
 ];
 
@@ -98,24 +99,25 @@ class _HelpScreenState extends State<HelpScreen> {
   @override
   Widget build(BuildContext context) {
     final matches = helpTopics.where(
-      (t) => '${t.category} ${t.question} ${t.answer}'.toLowerCase().contains(
-        query.toLowerCase(),
-      ),
+      (t) =>
+          '${context.message(t.category)} ${context.message(t.question)} ${context.message(t.answer)} ${t.question}'
+              .toLowerCase()
+              .contains(query.toLowerCase()),
     );
     return Scaffold(
-      appBar: AppBar(title: const Text('Help & guides')),
+      appBar: AppBar(title: Text(context.l10n.helpGuides)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           StudioSearchField(
             controller: search,
-            hintText: 'Search help',
+            hintText: context.l10n.searchHelp,
             onChanged: (v) => setState(() => query = v),
           ),
           if (matches.isEmpty)
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(24),
-              child: Text('No matching guides'),
+              child: Text(context.l10n.noMatchingGuides),
             ),
           for (final topic in matches)
             ExpansionTile(
@@ -149,7 +151,7 @@ class _HelpScreenState extends State<HelpScreen> {
                 }
               }),
               title: Text(
-                topic.question,
+                context.message(topic.question),
                 style: AppTypography.title.copyWith(
                   color: context.studioColors.text,
                 ),
@@ -157,7 +159,7 @@ class _HelpScreenState extends State<HelpScreen> {
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: AppSpacing.xxs),
                 child: Text(
-                  topic.category,
+                  context.message(topic.category),
                   style: AppTypography.caption.copyWith(
                     color: context.studioColors.muted,
                   ),
@@ -165,9 +167,9 @@ class _HelpScreenState extends State<HelpScreen> {
               ),
               children: [
                 Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: AlignmentDirectional.centerStart,
                   child: Text(
-                    topic.answer,
+                    context.message(topic.answer),
                     style: AppTypography.body.copyWith(
                       color: context.studioColors.muted,
                       height: 1.6,

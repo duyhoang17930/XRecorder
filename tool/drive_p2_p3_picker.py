@@ -4,19 +4,26 @@ import re
 import subprocess
 import time
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
-p=argparse.ArgumentParser();p.add_argument('--folder',required=True);p.add_argument('--seconds',type=int,default=180);args=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--folder',required=True);p.add_argument('--seconds',type=int,default=180);p.add_argument('--log',type=Path);p.add_argument('--copy-only',action='store_true');args=p.parse_args()
 adb='C:/Users/dangh/AppData/Local/Android/Sdk/platform-tools/adb.exe'
 def run(*words):return subprocess.check_output([adb,'-s','emulator-5560',*words],text=True,stderr=subprocess.DEVNULL,timeout=15)
 assert run('shell','getprop','ro.boot.qemu.avd_name').strip()=='ThreeHRecorder_Task021'
 assert re.fullmatch(r'P2P3_QA_[A-Za-z0-9_]+',args.folder)
 run('shell','mkdir','-p','/sdcard/Documents/'+args.folder)
-run('shell','mkdir','-p','/sdcard/Movies/XRecorder/'+args.folder)
-run('push','build/verification/p2_p3/audio/p2_p3_tone_440.wav','/sdcard/Movies/XRecorder/'+args.folder+'/p2_p3_audio_pick.wav')
+if not args.copy_only:
+    run('shell','mkdir','-p','/sdcard/Movies/XRecorder/'+args.folder)
+    run('push','build/verification/p2_p3/audio/p2_p3_tone_440.wav','/sdcard/Movies/XRecorder/'+args.folder+'/p2_p3_audio_pick.wav')
 end=time.monotonic()+args.seconds
 stage='tree';last='';entered=False;creating=False
 while time.monotonic()<end:
     time.sleep(1)
+    if args.log and args.log.exists():
+        raw=args.log.read_bytes();content=raw.decode('utf-16' if raw.startswith(b'\xff\xfe') else 'utf-8',errors='replace')
+        if 'All tests passed' in content:
+            print('Native assertions completed; picker helper stopped',flush=True);break
+        if 'Some tests failed' in content:raise SystemExit('Native test failed; picker helper stopped')
     try:
         run('shell','uiautomator','dump','/data/local/tmp/3h_qa_documents.xml')
         tree=ET.fromstring(run('shell','cat','/data/local/tmp/3h_qa_documents.xml'))
@@ -34,7 +41,10 @@ while time.monotonic()<end:
         bounds=re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]',node.get('bounds',''))
         if not bounds:return False
         x,y,r,b=map(int,bounds.groups());run('shell','input','tap',str((x+r)//2),str((y+b)//2));return True
-    if choose(lambda n:n.get('text')=='ALLOW'):stage='audio';continue
+    if choose(lambda n:n.get('text')=='ALLOW'):
+        if args.copy_only:
+            print('New QA folder consent selected; native copy/disconnect assertions continue.',flush=True);break
+        stage='audio';continue
     if stage=='audio':
         if choose(lambda n:n.get('text')=='p2_p3_audio_pick.wav'):stage='srt'
         continue

@@ -1,3 +1,5 @@
+import 'package:xrecorder/l10n/localization.dart';
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -124,20 +126,18 @@ class _ExportScreenState extends State<ExportScreen>
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Exports')),
+    appBar: AppBar(title: Text(context.l10n.exports)),
     body: ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        const Text(
-          'Keep the app open while exporting. Interrupted jobs can be retried. Each export saves a new file; your draft and original media are kept.',
-        ),
-        if (error != null) Text(error!),
+        Text(context.l10n.keepTheAppOpenWhileExportingInterrupted),
+        if (error != null) Text(context.message(error!)),
         for (final notice in jobs.where((j) => j['type'] == 'notice'))
-          Text(notice['message'] as String),
+          Text(context.message(notice['message'] as String)),
         if (jobs.isEmpty)
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(24),
-            child: Text('No exports yet'),
+            child: Text(context.l10n.noExportsYet),
           ),
         for (final job in jobs.reversed.where((j) => j['type'] != 'notice'))
           Card(
@@ -146,17 +146,23 @@ class _ExportScreenState extends State<ExportScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(job['project']['title'] as String? ?? 'Video project'),
                   Text(
-                    '${switch (job['state']) {
-                      'queued' => 'Waiting',
-                      'running' => 'Exporting',
-                      'finalizing' => 'Saving…',
-                      'completed' => 'Saved',
-                      'failed' => 'Could not export',
-                      'cancelled' => 'Cancelled',
-                      _ => 'Processing',
-                    }} · ${job['progress']}%',
+                    job['project']['title'] as String? ??
+                        context.l10n.videoProject,
+                  ),
+                  Text(
+                    context.l10n.operationProgress(
+                      context.message(switch (job['state']) {
+                        'queued' => 'Waiting',
+                        'running' => 'Exporting',
+                        'finalizing' => 'Saving…',
+                        'completed' => 'Saved',
+                        'failed' => 'Could not export',
+                        'cancelled' => 'Cancelled',
+                        _ => 'Processing',
+                      }),
+                      context.displayValue(job['progress']),
+                    ),
                   ),
                   if (job['state'] == 'running')
                     LinearProgressIndicator(
@@ -164,37 +170,44 @@ class _ExportScreenState extends State<ExportScreen>
                     ),
                   if (job['error'] != null)
                     Text(
-                      UserMessages.failure(
-                        job['error'],
-                        operation: UserOperation.export,
-                      ).text,
+                      context.message(
+                        UserMessages.failure(
+                          job['error'],
+                          operation: UserOperation.export,
+                        ).text,
+                      ),
                     ),
-                  if (job['warning'] is String) Text(job['warning'] as String),
+                  if (job['warning'] is String)
+                    Text(context.message(job['warning'] as String)),
                   if (job['state'] == 'completed' &&
                       (job['outputBytes'] as num? ?? 0) > 0)
                     Text(
-                      'Saved file: ${formatBytes((job['outputBytes'] as num).toInt())}',
+                      context.l10n.savedFileSize(
+                        context.displayValue(
+                          context.fileSize((job['outputBytes'] as num).toInt()),
+                        ),
+                      ),
                     ),
                   if (['queued', 'running'].contains(job['state']))
                     TextButton(
                       onPressed: pendingCommands.contains(job['id'])
                           ? null
                           : () => command('exportCancel', job['id'] as String),
-                      child: const Text('Cancel export'),
+                      child: Text(context.l10n.cancelExport),
                     ),
                   if (['failed', 'cancelled'].contains(job['state']))
                     TextButton(
                       onPressed: pendingCommands.contains(job['id'])
                           ? null
                           : () => command('exportRetry', job['id'] as String),
-                      child: const Text('Retry export'),
+                      child: Text(context.l10n.retryExport),
                     ),
                   if (job['state'] == 'completed')
                     TextButton(
                       onPressed: () => context.push(
                         '/media/${Uri.encodeComponent(job['uri'] as String)}',
                       ),
-                      child: const Text('Open saved media'),
+                      child: Text(context.l10n.openSavedMedia),
                     ),
                 ],
               ),

@@ -35,6 +35,8 @@ migrate_working_dir/
 .pub/
 /build/
 /coverage/
+# Rebuilt from the reviewed ARB source by Flutter gen_l10n.
+/lib/l10n/generated/
 
 # Symbolication related
 app.*.symbols
