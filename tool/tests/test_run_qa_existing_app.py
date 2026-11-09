@@ -1,6 +1,8 @@
 """Safety regression: a failed install must never lead to data removal."""
 import importlib.util
+import hashlib
 import io
+import json
 from pathlib import Path
 import subprocess
 import sys
@@ -16,6 +18,44 @@ spec.loader.exec_module(runner)
 
 
 class InstallSafetyTest(unittest.TestCase):
+    def test_offline_checkpoint_is_byte_verified_and_cannot_be_reused(self):
+        fixture = Path(tempfile.mkdtemp(prefix='checkpoint_v1_', dir=ROOT / 'build/verification/task08'))
+        snapshot = fixture / 'snapshot'
+        snapshot.mkdir()
+        rows = []
+        for name in ['config.ini', 'userdata-qemu.img.qcow2', 'encryptionkey.img']:
+            data = ('retained fixture ' + name).encode()
+            runner.write_new(snapshot / name, data)
+            rows.append({'relativePath': name, 'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
+        identity = 'package:com.xrecorder.xrecorder uid:10217'
+        manifest = fixture / 'manifest_v1.json'
+        runner.write_new(manifest, json.dumps({
+            'kind': 'offline_avd_checkpoint', 'serial': 'emulator-5566',
+            'avd': 'ThreeHRecorder_TASK08_API36', 'packageIdentity': identity,
+            'qemuExitedBeforeCopy': True, 'allSourceAndCopySha256Exact': True,
+            'snapshotDirectory': str(snapshot), 'files': rows,
+        }).encode())
+        result = runner.validate_offline_checkpoint(manifest, ROOT, 'emulator-5566',
+                                                   'ThreeHRecorder_TASK08_API36', identity)
+        self.assertEqual(result['filesVerified'], 3)
+        runner.write_new(Path(result['installClaim']), b'claimed by earlier update')
+        with self.assertRaisesRegex(RuntimeError, 'already used'):
+            runner.validate_offline_checkpoint(manifest, ROOT, 'emulator-5566',
+                                               'ThreeHRecorder_TASK08_API36', identity)
+
+    def test_validation_reports_never_overwrite_earlier_evidence(self):
+        fixture = Path(tempfile.mkdtemp(prefix='validator_v1_', dir=ROOT / 'build/verification/task08'))
+        for script, report, args in [
+            ('validate_editor_audio.py', 'signal_validation.json', ['--directory', str(fixture), '--offline']),
+            ('validate_p2_p3_outputs.py', 'validation.json', [str(fixture), '--ffmpeg-directory', str(fixture)]),
+        ]:
+            original = b'earlier evidence\x00\xff'
+            runner.write_new(fixture / report, original)
+            result = subprocess.run([sys.executable, str(ROOT / 'tool' / script), *args], capture_output=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn(b'preserve earlier evidence', result.stderr)
+            self.assertEqual((fixture / report).read_bytes(), original)
+
     def test_truncated_archive_rejected_even_with_successful_adb_exit(self):
         fixture = Path(tempfile.mkdtemp(prefix='archive_v1_', dir=ROOT / 'build/verification/task08'))
         path = fixture / 'truncated_v1.tar'

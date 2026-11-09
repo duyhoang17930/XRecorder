@@ -47,6 +47,8 @@ class EditorPreview(context: Context, id: Int, messenger: BinaryMessenger) :
     private val channel = MethodChannel(messenger, "com.xrecorder/editor_preview/$id")
     private var error: String? = null
     private var disposing = false
+    private var disposed = false
+    private var loading = false
     private var renderedFirstFrame = false
 
     init {
@@ -64,13 +66,14 @@ class EditorPreview(context: Context, id: Int, messenger: BinaryMessenger) :
                     }
 
                     override fun onPlayerError(value: PlaybackException) {
-                        if (disposing || created in retiring) {
+                        if (disposing || created in retiring || player !== created) {
                             releaseFailures++
                             android.util.Log.w(
                                 "EditorPreviewRelease",
                                 "Playback thread at release failure: " +
                                     created.playbackLooper.thread.stackTrace.joinToString("\n"),
                             )
+                            return
                         }
                         error =
                             "Preview failed (${value.errorCodeName}). Check source access and device codec support."
@@ -87,17 +90,29 @@ class EditorPreview(context: Context, id: Int, messenger: BinaryMessenger) :
         try {
             when (call.method) {
                 "load" -> {
+                    check(!disposed && !loading) { "Preview unavailable" }
                     val composition = EditorComposition.build(call.arguments as Map<*, *>)
                     loads++
                     val failuresBefore = releaseFailures
-                    releasePlayer()
-                    check(releaseFailures == failuresBefore) {
-                        "The previous preview could not close."
+                    loading = true
+                    releasePlayer {
+                        try {
+                            check(!disposed) { "Preview unavailable" }
+                            check(releaseFailures == failuresBefore) {
+                                "The previous preview could not close."
+                            }
+                            val current = createPlayer()
+                            error = null
+                            current.setComposition(composition)
+                            current.prepare()
+                            result.success(null)
+                        } catch (failure: Exception) {
+                            result.error("editor_preview", failure.message ?: "Preview unavailable", null)
+                        } finally {
+                            loading = false
+                        }
                     }
-                    val current = createPlayer()
-                    error = null
-                    current.setComposition(composition)
-                    current.prepare()
+                    return
                 }
                 "play" -> player?.play()
                 "pause" -> player?.pause()
@@ -132,31 +147,22 @@ class EditorPreview(context: Context, id: Int, messenger: BinaryMessenger) :
         }
     }
 
-    private fun releasePlayer() {
-        val current = player ?: return
-        disposing = true
+    private fun releasePlayer(afterRelease: () -> Unit = {}) {
+        val current = player
+        if (current == null) {
+            afterRelease()
+            return
+        }
+        player = null
+        retiring.add(current)
         try {
-            // A changed composition needs a fresh video/audio graph. Detach its
-            // SurfaceView before release so pending seeks cannot stall it.
             current.pause()
             current.stop()
             view.player = null
-            current.release()
-        } finally {
-            player = null
-            disposing = false
+        } catch (failure: Exception) {
+            releaseFailures++
+            android.util.Log.w("EditorPreviewRelease", "Player detach failed", failure)
         }
-    }
-
-    override fun dispose() {
-        active.remove(this)
-        channel.setMethodCallHandler(null)
-        val current = player ?: return
-        player = null
-        retiring.add(current)
-        current.pause()
-        current.stop()
-        view.player = null
         // A seek/reset and stop enqueue work on Media3's playback looper. Its
         // release has a short blocking timeout; don't start that wait while
         // those earlier tasks are still queued. Drain asynchronously so Android
@@ -172,10 +178,18 @@ class EditorPreview(context: Context, id: Int, messenger: BinaryMessenger) :
             } finally {
                 retiring.remove(current)
                 disposing = false
+                afterRelease()
             }
         }
         if (!Handler(current.playbackLooper).post { main.post(release) }) {
             main.post(release)
         }
+    }
+
+    override fun dispose() {
+        disposed = true
+        active.remove(this)
+        channel.setMethodCallHandler(null)
+        releasePlayer()
     }
 }

@@ -1,5 +1,29 @@
 # P2/P3 implementation progress
 
+## TASK08 checkpoint09/11/2026
+
+Current P2/P3 changes implemented and native-verified on available QA runtimes:
+decoded-thumbnail identity;history readonly duplicate safety and paging;
+foreign-trash preservation;8-track PCM endpoint;shared async preview release
+and stale/disposed-load guards;safe installer/versioned evidence handling.
+M0–M6 traversed with actual before/after and regression,not documentation only.
+231Flutter/12JUnit/9safetyPASS;API36/API34/16KBx64 currentv5 runtime subsets.
+Final observer-retention recheck passed10cycles with measured textScale2.0 and
+bounded image classes/cache;full allocation profiles archived with matching SHA.
+API36 main universalv5 restored by safe update;19-job journal and62source/model
+files retain SHA. Native locale cache resyncs ar→system en;persisted Settings
+document remains absent,not overwritten. All3available QA AVDs end on mainv5.
+
+Overall TASK08 **PARTIAL**,not whole-app DONE. The SDK uninstall incident on old
+QA5560 remains partial recovery;physical/OEM/SD/human/P1 integration gates stay
+separate. No Task08 cleanup/commit/push. Read
+[TASK08 final report](TASK_08_FINAL_REPORT_VI.md),
+[executed evidence](TASK_08_TEST_EVIDENCE.md),
+[memory report](TASK_08_MEMORY_THERMAL_REPORT.md),
+[device matrix](TASK_08_DEVICE_MATRIX.md),
+[storage](TASK_08_STORAGE_SIZE_REPORT.md).
+TASK07/quality numbers below are historical checkpoints,not freshTASK08 passes.
+
 Updated 08/11/2026. TASK07 current delivery/evidence:
 [TASK07 final report](TASK_07_FINAL_REPORT_VI.md),
 [globalization matrix](TASK_07_GLOBALIZATION_MATRIX.md),

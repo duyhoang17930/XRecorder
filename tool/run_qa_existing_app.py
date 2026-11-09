@@ -46,6 +46,9 @@ def validate_offline_checkpoint(path, root, serial, avd, identity):
         raise RuntimeError('Offline checkpoint identity/consistency mismatch; no install.')
     snapshot = Path(manifest['snapshotDirectory']).resolve(strict=True)
     snapshot.relative_to(path.parent)
+    claim = snapshot.parent / (snapshot.name + '.install_claim_v1.json')
+    if claim.exists():
+        raise RuntimeError('Offline checkpoint already used for an update; create a fresh checkpoint.')
     required = {'config.ini', 'userdata-qemu.img.qcow2', 'encryptionkey.img'}
     names = {row['relativePath'] for row in manifest['files']}
     if not required.issubset(names):
@@ -57,7 +60,7 @@ def validate_offline_checkpoint(path, root, serial, avd, identity):
             digest = hashlib.file_digest(stream, 'sha256').hexdigest()
         if digest != row['sha256'] or file.stat().st_size != row['bytes']:
             raise RuntimeError('Offline checkpoint file changed; no install.')
-    return {'manifest': str(path), 'filesVerified': len(manifest['files']),
+    return {'manifest': str(path), 'installClaim': str(claim), 'filesVerified': len(manifest['files']),
             'bytesVerified': sum(row['bytes'] for row in manifest['files']),
             'scope': 'whole offline AVD including app data/MediaStore/OS permissions'}
 
@@ -185,6 +188,12 @@ def main():
                 if not users or 'stopped=true' not in users[0] or not 0 <= age <= 1800:
                     raise RuntimeError('Checkpoint requires a fresh restart and still-stopped app; no install.')
                 verified = validate_offline_checkpoint(args.offline_checkpoint, root, args.serial, name, before)
+                # One update per snapshot, even if that update fails. A stopped
+                # app alone cannot prove its data hasn't changed since backup.
+                write_new(Path(verified['installClaim']), json.dumps({
+                    'output': str(output), 'apk': str(apk),
+                    'utc': datetime.now(timezone.utc).isoformat(),
+                }, indent=2).encode('utf8'))
                 write_new(output / 'offline_checkpoint_verified_v1.json', json.dumps(verified, indent=2).encode())
             adb('shell', 'am', 'force-stop', PACKAGE)
             for label, command in ([] if args.offline_checkpoint else [

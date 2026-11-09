@@ -28,6 +28,16 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
     private boolean task08HistoryMatrix;
     private String task08HistoryReopen;
     private boolean task08Trash;
+    private String task08MediaInput;
+    private boolean task08Media;
+    private boolean task08Speech;
+    private String task08SpeechUri;
+    private int task08SpeechCycles;
+    private boolean task08Navigation;
+    private String task08SpeechProject;
+    private boolean task08SpeechForeground;
+    private boolean task08Preview;
+    private int task08PreviewCycles;
 
     @Override public void onCreate(Bundle arguments) {
         super.onCreate(arguments);
@@ -36,6 +46,16 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
         task08HistoryMatrix = arguments != null && "history-matrix".equals(arguments.getString("task08"));
         task08HistoryReopen = arguments == null ? null : arguments.getString("historyReopen");
         task08Trash = arguments != null && "trash".equals(arguments.getString("task08"));
+        task08Media = arguments != null && "media".equals(arguments.getString("task08"));
+        task08MediaInput = arguments == null ? null : arguments.getString("mediaInput");
+        task08Speech = arguments != null && "speech".equals(arguments.getString("task08"));
+        task08SpeechUri = arguments == null ? null : arguments.getString("speechUri");
+        task08SpeechCycles = arguments == null ? 1 : Integer.parseInt(arguments.getString("speechCycles", "1"));
+        task08Navigation = arguments != null && "navigation".equals(arguments.getString("task08"));
+        task08SpeechProject = arguments == null ? null : arguments.getString("speechProject");
+        task08SpeechForeground = arguments != null && "true".equals(arguments.getString("speechForeground"));
+        task08Preview = arguments != null && "preview".equals(arguments.getString("task08"));
+        task08PreviewCycles = arguments == null ? 30 : Integer.parseInt(arguments.getString("previewCycles", "30"));
         start();
     }
 
@@ -46,22 +66,36 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
     }
 
     private static void collect(AccessibilityNodeInfo node, int bottomBand,
-                                Map<String, AccessibilityNodeInfo> targets) {
+                                Map<String, AccessibilityNodeInfo> targets, java.util.Set<String> allowed) {
         Rect bounds = new Rect();
         node.getBoundsInScreen(bounds);
         String text = label(node);
         if (PACKAGE.contentEquals(node.getPackageName() == null ? "" : node.getPackageName())
                 && node.isVisibleToUser() && node.isClickable()
-                && bounds.top >= bottomBand && !text.isEmpty()) {
+                && bounds.top >= bottomBand && !text.isEmpty()
+                && (allowed == null || allowed.contains(text))) {
             targets.putIfAbsent(text, node);
         }
         for (int i = 0; i < node.getChildCount(); i++) {
             AccessibilityNodeInfo child = node.getChild(i);
-            if (child != null) collect(child, bottomBand, targets);
+            if (child != null) collect(child, bottomBand, targets, allowed);
         }
     }
 
     @Override public void onStart() {
+        if (task08Preview) {
+            Task08PreviewInstrumentation.run(this, task08MediaInput, task08PreviewCycles);
+            return;
+        }
+        if (task08Speech) {
+            Task08SpeechInstrumentation.run(this, task08SpeechUri, task08SpeechCycles,
+                    task08SpeechProject, task08SpeechForeground);
+            return;
+        }
+        if (task08Media) {
+            Task08MediaRegressionInstrumentation.run(this, task08MediaInput);
+            return;
+        }
         if (task08Trash) {
             Task08TrashInstrumentation.run(this);
             return;
@@ -89,23 +123,28 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
             startActivitySync(new Intent().setClassName(PACKAGE, PACKAGE + ".MainActivity")
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             Map<String, AccessibilityNodeInfo> targets = new LinkedHashMap<>();
-            for (int retry = 0; retry < 150 && targets.size() < 4; retry++) {
+            // TASK08 English fixture: don't mistake a bottom media card for a
+            // navigation destination, or omit Settings after finding four nodes.
+            java.util.Set<String> allowed = task08Navigation ? new java.util.HashSet<>(
+                    java.util.Arrays.asList("Video", "Photo", "Create", "Edit", "Settings")) : null;
+            int required = task08Navigation ? 5 : 4;
+            for (int retry = 0; retry < 150 && targets.size() < required; retry++) {
                 targets.clear();
                 AccessibilityNodeInfo root = automation.getRootInActiveWindow();
                 if (root != null) {
                     Rect screen = new Rect();
                     root.getBoundsInScreen(screen);
-                    collect(root, screen.top + screen.height() * 85 / 100, targets);
+                    collect(root, screen.top + screen.height() * 85 / 100, targets, allowed);
                 }
-                if (targets.size() < 4) SystemClock.sleep(100);
+                if (targets.size() < required) SystemClock.sleep(100);
             }
-            if (targets.size() < 4) throw new AssertionError("Four labeled navigation targets required");
+            if (targets.size() < required) throw new AssertionError("Required labeled navigation targets missing");
             File folder = new File(getTargetContext().getFilesDir(),
                     "task07_native_a11y_" + System.currentTimeMillis());
             if (!folder.mkdir()) throw new AssertionError("Unique QA evidence directory required");
             JSONArray samples = new JSONArray();
             List<Map.Entry<String, AccessibilityNodeInfo>> entries = new ArrayList<>(targets.entrySet());
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < required; i++) {
                 Map.Entry<String, AccessibilityNodeInfo> entry = entries.get(i);
                 if (!entry.getValue().performAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS)) {
                     throw new AssertionError("Native accessibility-focus action rejected");
@@ -129,6 +168,7 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
                 samples.put(new JSONObject().put("requested", entry.getKey()).put("actual", focused));
             }
             JSONObject report = new JSONObject().put("passed", true)
+                    .put("navigationOnly", task08Navigation)
                     .put("dontSuppressAccessibilityServices", true)
                     .put("focusSamples", samples).put("evidenceDirectory", folder.getAbsolutePath())
                     .put("humanListening", false).put("humanUsability", false);

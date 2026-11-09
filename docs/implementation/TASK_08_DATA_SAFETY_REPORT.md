@@ -1,4 +1,47 @@
-# TASK08 — Data safety (đang triển khai, chưa nghiệm thu)
+# TASK08 — Data safety (verdict PARTIAL, chưa nghiệm thu toàn app)
+
+## Final main restore09/11
+
+`m6_api36_main_restore_v1/`:backup private/external device-host SHA exact trước
+update,install-r thành công,UID giữ nguyên;main v5 mở và screenshot được kiểm.
+`main_integrity_v2.json`:19job journal byte-exact,62source/model hashes nguyên.
+Speech-model preferences byte-exact;native `p2_locale.xml` đổi ar→en do main
+`NativeLocaleSync` đồng bộ locale thực sau harness Arabic dùng settings trong
+memory. App Settings document không tồn tại trước/sau,main dùng defaults.
+Không gọi mọi preference byte-exact;attempt oracle v1 giữ riêng trong
+`preferences_probe_v1_failure.json`. Không sửa/khôi phục preferences thủ công.
+Main v5 cũng đã được giữ trên API34/16KB;QA5560 recovery gate vẫn PARTIAL.
+
+## Checkpoint09/11 — native durability / paging
+
+`m3_pagination_green_v1.log`:0/20/21/77/100/1001 metadata-only fixture jobs
+đều giữ đủ, legacyvi/en/auto/Unicode/timing fields đúng; queued/running mở
+lại thành failed/interrupted. Cursor(createdAt,id), page17 và latest
+matching/project/source filter kiểm đủ ID, không trùng/mất ở timestamp bằng
+nhau; invalid limit/cursor bị reject. Red control trước fix:
+`m3_pagination_red_v1.log` (Invalid page accepted).
+
+`m3_history_matrix_metrics_v1.json`:1001 record legacy channel440628B so với
+latest matching444B; restore+list85ms, toàn bộ pages/filter220ms trong lượt
+này. Không gọi single sample là universal latency guarantee. Registry/journal
+vẫn giữ toàn bộ jobs, memory load theo history size; tối ưu transfer/page,
+không thêm retention cap hoặc đổi storage schema.
+
+`m3_history_process_reopen_v1.log`:mở lại cùng6 fixture directories trong
+process mới PASS,1001 metadata/IDs/interruption đúng. Write obstruction sau
+restore, future/corrupt/strictUTF8 giữ original bytes. Attempt đầu
+`m3_history_matrix_v1.log` là fixture fault đặt quá sớm bị AtomicFile.openRead
+dọn; failure giữ nguyên, không tính PASS.
+
+`m3_duplicate_regression_v2.log`:duplicate journal readonly/write rejected,
+input exact. `m3_trash_regression_v2.log`:foreignbin/part/json giữ nguyên,
+corrupt managedUUID vẫn hiện theo contract. Không đi vào trash thật.
+
+19 job speech/model thật sau M2 giữ nguyên journal byte trước/sau native
+tests, SHA256
+`f4854c6b8d8e6f39a3affbdcb29e404c2b52862e1daf4f13b51a3908b17745c5`;
+`m3_existing_speech_journal_integrity_v2.json`. Synthetic metadata không phải
+transcript khôi phục. Incident/quyền URI bên dưới vẫn là FAIL/PARTIAL.
 
 ## Sự cố QA trong TASK08: FAIL
 

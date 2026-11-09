@@ -19,6 +19,8 @@ args = parser.parse_args()
 probe = args.ffmpeg_directory / 'ffprobe.exe'
 ffmpeg = args.ffmpeg_directory / 'ffmpeg.exe'
 args.directory.mkdir(parents=True,exist_ok=True)
+if (args.directory/'validation.json').exists():
+    raise FileExistsError('Use a new validation directory; preserve earlier evidence.')
 if args.native_report:
     adb='C:/Users/dangh/AppData/Local/Android/Sdk/platform-tools/adb.exe'
     allowed={'emulator-5560':'ThreeHRecorder_Task021','emulator-5562':'ThreeHRecorder_Final_API34'}
@@ -100,5 +102,6 @@ if args.check_input_matrix:
             assert amplitude(1,880)>amplitude(1,440)*10
             checks[name]['distinctStereoTonesPreserved']=True
     report['inputMatrix']=checks
-(args.directory / 'validation.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
+with (args.directory/'validation.json').open('x',encoding='utf8') as stream:
+    json.dump(report,stream,indent=2)
 print(json.dumps([{'file':r['file'],'frames':r['decodedVideoFrames'],'bytes':r['bytes'],'fullDecode':r['fullDecode'],'audioRms':r['audioRms']} for r in results], indent=2))

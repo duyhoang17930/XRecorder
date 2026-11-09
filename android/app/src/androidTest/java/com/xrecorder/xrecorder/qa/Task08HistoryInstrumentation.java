@@ -25,9 +25,10 @@ public final class Task08HistoryInstrumentation {
         final CountDownLatch ready = new CountDownLatch(1);
         Object value;
         String code;
+        String message;
         @Override public void success(Object data) { value = data; ready.countDown(); }
         @Override public void error(String error, String message, Object details) {
-            code = error; ready.countDown();
+            code = error; this.message = message; ready.countDown();
         }
         @Override public void notImplemented() { code = "not_implemented"; ready.countDown(); }
     }

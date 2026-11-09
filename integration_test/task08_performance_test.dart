@@ -104,11 +104,50 @@ Map<String, dynamic> _compactCpu(Map<String, dynamic> profile) {
   };
 }
 
+Future<Map<String, dynamic>> _allocationSnapshot(
+  String isolate,
+  int cycle,
+  String run,
+) async {
+  final profile = await _cpu('getAllocationProfile', {
+    'isolateId': isolate,
+    'gc': 'true',
+  });
+  expect(profile['members'], isA<List>());
+  final path =
+      '/data/user/0/com.xrecorder.xrecorder/files/'
+      'task08_allocation_${run}_$cycle.json';
+  final file = File(path);
+  await file.create(exclusive: true);
+  await file.writeAsString(jsonEncode(profile), flush: true);
+  // Retaining full class/reference graphs here changes the very heap being
+  // measured at the next GC. Keep raw evidence on disk and primitive summaries.
+  return {
+    'cycle': cycle,
+    'rawDevicePath': path,
+    'memoryUsage': profile['memoryUsage'],
+    'members': [
+      for (final row in (profile['members'] as List).cast<Map>())
+        if (((row['instancesCurrent'] as num?) ?? 0) > 0)
+          {
+            'classId': (row['class'] as Map)['id'],
+            'name': (row['class'] as Map)['name'],
+            'instancesCurrent': row['instancesCurrent'],
+            'bytesCurrent': row['bytesCurrent'],
+          },
+    ],
+  };
+}
+
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   testWidgets('TASK08 same-corpus library warmup and five measured trials', (
     tester,
   ) async {
+    if (const bool.fromEnvironment('TASK08_LIBRARY_SOAK')) {
+      tester.platformDispatcher.textScaleFactorTestValue = 2.0;
+      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+    }
     expect(
       kProfileMode,
       isTrue,
@@ -191,6 +230,7 @@ void main() {
     if (const bool.fromEnvironment('TASK08_LIBRARY_SOAK')) {
       final cycles = <Map<String, Object?>>[];
       final allocations = <Map<String, dynamic>>[];
+      final allocationRun = DateTime.now().microsecondsSinceEpoch.toString();
       for (var cycle = 0; cycle < 10; cycle++) {
         final router = GoRouter.of(
           tester.element(find.byType(MediaLibraryScreen).first),
@@ -199,7 +239,10 @@ void main() {
         await tester.pumpAndSettle();
         router.go('/photos');
         await tester.pumpAndSettle();
-        tester.state<ScrollableState>(find.byType(Scrollable).first).position.jumpTo(0);
+        tester
+            .state<ScrollableState>(find.byType(Scrollable).first)
+            .position
+            .jumpTo(0);
         await tester.pumpAndSettle();
         final queries = repository.queries;
         final cycleFrames = <FrameTiming>[];
@@ -220,24 +263,27 @@ void main() {
         expect(cycleFrames, isNotEmpty);
         expect(repository.queries, queries);
         expect(scope.thumbnails!.length, lessThanOrEqualTo(64));
-        expect(scope.thumbnails!.retainedBytes, lessThanOrEqualTo(8 * 1024 * 1024));
+        expect(
+          scope.thumbnails!.retainedBytes,
+          lessThanOrEqualTo(8 * 1024 * 1024),
+        );
         cycles.add({
           'cycle': cycle + 1,
           'decodedEntries': PaintingBinding.instance.imageCache.currentSize,
           'decodedBytes': PaintingBinding.instance.imageCache.currentSizeBytes,
           'compressedEntries': scope.thumbnails!.length,
           'compressedBytes': scope.thumbnails!.retainedBytes,
-          'buildUs': cycleFrames.map((f) => f.buildDuration.inMicroseconds).toList(),
-          'rasterUs': cycleFrames.map((f) => f.rasterDuration.inMicroseconds).toList(),
+          'buildUs': cycleFrames
+              .map((f) => f.buildDuration.inMicroseconds)
+              .toList(),
+          'rasterUs': cycleFrames
+              .map((f) => f.rasterDuration.inMicroseconds)
+              .toList(),
         });
         if ([0, 4, 9].contains(cycle) && isolate != null) {
-          allocations.add({
-            'cycle': cycle + 1,
-            'allocationProfileAfterGc': await _cpu('getAllocationProfile', {
-              'isolateId': isolate,
-              'gc': 'true',
-            }),
-          });
+          allocations.add(
+            await _allocationSnapshot(isolate, cycle + 1, allocationRun),
+          );
         }
         debugPrint('TASK08_LIBRARY_CYCLE=${cycle + 1}');
       }
@@ -250,6 +296,13 @@ void main() {
         'warmups': 0,
         'measurementTrials': 0,
         'frameBenchmark': false,
+        'measuredTextScale':
+            MediaQuery.textScalerOf(
+              tester.element(find.byType(MediaLibraryScreen).first),
+            ).scale(16) /
+            16,
+        'allocationCapture':
+            'Raw profiles on disk; compact nonzero class summaries retained.',
       };
       await tester.pumpWidget(const SizedBox());
       await tester.pump();

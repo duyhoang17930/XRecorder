@@ -44,6 +44,7 @@ object EditorComposition {
                     builder.build()
                 },
             )
+            .setEffects(Effects(source.effects.audioProcessors, emptyList()))
             .build()
     }
 
@@ -306,7 +307,15 @@ object EditorComposition {
                     .build(),
             )
         }
-        return Composition.Builder(sequences).build()
+        val builder = Composition.Builder(sequences)
+        if (tracks.isNotEmpty() || music.isNotEmpty()) {
+            // Apply after the mixer, including Sonic/RNNoise drains and gaps.
+            // CompositionPlayer and Transformer receive the same endpoint.
+            builder.setEffects(
+                Effects(listOf(TimelineAudioLimit(durationUs(project))), emptyList()),
+            )
+        }
+        return builder.build()
     }
 
     fun durationUs(project: Map<*, *>): Long {

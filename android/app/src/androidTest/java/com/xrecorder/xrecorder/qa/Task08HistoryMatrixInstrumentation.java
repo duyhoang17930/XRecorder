@@ -7,12 +7,14 @@ import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.os.SystemClock;
 import com.xrecorder.xrecorder.editor.TranscriptionBridge;
+import io.flutter.plugin.common.StandardMessageCodec;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +52,7 @@ public final class Task08HistoryMatrixInstrumentation {
             JSONObject job = new JSONObject().put("id", "fixture_" + i)
                 .put("type", "speech").put("model", "tiny")
                 .put("projectId", "task08_مرحبا_日本語_" + (i % 3))
-                .put("sourceSignature", "signature_" + (i % 3))
+                .put("sourceSignature", i == 0 ? JSONObject.NULL : "signature_" + (i % 3))
                 .put("createdAt", 100000L + i / 2)
                 .put("state", i == 1 ? "queued" : i == 2 ? "running" : "completed")
                 .put("segments", new JSONArray());
@@ -64,9 +66,58 @@ public final class Task08HistoryMatrixInstrumentation {
 
     @SuppressWarnings("unchecked")
     private static List<Map<String, Object>> listed(Instrumentation runner, TranscriptionBridge bridge) throws Exception {
-        Task08HistoryInstrumentation.Reply reply = Task08HistoryInstrumentation.call(runner, bridge, "transcriptionJobs", null);
+        return listed(runner, bridge, null);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static List<Map<String, Object>> listed(Instrumentation runner, TranscriptionBridge bridge, Object query) throws Exception {
+        Task08HistoryInstrumentation.Reply reply = Task08HistoryInstrumentation.call(runner, bridge, "transcriptionJobs", query);
         if (reply.code != null || !(reply.value instanceof List)) throw new AssertionError("History unavailable: " + reply.code);
         return (List<Map<String, Object>>) reply.value;
+    }
+
+    private static void verifyPages(Instrumentation runner, TranscriptionBridge bridge, int count) throws Exception {
+        Set<String> ids = new HashSet<>();
+        Map<String, Object> query = new HashMap<>();
+        query.put("limit", 17);
+        long previousTime = Long.MAX_VALUE;
+        String previousId = null;
+        while (true) {
+            List<Map<String, Object>> page = listed(runner, bridge, query);
+            if (page.size() > 17) throw new AssertionError("Unbounded history page");
+            if (page.isEmpty()) break;
+            for (Map<String, Object> row : page) {
+                long time = ((Number) row.get("createdAt")).longValue();
+                String id = (String) row.get("id");
+                if (time > previousTime || time == previousTime && previousId != null && id.compareTo(previousId) >= 0)
+                    throw new AssertionError("Unstable equal-timestamp cursor");
+                if (!ids.add(id)) throw new AssertionError("Repeated paged identity");
+                previousTime = time;
+                previousId = id;
+            }
+            query.put("beforeCreatedAt", previousTime);
+            query.put("beforeId", previousId);
+            if (ids.size() > count) throw new AssertionError("Pagination didn't terminate");
+        }
+        if (ids.size() != count) throw new AssertionError("Pagination lost history");
+        for (int i = 0; i < count; i++) if (!ids.contains("fixture_" + i)) throw new AssertionError("Missing paged identity");
+        query.clear();
+        query.put("projectId", "task08_مرحبا_日本語_0");
+        query.put("sourceSignature", "different_revision");
+        query.put("limit", 1);
+        List<Map<String, Object>> legacy = listed(runner, bridge, query);
+        if (legacy.size() != (count > 0 ? 1 : 0)
+                || count > 0 && !"fixture_0".equals(legacy.get(0).get("id")))
+            throw new AssertionError("Legacy null signature or changed-source filtering lost");
+        for (int invalid : new int[]{0, 101}) {
+            query.clear(); query.put("limit", invalid);
+            if (Task08HistoryInstrumentation.call(runner, bridge, "transcriptionJobs", query).code == null)
+                throw new AssertionError("Invalid page accepted");
+        }
+        query.clear(); query.put("beforeCreatedAt", 1);
+        if (Task08HistoryInstrumentation.call(runner, bridge, "transcriptionJobs", query).code == null)
+            throw new AssertionError("Incomplete cursor accepted");
+        verify(listed(runner, bridge), count); // Paging must not mutate/prune the journal.
     }
 
     private static void verify(List<Map<String, Object>> jobs, int count) {
@@ -122,8 +173,19 @@ public final class Task08HistoryMatrixInstrumentation {
                     TranscriptionBridge bridge = new TranscriptionBridge(context(runner, root));
                     long start = SystemClock.elapsedRealtimeNanos();
                     try {
-                        verify(listed(runner, bridge), count);
+                        List<Map<String, Object>> full = listed(runner, bridge);
+                        verify(full, count);
                         long restoreMs = (SystemClock.elapsedRealtimeNanos() - start) / 1000000;
+                        start = SystemClock.elapsedRealtimeNanos();
+                        verifyPages(runner, bridge, count);
+                        long pagesMs = (SystemClock.elapsedRealtimeNanos() - start) / 1000000;
+                        Map<String, Object> latestQuery = new HashMap<>();
+                        latestQuery.put("projectId", "task08_مرحبا_日本語_0");
+                        latestQuery.put("sourceSignature", "signature_0");
+                        latestQuery.put("limit", 1);
+                        List<Map<String, Object>> latest = listed(runner, bridge, latestQuery);
+                        int fullBytes = StandardMessageCodec.INSTANCE.encodeMessage(full).position();
+                        int latestBytes = StandardMessageCodec.INSTANCE.encodeMessage(latest).position();
                         start = SystemClock.elapsedRealtimeNanos();
                         if (count > 0) {
                             Task08HistoryInstrumentation.Reply saved = Task08HistoryInstrumentation.call(runner, bridge,
@@ -133,6 +195,9 @@ public final class Task08HistoryMatrixInstrumentation {
                         verify(listed(runner, bridge), count);
                         results.put(new JSONObject().put("count", count).put("directory", root.getName())
                                 .put("restoreAndListMs", restoreMs)
+                                .put("allPagesAndFiltersMs", pagesMs)
+                                .put("unfilteredChannelBytes", fullBytes)
+                                .put("latestMatchingChannelBytes", latestBytes)
                                 .put("checkpointAndVerifyMs", (SystemClock.elapsedRealtimeNanos() - start) / 1000000));
                     } finally { bridge.dispose(); }
                 }
@@ -147,12 +212,14 @@ public final class Task08HistoryMatrixInstrumentation {
                     File journal = new File(root, "transcription_jobs.json");
                     writeNew(journal, source);
                     writeNew(new File(root, "source.bin"), source);
-                    if (fault.equals("write_obstruction") && !new File(root, "transcription_jobs.json.new").mkdir())
-                        throw new AssertionError("Write obstruction fixture unavailable");
                     TranscriptionBridge bridge = new TranscriptionBridge(context(runner, root));
                     try {
                         if (fault.equals("write_obstruction")) {
                             verify(listed(runner, bridge), 20);
+                            // openRead removes stale .new entries during recovery.
+                            // Obstruct the next write only after restore has completed.
+                            if (!new File(root, "transcription_jobs.json.new").mkdir())
+                                throw new AssertionError("Write obstruction fixture unavailable");
                             if (!"history_write_failed".equals(Task08HistoryInstrumentation.call(runner, bridge,
                                     "transcriptionSaveHistory", "fixture_0").code))
                                 throw new AssertionError("Write failure falsely saved");
@@ -167,7 +234,7 @@ public final class Task08HistoryMatrixInstrumentation {
                 }
                 indexName = "task08_history_matrix_" + stamp + ".json";
                 writeNew(new File(base, indexName), results.toString().getBytes(StandardCharsets.UTF_8));
-                output.putString("stream", "TASK08_HISTORY_MATRIX_PASS:0/20/21/77/100/1001;checkpoint;legacy;Unicode;future/corrupt/utf8 readonly;write obstruction;index=" + indexName);
+                output.putString("stream", "TASK08_HISTORY_MATRIX_PASS:0/20/21/77/100/1001;bounded pages/stable cursors;checkpoint;legacy;Unicode;future/corrupt/utf8 readonly;write obstruction;index=" + indexName);
             }
             runner.finish(Activity.RESULT_OK, output);
         } catch (Throwable error) {

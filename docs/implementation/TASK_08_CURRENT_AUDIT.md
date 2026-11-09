@@ -1,5 +1,38 @@
 # TASK08 — M0 source audit và checkpoint triển khai
 
+## Current09/11 — milestone checkpoint
+
+Source hiệnHEAD `bad1dc30` + targeted working changes;HEAD thay bên ngoài task,
+không tự commit/push. `m6_source_integrity_v2.json`:18protected hashes exact,
+589initial files còn đủ,Settingsdiff/stageddiff empty,incident_image_paths.txt
+103745B/SHA nguyên. Các mục08/11 bên dưới là lịch sử,không phải status cuối.
+
+| Milestone | Kết quả hiện tại |
+|---|---|
+|M0|Rebaseline thực1013same rows;incident và recovery evidence giữ nguyên|
+|M1|Content-key decoded-cache fix,RGBA regression và5trial/viewport;raster cải thiện,build effectINCONCLUSIVE|
+|M2|3model/10min/10Tinycycles/8tracks thực;tailguard vàpreview lifecycle fixes;30reload0failure;freshGCsoak10cycles bounded images PASS|
+|M3|Paging/latest matching,dedup readonly,foreign-trash safety;0..1001/restart/faults PASS;overallDATA vẫnPARTIAL|
+|M4|Currentv5 API36/API34/actual16KB;2GiB actualforegroundTiny complete;physical/OEM/SDNOTRUN|
+|M5|8currentv5APK build/static;4QAsignatures verified;release unsigned;no cleanup|
+|M6|231Flutter/12JUnit/9safetyPASS;finalanalyze sạch;nativefinalv5 output/regression PASS;freshGC rawSHA exact;mainv5 restored/launch/integrity verified|
+
+Current changes ngoài checkpoint trước:Native `EditorAudio/EditorComposition`
+cap PCM sau mixer vàidentity timingmetadata theoMedia3,`EditorPreview` dùng chung
+async drain/release cho load/dispose,guard pending/disposed/stale callbacks;
+`TranscriptionBridge` page1..100,cursor(timestamp,id);dialog yêu cầu latest1.
+QA/native fixtures vàvalidator/runner safety được thêm theo các defect thực.
+Không đổi P1,applicationID,recording/muxer/permissions/defaults hay dependency.
+
+Red→green quan trọng:8trackdrift80.708→30.708ms;unsupported-speed preview
+metadata lỗi được actualSurface test bắt và sửa;old reload4cycles/2failures→
+30cycles/0failures. Native overloading/dispose race PASS callback/no resurrection.
+Full details/failed experiments: [TEST_EVIDENCE](TASK_08_TEST_EVIDENCE.md).
+Current APK chỉ suffixv5;v1–v4 giữ để truy vết,không phân phối như bản cuối.
+
+Verdict toàn task PARTIAL do QA5560 fullrecovery/physical/P1 gates;không dùng
+native fixturePASS hoặc sourcehash để thay nghiệm thu capture/human.
+
 08/11/2026, HEAD `b9aea926c1ab024dd32a139e5ab43b0e0e584908`, dirty working tree.
 Task bắt đầu từ toàn bộ source TASK07 hiện có;589 file source/docs được chụp
 SHA256 trong `build/verification/task08/initial_source.json`. Không có file nào
@@ -97,3 +130,44 @@ M2–M6 chưa DONE. DATA vẫn FAIL/PARTIAL do SDK installer incident; không d�
 frame improvement để che mất dữ liệu/quyền QA. `incident_image_paths.txt` được
 giữ nguyên103745B, SHA256657124c3…; cấm redirect overwrite, mọi artifact tương
 lai dùng version riêng + exclusive create, collision phải dừng.
+
+## Checkpoint tiếp tục 09/11 — M2 / history pagination đang triển khai
+
+HEAD hiện tại `bad1dc3` do bên ngoài phiên implementation cập nhật; working tree
+sạch khi tiếp tục. Không tự commit hoặc dựng lại source từ HEAD.18 protected
+P1/shared hashes vẫn khớp snapshot TASK08; evidence cũ được giữ.
+
+- Đối chứng drift M1 đã hoàn tất, xem BEFORE_AFTER: raster cải thiện, tác động
+  riêng lên build-time INCONCLUSIVE, không kết luận60fps.
+- Library Arabic/Light/font200%,10 vòng×30swipe: decoded cache15entries /
+  1481248B ở cả10 vòng; retained image/provider counts sauGC ổn định. Tổng
+  Dart heap tăng có profiler DTO/pointer records do harness giữ; chưa chứng
+  minh toàn app leak-free. Raw `memory/library_ar_light_200_v1/`.
+- Native preview trước sửa timeout release ở cả có/không PSS profiler.
+  Patch drain playback looper trước release đã PASS30preview/20export-cancel:
+  `memory/editor_soak_v3_offline_checkpoint_v1/emulator_verification.json`,
+  active0/releaseFailures0/sourcePreserved true. Dispose median605ms,
+  p954462ms,max4520ms; vẫn có latency emulator đáng kể. Không dùng peakPSS
+  đơn lẻ để chứng nhận không leak; reload và physical gate còn riêng.
+- Trash P0: chỉ xử lý tênUUID thuộc trash contract; foreign `.bin/.part/.json`
+  không còn bị auto-cleanup. Red/green native fixture giữ tại
+  `m2_trash_foreign_red_v1.txt` / `m2_trash_foreign_green_v1.txt`.
+- History matrix lần đầu FAIL do fixture `.new` bị AtomicFile.openRead dọn
+  trước write; đã chuyển fault injection sau restore. Chưa tính PASS.
+  Bổ sung truy vấn page có cursor(timestamp,id),limit1..100; hộp phụ đề yêu
+  cầu latest matching job thay vì chuyển mọi transcript. Chờ native tests.
+- Bộ Whisper3model/audio13output/photo/10min input đang chạy trong một APK:
+  `M2-combined-media-memory-v1.apk`, SHA256
+  `fa65b841625272daf0fa8d3fab372c957ed68c6f170e267811dc76f13cf1b8c1`.
+  Đây là **test-entry APK**, chưa phải bản main bàn giao. Production binary
+  của APK ở HEADbad1dc3; patch pagination sau đó chưa nằm trong APK này.
+
+Backup ADB lớn từng trả truncated payload kể cả exit0; runner từ chối trước
+install bằng size/SHA/tarEOF. Không bỏ kiểm tra. Whole offline AVD checkpoint
+v2 được copy sau QEMU thoát, source/copy SHA exact; bao gồm MediaStore/OS grants.
+Lần boot đầu stopped-state chưa persist nên guard chặn install; đã chờ Android
+persist12s rồi tạo **snapshot mới**, giữ snapshot lỗi cũ. Một lần launch trước
+boot-ready cũng dừng trước install. Lượt `combined_media_memory_v3` sử dụng
+`offline_checkpoint_v2_20261109T034847Z_fa387232/checkpoint_manifest_v2.json`.
+Mọi evidence này nằm dưới `build/verification/task08/`; không restore snapshot,
+không uninstall, không thao tác5554. DATA toàn task vẫn FAIL/PARTIAL do incident.
