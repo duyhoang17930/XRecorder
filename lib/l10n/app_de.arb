@@ -1,5 +1,6 @@
 {
   "@@locale": "de",
+  "componentGallery": "UI-Komponentengalerie",
   "label1080pFhd": "1080p FHD",
   "label12Mbps": "12 Mbps",
   "label16Mbps": "16 Mbps",

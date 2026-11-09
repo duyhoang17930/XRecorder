@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
-import '../core/constants/design_tokens.dart';
+import '../core/ui/theme/motion.dart';
+import '../core/ui/theme/app_theme.dart';
 
 import '../features/settings/settings_controller.dart';
 import 'router/app_router.dart';
-import 'theme/app_theme.dart';
 import 'app_configuration.dart';
 import '../features/media/media_repository.dart';
 import '../features/recording/recording_service.dart';

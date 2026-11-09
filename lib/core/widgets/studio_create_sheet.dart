@@ -7,7 +7,15 @@ import '../../features/recording/recording_setup_sheet.dart';
 import '../../features/recording/recording_service.dart';
 import '../../features/recording/capture_status_presentation.dart';
 import '../../features/settings/settings_controller.dart';
-import 'studio_widgets.dart';
+import '../constants/app_icons.dart';
+import '../presentation/user_messages.dart';
+import '../ui/components/bottom_sheets/studio_bottom_sheet.dart';
+import '../ui/components/buttons/studio_buttons.dart';
+import '../ui/components/cards/studio_cards.dart';
+import '../ui/components/feedback/studio_feedback.dart';
+import '../ui/theme/colors.dart';
+import '../ui/theme/radius.dart';
+import '../ui/theme/spacing.dart';
 
 Future<void> openStudioCreate(BuildContext context) =>
     showStudioBottomSheet<void>(
