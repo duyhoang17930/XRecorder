@@ -1,0 +1,168 @@
+{
+  "method": "Parse MP4 stts/ctts from retained own-app samples; presentation interval distribution excludes final EOS tail delta. Existing 5min full MP4 was not retained for privacy, so its intervals cannot be reconstructed from summary alone.",
+  "results": [
+    {
+      "file": "timer30_own_app.mp4",
+      "source": "Existing pre-fix safe evidence; no new capture",
+      "timescale": 90000,
+      "frames": 487,
+      "stts_duration_s": 30.0339,
+      "average_samples_per_s": 16.21501037161341,
+      "ctts_present": false,
+      "pts_intervals_ms": {
+        "min": 7.0777777777777775,
+        "p50": 33.333333333333336,
+        "p90": 34.233333333333334,
+        "p99": 688.2888888888889,
+        "max": 722.1333333333333,
+        "distinct_rounded_ms": 76,
+        "nonpositive": 0,
+        "over_50ms": 40,
+        "top_intervals_ms": [
+          [
+            33.333,
+            410
+          ],
+          [
+            32.356,
+            2
+          ],
+          [
+            41.311,
+            1
+          ],
+          [
+            23.933,
+            1
+          ],
+          [
+            34.122,
+            1
+          ],
+          [
+            32.589,
+            1
+          ],
+          [
+            49.844,
+            1
+          ],
+          [
+            17.467,
+            1
+          ]
+        ]
+      },
+      "stts_last_delta_ms": 412.52222222222224
+    },
+    {
+      "file": "timer60_own_app.mp4",
+      "source": "Existing pre-fix safe evidence; no new capture",
+      "timescale": 90000,
+      "frames": 877,
+      "stts_duration_s": 60.02685555555556,
+      "average_samples_per_s": 14.610127281918444,
+      "ctts_present": false,
+      "pts_intervals_ms": {
+        "min": 9.366666666666667,
+        "p50": 33.333333333333336,
+        "p90": 33.333333333333336,
+        "p99": 692.0777777777778,
+        "max": 712.3111111111111,
+        "distinct_rounded_ms": 93,
+        "nonpositive": 0,
+        "over_50ms": 66,
+        "top_intervals_ms": [
+          [
+            33.333,
+            732
+          ],
+          [
+            33.322,
+            53
+          ],
+          [
+            31.811,
+            1
+          ],
+          [
+            42.033,
+            1
+          ],
+          [
+            33.078,
+            1
+          ],
+          [
+            34.367,
+            1
+          ],
+          [
+            32.511,
+            1
+          ],
+          [
+            34.156,
+            1
+          ]
+        ]
+      },
+      "stts_last_delta_ms": 471.05555555555554
+    },
+    {
+      "file": "controls.mp4",
+      "source": "Existing pre-fix safe evidence; no new capture",
+      "timescale": 90000,
+      "frames": 81,
+      "stts_duration_s": 6.335677777777778,
+      "average_samples_per_s": 12.784741087071277,
+      "ctts_present": false,
+      "pts_intervals_ms": {
+        "min": 14.855555555555556,
+        "p50": 33.333333333333336,
+        "p90": 35.18888888888889,
+        "p99": 994.5,
+        "max": 1599.4777777777779,
+        "distinct_rounded_ms": 17,
+        "nonpositive": 0,
+        "over_50ms": 5,
+        "top_intervals_ms": [
+          [
+            33.333,
+            64
+          ],
+          [
+            32.122,
+            1
+          ],
+          [
+            40.789,
+            1
+          ],
+          [
+            33.4,
+            1
+          ],
+          [
+            33.544,
+            1
+          ],
+          [
+            34.233,
+            1
+          ],
+          [
+            49.033,
+            1
+          ],
+          [
+            22.778,
+            1
+          ]
+        ]
+      },
+      "stts_last_delta_ms": 836.4444444444445
+    }
+  ],
+  "conclusion": "Intervals are variable in these recordings. Does not identify input frame cadence, static-scene suppression, thermal throttling or driver root cause; controlled-motion benchmark still required."
+}

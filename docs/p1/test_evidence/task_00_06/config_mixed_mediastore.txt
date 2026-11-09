@@ -1,0 +1,1 @@
+Row: 0 _id=1000002306, _display_name=Recording_1794106474362.mp4, mime_type=video/mp4, _size=76972, width=720, height=1280, duration=4344, is_pending=0, owner_package_name=com.xrecorder.xrecorder

@@ -1,0 +1,16 @@
+ .gitignore                                         |   1 +
+ .../xrecorder/xrecorder/recording/CaptureBridge.kt |  66 +++-
+ .../xrecorder/xrecorder/recording/CaptureConfig.kt |  86 ++++-
+ .../xrecorder/recording/CaptureJournal.kt          |  24 +-
+ .../xrecorder/recording/CaptureService.kt          | 204 +++++++---
+ .../xrecorder/xrecorder/recording/CaptureState.kt  |   3 +-
+ .../xrecorder/xrecorder/recording/SessionAudio.kt  |  59 ++-
+ .../xrecorder/xrecorder/recording/VideoEncoder.kt  |  27 +-
+ docs/p1/TASK_00_OWNERSHIP_AND_CONTRACT.md          | 138 +++----
+ docs/p1/TASK_00_P2_INTEGRATION_REQUESTS.md         |  66 ++--
+ integration_test/screenshot_native_test.dart       |  21 +-
+ lib/features/recording/recording_service.dart      |  39 +-
+ lib/features/recording/recording_setup_sheet.dart  | 219 +++++++----
+ lib/features/settings/recording_settings_form.dart | 423 ++++++++++++---------
+ test/recording_controller_test.dart                | 145 +++++++
+ 15 files changed, 1042 insertions(+), 479 deletions(-)

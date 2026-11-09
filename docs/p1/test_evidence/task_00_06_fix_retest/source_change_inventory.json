@@ -1,0 +1,25 @@
+{
+  "compared": 344,
+  "changed_existing": [
+    "lib/features/settings/recording_settings_form.dart",
+    "lib/features/recording/recording_service.dart",
+    "lib/features/recording/recording_setup_sheet.dart",
+    "integration_test/recording_cancel_test.dart",
+    "integration_test/screenshot_native_test.dart",
+    "test/recording_service_contract_test.dart",
+    "test/recording_setup_sheet_test.dart",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt"
+  ],
+  "missing": [],
+  "new_source_files": [
+    "test/capture_library_finder_test.dart",
+    "test/recording_replay_test.dart",
+    "test/recording_cancel_semantics_test.dart",
+    "integration_test/capture_library_finder.dart",
+    "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/CaptureJournalTest.kt"
+  ],
+  "historical_device_report_unchanged": true,
+  "local_test_count_unique": 32,
+  "native_jvm_count": 24,
+  "physical_device_used_in_local_phase": false
+}

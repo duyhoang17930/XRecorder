@@ -19,6 +19,15 @@ class AndroidRecordingService implements RecordingService {
       .map((value) => decode(value as Map<Object?, Object?>));
   static RecordingSession decode(Map<Object?, Object?> data) {
     final config = (data['config'] as Map<Object?, Object?>?) ?? data;
+    // Screenshot config is a video preset, not the dimensions of its PNG.
+    bool hasDimensions(Map<Object?, Object?> value) =>
+        value['width'] is num &&
+        (value['width'] as num) > 0 &&
+        value['height'] is num &&
+        (value['height'] as num) > 0;
+    final dimensions = data['screenshot'] == true
+        ? (hasDimensions(data) ? data : const <Object?, Object?>{})
+        : (hasDimensions(config) ? config : data);
     return RecordingSession(
       id: data['id'] as String? ?? '',
       screenshot: data['screenshot'] == true,
@@ -31,8 +40,12 @@ class AndroidRecordingService implements RecordingService {
           (a) => a.name == config['audio'],
           orElse: () => AudioSource.mute,
         ),
-        width: (config['width'] as num?)?.toInt() ?? 0,
-        height: (config['height'] as num?)?.toInt() ?? 0,
+        width: hasDimensions(dimensions)
+            ? (dimensions['width'] as num).toInt()
+            : 0,
+        height: hasDimensions(dimensions)
+            ? (dimensions['height'] as num).toInt()
+            : 0,
         fps: (config['fps'] as num?)?.toInt() ?? 30,
         bitrate: (config['bitrate'] as num?)?.toInt() ?? 8000000,
         codec: config['codec'] == 'hevc' ? VideoCodec.hevc : VideoCodec.avc,
@@ -55,6 +68,9 @@ class AndroidRecordingService implements RecordingService {
         internalGain: (config['internalGain'] as num?)?.toDouble() ?? 1,
         noiseReduction: config['noiseReduction'] == true,
         facecam: config['facecam'] == true,
+        hardwareEncoding: config['hardwareEncoding'] != false,
+        shakeToStop: config['shakeToStop'] == true,
+        showTouches: config['showTouches'] == true,
       ),
       startedAt: data['startedAt'] is num && (data['startedAt'] as num) > 0
           ? DateTime.fromMillisecondsSinceEpoch(
@@ -135,9 +151,20 @@ class AndroidRecordingService implements RecordingService {
   @override
   Future<RecordingSession> screenshot() => _call('screenshot');
   @override
-  Future<RecordingSession> start(RecordingSettings settings) async {
+  Future<RecordingSession> start(
+    RecordingSettings settings, {
+    int? cropX,
+    int? cropY,
+    int? cropWidth,
+    int? cropHeight,
+    double? floatingScale,
+    double? floatingOpacity,
+    double? floatingRatioX,
+    double? floatingRatioY,
+    bool? audioDucking,
+  }) async {
     final supported = await capabilities();
-    return _call('start', {
+    final payload = <String, Object?>{
       'width': settings.width,
       'height': settings.height,
       'fps': settings.fps,
@@ -148,11 +175,93 @@ class AndroidRecordingService implements RecordingService {
       'internalGain': settings.internalGain,
       'noiseReduction': settings.noiseReduction && supported.noiseReduction,
       'facecam': settings.facecam,
+      'hardwareEncoding': settings.hardwareEncoding,
       'countdown': settings.countdown.inSeconds,
       'durationSeconds': settings.durationLimit?.inSeconds ?? 0,
       'orientation': settings.orientation.name,
       'mode': settings.mode.name,
+      'shakeToStop': settings.shakeToStop,
+      'showTouches': settings.showTouches,
+    };
+    if (cropX != null &&
+        cropY != null &&
+        cropWidth != null &&
+        cropHeight != null) {
+      payload['cropX'] = cropX;
+      payload['cropY'] = cropY;
+      payload['cropWidth'] = cropWidth;
+      payload['cropHeight'] = cropHeight;
+    }
+    if (floatingScale != null) payload['floatingScale'] = floatingScale;
+    if (floatingOpacity != null) payload['floatingOpacity'] = floatingOpacity;
+    if (floatingRatioX != null) payload['floatingRatioX'] = floatingRatioX;
+    if (floatingRatioY != null) payload['floatingRatioY'] = floatingRatioY;
+    if (audioDucking != null) payload['audioDucking'] = audioDucking;
+    return _call('start', payload);
+  }
+
+  Future<bool> updateFloatingBall({double? scale, double? opacity}) async {
+    final payload = <String, Object?>{};
+    if (scale != null) payload['scale'] = scale;
+    if (opacity != null) payload['opacity'] = opacity;
+    final res = await commands.invokeMethod<bool>('updateFloatingBall', payload);
+    return res ?? false;
+  }
+
+  Future<bool> setDrawingEnabled(bool enabled) async {
+    final res = await commands.invokeMethod<bool>('setDrawingEnabled', {
+      'enabled': enabled,
     });
+    return res ?? false;
+  }
+
+  Future<bool> clearDrawing() async {
+    final res = await commands.invokeMethod<bool>('clearDrawing');
+    return res ?? false;
+  }
+
+  Future<bool> undoDrawing() async {
+    final res = await commands.invokeMethod<bool>('undoDrawing');
+    return res ?? false;
+  }
+
+  Future<bool> setDrawingStyle({int? color, double? width}) async {
+    final payload = <String, Object?>{};
+    if (color != null) payload['color'] = color;
+    if (width != null) payload['width'] = width;
+    final res = await commands.invokeMethod<bool>('setDrawingStyle', payload);
+    return res ?? false;
+  }
+
+  Future<Map<String, dynamic>> getDrawingState() async {
+    final res =
+        await commands.invokeMapMethod<String, dynamic>('getDrawingState');
+    return res ?? const <String, dynamic>{};
+  }
+
+  Future<bool> switchFacecamCamera() async {
+    final res = await commands.invokeMethod<bool>('switchFacecamCamera');
+    return res ?? false;
+  }
+
+  Future<bool> setFacecamEffect(int effect) async {
+    final res = await commands.invokeMethod<bool>('setFacecamEffect', {
+      'effect': effect,
+    });
+    return res ?? false;
+  }
+
+  Future<bool> setFacecamScale(double scale) async {
+    final res = await commands.invokeMethod<bool>('setFacecamScale', {
+      'scale': scale,
+    });
+    return res ?? false;
+  }
+
+  Future<Map<String, dynamic>> getFacecamState() async {
+    final res =
+        await commands.invokeMapMethod<String, dynamic>('getFacecamState');
+    return res ?? const <String, dynamic>{};
   }
 
   @override
@@ -193,7 +302,8 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
   late final StreamSubscription<RecordingSession> subscription;
   RecordingSession? session;
   String? error;
-  String? _savedId;
+  final _savedIds = <String>{};
+  int _snapshotEpoch = 0;
   String? dismissedId;
   bool _disposed = false;
   bool _requesting = false;
@@ -236,6 +346,7 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
 
   void _receive(RecordingSession value) {
     if (_disposed) return;
+    _snapshotEpoch++;
     final previous = session;
     final announce = _receivedSession || _requesting;
     _receivedSession = true;
@@ -259,8 +370,7 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     }
     if (value.state == RecordingState.completed &&
         value.outputUri != null &&
-        value.id != _savedId) {
-      _savedId = value.id;
+        _savedIds.add(value.id)) {
       onSaved();
       if (announce) {
         _showFeedback(
@@ -303,9 +413,12 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
   }
 
   Future<void> refresh() async {
+    final epoch = ++_snapshotEpoch;
     try {
       final value = await service.currentSession();
-      if (value != null && !_disposed) _receive(value);
+      if (value != null && !_disposed && epoch == _snapshotEpoch) {
+        _receive(value);
+      }
     } catch (_) {}
   }
 
@@ -316,7 +429,9 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     error = null;
     dismissedId = null;
     try {
-      _receive(await service.start(settings));
+      final epoch = ++_snapshotEpoch;
+      final value = await service.start(settings);
+      if (epoch == _snapshotEpoch) _receive(value);
     } catch (e) {
       error = e.toString();
       _notify();
@@ -334,7 +449,9 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     error = null;
     dismissedId = null;
     try {
-      _receive(await service.screenshot());
+      final epoch = ++_snapshotEpoch;
+      final value = await service.screenshot();
+      if (epoch == _snapshotEpoch) _receive(value);
     } catch (e) {
       if (e is DomainFailure ||
           e is PlatformException ||

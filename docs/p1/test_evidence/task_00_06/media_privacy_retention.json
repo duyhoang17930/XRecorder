@@ -1,0 +1,20 @@
+{
+  "long_test_uri": "content://media/external/video/media/1000002316",
+  "local_long_mp4_removed": true,
+  "reason": "Notification shade was opened during the long recording. Remove only the newly-created host copy; retain native metadata/hash/full-decode results and inspected safe frame samples. Original device media remains untouched.",
+  "landscape_uri": "content://media/external/video/media/1000002317",
+  "performance_overlay_uri": "content://media/external/video/media/1000002318",
+  "landscape_and_performance_full_mp4_copied": false,
+  "auto_review": "Rejected full performance/overlay MP4 copy due potential notification/private screen content; no alternative copy attempted.",
+  "new_safe_timer_samples": {
+    "uris": [
+      "content://media/external/video/media/1000002326",
+      "content://media/external/video/media/1000002327"
+    ],
+    "host_copies": [
+      "timer30_own_app.mp4",
+      "timer60_own_app.mp4"
+    ],
+    "scope": "New independently-authorized timer tests recorded only foreground3HRecorder. No notification shade or external apps opened. Copies allowed and fully decoded; not alternate access to blocked2318."
+  }
+}

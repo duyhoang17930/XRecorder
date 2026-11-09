@@ -18,7 +18,7 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
     private val main = Handler(Looper.getMainLooper())
     private val pendingCapabilities = mutableSetOf<MethodChannel.Result>()
     private var disposed = false
-    companion object { const val CONSENT = 702; const val NOTIFICATIONS = 703; const val AUDIO_PERMISSION = 704; const val CAMERA_PERMISSION = 705; const val OVERLAY_PERMISSION = 706 }
+    companion object { const val CONSENT = 702; const val NOTIFICATIONS = 703; const val AUDIO_PERMISSION = 704; const val CAMERA_PERMISSION = 705; const val OVERLAY_PERMISSION = 706; const val CONTROLS_OVERLAY_PERMISSION = 707 }
     private var requestedSession: String? = CaptureState.id.takeIf { CaptureState.state == "awaitingPermission" }
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         if (disposed) { result.error("cancelled", "Capture screen closed.", null); return }
@@ -26,7 +26,7 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
             "capabilities" -> {
                 pendingCapabilities.add(result)
                 capabilitiesWorker.execute {
-                    val value = runCatching { CaptureConfig.capabilities() + mapOf("facecam" to hasFrontCamera()) }
+                    val value = runCatching { CaptureConfig.capabilities(activity) + mapOf("facecam" to hasFrontCamera()) }
                     main.post {
                         if (pendingCapabilities.remove(result)) {
                             value.fold({ result.success(it) }, { result.error("unavailable", "Could not check device capabilities. Try again.", null) })
@@ -41,7 +41,7 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
                 catch (_: Exception) { result.error("unavailable", "This encoder could not change pause state.", null) }
             }
             "start", "screenshot" -> {
-                if (CaptureState.busy) { result.error("busy", "A recording is already being prepared or captured.", null); return }
+                if (CaptureState.busy || CaptureRequests.awaitingResult || CaptureService.instance != null) { result.error("busy", "A recording is already being prepared or captured.", null); return }
                 val config = try { if(call.method == "screenshot") CaptureConfig(countdown=3) else CaptureConfig.from(activity, call.arguments as? Map<*,*>) }
                     catch (e: Exception) { result.error("unsupported", e.message ?: "Unsupported capture settings", null); return }
                 CaptureState.screenshot = call.method == "screenshot"
@@ -49,7 +49,7 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
                 CaptureState.prepare(config); requestedSession = CaptureState.id
                 try {
                     if (!CaptureState.screenshot && Build.VERSION.SDK_INT >= 33 && activity.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
-                        activity.requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), NOTIFICATIONS)
+                        requestPermission(Manifest.permission.POST_NOTIFICATIONS, NOTIFICATIONS)
                     else ensureAudioPermission()
                     result.success(CaptureState.snapshot())
                 } catch (_: Exception) {
@@ -60,8 +60,73 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
             "stop", "cancel" -> {
                 if (call.argument<String>("sessionId") != CaptureState.id) { result.error("stale_session", "This session is no longer active.", null); return }
                 if (CaptureState.state == "awaitingPermission") { requestedSession = null; CaptureState.transition("idle") }
-                else CaptureService.instance?.stopCapture()
+                else if (call.method == "cancel" && CaptureState.busy) {
+                    val service = CaptureService.instance
+                    if (service == null) { result.error("unavailable", "Capture service is unavailable.", null); return }
+                    if (!service.cancelCapture()) { result.error("too_late", "Capture is already being saved.", null); return }
+                }
+                else if (call.method == "stop") CaptureService.instance?.stopCapture()
                 result.success(CaptureState.snapshot())
+            }
+            "updateFloatingBall" -> {
+                val args = call.arguments as? Map<*, *>
+                val scale = (args?.get("scale") as? Number)?.toFloat()
+                val opacity = (args?.get("opacity") as? Number)?.toFloat()
+                CaptureService.instance?.updateFloatingControls(scale, opacity)
+                result.success(true)
+            }
+            "setDrawingEnabled" -> {
+                val enabled = call.argument<Boolean>("enabled") ?: false
+                val success = CaptureService.instance?.setDrawingEnabled(enabled) ?: false
+                result.success(success)
+            }
+            "clearDrawing" -> {
+                val success = CaptureService.instance?.clearDrawing() ?: false
+                result.success(success)
+            }
+            "undoDrawing" -> {
+                val success = CaptureService.instance?.undoDrawing() ?: false
+                result.success(success)
+            }
+            "setDrawingStyle" -> {
+                val args = call.arguments as? Map<*, *>
+                val color = (args?.get("color") as? Number)?.toInt()
+                val width = (args?.get("width") as? Number)?.toFloat()
+                val success = CaptureService.instance?.setDrawingStyle(color, width) ?: false
+                result.success(success)
+            }
+            "getDrawingState" -> {
+                val state = CaptureService.instance?.getDrawingState() ?: mapOf(
+                    "enabled" to false,
+                    "strokeCount" to 0,
+                    "canUndo" to false,
+                    "color" to DrawingStrokeEngine.DEFAULT_COLOR,
+                    "width" to DrawingStrokeEngine.DEFAULT_STROKE_WIDTH
+                )
+                result.success(state)
+            }
+            "switchFacecamCamera" -> {
+                val success = CaptureService.instance?.switchFacecamCamera() ?: false
+                result.success(success)
+            }
+            "setFacecamEffect" -> {
+                val effect = call.argument<Int>("effect") ?: FacecamGeometry.EFFECT_OFF
+                val success = CaptureService.instance?.setFacecamEffect(effect) ?: false
+                result.success(success)
+            }
+            "setFacecamScale" -> {
+                val scale = (call.argument<Number>("scale"))?.toFloat() ?: FacecamGeometry.DEFAULT_SCALE
+                val success = CaptureService.instance?.setFacecamScale(scale) ?: false
+                result.success(success)
+            }
+            "getFacecamState" -> {
+                val state = CaptureService.instance?.getFacecamState() ?: mapOf(
+                    "ready" to false,
+                    "lensFacing" to FacecamGeometry.LENS_FACING_FRONT,
+                    "effect" to FacecamGeometry.EFFECT_OFF,
+                    "scale" to FacecamGeometry.DEFAULT_SCALE
+                )
+                result.success(state)
             }
             else -> result.notImplemented()
         }
@@ -72,9 +137,20 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
         pendingCapabilities.clear()
         capabilitiesWorker.shutdownNow()
     }
+    private fun requestPermission(permission: String, code: Int) {
+        CaptureRequests.launchOnce(code, CaptureState.id) {
+            activity.requestPermissions(arrayOf(permission), code)
+        }
+    }
+    private fun openActivity(code: Int, createIntent: () -> Intent) {
+        CaptureRequests.launchOnce(code, CaptureState.id) {
+            activity.startActivityForResult(createIntent(), code)
+        }
+    }
     private fun ensureAudioPermission() {
+        if (disposed || requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
         if (CaptureState.config.hasAudio && activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
-            activity.requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), AUDIO_PERMISSION)
+            requestPermission(Manifest.permission.RECORD_AUDIO, AUDIO_PERMISSION)
         else ensureCameraPermission()
     }
     private fun hasFrontCamera(): Boolean = try {
@@ -82,22 +158,35 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
         manager.cameraIdList.any { manager.getCameraCharacteristics(it).get(android.hardware.camera2.CameraCharacteristics.LENS_FACING)==android.hardware.camera2.CameraCharacteristics.LENS_FACING_FRONT }
     } catch (_: Exception) { false }
     private fun ensureCameraPermission() {
+        if (disposed || requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
+        // Optional recording controls must not force an overlay permission trip.
+        // Without overlay access the existing notification controls remain usable.
         if (!CaptureState.config.facecam) { launchConsent(); return }
         if (!android.provider.Settings.canDrawOverlays(activity)) {
-            activity.startActivityForResult(Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,android.net.Uri.parse("package:${activity.packageName}")),OVERLAY_PERMISSION)
+            openActivity(OVERLAY_PERMISSION) { Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,android.net.Uri.parse("package:${activity.packageName}")) }
         } else if(activity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            activity.requestPermissions(arrayOf(Manifest.permission.CAMERA),CAMERA_PERMISSION)
+            requestPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION)
         } else launchConsent()
     }
     private fun launchConsent() {
-        if (requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
-        val manager = activity.getSystemService(MediaProjectionManager::class.java)
-        val intent = if (Build.VERSION.SDK_INT >= 34) manager.createScreenCaptureIntent(MediaProjectionConfig.createConfigForDefaultDisplay()) else manager.createScreenCaptureIntent()
-        activity.startActivityForResult(intent, CONSENT)
+        if (disposed || requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
+        openActivity(CONSENT) {
+            val manager = activity.getSystemService(MediaProjectionManager::class.java)
+            // Reserve before creating the one-shot intent; never retain it for another session.
+            // Video uses the system selector. Screenshots retain whole-screen capture.
+            if (Build.VERSION.SDK_INT >= 34 && CaptureState.screenshot) manager.createScreenCaptureIntent(MediaProjectionConfig.createConfigForDefaultDisplay()) else manager.createScreenCaptureIntent()
+        }
     }
+    private fun consumeResult(code: Int): String? = CaptureRequests.consumeFor(
+        code, requestedSession, receiverActive = !disposed,
+        // Cancel clears requestedSession, but its system dialog must still drain.
+        // The callback's state/owner checks below prevent using that old consent.
+        cancelledSession = CaptureState.id.takeUnless { CaptureState.busy }
+    )
     fun onPermissionsResult(requestCode: Int): Boolean {
         if (requestCode != NOTIFICATIONS && requestCode != AUDIO_PERMISSION && requestCode != CAMERA_PERMISSION) return false
-        if (CaptureState.state != "awaitingPermission") return true
+        val sessionId = consumeResult(requestCode) ?: return true
+        if (disposed || sessionId != CaptureState.id || requestedSession != sessionId || CaptureState.state != "awaitingPermission") return true
         if (requestCode == AUDIO_PERMISSION && activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             requestedSession = null; CaptureState.transition("failed", "Audio permission was denied. Select mute to record without audio."); return true
         }
@@ -109,6 +198,17 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
         return true
     }
     fun onActivityResult(request: Int, code: Int, data: Intent?): Boolean {
+        if (request !in listOf(CONSENT, OVERLAY_PERMISSION, CONTROLS_OVERLAY_PERMISSION)) return false
+        val sessionId = consumeResult(request) ?: return true
+        if (disposed || sessionId != CaptureState.id || requestedSession != sessionId || CaptureState.state != "awaitingPermission") return true
+        if (request == CONTROLS_OVERLAY_PERMISSION) {
+            // Grant is optional. Back/deny still continues with notification controls.
+            if (requestedSession == CaptureState.id && CaptureState.state == "awaitingPermission") {
+                try { launchConsent() }
+                catch (_: Exception) { CaptureState.transition("failed", "Could not open screen capture consent.") }
+            }
+            return true
+        }
         if (request == OVERLAY_PERMISSION) {
             if (CaptureState.state != "awaitingPermission") return true
             if (!android.provider.Settings.canDrawOverlays(activity)) { requestedSession=null; CaptureState.transition("failed","Floating camera access was not granted. Disable facecam to record without it.") }

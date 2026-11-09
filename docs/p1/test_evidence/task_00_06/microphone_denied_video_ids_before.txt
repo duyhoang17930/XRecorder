@@ -1,0 +1,10 @@
+Error while accessing provider:media
+java.lang.IllegalArgumentException: Invalid token com
+	at android.database.DatabaseUtils.readExceptionFromParcel(DatabaseUtils.java:172)
+	at android.database.DatabaseUtils.readExceptionFromParcel(DatabaseUtils.java:142)
+	at android.content.ContentProviderProxy.query(ContentProviderNative.java:473)
+	at com.android.commands.content.Content$QueryCommand.onExecute(Content.java:654)
+	at com.android.commands.content.Content$Command.execute(Content.java:521)
+	at com.android.commands.content.Content.main(Content.java:727)
+	at com.android.internal.os.RuntimeInit.nativeFinishInit(Native Method)
+	at com.android.internal.os.RuntimeInit.main(RuntimeInit.java:439)

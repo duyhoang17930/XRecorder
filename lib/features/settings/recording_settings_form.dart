@@ -6,7 +6,10 @@ import '../recording/recording_service.dart';
 import 'settings_controller.dart';
 
 class RecordingSettingsForm extends StatefulWidget {
-  const RecordingSettingsForm({super.key});
+  const RecordingSettingsForm({super.key, this.advanced});
+
+  // Null preserves the full form used by the Audio & Video settings screen.
+  final bool? advanced;
   @override
   State<RecordingSettingsForm> createState() => _RecordingSettingsFormState();
 }
@@ -88,6 +91,7 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
           '4K UHD': (3840, 2160),
         };
         bool supports(String resolution, int fps, {String? codecName}) {
+          if (s.mode == 'Performance' && fps > 30) return false;
           if (caps == null) return true;
           final size = resolutions[resolution]!;
           final portrait = switch (s.orientation) {
@@ -114,192 +118,259 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
           children: [
             if (snapshot.hasError)
               const Text(
-                'Device capability information is unavailable. Preferences are checked again before capture.',
+                'Device capabilities unavailable. Checked again before recording.',
               ),
-            const Text(
-              'Video quality and FPS depend on your device. Changes apply next time.',
-            ),
-            const SizedBox(height: 16),
-            ChoiceGroup(
-              label: 'Recording mode',
-              options: const ['Normal', 'Performance'],
-              value: s.mode,
-              onChanged: (v) => s.update(() {
-                s.mode = v;
-                if (v == 'Performance') {
-                  s.resolution = '720p HD';
-                  s.fps = '30';
-                  s.bitrate = '8 Mbps';
-                }
-              }),
-            ),
-            if (s.mode == 'Performance')
-              const Padding(
-                padding: EdgeInsets.only(bottom: 16),
-                child: Text(
-                  'Performance mode limits output to 720p, 30 FPS and 8 Mbps.',
+            if (widget.advanced != false) ...[
+              ChoiceGroup(
+                label: 'Recording mode',
+                options: const ['Normal', 'Performance'],
+                value: s.mode,
+                onChanged: (v) => s.update(() {
+                  s.mode = v;
+                  if (v == 'Performance') {
+                    s.resolution = '720p HD';
+                    s.fps = '30';
+                    s.bitrate = '8 Mbps';
+                  }
+                }),
+              ),
+              if (s.mode == 'Performance')
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 16),
+                  child: Text('Up to 720p · 30 FPS · 8 Mbps'),
                 ),
-              ),
-            ChoiceGroup(
-              label: 'Resolution',
-              options: resolutions.keys.toList(),
-              value: s.resolution,
-              disabledOptions: resolutions.keys
-                  .where(
-                    (r) =>
-                        (s.mode == 'Performance' && r != '720p HD') ||
-                        !supports(r, int.parse(s.fps)),
-                  )
-                  .toSet(),
-              onChanged: (v) => s.update(() => s.resolution = v),
-            ),
-            ChoiceGroup(
-              label: 'Target FPS',
-              options: const ['24', '30', '60', '90', '120'],
-              value: s.fps,
-              disabledOptions: ['24', '30', '60', '90', '120']
-                  .where(
-                    (f) =>
-                        (s.mode == 'Performance' && int.parse(f) > 30) ||
-                        !supports(s.resolution, int.parse(f)),
-                  )
-                  .toSet(),
-              onChanged: (v) => s.update(() => s.fps = v),
-            ),
-            ChoiceGroup(
-              label: 'Bitrate',
-              options: const [
-                'Auto',
-                '8 Mbps',
-                '12 Mbps',
-                '16 Mbps',
-                '24 Mbps',
-              ],
-              value: s.bitrate,
-              disabledOptions: s.mode == 'Performance'
-                  ? {'12 Mbps', '16 Mbps', '24 Mbps'}
-                  : const {},
-              onChanged: (v) => s.update(() => s.bitrate = v),
-            ),
-            ChoiceGroup(
-              label: 'Video codec',
-              options: const ['H.264 / AVC', 'H.265 / HEVC'],
-              value: s.codec,
-              disabledOptions: caps?.hevc == false
-                  ? {'H.265 / HEVC'}
-                  : !supports(
-                      s.resolution,
-                      int.parse(s.fps),
-                      codecName: 'H.265 / HEVC',
+            ],
+            if (widget.advanced != true) ...[
+              ChoiceGroup(
+                label: 'Resolution',
+                options: resolutions.keys.toList(),
+                value: s.resolution,
+                disabledOptions: resolutions.keys
+                    .where(
+                      (r) =>
+                          (s.mode == 'Performance' && r != '720p HD') ||
+                          ![24, 30, 60, 90, 120].any((fps) => supports(r, fps)),
                     )
-                  ? {'H.265 / HEVC'}
-                  : const {},
-              onChanged: (v) => s.update(() => s.codec = v),
-            ),
-            ChoiceGroup(
-              label: 'Orientation',
-              options: const ['Auto Sensor', 'Landscape', 'Portrait'],
-              value: s.orientation,
-              onChanged: (v) => s.update(() => s.orientation = v),
-            ),
-            ChoiceGroup(
-              label: 'Audio source',
-              options: const [
-                'Mute',
-                'Microphone',
-                'Internal Audio',
-                'Mixed Stream',
-              ],
-              value: s.audio,
-              disabledOptions:
-                  caps != null &&
-                      !caps.audioSources.contains(AudioSource.internal)
-                  ? {'Internal Audio', 'Mixed Stream'}
-                  : const {},
-              onChanged: (v) => s.update(() => s.audio = v),
-            ),
-            if (s.audio == 'Internal Audio' || s.audio == 'Mixed Stream') ...[
-              const Text(
-                'Playback audio depends on the source app. Protected audio may be silent. Your device may request audio access.',
+                    .toSet(),
+                onChanged: (v) => s.update(() {
+                  s.resolution = v;
+                  if (!supports(v, int.parse(s.fps))) {
+                    s.fps = [
+                      30,
+                      24,
+                      60,
+                      90,
+                      120,
+                    ].firstWhere((fps) => supports(v, fps)).toString();
+                  }
+                }),
               ),
-              const SizedBox(height: 8),
-              _gain(
-                'Internal audio volume',
-                s.internalGain,
-                (v) => s.update(() => s.internalGain = v),
+              ChoiceGroup(
+                label: 'Target FPS',
+                options: const ['24', '30', '60', '90', '120'],
+                value: s.fps,
+                disabledOptions: ['24', '30', '60', '90', '120']
+                    .where(
+                      (f) =>
+                          (s.mode == 'Performance' && int.parse(f) > 30) ||
+                          !supports(s.resolution, int.parse(f)),
+                    )
+                    .toSet(),
+                onChanged: (v) => s.update(() => s.fps = v),
               ),
             ],
-            if (s.audio == 'Microphone' || s.audio == 'Mixed Stream') ...[
-              _gain(
-                'Microphone volume',
-                s.gain,
-                (v) => s.update(() => s.gain = v),
+            if (widget.advanced != false) ...[
+              ChoiceGroup(
+                label: 'Bitrate',
+                options: const [
+                  'Auto',
+                  '8 Mbps',
+                  '12 Mbps',
+                  '16 Mbps',
+                  '24 Mbps',
+                ],
+                value: s.bitrate,
+                disabledOptions: s.mode == 'Performance'
+                    ? {'12 Mbps', '16 Mbps', '24 Mbps'}
+                    : const {},
+                onChanged: (v) => s.update(() => s.bitrate = v),
+              ),
+              ChoiceGroup(
+                label: 'Video codec',
+                options: const ['H.264 / AVC', 'H.265 / HEVC'],
+                value: s.codec,
+                disabledOptions: caps?.hevc == false
+                    ? {'H.265 / HEVC'}
+                    : !supports(
+                        s.resolution,
+                        int.parse(s.fps),
+                        codecName: 'H.265 / HEVC',
+                      )
+                    ? {'H.265 / HEVC'}
+                    : const {},
+                onChanged: (v) => s.update(() => s.codec = v),
+              ),
+              ChoiceGroup(
+                label: 'Orientation',
+                options: const ['Auto Sensor', 'Landscape', 'Portrait'],
+                value: s.orientation,
+                onChanged: (v) => s.update(() => s.orientation = v),
+              ),
+            ],
+            if (widget.advanced != true) ...[
+              ChoiceGroup(
+                label: 'Audio source',
+                options: const [
+                  'Mute',
+                  'Microphone',
+                  'Internal Audio',
+                  'Mixed Stream',
+                ],
+                value: s.audio,
+                disabledOptions: widget.advanced == null
+                    ? (caps != null &&
+                              !caps.audioSources.contains(AudioSource.internal)
+                          ? {'Internal Audio', 'Mixed Stream'}
+                          : const {})
+                    : {
+                        for (final entry in const {
+                          'Mute': AudioSource.mute,
+                          'Microphone': AudioSource.microphone,
+                          'Internal Audio': AudioSource.internal,
+                          'Mixed Stream': AudioSource.mixed,
+                        }.entries)
+                          if (caps != null &&
+                              !caps.audioSources.contains(entry.value))
+                            entry.key,
+                      },
+                onChanged: (v) => s.update(() => s.audio = v),
+              ),
+            ],
+            if (widget.advanced != false) ...[
+              if (s.audio == 'Internal Audio' || s.audio == 'Mixed Stream') ...[
+                const Text(
+                  'Protected audio may be silent. Android may ask for audio access.',
+                ),
+                const SizedBox(height: 8),
+                _gain(
+                  'Internal audio volume',
+                  s.internalGain,
+                  (v) => s.update(() => s.internalGain = v),
+                ),
+              ],
+              if (s.audio == 'Microphone' || s.audio == 'Mixed Stream') ...[
+                _gain(
+                  'Microphone volume',
+                  s.gain,
+                  (v) => s.update(() => s.gain = v),
+                ),
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text('Microphone noise reduction'),
+                  subtitle: caps?.noiseReduction == false
+                      ? const Text('Not supported by this device')
+                      : null,
+                  value: caps?.noiseReduction == false ? false : s.noise,
+                  onChanged: caps?.noiseReduction == false
+                      ? null
+                      : (v) => s.update(() => s.noise = v),
+                ),
+              ],
+            ],
+            if (widget.advanced != true) ...[
+              ChoiceGroup(
+                label: 'Pre-start countdown',
+                options: const ['Off', '3s', '5s', '10s'],
+                value: s.countdown,
+                onChanged: (v) => s.update(() => s.countdown = v),
               ),
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const Text('Microphone noise reduction'),
-                subtitle: Text(
-                  caps?.noiseReduction == false
-                      ? 'Not supported by this device'
-                      : 'Uses the device audio processor',
-                ),
-                value: caps?.noiseReduction == false ? false : s.noise,
-                onChanged: caps?.noiseReduction == false
+                title: const Text('Facecam'),
+                subtitle: caps?.facecam == false
+                    ? const Text('No front camera available')
+                    : null,
+                value: s.facecam,
+                onChanged: caps?.facecam != true && !s.facecam
                     ? null
-                    : (v) => s.update(() => s.noise = v),
+                    : (v) => s.update(() => s.facecam = v),
               ),
             ],
-            ChoiceGroup(
-              label: 'Pre-start countdown',
-              options: const ['Off', '3s', '5s', '10s'],
-              value: s.countdown,
-              onChanged: (v) => s.update(() => s.countdown = v),
-            ),
-            SwitchListTile(
-              title: const Text('Facecam'),
-              subtitle: Text(
-                caps?.facecam == true
-                    ? 'Floating front camera appears in full-screen recordings. Requires camera and display-over-other-apps access. Turn off for camera-free capture.'
-                    : 'No front camera available. Turn facecam off to record without it.',
-              ),
-              value: s.facecam,
-              onChanged: caps?.facecam != true && !s.facecam
-                  ? null
-                  : (v) => s.update(() => s.facecam = v),
-            ),
-            TextButton(
-              onPressed: () => showDialog<void>(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text('Show touches'),
-                  content: const Text(
-                    'Android can draw touch indicators when Show taps is enabled in Developer options. Enable it manually in system Settings if available. 3HRecorder cannot observe arbitrary touches in other apps. The system indicator may appear in full-screen recordings; turn it off afterward if you do not want it.',
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('Close'),
+            if (widget.advanced != false) ...[
+              if (widget.advanced == null) ...[
+                TextButton(
+                  onPressed: () => showDialog<void>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Show touches'),
+                      content: const Text(
+                        'Android can draw touch indicators when Show taps is enabled in Developer options. Enable it manually in system Settings if available. 3HRecorder cannot observe arbitrary touches in other apps. The system indicator may appear in full-screen recordings; turn it off afterward if you do not want it.',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Close'),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
+                  child: const Text('Touch-indicator guidance'),
                 ),
-              ),
-              child: const Text('Touch-indicator guidance'),
-            ),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text('Recording duration / auto-stop'),
-              subtitle: Text(
-                s.durationSeconds == 0
-                    ? 'No duration limit'
-                    : '${s.durationSeconds} seconds',
-              ),
-              trailing: const Icon(AppIcons.countdown),
-              onTap: () => _duration(context, s),
-            ),
-            const SizedBox(height: 16),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text('Auto-stop'),
+                  subtitle: Text(
+                    s.durationSeconds == 0
+                        ? 'No limit'
+                        : '${s.durationSeconds} seconds',
+                  ),
+                  trailing: const Icon(AppIcons.countdown),
+                  onTap: () => _duration(context, s),
+                ),
+              ] else
+                _autoStop(s),
+            ],
+            if (widget.advanced == null) const SizedBox(height: 16),
           ],
         );
       },
+    );
+  }
+
+  Widget _autoStop(SettingsController s) {
+    final durations = {
+      '5m': 300,
+      '10m': 600,
+      '30m': 1800,
+      '60m': 3600,
+      if (s.durationSeconds > 0 &&
+          !const [300, 600, 1800, 3600].contains(s.durationSeconds))
+        '${s.durationSeconds}s': s.durationSeconds,
+    };
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: const Text('Auto-stop'),
+          value: s.durationSeconds > 0,
+          onChanged: (enabled) => s.update(() {
+            s.durationSeconds = enabled
+                ? (s.durationSeconds > 0 ? s.durationSeconds : 300)
+                : 0;
+          }),
+        ),
+        if (s.durationSeconds > 0)
+          ChoiceGroup(
+            label: 'Duration',
+            options: durations.keys.toList(),
+            value: durations.entries
+                .firstWhere((entry) => entry.value == s.durationSeconds)
+                .key,
+            onChanged: (value) =>
+                s.update(() => s.durationSeconds = durations[value]!),
+          ),
+      ],
     );
   }
 
@@ -323,7 +394,7 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
         ],
       );
   Future<void> _duration(BuildContext context, SettingsController s) async {
-    final field = TextEditingController(text: s.durationSeconds.toString());
+    var seconds = s.durationSeconds.toString();
     String? error;
     final result = await showStudioDialog<int>(
       context: context,
@@ -333,11 +404,10 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'Enter seconds from 1 to 86400, or 0 for no limit. This limits recording time; it is separate from the countdown.',
-              ),
-              TextField(
-                controller: field,
+              const Text('1–86400 seconds, or 0 for no limit.'),
+              TextFormField(
+                initialValue: seconds,
+                onChanged: (value) => seconds = value,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Seconds',
@@ -353,7 +423,7 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
             ),
             TextButton(
               onPressed: () {
-                final value = int.tryParse(field.text);
+                final value = int.tryParse(seconds);
                 if (value == null || value < 0 || value > 86400) {
                   update(() => error = 'Enter 0–86400 seconds');
                   return;
@@ -366,7 +436,6 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
         ),
       ),
     );
-    field.dispose();
     if (result != null) s.update(() => s.durationSeconds = result);
   }
 }

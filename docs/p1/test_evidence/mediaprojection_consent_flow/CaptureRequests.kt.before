@@ -1,0 +1,22 @@
+package com.xrecorder.xrecorder.recording
+
+/** Main-looper request ownership; survives Activity recreation, never stores consent. */
+object CaptureRequests {
+    private var pending: Pair<Int, String>? = null
+    val awaitingResult: Boolean get() = pending != null
+
+    fun launch(code: Int, sessionId: String) {
+        check(pending == null) { "An Android permission result is still pending" }
+        pending = code to sessionId
+    }
+
+    fun consume(code: Int): String? {
+        val request = pending ?: return null
+        if (request.first != code) return null
+        pending = null
+        return request.second
+    }
+
+    fun owns(commandId: String?, sessionId: String): Boolean =
+        commandId != null && commandId == sessionId
+}

@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-08T10:42:35.820295+07:00",
+  "target": {
+    "index": "0",
+    "text": "",
+    "resource-id": "",
+    "class": "android.widget.Button",
+    "package": "com.xrecorder.xrecorder",
+    "content-desc": "Photo",
+    "checkable": "false",
+    "checked": "false",
+    "clickable": "true",
+    "enabled": "true",
+    "focusable": "true",
+    "focused": "false",
+    "scrollable": "false",
+    "long-clickable": "false",
+    "password": "false",
+    "selected": "false",
+    "bounds": "[149,1344][290,1456]"
+  },
+  "action": "input tap 219 1400",
+  "outside_bubble_frame": [
+    320,
+    485,
+    416,
+    581
+  ]
+}

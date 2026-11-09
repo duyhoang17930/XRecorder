@@ -1,0 +1,82 @@
+[
+  {
+    "at": "2026-11-08T10:45:11.592780+07:00",
+    "action": "input tap 568 533",
+    "target": "Pause icon located in overlay_expanded_photo_library.png at window [320,485]-[720,581]"
+  },
+  {
+    "at": "2026-11-08T10:45:11.666658+07:00",
+    "native_paused": {
+      "id": "6d544a80-ed29-48c0-9911-360cfb4dfd63",
+      "state": "paused",
+      "startedAt": 1794109079131,
+      "elapsedMs": 219343,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "bitrate": 8000000,
+      "config": {
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "bitrate": 8000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 3,
+        "durationSeconds": 300,
+        "orientation": "landscape",
+        "mode": "performance",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    }
+  },
+  {
+    "at": "2026-11-08T10:45:12.768700+07:00",
+    "action": "input tap 664 533",
+    "target": "Stop square in unchanged observed overlay frame"
+  },
+  {
+    "at": "2026-11-08T10:45:13.482932+07:00",
+    "native_completed": {
+      "id": "6d544a80-ed29-48c0-9911-360cfb4dfd63",
+      "state": "completed",
+      "startedAt": 1794109079131,
+      "elapsedMs": 219343,
+      "outputUri": "content://media/external/video/media/1000002318",
+      "error": null,
+      "screenshot": false,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "bitrate": 8000000,
+      "config": {
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "bitrate": 8000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 3,
+        "durationSeconds": 300,
+        "orientation": "landscape",
+        "mode": "performance",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    }
+  }
+]

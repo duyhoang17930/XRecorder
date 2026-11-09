@@ -1,0 +1,94 @@
+[
+  {
+    "at": "2026-11-08T10:37:22.706639+07:00",
+    "target": {
+      "index": "7",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Record screen",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[80,582][397,686]"
+    },
+    "action": "input tap 238 634"
+  },
+  {
+    "at": "2026-11-08T10:37:26.236702+07:00",
+    "target": {
+      "index": "5",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Advanced",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[176,381][353,477]"
+    },
+    "action": "input tap 264 429"
+  },
+  {
+    "at": "2026-11-08T10:37:29.712310+07:00",
+    "target": {
+      "index": "2",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Performance",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[195,553][405,649]"
+    },
+    "action": "input tap 300 601"
+  },
+  {
+    "at": "2026-11-08T10:37:33.203033+07:00",
+    "target": {
+      "index": "8",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Start Recording",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[32,1192][688,1296]"
+    },
+    "action": "input tap 360 1244"
+  }
+]

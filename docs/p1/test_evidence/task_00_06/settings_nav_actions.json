@@ -1,0 +1,77 @@
+[
+  {
+    "node": {
+      "index": "8",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Screenshot",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[32,758][688,870]"
+    },
+    "xy": [
+      360,
+      814
+    ]
+  },
+  {
+    "node": {
+      "index": "0",
+      "text": "B\u1eaeT \u0110\u1ea6U NGAY",
+      "resource-id": "android:id/button1",
+      "class": "android.widget.Button",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[40,847][680,951]"
+    },
+    "xy": [
+      360,
+      899
+    ]
+  },
+  {
+    "node": {
+      "index": "0",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Settings",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[571,1344][712,1456]"
+    },
+    "xy": [
+      641,
+      1400
+    ]
+  }
+]

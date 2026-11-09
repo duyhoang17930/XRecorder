@@ -1,0 +1,25 @@
+{
+  "node": {
+    "index": "1",
+    "text": "",
+    "resource-id": "",
+    "class": "android.widget.Button",
+    "package": "com.xrecorder.xrecorder",
+    "content-desc": "Audio, countdown & facecam",
+    "checkable": "false",
+    "checked": "false",
+    "clickable": "true",
+    "enabled": "true",
+    "focusable": "true",
+    "focused": "false",
+    "scrollable": "false",
+    "long-clickable": "false",
+    "password": "false",
+    "selected": "false",
+    "bounds": "[32,498][688,674]"
+  },
+  "xy": [
+    360,
+    586
+  ]
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "com.xrecorder.xrecorder.recording.CaptureRequestsTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.003"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.VideoBitrateTest",
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.004"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.CaptureJournalTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.023"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.ScreenshotPixelsTest",
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.005"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.CaptureTimingTest",
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.01"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.AudioVideoMathTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.016"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.FloatingControlGeometryTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.003"
+  }
+]

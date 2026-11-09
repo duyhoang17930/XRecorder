@@ -1,0 +1,51 @@
+{
+  "at": "2026-11-08T11:21:36.162609+07:00",
+  "serial": "RGDMSKDY7PPBAAT4",
+  "native": {
+    "id": "eea82188-cc0e-47e1-955f-0d69f5ee52e1",
+    "state": "completed",
+    "startedAt": 1794111580390,
+    "elapsedMs": 60002,
+    "outputUri": "content://media/external/video/media/1000002327",
+    "error": null,
+    "screenshot": false,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mute",
+      "micGain": 1,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 5,
+      "durationSeconds": 60,
+      "orientation": "landscape",
+      "mode": "performance",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+    },
+    "countdownRemaining": 0
+  },
+  "capture_service_present": false,
+  "projection_lines": [
+    "null"
+  ],
+  "overlay_window_present": false,
+  "installed_main_hash": "72edd81b5fb4a6007ad2414892b39ac5e3d82125e96488d4236887baf865d64a",
+  "expected_main_hash": "72edd81b5fb4a6007ad2414892b39ac5e3d82125e96488d4236887baf865d64a",
+  "main_hash_match": true,
+  "permissions": [
+    "android.permission.CAMERA: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|ONE_TIME]",
+    "android.permission.RECORD_AUDIO: granted=false, flags=[ USER_SET|USER_FIXED|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]"
+  ],
+  "media_deleted": false,
+  "source_changed": false,
+  "note": "Final app options via UI: Performance720p30AVC8Mbps/Mute/Landscape/countdown5s/auto-stop60s. Options intentionally used by tests; no project configuration changed. Camera permission unchanged; mic denied."
+}

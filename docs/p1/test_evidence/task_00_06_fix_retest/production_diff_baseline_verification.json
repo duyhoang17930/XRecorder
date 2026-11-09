@@ -1,0 +1,18 @@
+[
+  {
+    "file": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt",
+    "reconstructed_before_matches_baseline": true
+  },
+  {
+    "file": "lib/features/recording/recording_service.dart",
+    "reconstructed_before_matches_baseline": true
+  },
+  {
+    "file": "lib/features/recording/recording_setup_sheet.dart",
+    "reconstructed_before_matches_baseline": true
+  },
+  {
+    "file": "lib/features/settings/recording_settings_form.dart",
+    "reconstructed_before_matches_baseline": true
+  }
+]

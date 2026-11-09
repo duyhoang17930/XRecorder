@@ -1,0 +1,48 @@
+[
+  {
+    "at": "2026-11-08T10:41:35.671243+07:00",
+    "action": "input tap 264 392",
+    "target": "Visible overlay play icon",
+    "located_from": "overlay_paused.png; visible bar [16,344]-[416,440]; UiAutomator excludes non-focusable overlay on this device"
+  },
+  {
+    "at": "2026-11-08T10:41:35.755065+07:00",
+    "native_after_resume": {
+      "id": "6d544a80-ed29-48c0-9911-360cfb4dfd63",
+      "state": "recording",
+      "startedAt": 1794109079131,
+      "elapsedMs": 3436,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "bitrate": 8000000,
+      "config": {
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "bitrate": 8000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 3,
+        "durationSeconds": 300,
+        "orientation": "landscape",
+        "mode": "performance",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    }
+  },
+  {
+    "at": "2026-11-08T10:41:37.630422+07:00",
+    "action": "input swipe 120 392 300 532 700",
+    "target": "Visible timer center from overlay_paused.png"
+  }
+]

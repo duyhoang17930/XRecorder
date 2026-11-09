@@ -1,0 +1,1 @@
+Observed external com.android.stk foreground during harness. Did not accept any carrier action; sent KEYCODE_BACK only to dismiss. Previous test observations require separate qualification.
