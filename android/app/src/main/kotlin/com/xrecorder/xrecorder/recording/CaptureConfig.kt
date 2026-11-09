@@ -64,9 +64,22 @@ data class CaptureConfig(
             "audioSources" to if (Build.VERSION.SDK_INT >= 29) listOf("mute","microphone","internal","mixed") else listOf("mute","microphone"),
             "noiseReduction" to NoiseSuppressor.isAvailable(),
             "hevc" to encoders("video/hevc").isNotEmpty(),
-            "presets" to listOf(1280 to 720,1920 to 1080,2560 to 1440,3840 to 2160).flatMap { (w,h) ->
-                listOf(24,30,60,90,120).filter { fps -> encoders("video/avc").any { e -> val caps=e.getCapabilitiesForType("video/avc").videoCapabilities; caps.areSizeAndRateSupported(w,h,fps.toDouble()) || caps.areSizeAndRateSupported(h,w,fps.toDouble()) } }
-                    .map { fps -> mapOf("width" to w,"height" to h,"fps" to fps) }
+            "presets" to listOf("video/avc" to "avc", "video/hevc" to "hevc").flatMap { (type, codec) ->
+                val available = encoders(type)
+                listOf(1280 to 720,1920 to 1080,2560 to 1440,3840 to 2160).flatMap { (w,h) ->
+                    listOf(24,30,60,90,120).flatMap { fps ->
+                        listOf(w to h, h to w).distinct().filter { (width,height) ->
+                            available.any { e ->
+                                runCatching {
+                                    e.getCapabilitiesForType(type).videoCapabilities
+                                        .areSizeAndRateSupported(width,height,fps.toDouble())
+                                }.getOrDefault(false)
+                            }
+                        }.map { (width,height) ->
+                            mapOf("width" to width,"height" to height,"fps" to fps,"codec" to codec)
+                        }
+                    }
+                }
             })
     }
 }

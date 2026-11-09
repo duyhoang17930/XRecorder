@@ -169,7 +169,10 @@ class ExportQueue(private val context: Context) {
     fun list(): String {
         val holder = ProgressHolder()
         if (transformer?.getProgress(holder) == Transformer.PROGRESS_STATE_AVAILABLE)
-            active?.put("progress", holder.progress)
+            // Media3 can report 100% before dispatching onCompleted. Keep a running
+            // job visibly in progress until the completion callback switches it
+            // to finalizing or completed.
+            active?.put("progress", holder.progress.coerceIn(0, 99))
         val rows = JSONArray(jobs)
         recoveryWarning?.let { rows.put(JSONObject().put("type", "notice").put("message", it)) }
         return rows.toString()
