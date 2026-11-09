@@ -1,0 +1,520 @@
+[
+  {
+    "at": "2026-11-08T10:04:56.198765+07:00",
+    "marker": "countdown",
+    "native": {
+      "id": "257880aa-d789-4355-a6e4-b7137c8d2bac",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 10,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 10
+    },
+    "packages": [
+      "com.android.systemui"
+    ],
+    "target": {
+      "index": "0",
+      "text": "BẮT ĐẦU NGAY",
+      "resource-id": "android:id/button1",
+      "class": "android.widget.Button",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[40,847][680,951]"
+    },
+    "action": "input tap 360 899"
+  },
+  {
+    "at": "2026-11-08T10:05:00.926546+07:00",
+    "marker": "recording",
+    "native": {
+      "id": "28c4d54b-b39e-4815-9d63-76b895b79a8d",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.systemui"
+    ],
+    "target": {
+      "index": "0",
+      "text": "BẮT ĐẦU NGAY",
+      "resource-id": "android:id/button1",
+      "class": "android.widget.Button",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[40,847][680,951]"
+    },
+    "action": "input tap 360 899"
+  },
+  {
+    "at": "2026-11-08T10:05:07.447337+07:00",
+    "marker": "recording",
+    "native": {
+      "id": "28c4d54b-b39e-4815-9d63-76b895b79a8d",
+      "state": "idle",
+      "startedAt": 1794107102919,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.systemui"
+    ],
+    "action": "KEYCODE_BACK; dismiss cancelled session consent without acceptance"
+  },
+  {
+    "at": "2026-11-08T10:05:13.058622+07:00",
+    "marker": "paused",
+    "native": {
+      "id": "8e4f27fa-be7f-4ef1-b20c-80035b40b9d9",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.stk"
+    ],
+    "action": "observe only"
+  },
+  {
+    "at": "2026-11-08T10:05:17.797610+07:00",
+    "marker": "paused",
+    "native": {
+      "id": "8e4f27fa-be7f-4ef1-b20c-80035b40b9d9",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.stk"
+    ],
+    "action": "observe only"
+  },
+  {
+    "at": "2026-11-08T10:05:21.343543+07:00",
+    "marker": "",
+    "native": {
+      "id": "8e4f27fa-be7f-4ef1-b20c-80035b40b9d9",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.stk"
+    ],
+    "action": "observe only"
+  },
+  {
+    "at": "2026-11-08T10:05:25.042287+07:00",
+    "marker": "",
+    "native": {
+      "id": "8e4f27fa-be7f-4ef1-b20c-80035b40b9d9",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.stk"
+    ],
+    "action": "observe only"
+  },
+  {
+    "at": "2026-11-08T10:05:28.867336+07:00",
+    "marker": "",
+    "native": {
+      "id": "8e4f27fa-be7f-4ef1-b20c-80035b40b9d9",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.stk"
+    ],
+    "action": "observe only"
+  },
+  {
+    "at": "2026-11-08T10:05:32.563791+07:00",
+    "marker": "",
+    "native": {
+      "id": "8e4f27fa-be7f-4ef1-b20c-80035b40b9d9",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.stk"
+    ],
+    "action": "observe only"
+  },
+  {
+    "at": "2026-11-08T10:05:35.917699+07:00",
+    "marker": "",
+    "native": {
+      "id": "8e4f27fa-be7f-4ef1-b20c-80035b40b9d9",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.stk"
+    ],
+    "action": "observe only"
+  },
+  {
+    "at": "2026-11-08T10:05:39.242938+07:00",
+    "marker": "",
+    "native": {
+      "id": "8e4f27fa-be7f-4ef1-b20c-80035b40b9d9",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.stk"
+    ],
+    "action": "observe only"
+  },
+  {
+    "at": "2026-11-08T10:05:42.649565+07:00",
+    "marker": "",
+    "native": {
+      "id": "8e4f27fa-be7f-4ef1-b20c-80035b40b9d9",
+      "state": "awaitingPermission",
+      "startedAt": 0,
+      "elapsedMs": 0,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 60,
+      "bitrate": 16000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 60,
+        "bitrate": 16000000,
+        "codec": "avc",
+        "audio": "mute",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 0,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "packages": [
+      "com.android.stk"
+    ],
+    "action": "observe only"
+  }
+]

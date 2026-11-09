@@ -1,0 +1,73 @@
+{
+  "at": "2026-11-08T09:51:01.392986+07:00",
+  "device": "RGDM…AAT4",
+  "package": "com.xrecorder.xrecorder",
+  "local_apk_sha256_before": "56d455a7516320cc3dc37cd3e9d3fa76e51f2501b55c9546e93de4349eb46d8f",
+  "local_apk_signer_sha256": "032ad9b4fd062c482a1e30c67f2d1b8ebdf4a58e2d6c8c797284dec3606be153",
+  "read_only_checks": {
+    "connection": {
+      "exit": 0,
+      "stdout": "device\n",
+      "stderr": ""
+    },
+    "manufacturer": {
+      "exit": 0,
+      "stdout": "OPPO\n",
+      "stderr": ""
+    },
+    "model": {
+      "exit": 0,
+      "stdout": "CPH2349\n",
+      "stderr": ""
+    },
+    "android": {
+      "exit": 0,
+      "stdout": "11\n",
+      "stderr": ""
+    },
+    "api": {
+      "exit": 0,
+      "stdout": "30\n",
+      "stderr": ""
+    },
+    "abi": {
+      "exit": 0,
+      "stdout": "arm64-v8a\n",
+      "stderr": ""
+    },
+    "screen": {
+      "exit": 0,
+      "stdout": "Physical size: 720x1600\n",
+      "stderr": ""
+    },
+    "density": {
+      "exit": 0,
+      "stdout": "Physical density: 320\n",
+      "stderr": ""
+    },
+    "storage": {
+      "exit": 0,
+      "stdout": "Filesystem       1K-blocks     Used Available Use% Mounted on\n/dev/block/dm-26  20519904 18099840   2380492  89% /data/user/0\n",
+      "stderr": ""
+    },
+    "services_before": {
+      "exit": 0,
+      "stdout": "ACTIVITY MANAGER SERVICES (dumpsys activity services)\n  (nothing)\n",
+      "stderr": ""
+    },
+    "installed_sha256": {
+      "exit": 0,
+      "stdout": "56d455a7516320cc3dc37cd3e9d3fa76e51f2501b55c9546e93de4349eb46d8f  /data/app/~~FL0daPKS7KZmeIs8626xvA==/com.xrecorder.xrecorder-7GwI2aje3iPIeV96jSQ6Nw==/base.apk\n",
+      "stderr": ""
+    }
+  },
+  "package_info": [
+    "versionCode=1 minSdk=24 targetSdk=36",
+    "versionName=0.1.0",
+    "firstInstallTime=2026-11-08 09:45:21",
+    "lastUpdateTime=2026-11-08 09:48:04",
+    "android.permission.CAMERA: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]",
+    "android.permission.RECORD_AUDIO: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]"
+  ],
+  "flutter": "Flutter 3.47.7 • channel stable • https://github.com/flutter/flutter.git\nFramework • revision abaf9c5237 (4 weeks ago) • 2026-10-08 09:51:21 -0700\nEngine • hash d8a2d6c768c334d53e16277f837970ffa1e2de81 (revision deb287481e) (31 days ago) • 2026-10-07 17:09:12.000Z\nTools • Dart 3.13.5 • DevTools 2.60.0\n"
+}

@@ -1,0 +1,92 @@
+{
+  "recording_nodes": [
+    {
+      "recording_node": {
+        "index": "7",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.ImageView",
+        "package": "com.android.systemui",
+        "content-desc": "3HRecorderThông báo: Screen recording",
+        "checkable": "false",
+        "checked": "false",
+        "clickable": "false",
+        "enabled": "true",
+        "focusable": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "long-clickable": "false",
+        "password": "false",
+        "selected": "false",
+        "bounds": "[295,1296][330,1352]"
+      },
+      "ancestor_structure": [
+        {
+          "class": "android.widget.ImageView",
+          "resource-id": "",
+          "bounds": "[295,1296][330,1352]",
+          "clickable": "false",
+          "scrollable": "false"
+        },
+        {
+          "class": "android.widget.FrameLayout",
+          "resource-id": "com.android.systemui:id/content",
+          "bounds": "[20,1296][700,1352]",
+          "clickable": "false",
+          "scrollable": "false"
+        },
+        {
+          "class": "android.widget.FrameLayout",
+          "resource-id": "",
+          "bounds": "[20,1296][700,1352]",
+          "clickable": "false",
+          "scrollable": "false"
+        },
+        {
+          "class": "android.widget.ScrollView",
+          "resource-id": "com.android.systemui:id/notification_stack_scroller",
+          "bounds": "[0,0][720,1352]",
+          "clickable": "false",
+          "scrollable": "true"
+        },
+        {
+          "class": "android.widget.FrameLayout",
+          "resource-id": "com.android.systemui:id/notification_container_parent",
+          "bounds": "[0,0][720,1456]",
+          "clickable": "false",
+          "scrollable": "false"
+        },
+        {
+          "class": "android.widget.FrameLayout",
+          "resource-id": "com.android.systemui:id/notification_panel",
+          "bounds": "[0,0][720,1456]",
+          "clickable": "false",
+          "scrollable": "false"
+        },
+        {
+          "class": "android.widget.FrameLayout",
+          "resource-id": "",
+          "bounds": "[0,0][720,1456]",
+          "clickable": "false",
+          "scrollable": "false"
+        }
+      ]
+    }
+  ],
+  "scroll_structure": [
+    {
+      "class": "android.widget.ScrollView",
+      "resource-id": "com.android.systemui:id/expanded_qs_scroll_view",
+      "bounds": "[0,0][720,476]",
+      "clickable": "false",
+      "scrollable": "false"
+    },
+    {
+      "class": "android.widget.ScrollView",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "bounds": "[0,0][720,1352]",
+      "clickable": "false",
+      "scrollable": "true"
+    }
+  ]
+}

@@ -26,6 +26,23 @@ object CaptureJournal {
             CaptureState.error = data.optString("error").takeUnless { it.isBlank() || it == "null" }
             val config = data.optJSONObject("config")
             if (config != null) runCatching { CaptureState.config = CaptureConfig.from(value, config.keys().asSequence().associateWith { config.get(it) }) }
+            val dimensions = dimensions(
+                data.optInt("width", if (CaptureState.screenshot) 0 else CaptureState.config.width),
+                data.optInt("height", if (CaptureState.screenshot) 0 else CaptureState.config.height)
+            ) {
+                if (!CaptureState.screenshot || CaptureState.state != "completed") null
+                else CaptureState.output?.let { output ->
+                    runCatching {
+                        val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
+                        value.contentResolver.openInputStream(Uri.parse(output))?.use {
+                            android.graphics.BitmapFactory.decodeStream(it, null, bounds)
+                        }
+                        if (bounds.outMimeType == "image/png") bounds.outWidth to bounds.outHeight else null
+                    }.getOrNull()
+                }
+            }
+            CaptureState.width = dimensions.first
+            CaptureState.height = dimensions.second
             if (CaptureState.busy) {
                 cleanup()
                 CaptureState.state = "failed"
@@ -36,6 +53,11 @@ object CaptureJournal {
         } catch (_: Exception) {
             CaptureState.state = "failed"; CaptureState.error = "The previous recording journal could not be recovered."
         }
+    }
+    internal fun dimensions(width: Int, height: Int, readOutput: () -> Pair<Int, Int>?): Pair<Int, Int> {
+        if (width > 0 && height > 0) return width to height
+        val actual = readOutput()
+        return actual?.takeIf { it.first > 0 && it.second > 0 } ?: (0 to 0)
     }
     fun save() { if (context != null) prefs.edit().putString("session", JSONObject(CaptureState.snapshot()).toString()).commit() }
     fun pending(uri: Uri) { if (context != null) check(prefs.edit().putString("pending",uri.toString()).commit()) }
@@ -56,7 +78,7 @@ object CaptureJournal {
             File(app.cacheDir,"capture_$id.m4a").delete()
         }
         if (Build.VERSION.SDK_INT < 29) {
-            File(app.getExternalFilesDir(null),"media").listFiles()?.filter { it.name.startsWith("Recording_") && it.name.endsWith(".mp4.pending") }?.forEach { it.delete() }
+            File(app.getExternalFilesDir(null),"media").listFiles()?.filter { (it.name.startsWith("Recording_") && it.name.endsWith(".mp4.pending")) || it.name.matches(Regex("Screenshot_[0-9]+[.]png[.]pending")) }?.forEach { it.delete() }
         }
     }
 }

@@ -1,0 +1,37 @@
+--------- beginning of main
+11-08 10:08:46.226  1985  2032 I flutter : [IMPORTANT:flutter/shell/platform/android/android_context_gl_impeller.cc(104)] Using the Impeller rendering backend (OpenGLES).
+--------- beginning of system
+11-08 10:08:48.410  1985  1985 I flutter : 00:00 +0: Consent, two one-shot PNGs, cleanup, feedback, and video/audio regression
+11-08 10:09:04.246  1985  1985 I flutter : TASK022_DENY
+11-08 10:09:40.062  1985  1985 I flutter : TASK022_BACK
+11-08 10:09:44.576  1985  1985 I flutter : TASK022_CAPTURE_1
+11-08 10:09:53.099  1985  1985 I flutter : TASK022_RETURN_1
+11-08 10:10:34.455  1985  1985 I flutter : TASK022_CAPTURE_2
+11-08 10:10:42.761  1985  1985 I flutter : TASK022_RETURN_2
+11-08 10:11:13.814  1985  1985 I flutter : TASK022_VIDEO
+11-08 10:12:34.783  1985  1985 I flutter : ══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+11-08 10:12:34.783  1985  1985 I flutter : The following TestFailure was thrown running a test:
+11-08 10:12:34.783  1985  1985 I flutter : Timed out waiting for host resume or visible catalog update.
+11-08 10:12:34.783  1985  1985 I flutter : 
+11-08 10:12:34.783  1985  1985 I flutter : When the exception was thrown, this was the stack:
+11-08 10:12:34.783  1985  1985 I flutter : #0      fail (package:matcher/src/expect/expect.dart:187:31)
+11-08 10:12:34.783  1985  1985 I flutter : #1      main.<anonymous closure>.waitFor (file:///home/hieu/Documents/Training/XRecorder/integration_test/screenshot_native_test.dart:46:9)
+11-08 10:12:34.783  1985  1985 I flutter : <asynchronous suspension>
+11-08 10:12:34.783  1985  1985 I flutter : #2      main.<anonymous closure> (file:///home/hieu/Documents/Training/XRecorder/integration_test/screenshot_native_test.dart:197:9)
+11-08 10:12:34.783  1985  1985 I flutter : <asynchronous suspension>
+11-08 10:12:34.783  1985  1985 I flutter : #3      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+11-08 10:12:34.783  1985  1985 I flutter : <asynchronous suspension>
+11-08 10:12:34.783  1985  1985 I flutter : #4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+11-08 10:12:34.783  1985  1985 I flutter : <asynchronous suspension>
+11-08 10:12:34.783  1985  1985 I flutter : #5      TestWidgetsFlutterBinding._createTestCompletionHandler.<anonymous closure> (package:flutter_test/src/binding.dart:1707:12)
+11-08 10:12:34.784  1985  1985 I flutter : <asynchronous suspension>
+11-08 10:12:34.784  1985  1985 I flutter : 
+11-08 10:12:34.784  1985  1985 I flutter : The test description was:
+11-08 10:12:34.784  1985  1985 I flutter :   Consent, two one-shot PNGs, cleanup, feedback, and video/audio regression
+11-08 10:12:34.784  1985  1985 I flutter : ════════════════════════════════════════════════════════════════════════════════════════════════════
+11-08 10:12:34.802  1985  1985 I flutter : 03:46 +0: Consent, two one-shot PNGs, cleanup, feedback, and video/audio regression [E]
+11-08 10:12:34.805  1985  1985 I flutter :   Test failed. See exception logs above.
+11-08 10:12:34.805  1985  1985 I flutter :   The test description was: Consent, two one-shot PNGs, cleanup, feedback, and video/audio regression
+11-08 10:12:34.808  1985  1985 I flutter :   
+11-08 10:12:34.891  1985  1985 I flutter : 03:46 +0 -1: (tearDownAll)
+11-08 10:12:34.926  1985  1985 I flutter : 03:46 +1 -1: Some tests failed.

@@ -1,0 +1,57 @@
+{
+  "source": "Pre-fix safe timer30 frames already retained; no new Android capture. Source physical display720x1600 from prior device report; VirtualDisplay+encoder1280x720.",
+  "expected_uniform_fit": {
+    "scale": 0.45,
+    "content_width_px": 324.0,
+    "content_height_px": 720.0,
+    "side_bar_px": 478.0
+  },
+  "samples": [
+    {
+      "existing_frame": "timer30_frame_0.png",
+      "canvas": [
+        1280,
+        720
+      ],
+      "nonblack_horizontal_bounds_px": [
+        478,
+        802
+      ],
+      "content_width_px": 324,
+      "left_bar_px": 478,
+      "right_bar_px": 478,
+      "outer_regions_max_pixel": 7
+    },
+    {
+      "existing_frame": "timer30_frame_100.png",
+      "canvas": [
+        1280,
+        720
+      ],
+      "nonblack_horizontal_bounds_px": [
+        478,
+        802
+      ],
+      "content_width_px": 324,
+      "left_bar_px": 478,
+      "right_bar_px": 478,
+      "outer_regions_max_pixel": 2
+    },
+    {
+      "existing_frame": "timer30_frame_200.png",
+      "canvas": [
+        1280,
+        720
+      ],
+      "nonblack_horizontal_bounds_px": [
+        478,
+        802
+      ],
+      "content_width_px": 324,
+      "left_bar_px": 478,
+      "right_bar_px": 478,
+      "outer_regions_max_pixel": 2
+    }
+  ],
+  "conclusion": "Measured centered width324 with478px side regions matches uniform fit of portrait720x1600 into landscape1280x720. No overlay present in these samples. This does not prove overlay output pixels for blocked clip2318."
+}

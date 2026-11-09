@@ -1,0 +1,22 @@
+{
+  "report_links_checked": 33,
+  "missing_links": [],
+  "trailing_whitespace": [],
+  "baseline_files": 344,
+  "changed_existing": [
+    "lib/features/settings/recording_settings_form.dart",
+    "lib/features/recording/recording_service.dart",
+    "lib/features/recording/recording_setup_sheet.dart",
+    "integration_test/recording_cancel_test.dart",
+    "integration_test/screenshot_native_test.dart",
+    "test/recording_service_contract_test.dart",
+    "test/recording_setup_sheet_test.dart",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt"
+  ],
+  "unexpected_source_changes": [],
+  "missing_baseline_files": [],
+  "git_diff_check_exit": 0,
+  "old_device_report_unchanged": true,
+  "analyzer_final": "Analyzing XRecorder...                                          \nNo issues found! (ran in 6.7s)",
+  "new_device_work_in_local_phase": false
+}

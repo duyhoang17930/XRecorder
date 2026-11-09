@@ -19,9 +19,10 @@ object CaptureState : EventChannel.StreamHandler {
     var countdownRemaining = 0
     var width = 0
     var height = 0
+    val elapsedActiveMs: Long get() = FloatingControlGeometry.elapsedMs(state, elapsed, activeStart, SystemClock.elapsedRealtime())
     val busy: Boolean get() = state in setOf("awaitingPermission", "countdown", "starting", "recording", "paused", "stopping", "finalizing")
     fun snapshot(): Map<String, Any?> = mapOf("id" to id, "state" to state, "startedAt" to startedAt,
-        "elapsedMs" to if (state == "recording") elapsed + SystemClock.elapsedRealtime() - activeStart else elapsed,
+        "elapsedMs" to elapsedActiveMs,
         "outputUri" to output, "error" to error, "screenshot" to screenshot, "width" to width, "height" to height, "fps" to config.fps, "bitrate" to config.bitrate, "config" to config.map(), "countdownRemaining" to countdownRemaining)
     fun prepare(settings: CaptureConfig) { config = settings; width = settings.width; height = settings.height; countdownRemaining = settings.countdown; id = UUID.randomUUID().toString(); elapsed = 0; startedAt = 0; output = null; error = null; transition("awaitingPermission") }
     fun transition(next: String, failure: String? = null) { state = next; error = failure; CaptureJournal.save(); sink?.success(snapshot()) }

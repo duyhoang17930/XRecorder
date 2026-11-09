@@ -1,0 +1,719 @@
+{
+  "method": "MP4 atoms via Python stdlib; video full decode via system OpenCV. No ffprobe installed; audio not decoded/listened. Average FPS differs from configured target; variable static content and device effects not isolated.",
+  "files": [
+    {
+      "file": "config_internal.mp4",
+      "bytes": 77677,
+      "sha256": "02ed246e1ee2c931c178adde635633f31c8e2c22e64446a210615a765f5fe986",
+      "tracks": [
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 90000,
+          "duration_s": 4.1289444444444445,
+          "handler": "vide",
+          "codec_sample_entry": "avc1",
+          "width": 720,
+          "height": 1280,
+          "timed_samples": 60,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 867,
+          "decode_delta_max": 109260,
+          "sample_count": 60,
+          "encoded_sample_bytes": 9592,
+          "actual_sample_bitrate_bps": 18584.89525167853,
+          "average_sample_fps_or_audio_packets_per_s": 14.53155904791378
+        },
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 48000,
+          "duration_s": 4.070354166666666,
+          "handler": "soun",
+          "codec_sample_entry": "mp4a",
+          "channels": 1,
+          "sample_rate_hz": 48000.0,
+          "timed_samples": 190,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 1024,
+          "decode_delta_max": 1024,
+          "sample_count": 190,
+          "encoded_sample_bytes": 64853,
+          "actual_sample_bitrate_bps": 127464.09249809344,
+          "average_sample_fps_or_audio_packets_per_s": 46.67898473208208
+        }
+      ],
+      "video_decode": {
+        "opencv": "4.6.0",
+        "reported_frames": 60,
+        "decoded_frames": 60,
+        "all_reported_frames_decoded": true,
+        "samples": {
+          "0": {
+            "mean_bgr": [
+              0.32537217881944447,
+              0.35132161458333333,
+              0.3118337673611111
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "30": {
+            "mean_bgr": [
+              0.32745985243055553,
+              0.35401041666666666,
+              0.3092230902777778
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "59": {
+            "mean_bgr": [
+              0.3258224826388889,
+              0.35250542534722223,
+              0.3074446614583333
+            ],
+            "width": 720,
+            "height": 1280
+          }
+        }
+      }
+    },
+    {
+      "file": "config_microphone.mp4",
+      "bytes": 134105,
+      "sha256": "193b7abbc0674e2ed7992293d3e23ab97c49539d1183a8104584d3a068cf5cf0",
+      "tracks": [
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 90000,
+          "duration_s": 4.170411111111111,
+          "handler": "vide",
+          "codec_sample_entry": "avc1",
+          "width": 720,
+          "height": 1280,
+          "timed_samples": 74,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 967,
+          "decode_delta_max": 93455,
+          "sample_count": 74,
+          "encoded_sample_bytes": 66565,
+          "actual_sample_bitrate_bps": 127690.04920911074,
+          "average_sample_fps_or_audio_packets_per_s": 17.744054010129563
+        },
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 48000,
+          "duration_s": 4.042604166666667,
+          "handler": "soun",
+          "codec_sample_entry": "mp4a",
+          "channels": 1,
+          "sample_rate_hz": 48000.0,
+          "timed_samples": 189,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 1024,
+          "decode_delta_max": 1024,
+          "sample_count": 189,
+          "encoded_sample_bytes": 64308,
+          "actual_sample_bitrate_bps": 127260.54265763095,
+          "average_sample_fps_or_audio_packets_per_s": 46.75204205210131
+        }
+      ],
+      "video_decode": {
+        "opencv": "4.6.0",
+        "reported_frames": 74,
+        "decoded_frames": 74,
+        "all_reported_frames_decoded": true,
+        "samples": {
+          "0": {
+            "mean_bgr": [
+              12.155600043402778,
+              12.607583550347222,
+              11.674270833333333
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "37": {
+            "mean_bgr": [
+              12.14601345486111,
+              12.606303168402778,
+              11.661974826388889
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "73": {
+            "mean_bgr": [
+              0.32501627604166666,
+              0.3518923611111111,
+              0.30689995659722225
+            ],
+            "width": 720,
+            "height": 1280
+          }
+        }
+      }
+    },
+    {
+      "file": "config_mixed.mp4",
+      "bytes": 76972,
+      "sha256": "c1e7c0004b175fa8cb4c057e6ae11fd0e6cfb1c138faa1b7d08b3bdc9e6c338f",
+      "tracks": [
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 90000,
+          "duration_s": 4.344333333333333,
+          "handler": "vide",
+          "codec_sample_entry": "avc1",
+          "width": 720,
+          "height": 1280,
+          "timed_samples": 56,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 1417,
+          "decode_delta_max": 193907,
+          "sample_count": 56,
+          "encoded_sample_bytes": 9449,
+          "actual_sample_bitrate_bps": 17400.13811094913,
+          "average_sample_fps_or_audio_packets_per_s": 12.890355252052483
+        },
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 48000,
+          "duration_s": 4.040895833333333,
+          "handler": "soun",
+          "codec_sample_entry": "mp4a",
+          "channels": 1,
+          "sample_rate_hz": 48000.0,
+          "timed_samples": 189,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 1024,
+          "decode_delta_max": 1024,
+          "sample_count": 189,
+          "encoded_sample_bytes": 64291,
+          "actual_sample_bitrate_bps": 127280.68755381182,
+          "average_sample_fps_or_audio_packets_per_s": 46.77180699411744
+        }
+      ],
+      "video_decode": {
+        "opencv": "4.6.0",
+        "reported_frames": 56,
+        "decoded_frames": 56,
+        "all_reported_frames_decoded": true,
+        "samples": {
+          "0": {
+            "mean_bgr": [
+              0.32581271701388886,
+              0.3517610677083333,
+              0.31227647569444444
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "28": {
+            "mean_bgr": [
+              0.32301323784722225,
+              0.34917860243055554,
+              0.3053559027777778
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "55": {
+            "mean_bgr": [
+              0.3172211371527778,
+              0.3439040798611111,
+              0.29884331597222225
+            ],
+            "width": 720,
+            "height": 1280
+          }
+        }
+      }
+    },
+    {
+      "file": "config_mute.mp4",
+      "bytes": 389579,
+      "sha256": "8c11464539748dc1e7c44d96a4b0c005b820c07a916c43d0081903e56ba4316d",
+      "tracks": [
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 90000,
+          "duration_s": 4.060644444444445,
+          "handler": "vide",
+          "codec_sample_entry": "avc1",
+          "width": 720,
+          "height": 1280,
+          "timed_samples": 56,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 698,
+          "decode_delta_max": 104054,
+          "sample_count": 56,
+          "encoded_sample_bytes": 386347,
+          "actual_sample_bitrate_bps": 761154.0587427282,
+          "average_sample_fps_or_audio_packets_per_s": 13.790914414241854
+        }
+      ],
+      "video_decode": {
+        "opencv": "4.6.0",
+        "reported_frames": 56,
+        "decoded_frames": 56,
+        "all_reported_frames_decoded": true,
+        "samples": {
+          "0": {
+            "mean_bgr": [
+              10.838216145833334,
+              10.818013237847222,
+              9.504772135416667
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "28": {
+            "mean_bgr": [
+              10.814006076388889,
+              10.811128472222222,
+              9.479674479166667
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "55": {
+            "mean_bgr": [
+              0.3233463541666667,
+              0.34966688368055554,
+              0.3049131944444444
+            ],
+            "width": 720,
+            "height": 1280
+          }
+        }
+      }
+    },
+    {
+      "file": "controls.mp4",
+      "bytes": 133825,
+      "sha256": "8f70c6ff3c265a2ef46701a5764d2b93fda91ff08280afd6a44e147ffba9ee94",
+      "tracks": [
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 90000,
+          "duration_s": 6.335677777777778,
+          "handler": "vide",
+          "codec_sample_entry": "avc1",
+          "width": 720,
+          "height": 1280,
+          "timed_samples": 81,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 1337,
+          "decode_delta_max": 143953,
+          "sample_count": 81,
+          "encoded_sample_bytes": 29310,
+          "actual_sample_bitrate_bps": 37009.457902425595,
+          "average_sample_fps_or_audio_packets_per_s": 12.784741087071277
+        },
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 48000,
+          "duration_s": 6.338041666666666,
+          "handler": "soun",
+          "codec_sample_entry": "mp4a",
+          "channels": 1,
+          "sample_rate_hz": 48000.0,
+          "timed_samples": 297,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 1024,
+          "decode_delta_max": 1024,
+          "sample_count": 297,
+          "encoded_sample_bytes": 101283,
+          "actual_sample_bitrate_bps": 127841.3810785403,
+          "average_sample_fps_or_audio_packets_per_s": 46.859900205768085
+        }
+      ],
+      "video_decode": {
+        "opencv": "4.6.0",
+        "reported_frames": 81,
+        "decoded_frames": 81,
+        "all_reported_frames_decoded": true,
+        "samples": {
+          "0": {
+            "mean_bgr": [
+              16.297835286458334,
+              12.679036458333334,
+              11.964481336805555
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "40": {
+            "mean_bgr": [
+              16.28187934027778,
+              12.686459418402778,
+              11.918110894097222
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "80": {
+            "mean_bgr": [
+              16.286889105902777,
+              12.693229166666667,
+              11.925387369791666
+            ],
+            "width": 720,
+            "height": 1280
+          }
+        }
+      }
+    },
+    {
+      "file": "long_5min.mp4",
+      "bytes": 17883636,
+      "sha256": "25b9bff26c97dc7592374cab2459d464eabbdcda33c1f41feb37b000ae1eb0e3",
+      "tracks": [
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 90000,
+          "duration_s": 300.31205555555556,
+          "handler": "vide",
+          "codec_sample_entry": "avc1",
+          "width": 720,
+          "height": 1280,
+          "timed_samples": 4230,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 90,
+          "decode_delta_max": 327969,
+          "sample_count": 4230,
+          "encoded_sample_bytes": 12989710,
+          "actual_sample_bitrate_bps": 346032.3289644827,
+          "average_sample_fps_or_audio_packets_per_s": 14.085348629027916
+        },
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 48000,
+          "duration_s": 300.0230208333333,
+          "handler": "soun",
+          "codec_sample_entry": "mp4a",
+          "channels": 1,
+          "sample_rate_hz": 48000.0,
+          "timed_samples": 14063,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 1024,
+          "decode_delta_max": 1024,
+          "sample_count": 14063,
+          "encoded_sample_bytes": 4800122,
+          "actual_sample_bitrate_bps": 127993.43161514343,
+          "average_sample_fps_or_audio_packets_per_s": 46.87306980957364
+        }
+      ],
+      "video_decode": {
+        "opencv": "4.6.0",
+        "reported_frames": 4230,
+        "decoded_frames": 4230,
+        "all_reported_frames_decoded": true,
+        "samples": {
+          "0": {
+            "mean_bgr": [
+              28.643237847222224,
+              20.505460069444446,
+              19.425930989583332
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "2115": {
+            "mean_bgr": [
+              28.670239800347222,
+              20.53021158854167,
+              19.5901953125
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "4229": {
+            "mean_bgr": [
+              120.91784722222222,
+              94.22790907118056,
+              39.514087456597224
+            ],
+            "width": 720,
+            "height": 1280
+          }
+        }
+      }
+    },
+    {
+      "file": "output30.mp4",
+      "bytes": 49513,
+      "sha256": "b04a7331a37c91fb059a3f5a5c108283057653070e7142557d5b875fa150bc5c",
+      "tracks": [
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 90000,
+          "duration_s": 30.068855555555555,
+          "handler": "vide",
+          "codec_sample_entry": "avc1",
+          "width": 720,
+          "height": 1280,
+          "timed_samples": 174,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 820,
+          "decode_delta_max": 330150,
+          "sample_count": 174,
+          "encoded_sample_bytes": 46281,
+          "actual_sample_bitrate_bps": 12313.338607647558,
+          "average_sample_fps_or_audio_packets_per_s": 5.786718409635367
+        }
+      ],
+      "video_decode": {
+        "opencv": "4.6.0",
+        "reported_frames": 174,
+        "decoded_frames": 174,
+        "all_reported_frames_decoded": true,
+        "samples": {
+          "0": {
+            "mean_bgr": [
+              16.3954296875,
+              12.765796440972222,
+              12.03
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "87": {
+            "mean_bgr": [
+              16.376312934027776,
+              12.770477430555555,
+              11.987958984375
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "173": {
+            "mean_bgr": [
+              16.385843098958333,
+              12.779964192708333,
+              11.997450086805555
+            ],
+            "width": 720,
+            "height": 1280
+          }
+        }
+      }
+    },
+    {
+      "file": "screenshot_video.mp4",
+      "bytes": 334885,
+      "sha256": "49f308eb72fb47f33260e51d204eb50b0c426bb8e703752974c0f7065c81adc7",
+      "tracks": [
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 90000,
+          "duration_s": 4.6298111111111115,
+          "handler": "vide",
+          "codec_sample_entry": "avc1",
+          "width": 720,
+          "height": 1280,
+          "timed_samples": 60,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 765,
+          "decode_delta_max": 109168,
+          "sample_count": 60,
+          "encoded_sample_bytes": 259466,
+          "actual_sample_bitrate_bps": 448339.67308481503,
+          "average_sample_fps_or_audio_packets_per_s": 12.959491987914072
+        },
+        {
+          "tkhd_matrix_raw": [
+            65536,
+            0,
+            0,
+            0,
+            65536,
+            0,
+            0,
+            0,
+            1073741824
+          ],
+          "timescale": 48000,
+          "duration_s": 4.539354166666667,
+          "handler": "soun",
+          "codec_sample_entry": "mp4a",
+          "channels": 1,
+          "sample_rate_hz": 48000.0,
+          "timed_samples": 212,
+          "decode_deltas_all_positive": true,
+          "decode_delta_min": 1024,
+          "decode_delta_max": 1024,
+          "sample_count": 212,
+          "encoded_sample_bytes": 72187,
+          "actual_sample_bitrate_bps": 127219.85965330972,
+          "average_sample_fps_or_audio_packets_per_s": 46.70267888695621
+        }
+      ],
+      "video_decode": {
+        "opencv": "4.6.0",
+        "reported_frames": 60,
+        "decoded_frames": 60,
+        "all_reported_frames_decoded": true,
+        "samples": {
+          "0": {
+            "mean_bgr": [
+              192.21474175347223,
+              188.56890625,
+              187.31062174479166
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "30": {
+            "mean_bgr": [
+              192.26923502604166,
+              188.61628797743055,
+              187.35180447048612
+            ],
+            "width": 720,
+            "height": 1280
+          },
+          "59": {
+            "mean_bgr": [
+              192.2605978732639,
+              188.59647569444445,
+              187.35933268229167
+            ],
+            "width": 720,
+            "height": 1280
+          }
+        }
+      }
+    }
+  ]
+}

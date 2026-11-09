@@ -168,6 +168,8 @@ class _ExportScreenState extends State<ExportScreen>
                     LinearProgressIndicator(
                       value: (job['progress'] as num).toDouble() / 100,
                     ),
+                  if (job['state'] == 'finalizing')
+                    const LinearProgressIndicator(),
                   if (job['error'] != null)
                     Text(
                       context.message(

@@ -1,0 +1,32 @@
+{
+  "id": "eea82188-cc0e-47e1-955f-0d69f5ee52e1",
+  "state": "completed",
+  "startedAt": 1794111580390,
+  "elapsedMs": 60002,
+  "outputUri": "content://media/external/video/media/1000002327",
+  "error": null,
+  "screenshot": false,
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "bitrate": 8000000,
+  "config": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "bitrate": 8000000,
+    "codec": "avc",
+    "audio": "mute",
+    "micGain": 1,
+    "internalGain": 1,
+    "noiseReduction": false,
+    "countdown": 5,
+    "durationSeconds": 60,
+    "orientation": "landscape",
+    "mode": "performance",
+    "facecam": false,
+    "hardwareEncoding": true,
+    "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+  },
+  "countdownRemaining": 0
+}

@@ -1,0 +1,72 @@
+{
+  "decoded_frames": 174,
+  "reported_frames": 174,
+  "average_fps": 5.786716271314959,
+  "samples": [
+    {
+      "target_second": 2,
+      "opencv_timestamp_ms": 1937.688888888889,
+      "nearest_error_ms": 62.311111111110904,
+      "frame": 35,
+      "black_components": [
+        [
+          0,
+          0,
+          720,
+          1280,
+          250914
+        ]
+      ],
+      "interior_black_components": []
+    },
+    {
+      "target_second": 10,
+      "opencv_timestamp_ms": 9917.055555555557,
+      "nearest_error_ms": 82.94444444444343,
+      "frame": 74,
+      "black_components": [
+        [
+          0,
+          0,
+          720,
+          1280,
+          250908
+        ]
+      ],
+      "interior_black_components": []
+    },
+    {
+      "target_second": 20,
+      "opencv_timestamp_ms": 20014.566666666666,
+      "nearest_error_ms": 14.566666666665697,
+      "frame": 137,
+      "black_components": [
+        [
+          0,
+          0,
+          720,
+          1280,
+          250877
+        ]
+      ],
+      "interior_black_components": []
+    },
+    {
+      "target_second": 28,
+      "opencv_timestamp_ms": 29550.08888888889,
+      "nearest_error_ms": 1550.0888888888912,
+      "frame": 163,
+      "black_components": [
+        [
+          0,
+          0,
+          720,
+          1280,
+          250888
+        ]
+      ],
+      "interior_black_components": []
+    }
+  ],
+  "visual_limitation": "ADB live screenshot is also dark. Harness did not visibly render the intended blue page; no-overlay sample validates duration/decoding/observed dark screen only. It is not a comprehensive overlay-output acceptance test. OpenCV seeking failed, so samples selected from sequential decode; timestamp accuracy limited by OpenCV."
+}

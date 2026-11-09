@@ -1,0 +1,5 @@
+{
+  "sha256": "1694668927e7ee6cb7dc87eb84f19db8a07f8b28d3ab4bd705d785e5b2272b95",
+  "package": "package: name='com.xrecorder.xrecorder' versionCode='1' versionName='0.1.0' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+  "signer": "Signer #1 certificate DN: C=US, O=Android, CN=Android Debug\nSigner #1 certificate SHA-256 digest: 032ad9b4fd062c482a1e30c67f2d1b8ebdf4a58e2d6c8c797284dec3606be153\nSigner #1 certificate SHA-1 digest: e1af0dbbdc5b83d08e69554c0d3010c3f1546b3d\nSigner #1 certificate MD5 digest: e974423abca629c409e6ef5283e9ef56\n"
+}

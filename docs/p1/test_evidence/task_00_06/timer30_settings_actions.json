@@ -1,0 +1,80 @@
+[
+  {
+    "node": {
+      "index": "19",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Auto-stop\n300 seconds",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[32,1304][688,1448]"
+    },
+    "xy": [
+      360,
+      1376
+    ]
+  },
+  {
+    "node": {
+      "index": "1",
+      "text": "300",
+      "resource-id": "",
+      "class": "android.widget.EditText",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[128,742][592,848]"
+    },
+    "xy": [
+      360,
+      795
+    ]
+  },
+  {
+    "input": "replace 300 with 30 via End/3 Delete/input text"
+  },
+  {
+    "node": {
+      "index": "2",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Save",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[483,609][592,705]"
+    },
+    "xy": [
+      537,
+      657
+    ]
+  }
+]

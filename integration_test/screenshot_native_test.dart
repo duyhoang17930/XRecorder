@@ -14,6 +14,7 @@ import 'package:xrecorder/features/recording/recording_service.dart';
 import 'package:xrecorder/features/settings/settings_controller.dart';
 
 import 'recording_configuration_test.dart' show state;
+import 'capture_library_finder.dart';
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -96,7 +97,10 @@ void main() {
           expect(png.take(8), orderedEquals([137, 80, 78, 71, 13, 10, 26, 10]));
           final codec = await ui.instantiateImageCodec(png);
           final image = (await codec.getNextFrame()).image;
-          expect((image.width, image.height), (1080, 2400));
+          expect(
+            (image.width, image.height),
+            (saved.configSnapshot.width, saved.configSnapshot.height),
+          );
           final bytes = (await image.toByteData())!.buffer.asUint8List();
           final colors = <int>{};
           for (var i = 0; i + 3 < bytes.length; i += 4000) {
@@ -109,8 +113,8 @@ void main() {
             'uri': item.uri.toString(),
             'mime': item.mimeType,
             'bytes': png.length,
-            'width': 1080,
-            'height': 2400,
+            'width': saved.configSnapshot.width,
+            'height': saved.configSnapshot.height,
           });
           final events = timeline.where((e) => e['id'] == saved.id).toList();
           expect(
@@ -190,8 +194,17 @@ void main() {
         expect(row.mimeType, 'video/mp4');
         expect(row.hasAudio, isTrue);
         expect(row.duration!.inMilliseconds, greaterThan(3000));
+        expect(
+          (await catalog.list(kind: MediaKind.video))
+              .where((item) => item.displayName == row.displayName)
+              .single
+              .uri,
+          video.outputUri,
+        );
         await tester.pumpAndSettle();
-        await waitFor(() => find.text(row.displayName).evaluate().isNotEmpty);
+        // The video sliver is lazy and sits below the capture card and filters.
+        // A catalog commit alone cannot build an off-screen row.
+        await revealCaptureOutput(tester, row.displayName);
         debugPrint('TASK022_FINISHED');
         binding.reportData ??= {};
         binding.reportData!['screenshotVerification'] = {

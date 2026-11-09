@@ -1,0 +1,123 @@
+[
+  {
+    "at": "2026-11-08T10:34:11.529808+07:00",
+    "step": 0,
+    "target": {
+      "index": "1",
+      "text": "",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "class": "android.widget.ScrollView",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "false",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "true",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[0,0][720,1352]"
+    },
+    "action": "input swipe 360 1081 360 676 400"
+  },
+  {
+    "at": "2026-11-08T10:34:15.663657+07:00",
+    "step": 1,
+    "target": {
+      "index": "1",
+      "text": "",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "class": "android.widget.ScrollView",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "false",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "true",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[0,0][720,1352]"
+    },
+    "action": "input swipe 360 1081 360 676 400"
+  },
+  {
+    "at": "2026-11-08T10:34:20.039985+07:00",
+    "step": 2,
+    "target": {
+      "index": "1",
+      "text": "",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "class": "android.widget.ScrollView",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "false",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "true",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[0,0][720,1352]"
+    },
+    "action": "input swipe 360 1081 360 676 400"
+  },
+  {
+    "at": "2026-11-08T10:34:24.408254+07:00",
+    "step": 3,
+    "target": {
+      "index": "1",
+      "text": "",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "class": "android.widget.ScrollView",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "false",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "true",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[0,0][720,1352]"
+    },
+    "action": "input swipe 360 1081 360 676 400"
+  },
+  {
+    "at": "2026-11-08T10:34:28.864019+07:00",
+    "step": 4,
+    "target": {
+      "index": "3",
+      "text": "",
+      "resource-id": "android:id/expand_button",
+      "class": "android.widget.Button",
+      "package": "com.android.systemui",
+      "content-desc": "Mở rộng",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[606,1053][702,1149]"
+    },
+    "action": "input tap 654 1101",
+    "meaning": "Expand only the ancestor row of Screen recording title"
+  }
+]

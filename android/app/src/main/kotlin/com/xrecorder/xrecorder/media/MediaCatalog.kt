@@ -941,14 +941,17 @@ class MediaCatalog(private val activity: Activity) :
 
     private fun thumbnail(uri: Uri, timeUs: Long? = null): ByteArray {
         checkUri(uri)
+        val mime = resolver.getType(uri) ?: throw java.io.FileNotFoundException()
         var bitmap: Bitmap? = null
-        if (Build.VERSION.SDK_INT >= 29 && timeUs == null) {
+        // Some platform providers return a black poster for animated GIFs.
+        // Decode their first frame directly so the library/detail thumbnail
+        // matches the image preview.
+        if (mime != "image/gif" && Build.VERSION.SDK_INT >= 29 && timeUs == null) {
             try {
                 bitmap = resolver.loadThumbnail(uri, Size(320, 240), null)
             } catch (_: java.io.IOException) {}
         }
         if (bitmap == null) {
-            val mime = resolver.getType(uri) ?: throw java.io.FileNotFoundException()
             if (mime.startsWith("video/")) {
                 val retriever = MediaMetadataRetriever()
                 try {

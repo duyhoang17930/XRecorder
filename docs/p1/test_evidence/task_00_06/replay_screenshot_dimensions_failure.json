@@ -1,0 +1,80 @@
+{
+  "before_restart": {
+    "id": "0f70ab5a-e678-452e-ac47-068576ad26f0",
+    "state": "completed",
+    "startedAt": 0,
+    "elapsedMs": 0,
+    "outputUri": "content://media/external/images/media/1000002323",
+    "error": null,
+    "screenshot": true,
+    "width": 720,
+    "height": 1456,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mute",
+      "micGain": 1,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 3,
+      "durationSeconds": 0,
+      "orientation": "automatic",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": ""
+    },
+    "countdownRemaining": 0
+  },
+  "after_restart": {
+    "id": "0f70ab5a-e678-452e-ac47-068576ad26f0",
+    "state": "completed",
+    "startedAt": 0,
+    "elapsedMs": 0,
+    "outputUri": "content://media/external/images/media/1000002323",
+    "error": null,
+    "screenshot": true,
+    "width": 0,
+    "height": 0,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mute",
+      "micGain": 1,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 3,
+      "durationSeconds": 0,
+      "orientation": "automatic",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+    },
+    "countdownRemaining": 0
+  },
+  "root_dimensions_before": [
+    720,
+    1456
+  ],
+  "root_dimensions_after": [
+    0,
+    0
+  ],
+  "same_session_and_uri": true,
+  "source_evidence": [
+    "CaptureJournal.kt:20-35 restores session/config but not root width/height, then save() rewrites snapshot",
+    "recording_service.dart:22,35-37 uses root screenshot dimensions; zero does not trigger null fallback"
+  ],
+  "device_original_image_deleted": false
+}

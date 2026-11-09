@@ -1,0 +1,9 @@
+{
+  "sha256": "4bcca00a5cccb02e52f1564bd0a37f87583ad123b1433f49d926fdb3117051a8",
+  "entrypoint": "integration_test/floating_output_test.dart",
+  "defines": [
+    "OUTPUT_SAMPLE=oppo_30s_no_overlay",
+    "OUTPUT_SECONDS=30"
+  ],
+  "signer": "Signer #1 certificate DN: C=US, O=Android, CN=Android Debug\nSigner #1 certificate SHA-256 digest: 032ad9b4fd062c482a1e30c67f2d1b8ebdf4a58e2d6c8c797284dec3606be153\nSigner #1 certificate SHA-1 digest: e1af0dbbdc5b83d08e69554c0d3010c3f1546b3d\nSigner #1 certificate MD5 digest: e974423abca629c409e6ef5283e9ef56\n"
+}

@@ -1,0 +1,17 @@
+{
+  "changed_existing": [
+    "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/CaptureRequestsTest.kt",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureBridge.kt",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureRequests.kt"
+  ],
+  "unexpected_changes": [],
+  "missing_baseline": [],
+  "missing_report_links": [],
+  "report_trailing_whitespace": [],
+  "git_diff_check_exit": 0,
+  "git_diff_check_output": "",
+  "flutter_tests_passed": 28,
+  "jvm_tests_passed": 29,
+  "analyzer": "Analyzing XRecorder...                                          \nNo issues found! (ran in 11.2s)",
+  "device_work": false
+}

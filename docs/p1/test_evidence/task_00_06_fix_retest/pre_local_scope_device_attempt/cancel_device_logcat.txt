@@ -1,0 +1,18 @@
+--------- beginning of system
+11-08 12:31:17.630 10379 10379 D AppResolutionTuner: loadTunerAppList + 
+11-08 12:31:17.636 10379 10379 D AppResolutionTuner: loadTunerAppList - 
+11-08 12:31:17.659 10379 10379 D OplusInputMethodUtil: init DEBUG to false, update DEBUG_IME to false
+11-08 12:31:17.880 10379 10379 D ColorViewRootUtil: initSwipState, isDisplayCompatApp false
+11-08 12:31:17.881 10379 10379 D ColorViewRootUtil: mScreenHeight 1600, mScreenWidth 720
+--------- beginning of main
+11-08 12:32:04.158 10379 10379 I flutter : 00:45 +0: (setUpAll) [E]
+11-08 12:32:04.166 10379 10379 I flutter :   UIAutomator did not attach before the semantics baseline.
+11-08 12:32:04.480 10379 10379 I flutter :   package:matcher/src/expect/expect.dart 187:31                                             fail
+11-08 12:32:04.480 10379 10379 I flutter :   home/hieu/Documents/Training/XRecorder/integration_test/recording_cancel_test.dart 21:11  main.<fn>
+11-08 12:32:04.480 10379 10379 I flutter :   ===== asynchronous gap ===========================
+11-08 12:32:04.480 10379 10379 I flutter :   dart:async/future.dart 702:3                                                              Future._kTrue
+11-08 12:32:04.480 10379 10379 I flutter :   ===== asynchronous gap ===========================
+11-08 12:32:04.480 10379 10379 I flutter :   dart:async/zone.dart 748:12                                                               _CustomZone.bindUnaryCallbackGuarded.<fn>
+11-08 12:32:04.480 10379 10379 I flutter :   
+11-08 12:32:04.494 10379 10379 I flutter : 00:45 +0 -1: (tearDownAll)
+11-08 12:32:04.534 10379 10379 I flutter : 00:45 +1 -1: Some tests failed.

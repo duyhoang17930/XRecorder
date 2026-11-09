@@ -15,9 +15,13 @@ class VideoEncoder(
     width: Int, height: Int, bitrate: Int, private val fps: Int, private val mime: String = "video/avc",
     private val onFirstFrame: () -> Unit, private val onFailure: () -> Unit
 ) {
+    companion object {
+        // Translate encoder-relative PTS into the monotonic clock used by pause ranges.
+        fun captureTimeNs(ptsUs: Long, originUs: Long, sourceStartNs: Long): Long =
+            sourceStartNs + (ptsUs - originUs) * 1000
+    }
     private val codec = MediaCodec.createByCodecName(encoderName)
-    private val muxer = if (Build.VERSION.SDK_INT >= 26) MediaMuxer(descriptor.fileDescriptor, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
-        else MediaMuxer(requireNotNull(legacyPath), MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+    private val muxer: MediaMuxer
     val surface: Surface
     @Volatile private var aborted = false
     @Volatile private var failure: Exception? = null
@@ -42,6 +46,14 @@ class VideoEncoder(
         pauseRanges.sumOf { (start, end) -> (minOf(timeNs,end)-start).coerceAtLeast(0) } +
             if (pauseStartNs != 0L) (timeNs-pauseStartNs).coerceAtLeast(0) else 0L
     init {
+        muxer = try {
+            if (Build.VERSION.SDK_INT >= 26) MediaMuxer(descriptor.fileDescriptor, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+            else MediaMuxer(requireNotNull(legacyPath), MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+        } catch (e: Exception) {
+            runCatching { codec.release() }
+            throw e
+        }
+        var inputSurface: Surface? = null
         try {
             val format = MediaFormat.createVideoFormat(mime, width, height).apply {
                 setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface)
@@ -52,9 +64,14 @@ class VideoEncoder(
                 if (Build.VERSION.SDK_INT >= 29) setFloat(MediaFormat.KEY_MAX_FPS_TO_ENCODER, fps.toFloat())
             }
             codec.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
-            surface = codec.createInputSurface()
+            surface = codec.createInputSurface().also { inputSurface = it }
             codec.start()
-        } catch (e: Exception) { codec.release(); muxer.release(); throw e }
+        } catch (e: Exception) {
+            runCatching { inputSurface?.release() }
+            runCatching { codec.release() }
+            runCatching { muxer.release() }
+            throw e
+        }
         worker = Thread({ drain() }, "screen-encoder").apply { start() }
     }
     private fun drain() {
@@ -77,7 +94,7 @@ class VideoEncoder(
                         if (originPts < 0) { originPts = info.presentationTimeUs; firstFrameNs = System.nanoTime(); sourceStartNs = if (kotlin.math.abs(originPts * 1000 - firstFrameNs) < 60000000000L) originPts * 1000 else firstFrameNs }
                         // Keep spacing above the MP4 track's timestamp quantization (often 90 kHz).
                         // Some encoders drain queued repeat frames across suspend/resume.
-                        info.presentationTimeUs = maxOf(if(lastPts < 0) 0 else lastPts + 1000, info.presentationTimeUs - originPts - pausedBefore(info.presentationTimeUs * 1000) / 1000)
+                        info.presentationTimeUs = maxOf(if(lastPts < 0) 0 else lastPts + 1000, info.presentationTimeUs - originPts - pausedBefore(captureTimeNs(info.presentationTimeUs, originPts, sourceStartNs)) / 1000)
                         buffer.position(info.offset); buffer.limit(info.offset + info.size)
                         muxer.writeSampleData(track, buffer, info)
                         if (lastPts < 0) onFirstFrame()

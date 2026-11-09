@@ -1,0 +1,8 @@
+  Window #6 Window{c1727b7 u0 3HRecorder floating controls}:
+    mAttrs={(320,421)(wrapxwrap) gr=TOP LEFT CENTER sim={adjust=pan} ty=APPLICATION_OVERLAY fmt=TRANSLUCENT
+      fl=NOT_FOCUSABLE NOT_TOUCH_MODAL HARDWARE_ACCELERATED
+    Requested w=400 h=96 mLayoutSeq=127925
+ canReceiveKeys()=false    mHasSurface=true isReadyForDisplay()=true mWindowRemovalAllowed=false
+    mFrame=[320,485][720,581] last=[320,485][720,581]
+    WindowStateAnimator{47c59fa 3HRecorder floating controls}:
+      mSurface=Surface(name=3HRecorder floating controls)/@0xdb8abab

@@ -1,0 +1,102 @@
+[
+  {
+    "node": {
+      "index": "0",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Video",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[8,1344][149,1456]"
+    },
+    "xy": [
+      78,
+      1400
+    ]
+  },
+  {
+    "node": {
+      "index": "7",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Record screen",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[80,582][397,686]"
+    },
+    "xy": [
+      238,
+      634
+    ]
+  },
+  {
+    "node": {
+      "index": "8",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Start Recording",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[32,1192][688,1296]"
+    },
+    "xy": [
+      360,
+      1244
+    ]
+  },
+  {
+    "node": {
+      "index": "0",
+      "text": "BẮT ĐẦU NGAY",
+      "resource-id": "android:id/button1",
+      "class": "android.widget.Button",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[40,847][680,951]"
+    },
+    "xy": [
+      360,
+      899
+    ]
+  }
+]

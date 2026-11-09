@@ -1,0 +1,67 @@
+{
+  "baseline_files": 336,
+  "changed_existing": [
+    "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/CaptureRequestsTest.kt",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureBridge.kt",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureRequests.kt"
+  ],
+  "missing": [],
+  "dart_tests": 28,
+  "native_suites": [
+    {
+      "name": "com.xrecorder.xrecorder.recording.CaptureRequestsTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.xrecorder.xrecorder.recording.VideoBitrateTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.xrecorder.xrecorder.recording.CaptureJournalTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.xrecorder.xrecorder.recording.ScreenshotPixelsTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.xrecorder.xrecorder.recording.CaptureTimingTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.xrecorder.xrecorder.recording.AudioVideoMathTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.xrecorder.xrecorder.recording.FloatingControlGeometryTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "native_tests": 29,
+  "native_failures": 0,
+  "new_source_files": [
+    "test/mediaprojection_consent_flow_test.dart"
+  ],
+  "device_commands_run": false
+}

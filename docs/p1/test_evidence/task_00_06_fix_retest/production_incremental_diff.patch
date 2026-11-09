@@ -1,0 +1,182 @@
+--- android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt (before task)
++++ android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt (local fix)
+@@ -26,6 +26,23 @@
+             CaptureState.error = data.optString("error").takeUnless { it.isBlank() || it == "null" }
+             val config = data.optJSONObject("config")
+             if (config != null) runCatching { CaptureState.config = CaptureConfig.from(value, config.keys().asSequence().associateWith { config.get(it) }) }
++            val dimensions = dimensions(
++                data.optInt("width", if (CaptureState.screenshot) 0 else CaptureState.config.width),
++                data.optInt("height", if (CaptureState.screenshot) 0 else CaptureState.config.height)
++            ) {
++                if (!CaptureState.screenshot || CaptureState.state != "completed") null
++                else CaptureState.output?.let { output ->
++                    runCatching {
++                        val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
++                        value.contentResolver.openInputStream(Uri.parse(output))?.use {
++                            android.graphics.BitmapFactory.decodeStream(it, null, bounds)
++                        }
++                        if (bounds.outMimeType == "image/png") bounds.outWidth to bounds.outHeight else null
++                    }.getOrNull()
++                }
++            }
++            CaptureState.width = dimensions.first
++            CaptureState.height = dimensions.second
+             if (CaptureState.busy) {
+                 cleanup()
+                 CaptureState.state = "failed"
+@@ -36,6 +53,11 @@
+         } catch (_: Exception) {
+             CaptureState.state = "failed"; CaptureState.error = "The previous recording journal could not be recovered."
+         }
++    }
++    internal fun dimensions(width: Int, height: Int, readOutput: () -> Pair<Int, Int>?): Pair<Int, Int> {
++        if (width > 0 && height > 0) return width to height
++        val actual = readOutput()
++        return actual?.takeIf { it.first > 0 && it.second > 0 } ?: (0 to 0)
+     }
+     fun save() { if (context != null) prefs.edit().putString("session", JSONObject(CaptureState.snapshot()).toString()).commit() }
+     fun pending(uri: Uri) { if (context != null) check(prefs.edit().putString("pending",uri.toString()).commit()) }
+--- lib/features/recording/recording_service.dart (before task)
++++ lib/features/recording/recording_service.dart (local fix)
+@@ -19,7 +19,15 @@
+       .map((value) => decode(value as Map<Object?, Object?>));
+   static RecordingSession decode(Map<Object?, Object?> data) {
+     final config = (data['config'] as Map<Object?, Object?>?) ?? data;
+-    final dimensions = data['screenshot'] == true ? data : config;
++    // Screenshot config is a video preset, not the dimensions of its PNG.
++    bool hasDimensions(Map<Object?, Object?> value) =>
++        value['width'] is num &&
++        (value['width'] as num) > 0 &&
++        value['height'] is num &&
++        (value['height'] as num) > 0;
++    final dimensions = data['screenshot'] == true
++        ? (hasDimensions(data) ? data : const <Object?, Object?>{})
++        : (hasDimensions(config) ? config : data);
+     return RecordingSession(
+       id: data['id'] as String? ?? '',
+       screenshot: data['screenshot'] == true,
+@@ -32,9 +40,12 @@
+           (a) => a.name == config['audio'],
+           orElse: () => AudioSource.mute,
+         ),
+-        width: ((dimensions['width'] ?? config['width']) as num?)?.toInt() ?? 0,
+-        height:
+-            ((dimensions['height'] ?? config['height']) as num?)?.toInt() ?? 0,
++        width: hasDimensions(dimensions)
++            ? (dimensions['width'] as num).toInt()
++            : 0,
++        height: hasDimensions(dimensions)
++            ? (dimensions['height'] as num).toInt()
++            : 0,
+         fps: (config['fps'] as num?)?.toInt() ?? 30,
+         bitrate: (config['bitrate'] as num?)?.toInt() ?? 8000000,
+         codec: config['codec'] == 'hevc' ? VideoCodec.hevc : VideoCodec.avc,
+--- lib/features/recording/recording_setup_sheet.dart (before task)
++++ lib/features/recording/recording_setup_sheet.dart (local fix)
+@@ -1,9 +1,43 @@
+ import 'package:flutter/material.dart';
+ 
++import '../../core/domain/models.dart';
+ import '../../core/widgets/studio_widgets.dart';
+ import '../settings/settings_controller.dart';
+ import '../settings/recording_settings_form.dart';
+ import 'recording_service.dart';
++
++void validateRecordingSelection(
++  RecordingSettings settings,
++  RecordingCapabilities caps,
++) {
++  final longEdge = settings.width > settings.height
++      ? settings.width
++      : settings.height;
++  final shortEdge = settings.width < settings.height
++      ? settings.width
++      : settings.height;
++  final supported = caps.configurations.any(
++    (c) =>
++        c.width == longEdge &&
++        c.height == shortEdge &&
++        c.fps == settings.fps &&
++        c.codec == settings.codec,
++  );
++  final exceedsPerformance =
++      settings.mode == RecordingMode.performance &&
++      (longEdge > 1280 ||
++          shortEdge > 720 ||
++          settings.fps > 30 ||
++          (settings.bitrate ?? 0) > 8000000);
++  if (!supported ||
++      exceedsPerformance ||
++      !caps.audioSources.contains(settings.audioSource)) {
++    throw const DomainFailure(
++      FailureCode.invalid,
++      'The selected settings are unavailable. Choose a supported resolution, FPS, codec and audio source; Performance uses up to 720p, 30 FPS and 8 Mbps.',
++    );
++  }
++}
+ 
+ Future<void> openRecordingSetup(BuildContext context) =>
+     showStudioBottomSheet<void>(
+@@ -117,7 +151,11 @@
+                       return;
+                     }
+                     try {
+-                      await capture.start(settings.recordingSnapshot);
++                      final caps = await capture.service.capabilities();
++                      if (!context.mounted) return;
++                      final selection = settings.recordingSnapshot;
++                      validateRecordingSelection(selection, caps);
++                      await capture.start(selection);
+                       if (context.mounted) Navigator.pop(context);
+                     } catch (e) {
+                       if (context.mounted) {
+--- lib/features/settings/recording_settings_form.dart (before task)
++++ lib/features/settings/recording_settings_form.dart (local fix)
+@@ -36,17 +36,18 @@
+           '4K UHD': (3840, 2160),
+         };
+         bool supports(String resolution, int fps) {
++          if (s.mode == 'Performance' && fps > 30) return false;
+           if (caps == null) return true;
+           final size = resolutions[resolution]!;
+           final codec = s.codec == 'H.265 / HEVC'
+               ? VideoCodec.hevc
+               : VideoCodec.avc;
+-          if (codec == VideoCodec.hevc) {
+-            return caps
+-                .hevc; // Native preflight validates the exact HEVC tuple.
+-          }
+           return caps.configurations.any(
+-            (c) => c.width == size.$1 && c.height == size.$2 && c.fps == fps,
++            (c) =>
++                c.width == size.$1 &&
++                c.height == size.$2 &&
++                c.fps == fps &&
++                c.codec == codec,
+           );
+         }
+ 
+@@ -86,10 +87,21 @@
+                     .where(
+                       (r) =>
+                           (s.mode == 'Performance' && r != '720p HD') ||
+-                          !supports(r, int.parse(s.fps)),
++                          ![24, 30, 60, 90, 120].any((fps) => supports(r, fps)),
+                     )
+                     .toSet(),
+-                onChanged: (v) => s.update(() => s.resolution = v),
++                onChanged: (v) => s.update(() {
++                  s.resolution = v;
++                  if (!supports(v, int.parse(s.fps))) {
++                    s.fps = [
++                      30,
++                      24,
++                      60,
++                      90,
++                      120,
++                    ].firstWhere((fps) => supports(v, fps)).toString();
++                  }
++                }),
+               ),
+               ChoiceGroup(
+                 label: 'Target FPS',

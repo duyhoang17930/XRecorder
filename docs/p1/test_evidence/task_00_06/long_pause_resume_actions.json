@@ -1,0 +1,130 @@
+[
+  {
+    "at": "2026-11-08T10:25:20.079919+07:00",
+    "target": {
+      "index": "3",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Pause",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[320,1216][506,1312]"
+    },
+    "action": "input tap 413 1264"
+  },
+  {
+    "at": "2026-11-08T10:25:22.572199+07:00",
+    "native": {
+      "id": "3f0a524d-e46d-4c27-aa3a-835473b2d0d5",
+      "state": "paused",
+      "startedAt": 1794108242343,
+      "elapsedMs": 77444,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 30,
+        "bitrate": 8000000,
+        "codec": "avc",
+        "audio": "microphone",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 3,
+        "durationSeconds": 300,
+        "orientation": "portrait",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "elapsed_labels": [
+      "77 seconds elapsed"
+    ],
+    "screenshot_enabled": [
+      "false"
+    ]
+  },
+  {
+    "at": "2026-11-08T10:25:30.056854+07:00",
+    "native": {
+      "id": "3f0a524d-e46d-4c27-aa3a-835473b2d0d5",
+      "state": "paused",
+      "startedAt": 1794108242343,
+      "elapsedMs": 77444,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 30,
+        "bitrate": 8000000,
+        "codec": "avc",
+        "audio": "microphone",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 3,
+        "durationSeconds": 300,
+        "orientation": "portrait",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+      },
+      "countdownRemaining": 0
+    },
+    "elapsed_labels": [
+      "77 seconds elapsed"
+    ],
+    "screenshot_enabled": [
+      "false"
+    ]
+  },
+  {
+    "at": "2026-11-08T10:25:31.754426+07:00",
+    "target": {
+      "index": "3",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Resume",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[296,1216][506,1312]"
+    },
+    "action": "input tap 401 1264"
+  }
+]

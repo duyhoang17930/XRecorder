@@ -1,0 +1,36 @@
+[
+  {
+    "file": "screenshot_native_1.png",
+    "signature": [
+      137,
+      80,
+      78,
+      71,
+      13,
+      10,
+      26,
+      10
+    ],
+    "bytes": 856636,
+    "width": 720,
+    "height": 1456,
+    "sampled_colors": 1349
+  },
+  {
+    "file": "screenshot_native_2.png",
+    "signature": [
+      137,
+      80,
+      78,
+      71,
+      13,
+      10,
+      26,
+      10
+    ],
+    "bytes": 854564,
+    "width": 720,
+    "height": 1456,
+    "sampled_colors": 1352
+  }
+]

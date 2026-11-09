@@ -1,0 +1,13 @@
+--------- beginning of main
+--------- beginning of system
+11-08 09:52:20.026 18609 18609 I flutter : 00:00 +0: Quality, countdown, timed auto-stop and every supported audio mode
+11-08 09:52:25.548 18609 18609 I flutter : CONFIG_TEST_CONSENT_mute
+11-08 09:53:18.704 18609 18609 I flutter : CONFIG_TEST_OUTPUT_mute=content://media/external/video/media/1000002303
+11-08 09:53:18.705 18609 18609 I flutter : CONFIG_TEST_CONSENT_microphone
+11-08 09:53:30.167 18609 18609 I flutter : CONFIG_TEST_OUTPUT_microphone=content://media/external/video/media/1000002304
+11-08 09:53:30.168 18609 18609 I flutter : CONFIG_TEST_CONSENT_internal
+11-08 09:53:38.835 18609 18609 I flutter : CONFIG_TEST_OUTPUT_internal=content://media/external/video/media/1000002305
+11-08 09:53:38.836 18609 18609 I flutter : CONFIG_TEST_CONSENT_mixed
+11-08 09:54:40.494 18609 18609 I flutter : CONFIG_TEST_OUTPUT_mixed=content://media/external/video/media/1000002306
+11-08 09:54:41.042 18609 18609 I flutter : 02:21 +1: (tearDownAll)
+11-08 09:54:41.112 18609 18609 I flutter : 02:21 +2: All tests passed!
