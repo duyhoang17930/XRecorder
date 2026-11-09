@@ -16,6 +16,8 @@ p.add_argument('--offline',action='store_true',help='Validate already-pulled nat
 p.add_argument('--exclude-capture-outline',action='store_true',help='Exclude the capture-only outer1px at320x180; reject fixtures with expected media on that border.')
 args=p.parse_args()
 root=Path(args.directory)
+if (root/'signal_validation.json').exists():
+    raise FileExistsError('Use a new validation directory; preserve earlier evidence.')
 ffmpeg=Path('build/task03/ffmpeg/ffmpeg.exe').resolve()
 ffprobe=ffmpeg.with_name('ffprobe.exe')
 def adb(*words):
@@ -58,6 +60,17 @@ for name,path in files.items():
     subprocess.run([str(ffmpeg),'-v','error','-xerror','-i',str(path),'-f','null','-'],check=True,capture_output=True)
     result['files'][name]={'avDurationDifferenceMs':round(drift*1000,3),'duration':probe['format']['duration'],'samples':len(audio[name]),'rmsMiddle':rms(name,1.2,2.8)}
 assert rms('baseline',1.2,2.8)>.1
+if 'eightTrackMix' in audio:
+    # Eight processed, offset speech tracks must remain audible and aligned to
+    # the four-second video. This does not substitute for human listening.
+    samples=audio['eightTrackMix']
+    assert abs(len(samples)/48000-4)<.08,len(samples)
+    assert all(math.isfinite(x) for x in samples)
+    middle=rms('eightTrackMix',1.2,2.8)
+    assert middle>.003,middle
+    assert rms('eightTrackMix',0,.1)<middle
+    result['eightTrackMix']={'tracks':8,'samples':len(samples),'rmsMiddle':middle,
+        'allFinite':True,'fadeOnsetQuieterThanMiddle':True}
 if 'gain' in audio:
     assert rms('gain',1.2,2.8)>rms('baseline',1.2,2.8)*1.5
     # Boosting must saturate rather than wrapping signed PCM16 through zero.
@@ -166,9 +179,13 @@ if args.check_preview_parity:
             assert min(coverage_a,coverage_b)>.9,(time_ms,coverage_a,coverage_b)
             metric.update(previewWithin2pxOfExport=coverage_a,exportWithin2pxOfPreview=coverage_b)
         parity.append(metric)
-        preview.save(root/f'preview_crop_{time_ms}.png');exported.save(root/f'export_frame_{time_ms}.png')
+        with (root/f'preview_crop_{time_ms}.png').open('xb') as stream:
+            preview.save(stream,format='PNG')
+        with (root/f'export_frame_{time_ms}.png').open('xb') as stream:
+            exported.save(stream,format='PNG')
     result['previewExportParity']={'frames':parity,'method':'Known fixture layer color masks after resizing native screen crop to320x180; symmetric2px tolerance for codec/raster edges. Excludes QA debug banner; no claim of bit-identical rendering.'}
 result['archivedFilesOnly']=args.offline
 result['excludedCaptureBoundaryPxAt320x180']=1 if args.exclude_capture_outline else 0
-(root/'signal_validation.json').write_text(json.dumps(result,indent=2))
+with (root/'signal_validation.json').open('x',encoding='utf8') as stream:
+    json.dump(result,stream,indent=2)
 print(json.dumps(result,indent=2))

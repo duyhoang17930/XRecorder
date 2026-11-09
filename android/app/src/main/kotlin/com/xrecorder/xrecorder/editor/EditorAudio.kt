@@ -79,6 +79,46 @@ object EditorAudio {
     }
 }
 
+/** Mixed processor tails must not extend a composition past its video endpoint. */
+internal class TimelineAudioLimit(private val durationUs: Long) : BaseAudioProcessor() {
+    private var remainingFrames = 0L
+
+    init {
+        require(durationUs > 0)
+    }
+
+    override fun onConfigure(format: AudioProcessor.AudioFormat): AudioProcessor.AudioFormat {
+        if (format.sampleRate <= 0 || format.bytesPerFrame <= 0)
+            throw AudioProcessor.UnhandledAudioFormatException(format)
+        return format
+    }
+
+    override fun onFlush(metadata: AudioProcessor.StreamMetadata) {
+        remainingFrames =
+            (durationUs - metadata.positionOffsetUs).coerceAtLeast(0) *
+                inputAudioFormat.sampleRate / 1000000
+    }
+
+    // Retained samples keep their timestamps and speed. Use the identity time
+    // mapping: the composition already declares its endpoint. Reporting a
+    // clamped hypothetical duration makes CompositionPlayer classify this tail
+    // guard as an unsupported speed-changing effect (Media3 probes 1000s).
+    override fun queueInput(input: ByteBuffer) {
+        if (!input.hasRemaining()) return
+        val frameBytes = inputAudioFormat.bytesPerFrame
+        require(input.remaining() % frameBytes == 0)
+        val frames = minOf(remainingFrames, (input.remaining() / frameBytes).toLong()).toInt()
+        val end = input.limit()
+        val output = replaceOutputBuffer(frames * frameBytes)
+        input.limit(input.position() + frames * frameBytes)
+        output.put(input)
+        input.limit(end)
+        input.position(end) // Consume the tail without copying or retaining it.
+        remainingFrames -= frames
+        output.flip()
+    }
+}
+
 @androidx.annotation.Keep
 private object NativeDenoiser {
     init {

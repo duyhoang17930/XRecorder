@@ -59,8 +59,13 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
 
   Future<void> restoreJob() async {
     try {
+      final signature = transcriptionSourceSignature(widget.project);
       final list = await AndroidTranscriptionService.channel
-          .invokeListMethod<dynamic>('transcriptionJobs');
+          .invokeListMethod<dynamic>('transcriptionJobs', {
+            'projectId': widget.project.id,
+            'sourceSignature': signature,
+            'limit': 1,
+          });
       final matching =
           (list ?? [])
               .map((v) => Map<String, dynamic>.from(v as Map))
@@ -68,8 +73,7 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
                 (v) =>
                     v['projectId'] == widget.project.id &&
                     (v['sourceSignature'] == null ||
-                        v['sourceSignature'] ==
-                            transcriptionSourceSignature(widget.project)),
+                        v['sourceSignature'] == signature),
               )
               .toList()
             ..sort(

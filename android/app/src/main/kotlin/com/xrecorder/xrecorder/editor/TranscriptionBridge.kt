@@ -236,9 +236,42 @@ class TranscriptionBridge(private val context: Context) {
         }
     }
 
-    private fun replyJobs(result: MethodChannel.Result) {
+    private fun replyJobs(arguments: Any?, result: MethodChannel.Result) {
         if (historyReadError) result.error("history_unavailable", historyUnavailableMessage, null)
-        else result.success(jobs.values.map { it.snapshot() })
+        else if (arguments == null) result.success(jobs.values.map { it.snapshot() })
+        else {
+            // Keep the unfiltered legacy contract. New callers transfer at most
+            // one page, selecting metadata before serializing subtitle segments.
+            require(arguments is Map<*, *>) { "Invalid speech history query" }
+            val requestedLimit = arguments["limit"] ?: 50
+            require(requestedLimit is Number && requestedLimit.toDouble() in 1.0..100.0 &&
+                requestedLimit.toDouble() == requestedLimit.toInt().toDouble()) {
+                "Speech history page size must be 1 to 100"
+            }
+            val limit = requestedLimit.toInt()
+            require(arguments["projectId"] == null || arguments["projectId"] is String)
+            require(arguments["sourceSignature"] == null || arguments["sourceSignature"] is String)
+            require(arguments["beforeCreatedAt"] == null || arguments["beforeCreatedAt"] is Number)
+            require(arguments["beforeId"] == null || arguments["beforeId"] is String)
+            val projectId = arguments["projectId"] as? String
+            val signature = arguments["sourceSignature"] as? String
+            val beforeTime = (arguments["beforeCreatedAt"] as? Number)?.toLong()
+            val beforeId = arguments["beforeId"] as? String
+            require((beforeTime == null) == (beforeId == null)) { "Incomplete speech history cursor" }
+            require(beforeId == null || beforeId.isNotEmpty()) { "Invalid speech history cursor" }
+            val page = jobs.values.asSequence()
+                .filter { projectId == null || it.projectId == projectId }
+                .filter { signature == null || it.sourceSignature == null || it.sourceSignature == signature }
+                .filter {
+                    beforeTime == null || it.createdAt < beforeTime ||
+                        it.createdAt == beforeTime && it.id < beforeId!!
+                }
+                .sortedWith(compareByDescending<Job> { it.createdAt }.thenByDescending { it.id })
+                .take(limit)
+                .map { it.snapshot() }
+                .toList()
+            result.success(page)
+        }
     }
 
     private fun persistOrWarn(job: Job) {
@@ -380,10 +413,10 @@ class TranscriptionBridge(private val context: Context) {
                 }
                 "transcriptionJobs" -> {
                     if (journalRestored) {
-                        replyJobs(result)
+                        replyJobs(call.arguments, result)
                     } else
                         worker.execute {
-                            main.post { replyJobs(result) }
+                            main.post { handle(call, result) }
                         }
                 }
                 "transcriptionSaveHistory" -> {

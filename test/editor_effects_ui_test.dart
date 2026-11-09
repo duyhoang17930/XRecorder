@@ -7,6 +7,7 @@ import 'package:xrecorder/features/editor/layers_editor.dart';
 import 'package:xrecorder/features/editor/project_effects.dart';
 import 'package:xrecorder/features/editor/transcription_dialog.dart';
 import 'package:xrecorder/features/editor/subtitles.dart';
+import 'package:xrecorder/features/editor/transcription_service.dart';
 import 'package:xrecorder/core/domain/models.dart';
 
 void main() {
@@ -36,6 +37,11 @@ void main() {
               {'id': 'base', 'installed': true},
             ];
           case 'transcriptionJobs':
+            expect(call.arguments, {
+              'projectId': project.id,
+              'sourceSignature': transcriptionSourceSignature(project),
+              'limit': 1,
+            });
             return [
               {
                 'id': 'retained',

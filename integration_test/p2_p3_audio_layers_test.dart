@@ -151,7 +151,9 @@ void main() {
   ) async {
     const engine = AndroidEditProjectRepository.channel;
     const media = MethodChannel('com.xrecorder/media');
-    const root = 'content://com.xrecorder.xrecorder.files/media/';
+    const root = bool.fromEnvironment('QA_PRIVATE_FIXTURES')
+        ? 'content://com.xrecorder.xrecorder.files/trash/'
+        : 'content://com.xrecorder.xrecorder.files/media/';
     final stamp = DateTime.now().microsecondsSinceEpoch;
     if (const bool.fromEnvironment('P2_P3_MATRIX')) {
       await _matrix(tester, binding);
