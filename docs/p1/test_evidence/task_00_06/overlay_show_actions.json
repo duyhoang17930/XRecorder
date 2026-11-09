@@ -1,0 +1,140 @@
+[
+  {
+    "at": "2026-11-08T10:35:09.856456+07:00",
+    "target": {
+      "index": "1",
+      "text": "",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "class": "android.widget.ScrollView",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "false",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "true",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[0,0][720,1352]"
+    },
+    "action": "input swipe 360 1081 360 676 400"
+  },
+  {
+    "at": "2026-11-08T10:35:14.026039+07:00",
+    "target": {
+      "index": "1",
+      "text": "",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "class": "android.widget.ScrollView",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "false",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "true",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[0,0][720,1352]"
+    },
+    "action": "input swipe 360 1081 360 676 400"
+  },
+  {
+    "at": "2026-11-08T10:35:18.400999+07:00",
+    "target": {
+      "index": "1",
+      "text": "",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "class": "android.widget.ScrollView",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "false",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "true",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[0,0][720,1352]"
+    },
+    "action": "input swipe 360 1081 360 676 400"
+  },
+  {
+    "at": "2026-11-08T10:35:22.991099+07:00",
+    "target": {
+      "index": "1",
+      "text": "",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "class": "android.widget.ScrollView",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "false",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "true",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[0,0][720,1352]"
+    },
+    "action": "input swipe 360 1081 360 676 400"
+  },
+  {
+    "at": "2026-11-08T10:35:27.935551+07:00",
+    "target": {
+      "index": "1",
+      "text": "",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "class": "android.widget.ScrollView",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "false",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "true",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[0,0][720,1352]"
+    },
+    "action": "input swipe 360 1081 360 676 400"
+  },
+  {
+    "at": "2026-11-08T10:35:33.756172+07:00",
+    "target": {
+      "index": "1",
+      "text": "",
+      "resource-id": "com.android.systemui:id/notification_stack_scroller",
+      "class": "android.widget.ScrollView",
+      "package": "com.android.systemui",
+      "content-desc": "",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "false",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "true",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[0,0][720,1352]"
+    },
+    "action": "input swipe 360 1081 360 676 400"
+  }
+]

@@ -1,0 +1,1 @@
+Row: 0 _id=1000002314, _display_name=Screenshot_1794107441132.png, mime_type=image/png, _size=854564, width=720, height=1456, is_pending=0, owner_package_name=com.xrecorder.xrecorder

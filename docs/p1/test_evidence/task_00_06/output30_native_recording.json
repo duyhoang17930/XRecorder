@@ -1,0 +1,32 @@
+{
+  "id": "c907b673-0c87-4caf-a79b-b9e738ee417c",
+  "state": "recording",
+  "startedAt": 1794106906161,
+  "elapsedMs": 1,
+  "outputUri": null,
+  "error": null,
+  "screenshot": false,
+  "width": 720,
+  "height": 1280,
+  "fps": 30,
+  "bitrate": 8000000,
+  "config": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "bitrate": 8000000,
+    "codec": "avc",
+    "audio": "mute",
+    "micGain": 1,
+    "internalGain": 1,
+    "noiseReduction": false,
+    "countdown": 0,
+    "durationSeconds": 30,
+    "orientation": "automatic",
+    "mode": "normal",
+    "facecam": false,
+    "hardwareEncoding": true,
+    "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+  },
+  "countdownRemaining": 0
+}

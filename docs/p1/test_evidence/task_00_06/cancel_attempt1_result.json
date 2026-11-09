@@ -1,0 +1,5 @@
+{
+  "status": "BLOCKED",
+  "reason": "UI automation used a stale native state while session advanced; it sent Back on a new consent. Unrelated SIM Toolkit foreground also interrupted. No product failure inferred. Full harness result not retained; retry required.",
+  "source_changes": false
+}

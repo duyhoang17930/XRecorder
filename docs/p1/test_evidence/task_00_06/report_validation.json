@@ -1,0 +1,16 @@
+{
+  "cases": 93,
+  "counts": {
+    "PASS": 55,
+    "NOT RUN": 29,
+    "UNSUPPORTED": 8,
+    "FAIL": 1
+  },
+  "unique_ids": 93,
+  "report_links_checked": 555,
+  "missing_links": [],
+  "trailing_whitespace_lines": [],
+  "git_diff_check_exit": 0,
+  "git_diff_check_output": "",
+  "report_bytes": 129775
+}

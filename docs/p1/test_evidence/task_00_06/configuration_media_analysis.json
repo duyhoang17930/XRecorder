@@ -1,0 +1,289 @@
+[
+  {
+    "file": "config_internal.mp4",
+    "bytes": 77677,
+    "sha256": "02ed246e1ee2c931c178adde635633f31c8e2c22e64446a210615a765f5fe986",
+    "tracks": [
+      {
+        "timescale": 90000,
+        "duration_s": 4.1289444444444445,
+        "handler": "vide",
+        "sample_entry": "avc1",
+        "width": 720,
+        "height": 1280
+      },
+      {
+        "timescale": 48000,
+        "duration_s": 4.070354166666666,
+        "handler": "soun",
+        "sample_entry": "mp4a",
+        "channels": 1,
+        "sample_size": 16,
+        "sample_rate": 48000.0
+      }
+    ],
+    "decode": {
+      "opencv": "4.6.0",
+      "reported_fps": 14.53155904791378,
+      "reported_frames": 60,
+      "decoded_frames": 60,
+      "samples": [
+        {
+          "frame": 0,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            0.32537217881944447,
+            0.35132161458333333,
+            0.3118337673611111
+          ],
+          "colors_sampled": 3
+        },
+        {
+          "frame": 30,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            0.32745985243055553,
+            0.35401041666666666,
+            0.3092230902777778
+          ],
+          "colors_sampled": 1
+        },
+        {
+          "frame": 59,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            0.3258224826388889,
+            0.35250542534722223,
+            0.3074446614583333
+          ],
+          "colors_sampled": 1
+        }
+      ]
+    }
+  },
+  {
+    "file": "config_microphone.mp4",
+    "bytes": 134105,
+    "sha256": "193b7abbc0674e2ed7992293d3e23ab97c49539d1183a8104584d3a068cf5cf0",
+    "tracks": [
+      {
+        "timescale": 90000,
+        "duration_s": 4.170411111111111,
+        "handler": "vide",
+        "sample_entry": "avc1",
+        "width": 720,
+        "height": 1280
+      },
+      {
+        "timescale": 48000,
+        "duration_s": 4.042604166666667,
+        "handler": "soun",
+        "sample_entry": "mp4a",
+        "channels": 1,
+        "sample_size": 16,
+        "sample_rate": 48000.0
+      }
+    ],
+    "decode": {
+      "opencv": "4.6.0",
+      "reported_fps": 17.744054010129563,
+      "reported_frames": 74,
+      "decoded_frames": 74,
+      "samples": [
+        {
+          "frame": 0,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            12.155600043402778,
+            12.607583550347222,
+            11.674270833333333
+          ],
+          "colors_sampled": 15
+        },
+        {
+          "frame": 37,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            12.14601345486111,
+            12.606303168402778,
+            11.661974826388889
+          ],
+          "colors_sampled": 10
+        },
+        {
+          "frame": 73,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            0.32501627604166666,
+            0.3518923611111111,
+            0.30689995659722225
+          ],
+          "colors_sampled": 1
+        }
+      ]
+    }
+  },
+  {
+    "file": "config_mixed.mp4",
+    "bytes": 76972,
+    "sha256": "c1e7c0004b175fa8cb4c057e6ae11fd0e6cfb1c138faa1b7d08b3bdc9e6c338f",
+    "tracks": [
+      {
+        "timescale": 90000,
+        "duration_s": 4.344333333333333,
+        "handler": "vide",
+        "sample_entry": "avc1",
+        "width": 720,
+        "height": 1280
+      },
+      {
+        "timescale": 48000,
+        "duration_s": 4.040895833333333,
+        "handler": "soun",
+        "sample_entry": "mp4a",
+        "channels": 1,
+        "sample_size": 16,
+        "sample_rate": 48000.0
+      }
+    ],
+    "decode": {
+      "opencv": "4.6.0",
+      "reported_fps": 12.890355252052482,
+      "reported_frames": 56,
+      "decoded_frames": 56,
+      "samples": [
+        {
+          "frame": 0,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            0.32581271701388886,
+            0.3517610677083333,
+            0.31227647569444444
+          ],
+          "colors_sampled": 3
+        },
+        {
+          "frame": 28,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            0.32301323784722225,
+            0.34917860243055554,
+            0.3053559027777778
+          ],
+          "colors_sampled": 3
+        },
+        {
+          "frame": 55,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            0.3172211371527778,
+            0.3439040798611111,
+            0.29884331597222225
+          ],
+          "colors_sampled": 1
+        }
+      ]
+    }
+  },
+  {
+    "file": "config_mute.mp4",
+    "bytes": 389579,
+    "sha256": "8c11464539748dc1e7c44d96a4b0c005b820c07a916c43d0081903e56ba4316d",
+    "tracks": [
+      {
+        "timescale": 90000,
+        "duration_s": 4.060644444444445,
+        "handler": "vide",
+        "sample_entry": "avc1",
+        "width": 720,
+        "height": 1280
+      }
+    ],
+    "decode": {
+      "opencv": "4.6.0",
+      "reported_fps": 13.790989886607417,
+      "reported_frames": 56,
+      "decoded_frames": 56,
+      "samples": [
+        {
+          "frame": 0,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            10.838216145833334,
+            10.818013237847222,
+            9.504772135416667
+          ],
+          "colors_sampled": 56
+        },
+        {
+          "frame": 28,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            10.814006076388889,
+            10.811128472222222,
+            9.479674479166667
+          ],
+          "colors_sampled": 52
+        },
+        {
+          "frame": 55,
+          "shape": [
+            1280,
+            720,
+            3
+          ],
+          "mean_rgb": [
+            0.3233463541666667,
+            0.34966688368055554,
+            0.3049131944444444
+          ],
+          "colors_sampled": 1
+        }
+      ]
+    }
+  }
+]

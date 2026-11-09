@@ -1,4 +1,4 @@
-﻿package com.xrecorder.xrecorder.recording
+package com.xrecorder.xrecorder.recording
 
 import android.media.MediaCodec
 import android.media.MediaExtractor
@@ -55,7 +55,9 @@ object RecordingMuxer {
             writer.stop(); muxing = false
         } finally {
             if (muxing) try { muxer?.stop() } catch (_: Exception) { }
-            muxer?.release(); videoReader.release(); audioReader.release()
+            try { muxer?.release() } catch (_: Exception) { }
+            try { videoReader.release() } catch (_: Exception) { }
+            try { audioReader.release() } catch (_: Exception) { }
         }
     }
 }

@@ -1,0 +1,32 @@
+{
+  "id": "28042445-9585-411b-b0f1-0c393378520e",
+  "state": "failed",
+  "startedAt": 0,
+  "elapsedMs": 0,
+  "outputUri": null,
+  "error": "Audio permission was denied. Select mute to record without audio.",
+  "screenshot": false,
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "bitrate": 8000000,
+  "config": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "bitrate": 8000000,
+    "codec": "avc",
+    "audio": "microphone",
+    "micGain": 1,
+    "internalGain": 1,
+    "noiseReduction": false,
+    "countdown": 3,
+    "durationSeconds": 300,
+    "orientation": "landscape",
+    "mode": "performance",
+    "facecam": false,
+    "hardwareEncoding": true,
+    "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+  },
+  "countdownRemaining": 3
+}

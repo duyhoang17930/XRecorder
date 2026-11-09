@@ -1,0 +1,36 @@
+ M android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureBridge.kt
+ M android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureConfig.kt
+ M android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt
+ M android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureService.kt
+ M android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureState.kt
+ M android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/SessionAudio.kt
+ M android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/VideoEncoder.kt
+ M docs/p1/TASK_00_OWNERSHIP_AND_CONTRACT.md
+ M docs/p1/TASK_00_P2_INTEGRATION_REQUESTS.md
+ M integration_test/screenshot_native_test.dart
+ M lib/features/recording/recording_service.dart
+ M lib/features/recording/recording_setup_sheet.dart
+ M lib/features/settings/recording_settings_form.dart
+ M test/recording_controller_test.dart
+?? android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureRequests.kt
+?? android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureTiming.kt
+?? android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FloatingControlGeometry.kt
+?? android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FloatingRecordingControls.kt
+?? android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/ScreenshotPixels.kt
+?? android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/
+?? docs/p1/FLOATING_CONTROLS_COMPACT_OUTPUT.md
+?? docs/p1/FLOATING_CONTROLS_F06_F12_F14.md
+?? docs/p1/RECORDING_SETTINGS_LAYOUT_P2_REQUEST.md
+?? docs/p1/TASK_01_RECORDING_ENGINE_AUDIT.md
+?? docs/p1/TASK_02_MEDIAPROJECTION_SESSION_RESULT.md
+?? docs/p1/TASK_03_AUDIO_ENGINE_RESULT.md
+?? docs/p1/TASK_03_P2_INTEGRATION_REQUESTS.md
+?? docs/p1/TASK_04_VIDEO_QUALITY_RESULT.md
+?? docs/p1/TASK_05_COUNTDOWN_AUTOSTOP_RESULT.md
+?? docs/p1/TASK_06_SCREENSHOT_RESULT.md
+?? docs/p1/test_evidence/
+?? integration_test/floating_controls_test.dart
+?? integration_test/floating_output_test.dart
+?? integration_test/recording_cancel_test.dart
+?? test/recording_service_contract_test.dart
+?? test/recording_setup_sheet_test.dart

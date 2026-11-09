@@ -1,0 +1,108 @@
+--- CaptureBridge.kt (before task)
++++ CaptureBridge.kt (after task)
+@@ -78,14 +78,14 @@
+         capabilitiesWorker.shutdownNow()
+     }
+     private fun requestPermission(permission: String, code: Int) {
+-        CaptureRequests.launch(code, CaptureState.id)
+-        try { activity.requestPermissions(arrayOf(permission), code) }
+-        catch (e: Exception) { CaptureRequests.consume(code); throw e }
++        CaptureRequests.launchOnce(code, CaptureState.id) {
++            activity.requestPermissions(arrayOf(permission), code)
++        }
+     }
+-    private fun openActivity(intent: Intent, code: Int) {
+-        CaptureRequests.launch(code, CaptureState.id)
+-        try { activity.startActivityForResult(intent, code) }
+-        catch (e: Exception) { CaptureRequests.consume(code); throw e }
++    private fun openActivity(code: Int, createIntent: () -> Intent) {
++        CaptureRequests.launchOnce(code, CaptureState.id) {
++            activity.startActivityForResult(createIntent(), code)
++        }
+     }
+     private fun ensureAudioPermission() {
+         if (disposed || requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
+@@ -99,32 +99,33 @@
+     } catch (_: Exception) { false }
+     private fun ensureCameraPermission() {
+         if (disposed || requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
+-        if (!CaptureState.config.facecam) { ensureControlsPermission(); return }
++        // Optional recording controls must not force an overlay permission trip.
++        // Without overlay access the existing notification controls remain usable.
++        if (!CaptureState.config.facecam) { launchConsent(); return }
+         if (!android.provider.Settings.canDrawOverlays(activity)) {
+-            openActivity(Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,android.net.Uri.parse("package:${activity.packageName}")),OVERLAY_PERMISSION)
++            openActivity(OVERLAY_PERMISSION) { Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,android.net.Uri.parse("package:${activity.packageName}")) }
+         } else if(activity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+             requestPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION)
+         } else launchConsent()
+     }
+-    private fun ensureControlsPermission() {
+-        if (requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
+-        if (CaptureState.screenshot || android.provider.Settings.canDrawOverlays(activity)) { launchConsent(); return }
+-        try {
+-            openActivity(Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+-                android.net.Uri.parse("package:${activity.packageName}")), CONTROLS_OVERLAY_PERMISSION)
+-        } catch (_: android.content.ActivityNotFoundException) { launchConsent() }
+-        catch (_: SecurityException) { launchConsent() }
++    private fun launchConsent() {
++        if (disposed || requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
++        openActivity(CONSENT) {
++            val manager = activity.getSystemService(MediaProjectionManager::class.java)
++            // Reserve before creating the one-shot intent; never retain it for another session.
++            // Video uses the system selector. Screenshots retain whole-screen capture.
++            if (Build.VERSION.SDK_INT >= 34 && CaptureState.screenshot) manager.createScreenCaptureIntent(MediaProjectionConfig.createConfigForDefaultDisplay()) else manager.createScreenCaptureIntent()
++        }
+     }
+-    private fun launchConsent() {
+-        if (requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return
+-        val manager = activity.getSystemService(MediaProjectionManager::class.java)
+-        // Video uses the system whole-screen/app selector. Screenshots retain whole-screen capture.
+-        val intent = if (Build.VERSION.SDK_INT >= 34 && CaptureState.screenshot) manager.createScreenCaptureIntent(MediaProjectionConfig.createConfigForDefaultDisplay()) else manager.createScreenCaptureIntent()
+-        openActivity(intent, CONSENT)
+-    }
++    private fun consumeResult(code: Int): String? = CaptureRequests.consumeFor(
++        code, requestedSession, receiverActive = !disposed,
++        // Cancel clears requestedSession, but its system dialog must still drain.
++        // The callback's state/owner checks below prevent using that old consent.
++        cancelledSession = CaptureState.id.takeUnless { CaptureState.busy }
++    )
+     fun onPermissionsResult(requestCode: Int): Boolean {
+         if (requestCode != NOTIFICATIONS && requestCode != AUDIO_PERMISSION && requestCode != CAMERA_PERMISSION) return false
+-        val sessionId = CaptureRequests.consume(requestCode) ?: return true
++        val sessionId = consumeResult(requestCode) ?: return true
+         if (disposed || sessionId != CaptureState.id || requestedSession != sessionId || CaptureState.state != "awaitingPermission") return true
+         if (requestCode == AUDIO_PERMISSION && activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+             requestedSession = null; CaptureState.transition("failed", "Audio permission was denied. Select mute to record without audio."); return true
+@@ -138,7 +139,7 @@
+     }
+     fun onActivityResult(request: Int, code: Int, data: Intent?): Boolean {
+         if (request !in listOf(CONSENT, OVERLAY_PERMISSION, CONTROLS_OVERLAY_PERMISSION)) return false
+-        val sessionId = CaptureRequests.consume(request) ?: return true
++        val sessionId = consumeResult(request) ?: return true
+         if (disposed || sessionId != CaptureState.id || requestedSession != sessionId || CaptureState.state != "awaitingPermission") return true
+         if (request == CONTROLS_OVERLAY_PERMISSION) {
+             // Grant is optional. Back/deny still continues with notification controls.
+--- CaptureRequests.kt (before task)
++++ CaptureRequests.kt (after task)
+@@ -10,6 +10,20 @@
+         pending = code to sessionId
+     }
+ 
++    fun launchOnce(code: Int, sessionId: String, action: () -> Unit): Boolean {
++        if (pending == (code to sessionId)) return false
++        launch(code, sessionId)
++        try { action() }
++        catch (e: Exception) { consumeFor(code, sessionId); throw e }
++        return true
++    }
++
++    fun consumeFor(code: Int, receiverSession: String?, receiverActive: Boolean = true, cancelledSession: String? = null): String? {
++        val request = pending ?: return null
++        if (!receiverActive || !owns(receiverSession ?: cancelledSession, request.second)) return null
++        return consume(code)
++    }
++
+     fun consume(code: Int): String? {
+         val request = pending ?: return null
+         if (request.first != code) return null

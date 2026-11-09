@@ -1,0 +1,16 @@
+ACTIVITY MANAGER SERVICES (dumpsys activity services)
+  User 0 active services:
+  * ServiceRecord{501e82 u0 com.xrecorder.xrecorder/.recording.CaptureService}
+    intent={cmp=com.xrecorder.xrecorder/.recording.CaptureService}
+    packageName=com.xrecorder.xrecorder
+    processName=com.xrecorder.xrecorder
+    baseDir=/data/app/~~FUbMIvthFCoXTJR6rNoN6A==/com.xrecorder.xrecorder-7AXdVP6uOuSwqqdJaInnAQ==/base.apk
+    dataDir=/data/user/0/com.xrecorder.xrecorder
+    app=ProcessRecord{76c76db 26164:com.xrecorder.xrecorder/u0a440}
+    allowWhileInUsePermissionInFgs=true
+    startForegroundCount=1
+    recentCallingPackage=com.xrecorder.xrecorder
+    isForeground=true foregroundId=2001 foregroundNoti=Notification(channel=screen_recording shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x62 color=0x00000000 actions=1 vis=PRIVATE)
+    createTime=-23s133ms startingBgTimeout=--
+    lastActivity=-23s132ms restartTime=-23s132ms createdFromFg=true
+    startRequested=true delayedStop=false stopIfKilled=true callStart=true lastStartId=1

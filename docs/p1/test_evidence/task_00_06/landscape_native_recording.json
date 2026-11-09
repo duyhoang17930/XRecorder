@@ -1,0 +1,36 @@
+{
+  "at": "2026-11-08T10:32:26.229606+07:00",
+  "native": {
+    "id": "24fe26f3-e546-4c74-b7bf-e25ef2bdcbe9",
+    "state": "recording",
+    "startedAt": 1794108746219,
+    "elapsedMs": 0,
+    "outputUri": null,
+    "error": null,
+    "screenshot": false,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "bitrate": 24000000,
+    "config": {
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "bitrate": 24000000,
+      "codec": "avc",
+      "audio": "mute",
+      "micGain": 1,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 3,
+      "durationSeconds": 300,
+      "orientation": "landscape",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "OMX.MTK.VIDEO.ENCODER.AVC"
+    },
+    "countdownRemaining": 0
+  },
+  "action": "input tap 360 899"
+}

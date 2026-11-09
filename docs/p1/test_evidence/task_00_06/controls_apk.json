@@ -1,0 +1,5 @@
+{
+  "sha256": "91d8bfed967268c819e722b612d48fc3e3494eb27758d15401a7b0efe94d0cb6",
+  "entrypoint": "integration_test/recording_controls_test.dart",
+  "signer": "Signer #1 certificate DN: C=US, O=Android, CN=Android Debug\nSigner #1 certificate SHA-256 digest: 032ad9b4fd062c482a1e30c67f2d1b8ebdf4a58e2d6c8c797284dec3606be153\nSigner #1 certificate SHA-1 digest: e1af0dbbdc5b83d08e69554c0d3010c3f1546b3d\nSigner #1 certificate MD5 digest: e974423abca629c409e6ef5283e9ef56\n"
+}

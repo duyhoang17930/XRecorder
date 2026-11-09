@@ -1,0 +1,94 @@
+[
+  {
+    "at": "2026-11-08T10:49:37.752220+07:00",
+    "target": {
+      "index": "0",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Video",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[8,1344][149,1456]"
+    },
+    "action": "input tap 78 1400"
+  },
+  {
+    "at": "2026-11-08T10:49:41.266798+07:00",
+    "target": {
+      "index": "7",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Record screen",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[80,582][397,686]"
+    },
+    "action": "input tap 238 634"
+  },
+  {
+    "at": "2026-11-08T10:49:44.828003+07:00",
+    "target": {
+      "index": "13",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Microphone",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[174,1033][374,1096]"
+    },
+    "action": "input tap 274 1064"
+  },
+  {
+    "at": "2026-11-08T10:49:48.241712+07:00",
+    "target": {
+      "index": "3",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Close setup",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[592,253][688,349]"
+    },
+    "action": "input tap 640 301"
+  }
+]

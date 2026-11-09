@@ -1,0 +1,48 @@
+[
+  {
+    "at": "2026-11-08T10:22:49.041094+07:00",
+    "target": {
+      "index": "5",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "5m",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "true",
+      "bounds": "[32,968][134,1064]"
+    },
+    "action": "input tap 83 1016"
+  },
+  {
+    "at": "2026-11-08T10:22:52.865608+07:00",
+    "target": {
+      "index": "8",
+      "text": "",
+      "resource-id": "",
+      "class": "android.widget.Button",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Start Recording",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[32,1192][688,1296]"
+    },
+    "action": "input tap 360 1244"
+  }
+]

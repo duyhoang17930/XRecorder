@@ -7,16 +7,29 @@ import android.media.projection.MediaProjection
 import android.os.Build
 import java.io.File
 import java.nio.ByteOrder
+import java.io.IOException
 
 /** Captures mono 48k PCM and encodes a separate AAC track for final muxing. */
 class SessionAudio(
-    context: Context, projection: MediaProjection, source: String,
+    context: Context, projection: MediaProjection, val source: String,
     private val micGain: Double, private val internalGain: Double,
-    noiseReduction: Boolean, val file: File, private val onFailure: () -> Unit
+    noiseReduction: Boolean, val audioDucking: Boolean = false,
+    val file: File, private val onFailure: () -> Unit
 ) {
+    companion object {
+        fun mixSample(
+            mic: Short, internal: Short, micGain: Double, internalGain: Double,
+            duckFactor: Float = 1.0f
+        ): Short =
+            (mic * micGain + internal * internalGain * duckFactor).toInt().coerceIn(-32768, 32767).toShort()
+    }
     private val rate = 48000
+    private val duckingEngine = AudioDuckingEngine(rate)
     private val inputFormat = AudioFormat.Builder().setEncoding(AudioFormat.ENCODING_PCM_16BIT).setSampleRate(rate).setChannelMask(AudioFormat.CHANNEL_IN_MONO).build()
-    private val bufferSize = maxOf(192000, AudioRecord.getMinBufferSize(rate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * 4)
+    private val bufferSize = AudioRecord.getMinBufferSize(rate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT).let {
+        require(it > 0) { "Mono 48 kHz PCM input is unavailable" }
+        maxOf(192000, it * 4)
+    }
     private var mic: AudioRecord? = null
     private var internal: AudioRecord? = null
     private var suppression: NoiseSuppressor? = null
@@ -34,7 +47,8 @@ class SessionAudio(
                 check(mic!!.state == AudioRecord.STATE_INITIALIZED)
                 if (noiseReduction) {
                     require(NoiseSuppressor.isAvailable()) { "Noise reduction is unavailable" }
-                    suppression = NoiseSuppressor.create(mic!!.audioSessionId)?.apply { enabled = true }
+                    suppression = requireNotNull(NoiseSuppressor.create(mic!!.audioSessionId)) { "Noise reduction could not attach to microphone" }
+                    check(suppression!!.setEnabled(true) == android.media.audiofx.AudioEffect.SUCCESS) { "Noise reduction could not be enabled" }
                 }
             }
             if (source == "internal" || source == "mixed") {
@@ -60,7 +74,8 @@ class SessionAudio(
         var muxer: MediaMuxer? = null
         var muxing = false
         try {
-            val encoder = MediaCodec.createEncoderByType("audio/mp4a-latm"); codec = encoder
+            val selected = requireNotNull(CaptureConfig.aacEncoder()) { "AAC-LC mono 48 kHz / 128 kbps is unavailable" }
+            val encoder = MediaCodec.createByCodecName(selected.name); codec = encoder
             val output = MediaMuxer(file.absolutePath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4); muxer = output
             encoder.configure(MediaFormat.createAudioFormat("audio/mp4a-latm", rate, 1).apply {
                 setInteger(MediaFormat.KEY_AAC_PROFILE, MediaCodecInfo.CodecProfileLevel.AACObjectLC)
@@ -91,13 +106,27 @@ class SessionAudio(
                 }
             }
             val micPcm = ShortArray(1024); val internalPcm = ShortArray(1024)
+            var micCount = 0; var internalCount = 0
+            var lastInputNs = System.nanoTime()
             while (!stopping) {
-                val micCount = mic?.read(micPcm, 0, 1024, AudioRecord.READ_BLOCKING) ?: 1024
-                val internalCount = internal?.read(internalPcm, 0, 1024, AudioRecord.READ_BLOCKING) ?: 1024
+                // Accumulate partial reads independently. Never discard the longer source
+                // or block forever waiting for a silent/unavailable second source.
+                val micRead = if (mic != null && micCount < 1024) mic!!.read(micPcm, micCount, 1024 - micCount, AudioRecord.READ_NON_BLOCKING) else 0
+                val internalRead = if (internal != null && internalCount < 1024) internal!!.read(internalPcm, internalCount, 1024 - internalCount, AudioRecord.READ_NON_BLOCKING) else 0
                 if (stopping) break
-                if (micCount < 0 || internalCount < 0) throw java.io.IOException("Audio capture was interrupted")
-                val count = minOf(micCount, internalCount)
-                if (count == 0 || paused) continue
+                if (micRead < 0 || internalRead < 0) throw IOException("Audio capture was interrupted")
+                micCount += micRead; internalCount += internalRead
+                if (paused) {
+                    micCount = 0; internalCount = 0; lastInputNs = System.nanoTime()
+                    duckingEngine.reset()
+                    drain(false); Thread.sleep(2); continue
+                }
+                if ((mic != null && micCount < 1024) || (internal != null && internalCount < 1024)) {
+                    if (System.nanoTime() - lastInputNs > 3000000000L) throw IOException("An audio source stopped supplying PCM")
+                    drain(false); Thread.sleep(2); continue
+                }
+                val count = 1024
+                lastInputNs = System.nanoTime()
                 if (startTimeNs == 0L) {
                     val timestamp = AudioTimestamp()
                     val primary = internal ?: mic!!
@@ -106,14 +135,29 @@ class SessionAudio(
                         else System.nanoTime() - count * 1000000000L / rate
                 }
                 var index = encoder.dequeueInputBuffer(10000)
-                while (index < 0 && !stopping) { drain(false); index = encoder.dequeueInputBuffer(10000) }
+                val inputDeadline = System.nanoTime() + 3000000000L
+                while (index < 0 && !stopping) {
+                    if (System.nanoTime() >= inputDeadline) throw IOException("Audio encoder stopped accepting PCM")
+                    drain(false); index = encoder.dequeueInputBuffer(10000)
+                }
                 if (index < 0) break
                 val input = encoder.getInputBuffer(index)!!.apply { clear(); order(ByteOrder.LITTLE_ENDIAN) }
+                val isDuckingActive = source == "mixed" && audioDucking
+                if (isDuckingActive) {
+                    duckingEngine.analyzeMicFrame(micPcm, 0, count)
+                }
                 for (i in 0 until count) {
-                    val value = (if (mic != null) micPcm[i] * micGain else 0.0) + (if (internal != null) internalPcm[i] * internalGain else 0.0)
-                    input.putShort(value.toInt().coerceIn(-32768,32767).toShort())
+                    val micSample = if (mic != null) micPcm[i] else 0
+                    val internalSample = if (internal != null) internalPcm[i] else 0
+                    val mixed = if (isDuckingActive) {
+                        duckingEngine.mixSample(micSample, internalSample, micGain, internalGain, true)
+                    } else {
+                        mixSample(micSample, internalSample, micGain, internalGain)
+                    }
+                    input.putShort(mixed)
                 }
                 encoder.queueInputBuffer(index,0,count*2,samples*1000000L/rate,0); samples += count
+                micCount = 0; internalCount = 0
                 drain(false)
             }
             if (aborted) throw java.io.IOException("Audio cancelled")
@@ -137,7 +181,7 @@ class SessionAudio(
             releaseInputs()
         }
     }
-    fun requestStop() {
+    @Synchronized fun requestStop() {
         stopping = true
         try { mic?.stop() } catch (_: Exception) { }
         try { internal?.stop() } catch (_: Exception) { }
@@ -149,9 +193,10 @@ class SessionAudio(
         failure?.let { throw it }
     }
     fun abort() { aborted = true; try { finish() } catch (_: Exception) { }; if (worker == null) releaseInputs() }
-    private fun releaseInputs() {
-        suppression?.release(); suppression = null
-        mic?.release(); mic = null
-        internal?.release(); internal = null
+    @Synchronized private fun releaseInputs() {
+        duckingEngine.reset()
+        try { suppression?.release() } catch (_: Exception) { }; suppression = null
+        try { mic?.release() } catch (_: Exception) { }; mic = null
+        try { internal?.release() } catch (_: Exception) { }; internal = null
     }
 }

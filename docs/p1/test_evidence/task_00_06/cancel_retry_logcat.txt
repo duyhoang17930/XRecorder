@@ -1,0 +1,30 @@
+--------- beginning of main
+11-08 10:06:52.896 31684 31752 I flutter : [IMPORTANT:flutter/shell/platform/android/android_context_gl_impeller.cc(104)] Using the Impeller rendering backend (OpenGLES).
+--------- beginning of system
+11-08 10:06:55.858 31684 31684 I flutter : 00:00 +0: Native cancel aborts without publishing or Saved
+11-08 10:06:57.841 31684 31684 I flutter : CANCEL_TEST_CONSENT_countdown
+11-08 10:07:26.853 31684 31684 I flutter : CANCEL_TEST_CONSENT_recording
+11-08 10:07:31.812 31684 31684 I flutter : CANCEL_TEST_CONSENT_paused
+11-08 10:07:35.827 31684 31684 I flutter : CANCEL_TEST_CONSENT_awaitingPermission
+11-08 10:07:37.736 31684 31684 I flutter : ══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+11-08 10:07:37.736 31684 31684 I flutter : The following assertion was thrown running a test:
+11-08 10:07:37.736 31684 31684 I flutter : A SemanticsHandle was active at the end of the test.
+11-08 10:07:37.736 31684 31684 I flutter : All SemanticsHandle instances must be disposed by calling dispose() on the SemanticsHandle.
+11-08 10:07:37.736 31684 31684 I flutter : 
+11-08 10:07:37.736 31684 31684 I flutter : When the exception was thrown, this was the stack:
+11-08 10:07:37.736 31684 31684 I flutter : #0      WidgetTester._verifySemanticsHandlesWereDisposed (package:flutter_test/src/widget_tester.dart:1074:7)
+11-08 10:07:37.736 31684 31684 I flutter : #1      WidgetTester._endOfTestVerifications (package:flutter_test/src/widget_tester.dart:1063:5)
+11-08 10:07:37.736 31684 31684 I flutter : #2      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1969:22)
+11-08 10:07:37.736 31684 31684 I flutter : <asynchronous suspension>
+11-08 10:07:37.736 31684 31684 I flutter : #3      TestWidgetsFlutterBinding._createTestCompletionHandler.<anonymous closure> (package:flutter_test/src/binding.dart:1707:12)
+11-08 10:07:37.736 31684 31684 I flutter : <asynchronous suspension>
+11-08 10:07:37.736 31684 31684 I flutter : 
+11-08 10:07:37.736 31684 31684 I flutter : The test description was:
+11-08 10:07:37.736 31684 31684 I flutter :   Native cancel aborts without publishing or Saved
+11-08 10:07:37.737 31684 31684 I flutter : ════════════════════════════════════════════════════════════════════════════════════════════════════
+11-08 10:07:37.749 31684 31684 I flutter : 00:41 +0: Native cancel aborts without publishing or Saved [E]
+11-08 10:07:37.752 31684 31684 I flutter :   Test failed. See exception logs above.
+11-08 10:07:37.752 31684 31684 I flutter :   The test description was: Native cancel aborts without publishing or Saved
+11-08 10:07:37.755 31684 31684 I flutter :   
+11-08 10:07:37.803 31684 31684 I flutter : 00:41 +0 -1: (tearDownAll)
+11-08 10:07:37.966 31684 31684 I flutter : 00:42 +1 -1: Some tests failed.

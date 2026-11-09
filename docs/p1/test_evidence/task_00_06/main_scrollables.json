@@ -1,0 +1,21 @@
+[
+  {
+    "index": "0",
+    "text": "",
+    "resource-id": "",
+    "class": "android.widget.ScrollView",
+    "package": "com.xrecorder.xrecorder",
+    "content-desc": "",
+    "checkable": "false",
+    "checked": "false",
+    "clickable": "false",
+    "enabled": "true",
+    "focusable": "true",
+    "focused": "false",
+    "scrollable": "true",
+    "long-clickable": "false",
+    "password": "false",
+    "selected": "false",
+    "bounds": "[0,64][720,1328]"
+  }
+]

@@ -1,0 +1,1260 @@
+[
+  {
+    "id": "T00-01",
+    "title": "Xác định branch hiện tại.",
+    "status": "PASS",
+    "preconditions": "Working tree hiện tại và build debug cùng chữ ký; không thay source.",
+    "expected": "Xác định branch hiện tại.",
+    "steps": "Đọc tài liệu/Git và so sánh hash.",
+    "actual": "Branch feature/capture-live, HEAD 4ce6a53; working tree dirty đã được ghi trước test.",
+    "evidence": [
+      "git_identity.txt",
+      "git_status_before.txt"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T00-02",
+    "title": "Xác minh các file P1/P2/P3 tuân thủ ownership.",
+    "status": "PASS",
+    "preconditions": "Working tree hiện tại và build debug cùng chữ ký; không thay source.",
+    "expected": "Xác minh các file P1/P2/P3 tuân thủ ownership.",
+    "steps": "Đọc tài liệu/Git và so sánh hash.",
+    "actual": "So với baseline 536 file: không file có sẵn nào đổi; ownership theo báo cáo P1 hiện hữu, IR-00-01 vẫn pending xác nhận owner chính thức.",
+    "evidence": [
+      "source_freeze_interim.json",
+      "git_status_before.txt"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T00-03",
+    "title": "Capture success → Saved event hợp lệ.",
+    "status": "PASS",
+    "preconditions": "Working tree hiện tại và build debug cùng chữ ký; không thay source.",
+    "expected": "Capture success → Saved event hợp lệ.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Hai PNG completed, is_pending=0, decode thật; harness qua Saved feedback và View trước marker VIDEO.",
+    "evidence": [
+      "screenshot_logcat.txt",
+      "screenshot_media_analysis.json",
+      "screenshot_native_1_mediastore.txt"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T00-04",
+    "title": "Capture Cancel → không Saved event.",
+    "status": "PASS",
+    "preconditions": "Working tree hiện tại và build debug cùng chữ ký; không thay source.",
+    "expected": "Capture Cancel → không Saved event.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Các assertion cancel countdown/recording/paused/awaitingPermission, Saved không tăng và catalog không tăng đã đi hết; native idle/output null. Suite tổng thể FAIL ở end-of-test SemanticsHandle, không giấu kết quả này.",
+    "evidence": [
+      "cancel_retry_logcat.txt",
+      "cancel_retry_actions.json",
+      "cancel_native_final.xml"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T00-05",
+    "title": "Capture Error → không Saved event.",
+    "status": "NOT RUN",
+    "preconditions": "Working tree hiện tại và build debug cùng chữ ký; không thay source.",
+    "expected": "Capture Error → không Saved event.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Đã quan sát lỗi micro denied thật: failed/outputUri=null và message rõ. Chưa instrument Saved event count; query catalog trước thử sai quoting nên chưa chứng minh đầy đủ no Saved event.",
+    "evidence": [
+      "mic_deny_actual_native.json",
+      "mic_deny_actual_ui.xml"
+    ],
+    "notes": "NOT RUN cho toàn bộ contract event assertion; không suy no Saved event chỉ từ outputUri null."
+  },
+  {
+    "id": "T00-06",
+    "title": "Không xuất hiện duplicate Saved event.",
+    "status": "NOT RUN",
+    "preconditions": "Working tree hiện tại và build debug cùng chữ ký; không thay source.",
+    "expected": "Không xuất hiện duplicate Saved event.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Đã kiểm duplicate Stop giữ URI và duplicate screenshot không tăng file, nhưng chưa instrument chính xác số Saved event callback qua mọi replay/process. Không suy từ số file sang exactly-once event.",
+    "evidence": [],
+    "notes": "Đã kiểm duplicate Stop giữ URI và duplicate screenshot không tăng file, nhưng chưa instrument chính xác số Saved event callback qua mọi replay/process. Không suy từ số file sang exactly-once event."
+  },
+  {
+    "id": "T00-07",
+    "title": "Media Library nhận kết quả đã lưu hợp lệ.",
+    "status": "PASS",
+    "preconditions": "Working tree hiện tại và build debug cùng chữ ký; không thay source.",
+    "expected": "Media Library nhận kết quả đã lưu hợp lệ.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "App bình thường hiển thị đúng MP4 regression trong Library sau scroll; PNG xuất hiện Photo Library/View theo assertion harness.",
+    "evidence": [
+      "main_library_scrolled.xml",
+      "main_library_scrolled.png",
+      "screenshot_logcat.txt"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T01-01",
+    "title": "Có Feature Audit Matrix.",
+    "status": "PASS",
+    "preconditions": "Các báo cáo Task 00–06 hiện có, đọc trong phạm vi yêu cầu.",
+    "expected": "Có Feature Audit Matrix.",
+    "steps": "Đọc tài liệu/Git và so sánh hash.",
+    "actual": "Đã kiểm tra tài liệu: Feature Audit Matrix. Audit là snapshot lịch sử 2026-11-07, các task sau đã sửa một số issue.",
+    "evidence": [
+      "document_audit.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T01-02",
+    "title": "Có danh sách trạng thái F01–F18, F20–F23, F52–F53.",
+    "status": "PASS",
+    "preconditions": "Các báo cáo Task 00–06 hiện có, đọc trong phạm vi yêu cầu.",
+    "expected": "Có danh sách trạng thái F01–F18, F20–F23, F52–F53.",
+    "steps": "Đọc tài liệu/Git và so sánh hash.",
+    "actual": "Đã kiểm tra tài liệu: đủ 24 feature F01–F18/F20–F23/F52–F53. Audit là snapshot lịch sử 2026-11-07, các task sau đã sửa một số issue.",
+    "evidence": [
+      "document_audit.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T01-03",
+    "title": "Có bằng chứng file/line.",
+    "status": "PASS",
+    "preconditions": "Các báo cáo Task 00–06 hiện có, đọc trong phạm vi yêu cầu.",
+    "expected": "Có bằng chứng file/line.",
+    "steps": "Đọc tài liệu/Git và so sánh hash.",
+    "actual": "Đã kiểm tra tài liệu: file/line evidence. Audit là snapshot lịch sử 2026-11-07, các task sau đã sửa một số issue.",
+    "evidence": [
+      "document_audit.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T01-04",
+    "title": "Có bug/risk list.",
+    "status": "PASS",
+    "preconditions": "Các báo cáo Task 00–06 hiện có, đọc trong phạm vi yêu cầu.",
+    "expected": "Có bug/risk list.",
+    "steps": "Đọc tài liệu/Git và so sánh hash.",
+    "actual": "Đã kiểm tra tài liệu: bug/risk list. Audit là snapshot lịch sử 2026-11-07, các task sau đã sửa một số issue.",
+    "evidence": [
+      "document_audit.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T01-05",
+    "title": "Có P2 integration requests.",
+    "status": "PASS",
+    "preconditions": "Các báo cáo Task 00–06 hiện có, đọc trong phạm vi yêu cầu.",
+    "expected": "Có P2 integration requests.",
+    "steps": "Đọc tài liệu/Git và so sánh hash.",
+    "actual": "Đã kiểm tra tài liệu: P2 integration requests. Audit là snapshot lịch sử 2026-11-07, các task sau đã sửa một số issue.",
+    "evidence": [
+      "document_audit.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T01-06",
+    "title": "Có recommended next tasks.",
+    "status": "PASS",
+    "preconditions": "Các báo cáo Task 00–06 hiện có, đọc trong phạm vi yêu cầu.",
+    "expected": "Có recommended next tasks.",
+    "steps": "Đọc tài liệu/Git và so sánh hash.",
+    "actual": "Đã kiểm tra tài liệu: recommended next tasks. Audit là snapshot lịch sử 2026-11-07, các task sau đã sửa một số issue.",
+    "evidence": [
+      "document_audit.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T01-07",
+    "title": "Không thay đổi UI/source ngoài báo cáo audit.",
+    "status": "NOT RUN",
+    "preconditions": "Các báo cáo Task 00–06 hiện có, đọc trong phạm vi yêu cầu.",
+    "expected": "Không thay đổi UI/source ngoài báo cáo audit.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Chưa có checksum lịch sử riêng của lần Task 01. Lượt verification hiện tại giữ nguyên 536 file; không tự xác nhận lại lịch sử source/UI ngoài evidence đã có.",
+    "evidence": [],
+    "notes": "Chưa có checksum lịch sử riêng của lần Task 01. Lượt verification hiện tại giữ nguyên 536 file; không tự xác nhận lại lịch sử source/UI ngoài evidence đã có."
+  },
+  {
+    "id": "T02-01",
+    "title": "Start → Android consent dialog.",
+    "status": "PASS",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Start → Android consent dialog.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Có dialog MediaProjection thật của 3HRecorder; nút được chọn từ hierarchy.",
+    "evidence": [
+      "T02-01_mixed_consent.xml",
+      "T02-03_video_consent_denied.xml"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T02-02",
+    "title": "Consent Accept → Recording.",
+    "status": "PASS",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Consent Accept → Recording.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Consent accept dẫn tới native recording, foreground service/projection hoạt động và output thực.",
+    "evidence": [
+      "output30_native_recording.json",
+      "output30_projection_active.txt",
+      "output30_service_active.txt"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T02-03",
+    "title": "Consent Denied/Cancelled.",
+    "status": "PASS",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Consent Denied/Cancelled.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Chọn HỦY consent video: native idle, outputUri null, video IDs không tăng.",
+    "evidence": [
+      "T02-03_action.json",
+      "T02-03_native_after_deny.json",
+      "T02-03_video_ids_after_deny.txt"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T02-04",
+    "title": "Record 30s → Stop → playable MP4.",
+    "status": "PASS",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Record 30s → Stop → playable MP4.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "MP4 30.069s, native elapsed 30.006s; giải mã đủ 174/174 frames. Mẫu trực quan tối giống screenshot live; không dùng làm bằng chứng toàn diện cho overlay.",
+    "evidence": [
+      "output30_logcat.txt",
+      "output30_mediastore.txt",
+      "output30_frame_analysis.json",
+      "output30.mp4"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T02-05",
+    "title": "Start → Pause → Resume → Stop.",
+    "status": "PASS",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Start → Pause → Resume → Stop.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Controls harness native pause 4s, resume cùng ID, stop lúc paused; MP4 6.338s, 81/81 frames.",
+    "evidence": [
+      "controls_logcat.txt",
+      "controls_journal.xml",
+      "controls_decode.json",
+      "controls.mp4"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T02-06",
+    "title": "Double Start không tạo session thứ hai.",
+    "status": "NOT RUN",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Double Start không tạo session thứ hai.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "UI không hiển thị Start khi active; chưa gọi duplicate native Start trong cùng phiên bằng harness hiện có. Không dùng tap tọa độ stale khi dialog đã đổi.",
+    "evidence": [],
+    "notes": "UI không hiển thị Start khi active; chưa gọi duplicate native Start trong cùng phiên bằng harness hiện có. Không dùng tap tọa độ stale khi dialog đã đổi."
+  },
+  {
+    "id": "T02-07",
+    "title": "Double Stop không tạo video trùng.",
+    "status": "PASS",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Double Stop không tạo video trùng.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Double Stop sau completed giữ nguyên output URI, assertion harness PASS.",
+    "evidence": [
+      "controls_logcat.txt"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T02-08",
+    "title": "Recording → chuyển app → quay lại.",
+    "status": "PASS",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Recording → chuyển app → quay lại.",
+    "steps": "Tap Pause/Resume theo UIAutomator bounds; KEYCODE_HOME và am start để quay lại; để native auto-stop ở Home không gửi Stop; đọc journal, MediaStore, decode MP4 và kiểm temp cache đúng session.",
+    "actual": "Home/background/return giữ nguyên native recording ID; sau return UI timer 168s, không reset.",
+    "evidence": [
+      "long_background_return.json",
+      "long_ui_after_background.xml"
+    ],
+    "notes": "Kết quả chỉ cho phiên và thiết bị đã thử; không thay thế đánh giá âm thanh hoặc fault injection."
+  },
+  {
+    "id": "T02-09",
+    "title": "Recording → Lock/Unlock.",
+    "status": "NOT RUN",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Recording → Lock/Unlock.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Không chụp lockscreen/notification cá nhân. Cần test có lockscreen được chuẩn bị an toàn hoặc sự tham gia của chủ thiết bị.",
+    "evidence": [],
+    "notes": "Không chụp lockscreen/notification cá nhân. Cần test có lockscreen được chuẩn bị an toàn hoặc sự tham gia của chủ thiết bị."
+  },
+  {
+    "id": "T02-10",
+    "title": "Recording → Rotate.",
+    "status": "NOT RUN",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Recording → Rotate.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Đã kiểm Portrait/Landscape canvas khi start; chưa đổi orientation màn hình trong lúc quay. Không thay global rotation setting khi chưa cần.",
+    "evidence": [],
+    "notes": "Đã kiểm Portrait/Landscape canvas khi start; chưa đổi orientation màn hình trong lúc quay. Không thay global rotation setting khi chưa cần."
+  },
+  {
+    "id": "T02-11",
+    "title": "Android system stops screen sharing.",
+    "status": "NOT RUN",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Android system stops screen sharing.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Chưa xác định node Android system Stop screen sharing riêng trên ROM này. Stop app notification không được tính là OS revoke.",
+    "evidence": [],
+    "notes": "Chưa xác định node Android system Stop screen sharing riêng trên ROM này. Stop app notification không được tính là OS revoke."
+  },
+  {
+    "id": "T02-12",
+    "title": "Activity recreation.",
+    "status": "NOT RUN",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Activity recreation.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Home/return đã chạy, không đồng nghĩa Activity recreation. Chưa có test hook safe recreation hiện có; không kill phiên người dùng hoặc đổi Don’t keep activities.",
+    "evidence": [],
+    "notes": "Home/return đã chạy, không đồng nghĩa Activity recreation. Chưa có test hook safe recreation hiện có; không kill phiên người dùng hoặc đổi Don’t keep activities."
+  },
+  {
+    "id": "T02-13",
+    "title": "App-window capture trên Android hỗ trợ.",
+    "status": "UNSUPPORTED",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "App-window capture trên Android hỗ trợ.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Thiết bị API 30; không kiểm thử app-window capture Android 14+.",
+    "evidence": [
+      "environment.json"
+    ],
+    "notes": "Không tính là PASS."
+  },
+  {
+    "id": "T02-14",
+    "title": "Saved event chỉ sau khi file hợp lệ.",
+    "status": "PASS",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Saved event chỉ sau khi file hợp lệ.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Output có duration/track hợp lệ, is_pending=0 và native completed; source contract commit-before-completed đã có trong báo cáo Task 00/04. Không fault-inject commit failure.",
+    "evidence": [
+      "output30_mediastore.txt",
+      "output30_native_completed.xml",
+      "configuration_media_analysis.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T02-15",
+    "title": "Cancel/Failure không tạo output thành công giả.",
+    "status": "PASS",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Cancel/Failure không tạo output thành công giả.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Cancel functional assertions và video consent denied không publish output mới. Fault paths encoder/storage chưa chạy.",
+    "evidence": [
+      "cancel_retry_logcat.txt",
+      "cancel_native_final.xml",
+      "T02-03_native_after_deny.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T02-16",
+    "title": "Recording 5–10 phút.",
+    "status": "PASS",
+    "preconditions": "OPPO API30; cùng recording session; consent hệ thống bình thường.",
+    "expected": "Recording 5–10 phút.",
+    "steps": "Tap Pause/Resume theo UIAutomator bounds; KEYCODE_HOME và am start để quay lại; để native auto-stop ở Home không gửi Stop; đọc journal, MediaStore, decode MP4 và kiểm temp cache đúng session.",
+    "actual": "Phiên native active 300.006s, MP4 300.312s; giải mã đủ 4230/4230 frames.",
+    "evidence": [
+      "long_autostop_observations.json",
+      "long_mediastore.txt",
+      "all_media_analysis.json",
+      "media_privacy_retention.json"
+    ],
+    "notes": "Full decode đã thực hiện thật; sau rà soát privacy, bản sao MP4 cục bộ mới tạo đã được loại bỏ vì có notification shade. File gốc trên điện thoại được giữ nguyên. Không suy từ decode sang nội dung mọi frame an toàn."
+  },
+  {
+    "id": "T03-01",
+    "title": "Mute.",
+    "status": "PASS",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Mute.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Mute tạo đúng 1 video track, không audio track; MP4 decode thành công.",
+    "evidence": [
+      "configuration_media_analysis.json",
+      "config_mute_mediastore.txt",
+      "config_mute.mp4"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T03-02",
+    "title": "Microphone.",
+    "status": "NOT RUN",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Microphone.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "AAC microphone thật và 5-minute duration đã kiểm; chưa có người nghe hoặc tín hiệu âm được phê duyệt để xác minh đúng nguồn/chất lượng. PENDING MANUAL VERIFICATION.",
+    "evidence": [],
+    "notes": "AAC microphone thật và 5-minute duration đã kiểm; chưa có người nghe hoặc tín hiệu âm được phê duyệt để xác minh đúng nguồn/chất lượng. PENDING MANUAL VERIFICATION."
+  },
+  {
+    "id": "T03-03",
+    "title": "Internal Audio.",
+    "status": "NOT RUN",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Internal Audio.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Internal tạo AAC track, nhưng không tự phát nhạc/app riêng tư và chưa có nguồn test internal được cho phép; chưa chứng nhận tiếng đúng nguồn. PENDING MANUAL VERIFICATION.",
+    "evidence": [],
+    "notes": "Internal tạo AAC track, nhưng không tự phát nhạc/app riêng tư và chưa có nguồn test internal được cho phép; chưa chứng nhận tiếng đúng nguồn. PENDING MANUAL VERIFICATION."
+  },
+  {
+    "id": "T03-04",
+    "title": "Mixed Audio.",
+    "status": "NOT RUN",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Mixed Audio.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Mixed tạo AAC track và snapshot đúng source/gains; chưa có hai tín hiệu test để xác minh pha trộn nghe được. PENDING MANUAL VERIFICATION.",
+    "evidence": [],
+    "notes": "Mixed tạo AAC track và snapshot đúng source/gains; chưa có hai tín hiệu test để xác minh pha trộn nghe được. PENDING MANUAL VERIFICATION."
+  },
+  {
+    "id": "T03-05",
+    "title": "Microphone permission denied.",
+    "status": "PASS",
+    "preconditions": "Microphone selected; denied qua system Settings; app yêu cầu quyền ghi âm thật.",
+    "expected": "Microphone permission denied.",
+    "steps": "adb -s RGDMSKDY7PPBAAT4 exec-out uiautomator dump /dev/tty; xác định dialog Cho phép 3HRecorder ghi âm?; tap tâm bounds permission_deny_and_dont_ask_again_button; đọc native capture journal.",
+    "actual": "Native failed, outputUri=null; error: Audio permission was denied. Select mute to record without audio. Không bypass quyền hoặc tạo MediaProjection mới.",
+    "evidence": [
+      "mic_deny_runtime_dialog.xml",
+      "mic_deny_actual_action.json",
+      "mic_deny_actual_native.json",
+      "mic_deny_actual_ui.xml"
+    ],
+    "notes": "PASS denied/error path. Query catalog trước thử sai quoting, không dùng làm bằng chứng không tăng file hoặc đếm Saved callbacks. Lượt sau unlock ban đầu được cấp quyền và đã dừng; lưu riêng, không tính denied."
+  },
+  {
+    "id": "T03-06",
+    "title": "App nguồn không cho internal capture.",
+    "status": "NOT RUN",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "App nguồn không cho internal capture.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Không có nguồn app protected-audio test được cho phép; không mở app nội dung riêng tư hoặc bypass capture policy.",
+    "evidence": [],
+    "notes": "Không có nguồn app protected-audio test được cho phép; không mở app nội dung riêng tư hoặc bypass capture policy."
+  },
+  {
+    "id": "T03-07",
+    "title": "Microphone gain.",
+    "status": "NOT RUN",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Microphone gain.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Runtime snapshot gain .75 trong configuration harness đã qua assertion; chưa đo amplitude/waveform trên tín hiệu chuẩn.",
+    "evidence": [],
+    "notes": "Runtime snapshot gain .75 trong configuration harness đã qua assertion; chưa đo amplitude/waveform trên tín hiệu chuẩn."
+  },
+  {
+    "id": "T03-08",
+    "title": "Internal gain.",
+    "status": "NOT RUN",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Internal gain.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Runtime snapshot internal gain .5 đã qua assertion; chưa có nguồn test được phép để đo amplitude/waveform.",
+    "evidence": [],
+    "notes": "Runtime snapshot internal gain .5 đã qua assertion; chưa có nguồn test được phép để đo amplitude/waveform."
+  },
+  {
+    "id": "T03-09",
+    "title": "Mono/Stereo.",
+    "status": "UNSUPPORTED",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Mono/Stereo.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Output thật là AAC mono 48kHz; implementation hiện tại không cung cấp stereo. Không kết luận phần cứng không hỗ trợ stereo.",
+    "evidence": [
+      "configuration_media_analysis.json"
+    ],
+    "notes": "Không tính là PASS."
+  },
+  {
+    "id": "T03-10",
+    "title": "Pause/Resume audio sync.",
+    "status": "NOT RUN",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Pause/Resume audio sync.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Pause duration và track durations đã kiểm; chênh track-end 0.289s của mẫu dài không phải phép đo A/V sync bằng tín hiệu mốc. Chưa nghe/đo drift.",
+    "evidence": [],
+    "notes": "Pause duration và track durations đã kiểm; chênh track-end 0.289s của mẫu dài không phải phép đo A/V sync bằng tín hiệu mốc. Chưa nghe/đo drift."
+  },
+  {
+    "id": "T03-11",
+    "title": "Recording 5 phút có audio.",
+    "status": "PASS",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Recording 5 phút có audio.",
+    "steps": "Tap Pause/Resume theo UIAutomator bounds; KEYCODE_HOME và am start để quay lại; để native auto-stop ở Home không gửi Stop; đọc journal, MediaStore, decode MP4 và kiểm temp cache đúng session.",
+    "actual": "Recording 5 phút với microphone: AAC mono 48kHz, audio duration 300.023s/14063 AAC samples, video 300.312s. Chưa nghe/waveform hoặc chứng nhận drift A/V.",
+    "evidence": [
+      "all_media_analysis.json",
+      "long_mediastore.txt"
+    ],
+    "notes": "Kết quả chỉ cho phiên và thiết bị đã thử; không thay thế đánh giá âm thanh hoặc fault injection."
+  },
+  {
+    "id": "T03-12",
+    "title": "Stop/Cancel cleanup.",
+    "status": "PASS",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Stop/Cancel cleanup.",
+    "steps": "Tap Pause/Resume theo UIAutomator bounds; KEYCODE_HOME và am start để quay lại; để native auto-stop ở Home không gửi Stop; đọc journal, MediaStore, decode MP4 và kiểm temp cache đúng session.",
+    "actual": "Các output stop đã published, service/projection null; hai temp MP4/M4A đúng session dài không còn trong cache. Cancel assertions không tăng catalog. Không fault-test driver/I/O.",
+    "evidence": [
+      "long_temp_cleanup.json",
+      "long_cleanup_projection.txt",
+      "long_cleanup_service.txt",
+      "cancel_retry_logcat.txt"
+    ],
+    "notes": "Kết quả chỉ cho phiên và thiết bị đã thử; không thay thế đánh giá âm thanh hoặc fault injection."
+  },
+  {
+    "id": "T03-13",
+    "title": "Audio hoạt động khi app background.",
+    "status": "NOT RUN",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Audio hoạt động khi app background.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Session/FGS tiếp tục ở background, AAC timeline đủ 300.023s; chưa xác minh waveform/tiếng mic khi background nên không PASS đầy đủ audio correctness.",
+    "evidence": [],
+    "notes": "Session/FGS tiếp tục ở background, AAC timeline đủ 300.023s; chưa xác minh waveform/tiếng mic khi background nên không PASS đầy đủ audio correctness."
+  },
+  {
+    "id": "T03-14",
+    "title": "Không bị giữ cấu hình audio từ phiên trước.",
+    "status": "PASS",
+    "preconditions": "AudioRecord/codec thật; chất lượng nguồn cần audio test được phép và đánh giá nghe.",
+    "expected": "Không bị giữ cấu hình audio từ phiên trước.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Harness lần lượt mute/microphone/internal/mixed, assert configSnapshot audio source và hasAudio đúng mỗi lượt.",
+    "evidence": [
+      "configuration_logcat.txt",
+      "configuration_media_analysis.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T04-01",
+    "title": "720p/30 FPS.",
+    "status": "PASS",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "720p/30 FPS.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Effective config 720x1280, 30 FPS target, AVC; file decode thật. FPS trung bình đo được trên mẫu tĩnh khác 30, không chứng nhận CFR/actual 30 FPS.",
+    "evidence": [
+      "configuration_logcat.txt",
+      "configuration_media_analysis.json",
+      "output30_native_recording.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T04-02",
+    "title": "1080p/30 FPS.",
+    "status": "UNSUPPORTED",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "1080p/30 FPS.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "1080p disabled trong UI capability hiện tại; không tạo 1080p MP4, không suy ra codec hardware maximum.",
+    "evidence": [
+      "record_setup_initial.xml",
+      "record_setup_initial.png"
+    ],
+    "notes": "Không tính là PASS."
+  },
+  {
+    "id": "T04-03",
+    "title": "1080p/60 FPS nếu hỗ trợ.",
+    "status": "UNSUPPORTED",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "1080p/60 FPS nếu hỗ trợ.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "1080p/60 không được app cho chọn ở cấu hình này; không có output 1080p60.",
+    "evidence": [
+      "record_setup_initial.xml"
+    ],
+    "notes": "Không tính là PASS."
+  },
+  {
+    "id": "T04-04",
+    "title": "2K/4K capability.",
+    "status": "PASS",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "2K/4K capability.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Đã kiểm tra capability qua UI thật: 2K và 4K disabled. Đây là kiểm tra advertise/gating, không phải encode 2K/4K.",
+    "evidence": [
+      "record_setup_initial.xml",
+      "record_setup_initial.png"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T04-05",
+    "title": "H.264/AVC output.",
+    "status": "PASS",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "H.264/AVC output.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "MP4 sample entry avc1, có video frames giải mã thật.",
+    "evidence": [
+      "configuration_media_analysis.json",
+      "config_mute.mp4"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T04-06",
+    "title": "H.265/HEVC output nếu hỗ trợ.",
+    "status": "UNSUPPORTED",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "H.265/HEVC output nếu hỗ trợ.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "H.265/HEVC disabled trong UI với 720p/30 hiện tại; không có HEVC output để nghiệm thu.",
+    "evidence": [
+      "advanced_initial.xml",
+      "advanced_scrolled1.xml"
+    ],
+    "notes": "Không tính là PASS."
+  },
+  {
+    "id": "T04-07",
+    "title": "Unsupported codec handling.",
+    "status": "NOT RUN",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "Unsupported codec handling.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "HEVC bị UI disable; chưa có native negative-path unsupported codec test có sẵn được chạy. Không chỉnh source/hook để inject codec lỗi.",
+    "evidence": [],
+    "notes": "HEVC bị UI disable; chưa có native negative-path unsupported codec test có sẵn được chạy. Không chỉnh source/hook để inject codec lỗi."
+  },
+  {
+    "id": "T04-08",
+    "title": "Low vs High Bitrate.",
+    "status": "PASS",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "Low vs High Bitrate.",
+    "steps": "Chọn cấu hình bằng UIAutomator bounds (xem landscape_setup_actions/start_actions), chấp nhận consent mới, Tap Stop và kiểm journal/MediaStore.",
+    "actual": "Normal nhận 8 Mbps ở phiên dài và 24 Mbps ở phiên Landscape, cả hai tạo MP4 published. Đây là xác minh effective requested target, không cam kết bitrate thực CBR/so sánh chất lượng cảnh giống nhau.",
+    "evidence": [
+      "long_recording_started.json",
+      "long_mediastore.txt",
+      "landscape_native_recording.json",
+      "landscape_mediastore.txt"
+    ],
+    "notes": "Không suy rộng bitrate mục tiêu thành CBR, hoặc canvas landscape thành dynamic rotation."
+  },
+  {
+    "id": "T04-09",
+    "title": "Portrait output.",
+    "status": "PASS",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "Portrait output.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Portrait effective 720x1280, snapshot và MP4 metadata khớp.",
+    "evidence": [
+      "configuration_logcat.txt",
+      "configuration_media_analysis.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T04-10",
+    "title": "Landscape output.",
+    "status": "PASS",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "Landscape output.",
+    "steps": "Chọn cấu hình bằng UIAutomator bounds (xem landscape_setup_actions/start_actions), chấp nhận consent mới, Tap Stop và kiểm journal/MediaStore.",
+    "actual": "Landscape native 1280x720, 24Mbps/Mute; MP4 MediaStore 1280x720, 250.526s published. Không copy/decode full clip này vì đã có notification shade; chưa nghiệm thu dynamic rotation.",
+    "evidence": [
+      "landscape_native_recording.json",
+      "landscape_native_completed.json",
+      "landscape_mediastore.txt"
+    ],
+    "notes": "Không suy rộng bitrate mục tiêu thành CBR, hoặc canvas landscape thành dynamic rotation."
+  },
+  {
+    "id": "T04-11",
+    "title": "Auto Orientation.",
+    "status": "PASS",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "Auto Orientation.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Auto orientation khi thiết bị portrait tạo 720x1280 và giữ orientation=automatic trong native snapshot. Dynamic rotation chưa được chứng nhận.",
+    "evidence": [
+      "controls_journal.xml",
+      "controls_decode.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T04-12",
+    "title": "Normal/Performance mode.",
+    "status": "PASS",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "Normal/Performance mode.",
+    "steps": "Chọn Normal/Performance bằng UI; chấp nhận consent mới; xem native effective config và MediaStore sau Stop.",
+    "actual": "Normal/24Mbps tạo MP4 250.526s; Performance cùng request bitrate bị clamp native về 8Mbps/30FPS/1280x720 và tạo output published. Không benchmark CPU/RAM/nhiệt hoặc chất lượng nghe/nhìn.",
+    "evidence": [
+      "landscape_native_recording.json",
+      "landscape_mediastore.txt",
+      "performance_native_recording.json",
+      "performance_mediastore.txt"
+    ],
+    "notes": "Chỉ policy/config/runtime save đã kiểm chứng; hiệu năng thực tế chưa được chứng nhận."
+  },
+  {
+    "id": "T04-13",
+    "title": "Pause/Resume high FPS.",
+    "status": "NOT RUN",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "Pause/Resume high FPS.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Có pause/resume 30 FPS; chưa thử high-FPS với motion scene. Không đồng nhất configured FPS và actual FPS.",
+    "evidence": [],
+    "notes": "Có pause/resume 30 FPS; chưa thử high-FPS với motion scene. Không đồng nhất configured FPS và actual FPS."
+  },
+  {
+    "id": "T04-14",
+    "title": "5-minute recording high preset.",
+    "status": "NOT RUN",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "5-minute recording high preset.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Đã có 5 phút 720p30/8Mbps; không có 5 phút high preset riêng. 1080p/2K/4K bị app disable ở cấu hình đã quan sát.",
+    "evidence": [],
+    "notes": "Đã có 5 phút 720p30/8Mbps; không có 5 phút high preset riêng. 1080p/2K/4K bị app disable ở cấu hình đã quan sát."
+  },
+  {
+    "id": "T04-15",
+    "title": "MP4 metadata verification.",
+    "status": "PASS",
+    "preconditions": "Preset được app advertise; output thật và công cụ metadata/decode có sẵn.",
+    "expected": "MP4 metadata verification.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Đã đọc MediaStore, MP4 atoms, tracks, duration, dimensions, AAC channels/rate, average FPS và decode frames. ffprobe không có; dùng OpenCV hệ thống/stdlib, chưa decode audio.",
+    "evidence": [
+      "configuration_media_analysis.json",
+      "output30_frame_analysis.json",
+      "controls_decode.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T05-01",
+    "title": "Countdown 3s.",
+    "status": "PASS",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Countdown 3s.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Hai screenshot có timeline countdown chứa 3,2,1 và khoảng native countdown >=2.8s (assertion qua trước marker VIDEO).",
+    "evidence": [
+      "screenshot_logcat.txt",
+      "screenshot_actions.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T05-02",
+    "title": "Countdown 5s.",
+    "status": "PASS",
+    "preconditions": "App settings countdown5s, auto-stop30s, mute.",
+    "expected": "Countdown 5s.",
+    "steps": "Chọn5s bằng UI settings, Start/consent qua bounds thật; poll capture_journal bằng ADB serial từ sau consent đến recording.",
+    "actual": "Native config countdown=5; countdown quan sát từ +0.10s, starting +4.57s, recording +5.23s sau mốc host (mốc được lấy sau tap consent 0.3s). Không recording trước countdown; MP4 bắt đầu riêng khi recording.",
+    "evidence": [
+      "full_settings_countdown_actions.json",
+      "full_settings_countdown5.xml",
+      "timer30_actions.json",
+      "timer30_timeline.json"
+    ],
+    "notes": "Polling journal không capture từng tick4/3/2/1; không khẳng định đã quan sát animation từng số."
+  },
+  {
+    "id": "T05-03",
+    "title": "Countdown Cancel.",
+    "status": "PASS",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Countdown Cancel.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Cancel countdown trong harness không tăng Saved/catalog; suite có lỗi teardown SemanticsHandle được tách riêng.",
+    "evidence": [
+      "cancel_retry_logcat.txt",
+      "cancel_retry_actions.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T05-04",
+    "title": "Double Start trong countdown.",
+    "status": "NOT RUN",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Double Start trong countdown.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Đã kiểm cancel countdown; chưa thực hiện duplicate native Start trong countdown bằng test có sẵn. Không double-tap mù sau khi nút đổi sang system dialog.",
+    "evidence": [],
+    "notes": "Đã kiểm cancel countdown; chưa thực hiện duplicate native Start trong countdown bằng test có sẵn. Không double-tap mù sau khi nút đổi sang system dialog."
+  },
+  {
+    "id": "T05-05",
+    "title": "Permission Denied.",
+    "status": "PASS",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Permission Denied.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Video consent denied trở về idle, không output; không bắt đầu countdown.",
+    "evidence": [
+      "T02-03_native_after_deny.json",
+      "T02-03_action.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T05-06",
+    "title": "Countdown disabled/0s.",
+    "status": "PASS",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Countdown disabled/0s.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Countdown=0 trong controls/output harness đi tới recording và tạo MP4 thật.",
+    "evidence": [
+      "controls_journal.xml",
+      "output30_native_recording.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T05-07",
+    "title": "Auto-stop 30s.",
+    "status": "PASS",
+    "preconditions": "Custom duration30s được nhập qua Settings dialog; Mute/AVC720p30Performance.",
+    "expected": "Auto-stop 30s.",
+    "steps": "UI chọn auto-stop30s; consent thật; không tapStop; poll native đến completed và query đúng output URI.",
+    "actual": "Native active30003ms tự finalizing/completed; URI1000002326, MP4 duration30034ms,629149bytes1280×720,is_pending=0. Countdown5s không tính vào30s active. OpenCV mở hợp lệ và decode487/487frames.",
+    "evidence": [
+      "timer30_settings_actions.json",
+      "timer30_actions.json",
+      "timer30_timeline.json",
+      "timer30_final_native.json",
+      "timer30_mediastore.txt",
+      "timer30_decode_validation.json",
+      "timer30_own_app.mp4"
+    ],
+    "notes": "PASS timer/finalize/output decode; FPS target không chứng nhận CFR. Ba sampleframes cho thấy portrait content fit trong landscape canvas với black pillarbox hai bên; không gọi đây là overlay rectangle."
+  },
+  {
+    "id": "T05-08",
+    "title": "Auto-stop 60s.",
+    "status": "PASS",
+    "preconditions": "Custom auto-stop60s, countdown5s, Mute/AVC/Performance landscape.",
+    "expected": "Auto-stop 60s.",
+    "steps": "Settings dialog thay30 bằng60; Start/consent theo hierarchy; chờ native auto-stop không bấmStop; query URI và decode MP4 own-app.",
+    "actual": "Native active60002ms tự finalizing/completed; URI1000002327, MP4 duration60027ms1098149bytes1280×720is_pending=0; decode877/877frames.",
+    "evidence": [
+      "timer60_actions.json",
+      "timer60_timeline.json",
+      "timer60_final_native.json",
+      "timer60_mediastore.txt",
+      "timer60_decode_validation.json",
+      "timer60_own_app.mp4"
+    ],
+    "notes": "PASS auto-stop/outputdecode; không chứng nhận motion/CFR/A-V sync. Phiên giữ own-app foreground, không mở notification/private apps."
+  },
+  {
+    "id": "T05-09",
+    "title": "Pause → Resume → Auto-stop.",
+    "status": "PASS",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Pause → Resume → Auto-stop.",
+    "steps": "Tap Pause/Resume theo UIAutomator bounds; KEYCODE_HOME và am start để quay lại; để native auto-stop ở Home không gửi Stop; đọc journal, MediaStore, decode MP4 và kiểm temp cache đúng session.",
+    "actual": "Pause giữ nguyên elapsed 77444ms; Resume cùng ID; native auto-stop tại active 300006ms, không tính khoảng paused.",
+    "evidence": [
+      "long_pause_resume_actions.json",
+      "long_autostop_observations.json"
+    ],
+    "notes": "Kết quả chỉ cho phiên và thiết bị đã thử; không thay thế đánh giá âm thanh hoặc fault injection."
+  },
+  {
+    "id": "T05-10",
+    "title": "Manual Stop trước deadline.",
+    "status": "PASS",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Manual Stop trước deadline.",
+    "steps": "Chọn cấu hình bằng UIAutomator bounds (xem landscape_setup_actions/start_actions), chấp nhận consent mới, Tap Stop và kiểm journal/MediaStore.",
+    "actual": "Tap Stop thật ở active 250441ms trước giới hạn 300000ms, completed và MP4 duration 250526ms.",
+    "evidence": [
+      "landscape_native_completed.json",
+      "landscape_mediastore.txt",
+      "landscape_before_stop.xml"
+    ],
+    "notes": "Không suy rộng bitrate mục tiêu thành CBR, hoặc canvas landscape thành dynamic rotation."
+  },
+  {
+    "id": "T05-11",
+    "title": "Auto-stop khi app background.",
+    "status": "PASS",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Auto-stop khi app background.",
+    "steps": "Tap Pause/Resume theo UIAutomator bounds; KEYCODE_HOME và am start để quay lại; để native auto-stop ở Home không gửi Stop; đọc journal, MediaStore, decode MP4 và kiểm temp cache đúng session.",
+    "actual": "Đã gửi Home lúc native recording trước deadline; không gửi Stop, native tự completed và MP4 300.312s.",
+    "evidence": [
+      "long_before_background_deadline.json",
+      "long_autostop_observations.json",
+      "long_mediastore.txt"
+    ],
+    "notes": "Kết quả chỉ cho phiên và thiết bị đã thử; không thay thế đánh giá âm thanh hoặc fault injection."
+  },
+  {
+    "id": "T05-12",
+    "title": "Activity recreation.",
+    "status": "NOT RUN",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Activity recreation.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Chưa có Activity recreation thật trong countdown/auto-stop; foreground/background không thay thế recreation.",
+    "evidence": [],
+    "notes": "Chưa có Activity recreation thật trong countdown/auto-stop; foreground/background không thay thế recreation."
+  },
+  {
+    "id": "T05-13",
+    "title": "System Stop gần deadline.",
+    "status": "NOT RUN",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "System Stop gần deadline.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Chưa gọi OS stop sharing gần deadline; các Stop đã thử là app/native controls.",
+    "evidence": [],
+    "notes": "Chưa gọi OS stop sharing gần deadline; các Stop đã thử là app/native controls."
+  },
+  {
+    "id": "T05-14",
+    "title": "Encoder error gần deadline (chỉ dùng test hook an toàn nếu đã có).",
+    "status": "NOT RUN",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Encoder error gần deadline (chỉ dùng test hook an toàn nếu đã có).",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Không có safe encoder-error hook được chạy; không cố làm đầy storage hoặc gây fault mất dữ liệu.",
+    "evidence": [],
+    "notes": "Không có safe encoder-error hook được chạy; không cố làm đầy storage hoặc gây fault mất dữ liệu."
+  },
+  {
+    "id": "T05-15",
+    "title": "Session mới không bị timer cũ ảnh hưởng.",
+    "status": "PASS",
+    "preconditions": "Native countdown/active-duration; không dùng timer/controller test thứ hai.",
+    "expected": "Session mới không bị timer cũ ảnh hưởng.",
+    "steps": "Chọn cấu hình bằng UIAutomator bounds (xem landscape_setup_actions/start_actions), chấp nhận consent mới, Tap Stop và kiểm journal/MediaStore.",
+    "actual": "Sau phiên auto-stop 300s, phiên Landscape mới có ID/start clock mới và chạy 250.441s tới Stop thủ công, không bị timer phiên trước dừng ngay; tiếp tục tạo session Performance mới.",
+    "evidence": [
+      "long_autostop_observations.json",
+      "landscape_native_recording.json",
+      "landscape_native_completed.json",
+      "performance_native_recording.json"
+    ],
+    "notes": "Không suy rộng bitrate mục tiêu thành CBR, hoặc canvas landscape thành dynamic rotation."
+  },
+  {
+    "id": "T06-01",
+    "title": "Screenshot Idle.",
+    "status": "PASS",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Screenshot Idle.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Screenshot từ idle tạo PNG thật và published.",
+    "evidence": [
+      "screenshot_native_1_mediastore.txt",
+      "screenshot_media_analysis.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T06-02",
+    "title": "Screenshot Delay 3s.",
+    "status": "PASS",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Screenshot Delay 3s.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Native delay 3s và timeline 3/2/1 đã qua assertion harness.",
+    "evidence": [
+      "screenshot_logcat.txt",
+      "screenshot_actions.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T06-03",
+    "title": "Cancel Delay.",
+    "status": "NOT RUN",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Cancel Delay.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Screenshot delay cố định 3s và chủ động minimize app; chưa có native cancel-screenshot harness/target UI an toàn trong cửa sổ này. Không suy từ video countdown cancel.",
+    "evidence": [],
+    "notes": "Screenshot delay cố định 3s và chủ động minimize app; chưa có native cancel-screenshot harness/target UI an toàn trong cửa sổ này. Không suy từ video countdown cancel."
+  },
+  {
+    "id": "T06-04",
+    "title": "Permission Denied.",
+    "status": "PASS",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Permission Denied.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Screenshot DENY và BACK đều không tăng ảnh, không feedback Saved theo assertions trước CAPTURE_1.",
+    "evidence": [
+      "screenshot_logcat.txt",
+      "screenshot_DENY_consent.xml",
+      "screenshot_BACK_consent.xml"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T06-05",
+    "title": "Screenshot during Recording nếu hỗ trợ.",
+    "status": "UNSUPPORTED",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Screenshot during Recording nếu hỗ trợ.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "UI Screenshot disabled khi recording; kiến trúc hiện tại không cung cấp concurrent screenshot.",
+    "evidence": [
+      "long_ui_recording.xml"
+    ],
+    "notes": "Không tính là PASS."
+  },
+  {
+    "id": "T06-06",
+    "title": "Screenshot during Paused Recording nếu hỗ trợ.",
+    "status": "UNSUPPORTED",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Screenshot during Paused Recording nếu hỗ trợ.",
+    "steps": "Tap Pause/Resume theo UIAutomator bounds; KEYCODE_HOME và am start để quay lại; để native auto-stop ở Home không gửi Stop; đọc journal, MediaStore, decode MP4 và kiểm temp cache đúng session.",
+    "actual": "Screenshot disabled khi paused, đã quan sát trên hai hierarchy; implementation không cung cấp concurrent screenshot.",
+    "evidence": [
+      "long_paused_1.xml",
+      "long_paused_2.xml"
+    ],
+    "notes": "Kết quả chỉ cho phiên và thiết bị đã thử; không thay thế đánh giá âm thanh hoặc fault injection."
+  },
+  {
+    "id": "T06-07",
+    "title": "Screenshot 5 lần liên tiếp.",
+    "status": "PASS",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Screenshot 5 lần liên tiếp.",
+    "steps": "Tap Screenshot bằng bounds trong Photo Library; accept consent thật; đưa own app trở lại trong 3s delay; poll native completed; content query/read đúng URI; decode PNG.",
+    "actual": "5 lần liên tiếp qua 5 consent mới, 5 session/URI khác nhau; mọi PNG signature đúng, decode 720x1456, nhiều màu, is_pending=0; giữ toàn bộ ảnh.",
+    "evidence": [
+      "T06-07_repeated_screenshots.json",
+      "T06-07_shot_1_mediastore.txt",
+      "T06-07_shot_2_mediastore.txt",
+      "T06-07_shot_3_mediastore.txt",
+      "T06-07_shot_4_mediastore.txt",
+      "T06-07_shot_5_mediastore.txt"
+    ],
+    "notes": "Không mở app nhạy cảm; ảnh test được giữ trên điện thoại. Chỉ chụp nội dung của app trong lượt này."
+  },
+  {
+    "id": "T06-08",
+    "title": "Rotate trước khi chụp.",
+    "status": "NOT RUN",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Rotate trước khi chụp.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Chưa xoay màn hình trước screenshot. Native 720x1456 đã decode, không thay rotation setting để giả kết quả.",
+    "evidence": [],
+    "notes": "Chưa xoay màn hình trước screenshot. Native 720x1456 đã decode, không thay rotation setting để giả kết quả."
+  },
+  {
+    "id": "T06-09",
+    "title": "Screenshot nội dung ứng dụng khác được phép.",
+    "status": "PASS",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Screenshot nội dung ứng dụng khác được phép.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Native screenshot chụp launcher sau khi app chủ động minimize; không mở ứng dụng riêng tư khác.",
+    "evidence": [
+      "screenshot_native_1.png",
+      "screenshot_media_analysis.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T06-10",
+    "title": "FLAG_SECURE/DRM limitations; chỉ kiểm tra giới hạn từ code/tài liệu hoặc trường hợp thử nghiệm hợp pháp, không vượt bảo vệ.",
+    "status": "PASS",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "FLAG_SECURE/DRM limitations; chỉ kiểm tra giới hạn từ code/tài liệu hoặc trường hợp thử nghiệm hợp pháp, không vượt bảo vệ.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Chỉ xác minh giới hạn secure/DRM từ tài liệu Task 06 và báo cáo controls; không vượt bảo vệ hoặc nhận là runtime test DRM.",
+    "evidence": [
+      "document_audit.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T06-11",
+    "title": "Storage error handling; chỉ kiểm tra bằng test an toàn, không cố làm đầy bộ nhớ điện thoại.",
+    "status": "NOT RUN",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Storage error handling; chỉ kiểm tra bằng test an toàn, không cố làm đầy bộ nhớ điện thoại.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Không chạy I/O/storage fault injection; không cố làm đầy bộ nhớ thiết bị.",
+    "evidence": [],
+    "notes": "Không chạy I/O/storage fault injection; không cố làm đầy bộ nhớ thiết bị."
+  },
+  {
+    "id": "T06-12",
+    "title": "Empty frame/timeout bằng test có sẵn nếu hỗ trợ.",
+    "status": "NOT RUN",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Empty frame/timeout bằng test có sẵn nếu hỗ trợ.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Không có safe empty-frame/timeout hook đã chạy; không suy từ unit buffer tests sang runtime timeout.",
+    "evidence": [],
+    "notes": "Không có safe empty-frame/timeout hook đã chạy; không suy từ unit buffer tests sang runtime timeout."
+  },
+  {
+    "id": "T06-13",
+    "title": "Cancel during capture.",
+    "status": "NOT RUN",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Cancel during capture.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Chưa cancel trong one-shot frame/finalizer; không đua Cancel quá muộn rồi báo đã hủy ảnh được lưu.",
+    "evidence": [],
+    "notes": "Chưa cancel trong one-shot frame/finalizer; không đua Cancel quá muộn rồi báo đã hủy ảnh được lưu."
+  },
+  {
+    "id": "T06-14",
+    "title": "Save/View URI hợp lệ.",
+    "status": "PASS",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Save/View URI hợp lệ.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "PNG content URI đọc được, decode và View Photo preview qua assertion trước capture 2.",
+    "evidence": [
+      "screenshot_logcat.txt",
+      "screenshot_media_analysis.json",
+      "screenshot_native_1_mediastore.txt"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T06-15",
+    "title": "Ảnh xuất hiện trong Photo Library.",
+    "status": "PASS",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Ảnh xuất hiện trong Photo Library.",
+    "steps": "Chạy harness/UI thật; định vị bằng UIAutomator, tap/swipe theo bounds; đọc native state, query/read đúng test URI; xem action/log/metadata đính kèm.",
+    "actual": "Photo Library cập nhật hai ảnh, View và feedback expiration qua assertions; video visibility cuối suite fail được ghi riêng.",
+    "evidence": [
+      "screenshot_logcat.txt",
+      "screenshot_actions.json"
+    ],
+    "notes": "PASS chỉ trong phạm vi actual result đã mô tả; không suy rộng mọi OEM/Android version."
+  },
+  {
+    "id": "T06-16",
+    "title": "Screenshot during Recording → Stop → MP4 hợp lệ.",
+    "status": "UNSUPPORTED",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Screenshot during Recording → Stop → MP4 hợp lệ.",
+    "steps": "Tap Pause/Resume theo UIAutomator bounds; KEYCODE_HOME và am start để quay lại; để native auto-stop ở Home không gửi Stop; đọc journal, MediaStore, decode MP4 và kiểm temp cache đúng session.",
+    "actual": "Screenshot trong Recording/Paused bị UI disable; không tuyên bố chụp đồng thời. Có regression quay sau screenshot và MP4 dài hợp lệ.",
+    "evidence": [
+      "long_ui_recording.xml",
+      "long_paused_1.xml",
+      "screenshot_video_mediastore.txt"
+    ],
+    "notes": "Kết quả chỉ cho phiên và thiết bị đã thử; không thay thế đánh giá âm thanh hoặc fault injection."
+  },
+  {
+    "id": "T06-17",
+    "title": "Screenshot lại sau lỗi.",
+    "status": "PASS",
+    "preconditions": "Native failed bởi microphone permission denied; không inject ImageReader fault.",
+    "expected": "Screenshot lại sau lỗi.",
+    "steps": "Tap Screenshot theo fresh hierarchy; xác nhận dialog MediaProjection thật; đưa own app về foreground trong 3s delay; đọc completed URI và decode đúng PNG test.",
+    "actual": "Sau failed do audio permission denied, phiên screenshot mới completed, URI1000002325; PNG720×1456 published/decode hợp lệ.",
+    "evidence": [
+      "mic_deny_actual_native.json",
+      "error_recovery_actions.json",
+      "error_recovery_native.json",
+      "error_recovery_mediastore.txt",
+      "error_recovery_png_validation.json",
+      "error_recovery.png"
+    ],
+    "notes": "PASS recovery sau permission error; không chứng nhận recovery sau ImageReader/encoder/storage fault."
+  },
+  {
+    "id": "T06-18",
+    "title": "Không leak ImageReader/VirtualDisplay sau khi đóng app.",
+    "status": "NOT RUN",
+    "preconditions": "Screenshot từ idle; consent mới; giữ toàn bộ file test.",
+    "expected": "Không leak ImageReader/VirtualDisplay sau khi đóng app.",
+    "steps": "Chưa thực hiện đầy đủ test case này.",
+    "actual": "Sau Stop có projection null/service none; chưa có heap/FD/ImageReader stress leak measurement. Không dùng một snapshot cleanup để khẳng định không leak.",
+    "evidence": [],
+    "notes": "Sau Stop có projection null/service none; chưa có heap/FD/ImageReader stress leak measurement. Không dùng một snapshot cleanup để khẳng định không leak."
+  },
+  {
+    "id": "T06-19",
+    "title": "Bổ sung: completed screenshot giữ dimensions sau process restart",
+    "status": "FAIL",
+    "preconditions": "Screenshot completed có native dimensions và URI thật; process restart tự nhiên sau đổi quyền micro bằng Settings UI.",
+    "expected": "Replay cùng session/URI vẫn giữ width=720,height=1456.",
+    "steps": "So sánh snapshot T06-07 shot 5 trước restart với capture_journal.xml sau restart; query MediaStore đúng test URI.",
+    "actual": "Cùng ID 0f70ab5a-e678-452e-ac47-068576ad26f0 và URI 1000002323 nhưng root dimensions từ 720×1456 thành 0×0. MediaStore vẫn 720×1456; không mất file.",
+    "evidence": [
+      "replay_screenshot_dimensions_failure.json",
+      "replay_screenshot_mediastore.txt",
+      "T06-07_repeated_screenshots.json"
+    ],
+    "notes": "Case bổ sung ngoài 92 cases yêu cầu. Owner P1, Medium. CaptureJournal không phục hồi root dimensions; chưa sửa code."
+  }
+]

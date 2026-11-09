@@ -1,0 +1,6 @@
+{
+  "at": "2026-11-08T10:42:07.787168+07:00",
+  "action": "input tap 424 533",
+  "target": "Timer in observed dragged bar [320,485]-[720,581]",
+  "reference": "overlay_dragged.png; overlay_dragged_window.txt"
+}

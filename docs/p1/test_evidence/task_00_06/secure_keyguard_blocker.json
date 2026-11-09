@@ -1,0 +1,11 @@
+{
+  "at": "2026-11-08T11:02:05.698031+07:00",
+  "observed": "Screen timed out; power Asleep/OFF; after KEYCODE_WAKEUP Keyguard secure=true/showingAndNotOccluded=true.",
+  "action": "Wake only; no PIN, swipe-unlock, dismiss-keyguard or security bypass. Owner unlock requested.",
+  "affected": [
+    "T03-05 runtime Start/deny verification",
+    "T00-05 failure without Saved",
+    "remaining timer UI cases"
+  ],
+  "not_a_product_failure": true
+}

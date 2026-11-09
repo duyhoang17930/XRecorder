@@ -1,0 +1,24 @@
+{
+  "at": "2026-11-08T10:54:36.730960+07:00",
+  "target": {
+    "index": "3",
+    "text": "Không cho phép",
+    "resource-id": "com.android.permissioncontroller:id/deny_radio_button",
+    "class": "android.widget.RadioButton",
+    "package": "com.google.android.permissioncontroller",
+    "content-desc": "",
+    "checkable": "true",
+    "checked": "false",
+    "clickable": "true",
+    "enabled": "true",
+    "focusable": "true",
+    "focused": "false",
+    "scrollable": "false",
+    "long-clickable": "false",
+    "password": "false",
+    "selected": "false",
+    "bounds": "[32,812][688,893]"
+  },
+  "action": "input tap 360 852",
+  "purpose": "T03-05 normal microphone-denied test; no adb grant/revoke used"
+}

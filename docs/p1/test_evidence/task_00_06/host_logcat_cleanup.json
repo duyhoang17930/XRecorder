@@ -1,0 +1,6 @@
+{
+  "stopped_host_adb_logcat_processes": 0,
+  "trimmed_after_own_test_terminal_marker": [],
+  "device_app_processes_killed": false,
+  "reason": "End scoped capture and avoid collecting unrelated data if Android PID is reused."
+}
