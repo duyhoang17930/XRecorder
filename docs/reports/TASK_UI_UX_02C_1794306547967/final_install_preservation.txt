@@ -1,0 +1,5 @@
+True
+shared_prefs/app_settings.xml
+shared_prefs/media_catalog.xml
+shared_prefs/onboarding_state.xml
+shared_prefs/p2_locale.xml

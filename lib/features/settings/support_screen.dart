@@ -2,6 +2,7 @@ import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/widgets/studio_widgets.dart';
+import 'studio_identity.dart';
 
 import 'package:flutter/services.dart';
 
@@ -50,6 +51,7 @@ class _SupportScreenState extends State<SupportScreen> {
     body: ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        const SelectableText(StudioIdentity.email),
         Text(context.l10n.describeWhatHappenedWhatYouExpectedAnd),
         TextField(
           controller: text,
@@ -102,6 +104,41 @@ class _SupportScreenState extends State<SupportScreen> {
           ),
         if (busy) const LinearProgressIndicator(),
         if (message != null) Text(context.message(message!)),
+        OutlinedButton.icon(
+          icon: const Icon(AppIcons.feedback),
+          label: Text(context.l10n.sendFeedbackEmail),
+          onPressed: busy
+              ? null
+              : () async {
+                  await run(() async {
+                    try {
+                      await channel.invokeMethod<void>('composeEmail', {
+                        'text':
+                            '${text.text.trim()}${consent && diagnostics != null ? '\n\n$diagnostics' : ''}',
+                      });
+                    } catch (_) {
+                      if (mounted) {
+                        setState(
+                          () => message = context.l10n.openExternalFailed,
+                        );
+                      }
+                    }
+                  });
+                },
+        ),
+        TextButton(
+          onPressed: () async {
+            await Clipboard.setData(
+              const ClipboardData(text: StudioIdentity.email),
+            );
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(context.l10n.emailAddressCopied)),
+              );
+            }
+          },
+          child: Text(context.l10n.copyEmailAddress),
+        ),
         FilledButton(
           onPressed: busy
               ? null

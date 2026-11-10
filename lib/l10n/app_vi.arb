@@ -1,4 +1,26 @@
 {
+  "editorAllTools": "Tất cả công cụ",
+  "editorAudio": "Âm thanh",
+  "editorOverlays": "Lớp phủ",
+  "editorExportQuality": "Chất lượng xuất",
+  "editorShapes": "Hình dạng",
+  "editorCrop": "Cắt ảnh",
+  "editorTransform": "Biến đổi",
+  "editorColor": "Màu",
+  "photoDragToErase": "Kéo gần nét vẽ để xóa.",
+  "photoEnterText": "Nhập chữ trước khi đặt lên ảnh.",
+  "editorAdvancedAudio": "Giọng nói & nhạc nền",
+  "editorSubtitleHint": "Định dạng phụ đề đã thêm vào dự án.",
+  "editorApply": "Áp dụng",
+  "fileManagement": "Quản lý tệp",
+  "viewIntroduction": "Xem lại giới thiệu",
+  "privacyPolicy": "Chính sách quyền riêng tư",
+  "termsOfUse": "Điều khoản sử dụng",
+  "officialWebsite": "Trang web chính thức",
+  "sendFeedbackEmail": "Gửi góp ý qua email",
+  "copyEmailAddress": "Sao chép địa chỉ email",
+  "emailAddressCopied": "Đã sao chép địa chỉ email",
+  "openExternalFailed": "Không mở được ứng dụng. Kiểm tra trình duyệt hoặc ứng dụng email rồi thử lại.",
   "@@locale": "vi",
   "label1080pFhd": "Tính năng 1080p FHD",
   "label12Mbps": "12 Mbps",
@@ -670,5 +692,24 @@
   "speechHistoryUnavailable": "Lịch sử phát biểu đã được tiết kiệm không thể được tải lên. dữ liệu hiện có đã được lưu lại. khởi động lại ứng dụng hoặc khôi phục lại một bản sao lưu trước khi cố gắng lại.",
   "speechHistoryNotSaved": "Lịch sử ngôn ngữ không thể được lưu. miễn phí lưu trữ hoặc kiểm tra truy cập lưu trữ ứng dụng, sau đó rút lại. xem xét và lưu bất kỳ tiêu đề được tạo trước khi đóng.",
   "speechJobFailed": "Hoạt động thất bại",
-  "speechSavingHistory": "Tiết kiệm lịch sử công việc..."
+  "speechSavingHistory": "Tiết kiệm lịch sử công việc...",
+  "onboardingRecordTitle": "Ghi lại mọi thứ",
+  "onboardingRecordDescription": "Ghi lại màn hình với chất lượng cao. Chọn âm thanh và bắt đầu ghi chỉ với vài thao tác.",
+  "onboardingEditTitle": "Chỉnh sửa theo cách của bạn",
+  "onboardingEditDescription": "Cắt video, thêm chữ và hình vẽ, rồi tinh chỉnh bản ghi bằng các công cụ chỉnh sửa mạnh mẽ.",
+  "onboardingSubtitlesTitle": "Phụ đề thông minh",
+  "onboardingSubtitlesDescription": "Chuyển lời nói thành phụ đề ngay trên thiết bị. Chỉnh sửa nội dung để video dễ theo dõi hơn.",
+  "onboardingSkip": "Bỏ qua",
+  "onboardingNext": "Tiếp theo",
+  "onboardingBack": "Quay lại",
+  "onboardingGetStarted": "Bắt đầu",
+  "onboardingSaveFailed": "Không thể lưu tiến trình. Hãy thử lại.",
+  "onboardingProgress": "Bước {current} trên {total}",
+  "@onboardingProgress": {
+    "description": "Accessible current onboarding page and total page count.",
+    "placeholders": {
+      "current": { "type": "String" },
+      "total": { "type": "String" }
+    }
+  }
 }

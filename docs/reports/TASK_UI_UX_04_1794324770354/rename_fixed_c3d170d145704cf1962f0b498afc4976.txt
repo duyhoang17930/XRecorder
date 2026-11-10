@@ -1,0 +1,3 @@
+00:00 +0: loading D:/FAU_App/XRecorder/test/ux_interaction_test.dart
+00:00 +0: project rename survives dialog exit and keyboard inset animation
+00:02 +1: All tests passed!

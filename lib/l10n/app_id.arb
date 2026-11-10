@@ -1,4 +1,26 @@
 {
+  "editorAllTools": "Semua alat",
+  "editorAudio": "Audio",
+  "editorOverlays": "Lapisan",
+  "editorExportQuality": "Kualitas ekspor",
+  "editorShapes": "Bentuk",
+  "editorCrop": "Pangkas",
+  "editorTransform": "Transformasi",
+  "editorColor": "Warna",
+  "photoDragToErase": "Seret di dekat coretan untuk menghapusnya.",
+  "photoEnterText": "Masukkan teks sebelum menempatkannya pada foto.",
+  "editorAdvancedAudio": "Suara & musik latar",
+  "editorSubtitleHint": "Atur gaya subtitel yang ditambahkan ke proyek.",
+  "editorApply": "Terapkan",
+  "fileManagement": "Pengelolaan file",
+  "viewIntroduction": "Lihat pengantar",
+  "privacyPolicy": "Kebijakan Privasi",
+  "termsOfUse": "Ketentuan Penggunaan",
+  "officialWebsite": "Situs web resmi",
+  "sendFeedbackEmail": "Kirim masukan lewat email",
+  "copyEmailAddress": "Salin alamat email",
+  "emailAddressCopied": "Alamat email disalin",
+  "openExternalFailed": "Tidak dapat membuka aplikasi. Periksa browser atau aplikasi email lalu coba lagi.",
   "@@locale": "id",
   "componentGallery": "Galeri komponen UI",
   "label1080pFhd": "1080p dan FHD",
@@ -670,5 +692,24 @@
   "speechHistoryUnavailable": "Sejarah ucapan yang disimpan tidak dapat dimuat. data yang ada disimpan. memulai kembali aplikasi atau mengembalikan sandaran sebelum mencoba lagi.",
   "speechHistoryNotSaved": "Sejarah bicara tidak dapat disimpan. percuma menyimpan atau memeriksa akses penyimpanan aplikasi, kemudian retry. ulasan dan menyimpan subtitle yang dihasilkan sebelum menutup.",
   "speechJobFailed": "Operasi gagal",
-  "speechSavingHistory": "Menyelamatkan sejarah pekerjaan..."
+  "speechSavingHistory": "Menyelamatkan sejarah pekerjaan...",
+  "onboardingRecordTitle": "Rekam Apa Saja",
+  "onboardingRecordDescription": "Rekam layar dengan kualitas tinggi. Pilih pengaturan audio dan mulai merekam hanya dengan beberapa ketukan.",
+  "onboardingEditTitle": "Edit Sesuai Caramu",
+  "onboardingEditDescription": "Pangkas video, tambahkan teks dan gambar, lalu sempurnakan rekaman dengan alat pengeditan yang lengkap.",
+  "onboardingSubtitlesTitle": "Subtitle Cerdas",
+  "onboardingSubtitlesDescription": "Ubah ucapan menjadi subtitel langsung di perangkat. Sesuaikan teks agar video lebih mudah diikuti.",
+  "onboardingSkip": "Lewati",
+  "onboardingNext": "Lanjut",
+  "onboardingBack": "Kembali",
+  "onboardingGetStarted": "Mulai",
+  "onboardingSaveFailed": "Kemajuan tidak dapat disimpan. Coba lagi.",
+  "onboardingProgress": "Langkah {current} dari {total}",
+  "@onboardingProgress": {
+    "description": "Accessible current onboarding page and total page count.",
+    "placeholders": {
+      "current": { "type": "String" },
+      "total": { "type": "String" }
+    }
+  }
 }

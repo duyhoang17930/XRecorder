@@ -1,0 +1,191 @@
+[
+  {
+    "screen": "Photo_Editor_v4",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Photo editor",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Photo editor",
+      "Edit an sRGB copy with orientation applied. Up to 2048px on the longest edge. JPEG uses a white background for transparency.",
+      "Export image format\nPNG · lossless",
+      "Longest edge (no enlargement)\n2,048 pixels",
+      "Pen",
+      "Rectangle",
+      "Circle",
+      "Arrow",
+      "Text",
+      "Eraser",
+      "Undo photo edit",
+      "Redo photo edit",
+      "Red ink",
+      "Yellow ink",
+      "Cyan ink",
+      "White ink",
+      "Black ink",
+      "Rotate 90°",
+      "Flip horizontal",
+      "Flip vertical",
+      "Stroke width",
+      "12 pixels at 2048 pixels wide",
+      "Crop left / right",
+      "Crop left and right",
+      "0 percent",
+      "100 percent",
+      "Crop top / bottom",
+      "Crop top and bottom",
+      "0 percent",
+      "100 percent",
+      "Save copy"
+    ],
+    "image": "Photo_Editor_v4_portrait_0.png"
+  },
+  {
+    "screen": "Photo_Editor_v4",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Photo editor",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Photo editor",
+      "Edit an sRGB copy with orientation applied. Up to 2048px on the longest edge. JPEG uses a white background for transparency.",
+      "Export image format\nPNG · lossless",
+      "Longest edge (no enlargement)\n2,048 pixels",
+      "Pen",
+      "Rectangle",
+      "Circle",
+      "Arrow",
+      "Text",
+      "Eraser",
+      "Undo photo edit",
+      "Redo photo edit",
+      "Red ink",
+      "Yellow ink",
+      "Cyan ink",
+      "White ink",
+      "Black ink",
+      "Rotate 90°",
+      "Flip horizontal",
+      "Flip vertical",
+      "Save copy"
+    ],
+    "image": "Photo_Editor_v4_landscape_1.png"
+  },
+  {
+    "screen": "Photo_Editor_v4",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Photo editor",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Photo editor",
+      "Edit an sRGB copy with orientation applied. Up to 2048px on the longest edge. JPEG uses a white background for transparency.",
+      "Export image format\nPNG · lossless",
+      "Longest edge (no enlargement)\n2,048 pixels",
+      "Pen",
+      "Rectangle",
+      "Circle",
+      "Arrow",
+      "Text",
+      "Eraser",
+      "Undo photo edit",
+      "Redo photo edit",
+      "Red ink",
+      "Yellow ink",
+      "Cyan ink",
+      "White ink",
+      "Black ink",
+      "Rotate 90°",
+      "Flip horizontal",
+      "Flip vertical",
+      "Stroke width",
+      "12 pixels at 2048 pixels wide",
+      "Crop left / right",
+      "Crop left and right",
+      "0 percent",
+      "100 percent",
+      "Crop top / bottom",
+      "Crop top and bottom",
+      "0 percent",
+      "100 percent",
+      "Save copy"
+    ],
+    "image": "Photo_Editor_v4_portrait_2.png"
+  },
+  {
+    "photoSelectedAfterRotation": [
+      "Rectangle",
+      ""
+    ]
+  },
+  {
+    "screen": "Sort_sheet",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Sort media",
+    "markerFound": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Sort media",
+      "Newest",
+      "Oldest",
+      "Name",
+      "Largest"
+    ],
+    "image": "Sort_sheet_portrait_4.png"
+  },
+  {
+    "screen": "Sort_sheet",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Sort media",
+    "markerFound": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Sort media",
+      "Newest",
+      "Oldest"
+    ],
+    "image": "Sort_sheet_landscape_5.png"
+  },
+  {
+    "screen": "Sort_sheet",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Sort media",
+    "markerFound": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Sort media",
+      "Newest",
+      "Oldest",
+      "Name",
+      "Largest"
+    ],
+    "image": "Sort_sheet_portrait_6.png"
+  }
+]

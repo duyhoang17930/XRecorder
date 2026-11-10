@@ -1,0 +1,34 @@
+{
+  "sourceSha256": "399d4169a5a322c63d8fee240ff29c91893ccd8c854262a1afc09e2bcfd8b8ff",
+  "outputs": [
+    {
+      "name": "Edited_1794327210071.png",
+      "uri": "content://media/external/images/media/1434",
+      "sha256": "cf231d99e67112424d1a3654e85a80e93afb0c3d87250735029d424646e1af6b",
+      "size": 6573,
+      "dimensions": [
+        256,
+        128
+      ],
+      "changedPixelsFromInput": 527,
+      "fullDecode": true
+    },
+    {
+      "name": "Edited_1794327406739.png",
+      "uri": "content://media/external/images/media/1451",
+      "sha256": "be862241ed8f6c586e4a31f21cec0ac42a60e1cebfc8ff116df1b10c867d7891",
+      "size": 6640,
+      "dimensions": [
+        256,
+        128
+      ],
+      "changedPixelsFromInput": 810,
+      "fullDecode": true
+    }
+  ],
+  "previewPixelComparison": {
+    "undoChangedPixels": 1344,
+    "redoChangedPixels": 0,
+    "rotationReturnChangedPixels": 0
+  }
+}

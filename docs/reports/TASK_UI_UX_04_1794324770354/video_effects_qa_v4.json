@@ -1,0 +1,80 @@
+[
+  {
+    "cancelDraftByteExact": true,
+    "projectPath": "files/projects/project_1794327848468607.json"
+  },
+  {
+    "screen": "Effects_overlays",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "UI04",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Video & audio effects",
+      "Video",
+      "Audio",
+      "Subtitles",
+      "Overlays",
+      "Overlays",
+      "Text, stickers & drawing (0)",
+      "UI04",
+      "116 characters remaining",
+      "Cancel",
+      "Apply to project"
+    ],
+    "image": "Effects_overlays_portrait_1.png"
+  },
+  {
+    "screen": "Effects_overlays",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "UI04",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Video & audio effects",
+      "Video",
+      "Audio",
+      "Subtitles",
+      "Overlays",
+      "Overlays",
+      "Text, stickers & drawing (0)",
+      "UI04",
+      "Cancel",
+      "Apply to project"
+    ],
+    "image": "Effects_overlays_landscape_2.png"
+  },
+  {
+    "screen": "Effects_overlays",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "UI04",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Video & audio effects",
+      "Video",
+      "Audio",
+      "Subtitles",
+      "Overlays",
+      "Overlays",
+      "Text, stickers & drawing (0)",
+      "UI04",
+      "116 characters remaining",
+      "Cancel",
+      "Apply to project"
+    ],
+    "image": "Effects_overlays_portrait_3.png"
+  }
+]

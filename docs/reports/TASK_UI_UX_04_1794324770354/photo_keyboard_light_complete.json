@@ -1,0 +1,87 @@
+[
+  {
+    "screen": "photo_export_options_final",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Export quality",
+    "markerFound": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Export quality",
+      "Edit an sRGB copy with orientation applied. Up to 2048px on the longest edge. JPEG uses a white background for transparency.",
+      "Export image format\nPNG · lossless",
+      "Longest edge (no enlargement)\n2,048 pixels",
+      "Cancel",
+      "Apply"
+    ],
+    "image": "photo_export_options_final_portrait_0.png"
+  },
+  {
+    "screen": "photo_export_options_final",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Export quality",
+    "markerFound": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Export quality",
+      "Edit an sRGB copy with orientation applied. Up to 2048px on the longest edge. JPEG uses a white background for transparency.",
+      "Export image format\nPNG · lossless",
+      "Longest edge (no enlargement)\n2,048 pixels",
+      "Cancel",
+      "Apply"
+    ],
+    "image": "photo_export_options_final_landscape_1.png"
+  },
+  {
+    "screen": "photo_export_options_final",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Export quality",
+    "markerFound": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Export quality",
+      "Edit an sRGB copy with orientation applied. Up to 2048px on the longest edge. JPEG uses a white background for transparency.",
+      "Export image format\nPNG · lossless",
+      "Longest edge (no enlargement)\n2,048 pixels",
+      "Cancel",
+      "Apply"
+    ],
+    "image": "photo_export_options_final_portrait_2.png"
+  },
+  {
+    "screen": "Photo slider endpoints",
+    "labels": [
+      "Back",
+      "Photo editor",
+      "Undo photo edit",
+      "Redo photo edit",
+      "Pen",
+      "Shapes",
+      "Text",
+      "Eraser",
+      "All tools",
+      "Red ink",
+      "Color",
+      "Stroke width",
+      "2 pixels",
+      "Stroke width",
+      "2 pixels",
+      "Export quality",
+      "Save copy"
+    ]
+  }
+]

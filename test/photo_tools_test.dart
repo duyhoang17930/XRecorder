@@ -1,11 +1,51 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:xrecorder/features/media/photo_tools_screen.dart';
 
+import 'fixtures/visual_catalog.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  testWidgets(
+    'stroke width stays in range at gesture endpoints and tool changes',
+    (tester) async {
+      const channel = MethodChannel('com.xrecorder/media');
+      final messenger =
+          TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+      final bytes = (await tester.runAsync(fixtureImage))!;
+      messenger.setMockMethodCallHandler(
+        channel,
+        (call) async => call.method == 'decodePhoto' ? bytes : null,
+      );
+      addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+      await tester.pumpWidget(
+        const MaterialApp(home: PhotoToolsScreen(uri: 'content://qa/slider')),
+      );
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 80)),
+      );
+      await tester.pumpAndSettle();
+      final finder = find.byType(Slider);
+      for (var i = 0; i < 8; i++) {
+        final slider = tester.widget<Slider>(finder);
+        // Flutter Slider._lerp(1): floating-point rounding can exceed max.
+        slider.onChanged!((slider.max - slider.min) + slider.min);
+        await tester.pump();
+        expect(tester.takeException(), isNull);
+        expect(
+          tester.widget<Slider>(finder).value,
+          lessThanOrEqualTo(slider.max),
+        );
+        tester.widget<Slider>(finder).onChanged!(slider.min);
+        await tester.pump();
+        expect(tester.widget<Slider>(finder).value, slider.min);
+      }
+      await tester.pumpWidget(const SizedBox.shrink());
+    },
+  );
   test(
     'photo crop, clockwise rotation and flip preserve source pixels',
     () async {

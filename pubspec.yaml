@@ -25,6 +25,7 @@ flutter:
   assets:
     - assets/fonts/OFL.txt
     - assets/licenses/
+    - assets/images/onboarding/
   fonts:
     - family: Manrope
       fonts:

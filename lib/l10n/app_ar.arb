@@ -1,4 +1,26 @@
 {
+  "editorAllTools": "كل الأدوات",
+  "editorAudio": "الصوت",
+  "editorOverlays": "الطبقات",
+  "editorExportQuality": "جودة التصدير",
+  "editorShapes": "الأشكال",
+  "editorCrop": "اقتصاص",
+  "editorTransform": "تحويل",
+  "editorColor": "اللون",
+  "photoDragToErase": "اسحب قرب علامة لإزالتها.",
+  "photoEnterText": "أدخل النص قبل وضعه على الصورة.",
+  "editorAdvancedAudio": "الصوت والموسيقى الخلفية",
+  "editorSubtitleHint": "نسّق الترجمات المضافة إلى مشروعك.",
+  "editorApply": "تطبيق",
+  "fileManagement": "إدارة الملفات",
+  "viewIntroduction": "عرض المقدمة",
+  "privacyPolicy": "سياسة الخصوصية",
+  "termsOfUse": "شروط الاستخدام",
+  "officialWebsite": "الموقع الرسمي",
+  "sendFeedbackEmail": "إرسال ملاحظات بالبريد الإلكتروني",
+  "copyEmailAddress": "نسخ عنوان البريد الإلكتروني",
+  "emailAddressCopied": "تم نسخ عنوان البريد الإلكتروني",
+  "openExternalFailed": "تعذر فتح التطبيق. تحقق من المتصفح أو تطبيق البريد وحاول مجددًا.",
   "@@locale": "ar",
   "componentGallery": "معرض مكونات واجهة المستخدم",
   "label1080pFhd": "1080p FHD",
@@ -670,5 +692,24 @@
   "speechHistoryUnavailable": "لا يمكن تحميل تاريخ الكلام الذي تم حفظه. تم حفظ البيانات الموجودة. إعادة تشغيل التطبيق أو استعادة النسخ الاحتياطي قبل محاولة مرة أخرى.",
   "speechHistoryNotSaved": "لا يمكن حفظ تاريخ الكلام. مجانا التخزين أو التحقق من إمكانية الوصول إلى تخزين التطبيق، ثم الانسحاب. مراجعة وتخزين أي عناوين فرعية تم إنشاؤها قبل إغلاق.",
   "speechJobFailed": "عملية فاشلة",
-  "speechSavingHistory": "توفير التاريخ الوظيفي ..."
+  "speechSavingHistory": "توفير التاريخ الوظيفي ...",
+  "onboardingRecordTitle": "سجّل كل شيء",
+  "onboardingRecordDescription": "سجّل شاشتك بجودة عالية. اختر إعدادات الصوت وابدأ التسجيل ببضع نقرات.",
+  "onboardingEditTitle": "حرّر بطريقتك",
+  "onboardingEditDescription": "قصّ مقاطع الفيديو وأضف النصوص والرسومات واضبط تسجيلاتك بأدوات تحرير متقدمة.",
+  "onboardingSubtitlesTitle": "ترجمة ذكية",
+  "onboardingSubtitlesDescription": "حوّل الكلام إلى ترجمات مباشرة على جهازك. خصّص النص واجعل متابعة الفيديو أسهل.",
+  "onboardingSkip": "تخطٍّ",
+  "onboardingNext": "التالي",
+  "onboardingBack": "رجوع",
+  "onboardingGetStarted": "ابدأ الآن",
+  "onboardingSaveFailed": "تعذّر حفظ التقدّم. حاول مرة أخرى.",
+  "onboardingProgress": "الخطوة {current} من {total}",
+  "@onboardingProgress": {
+    "description": "Accessible current onboarding page and total page count.",
+    "placeholders": {
+      "current": { "type": "String" },
+      "total": { "type": "String" }
+    }
+  }
 }

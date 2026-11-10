@@ -1,0 +1,92 @@
+[
+  {
+    "screen": "Photo_Preview_v3",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Photo preview",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Photo preview"
+    ],
+    "image": "Photo_Preview_v3_portrait_0.png"
+  },
+  {
+    "screen": "Photo_Preview_v3",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Photo preview",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Photo preview"
+    ],
+    "image": "Photo_Preview_v3_landscape_1.png"
+  },
+  {
+    "screen": "Photo_Preview_v3",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Photo preview",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Photo preview"
+    ],
+    "image": "Photo_Preview_v3_portrait_2.png"
+  },
+  {
+    "screen": "Photo_Editor_v3",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Photo Editor",
+    "markerFound": false,
+    "labels": [
+      "Back",
+      "Photo editor",
+      "Edit an sRGB copy with orientation applied. Up to 2048px on the longest edge. JPEG uses a white background for transparency.",
+      "Export image format\nPNG · lossless",
+      "Longest edge (no enlargement)\n2,048 pixels",
+      "Pen",
+      "Rectangle",
+      "Circle",
+      "Arrow",
+      "Text",
+      "Eraser",
+      "Undo photo edit",
+      "Redo photo edit",
+      "Red ink",
+      "Yellow ink",
+      "Cyan ink",
+      "White ink",
+      "Black ink",
+      "Rotate 90°",
+      "Flip horizontal",
+      "Flip vertical",
+      "Stroke width",
+      "12 pixels at 2048 pixels wide",
+      "Crop left / right",
+      "Crop left and right",
+      "0 percent",
+      "100 percent",
+      "Crop top / bottom",
+      "Crop top and bottom",
+      "0 percent",
+      "100 percent",
+      "Save copy"
+    ],
+    "image": "Photo_Editor_v3_portrait_3.png"
+  }
+]

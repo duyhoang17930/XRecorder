@@ -1,4 +1,26 @@
 {
+  "editorAllTools": "すべてのツール",
+  "editorAudio": "音声",
+  "editorOverlays": "レイヤー",
+  "editorExportQuality": "書き出し品質",
+  "editorShapes": "図形",
+  "editorCrop": "切り抜き",
+  "editorTransform": "変形",
+  "editorColor": "色",
+  "photoDragToErase": "描画の近くをドラッグして削除します。",
+  "photoEnterText": "写真に配置する前に文字を入力してください。",
+  "editorAdvancedAudio": "声とBGM",
+  "editorSubtitleHint": "プロジェクトに追加した字幕のスタイルを設定します。",
+  "editorApply": "適用",
+  "fileManagement": "ファイル管理",
+  "viewIntroduction": "紹介を見る",
+  "privacyPolicy": "プライバシーポリシー",
+  "termsOfUse": "利用規約",
+  "officialWebsite": "公式サイト",
+  "sendFeedbackEmail": "メールで意見を送る",
+  "copyEmailAddress": "メールアドレスをコピー",
+  "emailAddressCopied": "メールアドレスをコピーしました",
+  "openExternalFailed": "アプリを開けませんでした。ブラウザやメールアプリを確認して再試行してください。",
   "@@locale": "ja",
   "componentGallery": "UIコンポーネントギャラリー",
   "label1080pFhd": "1080p FHD",
@@ -670,5 +692,24 @@
   "speechHistoryUnavailable": "保存されたスピーチストーリーはアップロードできません. 既存のデータは保存されました. アプリを再起動するか、再試す前にバックアップを復元します。",
   "speechHistoryNotSaved": "スピーチストーリーは保存できません. 無料のストレージまたはアプリストレージアクセスをチェックして、リリースします. 終了前に生成されたサブタイトルをレビューして保存します。",
   "speechJobFailed": "作戦失敗",
-  "speechSavingHistory": "仕事の歴史を節約する..."
+  "speechSavingHistory": "仕事の歴史を節約する...",
+  "onboardingRecordTitle": "何でも録画",
+  "onboardingRecordDescription": "画面を高画質で録画。音声の設定を選んで、数回のタップで録画を始められます。",
+  "onboardingEditTitle": "自由に編集",
+  "onboardingEditDescription": "動画をトリミングし、文字や描画を追加。多彩な編集ツールで録画を仕上げましょう。",
+  "onboardingSubtitlesTitle": "スマート字幕",
+  "onboardingSubtitlesDescription": "端末上で音声を字幕に変換。テキストを調整して、動画をもっと分かりやすくしましょう。",
+  "onboardingSkip": "スキップ",
+  "onboardingNext": "次へ",
+  "onboardingBack": "戻る",
+  "onboardingGetStarted": "始める",
+  "onboardingSaveFailed": "進行状況を保存できませんでした。もう一度お試しください。",
+  "onboardingProgress": "{total} ページ中 {current} ページ目",
+  "@onboardingProgress": {
+    "description": "Accessible current onboarding page and total page count.",
+    "placeholders": {
+      "current": { "type": "String" },
+      "total": { "type": "String" }
+    }
+  }
 }

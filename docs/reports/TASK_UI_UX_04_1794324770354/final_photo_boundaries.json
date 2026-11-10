@@ -1,0 +1,46 @@
+[
+  {
+    "endpoint": "maximum",
+    "labels": [
+      "Back",
+      "Photo editor",
+      "Undo photo edit",
+      "Redo photo edit",
+      "Pen",
+      "Shapes",
+      "Text",
+      "Eraser",
+      "All tools",
+      "Red ink",
+      "Color",
+      "Stroke width",
+      "5 pixels",
+      "Stroke width",
+      "5 pixels",
+      "Export quality",
+      "Save copy"
+    ]
+  },
+  {
+    "endpoint": "minimum",
+    "labels": [
+      "Back",
+      "Photo editor",
+      "Undo photo edit",
+      "Redo photo edit",
+      "Pen",
+      "Shapes",
+      "Text",
+      "Eraser",
+      "All tools",
+      "Red ink",
+      "Color",
+      "Stroke width",
+      "2 pixels",
+      "Stroke width",
+      "2 pixels",
+      "Export quality",
+      "Save copy"
+    ]
+  }
+]

@@ -1,4 +1,26 @@
 {
+  "editorAllTools": "Todas as ferramentas",
+  "editorAudio": "Áudio",
+  "editorOverlays": "Camadas",
+  "editorExportQuality": "Qualidade de exportação",
+  "editorShapes": "Formas",
+  "editorCrop": "Recortar",
+  "editorTransform": "Transformar",
+  "editorColor": "Cor",
+  "photoDragToErase": "Arraste perto de uma marca para removê-la.",
+  "photoEnterText": "Digite o texto antes de colocá-lo na foto.",
+  "editorAdvancedAudio": "Voz e música de fundo",
+  "editorSubtitleHint": "Personalize as legendas adicionadas ao projeto.",
+  "editorApply": "Aplicar",
+  "fileManagement": "Gestão de arquivos",
+  "viewIntroduction": "Ver introdução",
+  "privacyPolicy": "Política de Privacidade",
+  "termsOfUse": "Termos de Uso",
+  "officialWebsite": "Site oficial",
+  "sendFeedbackEmail": "Enviar opinião por e-mail",
+  "copyEmailAddress": "Copiar endereço de e-mail",
+  "emailAddressCopied": "Endereço de e-mail copiado",
+  "openExternalFailed": "Não foi possível abrir um aplicativo. Verifique o navegador ou aplicativo de e-mail e tente novamente.",
   "@@locale": "pt",
   "componentGallery": "Galeria de componentes da interface",
   "label1080pFhd": "1080p em FHD",
@@ -670,5 +692,24 @@
   "speechHistoryUnavailable": "História de discurso salvo não pode ser carregada. dados existentes foram preservados. reiniciar o aplicativo ou restaurar uma backup antes de tentar novamente.",
   "speechHistoryNotSaved": "História do discurso não pode ser salvo. armazenamento gratuito ou verificação do acesso ao armazenamento da aplicação, em seguida retire. revisar e salvar quaisquer subtitulos gerados antes de fechar.",
   "speechJobFailed": "A operação falhou",
-  "speechSavingHistory": "História de trabalho de poupança..."
+  "speechSavingHistory": "História de trabalho de poupança...",
+  "onboardingRecordTitle": "Grave o que quiser",
+  "onboardingRecordDescription": "Grave a tela com alta qualidade. Escolha as configurações de áudio e comece a gravar com poucos toques.",
+  "onboardingEditTitle": "Edite à sua maneira",
+  "onboardingEditDescription": "Corte vídeos, adicione texto e desenhos e aperfeiçoe suas gravações com ferramentas completas de edição.",
+  "onboardingSubtitlesTitle": "Legendas inteligentes",
+  "onboardingSubtitlesDescription": "Transforme a fala em legendas diretamente no dispositivo. Personalize o texto e torne seus vídeos mais fáceis de acompanhar.",
+  "onboardingSkip": "Ignorar",
+  "onboardingNext": "Seguinte",
+  "onboardingBack": "Voltar",
+  "onboardingGetStarted": "Começar",
+  "onboardingSaveFailed": "Não foi possível guardar o progresso. Tente novamente.",
+  "onboardingProgress": "Passo {current} de {total}",
+  "@onboardingProgress": {
+    "description": "Accessible current onboarding page and total page count.",
+    "placeholders": {
+      "current": { "type": "String" },
+      "total": { "type": "String" }
+    }
+  }
 }

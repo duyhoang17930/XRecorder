@@ -335,7 +335,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                     style: AppTypography.caption.copyWith(color: c.muted),
                   ),
                   const SizedBox(height: AppSpacing.md),
-                  if (_items.isNotEmpty || _query.isNotEmpty) ...[
+                  ...[
                     StudioSearchField(
                       controller: _search,
                       hintText: video
@@ -371,12 +371,14 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                           onPressed: _pickingFolder ? null : _disconnectFolder,
                           child: Text(context.l10n.disconnectFolder),
                         ),
-                      if (_items.length > 1)
-                        ActionChip(
+                      Tooltip(
+                        message: context.l10n.sortMedia,
+                        child: ActionChip(
                           label: Text(context.message(_sort.label)),
                           avatar: const Icon(AppIcons.sort),
                           onPressed: _chooseSort,
                         ),
+                      ),
                     ],
                   ),
                   SectionTitle(
@@ -603,7 +605,11 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                 },
               ),
             ),
-          const SliverToBoxAdapter(child: SizedBox(height: AppSpacing.lg)),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: AppSpacing.lg + MediaQuery.paddingOf(context).bottom,
+            ),
+          ),
         ],
       ),
     );

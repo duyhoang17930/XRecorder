@@ -1,0 +1,79 @@
+ACTIVITY MANAGER LAST ANR (dumpsys activity lastanr)
+  ANR time: Nov 10, 2026 5:34:14 PM
+  Reason: Input dispatching timed out (c2f1c2c com.xrecorder.xrecorder/com.xrecorder.xrecorder.MainActivity is not responding. Waited 5004ms for FocusEvent(hasFocus=true)).
+
+  * Task{ddb018b #65 type=standard I=com.xrecorder.xrecorder/.MainActivity U=0 visible=true visibleRequested=true mode=fullscreen translucent=false sz=1}
+    mLastNonFullscreenBounds=Rect(105, 269 - 305, 680)
+    isSleeping=false
+    topResumedActivity=ActivityRecord{96263002 u0 com.xrecorder.xrecorder/.MainActivity t65}
+
+  mLastHomeActivityStartResult=2
+  mLastStarter:
+    mCurrentUser=0
+    mLastStartReason=startActivityAndWait
+    mLastStartActivityTimeMs=Nov 10, 2026 5:33:41 PM
+    mLastStartActivityResult=0
+    mStartActivity:
+      packageName=com.xrecorder.xrecorder processName=com.xrecorder.xrecorder
+      launchedFromUid=2000 launchedFromPackage=com.android.shell launchedFromFeature=null userId=0
+      app=ProcessRecord{5d354b9 29601:com.xrecorder.xrecorder/u0a219}
+      Intent { flg=0x10000000 xflg=0x5 cmp=com.xrecorder.xrecorder/.MainActivity }
+      rootOfTask=true task=Task{ddb018b #65 type=standard I=com.xrecorder.xrecorder/.MainActivity}
+      taskAffinity=null
+      mActivityComponent=com.xrecorder.xrecorder/.MainActivity
+      baseDir=/data/app/~~wdkfXXrrDgGnZnNQtpnOkg==/com.xrecorder.xrecorder-GB2CB4ReY5zj4WFr-UPChQ==/base.apk
+      dataDir=/data/user/0/com.xrecorder.xrecorder
+      stateNotNeeded=false componentSpecified=true mActivityType=standard
+      compat={160dpi} theme=0x7f100020
+      mLastReportedConfigurations:
+        mGlobalConfig={1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h920dp 160dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 411, 920) mAppBounds=Rect(0, 0 - 411, 920) mMaxBounds=Rect(0, 0 - 411, 920) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.578 fontWeightAdjustment=0}
+        mOverrideConfig={1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h920dp 160dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 411, 920) mAppBounds=Rect(0, 0 - 411, 920) mMaxBounds=Rect(0, 0 - 411, 920) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.2 fontWeightAdjustment=0}
+      mLastReportedActivityWindowInfo=ActivityWindowInfo{isEmbedded=false, taskBounds=Rect(0, 0 - 411, 920), taskFragmentBounds=Rect(0, 0 - 411, 920)}
+      CurrentConfiguration={1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h920dp 160dpi nrml long port finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 411, 920) mAppBounds=Rect(0, 0 - 411, 920) mMaxBounds=Rect(0, 0 - 411, 920) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.2 fontWeightAdjustment=0}
+      RequestedOverrideConfiguration={0.0 ?mcc0mnc ?localeList ?layoutDir ?swdp ?wdp ?hdp ?density ?lsize ?long ?ldr ?wideColorGamut ?orien ?uimode ?night ?touch ?keyb/?/? ?nav/? winConfig={ mBounds=Rect(0, 0 - 0, 0) mAppBounds=null mMaxBounds=Rect(0, 0 - 0, 0) mDisplayRotation=undefined mWindowingMode=undefined mActivityType=standard mAlwaysOnTop=undefined mRotation=undefined} ?fontWeightAdjustment}
+      ResolvedOverrideConfiguration={0.0 ?mcc0mnc ?localeList ?layoutDir ?swdp ?wdp ?hdp ?density ?lsize ?long ?ldr ?wideColorGamut ?orien ?uimode ?night ?touch ?keyb/?/? ?nav/? winConfig={ mBounds=Rect(0, 0 - 0, 0) mAppBounds=null mMaxBounds=Rect(0, 0 - 0, 0) mDisplayRotation=undefined mWindowingMode=undefined mActivityType=undefined mAlwaysOnTop=undefined mRotation=undefined} s.2 ?fontWeightAdjustment}
+      taskDescription: label="3HRecorder" icon=null iconResource=com.xrecorder.xrecorder/0 iconFilename=null primaryColor=ffa83a12
+        backgroundColor=ffffffff statusBarColor=ff000000 navigationBarColor=808080
+       backgroundColorFloating=ffffffff
+      launchFailed=false launchCount=1 lastLaunchTime=-28s864ms
+      mHaveState=false mIcicle=null
+      state=RESUMED delayedResume=false finishing=false
+      keysPaused=false inHistory=true idle=true
+      occludesParent=true mNoDisplay=false immersive=false launchMode=1
+      mActivityType=standard
+      windows=[Window{c2f1c2c u0 com.xrecorder.xrecorder/com.xrecorder.xrecorder.MainActivity}]
+      windowType=2
+      mOccludesParent=true
+      overrideOrientation=SCREEN_ORIENTATION_UNSPECIFIED
+      requestedOrientation=SCREEN_ORIENTATION_UNSPECIFIED
+      mVisibleRequested=true mVisible=true mClientVisible=true reportedDrawn=true reportedVisible=true
+      mNumInterestingWindows=1 mNumDrawnWindows=1 allDrawn=true)
+      startingData=null firstWindowDrawn=true
+      nowVisible=true lastVisibleTime=-4s82ms
+      resizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION
+      mLastReportedMultiWindowMode=false mLastReportedPictureInPictureMode=false
+      supportsSizeChanges=SIZE_CHANGES_UNSUPPORTED_METADATA
+      configChanges=0x40003fb7
+      neverSandboxDisplayApis=false
+      alwaysSandboxDisplayApis=false
+      isTransparentPolicyRunning=false
+      areBoundsLetterboxed=false
+      isLetterboxRunning=false
+    mIntent=Intent { flg=0x10000000 xflg=0x5 cmp=com.xrecorder.xrecorder/.MainActivity }
+    mLaunchMode=LAUNCH_SINGLE_TOP    mLaunchFlags=0x10000000 mDoResume=true mAddingToTask=true mInTaskFragment=null
+
+  ResumedActivity: ActivityRecord{96263002 u0 com.xrecorder.xrecorder/.MainActivity t65}
+  LockTaskController:
+    mLockTaskModeState=NONE
+    mLockTaskModeTasks=
+    mLockTaskPackages (userId:packages)=
+
+  KeyguardController:
+    mKeyguardShowing=false
+    mAodShowing=false
+    mKeyguardGoingAway=false
+   KeyguardShowing=false AodShowing=false KeyguardGoingAway=false DismissalRequested=false  Occluded=false DismissingKeyguardActivity=null TurnScreenOnActivity=null at display=0
+    mDismissalRequested=false
+
+-------------------------------------------------------------------------------
+

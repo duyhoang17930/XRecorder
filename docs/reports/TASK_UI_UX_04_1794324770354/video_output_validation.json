@@ -1,0 +1,33 @@
+{
+  "uri": "content://media/external/video/media/1536",
+  "size": 436509,
+  "sha256": "81f4af10f09032118ecdfb8e20a23c48dce68da4573582b00e55a0f0f577a6e3",
+  "metadata": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 96,
+        "height": 64
+      }
+    ],
+    "format": {
+      "duration": "2.066395"
+    }
+  },
+  "fullDecode": true,
+  "monotonicVideoDts": true,
+  "cornerPixelRGB": [
+    251,
+    104,
+    115
+  ],
+  "whiteOverlayPixelsAt1s": 302
+}

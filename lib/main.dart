@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'app/app.dart';
 import 'core/persistence/settings_store.dart';
 import 'features/settings/settings_controller.dart';
+import 'features/onboarding/onboarding_store.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,6 +46,21 @@ Future<void> main() async {
     ], await rootBundle.loadString('assets/licenses/CLDR-LICENSE.txt'));
   });
   final settings = SettingsController(store: const AndroidSettingsStore());
-  await settings.restore();
-  runApp(XRecorderApp(settings: settings));
+  const onboardingStore = AndroidOnboardingStore();
+  final startup = () async {
+    await settings.restore();
+    try {
+      return await onboardingStore.load();
+    } catch (_) {
+      // Keep an existing user moving if the optional welcome-state store fails.
+      return OnboardingState.complete;
+    }
+  }();
+  runApp(
+    XRecorderApp(
+      settings: settings,
+      startupFuture: startup,
+      onboardingStore: onboardingStore,
+    ),
+  );
 }

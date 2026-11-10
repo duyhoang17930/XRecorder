@@ -1,0 +1,169 @@
+[
+  {
+    "screen": "Video_Editor",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Video project",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Video project",
+      "Rename project",
+      "Saved · Originals unchanged",
+      "Play preview",
+      "0.0 / 2.0 seconds",
+      "Preview position",
+      "0.0 seconds",
+      "Subtitles",
+      "Effects",
+      "Add clip",
+      "Split",
+      "Timeline",
+      "Clip 1 · 2.0s",
+      "1. 3H_2e625c63_Restored_1794233551004_Edited_a89b00bf-db24-4779-8be8-74cb5d385f87.mp4\n2.0s",
+      "Undo edit",
+      "Redo edit",
+      "Export"
+    ],
+    "image": "Video_Editor_portrait_0.png"
+  },
+  {
+    "screen": "Video_Editor",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Video project",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Video project",
+      "Rename project",
+      "Saved · Originals unchanged",
+      "Play preview",
+      "Undo edit",
+      "Redo edit",
+      "Export"
+    ],
+    "image": "Video_Editor_landscape_1.png"
+  },
+  {
+    "screen": "Video_Editor",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Video project",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Video project",
+      "Rename project",
+      "Saved · Originals unchanged",
+      "Play preview",
+      "0.0 / 2.0 seconds",
+      "Preview position",
+      "0.0 seconds",
+      "Subtitles",
+      "Effects",
+      "Add clip",
+      "Split",
+      "Timeline",
+      "Clip 1 · 2.0s",
+      "1. 3H_2e625c63_Restored_1794233551004_Edited_a89b00bf-db24-4779-8be8-74cb5d385f87.mp4\n2.0s",
+      "Undo edit",
+      "Redo edit",
+      "Export"
+    ],
+    "image": "Video_Editor_portrait_2.png"
+  },
+  {
+    "afterPlay": [
+      "Back",
+      "Video project",
+      "Rename project",
+      "Saved · Originals unchanged",
+      "Play preview",
+      "2.2 / 2.0 seconds",
+      "Preview position",
+      "2.0 seconds",
+      "Subtitles",
+      "Effects",
+      "Add clip",
+      "Split",
+      "Timeline",
+      "Clip 1 · 2.0s",
+      "1. 3H_2e625c63_Restored_1794233551004_Edited_a89b00bf-db24-4779-8be8-74cb5d385f87.mp4\n2.0s",
+      "Undo edit",
+      "Redo edit",
+      "Export"
+    ]
+  },
+  {
+    "screen": "Language_dialog",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "App language",
+    "markerFound": true,
+    "labels": [
+      "Dismiss",
+      "App language",
+      "Follow system",
+      "English",
+      "Tiếng Việt",
+      "Español",
+      "Português (Brasil)",
+      "Français",
+      "Close"
+    ],
+    "image": "Language_dialog_portrait_4.png"
+  },
+  {
+    "screen": "Language_dialog",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "App language",
+    "markerFound": true,
+    "labels": [
+      "Dismiss",
+      "App language",
+      "Follow system",
+      "English",
+      "Close"
+    ],
+    "image": "Language_dialog_landscape_5.png"
+  },
+  {
+    "screen": "Language_dialog",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "App language",
+    "markerFound": true,
+    "labels": [
+      "Dismiss",
+      "App language",
+      "Follow system",
+      "English",
+      "Tiếng Việt",
+      "Español",
+      "Português (Brasil)",
+      "Français",
+      "Close"
+    ],
+    "image": "Language_dialog_portrait_6.png"
+  }
+]

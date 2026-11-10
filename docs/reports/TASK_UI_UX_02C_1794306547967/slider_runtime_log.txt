@@ -1,0 +1,73 @@
+--------- beginning of main
+11-10 17:52:05.228 31174 31174 I order.xrecorder: Late-enabling -Xcheck:jni
+11-10 17:52:05.796 31174 31174 I order.xrecorder: Using CollectorTypeCMC GC.
+11-10 17:52:05.813 31174 31174 W order.xrecorder: Unexpected CPU variant for x86: x86_64.
+11-10 17:52:05.813 31174 31174 W order.xrecorder: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, alderlake, default
+11-10 17:52:05.962 31174 31174 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-10 17:52:06.211 31174 31174 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-10 17:52:06.211 31174 31174 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+11-10 17:52:06.589 31174 31174 D nativeloader: Configuring clns-9 for other apk /data/app/~~BH89EB-gWacOjB6uwz7w_g==/com.xrecorder.xrecorder-j8B99YjZDyhGiF41bwpdGw==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~BH89EB-gWacOjB6uwz7w_g==/com.xrecorder.xrecorder-j8B99YjZDyhGiF41bwpdGw==/lib/x86_64:/data/app/~~BH89EB-gWacOjB6uwz7w_g==/com.xrecorder.xrecorder-j8B99YjZDyhGiF41bwpdGw==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.xrecorder.xrecorder
+11-10 17:52:06.632 31174 31174 I order.xrecorder: AssetManager2(0x79012789d178) locale list changing from [] to [en-US]
+11-10 17:52:06.672 31174 31174 V GraphicsEnvironment: Currently set values for:
+11-10 17:52:06.672 31174 31174 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-10 17:52:06.672 31174 31174 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-10 17:52:06.672 31174 31174 V GraphicsEnvironment: com.xrecorder.xrecorder is not listed in per-application setting
+11-10 17:52:06.673 31174 31174 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+11-10 17:52:06.673 31174 31174 V GraphicsEnvironment: com.xrecorder.xrecorder is not listed in ANGLE allowlist or settings, returning default
+11-10 17:52:06.673 31174 31174 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+--------- beginning of system
+11-10 17:52:06.866 31174 31294 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-10 17:52:06.888 31174 31174 I order.xrecorder: AssetManager2(0x79012789af18) locale list changing from [] to [en-US]
+11-10 17:52:07.009 31174 31174 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-10 17:52:07.033 31174 31294 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-10 17:52:07.035 31174 31294 I EGL_emulation: Opening libGLESv2_emulation.so
+11-10 17:52:07.078 31174 31294 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-10 17:52:07.151 31174 31297 I ResourceExtractor: Found extracted resources res_timestamp-1-1794307319122
+11-10 17:52:07.151 31174 31297 I ResourceExtractor: Resource version mismatch res_timestamp-1-1794307866909
+11-10 17:52:07.158 31174 31296 D FlutterJNI: Beginning load of flutter...
+11-10 17:52:07.281 31174 31296 D nativeloader: Load /data/app/~~BH89EB-gWacOjB6uwz7w_g==/com.xrecorder.xrecorder-j8B99YjZDyhGiF41bwpdGw==/base.apk!/lib/x86_64/libflutter.so using class loader ns clns-9 (caller=/data/app/~~BH89EB-gWacOjB6uwz7w_g==/com.xrecorder.xrecorder-j8B99YjZDyhGiF41bwpdGw==/base.apk): ok
+11-10 17:52:07.291 31174 31296 D FlutterJNI: flutter (null) was loaded normally!
+11-10 17:52:07.299 31174 31298 D skia    : [SkFontMgr Android Parser] '/product/etc/fonts_customization.xml' could not be opened
+11-10 17:52:08.414 31174 31297 I ResourceExtractor: Extracted baseline resource assets/flutter_assets/kernel_blob.bin
+11-10 17:52:08.414 31174 31297 I ResourceExtractor: Extracted baseline resource assets/flutter_assets/vm_snapshot_data
+11-10 17:52:08.523 31174 31297 I ResourceExtractor: Extracted baseline resource assets/flutter_assets/isolate_snapshot_data
+11-10 17:52:08.564 31174 31174 I order.xrecorder: AssetManager2(0x7901278a3578) locale list changing from [] to [en-US]
+11-10 17:52:08.602 31174 31174 W order.xrecorder: type=1400 audit(0.0:884): avc:  denied  { read } for  name="max_map_count" dev="proc" ino=29069 scontext=u:r:untrusted_app:s0:c219,c256,c512,c768 tcontext=u:object_r:proc_max_map_count:s0 tclass=file permissive=0 app=com.xrecorder.xrecorder
+11-10 17:52:08.668 31174 31303 I flutter : [IMPORTANT:flutter/shell/platform/android/android_context_gl_impeller.cc(104)] Using the Impeller rendering backend (OpenGLES).
+11-10 17:52:08.683 31174 31174 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-10 17:52:08.997 31174 31309 I flutter : The Dart VM service is listening on http://127.0.0.1:33005/63ldV4sslS8=/
+11-10 17:52:10.112 31174 31174 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/view/accessibility/AccessibilityNodeInfo;->getSourceNodeId()J (runtime_flags=0, domain=platform, api=unsupported,test-api) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-10 17:52:10.112 31174 31174 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/view/accessibility/AccessibilityRecord;->getSourceNodeId()J (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-10 17:52:10.113 31174 31174 I order.xrecorder: hiddenapi: Accessing hidden field Landroid/view/accessibility/AccessibilityNodeInfo;->mChildNodeIds:Landroid/util/LongArray; (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-10 17:52:10.113 31174 31174 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/util/LongArray;->get(I)J (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-10 17:52:10.129 31174 31174 D AccessibilityBridge: Setting not found: accessibility_display_inversion_enabled, using default: 0
+11-10 17:52:10.206 31174 31174 D FlutterRenderer: Width is zero. 0,0
+11-10 17:52:10.218 31174 31174 D CompatChangeReporter: Compat change id reported: 377864165; UID 10219; state: ENABLED
+11-10 17:52:10.262 31174 31174 W HWUI    : Unknown dataspace 0
+11-10 17:52:13.193 31174 31174 I Choreographer: Skipped 173 frames!  The application may be doing too much work on its main thread.
+11-10 17:52:13.239 31174 31217 I order.xrecorder: Compiler allocated 5042KB to compile void android.view.ViewRootImpl.performTraversals()
+11-10 17:52:13.255 31174 31174 I WindowExtensionsImpl: Initializing Window Extensions, vendor API level=9, activity embedding enabled=true
+11-10 17:52:13.394 31174 31174 D FlutterRenderer: Width is zero. 0,0
+11-10 17:52:13.416 31174 31174 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 17:52:14.505 31174 31329 D ProfileInstaller: Installing profile for com.xrecorder.xrecorder
+11-10 17:52:14.634 31174 31174 I Choreographer: Skipped 74 frames!  The application may be doing too much work on its main thread.
+11-10 17:52:14.647 31174 31174 D WindowLayoutComponentImpl: Register WindowLayoutInfoListener on Context=com.xrecorder.xrecorder.MainActivity@4b656c0, of which baseContext=android.app.ContextImpl@5c28197
+11-10 17:52:14.715 31174 31174 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 17:52:17.526 31174 31174 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-10 17:52:17.527 31174 31174 I order.xrecorder: AssetManager2(0x7901278bc578) locale list changing from [] to [en]
+11-10 17:52:17.840 31174 31174 D InsetsController: hide(ime(), fromIme=false)
+11-10 17:52:17.840 31174 31174 I ImeTracker: com.xrecorder.xrecorder:12eb1f62: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-10 17:52:31.587 31174 31218 I order.xrecorder: Background concurrent mark compact GC freed 2181KB AllocSpace bytes, 10(204KB) LOS objects, 49% free, 2392KB/4784KB, paused 1.582ms,3.325ms total 134.492ms
+11-10 17:54:06.172 31174 31174 D VRI[MainActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-10 17:55:34.858 31174 31294 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-10 17:55:36.175 31174 31174 I Choreographer: Skipped 60 frames!  The application may be doing too much work on its main thread.
+11-10 17:55:36.221 31174 31294 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-10 17:55:36.490 31174 31334 I HWUI    : Davey! duration=1222ms; Flags=0, FrameTimelineVsyncId=8825283, IntendedVsync=55810365921338, Vsync=55811365921298, InputEventId=0, HandleInputStart=55811389904460, AnimationStart=55811389956360, PerformTraversalsStart=55811390008160, DrawStart=55811390426560, FrameDeadline=55810382588004, FrameStartTime=55811379724860, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=55811390659660, SyncStart=55811487986560, IssueDrawCommandsStart=55811488083460, SwapBuffers=55811516340260, FrameCompleted=55811685804760, DequeueBufferDuration=7044600, QueueBufferDuration=1364600, GpuCompleted=55811685804760, SwapBuffersCompleted=55811685388960, DisplayPresentTime=0, CommandSubmissionCompleted=55811516340260, 
+11-10 17:55:36.672 31174 31174 D InsetsController: hide(ime(), fromIme=false)
+11-10 17:55:36.674 31174 31174 I ImeTracker: com.xrecorder.xrecorder:164f1bf6: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-10 17:57:17.306 31174 31174 I order.xrecorder: AssetManager2(0x7901278c8418) locale list changing from [] to [en-US]
+11-10 17:57:17.417 31174 31174 D InsetsController: hide(ime(), fromIme=false)
+11-10 17:57:17.417 31174 31174 I ImeTracker: com.xrecorder.xrecorder:5694b00e: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-10 17:57:17.518 31174 31425 W HWUI    : Image decoding logging dropped!
+11-10 17:57:29.155 31174 31425 W HWUI    : Image decoding logging dropped!
+11-10 17:57:38.515 31174 31425 W HWUI    : Image decoding logging dropped!

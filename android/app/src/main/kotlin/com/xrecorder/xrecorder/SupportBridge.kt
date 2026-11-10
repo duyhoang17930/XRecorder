@@ -20,6 +20,23 @@ class SupportBridge(private val activity:Activity):MethodChannel.MethodCallHandl
     override fun onMethodCall(call:MethodCall,result:MethodChannel.Result) {
         try {
             when(call.method) {
+                "appVersion" -> {
+                    val info = activity.packageManager.getPackageInfo(activity.packageName, 0)
+                    val build = if (Build.VERSION.SDK_INT >= 28) info.longVersionCode else @Suppress("DEPRECATION") info.versionCode.toLong()
+                    result.success("${info.versionName} ($build)")
+                    return
+                }
+                "openStudioLink" -> {
+                    val url = call.arguments as? String
+                    require(url in setOf("https://mxtapp.website/", "https://mxtapp.website/privacy-policy.html", "https://mxtapp.website/terms-of-use.html"))
+                    activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                }
+                "composeEmail" -> {
+                    val text = call.argument<String>("text") ?: ""
+                    require(text.length <= 12000)
+                    val uri = Uri.parse("mailto:maixuantruongcvdev@gmail.com?subject=${Uri.encode("[3HRecorder] Feedback")}&body=${Uri.encode(text)}")
+                    activity.startActivity(Intent(Intent.ACTION_SENDTO, uri))
+                }
                 "diagnostics" -> {
                     val info=activity.packageManager.getPackageInfo(activity.packageName,0)
                     result.success("App: ${info.versionName}\nAndroid API: ${Build.VERSION.SDK_INT}\nDevice: ${Build.MANUFACTURER} ${Build.MODEL}\nABI: ${Build.SUPPORTED_ABIS.firstOrNull()}");return

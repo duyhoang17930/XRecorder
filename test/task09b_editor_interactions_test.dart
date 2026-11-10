@@ -74,6 +74,31 @@ void registerEditorInteractionTests({InteractionProbe? evidence}) {
   }
 
   Future<void> choose(WidgetTester tester, String label, String option) async {
+    if (find.byKey(const ValueKey('effects-section-0')).evaluate().isNotEmpty) {
+      final section = label.startsWith('Subtitle')
+          ? 2
+          : label.startsWith('Original audio') ||
+                label.startsWith('Audio pitch')
+          ? 1
+          : label.startsWith('Output') ||
+                label.startsWith('Target') ||
+                label.startsWith('Export') ||
+                label.startsWith('GIF')
+          ? 4
+          : 0;
+      final category = find.byKey(ValueKey('effects-section-$section'));
+      await tester.ensureVisible(category);
+      await tester.tap(category);
+      await tester.pumpAndSettle();
+      if ((label.startsWith('Audio pitch') ||
+              label == 'Original audio voice effect') &&
+          find.text(label).evaluate().isEmpty) {
+        final advanced = find.text('Voice & background music');
+        await tester.ensureVisible(advanced);
+        await tester.tap(advanced);
+        await tester.pumpAndSettle();
+      }
+    }
     final finder = find.ancestor(
       of: find.text(label),
       matching: find.byWidgetPredicate((w) => w is DropdownButtonFormField),

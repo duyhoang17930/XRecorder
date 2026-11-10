@@ -1,4 +1,26 @@
 {
+  "editorAllTools": "All tools",
+  "editorAudio": "Audio",
+  "editorOverlays": "Overlays",
+  "editorExportQuality": "Export quality",
+  "editorShapes": "Shapes",
+  "editorCrop": "Crop",
+  "editorTransform": "Transform",
+  "editorColor": "Color",
+  "photoDragToErase": "Drag near a mark to remove it.",
+  "photoEnterText": "Enter text before placing it on the photo.",
+  "editorAdvancedAudio": "Voice & background music",
+  "editorSubtitleHint": "Style the subtitles added to your project.",
+  "editorApply": "Apply",
+  "fileManagement": "File management",
+  "viewIntroduction": "View introduction",
+  "privacyPolicy": "Privacy Policy",
+  "termsOfUse": "Terms of Use",
+  "officialWebsite": "Official website",
+  "sendFeedbackEmail": "Send feedback by email",
+  "copyEmailAddress": "Copy email address",
+  "emailAddressCopied": "Email address copied",
+  "openExternalFailed": "Could not open an app. Check your browser or email app and try again.",
   "@@locale": "en",
   "label1080pFhd": "1080p FHD",
   "@label1080pFhd": {
@@ -3086,5 +3108,24 @@
   "speechSavingHistory": "Saving job history…",
   "@speechSavingHistory": {
     "description": "Real native speech-history persistence failure. Preserve existing data, never imply a successful save."
+  },
+  "onboardingRecordTitle": "Record Anything",
+  "onboardingRecordDescription": "Capture your screen in high quality. Choose your audio settings and start recording in just a few taps.",
+  "onboardingEditTitle": "Edit Your Way",
+  "onboardingEditDescription": "Trim videos, add text and drawings, and fine-tune your recordings with powerful editing tools.",
+  "onboardingSubtitlesTitle": "Smart Subtitles",
+  "onboardingSubtitlesDescription": "Turn speech into subtitles directly on your device. Customize the text and make your videos easier to follow.",
+  "onboardingSkip": "Skip",
+  "onboardingNext": "Next",
+  "onboardingBack": "Back",
+  "onboardingGetStarted": "Get Started",
+  "onboardingSaveFailed": "Couldn''t save your progress. Try again.",
+  "onboardingProgress": "Step {current} of {total}",
+  "@onboardingProgress": {
+    "description": "Accessible current onboarding page and total page count.",
+    "placeholders": {
+      "current": { "type": "String" },
+      "total": { "type": "String" }
+    }
   }
 }

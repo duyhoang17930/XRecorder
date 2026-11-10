@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/splash_3h_dark">
+    <target android:name="three" android:animation="@animator/splash_draw_three" />
+    <target android:name="h" android:animation="@animator/splash_draw_h" />
+    <target android:name="hBar" android:animation="@animator/splash_draw_h" />
+    <target android:name="hRight" android:animation="@animator/splash_draw_h" />
+    <target android:name="accent" android:animation="@animator/splash_show_accent" />
+</animated-vector>

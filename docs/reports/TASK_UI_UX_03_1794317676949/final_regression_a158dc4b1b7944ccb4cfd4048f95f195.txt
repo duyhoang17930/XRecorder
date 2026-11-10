@@ -1,0 +1,151 @@
+flutter test --no-pub test/ui_ux_03_test.dart test/onboarding_test.dart test/ui_startup_navigation_test.dart test/refinement_test.dart test/ui_ux_02c_test.dart test/global_layout_test.dart test/settings_persistence_test.dart test/settings_accessibility_test.dart test/support_test.dart test/photo_tools_test.dart test/ux_interaction_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_03_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: language search survives rotation with a landscape keyboard
+00:02 +1: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: language search survives rotation with a landscape keyboard
+00:02 +2: D:/FAU_App/XRecorder/test/ui_startup_navigation_test.dart: startup reveals the app as soon as preferences finish loading
+00:02 +3: D:/FAU_App/XRecorder/test/ui_startup_navigation_test.dart: startup reveals the app as soon as preferences finish loading
+00:02 +4: D:/FAU_App/XRecorder/test/ui_startup_navigation_test.dart: startup reveals the app as soon as preferences finish loading
+00:02 +5: D:/FAU_App/XRecorder/test/ui_startup_navigation_test.dart: startup reveals the app as soon as preferences finish loading
+00:03 +6: D:/FAU_App/XRecorder/test/ui_startup_navigation_test.dart: startup reveals the app as soon as preferences finish loading
+00:03 +7: D:/FAU_App/XRecorder/test/ui_startup_navigation_test.dart: startup reveals the app as soon as preferences finish loading
+00:03 +8: D:/FAU_App/XRecorder/test/ui_startup_navigation_test.dart: startup reveals the app as soon as preferences finish loading
+00:03 +9: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:03 +10: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:03 +11: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:03 +12: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:03 +13: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:03 +14: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:03 +15: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:04 +16: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:04 +17: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:04 +18: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:04 +19: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:04 +20: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:04 +21: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:04 +22: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:04 +23: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:04 +24: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:04 +25: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:05 +26: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:05 +27: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:05 +28: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:05 +29: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:05 +30: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:05 +31: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:05 +32: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:05 +33: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:06 +34: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:06 +35: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:06 +36: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:06 +37: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:06 +38: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:06 +39: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:06 +40: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:06 +41: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:06 +42: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:06 +43: D:/FAU_App/XRecorder/test/ui_ux_02c_test.dart: feedback composes reviewed text without collecting diagnostics or media
+00:06 +44: D:/FAU_App/XRecorder/test/refinement_test.dart: Screenshot invokes native screenshot once and never opens recording setup
+00:06 +45: D:/FAU_App/XRecorder/test/refinement_test.dart: Screenshot invokes native screenshot once and never opens recording setup
+00:06 +46: D:/FAU_App/XRecorder/test/refinement_test.dart: Screenshot invokes native screenshot once and never opens recording setup
+00:07 +47: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:07 +48: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:07 +49: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:07 +50: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:07 +51: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:08 +52: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:08 +53: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:08 +54: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:08 +55: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:08 +56: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:08 +57: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:08 +58: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:08 +59: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 360.0dp text150 light
+00:09 +60: D:/FAU_App/XRecorder/test/support_test.dart: Diagnostics require consent and handoff never claims delivery
+00:09 +61: D:/FAU_App/XRecorder/test/support_test.dart: Diagnostics require consent and handoff never claims delivery
+00:09 +62: D:/FAU_App/XRecorder/test/photo_tools_test.dart: stroke width stays in range at gesture endpoints and tool changes
+00:09 +63: D:/FAU_App/XRecorder/test/photo_tools_test.dart: stroke width stays in range at gesture endpoints and tool changes
+00:09 +64: D:/FAU_App/XRecorder/test/photo_tools_test.dart: stroke width stays in range at gesture endpoints and tool changes
+00:09 +65: D:/FAU_App/XRecorder/test/photo_tools_test.dart: stroke width stays in range at gesture endpoints and tool changes
+00:10 +66: D:/FAU_App/XRecorder/test/photo_tools_test.dart: stroke width stays in range at gesture endpoints and tool changes
+00:10 +67: D:/FAU_App/XRecorder/test/photo_tools_test.dart: stroke width stays in range at gesture endpoints and tool changes
+00:10 +68: D:/FAU_App/XRecorder/test/photo_tools_test.dart: stroke width stays in range at gesture endpoints and tool changes
+00:10 +69: D:/FAU_App/XRecorder/test/photo_tools_test.dart: stroke width stays in range at gesture endpoints and tool changes
+00:10 +70: D:/FAU_App/XRecorder/test/photo_tools_test.dart: stroke width stays in range at gesture endpoints and tool changes
+00:11 +71: D:/FAU_App/XRecorder/test/photo_tools_test.dart: stroke width stays in range at gesture endpoints and tool changes
+00:11 +72: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:11 +73: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:11 +74: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:11 +75: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:11 +76: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:11 +77: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:12 +78: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:12 +79: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 320.0dp text200 dark
+00:12 +80: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 320.0dp text200 dark
+00:13 +81: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 light at 200 percent
+00:13 +82: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 light at 200 percent
+00:13 +83: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 360.0dp text150 light
+00:14 +84: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 360.0dp text150 light
+00:14 +85: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 dark at 200 percent
+00:14 +86: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 dark at 200 percent
+00:15 +87: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:15 +88: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:15 +89: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:15 +90: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:15 +91: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:15 +92: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 light at 200 percent
+00:16 +93: D:/FAU_App/XRecorder/test/refinement_test.dart: notice kinds share style, replace queued notices and stay above navigation
+00:16 +94: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 840.0dp text200 light
+00:16 +95: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 840.0dp text200 light
+00:16 +96: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 840.0dp text200 light
+00:16 +97: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 dark at 200 percent
+00:16 +98: D:/FAU_App/XRecorder/test/refinement_test.dart: capture Help opens the related expanded guide
+00:17 +99: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 320.0dp text200 dark
+00:17 +100: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 320.0dp text200 dark
+00:17 +101: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 320.0dp text200 dark
+00:17 +102: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 320.0dp text200 dark
+00:17 +103: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 320.0dp text200 dark
+00:17 +104: D:/FAU_App/XRecorder/test/refinement_test.dart: music picker failure stays friendly and visible inside its dialog
+00:18 +105: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: saving a photo blocks repeated save and exit; failure preserves edits
+00:18 +106: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 360.0dp text150 light
+00:18 +107: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: new project double tap creates one draft and opening is reversible
+00:19 +108: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 411.0dp text200 light
+00:19 +109: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 411.0dp text200 light
+00:19 +110: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 840.0dp text200 light
+00:20 +111: D:/FAU_App/XRecorder/test/global_layout_test.dart: pt-BR 320.0dp text200 dark
+00:20 +112: D:/FAU_App/XRecorder/test/global_layout_test.dart: pt-BR 360.0dp text150 light
+00:21 +113: D:/FAU_App/XRecorder/test/global_layout_test.dart: pt-BR 411.0dp text200 light
+00:22 +114: D:/FAU_App/XRecorder/test/global_layout_test.dart: pt-BR 840.0dp text200 light
+00:23 +115: D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 320.0dp text200 dark
+00:23 +116: D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 360.0dp text150 light
+00:24 +117: D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 411.0dp text200 light
+00:25 +118: D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 840.0dp text200 light
+00:25 +119: D:/FAU_App/XRecorder/test/global_layout_test.dart: de 320.0dp text200 dark
+00:26 +120: D:/FAU_App/XRecorder/test/global_layout_test.dart: de 360.0dp text150 light
+00:27 +121: D:/FAU_App/XRecorder/test/global_layout_test.dart: de 411.0dp text200 light
+00:28 +122: D:/FAU_App/XRecorder/test/global_layout_test.dart: de 840.0dp text200 light
+00:29 +123: D:/FAU_App/XRecorder/test/global_layout_test.dart: id 320.0dp text200 dark
+00:29 +124: D:/FAU_App/XRecorder/test/global_layout_test.dart: id 360.0dp text150 light
+00:30 +125: D:/FAU_App/XRecorder/test/global_layout_test.dart: id 411.0dp text200 light
+00:31 +126: D:/FAU_App/XRecorder/test/global_layout_test.dart: id 840.0dp text200 light
+00:32 +127: D:/FAU_App/XRecorder/test/global_layout_test.dart: ja 320.0dp text200 dark
+00:32 +128: D:/FAU_App/XRecorder/test/global_layout_test.dart: ja 360.0dp text150 light
+00:34 +129: D:/FAU_App/XRecorder/test/global_layout_test.dart: ja 411.0dp text200 light
+00:35 +130: D:/FAU_App/XRecorder/test/global_layout_test.dart: ja 840.0dp text200 light
+00:36 +131: D:/FAU_App/XRecorder/test/global_layout_test.dart: ko 320.0dp text200 dark
+00:37 +132: D:/FAU_App/XRecorder/test/global_layout_test.dart: ko 360.0dp text150 light
+00:37 +133: D:/FAU_App/XRecorder/test/global_layout_test.dart: ko 411.0dp text200 light
+00:38 +134: D:/FAU_App/XRecorder/test/global_layout_test.dart: ko 840.0dp text200 light
+00:39 +135: D:/FAU_App/XRecorder/test/global_layout_test.dart: zh-Hans 320.0dp text200 dark
+00:40 +136: D:/FAU_App/XRecorder/test/global_layout_test.dart: zh-Hans 360.0dp text150 light
+00:41 +137: D:/FAU_App/XRecorder/test/global_layout_test.dart: zh-Hans 411.0dp text200 light
+00:42 +138: D:/FAU_App/XRecorder/test/global_layout_test.dart: zh-Hans 840.0dp text200 light
+00:42 +139: D:/FAU_App/XRecorder/test/global_layout_test.dart: hi 320.0dp text200 dark
+00:43 +140: D:/FAU_App/XRecorder/test/global_layout_test.dart: hi 360.0dp text150 light
+00:44 +141: D:/FAU_App/XRecorder/test/global_layout_test.dart: hi 411.0dp text200 light
+00:45 +142: D:/FAU_App/XRecorder/test/global_layout_test.dart: hi 840.0dp text200 light
+00:45 +143: D:/FAU_App/XRecorder/test/global_layout_test.dart: ar 320.0dp text200 dark
+00:46 +144: D:/FAU_App/XRecorder/test/global_layout_test.dart: ar 360.0dp text150 light
+00:47 +145: D:/FAU_App/XRecorder/test/global_layout_test.dart: ar 411.0dp text200 light
+00:48 +146: D:/FAU_App/XRecorder/test/global_layout_test.dart: ar 840.0dp text200 light
+00:49 +147: All tests passed!
+Exit=0

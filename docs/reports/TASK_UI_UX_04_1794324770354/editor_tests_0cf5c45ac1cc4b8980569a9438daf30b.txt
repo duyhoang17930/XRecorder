@@ -1,0 +1,713 @@
+flutter test --no-pub test/editor_hci_test.dart test/photo_tools_test.dart test/editor_effects_ui_test.dart test/task09b_editor_interactions_test.dart test/task09b_history_localization_test.dart test/project_controller_test.dart test/project_repository_test.dart test/timeline_effects_test.dart test/drawing_project_snapshot_test.dart test/editor_preview_load_queue_test.dart test/ux_interaction_test.dart test/refinement_test.dart test/global_layout_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/editor_hci_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +3: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +4: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +5: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +6: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +7: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +8: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +9: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +10: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +11: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +13: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +14: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +15: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +16: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +17: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +18: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +19: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:04 +19: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: en photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  en photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +19 -1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:04 +19 -1: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: en photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: en photo Undo and Redo are distinct accessible actions
+  
+00:04 +20 -1: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: audio edit all numeric fields gain voice noise and remove without mutating input
+00:05 +20 -1: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: vi photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  vi photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +20 -2: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: audio edit all numeric fields gain voice noise and remove without mutating input
+00:05 +20 -2: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: vi photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: vi photo Undo and Redo are distinct accessible actions
+  
+00:05 +21 -2: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: audio edit all numeric fields gain voice noise and remove without mutating input
+00:05 +22 -2: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: audio/layers/effects remain usable at 320.0 and text200
+00:05 +23 -2: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: audio/layers/effects remain usable at 320.0 and text200
+00:05 +24 -2: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: es photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 79 pixels on the right.
+
+The relevant error-causing widget was:
+  Row Row:file:///D:/FAU_App/XRecorder/lib/features/media/photo_tools_screen.dart:605:11
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#cb80c relayoutBoundary=up16 OVERFLOWING:
+  creator: Row ← Column ← _SingleChildViewport ← IgnorePointer-[GlobalKey#9490a] ← Semantics ←
+    Listener ← _GestureSemantics ←
+    RawGestureDetector-[LabeledGlobalKey<RawGestureDetectorState>#b71c3] ← Listener ← _ScrollableScope
+    ← _ScrollSemantics-[GlobalKey#605ee] ← NotificationListener<ScrollMetricsNotification> ← ⋯
+  parentData: offset=Offset(0.0, 56.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=288.0, 0.0<=h<=Infinity)
+  size: Size(288.0, 756.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  es photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +24 -3: D:/FAU_App/XRecorder/test/editor_hci_test.dart: stroke and crop inputs stay valid at endpoints and invalid samples
+00:06 +24 -3: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: es photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: es photo Undo and Redo are distinct accessible actions
+  
+00:06 +25 -3: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:06 +26 -3: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:07 +26 -3: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: pt-BR photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  pt-BR photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:07 +26 -4: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:07 +26 -4: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: pt-BR photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: pt-BR photo Undo and Redo are distinct accessible actions
+  
+00:07 +26 -4: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:07 +27 -4: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:07 +27 -4: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: fr photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 51 pixels on the right.
+
+The relevant error-causing widget was:
+  Row Row:file:///D:/FAU_App/XRecorder/lib/features/media/photo_tools_screen.dart:605:11
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#bc70e relayoutBoundary=up16 OVERFLOWING:
+  creator: Row ← Column ← _SingleChildViewport ← IgnorePointer-[GlobalKey#2dca7] ← Semantics ←
+    Listener ← _GestureSemantics ←
+    RawGestureDetector-[LabeledGlobalKey<RawGestureDetectorState>#8f57e] ← Listener ← _ScrollableScope
+    ← _ScrollSemantics-[GlobalKey#e08cb] ← NotificationListener<ScrollMetricsNotification> ← ⋯
+  parentData: offset=Offset(0.0, 56.0); flex=null; fit=null (can use size)
+  constraints: BoxConstraints(0.0<=w<=288.0, 0.0<=h<=Infinity)
+  size: Size(288.0, 756.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  fr photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +27 -5: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:08 +27 -5: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: fr photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: fr photo Undo and Redo are distinct accessible actions
+  
+00:08 +28 -5: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:09 +28 -5: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: de photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  de photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:09 +28 -6: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:09 +28 -6: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: de photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: de photo Undo and Redo are distinct accessible actions
+  
+00:09 +28 -6: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: id photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  id photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:09 +28 -7: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:09 +28 -7: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: id photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: id photo Undo and Redo are distinct accessible actions
+  
+00:10 +29 -7: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:10 +30 -7: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:10 +30 -7: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: ja photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  ja photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:10 +30 -8: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:10 +30 -8: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: ja photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: ja photo Undo and Redo are distinct accessible actions
+  
+00:10 +31 -8: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:10 +32 -8: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:11 +32 -8: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: ko photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  ko photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:11 +32 -9: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:11 +32 -9: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: ko photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: ko photo Undo and Redo are distinct accessible actions
+  
+00:11 +33 -9: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=2.0
+00:11 +34 -9: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 light at 200 percent
+00:12 +34 -9: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: zh-Hans photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  zh-Hans photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:12 +34 -10: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 light at 200 percent
+00:12 +34 -10: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: zh-Hans photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: zh-Hans photo Undo and Redo are distinct accessible actions
+  
+00:12 +34 -10: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: hi photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  hi photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:12 +35 -10: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:12 +35 -11: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:12 +35 -11: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: hi photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: hi photo Undo and Redo are distinct accessible actions
+  
+00:12 +36 -11: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:13 +37 -11: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:13 +37 -11: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: ar photo Undo and Redo are distinct accessible actions
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:828:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2429:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2427:27)
+#7      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart:99:22)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  ar photo Undo and Redo are distinct accessible actions
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:13 +37 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:13 +37 -12: D:/FAU_App/XRecorder/test/task09b_history_localization_test.dart: ar photo Undo and Redo are distinct accessible actions [E]
+  Test failed. See exception logs above.
+  The test description was: ar photo Undo and Redo are distinct accessible actions
+  
+00:13 +38 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:13 +39 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:14 +40 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:14 +41 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:14 +42 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:15 +43 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 320.0dp text200 dark
+00:15 +44 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:15 +45 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:15 +46 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:16 +47 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:16 +48 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:16 +49 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:16 +50 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:17 +51 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:17 +52 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:17 +53 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:17 +54 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:17 +55 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:17 +56 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:17 +57 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:18 +58 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:18 +59 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:18 +60 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:18 +61 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 411.0dp text200 light
+00:18 +62 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 411.0dp text200 light
+00:18 +63 -12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.5
+00:19 +64 -12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.5
+00:19 +65 -12: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: new project double tap creates one draft and opening is reversible
+00:19 +66 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 840.0dp text200 light
+00:19 +67 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 840.0dp text200 light
+00:19 +68 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 840.0dp text200 light
+00:20 +69 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 840.0dp text200 light
+00:20 +70 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: en 840.0dp text200 light
+00:20 +71 -12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.0
+00:20 +72 -12: D:/FAU_App/XRecorder/test/refinement_test.dart: Settings reselect scrolls to top without a route change
+00:20 +73 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 320.0dp text200 dark
+00:21 +74 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 320.0dp text200 dark
+00:21 +75 -12: D:/FAU_App/XRecorder/test/refinement_test.dart: Editor follows system on opening and while open
+00:21 +76 -12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=2.0
+00:21 +77 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 360.0dp text150 light
+00:22 +78 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 360.0dp text150 light
+00:22 +79 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 360.0dp text150 light
+00:22 +80 -12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.5
+00:22 +81 -12: D:/FAU_App/XRecorder/test/refinement_test.dart: Editor follows dark on opening and while open
+00:22 +82 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:23 +83 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:23 +84 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:23 +85 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:23 +86 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:23 +87 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 411.0dp text200 light
+00:24 +88 -12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.0
+00:24 +89 -12: D:/FAU_App/XRecorder/test/refinement_test.dart: notice kinds share style, replace queued notices and stay above navigation
+00:24 +90 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 840.0dp text200 light
+00:24 +91 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 840.0dp text200 light
+00:24 +92 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 840.0dp text200 light
+00:25 +93 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: vi 840.0dp text200 light
+00:25 +94 -12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=2.0
+00:25 +95 -12: D:/FAU_App/XRecorder/test/refinement_test.dart: capture Help opens the related expanded guide
+00:25 +96 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 320.0dp text200 dark
+00:25 +97 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 320.0dp text200 dark
+00:26 +98 -12: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 320.0dp text200 dark
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 79 pixels on the right.>
+PhotoToolsScreen
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/global_layout_test.dart:169:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/global_layout_test.dart line 169
+The test description was:
+  es 320.0dp text200 dark
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:26 +98 -13: D:/FAU_App/XRecorder/test/refinement_test.dart: music picker failure stays friendly and visible inside its dialog
+00:26 +98 -13: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 320.0dp text200 dark [E]
+  Test failed. See exception logs above.
+  The test description was: es 320.0dp text200 dark
+  
+00:26 +99 -13: D:/FAU_App/XRecorder/test/refinement_test.dart: music picker failure stays friendly and visible inside its dialog
+00:27 +100 -13: D:/FAU_App/XRecorder/test/refinement_test.dart: music picker failure stays friendly and visible inside its dialog
+00:28 +101 -13: D:/FAU_App/XRecorder/test/refinement_test.dart: music picker failure stays friendly and visible inside its dialog
+
+Warning: A call to tap() with finder "Found 1 widget with text "Add background music": [
+  Text("Add background music", dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery, _ScrollableScope]),
+]" derived an Offset (Offset(214.5, 796.0)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderParagraph#ed553 relayoutBoundary=up27
+The hit test result at that offset is: HitTestResult(_RenderInkFeatures#94e0c@Offset(214.5, 796.0), RenderPhysicalModel#b236c@Offset(214.5, 796.0), RenderSemanticsAnnotations#cf654@Offset(214.5, 796.0), RenderRepaintBoundary#3efeb@Offset(214.5, 796.0), RenderIgnorePointer#33ea3@Offset(214.5, 796.0), RenderAnimatedOpacity#57539@Offset(214.5, 796.0), RenderRepaintBoundary#84e50@Offset(214.5, 796.0), RenderSemanticsAnnotations#64719@Offset(214.5, 796.0), RenderOffstage#53424@Offset(214.5, 796.0), RenderSemanticsAnnotations#8dc4a@Offset(214.5, 796.0), _RenderTheater#be5bc@Offset(214.5, 796.0), RenderAbsorbPointer#ebf7d@Offset(214.5, 796.0), RenderPointerListener#84926@Offset(214.5, 796.0), RenderAnnotatedRegion<SystemUiOverlayStyle>#8f9ba@Offset(214.5, 796.0), RenderSemanticsAnnotations#85045@Offset(214.5, 796.0), RenderSemanticsAnnotations#88755@Offset(214.5, 796.0), RenderSemanticsAnnotations#0ef00@Offset(214.5, 796.0), RenderTapRegionSurface#bb815@Offset(214.5, 796.0), RenderSemanticsAnnotations#63290@Offset(214.5, 796.0), RenderSemanticsAnnotations#dea48@Offset(214.5, 796.0), HitTestEntry<HitTestTarget>#4930c(_ReusableRenderView#5da60), HitTestEntry<HitTestTarget>#1341d(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/refinement_test.dart:700:20)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _DescendantWidgetFinder:<Found 0 widgets with text "Couldn't open this file. Check access
+and try again." descending from widgets with type "Scaffold" (ignoring all but last): []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/refinement_test.dart:703:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/refinement_test.dart line 703
+The test description was:
+  music picker failure stays friendly and visible inside its dialog
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:28 +101 -14: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects cancel is isolated; apply retains unknown values and retimes cues
+00:28 +101 -14: D:/FAU_App/XRecorder/test/refinement_test.dart: music picker failure stays friendly and visible inside its dialog [E]
+  Test failed. See exception logs above.
+  The test description was: music picker failure stays friendly and visible inside its dialog
+  
+00:28 +101 -14: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects cancel is isolated; apply retains unknown values and retimes cues
+00:28 +102 -14: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 411.0dp text200 light
+00:29 +103 -14: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 840.0dp text200 light
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 60 pixels on the right.>
+PhotoToolsScreen
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/global_layout_test.dart:169:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/global_layout_test.dart line 169
+The test description was:
+  es 840.0dp text200 light
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:30 +103 -15: D:/FAU_App/XRecorder/test/global_layout_test.dart: es 840.0dp text200 light [E]
+  Test failed. See exception logs above.
+  The test description was: es 840.0dp text200 light
+  
+00:30 +103 -15: D:/FAU_App/XRecorder/test/global_layout_test.dart: pt-BR 320.0dp text200 dark
+00:31 +104 -15: D:/FAU_App/XRecorder/test/global_layout_test.dart: pt-BR 360.0dp text150 light
+00:32 +105 -15: D:/FAU_App/XRecorder/test/global_layout_test.dart: pt-BR 411.0dp text200 light
+00:33 +106 -15: D:/FAU_App/XRecorder/test/global_layout_test.dart: pt-BR 840.0dp text200 light
+00:34 +107 -15: D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 320.0dp text200 dark
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 51 pixels on the right.>
+PhotoToolsScreen
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/global_layout_test.dart:169:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/global_layout_test.dart line 169
+The test description was:
+  fr 320.0dp text200 dark
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:34 +107 -16: D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 320.0dp text200 dark [E]
+  Test failed. See exception logs above.
+  The test description was: fr 320.0dp text200 dark
+  
+00:34 +107 -16: D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 360.0dp text150 light
+00:35 +108 -16: D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 411.0dp text200 light
+00:36 +109 -16: D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 840.0dp text200 light
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 32 pixels on the right.>
+PhotoToolsScreen
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/global_layout_test.dart:169:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/global_layout_test.dart line 169
+The test description was:
+  fr 840.0dp text200 light
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:37 +109 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 840.0dp text200 light [E]
+  Test failed. See exception logs above.
+  The test description was: fr 840.0dp text200 light
+  
+00:37 +109 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: de 320.0dp text200 dark
+00:37 +110 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: de 360.0dp text150 light
+00:38 +111 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: de 411.0dp text200 light
+00:39 +112 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: de 840.0dp text200 light
+00:40 +113 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: id 320.0dp text200 dark
+00:40 +114 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: id 360.0dp text150 light
+00:41 +115 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: id 411.0dp text200 light
+00:41 +116 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: id 840.0dp text200 light
+00:42 +117 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ja 320.0dp text200 dark
+00:43 +118 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ja 360.0dp text150 light
+00:44 +119 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ja 411.0dp text200 light
+00:44 +120 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ja 840.0dp text200 light
+00:45 +121 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ko 320.0dp text200 dark
+00:45 +122 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ko 360.0dp text150 light
+00:46 +123 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ko 411.0dp text200 light
+00:47 +124 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ko 840.0dp text200 light
+00:47 +125 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: zh-Hans 320.0dp text200 dark
+00:48 +126 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: zh-Hans 360.0dp text150 light
+00:49 +127 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: zh-Hans 411.0dp text200 light
+00:49 +128 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: zh-Hans 840.0dp text200 light
+00:50 +129 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: hi 320.0dp text200 dark
+00:51 +130 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: hi 360.0dp text150 light
+00:52 +131 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: hi 411.0dp text200 light
+00:52 +132 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: hi 840.0dp text200 light
+00:53 +133 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ar 320.0dp text200 dark
+00:54 +134 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ar 360.0dp text150 light
+00:54 +135 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ar 411.0dp text200 light
+00:55 +136 -17: D:/FAU_App/XRecorder/test/global_layout_test.dart: ar 840.0dp text200 light
+00:55 +137 -17: Some tests failed.
+
+Failing tests:
+  D:/FAU_App/XRecorder/test/global_layout_test.dart: es 320.0dp text200 dark
+  D:/FAU_App/XRecorder/test/global_layout_test.dart: es 840.0dp text200 light
+  D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 320.0dp text200 dark
+  D:/FAU_App/XRecorder/test/global_layout_test.dart: fr 840.0dp text200 light
+  ... and 13 more
+Exit=1

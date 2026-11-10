@@ -1,0 +1,119 @@
+{
+  "head": "64e84ec0f952c4e28063488812933010f05bfa7d",
+  "protectedSource": {
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/MainActivity.kt": {
+      "expected": "42f33d82d163541429031727e29ded9a015a5e8b93a979d8738814655b053158",
+      "actual": "42f33d82d163541429031727e29ded9a015a5e8b93a979d8738814655b053158"
+    },
+    "lib/features/recording/recording_service.dart": {
+      "expected": "05127084897e00d87ebddb1859af27c1fcdd6e459e7800c8c4912521db328273",
+      "actual": "05127084897e00d87ebddb1859af27c1fcdd6e459e7800c8c4912521db328273"
+    },
+    "lib/features/settings/settings_controller.dart": {
+      "expected": "74e82510ebcec30c1a306985c262cf78d3fb7a46e87cbc566780b7d6b347d570",
+      "actual": "74e82510ebcec30c1a306985c262cf78d3fb7a46e87cbc566780b7d6b347d570"
+    },
+    "lib/features/settings/recording_settings_form.dart": {
+      "expected": "0df96cc38f2518231fb829cd5e8e28d7417ad060d005d9d9a7441d8d78194478",
+      "actual": "0df96cc38f2518231fb829cd5e8e28d7417ad060d005d9d9a7441d8d78194478"
+    }
+  },
+  "protectedSourceUnchanged": true,
+  "preferences": {
+    "shared_prefs/p2_locale.xml": {
+      "byteExact": true,
+      "beforeSha256": "87bf0345b0fdb43f7551ff7b4224828423b9c18b99e18950de9c54b41166a481",
+      "afterSha256": "87bf0345b0fdb43f7551ff7b4224828423b9c18b99e18950de9c54b41166a481"
+    },
+    "shared_prefs/onboarding_state.xml": {
+      "byteExact": true,
+      "beforeSha256": "c16d57d1a312ef8b3a71627274face812ad92c10d8ed15ad7ebb493eb094a961",
+      "afterSha256": "c16d57d1a312ef8b3a71627274face812ad92c10d8ed15ad7ebb493eb094a961"
+    },
+    "shared_prefs/app_settings.xml": {
+      "byteExact": true,
+      "beforeSha256": "e6015fa4fc5e8fdbfc1d2ca76ffab5f27e06cdedbd672d82869a80d7c12839cb",
+      "afterSha256": "e6015fa4fc5e8fdbfc1d2ca76ffab5f27e06cdedbd672d82869a80d7c12839cb"
+    },
+    "shared_prefs/media_catalog.xml": {
+      "byteExact": true,
+      "beforeSha256": "c7f7e03c2f63ee74d6730ba1b62cb33d97bd83091768724b2efc4c645f78d6e2",
+      "afterSha256": "c7f7e03c2f63ee74d6730ba1b62cb33d97bd83091768724b2efc4c645f78d6e2"
+    }
+  },
+  "fixtures": {
+    "slider_fixture.png": {
+      "expected": "399d4169a5a322c63d8fee240ff29c91893ccd8c854262a1afc09e2bcfd8b8ff",
+      "actual": "399d4169a5a322c63d8fee240ff29c91893ccd8c854262a1afc09e2bcfd8b8ff",
+      "matches": true
+    },
+    "sort_fixture.png": {
+      "expected": "c656e0de5f2ab3262b038e61ca09cbe3342f764d855e64de7ac5846b4b45eaf9",
+      "actual": "c656e0de5f2ab3262b038e61ca09cbe3342f764d855e64de7ac5846b4b45eaf9",
+      "matches": true
+    }
+  },
+  "retainedQAProject": {
+    "path": "files/projects/project_1794319906023720.json",
+    "sha256": "9689b4c7688b9a5c9edee6341beed505ec18a21bafeadefe7d2affcb34e24172",
+    "document": {
+      "version": 1,
+      "id": "project_1794319906023720",
+      "title": "Video project",
+      "updatedAt": 1794320106011,
+      "clips": [
+        {
+          "mediaId": "content://com.android.externalstorage.documents/tree/primary%3ADocuments%2FTask09B_SAF_20261109_f64203/document/primary%3ADocuments%2FTask09B_SAF_20261109_f64203%2F3H_2e625c63_Restored_1794233551004_Edited_a89b00bf-db24-4779-8be8-74cb5d385f87.mp4",
+          "title": "3H_2e625c63_Restored_1794233551004_Edited_a89b00bf-db24-4779-8be8-74cb5d385f87.mp4",
+          "inMs": 0,
+          "outMs": 2033,
+          "sourceDurationMs": 2033,
+          "rotation": 0,
+          "isImage": false,
+          "flipH": false,
+          "flipV": false,
+          "cropLeft": 0.0,
+          "cropTop": 0.0,
+          "cropRight": 1.0,
+          "cropBottom": 1.0
+        }
+      ],
+      "effects": {}
+    }
+  },
+  "configuration": {
+    "size": "Physical size: 1080x2400\r\nOverride size: 411x920",
+    "density": "Physical density: 420\r\nOverride density: 160",
+    "rotationAuto": "1",
+    "rotation": "0",
+    "fontScale": "1.0",
+    "animator": "null"
+  },
+  "configurationRestored": true,
+  "apk": {
+    "size": 120022074,
+    "sha256": "fd98f091cfcc2800a1dcb8d971e2e86bde0f5d713d98495947a2a02e4b764258",
+    "installedSha256": "fd98f091cfcc2800a1dcb8d971e2e86bde0f5d713d98495947a2a02e4b764258",
+    "installedMatches": true
+  },
+  "runtimeErrors": [],
+  "gitStatus": " M .gitignore\n M android/app/src/main/kotlin/com/xrecorder/xrecorder/MainActivity.kt\n M android/app/src/main/kotlin/com/xrecorder/xrecorder/SupportBridge.kt\n M android/app/src/main/res/drawable-v21/launch_background.xml\n M android/app/src/main/res/drawable/launch_background.xml\n M android/app/src/main/res/values-night/styles.xml\n M android/app/src/main/res/values/styles.xml\n M lib/app/app.dart\n M lib/app/router/app_router.dart\n M lib/core/ui/components/bottom_sheets/studio_bottom_sheet.dart\n M lib/core/ui/components/search/studio_search_field.dart\n M lib/core/ui/theme/motion.dart\n M lib/core/ui/theme/spacing.dart\n M lib/core/widgets/studio_shell.dart\n M lib/features/editor/editing_hub_screen.dart\n M lib/features/media/media_library_screen.dart\n M lib/features/media/photo_tools_screen.dart\n M lib/features/media/video_details_screen.dart\n M lib/features/settings/app_language_dialog.dart\n M lib/features/settings/settings_hub_screen.dart\n M lib/features/settings/support_screen.dart\n M lib/l10n/app_ar.arb\n M lib/l10n/app_de.arb\n M lib/l10n/app_en.arb\n M lib/l10n/app_es.arb\n M lib/l10n/app_fr.arb\n M lib/l10n/app_hi.arb\n M lib/l10n/app_id.arb\n M lib/l10n/app_ja.arb\n M lib/l10n/app_ko.arb\n M lib/l10n/app_pt.arb\n M lib/l10n/app_pt_BR.arb\n M lib/l10n/app_vi.arb\n M lib/l10n/app_zh.arb\n M lib/l10n/app_zh_Hans.arb\n M lib/main.dart\n M pubspec.yaml\n M test/photo_tools_test.dart\n M test/refinement_test.dart\n M test/support_test.dart\n?? android/app/src/main/kotlin/com/xrecorder/xrecorder/OnboardingPreferencesBridge.kt\n?? android/app/src/main/res/animator/\n?? android/app/src/main/res/drawable-night/\n?? android/app/src/main/res/drawable-xxxhdpi/\n?? android/app/src/main/res/drawable/splash_3h_animated_dark.xml\n?? android/app/src/main/res/drawable/splash_3h_animated_light.xml\n?? android/app/src/main/res/drawable/splash_3h_dark.xml\n?? android/app/src/main/res/drawable/splash_3h_light.xml\n?? android/app/src/main/res/values-night-v31/\n?? android/app/src/main/res/values-v31/\n?? assets/images/\n?? docs/implementation/TASK_STORAGE_AUDIT_20261110_034254.md\n?? docs/implementation/TASK_UI_UX_01_IMPLEMENTATION_REPORT_20261110_041500.md\n?? docs/implementation/TASK_UI_UX_02B_EVIDENCE_20261110_133100/\n?? docs/implementation/TASK_UI_UX_02B_FINAL_REPORT_20261110_140446.md\n?? docs/implementation/TASK_UI_UX_02B_STORAGE_REPORT_20261110_140446.md\n?? docs/implementation/TASK_UI_UX_02B_TEST_EVIDENCE_20261110_140446.md\n?? docs/implementation/TASK_UI_UX_02B_VISUAL_QA_20261110_140446.md\n?? docs/implementation/TASK_UI_UX_02_EVIDENCE_20261110_121400/\n?? docs/implementation/TASK_UI_UX_02_FINAL_REPORT_20261110_130533.md\n?? docs/implementation/TASK_UI_UX_02_STORAGE_REPORT_20261110_130533.md\n?? docs/implementation/TASK_UI_UX_02_TEST_EVIDENCE_20261110_130533.md\n?? docs/implementation/TASK_UI_UX_02_VISUAL_QA_20261110_130533.md\n?? docs/implementation/UI/\n?? docs/reports/\n?? lib/core/widgets/startup_splash.dart\n?? lib/features/onboarding/\n?? lib/features/settings/studio_identity.dart\n?? test/onboarding_test.dart\n?? test/ui_startup_navigation_test.dart\n?? test/ui_ux_02c_test.dart\n?? test/ui_ux_03_test.dart\n",
+  "diffCheck": {
+    "exit": 0,
+    "stdout": "",
+    "stderr": "warning: in the working copy of 'lib/core/widgets/studio_shell.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'lib/features/settings/app_language_dialog.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'lib/features/settings/support_screen.dart', LF will be replaced by CRLF the next time Git touches it\n"
+  },
+  "buildBeforeBytes": 140688905131,
+  "freeBeforeBytes": 31345229824,
+  "buildAfter": {
+    "logicalBytes": 139444929428,
+    "files": 20281,
+    "reparsePointsSkipped": []
+  },
+  "evidenceSize": {
+    "logicalBytes": 5215676,
+    "files": 133,
+    "reparsePointsSkipped": []
+  },
+  "diskFreeAfterBytes": 30722703360
+}

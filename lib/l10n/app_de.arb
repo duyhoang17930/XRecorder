@@ -1,4 +1,26 @@
 {
+  "editorAllTools": "Alle Werkzeuge",
+  "editorAudio": "Audio",
+  "editorOverlays": "Überlagerungen",
+  "editorExportQuality": "Exportqualität",
+  "editorShapes": "Formen",
+  "editorCrop": "Zuschneiden",
+  "editorTransform": "Transformieren",
+  "editorColor": "Farbe",
+  "photoDragToErase": "Zum Entfernen nahe an einer Markierung ziehen.",
+  "photoEnterText": "Gib Text ein, bevor du ihn auf dem Foto platzierst.",
+  "editorAdvancedAudio": "Stimme & Hintergrundmusik",
+  "editorSubtitleHint": "Gestalte die Untertitel in deinem Projekt.",
+  "editorApply": "Anwenden",
+  "fileManagement": "Dateiverwaltung",
+  "viewIntroduction": "Einführung ansehen",
+  "privacyPolicy": "Datenschutzerklärung",
+  "termsOfUse": "Nutzungsbedingungen",
+  "officialWebsite": "Offizielle Website",
+  "sendFeedbackEmail": "Feedback per E-Mail senden",
+  "copyEmailAddress": "E-Mail-Adresse kopieren",
+  "emailAddressCopied": "E-Mail-Adresse kopiert",
+  "openExternalFailed": "App konnte nicht geöffnet werden. Prüfe deinen Browser oder deine E-Mail-App und versuche es erneut.",
   "@@locale": "de",
   "componentGallery": "UI-Komponentengalerie",
   "label1080pFhd": "1080p FHD",
@@ -670,5 +692,24 @@
   "speechHistoryUnavailable": "Speechgeschichte, die gespeichert wurde, kann nicht geladen werden. bestehende Daten wurden gespeichert. die App neu starten oder eine Backup wiederherstellen, bevor Sie erneut versuchen.",
   "speechHistoryNotSaved": "Sprachgeschichte kann nicht gespeichert werden. kostenlose Speicher oder App Speicher Zugriff, dann Retry. Überprüfen und speichern Sie alle generierten Untertitel vor Schließung.",
   "speechJobFailed": "Operation versagt",
-  "speechSavingHistory": "Arbeitsschutzgeschichte zu sparen..."
+  "speechSavingHistory": "Arbeitsschutzgeschichte zu sparen...",
+  "onboardingRecordTitle": "Alles aufnehmen",
+  "onboardingRecordDescription": "Nimm deinen Bildschirm in hoher Qualität auf. Wähle die Audioeinstellungen und starte mit wenigen Tipps.",
+  "onboardingEditTitle": "Bearbeite nach deinen Wünschen",
+  "onboardingEditDescription": "Kürze Videos, füge Text und Zeichnungen hinzu und verfeinere deine Aufnahmen mit vielseitigen Werkzeugen.",
+  "onboardingSubtitlesTitle": "Smarte Untertitel",
+  "onboardingSubtitlesDescription": "Wandle Sprache direkt auf deinem Gerät in Untertitel um. Passe den Text an und mache deine Videos verständlicher.",
+  "onboardingSkip": "Überspringen",
+  "onboardingNext": "Weiter",
+  "onboardingBack": "Zurück",
+  "onboardingGetStarted": "Los geht’s",
+  "onboardingSaveFailed": "Fortschritt konnte nicht gespeichert werden. Bitte erneut versuchen.",
+  "onboardingProgress": "Schritt {current} von {total}",
+  "@onboardingProgress": {
+    "description": "Accessible current onboarding page and total page count.",
+    "placeholders": {
+      "current": { "type": "String" },
+      "total": { "type": "String" }
+    }
+  }
 }

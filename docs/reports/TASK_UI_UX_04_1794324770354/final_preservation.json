@@ -1,0 +1,382 @@
+{
+  "time": "2026-11-11T00:25:07.780526",
+  "avd": "ThreeHRecorder_TASK09B_API36",
+  "head": "64e84ec0f952c4e28063488812933010f05bfa7d",
+  "sourceHashes": [
+    {
+      "path": "lib/features/recording/capture_status_presentation.dart",
+      "before": "f339416d4ee6d37e5e0d9bb71decff1dcb85e4a9548be46677964334f99617be",
+      "after": "f339416d4ee6d37e5e0d9bb71decff1dcb85e4a9548be46677964334f99617be",
+      "equal": true
+    },
+    {
+      "path": "lib/features/recording/recording_service.dart",
+      "before": "05127084897e00d87ebddb1859af27c1fcdd6e459e7800c8c4912521db328273",
+      "after": "05127084897e00d87ebddb1859af27c1fcdd6e459e7800c8c4912521db328273",
+      "equal": true
+    },
+    {
+      "path": "lib/features/recording/recording_setup_sheet.dart",
+      "before": "a76256f211fde2ac4075ba03d2d20d33214e506c17712da554723e4d6f18446a",
+      "after": "a76256f211fde2ac4075ba03d2d20d33214e506c17712da554723e4d6f18446a",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/AudioDuckingEngine.kt",
+      "before": "f25794968cb7b865ff59f4e139104a7b4df92e562ffc126e0528bb44664c699c",
+      "after": "f25794968cb7b865ff59f4e139104a7b4df92e562ffc126e0528bb44664c699c",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureBridge.kt",
+      "before": "513915dee51123f0a60b62fcd535eded8941bc0bd31dcb922666ed1560b193bb",
+      "after": "513915dee51123f0a60b62fcd535eded8941bc0bd31dcb922666ed1560b193bb",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureConfig.kt",
+      "before": "783eacc9362aa5576e4acfa0d8784c3dcb7b469b3267b022f67e2e7800599386",
+      "after": "783eacc9362aa5576e4acfa0d8784c3dcb7b469b3267b022f67e2e7800599386",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt",
+      "before": "af6d07ff815ec6c12d16237021e5c7ba6192d8426e044637dc221306e38e9725",
+      "after": "af6d07ff815ec6c12d16237021e5c7ba6192d8426e044637dc221306e38e9725",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureNotificationPolicy.kt",
+      "before": "51265db2042a2f11432eda8d27ac82a94f08bf1c14454f2fb7af7c4b93a58225",
+      "after": "51265db2042a2f11432eda8d27ac82a94f08bf1c14454f2fb7af7c4b93a58225",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureRequests.kt",
+      "before": "93ce61c6d10a700749abc274397bb02d49486e9d600383c5438a1ece4ee0f8e9",
+      "after": "93ce61c6d10a700749abc274397bb02d49486e9d600383c5438a1ece4ee0f8e9",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureService.kt",
+      "before": "1aca5804c9cf6f642cd9f77aa61b2f8242c75e42d1b031b7f26bbfc6aa25a537",
+      "after": "1aca5804c9cf6f642cd9f77aa61b2f8242c75e42d1b031b7f26bbfc6aa25a537",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureState.kt",
+      "before": "effef3bbcda9bd77535037ae4a527218aee5b0bd1caf5fa6515e17f63f9669ea",
+      "after": "effef3bbcda9bd77535037ae4a527218aee5b0bd1caf5fa6515e17f63f9669ea",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureTiming.kt",
+      "before": "705efe0ec505e87bac85da1c94b11d548c96e3fcfdaab090b7f096a9e41e65fa",
+      "after": "705efe0ec505e87bac85da1c94b11d548c96e3fcfdaab090b7f096a9e41e65fa",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/DrawingOverlay.kt",
+      "before": "4823c7ac7ed945fb2ac6f584efe921356b873733c95129b3bfa37ffc442ad2f0",
+      "after": "4823c7ac7ed945fb2ac6f584efe921356b873733c95129b3bfa37ffc442ad2f0",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/DrawingStrokeEngine.kt",
+      "before": "4bdd73e2f49699a02096708b3fa126ad083dc913d2e4342e20a43acafd9f9dc4",
+      "after": "4bdd73e2f49699a02096708b3fa126ad083dc913d2e4342e20a43acafd9f9dc4",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FacecamGeometry.kt",
+      "before": "bf27b35252767a4c0e72227669e041d611cef1c01802ec8f113409407fdad197",
+      "after": "bf27b35252767a4c0e72227669e041d611cef1c01802ec8f113409407fdad197",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FacecamOverlay.kt",
+      "before": "c3d705c06e0110c1412ece8e949353ead4e89e89b4d14ead8851ab026c799142",
+      "after": "c3d705c06e0110c1412ece8e949353ead4e89e89b4d14ead8851ab026c799142",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FloatingControlGeometry.kt",
+      "before": "ce5ce2b9cc4bebb2bf3ba2c8c0813c2a6b22c4242a7561ed0b9eb9997f3eae7f",
+      "after": "ce5ce2b9cc4bebb2bf3ba2c8c0813c2a6b22c4242a7561ed0b9eb9997f3eae7f",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FloatingRecordingControls.kt",
+      "before": "20121e3bf57d2df985253db8eb51801c4bb192d2a6800fd5c96462bffaeafe46",
+      "after": "20121e3bf57d2df985253db8eb51801c4bb192d2a6800fd5c96462bffaeafe46",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/MediaOutput.kt",
+      "before": "e915893ce76d72492205cbef5b62fca5cf188273c3240505b132ae35847b24f6",
+      "after": "e915893ce76d72492205cbef5b62fca5cf188273c3240505b132ae35847b24f6",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/Mp4RecoveryEngine.kt",
+      "before": "1746ac598ccf7eba7b8574d0b7d23e98905d9a9e2e919a2ea2d209b356d00030",
+      "after": "1746ac598ccf7eba7b8574d0b7d23e98905d9a9e2e919a2ea2d209b356d00030",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/RecordingMuxer.kt",
+      "before": "8e1200e4252bca46cfa4bb07a0ec7fd6e8646cd3f71839908cffbda2498fbe9f",
+      "after": "8e1200e4252bca46cfa4bb07a0ec7fd6e8646cd3f71839908cffbda2498fbe9f",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/RegionCropGeometry.kt",
+      "before": "5939de20079f8acd47f1274662e3af3d6a44f2984d2889e31e58bb0a9818bf83",
+      "after": "5939de20079f8acd47f1274662e3af3d6a44f2984d2889e31e58bb0a9818bf83",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/ScreenshotPixels.kt",
+      "before": "a12c90c09ea758f10c8d767642d899fbe288b41e1adfc7119517bf700a29e291",
+      "after": "a12c90c09ea758f10c8d767642d899fbe288b41e1adfc7119517bf700a29e291",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/SessionAudio.kt",
+      "before": "5d479b3586fd31d7289ef6a59f8a354eff4342c9cbae60dfaf17de4f8fc7b205",
+      "after": "5d479b3586fd31d7289ef6a59f8a354eff4342c9cbae60dfaf17de4f8fc7b205",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/ShakeDetectorEngine.kt",
+      "before": "b4279ce900594934fc2f123de07ef1643cff5a3b5587239142a2bcd22b46abcd",
+      "after": "b4279ce900594934fc2f123de07ef1643cff5a3b5587239142a2bcd22b46abcd",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/TouchIndicatorEngine.kt",
+      "before": "24aa347201f2958a379c18a9cfaeef95156faa79112573ce3ebb76b19ae0441f",
+      "after": "24aa347201f2958a379c18a9cfaeef95156faa79112573ce3ebb76b19ae0441f",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/VideoEncoder.kt",
+      "before": "e40967d53a07d971f680fa6605fd693c6764250f5458fa47a3ff81fd00ae8993",
+      "after": "e40967d53a07d971f680fa6605fd693c6764250f5458fa47a3ff81fd00ae8993",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/EditorAudio.kt",
+      "before": "c687baa497ec9e52d3d3bd6235086b15901c07e045ce54a1b044a15ffe2a850b",
+      "after": "c687baa497ec9e52d3d3bd6235086b15901c07e045ce54a1b044a15ffe2a850b",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/EditorBridge.kt",
+      "before": "85cb443489be8211f52af39268b95888cbb73dfbb4c1a81150d4ab0fb63bbc67",
+      "after": "85cb443489be8211f52af39268b95888cbb73dfbb4c1a81150d4ab0fb63bbc67",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/EditorComposition.kt",
+      "before": "bc7e641f2b7bcdf3c28e8867bc9433697455640ed0616c1261ee3c005df4f87a",
+      "after": "bc7e641f2b7bcdf3c28e8867bc9433697455640ed0616c1261ee3c005df4f87a",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/EditorLayers.kt",
+      "before": "3f0f158aad6a64f576c65b369abaa42fc131154d013e1a43d7c4a9d2d7e93408",
+      "after": "3f0f158aad6a64f576c65b369abaa42fc131154d013e1a43d7c4a9d2d7e93408",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/EditorOutput.kt",
+      "before": "f3ec589b8d05c4c5a996db18e58ef0c299e60a22185c3b08b83bd0c41b415b27",
+      "after": "f3ec589b8d05c4c5a996db18e58ef0c299e60a22185c3b08b83bd0c41b415b27",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/EditorPreview.kt",
+      "before": "3594cfe75a1a6d7ee9fa7257d11133534096440a98610e38a666b270a85c93c7",
+      "after": "797b4c5dd31de63081e2de58e92d9a0b34fb7108b9e38e1e314b3ac1ad7539b1",
+      "equal": false
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/EditorStorage.kt",
+      "before": "02d1807c3146f1c8a634190e738198017d408124ceafc1d2cf40b87e0550dee2",
+      "after": "02d1807c3146f1c8a634190e738198017d408124ceafc1d2cf40b87e0550dee2",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/ExportQueue.kt",
+      "before": "e79bf409ac60db16b639319d6953e8bfbaedf9b95a07d3ada60766f5ee8e1a85",
+      "after": "e79bf409ac60db16b639319d6953e8bfbaedf9b95a07d3ada60766f5ee8e1a85",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/GifWriter.kt",
+      "before": "578c44fdf64002f46077dd810436841f413095ebecfa3be98773360b50991668",
+      "after": "578c44fdf64002f46077dd810436841f413095ebecfa3be98773360b50991668",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/SpeechActivity.kt",
+      "before": "7089706df4298041788b0c4c9ea3e48e7186dd7c60271647c65c4dbd048e181f",
+      "after": "7089706df4298041788b0c4c9ea3e48e7186dd7c60271647c65c4dbd048e181f",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/SpeechAudioDecoder.kt",
+      "before": "8d3ed3de09bf3d85d96e7ec11f2f04656c346474892f5c34fad0006977b54b96",
+      "after": "8d3ed3de09bf3d85d96e7ec11f2f04656c346474892f5c34fad0006977b54b96",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/SpeechLanguages.kt",
+      "before": "b8638eed13c26a71f44c6504223a8b94f92d2689f7c3bd32cf70d47b5e166ab4",
+      "after": "b8638eed13c26a71f44c6504223a8b94f92d2689f7c3bd32cf70d47b5e166ab4",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/SubtitleDiagnostics.kt",
+      "before": "4a6abea8d3b620ce4a18d7579cf9312782bc8a864c8c7ae11cb05197e60f4730",
+      "after": "4a6abea8d3b620ce4a18d7579cf9312782bc8a864c8c7ae11cb05197e60f4730",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/SubtitleOverlay.kt",
+      "before": "529464d1fca0450e6415f838e241c645043ff82d2b56309449e7d8557250e0b4",
+      "after": "529464d1fca0450e6415f838e241c645043ff82d2b56309449e7d8557250e0b4",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/SubtitleText.kt",
+      "before": "c34ad11a734be5ab8b1423c249cfc381e98e08659e88f85e5fc91e5e039651a9",
+      "after": "c34ad11a734be5ab8b1423c249cfc381e98e08659e88f85e5fc91e5e039651a9",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/TranscriptionBridge.kt",
+      "before": "dafc00f3e35e5b81a77a58677ed299991af228a28e3b377fc54ce532f3f98d53",
+      "after": "dafc00f3e35e5b81a77a58677ed299991af228a28e3b377fc54ce532f3f98d53",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/WhisperNative.kt",
+      "before": "b3fb61bd0826581b3061116b8fa482b28651f6921a8fc1f68cf1afdc8d6f4823",
+      "after": "b3fb61bd0826581b3061116b8fa482b28651f6921a8fc1f68cf1afdc8d6f4823",
+      "equal": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/MainActivity.kt",
+      "before": "42f33d82d163541429031727e29ded9a015a5e8b93a979d8738814655b053158",
+      "after": "42f33d82d163541429031727e29ded9a015a5e8b93a979d8738814655b053158",
+      "equal": true
+    },
+    {
+      "path": "lib/features/settings/settings_controller.dart",
+      "before": "74e82510ebcec30c1a306985c262cf78d3fb7a46e87cbc566780b7d6b347d570",
+      "after": "74e82510ebcec30c1a306985c262cf78d3fb7a46e87cbc566780b7d6b347d570",
+      "equal": true
+    },
+    {
+      "path": "lib/features/settings/recording_settings_form.dart",
+      "before": "0df96cc38f2518231fb829cd5e8e28d7417ad060d005d9d9a7441d8d78194478",
+      "after": "0df96cc38f2518231fb829cd5e8e28d7417ad060d005d9d9a7441d8d78194478",
+      "equal": true
+    },
+    {
+      "path": "lib/features/settings/audio_video_settings_screen.dart",
+      "before": "e5aa4a7c247375ebdc21da16debb79818a7dab3fa65cfe12683ae65d1ffd81af",
+      "after": "e5aa4a7c247375ebdc21da16debb79818a7dab3fa65cfe12683ae65d1ffd81af",
+      "equal": true
+    },
+    {
+      "path": "lib/core/widgets/studio_create_sheet.dart",
+      "before": "f967069a4ed0a9c7b4bd8aa941e0da40755d6888dd9ca167c149cc4beb45d88b",
+      "after": "f967069a4ed0a9c7b4bd8aa941e0da40755d6888dd9ca167c149cc4beb45d88b",
+      "equal": true
+    },
+    {
+      "path": "lib/features/editor/project_controller.dart",
+      "before": "b41354424bfe7a2e6d1297736ea26fe8392ae55db86e74903d93c905b92d0544",
+      "after": "b41354424bfe7a2e6d1297736ea26fe8392ae55db86e74903d93c905b92d0544",
+      "equal": true
+    },
+    {
+      "path": "lib/features/editor/project_repository.dart",
+      "before": "397e4b4665d7d02bde9bc6cb17d65229a3dc3f6e99f1958df9dc8dfa945fe496",
+      "after": "397e4b4665d7d02bde9bc6cb17d65229a3dc3f6e99f1958df9dc8dfa945fe496",
+      "equal": true
+    },
+    {
+      "path": "lib/features/editor/editor_preview.dart",
+      "before": "6d89447e58dc6aaffd2e9eef5b2d6a337ab0b6d68d55e629c845fc94b1ad032f",
+      "after": "6d89447e58dc6aaffd2e9eef5b2d6a337ab0b6d68d55e629c845fc94b1ad032f",
+      "equal": true
+    },
+    {
+      "path": "lib/core/domain/models.dart",
+      "before": "f73a8f20e942b2a91365374e2c336dcaaa93cbb175dc0b28c95f1e04ef331767",
+      "after": "f73a8f20e942b2a91365374e2c336dcaaa93cbb175dc0b28c95f1e04ef331767",
+      "equal": true
+    }
+  ],
+  "originalPrivateFiles": [
+    {
+      "path": "shared_prefs/p2_locale.xml",
+      "equal": true,
+      "beforeSha256": "87bf0345b0fdb43f7551ff7b4224828423b9c18b99e18950de9c54b41166a481",
+      "afterSha256": "87bf0345b0fdb43f7551ff7b4224828423b9c18b99e18950de9c54b41166a481"
+    },
+    {
+      "path": "shared_prefs/onboarding_state.xml",
+      "equal": true,
+      "beforeSha256": "c16d57d1a312ef8b3a71627274face812ad92c10d8ed15ad7ebb493eb094a961",
+      "afterSha256": "c16d57d1a312ef8b3a71627274face812ad92c10d8ed15ad7ebb493eb094a961"
+    },
+    {
+      "path": "shared_prefs/app_settings.xml",
+      "equal": true,
+      "beforeSha256": "e6015fa4fc5e8fdbfc1d2ca76ffab5f27e06cdedbd672d82869a80d7c12839cb",
+      "afterSha256": "e6015fa4fc5e8fdbfc1d2ca76ffab5f27e06cdedbd672d82869a80d7c12839cb"
+    },
+    {
+      "path": "shared_prefs/media_catalog.xml",
+      "equal": true,
+      "beforeSha256": "c7f7e03c2f63ee74d6730ba1b62cb33d97bd83091768724b2efc4c645f78d6e2",
+      "afterSha256": "c7f7e03c2f63ee74d6730ba1b62cb33d97bd83091768724b2efc4c645f78d6e2"
+    },
+    {
+      "path": "files/projects/project_1794319906023720.json",
+      "equal": true,
+      "beforeSha256": "9689b4c7688b9a5c9edee6341beed505ec18a21bafeadefe7d2affcb34e24172",
+      "afterSha256": "9689b4c7688b9a5c9edee6341beed505ec18a21bafeadefe7d2affcb34e24172"
+    }
+  ],
+  "addedPrivateFiles": [
+    "files/projects/project_1794327848468607.json"
+  ],
+  "mediaHashes": [
+    {
+      "path": "/sdcard/Download/UI02C_1794308051935/slider_fixture.png",
+      "sha256": "399d4169a5a322c63d8fee240ff29c91893ccd8c854262a1afc09e2bcfd8b8ff",
+      "matchesBaseline": true
+    },
+    {
+      "path": "/sdcard/Download/UI02C_1794308051935/sort_fixture.png",
+      "sha256": "c656e0de5f2ab3262b038e61ca09cbe3342f764d855e64de7ac5846b4b45eaf9",
+      "matchesBaseline": true
+    }
+  ],
+  "configuration": {
+    "size": "Physical size: 1080x2400\r\nOverride size: 411x920",
+    "density": "Physical density: 420\r\nOverride density: 160",
+    "rotationAuto": "1",
+    "rotation": "0",
+    "fontScale": "1.0",
+    "animator": "null"
+  },
+  "apkSha256": "3a413219a95158ef9a0eb1fac95bd3765d19be56019d3a2aee8a98ba35dc5ba2",
+  "installedApkSha256": "3a413219a95158ef9a0eb1fac95bd3765d19be56019d3a2aee8a98ba35dc5ba2"
+}

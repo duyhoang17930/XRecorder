@@ -74,36 +74,13 @@ class _EditorScreenState extends State<EditorScreen> {
 
   final frames = <String, Future<Uint8List?>>{};
   Future<void> renameProject() async {
-    final field = TextEditingController(text: controller!.project.title);
     final name = await showStudioDialog<String>(
       context: context,
-      builder: (dialog) => StudioDialog(
-        title: Text(context.l10n.projectName),
-        content: TextField(
-          controller: field,
-          maxLength: 80,
-          decoration: InputDecoration(labelText: context.l10n.name),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialog),
-            child: Text(context.l10n.cancel),
-          ),
-          TextButton(
-            onPressed: () {
-              if (field.text.trim().isNotEmpty) {
-                Navigator.pop(dialog, field.text.trim());
-              }
-            },
-            child: Text(context.l10n.saveName),
-          ),
-        ],
-      ),
+      builder: (_) => _ProjectNameDialog(initial: controller!.project.title),
     );
     if (mounted && name != null) {
       controller!.change(controller!.project.copyWith(title: name));
     }
-    field.dispose();
   }
 
   Future<Uint8List?> frame(String uri, int milliseconds) {
@@ -777,6 +754,47 @@ class _EditorScreenState extends State<EditorScreen> {
       },
     );
   }
+}
+
+class _ProjectNameDialog extends StatefulWidget {
+  const _ProjectNameDialog({required this.initial});
+  final String initial;
+  @override
+  State<_ProjectNameDialog> createState() => _ProjectNameDialogState();
+}
+
+class _ProjectNameDialogState extends State<_ProjectNameDialog> {
+  late final field = TextEditingController(text: widget.initial);
+
+  @override
+  void dispose() {
+    field.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => StudioDialog(
+    title: Text(context.l10n.projectName),
+    content: TextField(
+      controller: field,
+      maxLength: 80,
+      decoration: InputDecoration(labelText: context.l10n.name),
+    ),
+    actions: [
+      TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: Text(context.l10n.cancel),
+      ),
+      TextButton(
+        onPressed: () {
+          if (field.text.trim().isNotEmpty) {
+            Navigator.pop(context, field.text.trim());
+          }
+        },
+        child: Text(context.l10n.saveName),
+      ),
+    ],
+  );
 }
 
 class _EditRange extends StatefulWidget {

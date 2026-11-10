@@ -1,0 +1,272 @@
+--------- beginning of system
+11-10 21:33:52.514 12858 12899 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-10 21:34:04.295 12858 12858 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-10 21:34:37.687 12858 12858 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+11-10 21:34:59.846 12858 12858 D InsetsController: Setting requestedVisibleTypes to -9 (was -1)
+--------- beginning of main
+11-10 21:38:30.588 12858 14400 D CCodecBuffers: [c2.android.aac.decoder#640:Output[N]] popFromStashAndRegister: at 1000000000000us, output format changed to AMessage(what = 0x00000000) = {
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t aac-drc-album-mode = 0
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t aac-drc-boost-level = 127
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t aac-drc-cut-level = 127
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t aac-drc-effect-type = 3
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t aac-drc-output-loudness = -1
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t aac-encoded-target-level = -1
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t aac-max-output-channel_count = 8
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t aac-target-ref-level = 64
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t buffer-batch-max-output-size = 0
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t buffer-batch-threshold-output-size = 0
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t channel-count = 2
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t channel-mask = 12
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t max-output-channel-count = 8
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   string mime = "audio/raw"
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t sample-rate = 44100
+11-10 21:38:30.588 12858 14400 D CCodecBuffers:   int32_t android._config-pcm-encoding = 4
+11-10 21:38:30.588 12858 14400 D CCodecBuffers: }
+11-10 21:38:30.590 12858 12858 D CompositionPlayer-0: downstreamFormat [eventTime=1.16, mediaPos=0.00, window=0, period=0, id=2, mimeType=video/avc, container=video/mp4, bitrate=2884, codecs=avc1.42C029, res=96x64, color=BT709/Limited range/SDR SMPTE 170M/8/8, fps=30.0]
+11-10 21:38:30.647 12858 14407 E EGL_emulation: eglQueryContext 32c0  EGL_BAD_ATTRIBUTE
+11-10 21:38:30.647 12858 14407 E EGL_emulation: tid 14407: eglQueryContext(2159): error 0x3004 (EGL_BAD_ATTRIBUTE)
+11-10 21:38:30.659 12858 14395 I DMCodecAdapterFactory: Creating an asynchronous MediaCodec adapter for track type video
+11-10 21:38:30.663 12858 14409 D CCodec  : allocate(c2.goldfish.h264.decoder)
+11-10 21:38:30.667 12858 14409 I CCodec  : setting up 'default' as default (vendor) store
+11-10 21:38:30.712 12858 14409 I CCodec  : Created component [c2.goldfish.h264.decoder] for [c2.goldfish.h264.decoder]
+11-10 21:38:30.714 12858 14409 D CCodecConfig: read media type: video/avc
+11-10 21:38:30.740 12858 14409 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.max-count.values
+11-10 21:38:30.741 12858 14409 D ReflectedParamUpdater: extent() != 1 for single value type: output.subscribed-indices.values
+11-10 21:38:30.742 12858 14409 D ReflectedParamUpdater: extent() != 1 for single value type: input.buffers.allocator-ids.values
+11-10 21:38:30.743 12858 14409 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.allocator-ids.values
+11-10 21:38:30.743 12858 14409 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.allocator-ids.values
+11-10 21:38:30.744 12858 14409 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.pool-ids.values
+11-10 21:38:30.744 12858 14409 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.pool-ids.values
+11-10 21:38:30.755 12858 14409 D ReflectedParamUpdater: ignored struct field coded.color-format.locations
+11-10 21:38:30.764 12858 14409 D ReflectedParamUpdater: ignored struct field resources.needed.values
+11-10 21:38:30.764 12858 14409 D CCodecConfig: ignoring local param raw.size (0xd2001800) as it is already supported
+11-10 21:38:30.764 12858 14409 D CCodecConfig: ignoring local param default.color (0x5200180b) as it is already supported
+11-10 21:38:30.764 12858 14409 D ReflectedParamUpdater: ignored struct field raw.hdr-static-info.mastering
+11-10 21:38:30.765 12858 14409 I CCodecConfig: query failed after returning 12 values (BAD_INDEX)
+11-10 21:38:30.766 12858 14409 D CCodecConfig: c2 config diff is Dict {
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 coded.pl.level = 20496
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 coded.pl.profile = 20481
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 coded.vui.color.matrix = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 coded.vui.color.primaries = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 coded.vui.color.range = 2
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 coded.vui.color.transfer = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 default.color.matrix = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 default.color.primaries = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 default.color.range = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 default.color.transfer = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 input.buffers.max-size.value = 6291456
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 input.delay.value = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   string input.media-type.value = "video/avc"
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 output.delay.value = 8
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   string output.media-type.value = "video/raw"
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.color.matrix = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.color.primaries = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.color.range = 2
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.color.transfer = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.max-size.height = 240
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.max-size.width = 320
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.pixel-format.value = 35
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::i32 raw.rotation.flip = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::i32 raw.rotation.value = 0
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.sar.height = 1
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.sar.width = 1
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.size.height = 240
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2::u32 raw.size.width = 320
+11-10 21:38:30.766 12858 14409 D CCodecConfig:   c2:
+11-10 21:38:30.766 12858 14409 W ColorUtils: expected specified color aspects (2:0:0:0)
+11-10 21:38:30.771 12858 14408 I MediaCodec: MediaCodec will operate in async mode
+11-10 21:38:30.775 12858 14395 E MediaCodec: Media Quality Service not found.
+11-10 21:38:30.775 12858 14408 D SurfaceUtils: connecting to surface 0x7902779364d0, reason connectToSurface
+11-10 21:38:30.775 12858 14408 I MediaCodec: [c2.goldfish.h264.decoder] setting surface generation to 13166593
+11-10 21:38:30.775 12858 14408 D SurfaceUtils: disconnecting from surface 0x7902779364d0, reason connectToSurface(reconnect)
+11-10 21:38:30.775 12858 14408 D SurfaceUtils: connecting to surface 0x7902779364c0, reason connectToSurface(reconnect-with-listener)
+11-10 21:38:30.775 12858 14408 D SurfaceUtils: legacy buffer drop disabled: target sdk (36)
+11-10 21:38:30.776 12858 14409 D CCodec  : [c2.goldfish.h264.decoder] buffers are bound to CCodec for this session
+11-10 21:38:30.777 12858 14409 D CCodecConfig: no c2 equivalents for log-session-id
+11-10 21:38:30.778 12858 14409 D CCodecConfig: no c2 equivalents for allow-frame-drop
+11-10 21:38:30.778 12858 14409 D CCodecConfig: no c2 equivalents for importance
+11-10 21:38:30.778 12858 14409 D CCodecConfig: no c2 equivalents for color-standard
+11-10 21:38:30.778 12858 14409 D CCodecConfig: no c2 equivalents for csd-1
+11-10 21:38:30.778 12858 14409 D CCodecConfig: no c2 equivalents for native-window
+11-10 21:38:30.778 12858 14409 D CCodecConfig: no c2 equivalents for native-window-generation
+11-10 21:38:30.778 12858 14409 D CCodecConfig: no c2 equivalents for flags
+11-10 21:38:30.779 12858 14409 D CCodecConfig: config failed => CORRUPTED
+11-10 21:38:30.779 12858 14409 D CCodecConfig: c2 config diff is   c2::u32 default.color.matrix = 1
+11-10 21:38:30.779 12858 14409 D CCodecConfig:   c2::u32 default.color.primaries = 1
+11-10 21:38:30.779 12858 14409 D CCodecConfig:   c2::u32 default.color.range = 2
+11-10 21:38:30.779 12858 14409 D CCodecConfig:   c2::u32 default.color.transfer = 3
+11-10 21:38:30.779 12858 14409 D CCodecConfig:   c2::u32 raw.size.height = 64
+11-10 21:38:30.779 12858 14409 D CCodecConfig:   c2::u32 raw.size.width = 96
+11-10 21:38:30.780 12858 14409 W Codec2Client: query -- param skipped: index = 1107298332.
+11-10 21:38:30.780 12858 14409 D CCodec  : client requested max input size 153, which is smaller than what component recommended (6291456); overriding with component recommendation.
+11-10 21:38:30.780 12858 14409 W CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range.
+11-10 21:38:30.780 12858 14409 D CCodec  : encoding statistics level = 0
+11-10 21:38:30.780 12858 14409 D CCodec  : setup formats input: AMessage(what = 0x00000000) = {
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t height = 64
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t level = 65536
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t max-input-size = 6291456
+11-10 21:38:30.780 12858 14409 D CCodec  :   string mime = "video/avc"
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t profile = 65536
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t width = 96
+11-10 21:38:30.780 12858 14409 D CCodec  :   Rect crop(0, 0, 95, 63)
+11-10 21:38:30.780 12858 14409 D CCodec  : }
+11-10 21:38:30.780 12858 14409 D CCodec  : setup formats output: AMessage(what = 0x00000000) = {
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t android._color-format = 2135033992
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t android._video-scaling = 1
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t rotation-degrees = 0
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t color-standard = 4
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t color-range = 2
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t color-transfer = 3
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t sar-height = 1
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t sar-width = 1
+11-10 21:38:30.780 12858 14409 D CCodec  :   Rect crop(0, 0, 95, 63)
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t width = 96
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t height = 64
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t max-height = 240
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t max-width = 320
+11-10 21:38:30.780 12858 14409 D CCodec  :   string mime = "video/raw"
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t android._dataspace = 259
+11-10 21:38:30.780 12858 14409 D CCodec  :   int32_t color-format = 2130708361
+11-10 21:38:30.780 12858 14409 D CCodec  : }
+11-10 21:38:30.781 12858 14409 I CCodecConfig: query failed after returning 12 values (BAD_INDEX)
+11-10 21:38:30.781 12858 14409 D CCodecConfig: c2 config diff is   c2::u32 raw.color.matrix = 1
+11-10 21:38:30.781 12858 14409 D CCodecConfig:   c2::u32 raw.color.primaries = 1
+11-10 21:38:30.781 12858 14409 D CCodecConfig:   c2::u32 raw.color.transfer = 3
+11-10 21:38:30.782 12858 14395 D MediaCodec: keep callback message for reclaim
+11-10 21:38:30.786 12858 14409 W Codec2Client: query -- param skipped: index = 1342179345.
+11-10 21:38:30.786 12858 14409 W Codec2Client: query -- param skipped: index = 2415921170.
+11-10 21:38:30.786 12858 14409 W Codec2Client: query -- param skipped: index = 1610614798.
+11-10 21:38:30.788 12858 14409 W Codec2Client: query -- param skipped: index = 2684356609.
+11-10 21:38:30.789 12858 14409 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] Created input block pool with allocatorID 16 => poolID 18 - OK (0)
+11-10 21:38:30.790 12858 14409 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] Query output surface allocator returned 0 params => BAD_INDEX (6)
+11-10 21:38:30.793 12858 14409 I CCodecBufferChannel: [c2.goldfish.h264.decoder#472] Created output block pool with allocatorID 18 => poolID 18 - OK
+11-10 21:38:30.795 12858 14409 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] Configured output block pool ids 18 => OK
+11-10 21:38:30.795 12858 14409 D Codec2-OutputBufferQueue: remote graphic buffer migration 0/0
+11-10 21:38:30.798 12858 14409 D Codec2Client: setOutputSurface -- failed to set consumer usage (6/BAD_INDEX)
+11-10 21:38:30.799 12858 14409 D Codec2Client: setOutputSurface -- generation=13166593 consumer usage=0x900
+11-10 21:38:30.824 12858 14409 D Codec2Client: Surface configure completed
+11-10 21:38:30.891 12858 12858 D CompositionPlayer-0: videoDecoderInitialized [eventTime=1.46, mediaPos=0.00, window=0, period=0, c2.goldfish.h264.decoder]
+11-10 21:38:30.892 12858 12858 D CompositionPlayer-0: videoInputFormat [eventTime=1.46, mediaPos=0.00, window=0, period=0, id=2, mimeType=video/avc, container=video/mp4, bitrate=2884, codecs=avc1.42C029, res=96x64, color=BT709/Limited range/SDR SMPTE 170M/8/8, fps=30.0]
+11-10 21:38:31.019 12858 14404 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] Ignoring stale input buffer done callback: last flush index = 0, frameIndex = 0
+11-10 21:38:31.022 12858 14395 D AudioSystem: onNewService: media.audio_policy service obtained 0x7900a78c8c00
+11-10 21:38:31.026 12858 14395 D AudioSystem: getService: checking for service media.audio_policy: 0x7900a78c8c00
+11-10 21:38:31.055 12858 14395 W SpeakerLayoutUtil: Built-in speaker's getSpeakerLayoutChannelMask not usable, defaulting to stereo.
+11-10 21:38:31.195 12858 14409 D CCodecConfig: c2 config diff is   c2::u32 raw.crop.height = 64
+11-10 21:38:31.195 12858 14409 D CCodecConfig:   c2::u32 raw.crop.left = 0
+11-10 21:38:31.195 12858 14409 D CCodecConfig:   c2::u32 raw.crop.top = 0
+11-10 21:38:31.195 12858 14409 D CCodecConfig:   c2::u32 raw.crop.width = 96
+11-10 21:38:31.435 12858 12858 D CompositionPlayer-0: rendererReady [eventTime=2.00, mediaPos=0.00, window=0, period=0, rendererIndex=0, audio, true]
+11-10 21:38:31.581 12858 14395 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/media/AudioTrack;->getLatency()I (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/media3/exoplayer/audio/AudioTrackPositionTracker; (domain=app) using reflection: allowed
+11-10 21:38:32.067 12858 12858 D CompositionPlayer-0: loading [eventTime=2.64, mediaPos=0.00, window=0, period=0, false]
+11-10 21:38:32.136 12858 14395 W SpeakerLayoutUtil: Built-in speaker's getSpeakerLayoutChannelMask not usable, defaulting to stereo.
+11-10 21:38:32.854 12858 12858 D CompositionPlayer-0: rendererReady [eventTime=3.41, mediaPos=0.00, window=0, period=0, rendererIndex=1, video, true]
+11-10 21:38:32.868 12858 12858 D CompositionPlayer-0: state [eventTime=3.44, mediaPos=0.00, window=0, period=0, READY]
+11-10 21:38:32.879 12858 12858 D CompositionPlayer: state [eventTime=3.89, mediaPos=0.00, window=0, READY]
+11-10 21:38:33.454 12858 12858 D CompositionPlayer: playWhenReady [eventTime=4.46, mediaPos=0.00, window=0, false, USER_REQUEST]
+11-10 21:38:33.457 12858 12858 D CompositionPlayer-0: state [eventTime=4.03, mediaPos=0.00, window=0, period=0, IDLE]
+11-10 21:38:33.459 12858 14395 D MediaCodec: keep callback message for reclaim
+11-10 21:38:33.461 12858 12858 D CompositionPlayer: state [eventTime=4.47, mediaPos=0.00, window=0, IDLE]
+11-10 21:38:33.462 12858 14400 I CCodecConfig: query failed after returning 21 values (BAD_INDEX)
+11-10 21:38:33.464 12858 14400 W Codec2Client: query -- param skipped: index = 1342179345.
+11-10 21:38:33.464 12858 14400 W Codec2Client: query -- param skipped: index = 2415921170.
+11-10 21:38:33.464 12858 14400 W Codec2Client: query -- param skipped: index = 1610614798.
+11-10 21:38:33.475 12858 14395 D MediaCodec: keep callback message for reclaim
+11-10 21:38:33.483 12858 14408 I CCodecConfig: query failed after returning 12 values (BAD_INDEX)
+11-10 21:38:33.486 12858 14408 D CCodecConfig: c2 config diff is   c2::u32 coded.vui.color.matrix = 1
+11-10 21:38:33.486 12858 14408 D CCodecConfig:   c2::u32 coded.vui.color.primaries = 1
+11-10 21:38:33.486 12858 14408 D CCodecConfig:   c2::u32 coded.vui.color.transfer = 3
+11-10 21:38:33.490 12858 14404 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] Ignoring stale input buffer done callback: last flush index = 20, frameIndex = 16
+11-10 21:38:33.490 12858 14408 W Codec2Client: query -- param skipped: index = 1342179345.
+11-10 21:38:33.490 12858 14408 W Codec2Client: query -- param skipped: index = 2415921170.
+11-10 21:38:33.490 12858 14408 W Codec2Client: query -- param skipped: index = 1610614798.
+11-10 21:38:33.491 12858 14409 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] flushed work; ignored.
+11-10 21:38:33.491 12858 14409 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] Discard frames from previous generation.
+11-10 21:38:33.515 12858 14430 E EGL_emulation: eglQueryContext 32c0  EGL_BAD_ATTRIBUTE
+11-10 21:38:33.515 12858 14430 E EGL_emulation: tid 14430: eglQueryContext(2159): error 0x3004 (EGL_BAD_ATTRIBUTE)
+11-10 21:38:33.516 12858 14408 D SurfaceUtils: connecting to surface 0x7902779635d0, reason connectToSurface
+11-10 21:38:33.516 12858 14408 I MediaCodec: [c2.goldfish.h264.decoder] setting surface generation to 13166594
+11-10 21:38:33.516 12858 14408 D SurfaceUtils: disconnecting from surface 0x7902779635d0, reason connectToSurface(reconnect)
+11-10 21:38:33.516 12858 14408 D SurfaceUtils: connecting to surface 0x7902779635c0, reason connectToSurface(reconnect-with-listener)
+11-10 21:38:33.516 12858 14408 D SurfaceUtils: legacy buffer drop disabled: target sdk (36)
+11-10 21:38:33.522 12858 14408 D Codec2-OutputBufferQueue: remote graphic buffer migration 0/0
+11-10 21:38:33.523 12858 14408 D Codec2Client: setOutputSurface -- failed to set consumer usage (6/BAD_INDEX)
+11-10 21:38:33.523 12858 14408 D Codec2Client: setOutputSurface -- generation=13166594 consumer usage=0x900
+11-10 21:38:33.531 12858 14408 D Codec2Client: Surface configure completed
+11-10 21:38:33.531 12858 14408 D SurfaceUtils: disconnecting from surface 0x7902779364d0, reason disconnectFromSurface
+11-10 21:38:33.546 12858 14400 D CCodecBufferChannel: [c2.android.aac.decoder#640] MediaCodec discarded an unknown buffer
+11-10 21:38:33.548 12858 14400 D CCodecBufferChannel: [c2.android.aac.decoder#640] MediaCodec discarded an unknown buffer
+11-10 21:38:33.548 12858 14400 D CCodecBufferChannel: [c2.android.aac.decoder#640] MediaCodec discarded an unknown buffer
+11-10 21:38:33.548 12858 14400 D CCodecBufferChannel: [c2.android.aac.decoder#640] MediaCodec discarded an unknown buffer
+11-10 21:38:33.550 12858 14400 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+11-10 21:38:33.551 12858 14408 D SurfaceUtils: connecting to surface 0x79027795ced0, reason connectToSurface
+11-10 21:38:33.551 12858 14408 I MediaCodec: [c2.goldfish.h264.decoder] setting surface generation to 13166595
+11-10 21:38:33.551 12858 14408 D SurfaceUtils: disconnecting from surface 0x79027795ced0, reason connectToSurface(reconnect)
+11-10 21:38:33.551 12858 14408 D SurfaceUtils: connecting to surface 0x79027795cec0, reason connectToSurface(reconnect-with-listener)
+11-10 21:38:33.551 12858 14408 D SurfaceUtils: legacy buffer drop disabled: target sdk (36)
+11-10 21:38:33.551 12858 14408 D Codec2-OutputBufferQueue: remote graphic buffer migration 0/0
+11-10 21:38:33.551 12858 14408 D Codec2Client: setOutputSurface -- failed to set consumer usage (6/BAD_INDEX)
+11-10 21:38:33.553 12858 14408 D Codec2Client: setOutputSurface -- generation=13166595 consumer usage=0x900
+11-10 21:38:33.571 12858 14408 D Codec2Client: Surface configure completed
+11-10 21:38:33.571 12858 14408 D SurfaceUtils: disconnecting from surface 0x7902779635d0, reason disconnectFromSurface
+11-10 21:38:33.571 12858 14408 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] MediaCodec discarded an unknown buffer
+11-10 21:38:33.576 12858 14408 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] MediaCodec discarded an unknown buffer
+11-10 21:38:33.576 12858 14408 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] MediaCodec discarded an unknown buffer
+11-10 21:38:33.612 12858 14408 D CCodecBufferChannel: [c2.goldfish.h264.decoder#472] MediaCodec discarded an unknown buffer
+11-10 21:38:33.618 12858 14409 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+11-10 21:38:33.622 12858 14408 D SurfaceUtils: disconnecting from surface 0x79027795ced0, reason disconnectFromSurface
+11-10 21:38:33.710 12858 12858 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@948c428
+11-10 21:38:33.770 12858 12858 D CompositionPlayer-0: audioDisabled [eventTime=4.34, mediaPos=0.00, window=0, period=0]
+11-10 21:38:33.771 12858 12858 D CompositionPlayer-0: rendererReady [eventTime=4.34, mediaPos=0.00, window=0, period=0, rendererIndex=0, audio, false]
+11-10 21:38:33.775 12858 12858 D CompositionPlayer-0: videoDisabled [eventTime=4.34, mediaPos=0.00, window=0, period=0]
+11-10 21:38:33.869 12858 12858 D CompositionPlayer-0: videoSize [eventTime=4.43, mediaPos=0.00, window=0, period=0, w=0, h=0]
+11-10 21:38:33.895 12858 12858 D CompositionPlayer-0: rendererReady [eventTime=4.47, mediaPos=0.00, window=0, period=0, rendererIndex=1, video, false]
+11-10 21:38:33.896 12858 12858 D CompositionPlayer-0: audioDecoderReleased [eventTime=4.47, mediaPos=0.00, window=0, period=0, c2.android.aac.decoder]
+11-10 21:38:33.897 12858 12858 D CompositionPlayer-0: videoDecoderReleased [eventTime=4.47, mediaPos=0.00, window=0, period=0, c2.goldfish.h264.decoder]
+11-10 21:38:33.902 12858 12858 D CompositionPlayer-0: timeline [eventTime=4.47, mediaPos=0.00, window=0, period=0, periodCount=1, windowCount=1, reason=SOURCE_UPDATE
+11-10 21:38:33.903 12858 12858 D CompositionPlayer-0:   period [2.03]
+11-10 21:38:33.903 12858 12858 D CompositionPlayer-0:   window [2.03, seekable=true, dynamic=false]
+11-10 21:38:33.903 12858 12858 D CompositionPlayer-0: ]
+11-10 21:38:33.906 12858 12858 I ExoPlayerImpl: Release f81f184 [AndroidXMedia3/1.11.1] [emu64xa, sdk_gphone64_x86_64, Google, 36] [media3.common, media3.ui, media3.exoplayer, media3.decoder, media3.datasource, media3.extractor, media3.effect]
+11-10 21:38:35.565 12858 12867 W order.xrecorder: Cleared Reference was only reachable from finalizer (only reported once)
+11-10 21:38:35.651 12858 12867 I order.xrecorder: Background concurrent mark compact GC freed 2428KB AllocSpace bytes, 9(592KB) LOS objects, 49% free, 3938KB/7876KB, paused 3.062ms,17.397ms total 125.293ms
+11-10 21:38:38.560 12858 14403 D BufferPoolAccessor2.0: bufferpool2 0x7901e78b2d58 : 0(0 size) total buffers - 0(0 size) used buffers - 19/24 (recycle/alloc) - 5/23 (fetch/transfer)
+11-10 21:38:38.560 12858 14403 D BufferPoolAccessor2.0: bufferpool2 0x7901e7980118 : 0(0 size) total buffers - 0(0 size) used buffers - 63/69 (recycle/alloc) - 6/64 (fetch/transfer)
+11-10 21:38:38.560 12858 14403 D BufferPoolAccessor2.0: evictor expired: 2, evicted: 2
+11-10 21:39:43.271 12858 12858 I order.xrecorder: AssetManager2(0x7901278fc038) locale list changing from [] to [en-US]
+11-10 21:39:46.652 12858 12858 I ImeTracker: com.xrecorder.xrecorder:5b561066: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+11-10 21:39:46.655 12858 12858 D InsetsController: show(ime(), fromIme=false)
+11-10 21:39:46.655 12858 12858 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+11-10 21:39:46.717 12858 12858 I AssistStructure: Flattened final assist data: 508 bytes, containing 1 windows, 3 views
+11-10 21:39:46.719 12858 12858 D InputConnectionAdaptor: The input method toggled cursor monitoring on
+11-10 21:39:47.325 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:39:47.351 12858 12858 I ImeTracker: system_server:c5cd4e9a: onShown
+11-10 21:39:47.352 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:39:47.370 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:39:51.188 12858 12858 I ImeTracker: com.xrecorder.xrecorder:ae1e4427: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+11-10 21:39:51.188 12858 12858 D InsetsController: hide(ime(), fromIme=false)
+11-10 21:39:51.188 12858 12858 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ImeBackAnimationController@3eb8446
+11-10 21:39:51.190 12858 12858 D InsetsController: Setting requestedVisibleTypes to -9 (was -1)
+11-10 21:39:51.194 12858 12858 V Configuration: Updating configuration, locales updated from [en_US] to [ar]
+11-10 21:39:51.195 12858 12858 I order.xrecorder: AssetManager2(0x7901279149f8) locale list changing from [] to [ar]
+11-10 21:39:51.200 12858 12858 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@948c428
+11-10 21:39:51.211 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:39:51.224 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:39:51.227 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:39:51.507 12858 12858 I ImeTracker: system_server:52b407c3: onCancelled at PHASE_CLIENT_ON_CONTROLS_CHANGED
+11-10 21:39:59.839 12858 12858 I order.xrecorder: AssetManager2(0x7901278e71d8) locale list changing from [] to [en-US]
+11-10 21:39:59.840 12858 12858 I order.xrecorder: AssetManager2(0x790127904378) locale list changing from [] to [ar]
+11-10 21:39:59.924 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:39:59.970 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:40:00.149 12858 12858 I order.xrecorder: AssetManager2(0x790127919e58) locale list changing from [] to [en-US]
+11-10 21:40:00.250 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:40:00.665 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:40:23.542 12858 12858 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@948c428
+11-10 21:40:34.754 12858 12858 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-10 21:40:34.754 12858 12858 I order.xrecorder: AssetManager2(0x7901278b7438) locale list changing from [] to [en]
+11-10 21:40:34.761 12858 12858 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@948c428
+11-10 21:40:39.078 12858 12858 I order.xrecorder: AssetManager2(0x79012790c398) locale list changing from [] to [en-US]
+11-10 21:40:39.081 12858 12858 I order.xrecorder: AssetManager2(0x7901278cb2f8) locale list changing from [] to [en]
+11-10 21:40:39.166 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:40:39.186 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:40:39.283 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.
+11-10 21:40:39.950 12858 12858 D FlutterJNI: Sending viewport metrics to the engine.

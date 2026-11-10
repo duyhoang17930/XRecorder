@@ -1,4 +1,26 @@
 {
+  "editorAllTools": "全部工具",
+  "editorAudio": "音频",
+  "editorOverlays": "叠加层",
+  "editorExportQuality": "导出画质",
+  "editorShapes": "形状",
+  "editorCrop": "裁剪",
+  "editorTransform": "变换",
+  "editorColor": "颜色",
+  "photoDragToErase": "在标记附近拖动以将其擦除。",
+  "photoEnterText": "请先输入文字，再将其放置到照片上。",
+  "editorAdvancedAudio": "语音与背景音乐",
+  "editorSubtitleHint": "设置项目中已添加字幕的样式。",
+  "editorApply": "应用",
+  "fileManagement": "文件管理",
+  "viewIntroduction": "查看介绍",
+  "privacyPolicy": "隐私政策",
+  "termsOfUse": "使用条款",
+  "officialWebsite": "官方网站",
+  "sendFeedbackEmail": "通过电子邮件发送反馈",
+  "copyEmailAddress": "复制电子邮件地址",
+  "emailAddressCopied": "电子邮件地址已复制",
+  "openExternalFailed": "无法打开应用。请检查浏览器或邮件应用后重试。",
   "@@locale": "zh",
   "componentGallery": "界面组件库",
   "label1080pFhd": "1080p FHD",
@@ -670,5 +692,24 @@
   "speechHistoryUnavailable": "存储的演讲历史无法加载. 已存储的数据被保存. 重新启动应用程序或在重新尝试之前恢复备份。",
   "speechHistoryNotSaved": "演讲历史无法保存. 免费存储或检查应用程序存储访问,然后退出. 审查并在关闭之前保存任何创建的字幕。",
   "speechJobFailed": "行动失败",
-  "speechSavingHistory": "节省工作史"
+  "speechSavingHistory": "节省工作史",
+  "onboardingRecordTitle": "录制精彩内容",
+  "onboardingRecordDescription": "高质量录制屏幕。选择音频设置，只需轻点几下即可开始录制。",
+  "onboardingEditTitle": "随心编辑",
+  "onboardingEditDescription": "裁剪视频、添加文字和绘图，使用丰富的编辑工具精细调整录制内容。",
+  "onboardingSubtitlesTitle": "智能字幕",
+  "onboardingSubtitlesDescription": "直接在设备上将语音转换为字幕。自定义文字，让视频内容更容易理解。",
+  "onboardingSkip": "跳过",
+  "onboardingNext": "下一步",
+  "onboardingBack": "返回",
+  "onboardingGetStarted": "开始使用",
+  "onboardingSaveFailed": "无法保存进度，请重试。",
+  "onboardingProgress": "第 {current} 步，共 {total} 步",
+  "@onboardingProgress": {
+    "description": "Accessible current onboarding page and total page count.",
+    "placeholders": {
+      "current": { "type": "String" },
+      "total": { "type": "String" }
+    }
+  }
 }

@@ -238,10 +238,14 @@ void main() {
       await start(tester, catalog: catalog);
       await tester.enterText(find.byType(TextField).first, 'Clip 1');
       await tester.pumpAndSettle();
-      await tester.ensureVisible(find.text('Newest'));
+      tester.testTextInput.hide();
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Newest'));
+      final sortControl = find.widgetWithText(ActionChip, 'Newest');
+      await tester.ensureVisible(sortControl);
       await tester.pumpAndSettle();
+      await tester.tap(sortControl);
+      await tester.pumpAndSettle();
+      expect(find.widgetWithText(ListTile, 'Oldest'), findsOneWidget);
       await tester.tap(find.widgetWithText(ListTile, 'Oldest'));
       await tester.pumpAndSettle();
       await tester.drag(find.byType(Scrollable).first, const Offset(0, -450));
@@ -570,8 +574,8 @@ void main() {
       await tester.tap(find.text('Choose folder'));
       await tester.pumpAndSettle();
       expect(find.text('No videos in this folder'), findsOneWidget);
-      expect(find.byType(TextField), findsNothing);
-      expect(find.text('Newest'), findsNothing);
+      expect(find.byType(TextField), findsOneWidget);
+      expect(find.text('Newest'), findsOneWidget);
       catalog.items.add(TestCatalog().items.first);
       catalog.refresh();
       await tester.pumpAndSettle();
@@ -675,27 +679,34 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      await tester.scrollUntilVisible(
-        find.text('Add background music'),
-        250,
-        scrollable: find
-            .descendant(
-              of: find.byType(AlertDialog),
-              matching: find.byType(Scrollable),
-            )
-            .first,
-      );
-      await tester.tap(find.text('Add background music'));
+      final audio = find.byKey(const ValueKey('effects-section-1'));
+      await tester.ensureVisible(audio);
+      await tester.tap(audio);
+      await tester.pumpAndSettle();
+      final advanced = find.text('Voice & background music');
+      await tester.ensureVisible(advanced);
+      await tester.tap(advanced);
+      await tester.pumpAndSettle();
+      final music = find.widgetWithText(OutlinedButton, 'Add background music');
+      await tester.ensureVisible(music);
+      await tester.pumpAndSettle();
+      expect(music.hitTestable(), findsOneWidget);
+      await tester.tap(music);
       await tester.pumpAndSettle();
       expect(find.textContaining('InternalMusicClass'), findsNothing);
       expect(
         find.descendant(
-          of: find.byType(AlertDialog),
+          of: find.byType(Scaffold).last,
           matching: find.text(
             "Couldn't open this file. Check access and try again.",
           ),
         ),
         findsOneWidget,
+        reason: find
+            .byType(Text)
+            .evaluate()
+            .map((e) => (e.widget as Text).data)
+            .join('\n'),
       );
       expect(tester.takeException(), isNull);
     },

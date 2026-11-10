@@ -6,6 +6,13 @@ import '../../theme/radius.dart';
 import '../../theme/spacing.dart';
 import '../../theme/typography.dart';
 
+class _SheetPresentation {
+  ModalRoute<dynamic>? route;
+  bool get active => route == null || route!.isCurrent;
+}
+
+final _presentations = Expando<_SheetPresentation>();
+
 Future<T?> showStudioBottomSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,
@@ -13,30 +20,45 @@ Future<T?> showStudioBottomSheet<T>({
   bool useSafeArea = true,
   bool enableDrag = true,
   bool isDismissible = true,
-}) {
-  if (ModalRoute.of(context)?.isCurrent == false) return Future<T?>.value();
-  return showModalBottomSheet<T>(
-    context: context,
-    builder: builder,
-    isScrollControlled: isScrollControlled,
-    useSafeArea: useSafeArea,
-    enableDrag: enableDrag,
-    isDismissible: isDismissible,
-    backgroundColor: context.studioColors.surface,
-    barrierColor: AppColors.mediaScrim,
-    elevation: 0,
-    clipBehavior: Clip.antiAlias,
-    sheetAnimationStyle: AnimationStyle(
-      duration: context.motion(AppMotion.slow),
-      reverseDuration: context.motion(AppMotion.standard),
-    ),
-    shape: RoundedRectangleBorder(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(AppRadius.feature),
+}) async {
+  if (ModalRoute.of(context)?.isCurrent == false) return null;
+  final navigator = Navigator.of(context, rootNavigator: true);
+  if (_presentations[navigator]?.active == true) return null;
+  final presentation = _SheetPresentation();
+  _presentations[navigator] = presentation;
+  try {
+    return await showModalBottomSheet<T>(
+      context: context,
+      useRootNavigator: true,
+      showDragHandle: true,
+      builder: (sheetContext) {
+        presentation.route = ModalRoute.of(sheetContext);
+        return builder(sheetContext);
+      },
+      isScrollControlled: isScrollControlled,
+      useSafeArea: useSafeArea,
+      enableDrag: enableDrag,
+      isDismissible: isDismissible,
+      backgroundColor: context.studioColors.surface,
+      barrierColor: AppColors.mediaScrim,
+      elevation: 0,
+      clipBehavior: Clip.antiAlias,
+      sheetAnimationStyle: AnimationStyle(
+        duration: context.motion(AppMotion.slow),
+        reverseDuration: context.motion(AppMotion.standard),
       ),
-      side: BorderSide(color: context.studioColors.border),
-    ),
-  );
+      shape: RoundedRectangleBorder(
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(AppRadius.feature),
+        ),
+        side: BorderSide(color: context.studioColors.border),
+      ),
+    );
+  } finally {
+    if (identical(_presentations[navigator], presentation)) {
+      _presentations[navigator] = null;
+    }
+  }
 }
 
 class StudioSheetHeader extends StatelessWidget {

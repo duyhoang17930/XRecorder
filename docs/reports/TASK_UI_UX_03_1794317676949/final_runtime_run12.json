@@ -1,0 +1,362 @@
+[
+  {
+    "screen": "Language search IME final",
+    "size": [
+      920,
+      411
+    ],
+    "rotation": 1,
+    "labels": [
+      "Dismiss",
+      "App language",
+      "ar",
+      "Clear search",
+      "Close",
+      "العربية"
+    ],
+    "imeState": [
+      "mInputShown=true"
+    ]
+  },
+  {
+    "screen": "Language search IME final",
+    "size": [
+      411,
+      920
+    ],
+    "rotation": 0,
+    "labels": [
+      "Dismiss",
+      "App language",
+      "ar",
+      "Clear search",
+      "العربية",
+      "Close"
+    ],
+    "imeState": [
+      "mInputShown=true"
+    ]
+  },
+  {
+    "screen": "Settings navigation final",
+    "width": 320,
+    "scale": "2.0",
+    "size": [
+      320,
+      920
+    ],
+    "targets": [
+      {
+        "label": "Video",
+        "bounds": [
+          12,
+          830,
+          72,
+          888
+        ]
+      },
+      {
+        "label": "Photo",
+        "bounds": [
+          72,
+          830,
+          132,
+          888
+        ]
+      },
+      {
+        "label": "Edit",
+        "bounds": [
+          132,
+          830,
+          192,
+          888
+        ]
+      },
+      {
+        "label": "Settings",
+        "bounds": [
+          192,
+          831,
+          252,
+          887
+        ]
+      },
+      {
+        "label": "Create",
+        "bounds": [
+          260,
+          833,
+          312,
+          885
+        ]
+      }
+    ],
+    "labels": [
+      "Settings",
+      "CAPTURE",
+      "Video quality\n1080p FHD · 60 FPS · 16 Mbps",
+      "Audio, countdown & facecam",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nFollow system",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "screen": "Settings navigation final",
+    "width": 360,
+    "scale": "1.5",
+    "size": [
+      360,
+      920
+    ],
+    "targets": [
+      {
+        "label": "Video",
+        "bounds": [
+          12,
+          830,
+          82,
+          888
+        ]
+      },
+      {
+        "label": "Photo",
+        "bounds": [
+          82,
+          830,
+          152,
+          888
+        ]
+      },
+      {
+        "label": "Edit",
+        "bounds": [
+          152,
+          830,
+          222,
+          888
+        ]
+      },
+      {
+        "label": "Settings",
+        "bounds": [
+          222,
+          830,
+          292,
+          888
+        ]
+      },
+      {
+        "label": "Create",
+        "bounds": [
+          300,
+          833,
+          352,
+          885
+        ]
+      }
+    ],
+    "labels": [
+      "Settings",
+      "CAPTURE",
+      "Video quality\n1080p FHD · 60 FPS · 16 Mbps",
+      "Audio, countdown & facecam",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nFollow system",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "screen": "Settings navigation final",
+    "width": 393,
+    "scale": "1.0",
+    "size": [
+      393,
+      920
+    ],
+    "targets": [
+      {
+        "label": "Video",
+        "bounds": [
+          12,
+          832,
+          90,
+          888
+        ]
+      },
+      {
+        "label": "Photo",
+        "bounds": [
+          90,
+          832,
+          169,
+          888
+        ]
+      },
+      {
+        "label": "Edit",
+        "bounds": [
+          169,
+          832,
+          247,
+          888
+        ]
+      },
+      {
+        "label": "Settings",
+        "bounds": [
+          247,
+          832,
+          325,
+          888
+        ]
+      },
+      {
+        "label": "Create",
+        "bounds": [
+          333,
+          834,
+          385,
+          886
+        ]
+      }
+    ],
+    "labels": [
+      "Settings",
+      "CAPTURE",
+      "Video quality\n1080p FHD · 60 FPS · 16 Mbps",
+      "Audio, countdown & facecam",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nFollow system",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Trash & restore\nCleanup on opening Trash after 24 hours",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "screen": "Settings navigation final",
+    "width": 411,
+    "scale": "1.0",
+    "size": [
+      411,
+      920
+    ],
+    "targets": [
+      {
+        "label": "Video",
+        "bounds": [
+          12,
+          832,
+          95,
+          888
+        ]
+      },
+      {
+        "label": "Photo",
+        "bounds": [
+          95,
+          832,
+          178,
+          888
+        ]
+      },
+      {
+        "label": "Edit",
+        "bounds": [
+          178,
+          832,
+          260,
+          888
+        ]
+      },
+      {
+        "label": "Settings",
+        "bounds": [
+          260,
+          832,
+          343,
+          888
+        ]
+      },
+      {
+        "label": "Create",
+        "bounds": [
+          351,
+          834,
+          403,
+          886
+        ]
+      }
+    ],
+    "labels": [
+      "Settings",
+      "CAPTURE",
+      "Video quality\n1080p FHD · 60 FPS · 16 Mbps",
+      "Audio, countdown & facecam",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nFollow system",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Trash & restore\nCleanup on opening Trash after 24 hours",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  }
+]

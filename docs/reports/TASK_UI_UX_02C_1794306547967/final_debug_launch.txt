@@ -1,0 +1,6 @@
+Starting: Intent { cmp=com.xrecorder.xrecorder/.MainActivity }
+Status: timeout
+LaunchState: UNKNOWN (-1)
+Activity: com.xrecorder.xrecorder/.MainActivity
+WaitTime: 12459
+Complete

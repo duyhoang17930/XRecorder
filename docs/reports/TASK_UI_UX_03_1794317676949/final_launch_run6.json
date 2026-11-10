@@ -1,0 +1,59 @@
+[
+  {
+    "screen": "Final_onboarding_landscape",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Smart Subtitles",
+    "markerFound": true,
+    "labels": [
+      "Skip",
+      "Smart Subtitles. Turn speech into subtitles directly on your device. Customize the text and make your videos easier to follow.",
+      "Smart Subtitles",
+      "Turn speech into subtitles directly on your device. Customize the text and make your videos easier to follow.",
+      "Step 3 of 3",
+      "Get Started"
+    ],
+    "image": "Final_onboarding_landscape_portrait_0.png"
+  },
+  {
+    "screen": "Final_onboarding_landscape",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Smart Subtitles",
+    "markerFound": true,
+    "labels": [
+      "Skip",
+      "Smart Subtitles. Turn speech into subtitles directly on your device. Customize the text and make your videos easier to follow.",
+      "Smart Subtitles",
+      "Turn speech into subtitles directly on your device. Customize the text and make your videos easier to follow.",
+      "Step 3 of 3",
+      "Get Started"
+    ],
+    "image": "Final_onboarding_landscape_landscape_1.png"
+  },
+  {
+    "screen": "Final_onboarding_landscape",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Smart Subtitles",
+    "markerFound": true,
+    "labels": [
+      "Skip",
+      "Smart Subtitles. Turn speech into subtitles directly on your device. Customize the text and make your videos easier to follow.",
+      "Smart Subtitles",
+      "Turn speech into subtitles directly on your device. Customize the text and make your videos easier to follow.",
+      "Step 3 of 3",
+      "Get Started"
+    ],
+    "image": "Final_onboarding_landscape_portrait_2.png"
+  }
+]

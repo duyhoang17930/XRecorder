@@ -1,0 +1,16 @@
+{
+  "head": "64e84ec0f952c4e28063488812933010f05bfa7d",
+  "protectedSourceHashes": {
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/MainActivity.kt": "42f33d82d163541429031727e29ded9a015a5e8b93a979d8738814655b053158",
+    "lib/features/settings/settings_controller.dart": "74e82510ebcec30c1a306985c262cf78d3fb7a46e87cbc566780b7d6b347d570",
+    "lib/features/settings/recording_settings_form.dart": "0df96cc38f2518231fb829cd5e8e28d7417ad060d005d9d9a7441d8d78194478"
+  },
+  "originalPreferencesByteExact": true,
+  "finalInstallPreferencesByteExact": true,
+  "debugApkSha256": "a93eac7f043be424db8d1fd1f8ac22be3591385b177b595cb942f2078bd3c848",
+  "profileApkSha256": "f0de2726821c22e7257720a4fc97dfaaf516a7b3b95853f99fd50d076a36b037",
+  "fixtureHostHashes": {
+    "slider_fixture.png": "399d4169a5a322c63d8fee240ff29c91893ccd8c854262a1afc09e2bcfd8b8ff",
+    "sort_fixture.png": "c656e0de5f2ab3262b038e61ca09cbe3342f764d855e64de7ac5846b4b45eaf9"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "canvasBounds": [
+    24,
+    287,
+    386,
+    468
+  ],
+  "sliderBounds": [
+    90,
+    764,
+    138,
+    812
+  ],
+  "labelsAfter": [
+    "Back",
+    "Photo editor",
+    "Undo photo edit",
+    "Redo photo edit",
+    "Pen",
+    "Rectangle",
+    "Text",
+    "Eraser",
+    "All tools",
+    "Cyan ink",
+    "Color",
+    "Stroke width",
+    "5 pixels",
+    "Stroke width",
+    "5 pixels",
+    "Export quality",
+    "Save copy"
+  ],
+  "actions": [
+    "Pen",
+    "Color",
+    "Cyan ink",
+    "Stroke width",
+    "Draw",
+    "Undo",
+    "Redo",
+    "Rectangle",
+    "Landscape",
+    "Portrait"
+  ]
+}

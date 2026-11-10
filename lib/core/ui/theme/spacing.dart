@@ -11,7 +11,7 @@ abstract final class AppSpacing {
 abstract final class AppSize {
   static const touchTarget = 48.0;
   static const button = 52.0;
-  static const navigation = 76.0;
+  static const navigation = 56.0;
   static const create = 52.0;
   static const settingsRow = 72.0;
   static const thumbnailWidth = 92.0;

@@ -1,0 +1,625 @@
+[
+  {
+    "screen": "Videos",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Video Library",
+    "markerFound": true,
+    "labels": [
+      "3HRECORDER",
+      "Video Library",
+      "Trash",
+      "Storage",
+      "Ready",
+      "Screen recorder",
+      "1080p FHD · 60 FPS · Mixed Stream",
+      "Record screen",
+      "Screenshot",
+      "All tools",
+      "Screenshot minimizes the app after approval · 3s delay.",
+      "App media",
+      "Choose folder",
+      "Sort media",
+      "Newest",
+      "Recent videos",
+      "0 items",
+      "No recordings yet",
+      "Your videos will appear here.",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ],
+    "image": "Videos_portrait_0.png"
+  },
+  {
+    "screen": "Videos",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Video Library",
+    "markerFound": true,
+    "labels": [
+      "3HRECORDER",
+      "Video Library",
+      "Trash",
+      "Storage",
+      "Ready",
+      "Screen recorder",
+      "1080p FHD · 60 FPS · Mixed Stream",
+      "Record screen",
+      "Screenshot",
+      "All tools",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ],
+    "image": "Videos_landscape_1.png"
+  },
+  {
+    "screen": "Videos",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Video Library",
+    "markerFound": true,
+    "labels": [
+      "3HRECORDER",
+      "Video Library",
+      "Trash",
+      "Storage",
+      "Ready",
+      "Screen recorder",
+      "1080p FHD · 60 FPS · Mixed Stream",
+      "Record screen",
+      "Screenshot",
+      "All tools",
+      "Screenshot minimizes the app after approval · 3s delay.",
+      "App media",
+      "Choose folder",
+      "Sort media",
+      "Newest",
+      "Recent videos",
+      "0 items",
+      "No recordings yet",
+      "Your videos will appear here.",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ],
+    "image": "Videos_portrait_2.png"
+  },
+  {
+    "screen": "Photos",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Photo Library",
+    "markerFound": true,
+    "labels": [
+      "3HRECORDER",
+      "Photo Library",
+      "Trash",
+      "Storage",
+      "Screenshot",
+      "All tools",
+      "Screenshot minimizes the app after approval · 3s delay.",
+      "App media",
+      "Choose folder",
+      "Sort media",
+      "Newest",
+      "Your photos",
+      "0 items",
+      "No screenshots yet",
+      "Your screenshots and edited photos will appear here.",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "screen": "Photos",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Photo Library",
+    "markerFound": true,
+    "labels": [
+      "3HRECORDER",
+      "Photo Library",
+      "Trash",
+      "Storage",
+      "Screenshot",
+      "All tools",
+      "Screenshot minimizes the app after approval · 3s delay.",
+      "App media",
+      "Choose folder",
+      "Sort media",
+      "Newest",
+      "Your photos",
+      "0 items",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "screen": "Photos",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Photo Library",
+    "markerFound": true,
+    "labels": [
+      "3HRECORDER",
+      "Photo Library",
+      "Trash",
+      "Storage",
+      "Screenshot",
+      "All tools",
+      "Screenshot minimizes the app after approval · 3s delay.",
+      "App media",
+      "Choose folder",
+      "Sort media",
+      "Newest",
+      "Your photos",
+      "0 items",
+      "No screenshots yet",
+      "Your screenshots and edited photos will appear here.",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "screen": "Edit",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Editing Studio",
+    "markerFound": true,
+    "labels": [
+      "Editing Studio",
+      "Add Video editor to Home",
+      "Add Photo editor to Home",
+      "New video project\nTrim, merge & effects",
+      "Edit photo\nCrop & annotate a copy",
+      "Saved drafts",
+      "Export queue",
+      "No drafts yet\nCreate a project. Originals stay unchanged.",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "screen": "Edit",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Editing Studio",
+    "markerFound": true,
+    "labels": [
+      "Editing Studio",
+      "Add Video editor to Home",
+      "Add Photo editor to Home",
+      "New video project\nTrim, merge & effects",
+      "Edit photo\nCrop & annotate a copy",
+      "Saved drafts",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "screen": "Edit",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Editing Studio",
+    "markerFound": true,
+    "labels": [
+      "Editing Studio",
+      "Add Video editor to Home",
+      "Add Photo editor to Home",
+      "New video project\nTrim, merge & effects",
+      "Edit photo\nCrop & annotate a copy",
+      "Saved drafts",
+      "Export queue",
+      "No drafts yet\nCreate a project. Originals stay unchanged.",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "screen": "Settings",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Settings",
+    "markerFound": true,
+    "labels": [
+      "Settings",
+      "CAPTURE",
+      "Video quality\n1080p FHD · 60 FPS · 16 Mbps",
+      "Audio, countdown & facecam",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nFollow system",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Trash & restore\nCleanup on opening Trash after 24 hours",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ],
+    "image": "Settings_portrait_9.png"
+  },
+  {
+    "screen": "Settings",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Settings",
+    "markerFound": true,
+    "labels": [
+      "Settings",
+      "CAPTURE",
+      "Video quality\n1080p FHD · 60 FPS · 16 Mbps",
+      "Audio, countdown & facecam",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ],
+    "image": "Settings_landscape_10.png"
+  },
+  {
+    "screen": "Settings",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Settings",
+    "markerFound": true,
+    "labels": [
+      "Settings",
+      "CAPTURE",
+      "Video quality\n1080p FHD · 60 FPS · 16 Mbps",
+      "Audio, countdown & facecam",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nFollow system",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Trash & restore\nCleanup on opening Trash after 24 hours",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ],
+    "image": "Settings_portrait_11.png"
+  },
+  {
+    "screen": "Onboarding",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Record Anything",
+    "markerFound": true,
+    "labels": [
+      "Skip",
+      "Record Anything. Capture your screen in high quality. Choose your audio settings and start recording in just a few taps.",
+      "Record Anything",
+      "Capture your screen in high quality. Choose your audio settings and start recording in just a few taps.",
+      "Step 1 of 3",
+      "Next"
+    ],
+    "image": "Onboarding_portrait_12.png"
+  },
+  {
+    "screen": "Onboarding",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Record Anything",
+    "markerFound": true,
+    "labels": [
+      "Skip",
+      "Record Anything. Capture your screen in high quality. Choose your audio settings and start recording in just a few taps.",
+      "Record Anything",
+      "Next"
+    ],
+    "image": "Onboarding_landscape_13.png"
+  },
+  {
+    "screen": "Onboarding",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Record Anything",
+    "markerFound": true,
+    "labels": [
+      "Skip",
+      "Record Anything. Capture your screen in high quality. Choose your audio settings and start recording in just a few taps.",
+      "Record Anything",
+      "Capture your screen in high quality. Choose your audio settings and start recording in just a few taps.",
+      "Step 1 of 3",
+      "Next"
+    ],
+    "image": "Onboarding_portrait_14.png"
+  },
+  {
+    "screen": "Help",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Help & guides",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Help & guides",
+      "Collapsed",
+      "How do I record my screen?\nRecording, Collapsed",
+      "Collapsed",
+      "Why is a video black or silent?\nRecording, Collapsed",
+      "Collapsed",
+      "How do countdown and duration differ?\nRecording, Collapsed",
+      "Collapsed",
+      "How do facecam and touch indicators work?\nRecording, Collapsed",
+      "Collapsed",
+      "What if recording fails or the phone locks?\nRecording, Collapsed",
+      "Collapsed",
+      "Will editing change my originals?\nEditing, Collapsed",
+      "Collapsed",
+      "How do I merge, crop and export?\nEditing, Collapsed",
+      "Collapsed",
+      "What are the GIF and audio limits?\nEditing, Collapsed",
+      "Collapsed",
+      "Where are files saved?\nStorage, Collapsed"
+    ],
+    "image": "Help_portrait_15.png"
+  },
+  {
+    "screen": "Help",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "Help & guides",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Help & guides",
+      "Collapsed",
+      "How do I record my screen?\nRecording, Collapsed",
+      "Collapsed",
+      "Why is a video black or silent?\nRecording, Collapsed",
+      "Collapsed",
+      "How do countdown and duration differ?\nRecording, Collapsed"
+    ],
+    "image": "Help_landscape_16.png"
+  },
+  {
+    "screen": "Help",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Help & guides",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Help & guides",
+      "Collapsed",
+      "How do I record my screen?\nRecording, Collapsed",
+      "Collapsed",
+      "Why is a video black or silent?\nRecording, Collapsed",
+      "Collapsed",
+      "How do countdown and duration differ?\nRecording, Collapsed",
+      "Collapsed",
+      "How do facecam and touch indicators work?\nRecording, Collapsed",
+      "Collapsed",
+      "What if recording fails or the phone locks?\nRecording, Collapsed",
+      "Collapsed",
+      "Will editing change my originals?\nEditing, Collapsed",
+      "Collapsed",
+      "How do I merge, crop and export?\nEditing, Collapsed",
+      "Collapsed",
+      "What are the GIF and audio limits?\nEditing, Collapsed",
+      "Collapsed",
+      "Where are files saved?\nStorage, Collapsed"
+    ],
+    "image": "Help_portrait_17.png"
+  },
+  {
+    "screen": "About_dialog",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "MxT APP",
+    "markerFound": true,
+    "labels": [
+      "Dismiss",
+      "3HRecorder",
+      "MxT APP",
+      "0.1.0 (1)",
+      "Official website",
+      "Android screen recording and non-destructive editing. Media3: Apache-2.0. Manrope: SIL OFL. Lucide Flutter: MIT; Lucide artwork: ISC. See licenses for details.",
+      "View licenses",
+      "Close"
+    ],
+    "image": "About_dialog_portrait_18.png"
+  },
+  {
+    "screen": "About_dialog",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "MxT APP",
+    "markerFound": true,
+    "labels": [
+      "Dismiss",
+      "3HRecorder",
+      "MxT APP",
+      "0.1.0 (1)",
+      "Official website",
+      "Android screen recording and non-destructive editing. Media3: Apache-2.0. Manrope: SIL OFL. Lucide Flutter: MIT; Lucide artwork: ISC. See licenses for details.",
+      "View licenses",
+      "Close"
+    ],
+    "image": "About_dialog_landscape_19.png"
+  },
+  {
+    "screen": "About_dialog",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "MxT APP",
+    "markerFound": true,
+    "labels": [
+      "Dismiss",
+      "3HRecorder",
+      "MxT APP",
+      "0.1.0 (1)",
+      "Official website",
+      "Android screen recording and non-destructive editing. Media3: Apache-2.0. Manrope: SIL OFL. Lucide Flutter: MIT; Lucide artwork: ISC. See licenses for details.",
+      "View licenses",
+      "Close"
+    ],
+    "image": "About_dialog_portrait_20.png"
+  }
+]

@@ -59,10 +59,17 @@ app.*.map.json
 
 # Local references and agent configuration
 requirements/*
-images/
+image/
 AGENTS.md
 .agents/
 .aws/
 .codex/
 .claude-local/
 stitch_screenflow_mobile_app_ui_system/
+
+# Device-private UI QA backups stay local; retain them for recovery.
+/docs/implementation/TASK_UI_UX_*/qa5570_private_data*.tar
+/docs/reports/TASK_UI_UX_*/*.tar
+# Local snapshots of dirty source are not application source or commit artifacts.
+/docs/reports/TASK_UI_UX_*/before_*.dart.txt
+/docs/reports/TASK_UI_UX_*/before_*.kt.txt

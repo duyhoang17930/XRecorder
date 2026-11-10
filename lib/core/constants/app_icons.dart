@@ -11,6 +11,14 @@ abstract final class AppIcons {
   static const imageUnavailable = LucideIcons.imageOff;
   static const edit = LucideIcons.wandSparkles;
   static const photoEdit = LucideIcons.pencilRuler;
+  static const pen = LucideIcons.pencil;
+  static const shapes = LucideIcons.shapes;
+  static const text = LucideIcons.type;
+  static const eraser = LucideIcons.eraser;
+  static const palette = LucideIcons.palette;
+  static const crop = LucideIcons.crop;
+  static const flipHorizontal = LucideIcons.flipHorizontal;
+  static const flipVertical = LucideIcons.flipVertical;
   static const newProject = LucideIcons.copyPlus;
   static const settings = LucideIcons.slidersHorizontal;
   static const videoSettings = LucideIcons.settings2;

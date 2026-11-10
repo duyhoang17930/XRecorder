@@ -1,0 +1,10 @@
+{
+  "apkSha256": "6a60253a7ab3d68a83d993dc82658e32ff0fc4ab7c6cb1685c87a5cc97e0a3d5",
+  "kernelBytes": 79429112,
+  "kernelSha256": "bed254f2001e8090701f09c82ab5ccc13f87b0c2f16030d1bcbf60afe6101a14",
+  "markers": {
+    "_ProjectNameDialog": true,
+    "_EffectsScreen": true,
+    "photo-tool-pen": true
+  }
+}

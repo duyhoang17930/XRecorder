@@ -27,7 +27,13 @@ void main() {
       find.byType(TextField),
       'Recording stopped unexpectedly',
     );
-    await tester.ensureVisible(find.text('Open share sheet'));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text('Open share sheet'),
+      120,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Open share sheet'));
     await tester.pumpAndSettle();
     expect(calls.where((c) => c.method == 'diagnostics'), isEmpty);
@@ -37,10 +43,16 @@ void main() {
     );
     expect(find.textContaining('Delivery depends'), findsOneWidget);
     await tester.ensureVisible(find.byType(CheckboxListTile));
+    await tester.pumpAndSettle();
     await tester.tap(find.byType(CheckboxListTile));
     await tester.pumpAndSettle();
     expect(find.text('Android API: 36'), findsOneWidget);
-    await tester.ensureVisible(find.text('Open share sheet'));
+    await tester.scrollUntilVisible(
+      find.text('Open share sheet'),
+      120,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Open share sheet'));
     await tester.pumpAndSettle();
     expect((calls.last.arguments as Map)['text'], contains('Android API: 36'));
@@ -62,7 +74,13 @@ void main() {
             return null;
           });
       await tester.pumpWidget(const MaterialApp(home: SupportScreen()));
-      await tester.ensureVisible(find.text('Open share sheet'));
+      await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(
+        find.text('Open share sheet'),
+        120,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Open share sheet'));
       await tester.pumpAndSettle();
       expect(find.text('Write a report before sharing.'), findsOneWidget);
@@ -87,6 +105,7 @@ void main() {
         find.byType(TextField),
         'QA report, mocked delivery',
       );
+      await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('Open share sheet'));
       final share = tester.widget<FilledButton>(find.byType(FilledButton));
       share.onPressed!();

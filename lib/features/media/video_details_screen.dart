@@ -194,16 +194,21 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
         return ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            AspectRatio(
-              aspectRatio: 16 / 9,
+            SizedBox(
+              height: (MediaQuery.sizeOf(context).height * .25).clamp(
+                120.0,
+                220.0,
+              ),
               child: MediaThumbnail(item: item),
             ),
             SectionTitle(item.displayName),
             if (busy) const LinearProgressIndicator(),
+            SectionTitle(context.l10n.preview),
             Wrap(
               spacing: 8,
+              runSpacing: 8,
               children: [
-                TextButton.icon(
+                FilledButton.icon(
                   onPressed: busy
                       ? null
                       : () => run(() async {
@@ -227,6 +232,25 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                   icon: const Icon(AppIcons.share),
                   label: Text(context.l10n.share),
                 ),
+              ],
+            ),
+            if (item.kind == MediaKind.image) ...[
+              SectionTitle(context.l10n.edit),
+              OutlinedButton.icon(
+                onPressed: busy
+                    ? null
+                    : () => context.push(
+                        '/photo-tools/${Uri.encodeComponent(item.id)}',
+                      ),
+                icon: const Icon(AppIcons.photoEdit),
+                label: Text(context.l10n.cropAnnotateACopy),
+              ),
+            ],
+            SectionTitle(context.l10n.fileManagement),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
                 if (item.owned)
                   TextButton.icon(
                     onPressed: busy
@@ -237,17 +261,6 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                           ),
                     icon: const Icon(AppIcons.rename),
                     label: Text(context.l10n.rename),
-                  ),
-                if (item.owned)
-                  TextButton.icon(
-                    onPressed: busy
-                        ? null
-                        : () => run(
-                            () => trash(item),
-                            purpose: UserOperation.trash,
-                          ),
-                    icon: const Icon(AppIcons.trash),
-                    label: Text(context.l10n.moveToTrash),
                   ),
                 TextButton.icon(
                   onPressed: busy
@@ -267,14 +280,25 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
             ),
             if (!item.owned)
               Text(context.l10n.externalFilesCanBeCopiedMovingRequires),
-            if (item.kind == MediaKind.image)
-              TextButton.icon(
-                onPressed: () => context.push(
-                  '/photo-tools/${Uri.encodeComponent(item.id)}',
+            if (item.owned) ...[
+              const Divider(height: 32),
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: TextButton.icon(
+                  style: TextButton.styleFrom(
+                    foregroundColor: context.studioColors.warning,
+                  ),
+                  onPressed: busy
+                      ? null
+                      : () => run(
+                          () => trash(item),
+                          purpose: UserOperation.trash,
+                        ),
+                  icon: const Icon(AppIcons.trash),
+                  label: Text(context.l10n.moveToTrash),
                 ),
-                icon: const Icon(AppIcons.photoEdit),
-                label: Text(context.l10n.cropAnnotateACopy),
               ),
+            ],
             ListTile(
               title: Text(context.l10n.size),
               subtitle: Text(context.fileSize(item.sizeBytes)),

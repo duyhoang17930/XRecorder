@@ -1,4 +1,26 @@
 {
+  "editorAllTools": "Tous les outils",
+  "editorAudio": "Audio",
+  "editorOverlays": "Calques",
+  "editorExportQuality": "Qualité d’exportation",
+  "editorShapes": "Formes",
+  "editorCrop": "Recadrer",
+  "editorTransform": "Transformer",
+  "editorColor": "Couleur",
+  "photoDragToErase": "Faites glisser près d’une marque pour l’effacer.",
+  "photoEnterText": "Saisissez le texte avant de le placer sur la photo.",
+  "editorAdvancedAudio": "Voix et musique de fond",
+  "editorSubtitleHint": "Personnalisez les sous-titres de votre projet.",
+  "editorApply": "Appliquer",
+  "fileManagement": "Gestion des fichiers",
+  "viewIntroduction": "Revoir la présentation",
+  "privacyPolicy": "Politique de confidentialité",
+  "termsOfUse": "Conditions d’utilisation",
+  "officialWebsite": "Site officiel",
+  "sendFeedbackEmail": "Envoyer un avis par e-mail",
+  "copyEmailAddress": "Copier l’adresse e-mail",
+  "emailAddressCopied": "Adresse e-mail copiée",
+  "openExternalFailed": "Impossible d’ouvrir une application. Vérifiez le navigateur ou l’application e-mail et réessayez.",
   "@@locale": "fr",
   "componentGallery": "Galerie de composants d’interface",
   "label1080pFhd": "1080p FHD",
@@ -670,5 +692,24 @@
   "speechHistoryUnavailable": "L''historique de discours sauvée ne pouvait pas être chargée. les données existantes ont été conservées. réinitialiser l''application ou restaurer une sauvegarde avant d''essayer à nouveau.",
   "speechHistoryNotSaved": "L''historique de la parole ne pouvait pas être sauvée. stockage gratuit ou vérifier l''accès à l''application stockage, puis retire. réviser et sauvegarder les sous-titres générés avant de fermer.",
   "speechJobFailed": "L’opération échoue",
-  "speechSavingHistory": "Économiser l’histoire du travail..."
+  "speechSavingHistory": "Économiser l’histoire du travail...",
+  "onboardingRecordTitle": "Tout enregistrer",
+  "onboardingRecordDescription": "Enregistrez votre écran en haute qualité. Choisissez les réglages audio et lancez l’enregistrement en quelques gestes.",
+  "onboardingEditTitle": "Montez à votre façon",
+  "onboardingEditDescription": "Découpez vos vidéos, ajoutez du texte et des dessins, puis affinez vos enregistrements avec des outils complets.",
+  "onboardingSubtitlesTitle": "Sous-titres intelligents",
+  "onboardingSubtitlesDescription": "Transformez la parole en sous-titres directement sur votre appareil. Personnalisez le texte pour faciliter le suivi de vos vidéos.",
+  "onboardingSkip": "Passer",
+  "onboardingNext": "Suivant",
+  "onboardingBack": "Retour",
+  "onboardingGetStarted": "Commencer",
+  "onboardingSaveFailed": "Impossible d’enregistrer votre progression. Réessayez.",
+  "onboardingProgress": "Étape {current} sur {total}",
+  "@onboardingProgress": {
+    "description": "Accessible current onboarding page and total page count.",
+    "placeholders": {
+      "current": { "type": "String" },
+      "total": { "type": "String" }
+    }
+  }
 }

@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.SurfaceHolder
+import android.view.SurfaceView
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.transformer.CompositionPlayer
@@ -50,14 +52,34 @@ class EditorPreview(context: Context, id: Int, messenger: BinaryMessenger) :
     private var disposed = false
     private var loading = false
     private var renderedFirstFrame = false
+    private val surfaceCallback = object : SurfaceHolder.Callback {
+        override fun surfaceCreated(holder: SurfaceHolder) = Unit
+
+        override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
+            // A paused graph does not produce another frame when its SurfaceView
+            // changes size. Replay the cached frame after Media3 has updated the
+            // output surface, without seeking, playing audio or reloading edits.
+            view.post {
+                val current = player
+                if (!disposed && holder.surface.isValid && current != null && !current.isPlaying) {
+                    current.experimentalRedrawLastFrame()
+                }
+            }
+        }
+
+        override fun surfaceDestroyed(holder: SurfaceHolder) = Unit
+    }
 
     init {
         active.add(this)
         channel.setMethodCallHandler(this)
+        (view.videoSurfaceView as? SurfaceView)?.holder?.addCallback(surfaceCallback)
     }
 
     private fun createPlayer(): CompositionPlayer =
-        CompositionPlayer.Builder(view.context).build().also { created ->
+        CompositionPlayer.Builder(view.context)
+            .experimentalSetEnableReplayableCache(true)
+            .build().also { created ->
             renderedFirstFrame = false
             created.addListener(
                 object : Player.Listener {
@@ -188,6 +210,7 @@ class EditorPreview(context: Context, id: Int, messenger: BinaryMessenger) :
 
     override fun dispose() {
         disposed = true
+        (view.videoSurfaceView as? SurfaceView)?.holder?.removeCallback(surfaceCallback)
         active.remove(this)
         channel.setMethodCallHandler(null)
         releasePlayer()

@@ -1,0 +1,14 @@
+COMMAND: git diff --check
+warning: in the working copy of 'lib/core/widgets/studio_shell.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/features/settings/app_language_dialog.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/features/settings/support_screen.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'test/editor_preview_load_queue_test.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'test/task09b_editor_interactions_test.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'test/task09b_history_localization_test.dart', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'test/ux_interaction_test.dart', LF will be replaced by CRLF the next time Git touches it
+
+Exit=0
+COMMAND: D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe format --output=none --set-exit-if-changed lib/features/editor/project_effects.dart lib/features/editor/editor_screen.dart lib/features/media/photo_tools_screen.dart lib/features/media/photo_editor_panels.dart lib/core/constants/app_icons.dart lib/core/ui/theme/motion.dart test/editor_hci_test.dart test/editor_preview_load_queue_test.dart test/task09b_editor_interactions_test.dart test/task09b_history_localization_test.dart test/ux_interaction_test.dart test/refinement_test.dart
+Formatted 12 files (0 changed) in 0.22 seconds.
+
+Exit=0

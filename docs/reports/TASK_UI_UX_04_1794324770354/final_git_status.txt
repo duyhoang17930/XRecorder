@@ -1,0 +1,82 @@
+ M .gitignore
+ M android/app/src/main/kotlin/com/xrecorder/xrecorder/MainActivity.kt
+ M android/app/src/main/kotlin/com/xrecorder/xrecorder/SupportBridge.kt
+ M android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/EditorPreview.kt
+ M android/app/src/main/res/drawable-v21/launch_background.xml
+ M android/app/src/main/res/drawable/launch_background.xml
+ M android/app/src/main/res/values-night/styles.xml
+ M android/app/src/main/res/values/styles.xml
+ M lib/app/app.dart
+ M lib/app/router/app_router.dart
+ M lib/core/constants/app_icons.dart
+ M lib/core/ui/components/bottom_sheets/studio_bottom_sheet.dart
+ M lib/core/ui/components/search/studio_search_field.dart
+ M lib/core/ui/theme/motion.dart
+ M lib/core/ui/theme/spacing.dart
+ M lib/core/widgets/studio_shell.dart
+ M lib/features/editor/editing_hub_screen.dart
+ M lib/features/editor/editor_screen.dart
+ M lib/features/editor/project_effects.dart
+ M lib/features/media/media_library_screen.dart
+ M lib/features/media/photo_tools_screen.dart
+ M lib/features/media/video_details_screen.dart
+ M lib/features/settings/app_language_dialog.dart
+ M lib/features/settings/settings_hub_screen.dart
+ M lib/features/settings/support_screen.dart
+ M lib/l10n/app_ar.arb
+ M lib/l10n/app_de.arb
+ M lib/l10n/app_en.arb
+ M lib/l10n/app_es.arb
+ M lib/l10n/app_fr.arb
+ M lib/l10n/app_hi.arb
+ M lib/l10n/app_id.arb
+ M lib/l10n/app_ja.arb
+ M lib/l10n/app_ko.arb
+ M lib/l10n/app_pt.arb
+ M lib/l10n/app_pt_BR.arb
+ M lib/l10n/app_vi.arb
+ M lib/l10n/app_zh.arb
+ M lib/l10n/app_zh_Hans.arb
+ M lib/main.dart
+ M pubspec.yaml
+ M test/editor_preview_load_queue_test.dart
+ M test/photo_tools_test.dart
+ M test/refinement_test.dart
+ M test/support_test.dart
+ M test/task09b_editor_interactions_test.dart
+ M test/task09b_history_localization_test.dart
+ M test/ux_interaction_test.dart
+?? android/app/src/main/kotlin/com/xrecorder/xrecorder/OnboardingPreferencesBridge.kt
+?? android/app/src/main/res/animator/
+?? android/app/src/main/res/drawable-night/
+?? android/app/src/main/res/drawable-xxxhdpi/
+?? android/app/src/main/res/drawable/splash_3h_animated_dark.xml
+?? android/app/src/main/res/drawable/splash_3h_animated_light.xml
+?? android/app/src/main/res/drawable/splash_3h_dark.xml
+?? android/app/src/main/res/drawable/splash_3h_light.xml
+?? android/app/src/main/res/values-night-v31/
+?? android/app/src/main/res/values-v31/
+?? assets/images/
+?? docs/implementation/TASK_STORAGE_AUDIT_20261110_034254.md
+?? docs/implementation/TASK_UI_UX_01_IMPLEMENTATION_REPORT_20261110_041500.md
+?? docs/implementation/TASK_UI_UX_02B_EVIDENCE_20261110_133100/
+?? docs/implementation/TASK_UI_UX_02B_FINAL_REPORT_20261110_140446.md
+?? docs/implementation/TASK_UI_UX_02B_STORAGE_REPORT_20261110_140446.md
+?? docs/implementation/TASK_UI_UX_02B_TEST_EVIDENCE_20261110_140446.md
+?? docs/implementation/TASK_UI_UX_02B_VISUAL_QA_20261110_140446.md
+?? docs/implementation/TASK_UI_UX_02_EVIDENCE_20261110_121400/
+?? docs/implementation/TASK_UI_UX_02_FINAL_REPORT_20261110_130533.md
+?? docs/implementation/TASK_UI_UX_02_STORAGE_REPORT_20261110_130533.md
+?? docs/implementation/TASK_UI_UX_02_TEST_EVIDENCE_20261110_130533.md
+?? docs/implementation/TASK_UI_UX_02_VISUAL_QA_20261110_130533.md
+?? docs/implementation/UI/
+?? docs/reports/
+?? lib/core/widgets/startup_splash.dart
+?? lib/features/media/photo_editor_panels.dart
+?? lib/features/onboarding/
+?? lib/features/settings/studio_identity.dart
+?? test/editor_hci_test.dart
+?? test/onboarding_test.dart
+?? test/ui_startup_navigation_test.dart
+?? test/ui_ux_02c_test.dart
+?? test/ui_ux_03_test.dart

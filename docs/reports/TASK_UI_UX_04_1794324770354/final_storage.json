@@ -1,0 +1,10 @@
+{
+  "beforeBuildBytes": 141309297691,
+  "afterBuildBytes": 141309690523,
+  "buildDeltaBytes": 392832,
+  "buildFiles": 20311,
+  "beforeFreeBytes": 30717423616,
+  "afterFreeBytes": 29604143104,
+  "newEvidenceBytesBeforeFinalReport": 6805259,
+  "measure": "logical bytes; excludes reparse points; allocated sparse AVD size not measured"
+}

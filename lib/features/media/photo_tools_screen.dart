@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import 'media_repository.dart';
+import 'photo_editor_panels.dart';
 
 class PhotoMark {
   PhotoMark(
@@ -131,7 +132,13 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
   String tool = 'Pen';
   Color color = Colors.red;
   double strokeWidth = .006;
+  String panel = 'draw';
+  PhotoMark? _activeMark;
+  final _canvasRevision = ValueNotifier<int>(0);
+  final _toolAnchors = <String, GlobalKey>{};
   final label = TextEditingController();
+  final _textFocus = FocusNode();
+  final _textFieldKey = GlobalKey(debugLabel: 'photo-annotation-text');
   RangeValues horizontal = const RangeValues(0, 1),
       vertical = const RangeValues(0, 1);
   final marks = <PhotoMark>[];
@@ -182,11 +189,13 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
   }
 
   void undoMark() {
+    _activeMark = null;
     redoHistory.add(snapshot());
     restore(undoHistory.removeLast());
   }
 
   void redoMark() {
+    _activeMark = null;
     undoHistory.add(snapshot());
     restore(redoHistory.removeLast());
   }
@@ -196,6 +205,21 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
     super.initState();
     load();
   }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Portrait/landscape and IME layouts can recreate the toolbar viewport.
+    // Reveal the active tool after layout without changing editing history.
+    MediaQuery.of(context);
+    _revealTool(_selectedTool);
+  }
+
+  String get _selectedTool => panel != 'draw'
+      ? panel
+      : ['Rectangle', 'Circle', 'Arrow'].contains(tool)
+      ? 'shapes'
+      : tool.toLowerCase();
 
   Future<void> load() async {
     try {
@@ -290,10 +314,586 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
 
   @override
   void dispose() {
+    _canvasRevision.dispose();
     image?.dispose();
     label.dispose();
+    _textFocus.dispose();
     super.dispose();
   }
+
+  Future<void> _exportOptions() async {
+    final next = await editPhotoExportOptions(context, (
+      format: exportFormat,
+      maxEdge: exportEdge,
+      quality: jpegQuality,
+    ));
+    if (mounted && next != null) {
+      setState(() {
+        exportFormat = next.format;
+        exportEdge = next.maxEdge;
+        jpegQuality = next.quality;
+      });
+    }
+  }
+
+  Future<void> _ink() async {
+    final next = await choosePhotoInk(context, color);
+    if (mounted && next != null) setState(() => color = next);
+  }
+
+  void _tool(String next) {
+    setState(() {
+      _activeMark = null;
+      panel = 'draw';
+      tool = next;
+    });
+    _revealTool(_selectedTool);
+  }
+
+  void _revealTool(String name) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final target = _toolAnchors['photo-tool-$name']?.currentContext;
+      if (target != null) {
+        Scrollable.ensureVisible(
+          target,
+          alignment: .5,
+          duration: context.motion(AppMotion.standard),
+        );
+      }
+    });
+  }
+
+  void _selectPanel(String name) {
+    setState(() {
+      _activeMark = null;
+      panel = name;
+    });
+    _revealTool(name);
+  }
+
+  Future<void> _allTools() async {
+    final next = await choosePhotoTool(
+      context,
+      title: context.l10n.editorAllTools,
+      icon: AppIcons.tools,
+      selected: panel == 'draw' ? tool : panel,
+      isScrollControlled: true,
+      tools: [
+        for (final value in [
+          'Pen',
+          'Rectangle',
+          'Circle',
+          'Arrow',
+          'Text',
+          'Eraser',
+        ])
+          (value, context.message(value)),
+        ('crop', context.l10n.editorCrop),
+        ('transform', context.l10n.editorTransform),
+      ],
+    );
+    if (!mounted || next == null) return;
+    if (next == 'crop' || next == 'transform') {
+      _selectPanel(next);
+    } else {
+      _tool(next);
+    }
+  }
+
+  Future<void> _shapes() async {
+    final next = await choosePhotoTool(
+      context,
+      title: context.l10n.editorShapes,
+      icon: AppIcons.shapes,
+      selected: panel == 'draw' ? tool : '',
+      selectedTileColor: context.studioColors.primary.withValues(alpha: .10),
+      tools: [
+        for (final shape in ['Rectangle', 'Circle', 'Arrow'])
+          (shape, context.message(shape)),
+      ],
+    );
+    if (mounted && next != null) _tool(next);
+  }
+
+  void _crop(RangeValues next, bool isHorizontal) {
+    if (!next.start.isFinite || !next.end.isFinite) return;
+    final bounded = RangeValues(next.start.clamp(0, 1), next.end.clamp(0, 1));
+    if (bounded.end - bounded.start < .02) return;
+    setState(() {
+      if (isHorizontal) {
+        horizontal = bounded;
+      } else {
+        vertical = bounded;
+      }
+    });
+  }
+
+  Widget _toolbar(double height) {
+    final shapes = ['Rectangle', 'Circle', 'Arrow'].contains(tool);
+    Widget button(
+      String name,
+      IconData icon,
+      bool selected,
+      VoidCallback action,
+      String id,
+    ) => Padding(
+      key: _toolAnchors.putIfAbsent(id, () => GlobalKey()),
+      padding: const EdgeInsetsDirectional.only(end: AppSpacing.xs),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: AppSize.touchTarget),
+        child: ChoiceChip(
+          chipAnimationStyle: AppMotion.chipStyle(
+            reduceMotion: context.reduceMotion,
+          ),
+          key: ValueKey(id),
+          avatar: Icon(icon, size: AppIconSize.small),
+          label: Text(name),
+          selected: selected,
+          onSelected: saving ? null : (_) => action(),
+        ),
+      ),
+    );
+    return SizedBox(
+      height: height,
+      child: Row(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  button(
+                    context.message('Pen'),
+                    AppIcons.pen,
+                    panel == 'draw' && tool == 'Pen',
+                    () => _tool('Pen'),
+                    'photo-tool-pen',
+                  ),
+                  button(
+                    shapes ? context.message(tool) : context.l10n.editorShapes,
+                    AppIcons.shapes,
+                    panel == 'draw' && shapes,
+                    _shapes,
+                    'photo-tool-shapes',
+                  ),
+                  button(
+                    context.message('Text'),
+                    AppIcons.text,
+                    panel == 'draw' && tool == 'Text',
+                    () => _tool('Text'),
+                    'photo-tool-text',
+                  ),
+                  button(
+                    context.message('Eraser'),
+                    AppIcons.eraser,
+                    panel == 'draw' && tool == 'Eraser',
+                    () => _tool('Eraser'),
+                    'photo-tool-eraser',
+                  ),
+                  button(
+                    context.l10n.editorCrop,
+                    AppIcons.crop,
+                    panel == 'crop',
+                    () => _selectPanel('crop'),
+                    'photo-tool-crop',
+                  ),
+                  button(
+                    context.l10n.editorTransform,
+                    AppIcons.rotate,
+                    panel == 'transform',
+                    () => _selectPanel('transform'),
+                    'photo-tool-transform',
+                  ),
+                ],
+              ),
+            ),
+          ),
+          IconButton(
+            tooltip: context.l10n.editorAllTools,
+            onPressed: saving ? null : _allTools,
+            icon: const Icon(AppIcons.tools),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _cropSlider(
+    String title,
+    String semanticLabel,
+    RangeValues value,
+    bool isHorizontal,
+  ) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(title, style: AppTypography.bodyEmphasis),
+      Text(
+        '${context.displayValue((value.start * 100).round())}% – '
+        '${context.displayValue((value.end * 100).round())}%',
+        style: AppTypography.caption.copyWith(
+          color: context.studioColors.muted,
+        ),
+      ),
+      Semantics(
+        label: semanticLabel,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: RangeSlider(
+            key: ValueKey(
+              isHorizontal ? 'photo-crop-horizontal' : 'photo-crop-vertical',
+            ),
+            values: value,
+            onChangeStart: saving ? null : (_) => remember(),
+            onChanged: saving ? null : (v) => _crop(v, isHorizontal),
+            semanticFormatterCallback: context.spokenValue(
+              (strings, value) => strings.accessibilityValue40(value),
+              multiplier: 100,
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+
+  Widget _contextualControls(ui.Image source, {bool compact = false}) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      if (error != null)
+        Text(
+          context.message(error!),
+          style: TextStyle(color: context.studioColors.warning),
+        ),
+      if (panel == 'crop') ...[
+        _cropSlider(
+          context.l10n.cropLeftRight,
+          context.l10n.cropLeftAndRight,
+          horizontal,
+          true,
+        ),
+        _cropSlider(
+          context.l10n.cropTopBottom,
+          context.l10n.cropTopAndBottom,
+          vertical,
+          false,
+        ),
+        TextButton(
+          onPressed: saving
+              ? null
+              : () => setState(() {
+                  remember();
+                  horizontal = const RangeValues(0, 1);
+                  vertical = const RangeValues(0, 1);
+                }),
+          child: Text(context.l10n.resetCrop),
+        ),
+      ] else if (panel == 'transform') ...[
+        Wrap(
+          spacing: AppSpacing.xs,
+          runSpacing: AppSpacing.xs,
+          children: [
+            OutlinedButton.icon(
+              onPressed: saving
+                  ? null
+                  : () => setState(() {
+                      remember();
+                      turns = (turns + 1) % 4;
+                    }),
+              icon: const Icon(AppIcons.rotate),
+              label: Text(context.l10n.rotate90),
+            ),
+            FilterChip(
+              chipAnimationStyle: AppMotion.chipStyle(
+                reduceMotion: context.reduceMotion,
+              ),
+              label: Text(context.l10n.flipHorizontalState('')),
+              avatar: const Icon(
+                AppIcons.flipHorizontal,
+                size: AppIconSize.small,
+              ),
+              selected: flipH,
+              onSelected: saving
+                  ? null
+                  : (v) => setState(() {
+                      remember();
+                      flipH = v;
+                    }),
+            ),
+            FilterChip(
+              chipAnimationStyle: AppMotion.chipStyle(
+                reduceMotion: context.reduceMotion,
+              ),
+              label: Text(context.l10n.flipVerticalState('')),
+              avatar: const Icon(
+                AppIcons.flipVertical,
+                size: AppIconSize.small,
+              ),
+              selected: flipV,
+              onSelected: saving
+                  ? null
+                  : (v) => setState(() {
+                      remember();
+                      flipV = v;
+                    }),
+            ),
+          ],
+        ),
+      ] else if (tool == 'Eraser') ...[
+        Text(context.l10n.photoDragToErase),
+      ] else ...[
+        if (!compact || tool != 'Text')
+          Semantics(
+            label: photoInkName(context, color),
+            child: OutlinedButton.icon(
+              key: const ValueKey('photo-current-color'),
+              onPressed: saving ? null : _ink,
+              icon: Container(
+                width: 20,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: color,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: context.studioColors.outline),
+                ),
+              ),
+              label: Text(context.l10n.editorColor),
+            ),
+          ),
+        if (!compact || tool != 'Text') const SizedBox(height: AppSpacing.xs),
+        if (tool == 'Text')
+          TextField(
+            key: _textFieldKey,
+            controller: label,
+            focusNode: _textFocus,
+            maxLength: 120,
+            textInputAction: TextInputAction.done,
+            onSubmitted: (_) => _textFocus.unfocus(),
+            decoration: InputDecoration(
+              labelText: context.l10n.textToPlaceOnPhoto,
+              counterText: compact ? '' : null,
+            ),
+          )
+        else ...[
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            spacing: AppSpacing.xs,
+            runSpacing: AppSpacing.xxs,
+            children: [
+              Text(context.l10n.strokeWidth, style: AppTypography.bodyEmphasis),
+              Text(
+                context.l10n.pixelCount(
+                  context.displayValue(
+                    math.max(2, (strokeWidth * source.width).round()),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Semantics(
+            label: context.l10n.strokeWidth,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Slider(
+                key: const ValueKey('photo-stroke-width'),
+                value: strokeWidth,
+                min: .002,
+                max: .02,
+                onChanged: saving
+                    ? null
+                    : (value) {
+                        if (!value.isFinite) return;
+                        setState(() {
+                          // Slider._lerp(1) can round .02 above the valid maximum.
+                          strokeWidth = value.clamp(.002, .02);
+                        });
+                      },
+                semanticFormatterCallback: (v) => context.l10n.pixelCount(
+                  context.displayValue(math.max(2, (v * source.width).round())),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ],
+    ],
+  );
+
+  Widget _preview(ui.Image source) => RepaintBoundary(
+    key: const ValueKey('photo-preview-frame'),
+    child: DecoratedBox(
+      decoration: BoxDecoration(
+        color: context.studioColors.surface,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        border: Border.all(color: context.studioColors.border),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.xs),
+        child: LayoutBuilder(
+          builder: (context, box) {
+            final aspect = turns.isOdd
+                ? source.height / source.width
+                : source.width / source.height;
+            final width = math.min(box.maxWidth, box.maxHeight * aspect);
+            final height = width / aspect;
+            return Center(
+              child: SizedBox(
+                width: width,
+                height: height,
+                child: RotatedBox(
+                  quarterTurns: turns,
+                  child: Transform.flip(
+                    flipX: flipH,
+                    flipY: flipV,
+                    child: LayoutBuilder(
+                      builder: (context, canvas) {
+                        Offset point(Offset value) => Offset(
+                          (value.dx / canvas.maxWidth).clamp(0, 1),
+                          (value.dy / canvas.maxHeight).clamp(0, 1),
+                        );
+                        return GestureDetector(
+                          key: const ValueKey('photo-drawing-surface'),
+                          onPanStart: saving || panel != 'draw'
+                              ? null
+                              : (d) {
+                                  if (tool == 'Text' &&
+                                      label.text.trim().isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          context.l10n.photoEnterText,
+                                        ),
+                                      ),
+                                    );
+                                    return;
+                                  }
+                                  setState(() {
+                                    final p = point(d.localPosition);
+                                    _activeMark = null;
+                                    if (tool == 'Eraser') {
+                                      final index = marks.lastIndexWhere(
+                                        (m) => m.points.any(
+                                          (v) => (v - p).distance < .06,
+                                        ),
+                                      );
+                                      if (index >= 0) {
+                                        remember();
+                                        marks.removeAt(index);
+                                      }
+                                    } else {
+                                      remember();
+                                      _activeMark = PhotoMark(
+                                        tool,
+                                        color,
+                                        [p],
+                                        width: strokeWidth,
+                                        text: label.text.trim(),
+                                      );
+                                      marks.add(_activeMark!);
+                                    }
+                                  });
+                                },
+                          onPanUpdate: saving || panel != 'draw'
+                              ? null
+                              : (d) {
+                                  final mark = _activeMark;
+                                  if (mark != null) {
+                                    mark.points.add(point(d.localPosition));
+                                    // Paint the active canvas without rebuilding toolbars on every sample.
+                                    _canvasRevision.value++;
+                                  }
+                                },
+                          onPanEnd: (_) => _activeMark = null,
+                          onPanCancel: () => _activeMark = null,
+                          child: Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: CustomPaint(
+                              painter: PhotoPainter(
+                                source,
+                                marks,
+                                repaint: _canvasRevision,
+                                crop: Rect.fromLTRB(
+                                  horizontal.start,
+                                  vertical.start,
+                                  horizontal.end,
+                                  vertical.end,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    ),
+  );
+
+  Widget _editorBody(ui.Image source) => SafeArea(
+    bottom: false,
+    child: Padding(
+      padding: EdgeInsets.all(
+        MediaQuery.viewInsetsOf(context).bottom > 0
+            ? AppSpacing.xxs
+            : AppSpacing.md,
+      ),
+      child: LayoutBuilder(
+        builder: (context, box) {
+          final toolHeight = math.max(
+            48.0,
+            MediaQuery.textScalerOf(context).scale(14) * 1.5 + 20,
+          );
+          final controls = SingleChildScrollView(
+            key: ValueKey('photo-controls-$panel-$tool'),
+            primary: false,
+            child: _contextualControls(source, compact: box.maxHeight < 140),
+          );
+          if (box.maxHeight < 140) return controls;
+          if (box.maxWidth >= 600 && box.maxWidth > box.maxHeight) {
+            return Row(
+              children: [
+                Expanded(child: _preview(source)),
+                const SizedBox(width: AppSpacing.md),
+                SizedBox(
+                  width: (box.maxWidth * .38).clamp(260, 360),
+                  child: Column(
+                    children: [
+                      _toolbar(toolHeight),
+                      const SizedBox(height: AppSpacing.xs),
+                      Expanded(child: controls),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }
+          final panelHeight = math.max(
+            0.0,
+            math.min(
+              220.0,
+              math.min(box.maxHeight * .34, box.maxHeight - toolHeight - 64),
+            ),
+          );
+          return Column(
+            children: [
+              Expanded(child: _preview(source)),
+              const SizedBox(height: AppSpacing.xs),
+              _toolbar(toolHeight),
+              ConstrainedBox(
+                constraints: BoxConstraints(maxHeight: panelHeight),
+                child: controls,
+              ),
+            ],
+          );
+        },
+      ),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -308,15 +908,45 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
         appBar: AppBar(
           leading: BackButton(onPressed: saving ? null : leave),
           title: Text(context.l10n.photoEditor),
+          actions: [
+            IconButton(
+              tooltip: context.l10n.undoPhotoEdit,
+              onPressed: undoHistory.isEmpty || saving
+                  ? null
+                  : () => setState(undoMark),
+              icon: const Icon(AppIcons.undo),
+            ),
+            IconButton(
+              tooltip: context.l10n.redoPhotoEdit,
+              onPressed: redoHistory.isEmpty || saving
+                  ? null
+                  : () => setState(redoMark),
+              icon: const Icon(AppIcons.redo),
+            ),
+          ],
         ),
         bottomNavigationBar: SafeArea(
           top: false,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: FilledButton.icon(
-              onPressed: source == null || saving ? null : save,
-              icon: Icon(saving ? AppIcons.processing : AppIcons.save),
-              label: Text(saving ? context.l10n.saving : context.l10n.saveCopy),
+            child: Row(
+              children: [
+                IconButton(
+                  tooltip: context.l10n.editorExportQuality,
+                  onPressed: saving ? null : _exportOptions,
+                  icon: const Icon(AppIcons.settings),
+                ),
+                const SizedBox(width: AppSpacing.xs),
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: source == null || saving ? null : save,
+                    icon: Icon(saving ? AppIcons.processing : AppIcons.save),
+                    label: Text(
+                      saving ? context.l10n.saving : context.l10n.saveCopy,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -338,348 +968,14 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                         ],
                       ),
               )
-            : ListView(
-                padding: const EdgeInsets.all(16),
-                children: [
-                  Text(context.l10n.editAnSrgbCopyWithOrientationApplied),
-                  DropdownButtonFormField<String>(
-                    isExpanded: true,
-                    initialValue: exportFormat,
-                    decoration: InputDecoration(
-                      labelText: context.l10n.exportImageFormat,
-                    ),
-                    items: [
-                      DropdownMenuItem(
-                        value: 'png',
-                        child: Text(context.l10n.pngLossless),
-                      ),
-                      DropdownMenuItem(
-                        value: 'jpeg',
-                        child: Text(context.l10n.jpegSmallerFile),
-                      ),
-                    ],
-                    onChanged: saving
-                        ? null
-                        : (v) => setState(() => exportFormat = v!),
-                  ),
-                  DropdownButtonFormField<int>(
-                    isExpanded: true,
-                    initialValue: exportEdge,
-                    decoration: InputDecoration(
-                      labelText: context.l10n.longestEdgeNoEnlargement,
-                    ),
-                    items: [480, 720, 1080, 2048]
-                        .map(
-                          (v) => DropdownMenuItem(
-                            value: v,
-                            child: Text(
-                              context.l10n.pixelCount(context.displayValue(v)),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: saving
-                        ? null
-                        : (v) => setState(() => exportEdge = v!),
-                  ),
-                  if (exportFormat == 'jpeg')
-                    DropdownButtonFormField<int>(
-                      isExpanded: true,
-                      initialValue: jpegQuality,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.jpegQuality,
-                      ),
-                      items: [70, 85, 95, 100]
-                          .map(
-                            (v) => DropdownMenuItem(
-                              value: v,
-                              child: Text(
-                                context.l10n.percentValue(
-                                  context.displayValue(v),
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: saving
-                          ? null
-                          : (v) => setState(() => jpegQuality = v!),
-                    ),
-                  if (error != null)
-                    Text(
-                      context.message(error!),
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.error,
-                      ),
-                    ),
-                  Wrap(
-                    spacing: 8,
-                    children: [
-                      for (final value in [
-                        'Pen',
-                        'Rectangle',
-                        'Circle',
-                        'Arrow',
-                        'Text',
-                        'Eraser',
-                      ])
-                        ChoiceChip(
-                          label: Text(context.message(value)),
-                          selected: tool == value,
-                          onSelected: saving
-                              ? null
-                              : (_) => setState(() => tool = value),
-                        ),
-                      IconButton(
-                        tooltip: context.l10n.undoPhotoEdit,
-                        onPressed: undoHistory.isEmpty || saving
-                            ? null
-                            : () => setState(undoMark),
-                        icon: const Icon(AppIcons.undo),
-                      ),
-                      IconButton(
-                        tooltip: context.l10n.redoPhotoEdit,
-                        onPressed: redoHistory.isEmpty || saving
-                            ? null
-                            : () => setState(redoMark),
-                        icon: const Icon(AppIcons.redo),
-                      ),
-                      for (final ink in const [
-                        (Colors.red, 'Red'),
-                        (Colors.yellow, 'Yellow'),
-                        (Colors.cyan, 'Cyan'),
-                        (Colors.white, 'White'),
-                        (Colors.black, 'Black'),
-                      ])
-                        Semantics(
-                          selected: color == ink.$1,
-                          child: IconButton(
-                            tooltip: context.l10n.inkColor(
-                              context.message(ink.$2),
-                            ),
-                            style: IconButton.styleFrom(
-                              backgroundColor: ink.$1.computeLuminance() < .2
-                                  ? const Color(0xFFDEE3EC)
-                                  : const Color(0xFF242D3E),
-                            ),
-                            onPressed: saving
-                                ? null
-                                : () => setState(() => color = ink.$1),
-                            icon: Icon(
-                              color == ink.$1
-                                  ? AppIcons.selected
-                                  : AppIcons.unselected,
-                              color: ink.$1,
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                  Wrap(
-                    children: [
-                      TextButton(
-                        onPressed: saving
-                            ? null
-                            : () => setState(() {
-                                remember();
-                                turns = (turns + 1) % 4;
-                              }),
-                        child: Text(context.l10n.rotate90),
-                      ),
-                      TextButton(
-                        onPressed: saving
-                            ? null
-                            : () => setState(() {
-                                remember();
-                                flipH = !flipH;
-                              }),
-                        child: Text(
-                          context.l10n.flipHorizontalState(
-                            flipH ? ' · ${context.l10n.on}' : '',
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: saving
-                            ? null
-                            : () => setState(() {
-                                remember();
-                                flipV = !flipV;
-                              }),
-                        child: Text(
-                          context.l10n.flipVerticalState(
-                            flipV ? ' · ${context.l10n.on}' : '',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  if (tool == 'Text')
-                    TextField(
-                      controller: label,
-                      maxLength: 120,
-                      decoration: InputDecoration(
-                        labelText: context.l10n.textToPlaceOnPhoto,
-                      ),
-                    ),
-                  Semantics(
-                    label: context.l10n.strokeWidth,
-                    child: Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: Slider(
-                        value: strokeWidth,
-                        min: .002,
-                        max: .02,
-                        onChanged: saving
-                            ? null
-                            : (value) => setState(() => strokeWidth = value),
-                        semanticFormatterCallback: context.spokenValue(
-                          (strings, value) =>
-                              strings.accessibilityValue42(value),
-                          multiplier: 2048,
-                        ),
-                      ),
-                    ),
-                  ),
-                  RotatedBox(
-                    quarterTurns: turns,
-                    child: Transform.flip(
-                      flipX: flipH,
-                      flipY: flipV,
-                      child: AspectRatio(
-                        aspectRatio: source.width / source.height,
-                        child: LayoutBuilder(
-                          builder: (context, box) {
-                            Offset point(Offset value) => Offset(
-                              (value.dx / box.maxWidth).clamp(0, 1),
-                              (value.dy / box.maxHeight).clamp(0, 1),
-                            );
-                            return GestureDetector(
-                              onPanStart: saving
-                                  ? null
-                                  : (d) => setState(() {
-                                      final p = point(d.localPosition);
-                                      if (tool == 'Eraser') {
-                                        final index = marks.lastIndexWhere(
-                                          (m) => m.points.any(
-                                            (v) => (v - p).distance < .06,
-                                          ),
-                                        );
-                                        if (index >= 0) {
-                                          remember();
-                                          marks.removeAt(index);
-                                        }
-                                      } else {
-                                        remember();
-                                        marks.add(
-                                          PhotoMark(
-                                            tool,
-                                            color,
-                                            [p],
-                                            width: strokeWidth,
-                                            text: label.text.trim(),
-                                          ),
-                                        );
-                                      }
-                                    }),
-                              onPanUpdate: saving
-                                  ? null
-                                  : (d) {
-                                      if (tool != 'Eraser' &&
-                                          marks.isNotEmpty) {
-                                        setState(
-                                          () => marks.last.points.add(
-                                            point(d.localPosition),
-                                          ),
-                                        );
-                                      }
-                                    },
-                              child: Directionality(
-                                textDirection: TextDirection.ltr,
-                                child: CustomPaint(
-                                  painter: PhotoPainter(
-                                    source,
-                                    marks,
-                                    crop: Rect.fromLTRB(
-                                      horizontal.start,
-                                      vertical.start,
-                                      horizontal.end,
-                                      vertical.end,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text(context.l10n.cropLeftRight),
-                  Semantics(
-                    label: context.l10n.cropLeftAndRight,
-                    child: Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: RangeSlider(
-                        values: horizontal,
-                        onChangeStart: saving ? null : (_) => remember(),
-                        onChanged: saving
-                            ? null
-                            : (v) {
-                                if (v.end - v.start >= .02) {
-                                  setState(() => horizontal = v);
-                                }
-                              },
-                        semanticFormatterCallback: context.spokenValue(
-                          (strings, value) =>
-                              strings.accessibilityValue40(value),
-                          multiplier: 100,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text(context.l10n.cropTopBottom),
-                  Semantics(
-                    label: context.l10n.cropTopAndBottom,
-                    child: Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: RangeSlider(
-                        values: vertical,
-                        onChangeStart: saving ? null : (_) => remember(),
-                        onChanged: saving
-                            ? null
-                            : (v) {
-                                if (v.end - v.start >= .02) {
-                                  setState(() => vertical = v);
-                                }
-                              },
-                        semanticFormatterCallback: context.spokenValue(
-                          (strings, value) =>
-                              strings.accessibilityValue40(value),
-                          multiplier: 100,
-                        ),
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: saving
-                        ? null
-                        : () => setState(() {
-                            remember();
-                            horizontal = const RangeValues(0, 1);
-                            vertical = const RangeValues(0, 1);
-                          }),
-                    child: Text(context.l10n.resetCrop),
-                  ),
-                ],
-              ),
+            : _editorBody(source),
       ),
     );
   }
 }
 
 class PhotoPainter extends CustomPainter {
-  PhotoPainter(this.image, this.marks, {this.crop});
+  PhotoPainter(this.image, this.marks, {this.crop, super.repaint});
   final ui.Image image;
   final List<PhotoMark> marks;
   final Rect? crop;

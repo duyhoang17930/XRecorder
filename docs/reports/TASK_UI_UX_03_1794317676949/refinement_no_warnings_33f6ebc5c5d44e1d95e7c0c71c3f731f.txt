@@ -1,0 +1,57 @@
+00:00 +0: loading D:/FAU_App/XRecorder/test/refinement_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/refinement_test.dart: (setUpAll)
+00:00 +0: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: language search survives rotation with a landscape keyboard
+00:01 +1: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:02 +2: D:/FAU_App/XRecorder/test/refinement_test.dart: returning from a newly created project reloads drafts without a Future setState callback
+00:02 +3: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: text CTA stays centered and reachable 320.0dp landscape=false scale=1.5
+00:02 +4: D:/FAU_App/XRecorder/test/refinement_test.dart: draft load retry and delete confirmation reload synchronously
+00:02 +5: D:/FAU_App/XRecorder/test/refinement_test.dart: draft load retry and delete confirmation reload synchronously
+00:02 +6: D:/FAU_App/XRecorder/test/refinement_test.dart: draft load retry and delete confirmation reload synchronously
+00:02 +7: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: text CTA stays centered and reachable 320.0dp landscape=true scale=1.5
+00:02 +8: D:/FAU_App/XRecorder/test/refinement_test.dart: disposing during draft save does not update a disposed widget
+00:03 +9: D:/FAU_App/XRecorder/test/refinement_test.dart: disposing during draft save does not update a disposed widget
+00:03 +10: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: text CTA stays centered and reachable 360.0dp landscape=false scale=1.0
+00:03 +11: D:/FAU_App/XRecorder/test/refinement_test.dart: Screenshot invokes native screenshot once and never opens recording setup
+00:03 +12: D:/FAU_App/XRecorder/test/refinement_test.dart: Screenshot invokes native screenshot once and never opens recording setup
+00:03 +13: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: text CTA stays centered and reachable 360.0dp landscape=false scale=2.0
+00:03 +14: D:/FAU_App/XRecorder/test/refinement_test.dart: media events retain search, sort, position and thumbnail state
+00:04 +15: D:/FAU_App/XRecorder/test/refinement_test.dart: media events retain search, sort, position and thumbnail state
+00:04 +16: D:/FAU_App/XRecorder/test/refinement_test.dart: media events retain search, sort, position and thumbnail state
+00:04 +17: D:/FAU_App/XRecorder/test/refinement_test.dart: media events retain search, sort, position and thumbnail state
+00:04 +18: D:/FAU_App/XRecorder/test/refinement_test.dart: media events retain search, sort, position and thumbnail state
+00:04 +19: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: text CTA stays centered and reachable 393.0dp landscape=false scale=1.5
+00:04 +20: D:/FAU_App/XRecorder/test/refinement_test.dart: folder events keep selection and a burst during loading has one follow-up
+00:05 +21: D:/FAU_App/XRecorder/test/refinement_test.dart: folder events keep selection and a burst during loading has one follow-up
+00:05 +22: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: text CTA stays centered and reachable 393.0dp landscape=true scale=1.0
+00:05 +23: D:/FAU_App/XRecorder/test/refinement_test.dart: sort controls fit 320.0dp at 1.0
+00:05 +24: D:/FAU_App/XRecorder/test/refinement_test.dart: sort controls fit 320.0dp at 1.0
+00:05 +25: D:/FAU_App/XRecorder/test/refinement_test.dart: sort controls fit 320.0dp at 1.0
+00:05 +26: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: text CTA stays centered and reachable 411.0dp landscape=false scale=1.0
+00:05 +27: D:/FAU_App/XRecorder/test/refinement_test.dart: sort controls fit 320.0dp at 2.0
+00:05 +28: D:/FAU_App/XRecorder/test/refinement_test.dart: sort controls fit 320.0dp at 2.0
+00:06 +29: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: text CTA stays centered and reachable 411.0dp landscape=false scale=2.0
+00:06 +30: D:/FAU_App/XRecorder/test/refinement_test.dart: sort controls fit 411.0dp at 1.0
+00:06 +31: D:/FAU_App/XRecorder/test/refinement_test.dart: sort controls fit 411.0dp at 1.0
+00:06 +32: D:/FAU_App/XRecorder/test/refinement_test.dart: sort controls fit 411.0dp at 1.0
+00:06 +33: D:/FAU_App/XRecorder/test/ui_ux_03_test.dart: text CTA stays centered and reachable 411.0dp landscape=true scale=2.0
+00:06 +34: D:/FAU_App/XRecorder/test/refinement_test.dart: sort controls fit 411.0dp at 2.0
+00:06 +35: D:/FAU_App/XRecorder/test/refinement_test.dart: sort controls fit 411.0dp at 2.0
+00:06 +36: D:/FAU_App/XRecorder/test/refinement_test.dart: Video reselect scrolls to top without a route change
+00:07 +37: D:/FAU_App/XRecorder/test/refinement_test.dart: Photo reselect scrolls to top without a route change
+00:07 +38: D:/FAU_App/XRecorder/test/refinement_test.dart: Edit reselect scrolls to top without a route change
+00:07 +39: D:/FAU_App/XRecorder/test/refinement_test.dart: Settings reselect scrolls to top without a route change
+00:08 +40: D:/FAU_App/XRecorder/test/refinement_test.dart: Editor follows system on opening and while open
+00:09 +41: D:/FAU_App/XRecorder/test/refinement_test.dart: Editor follows light on opening and while open
+00:09 +42: D:/FAU_App/XRecorder/test/refinement_test.dart: Editor follows dark on opening and while open
+00:09 +43: D:/FAU_App/XRecorder/test/refinement_test.dart: FAQ has readable hierarchy and keeps search at 1.0
+00:10 +44: D:/FAU_App/XRecorder/test/refinement_test.dart: FAQ has readable hierarchy and keeps search at 2.0
+00:10 +45: D:/FAU_App/XRecorder/test/refinement_test.dart: untrusted errors never expose technical details
+00:10 +46: D:/FAU_App/XRecorder/test/refinement_test.dart: native events coalesce and resume only publishes actual changes
+00:10 +47: D:/FAU_App/XRecorder/test/refinement_test.dart: notice kinds share style, replace queued notices and stay above navigation
+00:10 +48: D:/FAU_App/XRecorder/test/refinement_test.dart: empty copy follows app media, folder, search, and photo context
+00:11 +49: D:/FAU_App/XRecorder/test/refinement_test.dart: app thumbnail cache clears on memory pressure and media change
+00:11 +50: D:/FAU_App/XRecorder/test/refinement_test.dart: capture Help opens the related expanded guide
+00:11 +51: D:/FAU_App/XRecorder/test/refinement_test.dart: friendly notices do not swallow programming errors
+00:11 +52: D:/FAU_App/XRecorder/test/refinement_test.dart: music picker failure stays friendly and visible inside its dialog
+00:12 +53: D:/FAU_App/XRecorder/test/refinement_test.dart: (tearDownAll)
+00:12 +53: All tests passed!

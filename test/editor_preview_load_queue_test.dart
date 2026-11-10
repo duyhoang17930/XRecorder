@@ -22,6 +22,54 @@ class _PreviewState extends EditorPreviewState {
 
 void main() {
   testWidgets(
+    'viewport resize leaves playback and composition to the native surface',
+    (tester) async {
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(411, 920);
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      const channel = MethodChannel('ui04-preview-viewport');
+      final calls = <MethodCall>[];
+      final messenger =
+          TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+      messenger.setMockMethodCallHandler(channel, (call) async {
+        calls.add(call);
+        return null;
+      });
+      addTearDown(() => messenger.setMockMethodCallHandler(channel, null));
+      final project = EditProject(
+        id: 'viewport',
+        updatedAt: DateTime(2026),
+        clips: [
+          TimelineClip(
+            mediaId: 'content://qa/video',
+            inPoint: Duration.zero,
+            outPoint: const Duration(seconds: 4),
+            sourceDuration: const Duration(seconds: 4),
+          ),
+        ],
+      );
+      await tester.pumpWidget(MaterialApp(home: _Preview(project: project)));
+      final state = tester.state<EditorPreviewState>(find.byType(_Preview));
+      state.channel = channel;
+      await state.command('seek', 1234);
+      calls.clear();
+      tester.view.physicalSize = const Size(920, 411);
+      await tester.pumpAndSettle();
+      expect(calls, isEmpty, reason: 'Surface resize must not reload or seek');
+      tester.view.viewInsets = const FakeViewPadding(bottom: 260);
+      await tester.pumpAndSettle();
+      expect(calls, isEmpty);
+      tester.view.resetViewInsets();
+      state.playing = true;
+      tester.view.physicalSize = const Size(411, 920);
+      await tester.pumpAndSettle();
+      expect(calls, isEmpty, reason: 'Do not interrupt running playback');
+      await tester.pumpWidget(const SizedBox.shrink());
+      expect(tester.takeException(), isNull);
+    },
+  );
+  testWidgets(
     'rapid effect updates serialize loads and keep the newest document',
     (tester) async {
       final messenger =

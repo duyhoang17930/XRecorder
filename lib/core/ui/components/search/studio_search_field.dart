@@ -99,8 +99,11 @@ class _StudioSearchFieldState extends State<StudioSearchField> {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
-                isDense: true,
-                contentPadding: EdgeInsets.zero,
+                // Give the editable semantics node the full Android tap target,
+                // not just the height of its text line.
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: AppSpacing.md,
+                ),
               ),
             ),
           ),

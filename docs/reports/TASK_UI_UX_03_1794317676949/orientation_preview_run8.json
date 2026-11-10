@@ -1,0 +1,35 @@
+[
+  {
+    "screen": "Native Video Preview",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "resumedActivity": [
+      "    topResumedActivity=ActivityRecord{18615044 u0 com.xrecorder.xrecorder/.media.VideoPreviewActivity t79}"
+    ]
+  },
+  {
+    "screen": "Native Video Preview",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "resumedActivity": [
+      "    topResumedActivity=ActivityRecord{18615044 u0 com.xrecorder.xrecorder/.media.VideoPreviewActivity t79}"
+    ]
+  },
+  {
+    "screen": "Native Video Preview",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "resumedActivity": [
+      "    topResumedActivity=ActivityRecord{18615044 u0 com.xrecorder.xrecorder/.media.VideoPreviewActivity t79}"
+    ]
+  }
+]

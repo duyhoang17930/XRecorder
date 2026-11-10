@@ -133,22 +133,10 @@ void main() {
           router.push('/photo-tools/fixture');
           await tester.pump();
           await settleImage(tester);
-          for (
-            var i = 0;
-            i < 16 && find.byType(RangeSlider).evaluate().isEmpty;
-            i++
-          ) {
-            await tester.drag(
-              find
-                  .descendant(
-                    of: find.byType(PhotoToolsScreen),
-                    matching: find.byType(Scrollable),
-                  )
-                  .first,
-              const Offset(0, -180),
-            );
-            await tester.pumpAndSettle();
-          }
+          final cropTool = find.byKey(const ValueKey('photo-tool-crop'));
+          await tester.ensureVisible(cropTool);
+          await tester.tap(cropTool);
+          await tester.pumpAndSettle();
           final range = find.byType(RangeSlider).first;
           await tester.ensureVisible(range);
           tester.widget<RangeSlider>(range).onChanged!(
@@ -221,34 +209,36 @@ void main() {
   ) async {
     var completed = false;
     var polls = 0;
-    messenger.setMockMethodCallHandler(
-      AndroidEditProjectRepository.channel,
-      (call) async {
-        expect(call.method, 'exportList');
-        polls++;
-        return jsonEncode([
-          {
-            'id': 'job',
-            'state': completed ? 'completed' : 'finalizing',
-            'progress': 100,
-            'project': {'title': 'My video'},
-            if (completed) ...{
-              'uri': 'content://media/external/video/media/99',
-              'outputBytes': 1024,
-            },
+    messenger.setMockMethodCallHandler(AndroidEditProjectRepository.channel, (
+      call,
+    ) async {
+      expect(call.method, 'exportList');
+      polls++;
+      return jsonEncode([
+        {
+          'id': 'job',
+          'state': completed ? 'completed' : 'finalizing',
+          'progress': 100,
+          'project': {'title': 'My video'},
+          if (completed) ...{
+            'uri': 'content://media/external/video/media/99',
+            'outputBytes': 1024,
           },
-        ]);
-      },
-    );
+        },
+      ]);
+    });
     await tester.pumpWidget(MaterialApp(home: const ExportScreen()));
     // Finalizing intentionally animates until native publication completes.
     // Advance bounded frames instead of waiting for that animation to stop.
     await tester.pump();
     expect(find.text('Saving… · 100%'), findsOneWidget);
     expect(find.text('Cancel export'), findsNothing);
-    expect(tester.widget<LinearProgressIndicator>(
-      find.byType(LinearProgressIndicator),
-    ).value, isNull);
+    expect(
+      tester
+          .widget<LinearProgressIndicator>(find.byType(LinearProgressIndicator))
+          .value,
+      isNull,
+    );
     for (var i = 0; i < 2; i++) {
       await tester.pump(const Duration(seconds: 1));
       await tester.pump();
@@ -372,6 +362,40 @@ void main() {
       await tester.tap(find.byTooltip('Back'));
       await tester.pumpAndSettle();
       expect(find.text('New video project'), findsOneWidget);
+    },
+  );
+  testWidgets(
+    'project rename survives dialog exit and keyboard inset animation',
+    (tester) async {
+      await start(tester);
+      router.push('/editor/project/ux');
+      await tester.pumpAndSettle();
+      await tester.tap(find.byTooltip('Rename project'));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextField), 'UI04 renamed project');
+      tester.view.viewInsets = const FakeViewPadding(bottom: 260);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Save name'));
+      tester.view.viewInsets = const FakeViewPadding();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 40));
+      await tester.pumpAndSettle();
+      expect(find.text('UI04 renamed project'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+      await tester.tap(find.byTooltip('Rename project'));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextField), 'Cancelled title');
+      tester.view.viewInsets = const FakeViewPadding(bottom: 260);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Cancel'));
+      tester.view.viewInsets = const FakeViewPadding();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 40));
+      await tester.pumpAndSettle();
+      expect(find.text('UI04 renamed project'), findsOneWidget);
+      expect(find.text('Cancelled title'), findsNothing);
+      expect(tester.takeException(), isNull);
+      tester.view.resetViewInsets();
     },
   );
   testWidgets(

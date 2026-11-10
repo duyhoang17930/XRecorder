@@ -96,7 +96,7 @@ void main() {
         );
         final undo = button(strings.undoPhotoEdit),
             redo = button(strings.redoPhotoEdit);
-        await tester.scrollUntilVisible(undo, 160, maxScrolls: 25);
+        await tester.ensureVisible(undo);
         await tester.pumpAndSettle();
         expect(undo, findsOneWidget);
         expect(redo, findsOneWidget);
@@ -118,13 +118,14 @@ void main() {
 
         expect(tester.widget<IconButton>(undo).onPressed, isNull);
         expect(tester.widget<IconButton>(redo).onPressed, isNull);
+        await click(find.byKey(const ValueKey('photo-tool-transform')));
         await click(find.text(strings.rotate90));
         tester
             .state<ScrollableState>(find.byType(Scrollable).first)
             .position
             .jumpTo(0);
         await tester.pumpAndSettle();
-        await tester.scrollUntilVisible(undo, 160, maxScrolls: 25);
+        await tester.ensureVisible(undo);
         await tester.pumpAndSettle();
         expect(tester.widget<IconButton>(undo).onPressed, isNotNull);
         await click(undo);

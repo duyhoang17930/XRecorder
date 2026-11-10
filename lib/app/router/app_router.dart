@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../l10n/localization.dart';
@@ -20,6 +21,8 @@ import '../../features/settings/settings_hub_screen.dart';
 import '../../features/settings/help_screen.dart';
 import '../../features/settings/support_screen.dart';
 import '../../features/settings/audio_video_settings_screen.dart';
+import '../../features/onboarding/onboarding_screen.dart';
+import '../../features/onboarding/onboarding_store.dart';
 
 GoRouter createRouter() => GoRouter(
   initialLocation: '/videos',
@@ -95,9 +98,19 @@ GoRouter createRouter() => GoRouter(
       ),
     ),
     GoRoute(path: '/support', builder: (_, _) => const SupportScreen()),
+    if (kDebugMode)
+      GoRoute(
+        path: '/showcase/components',
+        builder: (_, _) => const ComponentGallery(),
+      ),
     GoRoute(
-      path: '/showcase/components',
-      builder: (_, _) => const ComponentGallery(),
+      path: '/introduction',
+      builder: (context, _) => OnboardingScreen(
+        store: const ReplayOnboardingStore(),
+        initialPage: 0,
+        replay: true,
+        onCompleted: () => context.pop(),
+      ),
     ),
     GoRoute(
       path: '/photo-preview/:id',

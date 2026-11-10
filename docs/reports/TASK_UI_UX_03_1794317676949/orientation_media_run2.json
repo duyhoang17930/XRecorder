@@ -1,0 +1,106 @@
+[
+  {
+    "screen": "Media_Details",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "slider_fixture.png",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Media details",
+      "slider_fixture.png",
+      "Preview",
+      "Preview",
+      "Share",
+      "Edit",
+      "Crop & annotate a copy",
+      "File management",
+      "Copy to folder",
+      "Move to folder",
+      "External files can be copied. Moving requires permission from the Android document provider.",
+      "Size\n5.0 KiB",
+      "Format\nimage/png",
+      "Dimensions\n256 × 128"
+    ],
+    "image": "Media_Details_portrait_0.png"
+  },
+  {
+    "screen": "Media_Details",
+    "rotation": 1,
+    "size": [
+      920,
+      411
+    ],
+    "marker": "slider_fixture.png",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Media details",
+      "slider_fixture.png",
+      "Preview",
+      "Preview",
+      "Share",
+      "Edit"
+    ],
+    "image": "Media_Details_landscape_1.png"
+  },
+  {
+    "screen": "Media_Details",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "slider_fixture.png",
+    "markerFound": true,
+    "labels": [
+      "Back",
+      "Media details",
+      "slider_fixture.png",
+      "Preview",
+      "Preview",
+      "Share",
+      "Edit",
+      "Crop & annotate a copy",
+      "File management",
+      "Copy to folder",
+      "Move to folder",
+      "External files can be copied. Moving requires permission from the Android document provider.",
+      "Size\n5.0 KiB",
+      "Format\nimage/png",
+      "Dimensions\n256 × 128"
+    ],
+    "image": "Media_Details_portrait_2.png"
+  },
+  {
+    "screen": "Photo_Preview",
+    "rotation": 0,
+    "size": [
+      411,
+      920
+    ],
+    "marker": "Photo preview",
+    "markerFound": false,
+    "labels": [
+      "Back",
+      "Media details",
+      "slider_fixture.png",
+      "Preview",
+      "Preview",
+      "Share",
+      "Edit",
+      "Crop & annotate a copy",
+      "File management",
+      "Copy to folder",
+      "Move to folder",
+      "External files can be copied. Moving requires permission from the Android document provider.",
+      "Size\n5.0 KiB",
+      "Format\nimage/png",
+      "Dimensions\n256 × 128"
+    ],
+    "image": "Photo_Preview_portrait_3.png"
+  }
+]

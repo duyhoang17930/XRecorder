@@ -107,7 +107,12 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
   @override
   Widget build(BuildContext context) => ListView(
     primary: true,
-    padding: const EdgeInsets.all(AppSpacing.md),
+    padding: EdgeInsets.fromLTRB(
+      AppSpacing.md,
+      AppSpacing.md,
+      AppSpacing.md,
+      AppSpacing.md + MediaQuery.paddingOf(context).bottom,
+    ),
     children: [
       SectionTitle(context.l10n.editingStudio),
       Wrap(

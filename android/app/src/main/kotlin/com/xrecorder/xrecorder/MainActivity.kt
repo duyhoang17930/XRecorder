@@ -23,6 +23,8 @@ class MainActivity : FlutterActivity() {
     private var editorChannel: MethodChannel? = null
     private var supportBridge:SupportBridge?=null
     private var supportChannel:MethodChannel?=null
+    private var onboardingBridge: OnboardingPreferencesBridge? = null
+    private var onboardingChannel: MethodChannel? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -73,6 +75,11 @@ class MainActivity : FlutterActivity() {
                 }
             }
         }
+        onboardingBridge = OnboardingPreferencesBridge(applicationContext)
+        onboardingChannel = MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
+            "com.xrecorder/onboarding",
+        ).also { it.setMethodCallHandler(onboardingBridge) }
     }
 
     override fun cleanUpFlutterEngine(flutterEngine: FlutterEngine) {
@@ -93,6 +100,10 @@ class MainActivity : FlutterActivity() {
         mediaCatalog = null
         settingsChannel?.setMethodCallHandler(null)
         settingsChannel = null
+        onboardingChannel?.setMethodCallHandler(null)
+        onboardingBridge?.dispose()
+        onboardingChannel = null
+        onboardingBridge = null
         super.cleanUpFlutterEngine(flutterEngine)
     }
 

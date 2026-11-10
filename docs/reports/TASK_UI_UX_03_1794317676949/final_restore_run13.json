@@ -1,0 +1,40 @@
+[
+  {
+    "screen": "Light onboarding final",
+    "labels": [
+      "Skip",
+      "Record Anything. Capture your screen in high quality. Choose your audio settings and start recording in just a few taps.",
+      "Record Anything",
+      "Capture your screen in high quality. Choose your audio settings and start recording in just a few taps.",
+      "Step 1 of 3",
+      "Next"
+    ],
+    "size": [
+      920,
+      411
+    ]
+  },
+  {
+    "screen": "Retained QA draft after install-replace",
+    "labels": [
+      "Back",
+      "Video project",
+      "Rename project",
+      "Saved · Originals unchanged",
+      "Play preview",
+      "0.0 / 2.0 seconds",
+      "Preview position",
+      "0.0 seconds",
+      "Subtitles",
+      "Effects",
+      "Add clip",
+      "Split",
+      "Timeline",
+      "Clip 1 · 2.0s",
+      "1. 3H_2e625c63_Restored_1794233551004_Edited_a89b00bf-db24-4779-8be8-74cb5d385f87.mp4\n2.0s",
+      "Undo edit",
+      "Redo edit",
+      "Export"
+    ]
+  }
+]
