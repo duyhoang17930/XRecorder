@@ -21,6 +21,53 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
     private val cameras = context.getSystemService(CameraManager::class.java)
     private val displayManager = context.getSystemService(Context.DISPLAY_SERVICE) as? DisplayManager
     private val texture = TextureView(context)
+    // Sensor tracking and VSYNC rendering are independent of locked Activity orientation.
+    private val angleTracker = FacecamAngleTracker()
+    private val choreographer = Choreographer.getInstance()
+    private var framePending = false
+    private var renderedFrame: FacecamRotationFrame? = null
+    private var lastAppliedFrame: FacecamRotationFrame? = null
+    private var renderedAngle: Float? = null
+    private var displayDegrees = 0
+    private val previewMatrix = Matrix()
+    private val renderCallback = Choreographer.FrameCallback { frameNanos ->
+        framePending = false
+        if (!closed && currentSurfaceTexture != null) {
+            val frame = renderedFrame
+            if (frame != null) {
+                val physical = angleTracker.advance(frameNanos) ?: displayDegrees.toDouble()
+                // Retain unwrapped Double phase in the tracker; normalize only for the
+                // equivalent final matrix so Float precision does not degrade over many turns.
+                val angle = FacecamRotationFrame.targetAngle((physical % 360.0).toFloat(), displayDegrees, frame.mirrored)
+                applyRotationFrame(frame, angle)
+                if (angleTracker.needsFrame()) requestRender()
+            }
+        }
+    }
+
+    private fun requestRender() {
+        if (closed || framePending || renderedFrame == null || currentSurfaceTexture == null) return
+        framePending = true
+        choreographer.postFrameCallback(renderCallback)
+    }
+
+    private fun stopRendering() {
+        choreographer.removeFrameCallback(renderCallback)
+        framePending = false
+        renderedFrame = null
+        lastAppliedFrame = null
+    }
+
+    private fun observeOrientation(orientation: Int) {
+        if (!closed && angleTracker.observe(orientation)) requestRender()
+    }
+
+    private val orientationListener = object : OrientationEventListener(context) {
+        override fun onOrientationChanged(orientation: Int) {
+            if (Looper.myLooper() == main.looper) observeOrientation(orientation)
+            else main.post { observeOrientation(orientation) }
+        }
+    }
 
     private val displayListener = object : DisplayManager.DisplayListener {
         override fun onDisplayAdded(displayId: Int) {}
@@ -49,10 +96,12 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         private set
 
     private var sensorOrientation = 0
+    private var previewIsFront = true
     private var previewWidth = 640
     private var previewHeight = 480
-    private var baseWidth = dp(FacecamGeometry.DEFAULT_WIDTH_DP)
-    private var baseHeight = dp(FacecamGeometry.DEFAULT_HEIGHT_DP)
+    // Canonical Portrait size, independent of the current window dimensions/rotation.
+    private val baseWidth = dp(FacecamGeometry.DEFAULT_WIDTH_DP)
+    private val baseHeight = dp(FacecamGeometry.DEFAULT_HEIGHT_DP)
     private var cornerRadius = dp(FacecamGeometry.DEFAULT_CORNER_RADIUS_DP).toFloat()
 
     @Suppress("DEPRECATION")
@@ -69,6 +118,41 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         x = (w - baseWidth - dp(12)).coerceAtLeast(0)
         y = dp(100)
         title = "3HRecorder Facecam Overlay"
+    }
+
+    private var layoutScreen = availableSize()
+    private var layoutRotation: Int? = null
+    private var layoutGeneration = 0
+    private var positionX = FacecamGeometry.positionFraction(params.x, layoutScreen.first, params.width)
+    private var positionY = FacecamGeometry.positionFraction(params.y, layoutScreen.second, params.height)
+
+    private fun rememberPosition() {
+        positionX = FacecamGeometry.positionFraction(params.x, layoutScreen.first, params.width)
+        positionY = FacecamGeometry.positionFraction(params.y, layoutScreen.second, params.height)
+    }
+
+    private fun updateGeometry(degrees: Int) {
+        val screen = availableSize()
+        val (width, height) = FacecamGeometry.targetDimensions(baseWidth, baseHeight, currentScale, degrees)
+        val rotated = layoutRotation != null && (layoutRotation != degrees || layoutScreen != screen)
+        val x = if (rotated) FacecamGeometry.positionFromFraction(positionX, screen.first, width) else params.x
+        val y = if (rotated) FacecamGeometry.positionFromFraction(positionY, screen.second, height) else params.y
+        val (clampedX, clampedY) = FacecamGeometry.clampPosition(x, y, screen.first, screen.second, width, height)
+        val resized = params.width != width || params.height != height
+        val initial = layoutRotation == null
+        val changed = resized || params.x != clampedX || params.y != clampedY
+        if (rotated) layoutGeneration++ // Ignore stale drag deltas from the previous coordinate system.
+        params.width = width
+        params.height = height
+        params.x = clampedX
+        params.y = clampedY
+        layoutScreen = screen
+        layoutRotation = degrees
+        // Keep unrounded normalized coordinates across duplicate callbacks and rotation cycles.
+        if (!rotated && (initial || resized)) rememberPosition()
+        if (changed && texture.isAttachedToWindow) {
+            try { windows.updateViewLayout(texture, params) } catch (_: Exception) { }
+        }
     }
 
     private fun failure() { if (!closed) main.post { if (!closed) failed() } }
@@ -90,6 +174,8 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         texture.surfaceTextureListener = object : TextureView.SurfaceTextureListener {
             override fun onSurfaceTextureAvailable(value: SurfaceTexture, width: Int, height: Int) {
                 currentSurfaceTexture = value
+                lastAppliedFrame = null
+                transform()
                 openSelectedCamera()
             }
             override fun onSurfaceTextureSizeChanged(value: SurfaceTexture, width: Int, height: Int) {
@@ -97,6 +183,7 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
             }
             override fun onSurfaceTextureDestroyed(value: SurfaceTexture): Boolean {
                 currentSurfaceTexture = null
+                stopRendering()
                 return true
             }
             override fun onSurfaceTextureUpdated(value: SurfaceTexture) {
@@ -111,8 +198,10 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         }
 
         try {
+            updateGeometry(getDisplayRotationDegrees())
             displayManager?.registerDisplayListener(displayListener, main)
             windows.addView(texture, params)
+            if (orientationListener.canDetectOrientation()) orientationListener.enable()
         } catch (_: Exception) {
             failure()
         }
@@ -134,6 +223,7 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
 
         val info = cameras.getCameraCharacteristics(cameraId)
         sensorOrientation = info.get(CameraCharacteristics.SENSOR_ORIENTATION) ?: 0
+        previewIsFront = info.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_FRONT
         val map = info.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
         val sizes = map?.getOutputSizes(SurfaceTexture::class.java) ?: emptyArray()
         val size = sizes.filter { it.width <= 1280 && it.height <= 720 }
@@ -242,10 +332,6 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         if (closed) return
         val clamped = FacecamGeometry.clampScale(scale)
         currentScale = clamped
-        val (w, h) = FacecamGeometry.scaledDimensions(baseWidth, baseHeight, clamped)
-        params.width = w
-        params.height = h
-        reposition()
         main.post { transform() }
     }
 
@@ -269,29 +355,36 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
     }
 
     fun transform() {
-        if (texture.width == 0 || texture.height == 0) return
-        reposition()
+        if (closed) return
         val degrees = getDisplayRotationDegrees()
-        val isFront = currentLensFacing == FacecamGeometry.LENS_FACING_FRONT
-        val res = FacecamGeometry.calculateTransform(
-            sensorOrientation = sensorOrientation,
-            displayRotationDegrees = degrees,
-            viewWidth = texture.width.toFloat(),
-            viewHeight = texture.height.toFloat(),
-            previewWidth = previewWidth,
-            previewHeight = previewHeight,
-            isFrontCamera = isFront
-        )
-        val w = texture.width.toFloat()
-        val h = texture.height.toFloat()
-        val matrix = Matrix()
-        if (res.rotation != 0) {
-            matrix.postRotate(res.rotation.toFloat(), w / 2f, h / 2f)
+        // Only actual Display/resize changes affect WindowManager bounds. Sensor samples
+        // bypass this method entirely and update only the render-layer matrix at VSYNC.
+        updateGeometry(degrees)
+        if (texture.width != params.width || texture.height != params.height) {
+            stopRendering()
+            return
         }
-        if (res.scaleX != 1.0f || res.scaleY != 1.0f) {
-            matrix.postScale(res.scaleX, res.scaleY, w / 2f, h / 2f)
-        }
-        texture.setTransform(matrix)
+        val sensorSwaps = sensorOrientation % 180 == 90
+        renderedFrame = FacecamRotationFrame(texture.width, texture.height,
+            if (sensorSwaps) previewHeight else previewWidth,
+            if (sensorSwaps) previewWidth else previewHeight, previewIsFront)
+        displayDegrees = degrees
+        requestRender()
+    }
+
+    private fun applyRotationFrame(frame: FacecamRotationFrame, angle: Float) {
+        if (closed || !texture.isAttachedToWindow) return
+        val previous = renderedAngle
+        if (lastAppliedFrame == frame && previous != null && abs(previous - angle) < .001f) return
+        val scale = frame.scaleAt(angle)
+        previewMatrix.reset()
+        previewMatrix.postTranslate(-frame.width / 2f, -frame.height / 2f)
+        previewMatrix.postScale(scale.x, scale.y)
+        previewMatrix.postRotate(angle)
+        previewMatrix.postTranslate(frame.width / 2f, frame.height / 2f)
+        texture.setTransform(previewMatrix)
+        renderedAngle = angle
+        lastAppliedFrame = frame
     }
 
     fun reposition(snap: Boolean = false) {
@@ -306,6 +399,7 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
             params.y = clampedY
             try { windows.updateViewLayout(texture, params) } catch (_: Exception) { }
         }
+        rememberPosition()
     }
 
     private fun availableSize(): Pair<Int, Int> {
@@ -325,13 +419,16 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
     @SuppressLint("ClickableViewAccessibility")
     private fun setupDrag(view: View) {
         var downX = 0f; var downY = 0f; var startX = 0; var startY = 0; var moved = false
+        var dragGeneration = 0
         val slop = ViewConfiguration.get(context).scaledTouchSlop
         view.setOnTouchListener { _, event ->
             when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
+                    dragGeneration = layoutGeneration
                     downX = event.rawX; downY = event.rawY; startX = params.x; startY = params.y; moved = false; true
                 }
                 MotionEvent.ACTION_MOVE -> {
+                    if (dragGeneration != layoutGeneration) return@setOnTouchListener true
                     val dx = event.rawX - downX; val dy = event.rawY - downY
                     if (abs(dx) > slop || abs(dy) > slop) moved = true
                     if (moved) {
@@ -341,19 +438,20 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
                         )
                         if (tx != params.x || ty != params.y) {
                             params.x = tx; params.y = ty
+                            rememberPosition()
                             try { windows.updateViewLayout(texture, params) } catch (_: Exception) { }
                         }
                     }
                     true
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (moved) {
+                    if (moved && dragGeneration == layoutGeneration) {
                         reposition(snap = true)
                     }
                     true
                 }
                 MotionEvent.ACTION_CANCEL -> {
-                    if (moved) reposition(snap = true)
+                    if (moved && dragGeneration == layoutGeneration) reposition(snap = true)
                     true
                 }
                 else -> false
@@ -363,6 +461,8 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
 
     fun close() {
         closed = true
+        orientationListener.disable()
+        stopRendering()
         try { displayManager?.unregisterDisplayListener(displayListener) } catch (_: Exception) { }
         try { windows.removeView(texture) } catch (_: Exception) { }
         cameraHandler.post {

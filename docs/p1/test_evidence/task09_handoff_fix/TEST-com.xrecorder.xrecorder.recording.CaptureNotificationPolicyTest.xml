@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-11-10T03:08:58.495Z" hostname="hieunguyen" time="0.031">
+  <properties/>
+  <testcase name="resolveCountdownShowsSecondsAndCancelAction" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.015"/>
+  <testcase name="resolveScreenshotStates" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.001"/>
+  <testcase name="canAcceptActionValidatesStopTransitions" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.002"/>
+  <testcase name="resolvePausedShowsResumeAndStopActions" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.001"/>
+  <testcase name="resolveStoppingAndFinalizingHidesAllActionsToPreventStaleClicks" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.0"/>
+  <testcase name="canAcceptActionValidatesPauseTransitions" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.003"/>
+  <testcase name="canAcceptActionRejectsUnknownOrNullActions" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.002"/>
+  <testcase name="resolveRecordingWithOverlaysShowsVisibilityToggle" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.0"/>
+  <testcase name="resolveStartingShowsPreparingAndCancelAction" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.001"/>
+  <testcase name="resolveRecordingShowsPauseAndStopActions" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.001"/>
+  <testcase name="canAcceptActionValidatesResumeTransitions" classname="com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

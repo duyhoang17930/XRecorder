@@ -45,46 +45,68 @@ class FacecamGeometryTest {
     }
 
     @Test
-    fun orientationMatrixPreservesAspectRatiosAndNo180Flip() {
-        // Landscape Left (90 deg display) - Front Camera:
-        val front90 = FacecamGeometry.calculateTransform(
-            sensorOrientation = 270,
-            displayRotationDegrees = 90,
-            viewWidth = 110f,
-            viewHeight = 147f,
-            previewWidth = 640,
-            previewHeight = 480,
-            isFrontCamera = true
-        )
-        // Rotation MUST be 270 (not 90) to ensure head at top and body at bottom
-        assertEquals(270, front90.rotation)
-        assertTrue(front90.isMirrored)
-        assertTrue(front90.scaleX < 0)
-        // Effective on-screen aspect ratio must be 110.25 / 147 = 0.75 (matching 480/640)
-        val onScreenWidth90 = 147f * kotlin.math.abs(front90.scaleX)
-        val onScreenHeight90 = 110f * front90.scaleY
-        assertEquals(110.25f, onScreenWidth90, 0.1f)
-        assertEquals(147.0f, onScreenHeight90, 0.1f)
-        assertEquals(0.75f, onScreenWidth90 / onScreenHeight90, 0.001f)
+    fun landscapeCenterCropFillsBothAxesWithoutStretchForBothDirectionsAndLenses() {
+        // Validate the actual order in FacecamOverlay: rotate about center, THEN scale
+        // in display axes. TextureView starts with sensor-corrected content fit to W/H.
+        for (sensor in listOf(0, 90, 180, 270)) {
+            for (display in listOf(0, 90, 180, 270)) {
+                for (front in listOf(false, true)) {
+                    for ((w, h) in listOf(110f to 147f, 147f to 110f, 180f to 110f)) {
+                        val t = FacecamGeometry.calculateTransform(sensor, display, w, h, 640, 480, front)
+                        val sensorSwaps = sensor % 180 == 90
+                        val nativeW = if (sensorSwaps) 480f else 640f
+                        val nativeH = if (sensorSwaps) 640f else 480f
+                        val swaps = display % 180 == 90
+                        val outputW = (if (swaps) h else w) * kotlin.math.abs(t.scaleX)
+                        val outputH = (if (swaps) w else h) * t.scaleY
+                        val contentW = if (swaps) nativeH else nativeW
+                        val contentH = if (swaps) nativeW else nativeH
+                        assertEquals("uniform pixel scale s=$sensor d=$display front=$front",
+                            outputW / contentW, outputH / contentH, .0001f)
+                        assertTrue("fill width", outputW >= w - .001f)
+                        assertTrue("fill height", outputH >= h - .001f)
+                        assertTrue("minimal center crop", kotlin.math.abs(outputW - w) < .001f ||
+                            kotlin.math.abs(outputH - h) < .001f)
+                        assertEquals(front, t.isMirrored)
+                        assertEquals(front, t.scaleX < 0)
+                        // TextureView handles sensor orientation: only display compensation remains.
+                        assertEquals((360 - display) % 360, t.rotation)
+                    }
+                }
+            }
+        }
+    }
 
-        // Landscape Right (270 deg display) - Front Camera:
-        val front270 = FacecamGeometry.calculateTransform(
-            sensorOrientation = 270,
-            displayRotationDegrees = 270,
-            viewWidth = 110f,
-            viewHeight = 147f,
-            previewWidth = 640,
-            previewHeight = 480,
-            isFrontCamera = true
-        )
-        assertEquals(90, front270.rotation)
-        assertTrue(front270.isMirrored)
-        assertTrue(front270.scaleX < 0)
-        val onScreenWidth270 = 147f * kotlin.math.abs(front270.scaleX)
-        val onScreenHeight270 = 110f * front270.scaleY
-        assertEquals(110.25f, onScreenWidth270, 0.1f)
-        assertEquals(147.0f, onScreenHeight270, 0.1f)
-        assertEquals(0.75f, onScreenWidth270 / onScreenHeight270, 0.001f)
+    @Test
+    fun canonicalSizeSurvivesBothLandscapesDuplicateCallbacksAndResize() {
+        val portrait = 110 to 147
+        for (scale in listOf(.75f, 1f, 1.5f, 1.75f)) {
+            val (pw, ph) = FacecamGeometry.scaledDimensions(portrait.first, portrait.second, scale)
+            for (display in listOf(0, 90, 90, 270, 270, 180, 0, 0)) {
+                val expected = if (display % 180 == 90) ph to pw else pw to ph
+                assertEquals(expected, FacecamGeometry.targetDimensions(portrait.first, portrait.second, scale, display))
+            }
+        }
+    }
+
+    @Test
+    fun normalizedDraggedPositionSurvivesResizeAndRoundTripsWithoutDrift() {
+        val x = FacecamGeometry.positionFraction(613, 1080, 110)
+        val y = FacecamGeometry.positionFraction(1793, 2200, 147)
+        repeat(20) {
+            val lx = FacecamGeometry.positionFromFraction(x, 2200, 147)
+            val ly = FacecamGeometry.positionFromFraction(y, 1080, 110)
+            assertTrue(lx in 0..2053)
+            assertTrue(ly in 0..970)
+            assertEquals(x, FacecamGeometry.positionFraction(lx, 2200, 147), .001f)
+            assertEquals(y, FacecamGeometry.positionFraction(ly, 1080, 110), .001f)
+            assertEquals(613, FacecamGeometry.positionFromFraction(x, 1080, 110))
+            assertEquals(1793, FacecamGeometry.positionFromFraction(y, 2200, 147))
+        }
+        assertEquals(0, FacecamGeometry.positionFromFraction(x, 100, 147))
+        assertEquals(0f, FacecamGeometry.positionFraction(50, 100, 147), 0f)
+        assertEquals(0, FacecamGeometry.positionFromFraction(-1f, 1080, 110))
+        assertEquals(970, FacecamGeometry.positionFromFraction(2f, 1080, 110))
     }
 
     @Test
@@ -166,11 +188,11 @@ class FacecamGeometryTest {
         assertTrue(backTrans.scaleX > 0)
         assertEquals(kotlin.math.abs(frontTrans.scaleX), backTrans.scaleX, 0.001f)
 
-        // 12. Aspect ratio preservation: natural 0.75 ratio on screen in both portrait and landscape
+        // 12. Sensor-corrected aspect: Portrait 480/640; Landscape 640/480.
         val portraitRatio = (110f * kotlin.math.abs(s270d0.scaleX)) / (147f * s270d0.scaleY)
         val landscapeRatio = (147f * kotlin.math.abs(s270d90.scaleX)) / (110f * s270d90.scaleY)
         assertEquals(0.75f, portraitRatio, 0.005f)
-        assertEquals(0.75f, landscapeRatio, 0.005f)
+        assertEquals(640f / 480f, landscapeRatio, 0.005f)
     }
 
     @Test

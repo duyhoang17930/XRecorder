@@ -1,0 +1,26 @@
+{
+  "baseline": 421,
+  "changed_existing": [
+    "lib/features/settings/recording_settings_form.dart",
+    "lib/features/recording/recording_setup_sheet.dart"
+  ],
+  "unexpected_source_changes": [],
+  "missing_baseline_files": [],
+  "missing_report_links": [],
+  "report_whitespace": [],
+  "git_diff_check_exit": 0,
+  "ui_freeze": {
+    "lib/features/settings/recording_settings_form.dart": {
+      "render_tail_unchanged": true
+    },
+    "lib/features/recording/recording_setup_sheet.dart": {
+      "render_tail_unchanged": true
+    },
+    "original_tests_unchanged": true
+  },
+  "dart_targeted_pass": 37,
+  "original_layout_tests_still_fail": 3,
+  "native_jvm_pass": 125,
+  "device_work": false,
+  "task10_ready": false
+}

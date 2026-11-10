@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.xrecorder.xrecorder.recording.CaptureRequestsTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-10T03:08:58.622Z" hostname="hieunguyen" time="0.021">
+  <properties/>
+  <testcase name="failedLaunchReleasesOnlyItsOwnReservation" classname="com.xrecorder.xrecorder.recording.CaptureRequestsTest" time="0.007"/>
+  <testcase name="staleOrMissingCommandsDoNotOwnCurrentSession" classname="com.xrecorder.xrecorder.recording.CaptureRequestsTest" time="0.001"/>
+  <testcase name="duplicateConsentReservesBeforeFactoryAndLaunchesOnlyOnce" classname="com.xrecorder.xrecorder.recording.CaptureRequestsTest" time="0.002"/>
+  <testcase name="laterSessionRequiresFreshLaunchAndCannotReusePendingOwner" classname="com.xrecorder.xrecorder.recording.CaptureRequestsTest" time="0.002"/>
+  <testcase name="recreationRetainsRequestWithoutActivityOrTokenReference" classname="com.xrecorder.xrecorder.recording.CaptureRequestsTest" time="0.001"/>
+  <testcase name="cancelledRequestCannotBecomeConsentForAnotherSession" classname="com.xrecorder.xrecorder.recording.CaptureRequestsTest" time="0.001"/>
+  <testcase name="disposedOrStaleReceiverCannotConsumeCurrentConsent" classname="com.xrecorder.xrecorder.recording.CaptureRequestsTest" time="0.0"/>
+  <testcase name="cancelledDialogDrainsBeforeAFreshRequestWithoutReusingItsConsent" classname="com.xrecorder.xrecorder.recording.CaptureRequestsTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

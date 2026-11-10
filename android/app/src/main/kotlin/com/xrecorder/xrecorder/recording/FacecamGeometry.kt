@@ -34,6 +34,51 @@ internal object FacecamGeometry {
         val isMirrored: Boolean
     )
 
+    data class PhysicalTransform(
+        val content: TransformResult,
+        val inputScaleX: Float,
+        val inputScaleY: Float,
+        val coordinateRotation: Int
+    )
+
+    /** OrientationEventListener is clockwise; Surface rotation uses the opposite convention. */
+    fun physicalRotation(orientation: Int, previous: Int?): Int? {
+        if (orientation !in 0..359) return previous // Unknown (e.g. flat): retain last valid pose.
+        val degrees = normalizeDegrees(360 - orientation)
+        if (previous != null) {
+            val difference = normalizeDegrees(degrees - previous)
+            val distance = kotlin.math.min(difference, 360 - difference)
+            if (distance < 60) return previous // 45-degree boundary + 15-degree hysteresis.
+        }
+        return normalizeDegrees(((degrees + 45) / 90) * 90)
+    }
+
+    // P and D use Surface degrees. Compose R(P-D) * mirror * R(-P), with crop in
+    // physically upright coordinates. Mirroring in locked Display axes instead can
+    // invert gravity when P and D differ by a quarter turn.
+    fun calculatePhysicalTransform(
+        sensorOrientation: Int,
+        displayRotationDegrees: Int,
+        physicalRotationDegrees: Int,
+        viewWidth: Float,
+        viewHeight: Float,
+        previewWidth: Int,
+        previewHeight: Int,
+        isFrontCamera: Boolean
+    ): PhysicalTransform {
+        val relative = normalizeDegrees(physicalRotationDegrees - displayRotationDegrees)
+        val swapped = relative % 180 == 90
+        val physicalWidth = if (swapped) viewHeight else viewWidth
+        val physicalHeight = if (swapped) viewWidth else viewHeight
+        return PhysicalTransform(
+            calculateTransform(sensorOrientation, physicalRotationDegrees, physicalWidth, physicalHeight,
+                previewWidth, previewHeight, isFrontCamera),
+            if (viewWidth > 0f) physicalWidth / viewWidth else 1f,
+            if (viewHeight > 0f) physicalHeight / viewHeight else 1f,
+            relative
+        )
+    }
+
     data class State(
         val isReady: Boolean,
         val lensFacing: Int,
@@ -49,11 +94,13 @@ internal object FacecamGeometry {
     }
 
     fun calculateRotation(sensorOrientation: Int, displayRotationDegrees: Int, isFrontCamera: Boolean = true): Int {
+        // Both lens facings arrive in natural orientation via SurfaceTexture/TextureView.
+        // Sensor/lens compensation belongs to that producer transform, not a second rotation.
         return calculateRotation(displayRotationDegrees, isFrontCamera)
     }
 
     fun calculateTransform(
-        sensorOrientation: Int = 0,
+        sensorOrientation: Int = 90,
         displayRotationDegrees: Int = 0,
         viewWidth: Float,
         viewHeight: Float,
@@ -74,44 +121,19 @@ internal object FacecamGeometry {
 
         val pw = if (previewWidth > 0) previewWidth else 640
         val ph = if (previewHeight > 0) previewHeight else 480
-        val pLong = kotlin.math.max(pw, ph).toFloat()
-        val pShort = kotlin.math.min(pw, ph).toFloat()
-
-        var sx = 1.0f
-        var sy = 1.0f
-
-        if (rotation == 0 || rotation == 180) {
-            // Portrait orientation: content aspect is pShort / pLong (e.g. 480 / 640 = 0.75)
-            val contentAspect = pShort / pLong
-            val viewAspect = viewWidth / viewHeight
-            if (viewAspect > contentAspect) {
-                // View is wider than camera stream: fit width, center crop height
-                sx = 1.0f
-                sy = (viewWidth * pLong) / (viewHeight * pShort)
-            } else {
-                // View is taller than camera stream: fit height, center crop width
-                sx = (viewHeight * pShort) / (viewWidth * pLong)
-                sy = 1.0f
-            }
-        } else {
-            // Landscape orientation (90 or 270):
-            // After rotating by 90/270, the stream axes are swapped relative to the view.
-            // Content aspect in buffer is pShort / pLong.
-            // On screen, the rotated buffer spans: width = viewHeight * (pShort / pLong), height = viewWidth * (pLong / pShort).
-            // To ensure 1:1 natural aspect ratio (no stretch or squash) and full fill (Center-Crop):
-            val contentAspect = pShort / pLong
-            val viewAspect = viewWidth / viewHeight
-            if (viewAspect > contentAspect) {
-                sx = viewWidth / viewHeight
-                sy = pLong / pShort
-            } else {
-                sx = pShort / pLong
-                sy = viewHeight / viewWidth
-            }
-        }
-
-        if (sx.isNaN() || sx.isInfinite()) sx = 1.0f
-        if (sy.isNaN() || sy.isInfinite()) sy = 1.0f
+        // TextureView already applies the sensor-to-natural-orientation transform.
+        // Use sensor parity for the natural buffer dimensions; do NOT rotate by it again.
+        val sensorSwapsAxes = normalizeDegrees(sensorOrientation) % 180 == 90
+        val naturalWidth = (if (sensorSwapsAxes) ph else pw).toFloat()
+        val naturalHeight = (if (sensorSwapsAxes) pw else ph).toFloat()
+        val displaySwapsAxes = rotation % 180 == 90
+        val contentWidth = if (displaySwapsAxes) naturalHeight else naturalWidth
+        val contentHeight = if (displaySwapsAxes) naturalWidth else naturalHeight
+        val fill = kotlin.math.max(viewWidth / contentWidth, viewHeight / contentHeight)
+        // Matrix.postRotate then postScale scales in DISPLAY axes. Undo TextureView's
+        // nonuniform fit and center-crop with one uniform camera-pixel scale.
+        var sx = fill * contentWidth / (if (displaySwapsAxes) viewHeight else viewWidth)
+        val sy = fill * contentHeight / (if (displaySwapsAxes) viewWidth else viewHeight)
 
         if (isFrontCamera) {
             sx = -sx
@@ -136,6 +158,21 @@ internal object FacecamGeometry {
         val h = (baseHeightPx * clampedScale + 0.5f).toInt().coerceAtLeast(32)
         return w to h
     }
+
+    private fun normalizeDegrees(degrees: Int) = ((degrees % 360) + 360) % 360
+
+    fun targetDimensions(portraitWidth: Int, portraitHeight: Int, scale: Float, displayDegrees: Int): Pair<Int, Int> {
+        val portrait = scaledDimensions(portraitWidth, portraitHeight, scale)
+        return if (normalizeDegrees(displayDegrees) % 180 == 90) portrait.second to portrait.first else portrait
+    }
+
+    fun positionFraction(position: Int, screenSize: Int, viewSize: Int): Float {
+        val room = (screenSize - viewSize).coerceAtLeast(0)
+        return if (room == 0) 0f else position.coerceIn(0, room).toFloat() / room
+    }
+
+    fun positionFromFraction(fraction: Float, screenSize: Int, viewSize: Int): Int =
+        (fraction.coerceIn(0f, 1f) * (screenSize - viewSize).coerceAtLeast(0) + .5f).toInt()
 
     fun clampPosition(x: Int, y: Int, screenWidth: Int, screenHeight: Int, viewWidth: Int, viewHeight: Int): Pair<Int, Int> {
         val maxX = (screenWidth - viewWidth).coerceAtLeast(0)

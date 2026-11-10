@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.xrecorder.xrecorder.recording.CaptureTimingTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-10T03:08:58.646Z" hostname="hieunguyen" time="0.009">
+  <properties/>
+  <testcase name="pauseAtDeadlineDoesNotPostponeStopUntilResume" classname="com.xrecorder.xrecorder.recording.CaptureTimingTest" time="0.001"/>
+  <testcase name="activeTimeExcludesPauseAndResumesWithRemainingBudget" classname="com.xrecorder.xrecorder.recording.CaptureTimingTest" time="0.003"/>
+  <testcase name="delayedCountdownUsesDeadlineRatherThanNumberOfCallbacks" classname="com.xrecorder.xrecorder.recording.CaptureTimingTest" time="0.001"/>
+  <testcase name="disabledAndTerminalSessionsHaveNoAutoStopDeadline" classname="com.xrecorder.xrecorder.recording.CaptureTimingTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

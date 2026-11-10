@@ -1,0 +1,14 @@
+{
+  "head": "64e84ec0f952c4e28063488812933010f05bfa7d",
+  "baseline_files": 421,
+  "changed_existing": [
+    "lib/features/settings/recording_settings_form.dart",
+    "lib/features/recording/recording_setup_sheet.dart"
+  ],
+  "new_source": [
+    "test/recording_settings_capability_test.dart",
+    "lib/features/recording/recording_selection.dart"
+  ],
+  "missing": [],
+  "device_work": false
+}

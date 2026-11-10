@@ -1,0 +1,114 @@
+[
+  {
+    "name": "com.xrecorder.xrecorder.recording.ShakeDetectorEngineTest",
+    "tests": "7",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.DrawingStrokeEngineTest",
+    "tests": "10",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.CaptureRequestsTest",
+    "tests": "8",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.VideoBitrateTest",
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.CaptureReliabilityEngineTest",
+    "tests": "5",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.Mp4RecoveryEngineTest",
+    "tests": "7",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.CaptureJournalTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.ScreenshotPixelsTest",
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.FacecamGeometryTest",
+    "tests": "14",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.AudioDuckingEngineTest",
+    "tests": "6",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.CaptureNotificationPolicyTest",
+    "tests": "11",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.RegionCropGeometryTest",
+    "tests": "14",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.CaptureTimingTest",
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.AudioVideoMathTest",
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.TouchIndicatorEngineTest",
+    "tests": "5",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "com.xrecorder.xrecorder.recording.FloatingControlGeometryTest",
+    "tests": "19",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  }
+]

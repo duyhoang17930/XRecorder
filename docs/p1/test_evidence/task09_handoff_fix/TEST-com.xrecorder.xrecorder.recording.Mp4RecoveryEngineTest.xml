@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.xrecorder.xrecorder.recording.Mp4RecoveryEngineTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-10T03:08:58.770Z" hostname="hieunguyen" time="0.109">
+  <properties/>
+  <testcase name="validMp4WithMoovAndMdat_isDetectedAsValid_andSkipsRepair" classname="com.xrecorder.xrecorder.recording.Mp4RecoveryEngineTest" time="0.03"/>
+  <testcase name="fileSmallerThanHeader_isDetectedAsCorrupted" classname="com.xrecorder.xrecorder.recording.Mp4RecoveryEngineTest" time="0.015"/>
+  <testcase name="recoveryWithInvalidRemuxOutput_rollsBackAndPreservesOriginal" classname="com.xrecorder.xrecorder.recording.Mp4RecoveryEngineTest" time="0.026"/>
+  <testcase name="handles64BitExtendedBoxSize" classname="com.xrecorder.xrecorder.recording.Mp4RecoveryEngineTest" time="0.003"/>
+  <testcase name="truncatedMp4_withValidCheckpoint_recoversToIsolatedTargetAndValidates" classname="com.xrecorder.xrecorder.recording.Mp4RecoveryEngineTest" time="0.015"/>
+  <testcase name="emptyFile_isDetectedAsEmpty_andUnrecoverable" classname="com.xrecorder.xrecorder.recording.Mp4RecoveryEngineTest" time="0.009"/>
+  <testcase name="truncatedMp4MissingMoov_withoutCheckpoint_isUnrecoverableWithIsoBmffExplanation" classname="com.xrecorder.xrecorder.recording.Mp4RecoveryEngineTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

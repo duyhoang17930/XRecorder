@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/domain/models.dart';
 import '../../core/widgets/studio_widgets.dart';
 import '../recording/recording_service.dart';
+import '../recording/recording_selection.dart';
 import 'settings_controller.dart';
 
 class RecordingSettingsForm extends StatefulWidget {
@@ -16,65 +17,10 @@ class RecordingSettingsForm extends StatefulWidget {
 
 class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
   Future<RecordingCapabilities>? _capabilities;
-  bool _selectionNormalized = false;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _capabilities ??= CaptureScope.of(context).service.capabilities()
-      ..then((capabilities) {
-        if (!mounted || _selectionNormalized) return;
-        _selectionNormalized = true;
-        _normalizeSelection(SettingsScope.of(context), capabilities);
-      });
-  }
-
-  void _normalizeSelection(
-    SettingsController settings,
-    RecordingCapabilities capabilities,
-  ) {
-    final portrait = switch (settings.orientation) {
-      'Portrait' => true,
-      'Landscape' => false,
-      _ =>
-        MediaQuery.sizeOf(context).height >= MediaQuery.sizeOf(context).width,
-    };
-    const sizes = {
-      '4K UHD': (3840, 2160),
-      '2K QHD': (2560, 1440),
-      '1080p FHD': (1920, 1080),
-      '720p HD': (1280, 720),
-    };
-    bool supported(String resolution, int fps, String codec) {
-      final size = sizes[resolution]!;
-      final expectedWidth = portrait ? size.$2 : size.$1;
-      final expectedHeight = portrait ? size.$1 : size.$2;
-      final targetCodec = codec == 'H.265 / HEVC'
-          ? VideoCodec.hevc
-          : VideoCodec.avc;
-      return capabilities.configurations.any(
-        (configuration) =>
-            configuration.width == expectedWidth &&
-            configuration.height == expectedHeight &&
-            configuration.fps == fps &&
-            configuration.codec == targetCodec,
-      );
-    }
-
-    final currentFps = int.tryParse(settings.fps) ?? 30;
-    if (supported(settings.resolution, currentFps, settings.codec)) return;
-    for (final resolution in sizes.keys) {
-      for (final fps in const [120, 90, 60, 30, 24]) {
-        if (supported(resolution, fps, 'H.264 / AVC')) {
-          settings.update(() {
-            settings.resolution = resolution;
-            settings.fps = '$fps';
-            settings.codec = 'H.264 / AVC';
-            settings.bitrate = 'Auto';
-          });
-          return;
-        }
-      }
-    }
+    _capabilities ??= CaptureScope.of(context).service.capabilities();
   }
 
   @override
@@ -94,22 +40,17 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
           if (s.mode == 'Performance' && fps > 30) return false;
           if (caps == null) return true;
           final size = resolutions[resolution]!;
-          final portrait = switch (s.orientation) {
-            'Portrait' => true,
-            'Landscape' => false,
-            _ =>
-              MediaQuery.sizeOf(context).height >=
-                  MediaQuery.sizeOf(context).width,
-          };
-          final codec = (codecName ?? s.codec) == 'H.265 / HEVC'
-              ? VideoCodec.hevc
-              : VideoCodec.avc;
-          return caps.configurations.any(
-            (c) =>
-                c.width == (portrait ? size.$2 : size.$1) &&
-                c.height == (portrait ? size.$1 : size.$2) &&
-                c.fps == fps &&
-                c.codec == codec,
+          return supportsRecordingTuple(
+            caps,
+            width: size.$1,
+            height: size.$2,
+            fps: fps,
+            codec: (codecName ?? s.codec) == 'H.265 / HEVC'
+                ? VideoCodec.hevc
+                : VideoCodec.avc,
+            mode: s.mode == 'Performance'
+                ? RecordingMode.performance
+                : RecordingMode.normal,
           );
         }
 

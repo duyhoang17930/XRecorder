@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.xrecorder.xrecorder.recording.CaptureReliabilityEngineTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-10T03:08:58.537Z" hostname="hieunguyen" time="0.073">
+  <properties/>
+  <testcase name="sessionTokenMismatch_isRejected" classname="com.xrecorder.xrecorder.recording.CaptureReliabilityEngineTest" time="0.001"/>
+  <testcase name="concurrentStopTriggers_onlyOneWinsAtomicGuard" classname="com.xrecorder.xrecorder.recording.CaptureReliabilityEngineTest" time="0.014"/>
+  <testcase name="failureTransition_clearsSuccessAndRecordsError" classname="com.xrecorder.xrecorder.recording.CaptureReliabilityEngineTest" time="0.012"/>
+  <testcase name="terminalStateTransitions_emitCleanSnapshot" classname="com.xrecorder.xrecorder.recording.CaptureReliabilityEngineTest" time="0.018"/>
+  <testcase name="captureStateBusyStates_correctlyIdentified" classname="com.xrecorder.xrecorder.recording.CaptureReliabilityEngineTest" time="0.027"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

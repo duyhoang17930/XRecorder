@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-10T03:08:58.897Z" hostname="hieunguyen" time="0.019">
+  <properties/>
+  <testcase name="normalizedCropCalculatesCorrectUvTextureCoordinates" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.004"/>
+  <testcase name="sanitizeRegionClampsOverflowingCoordinatesToDisplayBounds" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.001"/>
+  <testcase name="sanitizeRegionRejectsInvalidDisplayDimensions" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.001"/>
+  <testcase name="fromDpConvertsAndSanitizes" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.0"/>
+  <testcase name="pxToDpConvertsAccurately" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.001"/>
+  <testcase name="sanitizeRegionRejectsCoordinatesCompletelyOutsideDisplay" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.0"/>
+  <testcase name="fitsDisplayValidatesBounds" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.0"/>
+  <testcase name="sanitizeRegionEnforcesAlignmentToEvenNumbers" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.001"/>
+  <testcase name="dpToPxConvertsAccurately" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.003"/>
+  <testcase name="sanitizeRegionRejectsEmptyOrNegativeDimensions" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.0"/>
+  <testcase name="sanitizeRegionValidInBoundsAligned" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.001"/>
+  <testcase name="sanitizeRegionRejectsRegionSmallerThanMinimumDimension" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.001"/>
+  <testcase name="aspectRatioCalculatesAccurateRatio" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.0"/>
+  <testcase name="sanitizeRegionClampsNegativeCoordinatesToZero" classname="com.xrecorder.xrecorder.recording.RegionCropGeometryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

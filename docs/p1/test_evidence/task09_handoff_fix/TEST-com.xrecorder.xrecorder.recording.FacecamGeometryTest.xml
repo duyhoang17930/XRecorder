@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.xrecorder.xrecorder.recording.FacecamGeometryTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-10T03:08:58.692Z" hostname="hieunguyen" time="0.017">
+  <properties/>
+  <testcase name="scaledDimensionsComputesPixelSizesWithClamping" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.003"/>
+  <testcase name="canAcceptActionValidatesStatesAndEnding" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.001"/>
+  <testcase name="orientationCycleHasNoAccumulatedRotation" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.001"/>
+  <testcase name="orientationMatrixPreservesAspectRatiosAndNo180Flip" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.003"/>
+  <testcase name="testRequired12MatrixAndOrientationCombinations" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.0"/>
+  <testcase name="calculateRotationNormalizesDegreesProperly" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.0"/>
+  <testcase name="calculateTransformZeroOrInvalidDimensionsFallbacksSafely" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.001"/>
+  <testcase name="calculateTransformLandscapeAndUpsideDown" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.001"/>
+  <testcase name="validateEffectAndNames" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.001"/>
+  <testcase name="clampPositionKeepsFacecamWithinScreenBounds" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.0"/>
+  <testcase name="clampScaleValidatesNormalAndBoundaryValues" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.0"/>
+  <testcase name="toggleFacingAlternatesFrontAndBack" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.001"/>
+  <testcase name="snapToEdgeSnapsToLeftOrRightScreenEdge" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.0"/>
+  <testcase name="calculateTransformPortraitFrontAndBackCamera" classname="com.xrecorder.xrecorder.recording.FacecamGeometryTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,22 @@
+{
+  "1410": {
+    "path": "/home/hieu/Downloads/1410.mp4",
+    "width": 1280,
+    "height": 720,
+    "frames": 306,
+    "average_fps": 33.37898602542815,
+    "approx_duration_seconds": 9.167444444444444,
+    "decoded_frames": 306,
+    "timing_note": "Contact-sheet times are approximate: frame index / average FPS. Not frame PTS or measured render latency."
+  },
+  "1411": {
+    "path": "/home/hieu/Downloads/1411.mp4",
+    "width": 1080,
+    "height": 1920,
+    "frames": 106,
+    "average_fps": 24.957096814700098,
+    "approx_duration_seconds": 4.247288888888889,
+    "decoded_frames": 106,
+    "timing_note": "Contact-sheet times are approximate: frame index / average FPS. Not frame PTS or measured render latency."
+  }
+}

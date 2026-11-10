@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.xrecorder.xrecorder.recording.AudioDuckingEngineTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-10T03:08:58.337Z" hostname="hieunguyen" time="0.066">
+  <properties/>
+  <testcase name="silentMicKeepsFullInternalGain" classname="com.xrecorder.xrecorder.recording.AudioDuckingEngineTest" time="0.011"/>
+  <testcase name="resetRestoresDefaultState" classname="com.xrecorder.xrecorder.recording.AudioDuckingEngineTest" time="0.002"/>
+  <testcase name="holdAndReleaseSmoothlyRestoresInternalVolume" classname="com.xrecorder.xrecorder.recording.AudioDuckingEngineTest" time="0.018"/>
+  <testcase name="duckingDisabledPreservesStandardMixBitwise" classname="com.xrecorder.xrecorder.recording.AudioDuckingEngineTest" time="0.005"/>
+  <testcase name="activeVoiceSmoothlyAttenuatesInternalAudio" classname="com.xrecorder.xrecorder.recording.AudioDuckingEngineTest" time="0.006"/>
+  <testcase name="processMixBlockHandlesMultiChannelOrClampingWithoutOverflow" classname="com.xrecorder.xrecorder.recording.AudioDuckingEngineTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

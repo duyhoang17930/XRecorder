@@ -1,0 +1,9 @@
+{
+  "lib/features/settings/recording_settings_form.dart": {
+    "render_tail_unchanged": true
+  },
+  "lib/features/recording/recording_setup_sheet.dart": {
+    "render_tail_unchanged": true
+  },
+  "original_tests_unchanged": true
+}

@@ -1,0 +1,7 @@
+ M lib/features/recording/recording_setup_sheet.dart
+ M lib/features/settings/recording_settings_form.dart
+?? docs/p1/TASK_09_P1_FOLLOWUP_REQUESTS.md
+?? docs/p1/TASK_09_P1_HANDOFF_FIX_RESULT.md
+?? docs/p1/test_evidence/task09_handoff_fix/
+?? lib/features/recording/recording_selection.dart
+?? test/recording_settings_capability_test.dart

@@ -1,0 +1,16 @@
+{
+  "1410": {
+    "adjacent_pairs": 305,
+    "exact_identical_gray_pairs": 0,
+    "pairs_with_mean_gray_difference_below_0_5": 85,
+    "region": "inner facecam crop x706:790 y130:245",
+    "note": "Decoded-image similarity only. Not a camera FPS, dropped-frame or render-latency measurement."
+  },
+  "1411": {
+    "adjacent_pairs": 105,
+    "exact_identical_gray_pairs": 0,
+    "pairs_with_mean_gray_difference_below_0_5": 0,
+    "region": "full reference frame",
+    "note": "Decoded-image similarity only. Not a camera FPS, dropped-frame or render-latency measurement."
+  }
+}
