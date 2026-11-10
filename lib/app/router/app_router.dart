@@ -3,9 +3,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../l10n/localization.dart';
 
-import '../../core/widgets/studio_tab_scroll.dart';
+import '../../core/ui/components/layout/studio_layout.dart';
 
-import '../../core/widgets/studio_shell.dart';
+import '../../core/ui/components/navigation/studio_navigation.dart';
+import '../../core/ui/showcase/component_gallery.dart';
 import '../../features/home/video_home_screen.dart';
 import '../../features/media/photo_library_screen.dart';
 import '../../features/media/video_details_screen.dart';
@@ -94,6 +95,10 @@ GoRouter createRouter() => GoRouter(
       ),
     ),
     GoRoute(path: '/support', builder: (_, _) => const SupportScreen()),
+    GoRoute(
+      path: '/showcase/components',
+      builder: (_, _) => const ComponentGallery(),
+    ),
     GoRoute(
       path: '/photo-preview/:id',
       builder: (_, state) => PhotoPreviewScreen(

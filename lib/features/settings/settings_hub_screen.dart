@@ -2,7 +2,13 @@ import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../core/widgets/studio_widgets.dart';
+import '../../core/constants/app_icons.dart';
+import '../../core/ui/components/cards/studio_cards.dart';
+import '../../core/ui/components/dialogs/studio_dialog.dart';
+import '../../core/ui/components/lists/studio_list.dart';
+import '../../core/ui/components/selection/studio_selection.dart';
+import '../../core/ui/theme/colors.dart';
+import '../../core/ui/theme/spacing.dart';
 import 'settings_controller.dart';
 import '../../l10n/app_languages.dart';
 import 'app_language_dialog.dart';
@@ -197,6 +203,11 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
                 context.l10n.feedback,
                 icon: AppIcons.feedback,
                 onTap: () => _open(context, '/support'),
+              ),
+              SettingsRow(
+                context.l10n.componentGallery,
+                icon: AppIcons.tools,
+                onTap: () => context.push('/showcase/components'),
               ),
               SettingsRow(
                 context.l10n.privacy,

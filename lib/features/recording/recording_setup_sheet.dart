@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../core/domain/models.dart';
-import '../../core/widgets/studio_widgets.dart';
+import '../../core/constants/app_icons.dart';
+import '../../core/presentation/user_messages.dart';
+import '../../core/ui/components/bottom_sheets/studio_bottom_sheet.dart';
+import '../../core/ui/components/buttons/studio_buttons.dart';
+import '../../core/ui/components/feedback/studio_feedback.dart';
+import '../../core/ui/theme/colors.dart';
+import '../../core/ui/theme/spacing.dart';
+import '../../core/ui/theme/typography.dart';
 import '../settings/settings_controller.dart';
 import '../settings/recording_settings_form.dart';
 import 'recording_service.dart';

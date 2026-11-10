@@ -741,6 +741,10 @@
     "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_widgets.dart. Keep product names, technical identifiers and units intact."
   },
   "helpGuides": "Help & guides",
+  "componentGallery": "UI component gallery",
+  "@componentGallery": {
+    "description": "Settings destination that previews the shared UI components and theme."
+  },
   "@helpGuides": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
   },
