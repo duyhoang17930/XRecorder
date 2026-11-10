@@ -244,22 +244,24 @@ class _LayerDialogState extends State<_LayerDialog> {
               label: context.l10n.drawingPadDragToDrawUsePosition,
               child: AspectRatio(
                 aspectRatio: 1,
-                child: LayoutBuilder(
-                  builder: (context, size) => GestureDetector(
+                child: Builder(
+                  builder: (context) => GestureDetector(
                     onPanStart: (d) => setState(() {
                       if (points.length < 2048) {
+                        final size = context.size!;
                         points.add(null);
                         points.add([
-                          (d.localPosition.dx / size.maxWidth).clamp(0.0, 1.0),
-                          (d.localPosition.dy / size.maxHeight).clamp(0.0, 1.0),
+                          (d.localPosition.dx / size.width).clamp(0.0, 1.0),
+                          (d.localPosition.dy / size.height).clamp(0.0, 1.0),
                         ]);
                       }
                     }),
                     onPanUpdate: (d) => setState(() {
                       if (points.length < 2048) {
+                        final size = context.size!;
                         points.add([
-                          (d.localPosition.dx / size.maxWidth).clamp(0.0, 1.0),
-                          (d.localPosition.dy / size.maxHeight).clamp(0.0, 1.0),
+                          (d.localPosition.dx / size.width).clamp(0.0, 1.0),
+                          (d.localPosition.dy / size.height).clamp(0.0, 1.0),
                         ]);
                       }
                     }),

@@ -35,6 +35,42 @@ def package_identity(text):
                  if line.split(' ', 1)[0] == 'package:' + PACKAGE), '')
 
 
+def completion_report_error(directory, require_complete=False):
+    """Some SDK timeout paths return exit0 with only partial report data."""
+    path = directory / 'emulator_verification.json'
+    if not path.is_file():
+        return 'Missing completion report.' if require_complete else None
+    try:
+        report = json.loads(path.read_text(encoding='utf8'))
+    except (ValueError, UnicodeError):
+        return 'Unreadable completion report; evidence retained.'
+    if require_complete and (not isinstance(report, dict) or report.get('status') != 'PASS'):
+        return 'Expected final report status PASS; driver exit0 is insufficient.'
+    if isinstance(report, dict) and (report.get('status') == 'IN_PROGRESS' or report.get('partial') is True):
+        return 'QA report is still in progress; driver exit0 is insufficient.'
+    return None
+
+
+def external_path_absent(adb):
+    """Missing first-launch storage is empty only under a readable parent.
+
+    A failed tar alone cannot distinguish absence from denied access. Symlinks,
+    unreadable parents and ambiguous transport results must still block install.
+    """
+    parent = '/sdcard/Android/data'
+    path = parent + '/' + PACKAGE
+    command = (
+        f'if test -d {shlex.quote(parent)} && test -r {shlex.quote(parent)} '
+        f'&& test -x {shlex.quote(parent)}; then '
+        f'if test -e {shlex.quote(path)} || test -L {shlex.quote(path)}; '
+        'then echo PRESENT; else echo ABSENT; fi; else exit 2; fi'
+    )
+    result = adb('shell', command, check=False)
+    if result.returncode or result.stderr or result.stdout.strip() not in {b'ABSENT', b'PRESENT'}:
+        raise RuntimeError('Cannot verify external storage absence; no install performed.')
+    return result.stdout.strip() == b'ABSENT'
+
+
 def validate_offline_checkpoint(path, root, serial, avd, identity):
     path = path.resolve(strict=True)
     path.relative_to(root / 'build' / 'verification' / 'task08')
@@ -126,6 +162,8 @@ def main():
                         help='Attach to an already paused QA process without restarting it.')
     parser.add_argument('--install-only', action='store_true',
                         help='Safely update and preserve the app without launching its entrypoint.')
+    parser.add_argument('--require-complete-report', action='store_true',
+                        help='Require an explicit top-level status PASS, not just a successful SDK driver exit.')
     parser.add_argument('--offline-checkpoint', type=Path,
                         help='Fresh verified offline whole-AVD checkpoint, after a clean restart with app still stopped.')
     args = parser.parse_args()
@@ -133,7 +171,9 @@ def main():
         raise RuntimeError('Attach-only cannot install an APK.')
     if args.install_only and not args.apk:
         raise RuntimeError('Install-only requires an APK.')
-    if args.serial == 'emulator-5554' or not args.avd.startswith('ThreeHRecorder_'):
+    if (args.serial in {'emulator-5554', 'emulator-5560'}
+            or args.avd == 'ThreeHRecorder_Task021'
+            or not args.avd.startswith('ThreeHRecorder_')):
         raise RuntimeError('A dedicated, named 3HRecorder QA AVD is required.')
     root = Path(__file__).resolve().parents[1]
     output = args.output.resolve()
@@ -210,6 +250,13 @@ def main():
                 result = adb('shell', remote, check=False)
                 write_new(output / f'backup_{label}.log', result.stdout + result.stderr)
                 if result.returncode:
+                    if label == 'external' and external_path_absent(adb):
+                        write_new(output / 'backup_external_absent_v1.json', json.dumps({
+                            'path': f'/sdcard/Android/data/{PACKAGE}',
+                            'verifiedAbsent': True, 'parentReadableAndSearchable': True,
+                            'symlinkAbsent': True, 'probeReadOnly': True,
+                        }, indent=2).encode())
+                        continue
                     raise RuntimeError(f'{label} backup failed; no install performed.')
                 expected = shell('sha256sum', stage).split()[0]
                 expected_size = int(shell('stat', '-c', '%s', stage))
@@ -343,12 +390,17 @@ def main():
         if sampler:
             sampler.join(timeout=15)
         adb('forward', '--remove', 'tcp:' + port, check=False)
+    completion_error = completion_report_error(output, args.require_complete_report) if code == 0 else None
+    effective_code = code or (1 if completion_error else 0)
     write_new(output / 'runner.json', json.dumps({
         'serial': args.serial, 'avd': name, 'pid': pid, 'startUtc': start,
         'driverExit': code, 'installedWith': 'adb install -r' if args.apk else None,
         'sdkInstallUsed': False, 'appLeftInstalled': True,
+        'effectiveExit': effective_code, 'completionError': completion_error,
     }, indent=2).encode('utf8'))
-    return code
+    if completion_error:
+        print(completion_error, flush=True)
+    return effective_code
 
 
 if __name__ == '__main__':

@@ -503,11 +503,16 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                                           children: [
                                             ColoredBox(
                                               color: c.elevated,
-                                              child: MediaThumbnail(
+                                              child: RepaintBoundary(
                                                 key: ValueKey(
-                                                  '${item.id}-${item.modifiedAt.millisecondsSinceEpoch}-${item.sizeBytes}-${item.revision}',
+                                                  'library-thumbnail-${item.id}',
                                                 ),
-                                                item: item,
+                                                child: MediaThumbnail(
+                                                  key: ValueKey(
+                                                    '${item.id}-${item.modifiedAt.millisecondsSinceEpoch}-${item.sizeBytes}-${item.revision}',
+                                                  ),
+                                                  item: item,
+                                                ),
                                               ),
                                             ),
                                             if (item.duration != null)

@@ -60,7 +60,13 @@ class _EditorScreenState extends State<EditorScreen> {
       }
       setState(() => allowLeave = true);
       await WidgetsBinding.instance.endOfFrame;
-      if (mounted) context.pop();
+      if (mounted) {
+        if (context.canPop()) {
+          context.pop();
+        } else {
+          context.go('/editor');
+        }
+      }
     } finally {
       leaving = false;
     }
@@ -807,8 +813,15 @@ class _EditRangeState extends State<_EditRange> {
         },
         onChangeEnd: (_) => widget.onCommit(value),
         semanticFormatterCallback: widget.seconds
-            ? context.spokenValue((strings, value) => strings.secondsValue(value), multiplier: .001, digits: 1)
-            : context.spokenValue((strings, value) => strings.accessibilityValue40(value), multiplier: 100),
+            ? context.spokenValue(
+                (strings, value) => strings.secondsValue(value),
+                multiplier: .001,
+                digits: 1,
+              )
+            : context.spokenValue(
+                (strings, value) => strings.accessibilityValue40(value),
+                multiplier: 100,
+              ),
       ),
     ),
   );

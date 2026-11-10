@@ -18,6 +18,35 @@ spec.loader.exec_module(runner)
 
 
 class InstallSafetyTest(unittest.TestCase):
+    def test_driver_success_needs_completed_report_when_status_is_present(self):
+        root = ROOT / 'build/verification/task09b'
+        root.mkdir(parents=True, exist_ok=True)
+        for payload, incomplete in [({'status': 'IN_PROGRESS'}, True),
+                                    ({'partial': True}, True), ({'status': 'PASS'}, False),
+                                    ({'partial': False}, False), ({'suites': {'native': 'PASS'}}, False)]:
+            directory = Path(tempfile.mkdtemp(prefix='completion_', dir=root))
+            path = directory / 'emulator_verification.json'
+            original = json.dumps(payload).encode()
+            runner.write_new(path, original)
+            self.assertEqual(runner.completion_report_error(directory) is not None, incomplete)
+            self.assertEqual(path.read_bytes(), original)
+            self.assertEqual(runner.completion_report_error(directory, True) is None, payload.get('status') == 'PASS')
+
+    def test_external_absence_requires_readable_parent_and_exact_probe(self):
+        for code, out, err, expected in [
+            (0, b'ABSENT\n', b'', True),
+            (0, b'PRESENT\n', b'', False),
+        ]:
+            def adb(*args, **kwargs):
+                self.assertEqual(args[0], 'shell')
+                self.assertNotIn('mkdir', args[1])
+                return subprocess.CompletedProcess(args, code, out, err)
+            self.assertEqual(runner.external_path_absent(adb), expected)
+        for code, out, err in [(1, b'', b'Permission denied'), (0, b'', b''),
+                               (0, b'ABSENT\n', b'cannot inspect')]:
+            with self.assertRaisesRegex(RuntimeError, 'external'):
+                runner.external_path_absent(lambda *a, **k: subprocess.CompletedProcess(a, code, out, err))
+
     def test_offline_checkpoint_is_byte_verified_and_cannot_be_reused(self):
         fixture = Path(tempfile.mkdtemp(prefix='checkpoint_v1_', dir=ROOT / 'build/verification/task08'))
         snapshot = fixture / 'snapshot'
@@ -80,7 +109,8 @@ class InstallSafetyTest(unittest.TestCase):
             runner.write_new(path, b'new content must not replace earlier evidence')
         self.assertEqual(path.read_bytes(), b'original evidence\x00\xff')
 
-    def invoke(self, *, free_kb, install_ok=False, serial='emulator-5566', install_only=False):
+    def invoke(self, *, free_kb, install_ok=False, serial='emulator-5566', install_only=False,
+               avd='ThreeHRecorder_TASK08_API36'):
         # Evidence is retained: TASK08 does not delete even temporary fixtures.
         fixture = Path(tempfile.mkdtemp(prefix='runner_', dir=ROOT / 'build/verification/task08'))
         apk = fixture / 'fixture.apk'
@@ -105,7 +135,7 @@ class InstallSafetyTest(unittest.TestCase):
                 out = b''
             return subprocess.CompletedProcess(args, 0, out, b'')
 
-        argv = ['runner', '--serial', serial, '--avd', 'ThreeHRecorder_TASK08_API36',
+        argv = ['runner', '--serial', serial, '--avd', avd,
                 '--apk', str(apk), '--output', str(fixture / 'evidence')]
         if install_only:
             argv.append('--install-only')
@@ -140,6 +170,17 @@ class InstallSafetyTest(unittest.TestCase):
         calls, error = self.invoke(free_kb=2 * 1024 * 1024, serial='emulator-5554')
         self.assertIn('dedicated', error)
         self.assertEqual(calls, [])
+
+    def test_recovery_device_rejected_by_serial_or_name_before_any_adb(self):
+        for serial, avd in [
+            ('emulator-5560', 'ThreeHRecorder_TASK09_API36'),
+            ('emulator-5568', 'ThreeHRecorder_Task021'),
+        ]:
+            with self.subTest(serial=serial, avd=avd):
+                calls, error = self.invoke(free_kb=2 * 1024 * 1024,
+                                           serial=serial, avd=avd)
+                self.assertIn('dedicated', error)
+                self.assertEqual(calls, [])
 
 
 if __name__ == '__main__':

@@ -265,8 +265,13 @@ class TimelineClip {
 
 Object _immutableEditorValue(Object value) {
   if (value is List) {
-    return List<Object>.unmodifiable(
-      value.cast<Object>().map(_immutableEditorValue),
+    // Drawing paths use null to separate strokes; freeze every point while
+    // retaining those separators for undo, autosave and native rendering.
+    return List<Object?>.unmodifiable(
+      value.map(
+        (entry) =>
+            entry == null ? null : _immutableEditorValue(entry as Object),
+      ),
     );
   }
   if (value is Map) {

@@ -38,6 +38,11 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
     private boolean task08SpeechForeground;
     private boolean task08Preview;
     private int task08PreviewCycles;
+    private boolean task09SourceRecovery;
+    private String task09SourceUri;
+    private boolean task09bExportHistory;
+    private String task09bExportProcess;
+    private String task09bExportRoot;
 
     @Override public void onCreate(Bundle arguments) {
         super.onCreate(arguments);
@@ -56,6 +61,11 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
         task08SpeechForeground = arguments != null && "true".equals(arguments.getString("speechForeground"));
         task08Preview = arguments != null && "preview".equals(arguments.getString("task08"));
         task08PreviewCycles = arguments == null ? 30 : Integer.parseInt(arguments.getString("previewCycles", "30"));
+        task09SourceRecovery = arguments != null && "source-recovery".equals(arguments.getString("task09"));
+        task09SourceUri = arguments == null ? null : arguments.getString("sourceUri");
+        task09bExportHistory = arguments != null && "export-history".equals(arguments.getString("task09b"));
+        task09bExportProcess = arguments == null ? null : arguments.getString("task09b");
+        task09bExportRoot = arguments == null ? null : arguments.getString("exportRoot");
         start();
     }
 
@@ -83,6 +93,22 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
     }
 
     @Override public void onStart() {
+        if ("backup-owned-media".equals(task09bExportProcess)) {
+            Task09BExportProcessInstrumentation.backupOwnedMedia(this, task09SourceUri);
+            return;
+        }
+        if ("export-process-start".equals(task09bExportProcess) || "export-process-recover".equals(task09bExportProcess)) {
+            Task09BExportProcessInstrumentation.run(this, task09bExportProcess, task09bExportRoot);
+            return;
+        }
+        if (task09bExportHistory) {
+            Task09BExportHistoryInstrumentation.run(this);
+            return;
+        }
+        if (task09SourceRecovery) {
+            Task09PreviewRecoveryInstrumentation.run(this, task09SourceUri);
+            return;
+        }
         if (task08Preview) {
             Task08PreviewInstrumentation.run(this, task08MediaInput, task08PreviewCycles);
             return;

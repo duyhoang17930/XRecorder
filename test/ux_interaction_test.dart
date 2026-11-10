@@ -219,13 +219,49 @@ void main() {
   testWidgets('export finalizing is shown as Saving and has no unsafe cancel', (
     tester,
   ) async {
+    var completed = false;
+    var polls = 0;
     messenger.setMockMethodCallHandler(
       AndroidEditProjectRepository.channel,
-      (call) async => '[{"id":"job","state":"finalizing","progress":100,"project":{"title":"My video"}}]',
+      (call) async {
+        expect(call.method, 'exportList');
+        polls++;
+        return jsonEncode([
+          {
+            'id': 'job',
+            'state': completed ? 'completed' : 'finalizing',
+            'progress': 100,
+            'project': {'title': 'My video'},
+            if (completed) ...{
+              'uri': 'content://media/external/video/media/99',
+              'outputBytes': 1024,
+            },
+          },
+        ]);
+      },
     );
     await tester.pumpWidget(MaterialApp(home: const ExportScreen()));
-    await tester.pumpAndSettle();
+    // Finalizing intentionally animates until native publication completes.
+    // Advance bounded frames instead of waiting for that animation to stop.
+    await tester.pump();
     expect(find.text('Saving… · 100%'), findsOneWidget);
+    expect(find.text('Cancel export'), findsNothing);
+    expect(tester.widget<LinearProgressIndicator>(
+      find.byType(LinearProgressIndicator),
+    ).value, isNull);
+    for (var i = 0; i < 2; i++) {
+      await tester.pump(const Duration(seconds: 1));
+      await tester.pump();
+      expect(find.text('Saving… · 100%'), findsOneWidget);
+      expect(find.text('Cancel export'), findsNothing);
+    }
+    expect(polls, greaterThanOrEqualTo(3));
+    completed = true;
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump();
+    expect(find.text('Saved · 100%'), findsOneWidget);
+    expect(find.text('Open saved media'), findsOneWidget);
+    expect(find.byType(LinearProgressIndicator), findsNothing);
     expect(find.text('Cancel export'), findsNothing);
     await tester.pumpWidget(const SizedBox.shrink());
   });

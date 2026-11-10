@@ -19,6 +19,14 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
   Future<MediaItem?>? _item;
   final actions = AndroidMediaActions();
   bool busy = false;
+  void closeDetails(MediaItem item) {
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go(item.kind == MediaKind.video ? '/videos' : '/photos');
+    }
+  }
+
   void reloadItem() {
     if (!mounted) return;
     final next = MediaScope.of(context).find(widget.id);
@@ -103,7 +111,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
     await actions.trash(item);
     if (mounted) {
       MediaScope.of(context).refresh();
-      context.pop();
+      closeDetails(item);
     }
   }
 
@@ -138,7 +146,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
             : 'Copy verified and saved.');
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(context.message(message))));
-    if (result['moved'] == true) context.pop();
+    if (result['moved'] == true) closeDetails(item);
   }
 
   @override

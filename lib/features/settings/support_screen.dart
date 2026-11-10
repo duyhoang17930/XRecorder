@@ -17,6 +17,7 @@ class _SupportScreenState extends State<SupportScreen> {
   String? attachment, diagnostics, message;
   bool consent = false, busy = false;
   Future<void> run(Future<void> Function() action) async {
+    if (busy) return;
     setState(() {
       busy = true;
       message = null;
@@ -106,9 +107,8 @@ class _SupportScreenState extends State<SupportScreen> {
               ? null
               : () => run(() async {
                   if (text.text.trim().isEmpty) {
-                    throw const FormatException(
-                      'Write a report before sharing.',
-                    );
+                    setState(() => message = 'Write a report before sharing.');
+                    return;
                   }
                   await channel.invokeMethod<void>('share', {
                     'text':

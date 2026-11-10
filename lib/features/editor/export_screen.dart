@@ -22,6 +22,7 @@ class _ExportScreenState extends State<ExportScreen>
   List<Map<String, dynamic>> jobs = [];
   String? error;
   bool loading = false;
+  bool refreshPending = false;
   bool foreground = true;
   bool routeCurrent = true;
   String? _document;
@@ -64,7 +65,11 @@ class _ExportScreenState extends State<ExportScreen>
   }
 
   Future<void> refresh() async {
-    if (loading) return;
+    if (loading) {
+      refreshPending = true;
+      return;
+    }
+    refreshPending = false;
     loading = true;
     try {
       final value = await AndroidEditProjectRepository.channel
@@ -97,7 +102,14 @@ class _ExportScreenState extends State<ExportScreen>
       }
     } finally {
       loading = false;
-      schedule();
+      // A command or resume can arrive while an older list request is pending.
+      // Re-read once it drains; a stale terminal response must not stop polling
+      // a job that the user has just retried.
+      if (refreshPending && mounted && foreground && routeCurrent) {
+        unawaited(refresh());
+      } else {
+        schedule();
+      }
     }
   }
 

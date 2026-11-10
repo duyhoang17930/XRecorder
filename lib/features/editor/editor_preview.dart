@@ -37,6 +37,7 @@ class EditorPreviewState extends State<EditorPreview>
   int _seekRevision = 0;
   bool _foreground = true;
   String? _loadedDocument;
+  Future<void> _loadTail = Future<void>.value();
   @override
   void initState() {
     super.initState();
@@ -70,6 +71,9 @@ class EditorPreviewState extends State<EditorPreview>
     // Platform-view creation already starts a load. Re-sending that same
     // composition while Media3 prepares tears down its active decoder graph.
     if (_loadedDocument == identity && error == null) {
+      final revision = generation;
+      await _loadTail;
+      if (!mounted || revision != generation) return;
       if (position != null) await command('seek', position.inMilliseconds);
       return;
     }
@@ -78,7 +82,15 @@ class EditorPreviewState extends State<EditorPreview>
     unawaited(_readAspectRatio(widget.project, revision));
     final target = (position ?? _lastPosition ?? Duration.zero).inMilliseconds
         .clamp(0, widget.project.duration.inMilliseconds);
+    final previous = _loadTail;
+    final completion = Completer<void>();
+    _loadTail = completion.future;
     try {
+      // Native load waits for its previous playback graph to drain. Serialize
+      // requests and skip superseded pending edits so a quick slider gesture
+      // cannot lose the final composition to the native overlapping-load guard.
+      await previous;
+      if (!mounted || revision != generation) return;
       await channel!.invokeMethod<void>('load', document);
       if (!mounted || revision != generation) return;
       if (target > 0) await channel!.invokeMethod<void>('seek', target);
@@ -90,6 +102,8 @@ class EditorPreviewState extends State<EditorPreview>
         _loadedDocument = null;
         setState(() => error = e.toString());
       }
+    } finally {
+      completion.complete();
     }
   }
 

@@ -91,30 +91,38 @@ class ExportQueue(private val context: Context) {
             .forEach {
                 val pending = it.optString("pending")
                 if (pending.startsWith("content://media/")) {
-                    val uri = Uri.parse(pending)
-                    context.contentResolver
-                        .query(
-                            uri,
-                            arrayOf(
-                                MediaStore.MediaColumns.IS_PENDING,
-                                MediaStore.MediaColumns.OWNER_PACKAGE_NAME,
-                            ),
-                            null,
-                            null,
-                            null,
-                        )
-                        ?.use { cursor ->
-                            if (
-                                cursor.moveToFirst() && cursor.getString(1) == context.packageName
-                            ) {
-                                if (cursor.getInt(0) == 1)
-                                    context.contentResolver.delete(uri, null, null)
-                                else {
-                                    it.put("state", "completed")
-                                    it.put("uri", pending)
+                    // A damaged/stale URI must fail this job rather than crash
+                    // startup. Publication metadata alone is not proof of bytes.
+                    runCatching {
+                        val uri = Uri.parse(pending)
+                        context.contentResolver
+                            .query(
+                                uri,
+                                arrayOf(
+                                    MediaStore.MediaColumns.IS_PENDING,
+                                    MediaStore.MediaColumns.OWNER_PACKAGE_NAME,
+                                ),
+                                null,
+                                null,
+                                null,
+                            )
+                            ?.use { cursor ->
+                                if (
+                                    cursor.moveToFirst() && cursor.getString(1) == context.packageName
+                                ) {
+                                    if (cursor.getInt(0) == 1)
+                                        context.contentResolver.delete(uri, null, null)
+                                    else if (
+                                        context.contentResolver.openFileDescriptor(uri, "r")?.use { file ->
+                                            file.statSize > 0
+                                        } == true
+                                    ) {
+                                        it.put("state", "completed")
+                                        it.put("uri", pending)
+                                    }
                                 }
                             }
-                        }
+                    }
                 }
                 if (it.getString("state") != "completed") {
                     it.put("state", "failed")

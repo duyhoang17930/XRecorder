@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -50,4 +52,60 @@ void main() {
     expect(find.text('How does Trash work?'), findsOneWidget);
     expect(find.text('How do I record my screen?'), findsNothing);
   });
+  testWidgets(
+    'empty support report explains the required input without sharing',
+    (tester) async {
+      final calls = <MethodCall>[];
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(channel, (call) async {
+            calls.add(call);
+            return null;
+          });
+      await tester.pumpWidget(const MaterialApp(home: SupportScreen()));
+      await tester.ensureVisible(find.text('Open share sheet'));
+      await tester.tap(find.text('Open share sheet'));
+      await tester.pumpAndSettle();
+      expect(find.text('Write a report before sharing.'), findsOneWidget);
+      expect(calls, isEmpty);
+    },
+  );
+  testWidgets(
+    'support actions reject duplicate commands before the next frame',
+    (tester) async {
+      final pending = Completer<void>();
+      var shares = 0;
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(channel, (call) async {
+            if (call.method == 'share') {
+              shares++;
+              await pending.future;
+            }
+            return null;
+          });
+      await tester.pumpWidget(const MaterialApp(home: SupportScreen()));
+      await tester.enterText(
+        find.byType(TextField),
+        'QA report, mocked delivery',
+      );
+      await tester.ensureVisible(find.text('Open share sheet'));
+      final share = tester.widget<FilledButton>(find.byType(FilledButton));
+      share.onPressed!();
+      share.onPressed!();
+      await tester.pump();
+      try {
+        expect(shares, 1);
+        expect(
+          tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
+          isNull,
+        );
+      } finally {
+        pending.complete();
+        await tester.pumpAndSettle();
+      }
+      expect(
+        tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
+        isNotNull,
+      );
+    },
+  );
 }

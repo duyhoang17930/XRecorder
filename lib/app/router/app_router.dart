@@ -79,29 +79,41 @@ GoRouter createRouter() => GoRouter(
     GoRoute(path: '/recording/completed', redirect: (_, _) => '/videos'),
     GoRoute(
       path: '/editor/project/:id',
-      builder: (_, state) => EditorScreen(id: state.pathParameters['id']!),
+      builder: (_, state) => EditorScreen(
+        key: ValueKey(state.pathParameters['id']),
+        id: state.pathParameters['id']!,
+      ),
     ),
     GoRoute(path: '/trash', builder: (_, _) => const TrashScreen()),
     GoRoute(path: '/exports', builder: (_, _) => const ExportScreen()),
     GoRoute(
       path: '/help',
-      builder: (_, state) =>
-          HelpScreen(initialTopic: state.uri.queryParameters['topic']),
+      builder: (_, state) => HelpScreen(
+        key: ValueKey(state.uri.queryParameters['topic']),
+        initialTopic: state.uri.queryParameters['topic'],
+      ),
     ),
     GoRoute(path: '/support', builder: (_, _) => const SupportScreen()),
     GoRoute(
       path: '/photo-preview/:id',
-      builder: (_, state) =>
-          PhotoPreviewScreen(uri: state.pathParameters['id']!),
+      builder: (_, state) => PhotoPreviewScreen(
+        key: ValueKey(state.pathParameters['id']),
+        uri: state.pathParameters['id']!,
+      ),
     ),
     GoRoute(
       path: '/photo-tools/:id',
-      builder: (_, state) => PhotoToolsScreen(uri: state.pathParameters['id']!),
+      builder: (_, state) => PhotoToolsScreen(
+        key: ValueKey(state.pathParameters['id']),
+        uri: state.pathParameters['id']!,
+      ),
     ),
     GoRoute(
       path: '/media/:id',
-      builder: (_, state) =>
-          VideoDetailsScreen(id: state.pathParameters['id']!),
+      builder: (_, state) => VideoDetailsScreen(
+        key: ValueKey(state.pathParameters['id']),
+        id: state.pathParameters['id']!,
+      ),
     ),
   ],
   errorBuilder: (context, state) => Scaffold(

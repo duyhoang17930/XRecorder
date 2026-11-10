@@ -7,21 +7,55 @@ import 'settings_controller.dart';
 import '../../l10n/app_languages.dart';
 import 'app_language_dialog.dart';
 
-class SettingsHubScreen extends StatelessWidget {
+class SettingsHubScreen extends StatefulWidget {
   const SettingsHubScreen({super.key});
 
+  @override
+  State<SettingsHubScreen> createState() => _SettingsHubScreenState();
+}
+
+class _SettingsHubScreenState extends State<SettingsHubScreen> {
+  bool _openingRoute = false;
+  bool _openingOverlay = false;
+
+  Future<T?> _present<T>(Future<T?> Function() open) async {
+    if (_openingOverlay || _openingRoute || !mounted) return null;
+    _openingOverlay = true;
+    try {
+      return await open();
+    } finally {
+      _openingOverlay = false;
+    }
+  }
+
+  Future<void> _open(BuildContext context, String path) async {
+    if (_openingRoute ||
+        _openingOverlay ||
+        ModalRoute.of(context)?.isCurrent == false) {
+      return;
+    }
+    _openingRoute = true;
+    try {
+      await context.push<void>(path);
+    } finally {
+      _openingRoute = false;
+    }
+  }
+
   void _details(BuildContext context, String title, String content) {
-    showStudioDialog<void>(
-      context: context,
-      builder: (dialog) => StudioDialog(
-        title: Text(title),
-        content: Text(content),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialog),
-            child: Text(dialog.l10n.close),
-          ),
-        ],
+    _present(
+      () => showStudioDialog<void>(
+        context: context,
+        builder: (dialog) => StudioDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialog),
+              child: Text(dialog.l10n.close),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -68,13 +102,13 @@ class SettingsHubScreen extends StatelessWidget {
                 icon: AppIcons.videoSettings,
                 subtitle:
                     '${settings.resolution} · ${settings.fps} FPS · ${settings.bitrate}',
-                onTap: () => context.push('/settings/audio-video'),
+                onTap: () => _open(context, '/settings/audio-video'),
               ),
               const Divider(height: 1, indent: 72),
               SettingsRow(
                 context.l10n.audioCountdownFacecam,
                 icon: AppIcons.microphone,
-                onTap: () => context.push('/settings/audio-video'),
+                onTap: () => _open(context, '/settings/audio-video'),
               ),
             ],
           ),
@@ -104,13 +138,16 @@ class SettingsHubScreen extends StatelessWidget {
                 style: TextStyle(color: context.studioColors.muted),
               ),
               const SizedBox(height: AppSpacing.sm),
-              SettingsRow(
-                context.l10n.appLanguage,
-                icon: AppIcons.settings,
-                subtitle: settings.appLocale == null
-                    ? context.l10n.followSystem
-                    : AppLanguages.nativeName(settings.appLocale!),
-                onTap: () => showAppLanguageDialog(context),
+              Semantics(
+                container: true,
+                child: SettingsRow(
+                  context.l10n.appLanguage,
+                  icon: AppIcons.settings,
+                  subtitle: settings.appLocale == null
+                      ? context.l10n.followSystem
+                      : AppLanguages.nativeName(settings.appLocale!),
+                  onTap: () => _present(() => showAppLanguageDialog(context)),
+                ),
               ),
             ],
           ),
@@ -135,13 +172,13 @@ class SettingsHubScreen extends StatelessWidget {
                 context.l10n.trashRestore,
                 icon: AppIcons.trash,
                 subtitle: context.l10n.cleanupOnOpeningTrashAfter24Hours,
-                onTap: () => context.push('/trash'),
+                onTap: () => _open(context, '/trash'),
               ),
               const Divider(height: 1, indent: 72),
               SettingsRow(
                 context.l10n.exportQueue,
                 icon: AppIcons.export,
-                onTap: () => context.push('/exports'),
+                onTap: () => _open(context, '/exports'),
               ),
             ],
           ),
@@ -154,12 +191,12 @@ class SettingsHubScreen extends StatelessWidget {
               SettingsRow(
                 context.l10n.helpGuides,
                 icon: AppIcons.help,
-                onTap: () => context.push('/help'),
+                onTap: () => _open(context, '/help'),
               ),
               SettingsRow(
                 context.l10n.feedback,
                 icon: AppIcons.feedback,
-                onTap: () => context.push('/support'),
+                onTap: () => _open(context, '/support'),
               ),
               SettingsRow(
                 context.l10n.privacy,
@@ -174,17 +211,21 @@ class SettingsHubScreen extends StatelessWidget {
               SettingsRow(
                 context.l10n.aboutLicenses,
                 icon: AppIcons.info,
-                onTap: () => showAboutDialog(
-                  context: context,
-                  applicationName: '3HRecorder',
-                  applicationVersion: '0.1.0+1',
-                  children: [
-                    Text(
-                      context
-                          .l10n
-                          .androidScreenRecordingAndNonDestructiveEditing,
+                onTap: () => _present(
+                  () => showStudioDialog<void>(
+                    context: context,
+                    builder: (context) => AboutDialog(
+                      applicationName: '3HRecorder',
+                      applicationVersion: '0.1.0+1',
+                      children: [
+                        Text(
+                          context
+                              .l10n
+                              .androidScreenRecordingAndNonDestructiveEditing,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
@@ -195,23 +236,25 @@ class SettingsHubScreen extends StatelessWidget {
           icon: const Icon(AppIcons.reset),
           label: Text(context.l10n.resetPreferences),
           onPressed: () async {
-            final confirmed = await showStudioDialog<bool>(
-              context: context,
-              builder: (dialog) => StudioDialog(
-                title: Text(dialog.l10n.resetPreferences550bf6),
-                content: Text(
-                  dialog.l10n.restoreRecordingAndAppearancePreferencesToTheir,
+            final confirmed = await _present(
+              () => showStudioDialog<bool>(
+                context: context,
+                builder: (dialog) => StudioDialog(
+                  title: Text(dialog.l10n.resetPreferences550bf6),
+                  content: Text(
+                    dialog.l10n.restoreRecordingAndAppearancePreferencesToTheir,
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(dialog, false),
+                      child: Text(dialog.l10n.cancel),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(dialog, true),
+                      child: Text(dialog.l10n.reset),
+                    ),
+                  ],
                 ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(dialog, false),
-                    child: Text(dialog.l10n.cancel),
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.pop(dialog, true),
-                    child: Text(dialog.l10n.reset),
-                  ),
-                ],
               ),
             );
             if (confirmed == true) settings.reset();

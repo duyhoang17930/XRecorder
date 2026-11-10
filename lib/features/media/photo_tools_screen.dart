@@ -116,7 +116,13 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
       if (!mounted || !discard) return;
       setState(() => allowLeave = true);
       await WidgetsBinding.instance.endOfFrame;
-      if (mounted) context.pop();
+      if (mounted) {
+        if (context.canPop()) {
+          context.pop();
+        } else {
+          context.go('/photos');
+        }
+      }
     } finally {
       leaving = false;
     }
