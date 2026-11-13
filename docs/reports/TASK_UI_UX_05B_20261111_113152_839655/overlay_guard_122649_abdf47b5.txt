@@ -1,0 +1,58 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_05b_acceptance_test.dart test/ui_ux_05_motion_test.dart test/task09b_shared_interactions_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:00 +1: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:01 +2: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:01 +3: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:01 +4: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:01 +5: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:01 +6: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:01 +7: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:01 +8: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:02 +9: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:02 +10: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:02 +11: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:02 +12: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:02 +13: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+00:03 +14: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: rapid Settings Help taps create one destination page
+00:03 +15: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: Vietnamese sort uses context and keeps every existing option
+00:04 +16: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:04 +17: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:04 +18: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:04 +19: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:04 +20: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:04 +21: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:04 +22: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:05 +23: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:05 +24: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:05 +25: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:05 +26: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings shared rows navigate, details dismiss, and reads do not save
+00:05 +27: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: root headers width=360.0 scale=2.0 dark=false in LTR/RTL and landscape
+00:05 +28: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:05 +29: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:05 +30: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:05 +31: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:05 +32: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:05 +33: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:06 +34: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:06 +35: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:06 +36: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:06 +37: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:06 +38: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:06 +39: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:06 +40: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:06 +41: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:06 +42: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:06 +43: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:07 +44: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings reset Cancel and barrier keep values, explicit Reset persists
+00:07 +45: D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: opening tap burst=3 reduced=true cannot activate sheet item
+00:07 +46: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: About licenses returns to one dialog, then barrier dismisses it
+00:07 +47: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: About licenses returns to one dialog, then barrier dismisses it
+00:07 +48: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: About licenses returns to one dialog, then barrier dismisses it
+00:07 +49: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings language search selection and all themes persist
+00:08 +50: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Settings read failure never overwrites and retries, save failure retries
+00:09 +51: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: Support attachment cancel replace remove and permission retry
+00:10 +52: D:/FAU_App/XRecorder/test/task09b_shared_interactions_test.dart: (tearDownAll)
+00:10 +52: All tests passed!
+
+Exit=0

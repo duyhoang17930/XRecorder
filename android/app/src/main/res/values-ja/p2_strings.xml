@@ -3,4 +3,5 @@
     <string name="p2_edit_video" formatted="false">動画編集</string>
     <string name="p2_edit_photo" formatted="false">写真編集</string>
     <string name="p2_preview_unavailable" formatted="false">このビデオは再生できず、アクセスがキャンセルされました。</string>
+    <string name="p2_back" formatted="false">戻る</string>
 </resources>

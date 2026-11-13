@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:xrecorder/app/theme/app_theme.dart';
 import 'package:xrecorder/features/editor/project_effects.dart';
+import 'package:xrecorder/features/editor/editor_workspace.dart';
 import 'package:xrecorder/features/media/photo_tools_screen.dart';
 import 'package:xrecorder/features/media/photo_editor_panels.dart';
 import 'package:xrecorder/l10n/localization.dart';
@@ -55,13 +56,22 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  Finder key(String name) => find.byKey(ValueKey(name));
+  Finder key(String name) => find.byKey(
+    ValueKey(name == 'photo-tool-eraser' ? 'photo-context-eraser' : name),
+  );
+  bool selectedTool(WidgetTester tester, Finder finder) =>
+      switch (tester.widget(finder)) {
+        EditorTool(:final selected) => selected,
+        ChoiceChip(:final selected) => selected,
+        _ => throw StateError('Unexpected tool presentation'),
+      };
   Finder getCanvas() => find.byWidgetPredicate(
     (w) => w is CustomPaint && w.painter is PhotoPainter,
   );
   PhotoPainter painter(WidgetTester tester) =>
       tester.widget<CustomPaint>(getCanvas()).painter! as PhotoPainter;
   Future<void> tool(WidgetTester tester, String name) async {
+    if (name == 'eraser') await tool(tester, 'pen');
     final control = key('photo-tool-$name');
     await tester.ensureVisible(control);
     await tester.tap(control);
@@ -76,6 +86,65 @@ void main() {
     );
     await tester.pumpAndSettle();
   }
+
+  testWidgets('short RTL landscape retains canvas and reachable tools', (
+    tester,
+  ) async {
+    await photo(tester, size: const Size(800, 320), scale: 2, rtl: true);
+    // Match Android status/gesture insets; a zero-inset desktop fixture leaves
+    // more height and did not exercise the device's short-workspace fallback.
+    tester.view.padding = const FakeViewPadding(top: 24, bottom: 24);
+    tester.view.viewPadding = const FakeViewPadding(top: 24, bottom: 24);
+    addTearDown(tester.view.resetPadding);
+    addTearDown(tester.view.resetViewPadding);
+    await tester.pumpAndSettle();
+    expect(getCanvas(), findsOneWidget);
+    final image = painter(tester).image;
+    expect(key('photo-tool-text'), findsOneWidget);
+    await tool(tester, 'text');
+    await tester.ensureVisible(find.byType(TextField));
+    await tester.enterText(find.byType(TextField), 'Short viewport');
+    tester.testTextInput.hide();
+    await tester.pumpAndSettle();
+    expect(selectedTool(tester, key('photo-tool-text')), isTrue);
+    expect(identical(painter(tester).image, image), isTrue);
+    expect(painter(tester).marks, isEmpty);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('accessibility changes retain manually scrolled photo tools', (
+    tester,
+  ) async {
+    await photo(tester, size: const Size(360, 800), scale: 1.5);
+    final strip = find.ancestor(
+      of: key('photo-tool-text'),
+      matching: find.byType(SingleChildScrollView),
+    );
+    final scrollable = find.descendant(
+      of: strip,
+      matching: find.byType(Scrollable),
+    );
+    await tester.drag(strip, const Offset(-240, 0));
+    await tester.pumpAndSettle();
+    final position = tester.state<ScrollableState>(scrollable).position;
+    final before = position.pixels;
+    expect(before, greaterThan(80));
+    tester.platformDispatcher.accessibilityFeaturesTestValue =
+        const FakeAccessibilityFeatures(accessibleNavigation: true);
+    addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+    await tester.pumpAndSettle();
+    expect(position.pixels, closeTo(before, .1));
+    tester.platformDispatcher.accessibilityFeaturesTestValue =
+        const FakeAccessibilityFeatures();
+    await tester.pumpAndSettle();
+    expect(position.pixels, closeTo(before, .1));
+    await tester.tap(key('photo-tool-text'));
+    await tester.pumpAndSettle();
+    expect(find.byType(TextField), findsOneWidget);
+    expect(selectedTool(tester, key('photo-tool-text')), isTrue);
+    expect(painter(tester).marks, isEmpty);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets(
     'photo contextual controls retain color, drawing and undo across panels',
@@ -156,7 +225,7 @@ void main() {
       await tester.binding.handlePopRoute();
       await tester.pumpAndSettle();
       expect(painter(tester).marks.single.points, points);
-      expect(tester.widget<ChoiceChip>(key('photo-tool-pen')).selected, isTrue);
+      expect(selectedTool(tester, key('photo-tool-pen')), isTrue);
       await tester.tap(find.byTooltip('All tools'));
       await tester.pumpAndSettle();
       await tester.tap(find.widgetWithText(ListTile, 'Circle'));
@@ -208,6 +277,30 @@ void main() {
     );
   });
 
+  testWidgets('Text Apply places a reversible mark without a hidden gesture', (
+    tester,
+  ) async {
+    await photo(tester);
+    await tool(tester, 'text');
+    await tester.enterText(find.byType(TextField), 'UI06 text');
+    tester.testTextInput.hide();
+    await tester.pumpAndSettle();
+    final apply = find.widgetWithText(TextButton, 'Apply');
+    await tester.ensureVisible(apply);
+    await tester.tap(apply);
+    await tester.pumpAndSettle();
+    expect(painter(tester).marks.single.text, 'UI06 text');
+    expect(painter(tester).marks.single.points, [const Offset(.5, .5)]);
+    await tester.tap(find.byTooltip('Undo photo edit'));
+    await tester.pumpAndSettle();
+    expect(painter(tester).marks, isEmpty);
+    await tester.tap(find.byTooltip('Redo photo edit'));
+    await tester.pumpAndSettle();
+    expect(painter(tester).marks.single.text, 'UI06 text');
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
   testWidgets('selected tool remains visible after viewport rotation', (
     tester,
   ) async {
@@ -224,7 +317,7 @@ void main() {
       final bounds = tester.getRect(selected);
       expect(bounds.left, greaterThanOrEqualTo(viewport.left));
       expect(bounds.right, lessThanOrEqualTo(viewport.right));
-      expect(tester.widget<ChoiceChip>(selected).selected, isTrue);
+      expect(selectedTool(tester, selected), isTrue);
     }
     expect(tester.takeException(), isNull);
     await tester.pumpWidget(const SizedBox.shrink());
@@ -319,10 +412,7 @@ void main() {
           );
           for (final name in ['crop', 'transform', 'pen', 'text', 'eraser']) {
             await tool(tester, name);
-            expect(
-              tester.widget<ChoiceChip>(key('photo-tool-$name')).selected,
-              isTrue,
-            );
+            expect(selectedTool(tester, key('photo-tool-$name')), isTrue);
             expect(tester.takeException(), isNull);
           }
           await tester.tap(find.byTooltip(strings.editorExportQuality));
@@ -344,10 +434,7 @@ void main() {
           await tester.ensureVisible(close);
           await tester.tap(close);
           await tester.pumpAndSettle();
-          expect(
-            tester.widget<ChoiceChip>(key('photo-tool-pen')).selected,
-            isTrue,
-          );
+          expect(selectedTool(tester, key('photo-tool-pen')), isTrue);
           await tester.pumpWidget(const SizedBox.shrink());
         });
       }

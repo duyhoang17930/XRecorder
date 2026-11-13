@@ -1,0 +1,44 @@
+[
+  {
+    "scenario": "video_scrub",
+    "build": {
+      "frames": 65,
+      "meanMs": 2.3947846153846153,
+      "p50Ms": 1.559,
+      "p90Ms": 3.996,
+      "p99Ms": 22.526,
+      "maxMs": 22.526,
+      "over16_67ms": 1
+    },
+    "raster": {
+      "frames": 65,
+      "meanMs": 10.533292307692308,
+      "p50Ms": 5.432,
+      "p90Ms": 14.443,
+      "p99Ms": 101.404,
+      "maxMs": 101.404,
+      "over16_67ms": 6
+    }
+  },
+  {
+    "scenario": "video_rotation",
+    "build": {
+      "frames": 6,
+      "meanMs": 9.590833333333334,
+      "p50Ms": 4.27,
+      "p90Ms": 23.948,
+      "p99Ms": 23.948,
+      "maxMs": 23.948,
+      "over16_67ms": 1
+    },
+    "raster": {
+      "frames": 6,
+      "meanMs": 48.441,
+      "p50Ms": 31.228,
+      "p90Ms": 100.12,
+      "p99Ms": 100.12,
+      "maxMs": 100.12,
+      "over16_67ms": 5
+    }
+  }
+]

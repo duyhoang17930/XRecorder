@@ -1,0 +1,71 @@
+[
+  {
+    "scenario": "color_picker",
+    "phase": "after",
+    "wallSeconds": 6.514999999999418,
+    "build": {
+      "frames": 122,
+      "meanMs": 3.1254836065573772,
+      "p50Ms": 2.204,
+      "p90Ms": 6.565,
+      "p99Ms": 13.23,
+      "maxMs": 17.149,
+      "over16_67ms": 1
+    },
+    "raster": {
+      "frames": 122,
+      "meanMs": 26.728040983606558,
+      "p50Ms": 26.805,
+      "p90Ms": 32.435,
+      "p99Ms": 54.006,
+      "maxMs": 58.071,
+      "over16_67ms": 113
+    }
+  },
+  {
+    "scenario": "drawing",
+    "phase": "after",
+    "wallSeconds": 5.468999999999141,
+    "build": {
+      "frames": 151,
+      "meanMs": 2.825887417218543,
+      "p50Ms": 2.138,
+      "p90Ms": 4.996,
+      "p99Ms": 12.992,
+      "maxMs": 13.04,
+      "over16_67ms": 0
+    },
+    "raster": {
+      "frames": 151,
+      "meanMs": 25.89332450331126,
+      "p50Ms": 26.153,
+      "p90Ms": 31.564,
+      "p99Ms": 53.104,
+      "maxMs": 55.173,
+      "over16_67ms": 138
+    }
+  },
+  {
+    "scenario": "photo_rotation",
+    "phase": "after",
+    "wallSeconds": 3.8590000000003783,
+    "build": {
+      "frames": 6,
+      "meanMs": 8.226333333333333,
+      "p50Ms": 3.46,
+      "p90Ms": 18.104,
+      "p99Ms": 18.104,
+      "maxMs": 18.104,
+      "over16_67ms": 2
+    },
+    "raster": {
+      "frames": 6,
+      "meanMs": 38.116,
+      "p50Ms": 34.078,
+      "p90Ms": 65.498,
+      "p99Ms": 65.498,
+      "maxMs": 65.498,
+      "over16_67ms": 5
+    }
+  }
+]

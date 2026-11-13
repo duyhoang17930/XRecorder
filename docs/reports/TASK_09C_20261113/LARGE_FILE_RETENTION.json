@@ -1,0 +1,778 @@
+[
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/avds/ThreeHRecorder_TASK09B_API36.avd/userdata-qemu.img.qcow2",
+    "bytes": 12164071424,
+    "mtime_ns": 1794412928866114300,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/avds/ThreeHRecorder_TASK08_API36.avd/userdata-qemu.img.qcow2",
+    "bytes": 8992391168,
+    "mtime_ns": 1794204920819050800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task021_avd/ThreeHRecorder_Task021.avd/userdata-qemu.img.qcow2",
+    "bytes": 6442909696,
+    "mtime_ns": 1794122399160968600,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09/avds/ThreeHRecorder_TASK09_API36.avd/userdata-qemu.img.qcow2",
+    "bytes": 6438977536,
+    "mtime_ns": 1794223281316598400,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/offline_checkpoint_v2_20261109T041649Z_140e2301/ThreeHRecorder_TASK08_API36.avd/userdata-qemu.img.qcow2",
+    "bytes": 5923209216,
+    "mtime_ns": 1794197855741851600,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/offline_checkpoint_v2_20261109T040853Z_4d4ea6d8/ThreeHRecorder_TASK08_API36.avd/userdata-qemu.img.qcow2",
+    "bytes": 5811666944,
+    "mtime_ns": 1794197358819872100,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/offline_checkpoint_v2_20261109T034847Z_fa387232/ThreeHRecorder_TASK08_API36.avd/userdata-qemu.img.qcow2",
+    "bytes": 5363662848,
+    "mtime_ns": 1794196148671431300,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/offline_checkpoint_v2_20261109T034457Z_f0393303/ThreeHRecorder_TASK08_API36.avd/userdata-qemu.img.qcow2",
+    "bytes": 5348917248,
+    "mtime_ns": 1794195919845029900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/offline_checkpoint_v1_20261108T095427Z_10b59617/ThreeHRecorder_TASK08_API36.avd/userdata-qemu.img.qcow2",
+    "bytes": 5258215424,
+    "mtime_ns": 1794131689704995400,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task07/avds/ThreeHRecorder_TASK07_16KB.avd/userdata-qemu.img.qcow2",
+    "bytes": 4257415168,
+    "mtime_ns": 1794202296374112500,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task07/avds/ThreeHRecorder_TASK07_API34_Clone.avd/userdata-qemu.img.qcow2",
+    "bytes": 3430285312,
+    "mtime_ns": 1794202755675572200,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task07/avds/ThreeHRecorder_TASK07_API34_Clone.avd/userdata-qemu.img",
+    "bytes": 3239641088,
+    "mtime_ns": 1794080034116308700,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/final_api34_avd/ThreeHRecorder_Final_API34.avd/userdata-qemu.img.qcow2",
+    "bytes": 3239641088,
+    "mtime_ns": 1794048425281451600,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/avds/ThreeHRecorder_TASK09B_API36.avd/snapshots/default_boot/ram.img",
+    "bytes": 3221291008,
+    "mtime_ns": 1794224325459321700,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09/avds/ThreeHRecorder_TASK09_API36.avd/snapshots/default_boot/ram.img",
+    "bytes": 3221291008,
+    "mtime_ns": 1794216079293438900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/offline_checkpoint_v2_20261109T041649Z_140e2301/ThreeHRecorder_TASK08_API36.avd/snapshots/default_boot/ram.img",
+    "bytes": 3221291008,
+    "mtime_ns": 1794197816363310600,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/offline_checkpoint_v2_20261109T040853Z_4d4ea6d8/ThreeHRecorder_TASK08_API36.avd/snapshots/default_boot/ram.img",
+    "bytes": 3221291008,
+    "mtime_ns": 1794197340385013100,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/offline_checkpoint_v2_20261109T034847Z_fa387232/ThreeHRecorder_TASK08_API36.avd/snapshots/default_boot/ram.img",
+    "bytes": 3221291008,
+    "mtime_ns": 1794196132802384700,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/offline_checkpoint_v2_20261109T034457Z_f0393303/ThreeHRecorder_TASK08_API36.avd/snapshots/default_boot/ram.img",
+    "bytes": 3221291008,
+    "mtime_ns": 1794195903043204300,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/offline_checkpoint_v1_20261108T095427Z_10b59617/ThreeHRecorder_TASK08_API36.avd/snapshots/default_boot/ram.img",
+    "bytes": 3221291008,
+    "mtime_ns": 1794131673267315800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/avds/ThreeHRecorder_TASK08_API36.avd/snapshots/default_boot/ram.img",
+    "bytes": 3221291008,
+    "mtime_ns": 1794122290502184800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task07/avds/ThreeHRecorder_TASK07_API34_Clone.avd/snapshots/default_boot/ram.img",
+    "bytes": 3221291008,
+    "mtime_ns": 1794199134446223100,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task021_avd/ThreeHRecorder_Task021.avd/snapshots/default_boot/ram.img",
+    "bytes": 3221291008,
+    "mtime_ns": 1793879154769490100,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task07/avds/ThreeHRecorder_TASK07_16KB.avd/snapshots/default_boot/ram.img",
+    "bytes": 2147549184,
+    "mtime_ns": 1794201978276987300,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/final_api34_avd/ThreeHRecorder_Final_API34.avd/snapshots/default_boot/ram.img",
+    "bytes": 2147549184,
+    "mtime_ns": 1794046923081157700,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/m6_api36_main_restore_v1/archive_private_v1/task08_backup_v1_f91f6793405e4fb1b591dc91bc696a29.tar",
+    "bytes": 900559360,
+    "mtime_ns": 1794204702538019900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/memory/library_ar_light_200_v2/archive_private_v1/task08_backup_v1_ee2ed31e27ca47b5a41d04cec442650d.tar",
+    "bytes": 890755072,
+    "mtime_ns": 1794204078735623700,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/m6_api36_final_install_v1/archive_private_v1/task08_backup_v1_c43cf6be3869428a95e6c62f41e9e6a0.tar",
+    "bytes": 889888768,
+    "mtime_ns": 1794202876507722900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09/run_20261109T091518633188Z/final_main_install_v1/archive_private_v1/task08_backup_v1_6a2b9fd99dc54f5caef724d9ce982421.tar",
+    "bytes": 863328256,
+    "mtime_ns": 1794219248243812900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/m6_api34_final_install_v1/archive_private_v1/task08_backup_v1_bef1b51f907f4b3fb996fdb641a2b805.tar",
+    "bytes": 547949056,
+    "mtime_ns": 1794202529563209800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/m4_api34_install_v1/archive_private_v1/task08_backup_v1_ed16f060e8ae43f2a61505215c97789a.tar",
+    "bytes": 545520128,
+    "mtime_ns": 1794199249074525800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task07/translation_model/model.bin",
+    "bytes": 490667752,
+    "mtime_ns": 1794053302676454900,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/memory/editor_soak_v3/archive_private_transport_v2/task08_backup_v1_fb6bfa427571435e9cb10b7d719dd39a.tar",
+    "bytes": 451326976,
+    "mtime_ns": 1794130351385622100,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/memory/trash_green_install_v3/archive_private_v1/task08_backup_v1_4686dd5fe97142c5bdf3b5b6dcb67ffa.tar",
+    "bytes": 451317248,
+    "mtime_ns": 1794128683987315200,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/memory/library_ar_light_200_v1/before_private.tar",
+    "bytes": 451307520,
+    "mtime_ns": 1794126504745207000,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09/run_20261109T091518633188Z/backend_native_v1/archive_private_v1/task08_backup_v1_46b2b8fd620f4125b1a871ea38cd5e45.tar",
+    "bytes": 447542272,
+    "mtime_ns": 1794217822423357800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/memory/trash_green_install_v1/before_private.tar",
+    "bytes": 433577472,
+    "mtime_ns": 1794127675609440600,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/uiux02/workspace/build/app/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/x86_64/libflutter.so",
+    "bytes": 390563592,
+    "mtime_ns": 1794287541948911000,
+    "classification": "I REGENERABLE BUILD ARTIFACT",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/app/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/x86_64/libflutter.so",
+    "bytes": 390563592,
+    "mtime_ns": 1794388859408727000,
+    "classification": "I REGENERABLE BUILD ARTIFACT",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/flutter_driver_commands_0.log",
+    "bytes": 300548662,
+    "mtime_ns": 1794251336643629900,
+    "classification": "I REGENERABLE BUILD ARTIFACT",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/memory/editor_soak_v3_transport_v2/bounded_transport_v4/complete_private_v4.tar",
+    "bytes": 234881024,
+    "mtime_ns": 1794131036744245400,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/m6_api34_final_install_v1/archive_external_v1/task08_backup_v1_acd8487313c4462e8e7d90023083952b.tar",
+    "bytes": 227348480,
+    "mtime_ns": 1794202544824837900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/m4_api34_install_v1/archive_external_v1/task08_backup_v1_4956537ac4694610831cc2d57adbd46d.tar",
+    "bytes": 227348480,
+    "mtime_ns": 1794199267272145800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09/run_20261109T091518633188Z/backup_transport_probe_v1/task08_backup_v1_4e3402fe2a8e478a8eb4d9bc3ca708aa.tar",
+    "bytes": 217120768,
+    "mtime_ns": 1794220121801019800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/memory/trash_green_install_v2/before_private.tar",
+    "bytes": 199129088,
+    "mtime_ns": 1794127951546464500,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/p2_p3/apk/3HRecorder-qa-debug.apk",
+    "bytes": 192045080,
+    "mtime_ns": 1794021965960020100,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/final_p2_p3/apk/3HRecorder-QA-debug.apk",
+    "bytes": 192045080,
+    "mtime_ns": 1794047185357356200,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task031/main-debug.apk",
+    "bytes": 192044437,
+    "mtime_ns": 1793950946607118500,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task03/main-debug.apk",
+    "bytes": 192044437,
+    "mtime_ns": 1793935250667485500,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/fixture_stage_v1/ggml-small-q5_1.bin",
+    "bytes": 190085487,
+    "mtime_ns": 1794126187816804800,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/p2_p3/models/ggml-small-q5_1.bin",
+    "bytes": 190085487,
+    "mtime_ns": 1793986286091910100,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/main_startup_ab_e0f130a1d7d448c88a1972f1e90153a3/current_safe_update/archive_private_v1/task08_backup_v1_378f8bd8ceb34c1eae19bb9777e7f27e.tar",
+    "bytes": 184260608,
+    "mtime_ns": 1794274425052287400,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/main_startup_ab_e0f130a1d7d448c88a1972f1e90153a3/baseline_safe_update/archive_private_v1/task08_backup_v1_94a3f2f50f70498b9dd4fb5513ed0fbd.tar",
+    "bytes": 184260608,
+    "mtime_ns": 1794274358182628900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/final_main_safe_update_v1/archive_private_v1/task08_backup_v1_d475def53b054a8ab8ba346c5ff4cfb2.tar",
+    "bytes": 184260608,
+    "mtime_ns": 1794273654126308200,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/profile_ab_thumbnail_boundary_320_v1/archive_private_v1/task08_backup_v1_d2ab75f023724aa5b20c389e8908382f.tar",
+    "bytes": 184259584,
+    "mtime_ns": 1794250792878693900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/profile_ab_baseline_320_v1/archive_private_v1/task08_backup_v1_d469d35048094734a17c7cdd3671b126.tar",
+    "bytes": 184257536,
+    "mtime_ns": 1794250223995321300,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_global_landscape_v1/archive_private_v1/task08_backup_v1_f2657c0150bc4597a4ce40e860f22347.tar",
+    "bytes": 182615040,
+    "mtime_ns": 1794249253255687200,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_media_ui_v3/archive_private_v1/task08_backup_v1_e5dfc9d7e15b4577adc9cf979871c374.tar",
+    "bytes": 181181440,
+    "mtime_ns": 1794248827809564600,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_global_320_remaining_v2/archive_private_v1/task08_backup_v1_c397157034c94cceb847cd7693e70cf9.tar",
+    "bytes": 180933632,
+    "mtime_ns": 1794248099632909400,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_media_ui_v2/archive_private_v1/task08_backup_v1_3542c6db59bc47a987c1c48eacfee997.tar",
+    "bytes": 180928000,
+    "mtime_ns": 1794247736971958700,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_library_320_controls_v4/archive_private_v1/task08_backup_v1_42f6ea67babc4cac85f8cdcdb22f5e9b.tar",
+    "bytes": 180782592,
+    "mtime_ns": 1794246825894412800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_library_320_controls_v3/archive_private_v1/task08_backup_v1_5c04057d520749d59d2dfe558048cea1.tar",
+    "bytes": 180782592,
+    "mtime_ns": 1794246204975187700,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_global_320_v1/archive_private_v1/task08_backup_v1_7a011fa8d5cb4b4993b322b16b682aa4.tar",
+    "bytes": 180782592,
+    "mtime_ns": 1794247117002511700,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/app/intermediates/merged_native_libs/profile/mergeProfileNativeLibs/out/lib/x86_64/libflutter.so",
+    "bytes": 174612224,
+    "mtime_ns": 1794410842392581300,
+    "classification": "I REGENERABLE BUILD ARTIFACT",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/app/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/x86_64/libflutter.so",
+    "bytes": 166186240,
+    "mtime_ns": 1794197935821139100,
+    "classification": "I REGENERABLE BUILD ARTIFACT",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task022/main.apk",
+    "bytes": 165377596,
+    "mtime_ns": 1793929055722469900,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task021/main-debug.apk",
+    "bytes": 165369592,
+    "mtime_ns": 1793880413838354600,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task022/before-test.apk",
+    "bytes": 165369352,
+    "mtime_ns": 1793927448534691000,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/app/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/arm64-v8a/libflutter.so",
+    "bytes": 165324816,
+    "mtime_ns": 1794197935172497900,
+    "classification": "I REGENERABLE BUILD ARTIFACT",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_library_320_v2/archive_private_v1/task08_backup_v1_917802626ff34decb9c2cec51b1b330b.tar",
+    "bytes": 159702528,
+    "mtime_ns": 1794244946458934900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_media_ui_v1/archive_private_v1/task08_backup_v1_b7814936c5264822bd4c8ed28ea54df0.tar",
+    "bytes": 159696896,
+    "mtime_ns": 1794244452274172400,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_document_v2/archive_private_v1/task08_backup_v1_bb28fdebd3284d69809d324e21595467.tar",
+    "bytes": 159691776,
+    "mtime_ns": 1794244283526174600,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_library_install_v1/archive_private_v1/task08_backup_v1_8a99118a44f745f9ad87f6283bd4c712.tar",
+    "bytes": 159436800,
+    "mtime_ns": 1794243670322198300,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_global_ar_install_v1/archive_private_v1/task08_backup_v1_3c263cddd8b340f39f2e4ffeb2c02713.tar",
+    "bytes": 159404032,
+    "mtime_ns": 1794243381313566000,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_document_install_v1/archive_private_v1/task08_backup_v1_c39b855e59e4487aaaf280737e6bf696.tar",
+    "bytes": 159398912,
+    "mtime_ns": 1794243146689248500,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_still_preview_install_v1/archive_private_v1/task08_backup_v1_a540f969a8f04de2aa3d341260eee539.tar",
+    "bytes": 159392768,
+    "mtime_ns": 1794243024682259900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/m2_16kb_reload_install_v1/archive_private_v1/task08_backup_v1_4195118b689c4c378ccc74aac0224b1f.tar",
+    "bytes": 159050240,
+    "mtime_ns": 1794201080130571800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/m2_16kb_mapping_install_v1/archive_private_v1/task08_backup_v1_9d420a1a2df740ee9b1f95a9a196fb95.tar",
+    "bytes": 159049216,
+    "mtime_ns": 1794200575821324500,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_global_v7_install/archive_private_v1/task08_backup_v1_c1b8e72617a042938c8691c95a0f0d9f.tar",
+    "bytes": 158323200,
+    "mtime_ns": 1794241924184036100,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_recovery_install_v2/archive_private_v1/task08_backup_v1_01cd6476ccd04ac7bc759b46a94f6794.tar",
+    "bytes": 157379072,
+    "mtime_ns": 1794240625554694000,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_global_411_v3/archive_private_v1/task08_backup_v1_c91b6bf2ddd34deb9806c6ffeaacc93d.tar",
+    "bytes": 156675584,
+    "mtime_ns": 1794238916907868900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_global_411_v2/archive_private_v1/task08_backup_v1_ad0fc8a04bb94d1baa9ec5424978695e.tar",
+    "bytes": 156673536,
+    "mtime_ns": 1794238589678963500,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/m4_16kb_install_v1/archive_private_v1/task08_backup_v1_737c3deaf9e34df39c39cb839b04b326.tar",
+    "bytes": 156618240,
+    "mtime_ns": 1794199821230108800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_global_411_v1/archive_private_v1/task08_backup_v1_439bf6e9f04247bd899c11860d9d479a.tar",
+    "bytes": 155421696,
+    "mtime_ns": 1794235690106645400,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_output_model_v1/archive_private_v1/task08_backup_v1_c9d931b0f5504f59b13b76b64ee604ce.tar",
+    "bytes": 155416576,
+    "mtime_ns": 1794235405082729100,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/native_editor_v2/archive_private_v1/task08_backup_v1_dce1b0a8c69d477cb262f1c439a4480e.tar",
+    "bytes": 155411456,
+    "mtime_ns": 1794234597871924500,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/app/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/armeabi-v7a/libflutter.so",
+    "bytes": 151722596,
+    "mtime_ns": 1794197934548294800,
+    "classification": "I REGENERABLE BUILD ARTIFACT",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/fixture_stage_v1/ggml-base.bin",
+    "bytes": 147951465,
+    "mtime_ns": 1794126187311971200,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/p2_p3/models/ggml-base.bin",
+    "bytes": 147951465,
+    "mtime_ns": 1793984633122785800,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/p2_p3/catalog-stress.apk",
+    "bytes": 146796066,
+    "mtime_ns": 1793979865111684600,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/verification/task08/memory/editor_soak_v3_transport_v2/archive_private_relative_v3/task08_backup_v1_401a9d422fd24c4caa45ae5f73a69599.tar",
+    "bytes": 137232384,
+    "mtime_ns": 1794130807437599900,
+    "classification": "L UNKNOWN / PROTECTED",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/app/outputs/flutter-apk/app-debug.apk",
+    "bytes": 120022152,
+    "mtime_ns": 1794410783551761400,
+    "classification": "I REGENERABLE BUILD ARTIFACT",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/app/outputs/apk/debug/app-debug.apk",
+    "bytes": 120022152,
+    "mtime_ns": 1794410783032308000,
+    "classification": "I REGENERABLE BUILD ARTIFACT",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task031/after.apk",
+    "bytes": 120020133,
+    "mtime_ns": 1793937807792852800,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task031/before.apk",
+    "bytes": 120020133,
+    "mtime_ns": 1793936722397304700,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task031/native.apk",
+    "bytes": 120020133,
+    "mtime_ns": 1793937626889304100,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  },
+  {
+    "path": "build/task031/visual.apk",
+    "bytes": 120020133,
+    "mtime_ns": 1793937654147864900,
+    "classification": "H QA / RECOVERY EVIDENCE",
+    "owner": "QA/history; retention owner required",
+    "deletion_eligibility": "not authorized; protected/unknown or retention review required"
+  }
+]

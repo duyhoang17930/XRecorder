@@ -1,0 +1,255 @@
+[
+  {
+    "case": "settings-destination-back",
+    "labels": [
+      "3HRECORDER\nSettings",
+      "CAPTURE",
+      "Recording settings\nVideo quality, audio & recording options",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nEnglish",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Trash & restore\nCleanup on opening Trash after 24 hours",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "case": "rapid-create",
+    "taps": 2,
+    "createSheetRemained": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Create",
+      "Close create menu",
+      "Screen recording\nVideo, audio & facecam",
+      "Screenshot\nMinimizes after approval · 3s delay",
+      "Facecam\nSet up before recording",
+      "Recording region\nUnavailable",
+      "Countdown\nDelay before recording",
+      "Livestream\nNot connected\nUnavailable",
+      "AI subtitles\nNot connected\nUnavailable"
+    ]
+  },
+  {
+    "case": "rapid-create",
+    "taps": 3,
+    "createSheetRemained": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Create",
+      "Close create menu",
+      "Screen recording\nVideo, audio & facecam",
+      "Screenshot\nMinimizes after approval · 3s delay",
+      "Facecam\nSet up before recording",
+      "Recording region\nUnavailable",
+      "Countdown\nDelay before recording",
+      "Livestream\nNot connected\nUnavailable",
+      "AI subtitles\nNot connected\nUnavailable"
+    ]
+  },
+  {
+    "case": "rapid-create",
+    "taps": 5,
+    "createSheetRemained": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Create",
+      "Close create menu",
+      "Screen recording\nVideo, audio & facecam",
+      "Screenshot\nMinimizes after approval · 3s delay",
+      "Facecam\nSet up before recording",
+      "Recording region\nUnavailable",
+      "Countdown\nDelay before recording",
+      "Livestream\nNot connected\nUnavailable",
+      "AI subtitles\nNot connected\nUnavailable"
+    ]
+  },
+  {
+    "case": "deliberate-create-handoff-no-recording",
+    "labels": [
+      "3HRECORDER\nSettings",
+      "CAPTURE",
+      "Recording settings\nVideo quality, audio & recording options",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nEnglish",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Trash & restore\nCleanup on opening Trash after 24 hours",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "case": "player-back-target",
+    "bounds": [
+      8,
+      60,
+      56,
+      108
+    ]
+  },
+  {
+    "case": "play-pause",
+    "control": {
+      "index": "1",
+      "text": "",
+      "resource-id": "android:id/pause",
+      "class": "android.widget.ImageButton",
+      "package": "com.xrecorder.xrecorder",
+      "content-desc": "Play",
+      "checkable": "false",
+      "checked": "false",
+      "clickable": "true",
+      "enabled": "true",
+      "focusable": "true",
+      "focused": "false",
+      "scrollable": "false",
+      "long-clickable": "false",
+      "password": "false",
+      "selected": "false",
+      "bounds": "[170,812][241,864]",
+      "drawing-order": "3",
+      "hint": ""
+    }
+  },
+  {
+    "case": "player-visible-back",
+    "labels": [
+      "Back",
+      "Media details",
+      "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+      "Preview",
+      "Preview",
+      "Share",
+      "File management",
+      "Rename",
+      "Copy to folder",
+      "Move to folder",
+      "Move to Trash",
+      "Size\n426.3 KiB",
+      "Format\nvideo/mp4"
+    ]
+  },
+  {
+    "case": "player-landscape-system-back",
+    "labels": [
+      "Back",
+      "Media details",
+      "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+      "Preview",
+      "Preview",
+      "Share",
+      "File management",
+      "Rename",
+      "Copy to folder",
+      "Move to folder",
+      "Move to Trash",
+      "Size\n426.3 KiB",
+      "Format\nvideo/mp4"
+    ]
+  },
+  {
+    "case": "player-end-reopen-back",
+    "labels": [
+      "Back",
+      "Media details",
+      "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+      "Preview",
+      "Preview",
+      "Share",
+      "File management",
+      "Rename",
+      "Copy to folder",
+      "Move to folder",
+      "Move to Trash",
+      "Size\n426.3 KiB",
+      "Format\nvideo/mp4"
+    ]
+  },
+  {
+    "case": "settings-stretch-10-flings",
+    "labels": [
+      "3HRECORDER\nSettings",
+      "CAPTURE",
+      "Recording settings\nVideo quality, audio & recording options",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nEnglish",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Trash & restore\nCleanup on opening Trash after 24 hours",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "case": "background-foreground",
+    "labels": [
+      "3HRECORDER\nSettings",
+      "CAPTURE",
+      "Recording settings\nVideo quality, audio & recording options",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nEnglish",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Trash & restore\nCleanup on opening Trash after 24 hours",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  }
+]

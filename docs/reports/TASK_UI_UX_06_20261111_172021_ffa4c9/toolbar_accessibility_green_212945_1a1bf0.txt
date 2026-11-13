@@ -1,0 +1,84 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/editor_hci_test.dart test/ui_ux_06_workflows_test.dart test/ux_interaction_test.dart --reporter expanded
+00:00 +0: loading D:/FAU_App/XRecorder/test/editor_hci_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/editor_hci_test.dart: accessibility changes retain manually scrolled photo tools
+00:00 +1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: accessibility changes retain manually scrolled photo tools
+00:00 +2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: accessibility changes retain manually scrolled photo tools
+00:01 +3: D:/FAU_App/XRecorder/test/editor_hci_test.dart: accessibility changes retain manually scrolled photo tools
+00:01 +4: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +5: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:02 +6: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:02 +7: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:02 +8: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:02 +9: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:02 +10: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:02 +11: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +13: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 light at 200 percent
+00:04 +14: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: cancel New video leaves every draft untouched
+00:04 +15: D:/FAU_App/XRecorder/test/editor_hci_test.dart: tool pickers preserve edits on Back and agree on selected shape
+00:04 +16: D:/FAU_App/XRecorder/test/editor_hci_test.dart: tool pickers preserve edits on Back and agree on selected shape
+00:04 +17: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 dark at 200 percent
+00:05 +18: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact Create preserves guard for 3 rapid taps
+00:05 +19: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo text remains editable with a landscape keyboard
+00:05 +20: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 light at 200 percent
+00:05 +21: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 light at 200 percent
+00:05 +22: D:/FAU_App/XRecorder/test/editor_hci_test.dart: Text Apply places a reversible mark without a hidden gesture
+00:05 +23: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact All tools preserves guard for 2 rapid taps
+00:05 +24: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 dark at 200 percent
+00:06 +25: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 dark at 200 percent
+00:06 +26: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 dark at 200 percent
+00:06 +27: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 dark at 200 percent
+00:06 +28: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 dark at 200 percent
+00:06 +29: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Media Details Edit keeps URI and reuses its launched project: content://media/external/video/media/42
+00:06 +30: D:/FAU_App/XRecorder/test/editor_hci_test.dart: stroke and crop inputs stay valid at endpoints and invalid samples
+00:07 +31: D:/FAU_App/XRecorder/test/editor_hci_test.dart: stroke and crop inputs stay valid at endpoints and invalid samples
+00:07 +32: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Media Details Edit keeps URI and reuses its launched project: content://com.android.externalstorage.documents/document/primary%3AMovies%2Fqa.mp4
+00:07 +33: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: export finalizing is shown as Saving and has no unsafe cancel
+00:07 +34: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+00:07 +35: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+00:07 +36: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+00:07 +37: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+00:07 +38: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+00:07 +39: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+00:07 +40: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+00:08 +41: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: saving a photo blocks repeated save and exit; failure preserves edits
+00:08 +42: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.5
+00:09 +43: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: new project double tap creates one draft and opening is reversible
+00:09 +44: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=2.0
+00:10 +45: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: project rename survives dialog exit and keyboard inset animation
+00:10 +46: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=1.0
+00:10 +47: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: media rename survives Cancel/Save while the keyboard closes
+00:11 +48: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=1.5
+00:11 +49: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: editor waits for autosave and failed save keeps a recovery path before leaving
+00:11 +50: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=2.0
+00:12 +51: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.0
+00:12 +52: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.5
+00:13 +53: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=2.0
+00:14 +54: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.0
+00:14 +55: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.5
+00:15 +56: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=2.0
+00:15 +57: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.0
+00:16 +58: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.5
+00:16 +59: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=2.0
+00:17 +60: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.0
+00:17 +61: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.5
+00:18 +62: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=2.0
+00:18 +63: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.0
+00:19 +64: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.5
+00:19 +65: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=2.0
+00:20 +66: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.0
+00:20 +67: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.5
+00:20 +68: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=2.0
+00:21 +69: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects cancel is isolated; apply retains unknown values and retimes cues
+00:21 +70: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo output options cancel does not apply, apply preserves the selected contract
+00:22 +71: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 320.0 landscape=false text200 RTL
+00:22 +72: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 320.0 landscape=true text200 RTL
+00:22 +73: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 360.0 landscape=false text200 RTL
+00:23 +74: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 360.0 landscape=true text200 RTL
+00:23 +75: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 393.0 landscape=false text200 RTL
+00:23 +76: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 393.0 landscape=true text200 RTL
+00:24 +77: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 411.0 landscape=false text200 RTL
+00:24 +78: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 411.0 landscape=true text200 RTL
+00:24 +79: All tests passed!
+
+Exit=0

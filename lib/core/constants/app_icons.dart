@@ -37,7 +37,7 @@ abstract final class AppIcons {
   static const pause = LucideIcons.pause;
   static const play = LucideIcons.play;
   static const stop = LucideIcons.square;
-  static const ready = LucideIcons.circleCheck;
+  static const ready = LucideIcons.badgeCheck;
   static const processing = LucideIcons.hourglass;
   static const error = LucideIcons.circleAlert;
   static const screenshot = LucideIcons.camera;

@@ -1,0 +1,167 @@
+--- baseline/lib/features/editor/editor_screen.dart
++++ task09c/lib/features/editor/editor_screen.dart
+@@ -4,6 +4,7 @@
+ import 'package:go_router/go_router.dart';
+ 
+ import '../../core/widgets/studio_widgets.dart';
++import '../../core/ui/components/dialogs/studio_name_dialog.dart';
+ import '../../core/domain/models.dart';
+ import 'project_controller.dart';
+ import 'project_repository.dart';
+@@ -86,7 +87,16 @@
+   Future<void> renameProject() async {
+     final name = await showStudioDialog<String>(
+       context: context,
+-      builder: (_) => _ProjectNameDialog(initial: controller!.project.title),
++      builder: (dialog) => StudioNameDialog(
++        initial: controller!.project.title,
++        title: dialog.l10n.projectName,
++        label: dialog.l10n.name,
++        maxLength: 80,
++        submitLabel: dialog.l10n.saveName,
++        onSubmit: (value) {
++          if (value.trim().isNotEmpty) Navigator.pop(dialog, value.trim());
++        },
++      ),
+     );
+     if (mounted && name != null) {
+       controller!.change(controller!.project.copyWith(title: name));
+@@ -787,50 +797,6 @@
+   }
+ }
+ 
+-class _ProjectNameDialog extends StatefulWidget {
+-  const _ProjectNameDialog({required this.initial});
+-  final String initial;
+-  @override
+-  State<_ProjectNameDialog> createState() => _ProjectNameDialogState();
+-}
+-
+-class _ProjectNameDialogState extends State<_ProjectNameDialog> {
+-  late final field = TextEditingController(text: widget.initial);
+-
+-  @override
+-  void dispose() {
+-    field.dispose();
+-    super.dispose();
+-  }
+-
+-  @override
+-  Widget build(BuildContext context) => StudioDialog(
+-    title: Text(context.l10n.projectName),
+-    content: TextField(
+-      controller: field,
+-      maxLength: 80,
+-      decoration: InputDecoration(
+-        labelText: context.l10n.name,
+-        suffixIcon: StudioClearTextButton(controller: field),
+-      ),
+-    ),
+-    actions: [
+-      TextButton(
+-        onPressed: () => Navigator.pop(context),
+-        child: Text(context.l10n.cancel),
+-      ),
+-      TextButton(
+-        onPressed: () {
+-          if (field.text.trim().isNotEmpty) {
+-            Navigator.pop(context, field.text.trim());
+-          }
+-        },
+-        child: Text(context.l10n.saveName),
+-      ),
+-    ],
+-  );
+-}
+-
+ class _EditRange extends StatefulWidget {
+   const _EditRange({
+     super.key,
+--- baseline/lib/features/media/video_details_screen.dart
++++ task09c/lib/features/media/video_details_screen.dart
+@@ -4,6 +4,7 @@
+ 
+ import '../../core/domain/models.dart';
+ import '../../core/widgets/studio_widgets.dart';
++import '../../core/ui/components/dialogs/studio_name_dialog.dart';
+ import 'media_repository.dart';
+ import 'media_library_screen.dart';
+ import 'media_actions.dart';
+@@ -73,7 +74,14 @@
+   Future<void> rename(MediaItem item) async {
+     final name = await showStudioDialog<String>(
+       context: context,
+-      builder: (_) => _RenameMediaDialog(initial: item.displayName),
++      builder: (dialog) => StudioNameDialog(
++        initial: item.displayName,
++        title: dialog.l10n.renameMedia,
++        label: dialog.l10n.filename,
++        maxLength: 120,
++        submitLabel: dialog.l10n.rename,
++        onSubmit: (value) => Navigator.pop(dialog, value),
++      ),
+     );
+     if (name == null || !mounted) return;
+     final id = await actions.rename(item.uri, name);
+@@ -347,42 +355,3 @@
+     ),
+   );
+ }
+-
+-class _RenameMediaDialog extends StatefulWidget {
+-  const _RenameMediaDialog({required this.initial});
+-  final String initial;
+-  @override
+-  State<_RenameMediaDialog> createState() => _RenameMediaDialogState();
+-}
+-
+-class _RenameMediaDialogState extends State<_RenameMediaDialog> {
+-  late final field = TextEditingController(text: widget.initial);
+-  @override
+-  void dispose() {
+-    field.dispose();
+-    super.dispose();
+-  }
+-
+-  @override
+-  Widget build(BuildContext context) => StudioDialog(
+-    title: Text(context.l10n.renameMedia),
+-    content: TextField(
+-      controller: field,
+-      maxLength: 120,
+-      decoration: InputDecoration(
+-        labelText: context.l10n.filename,
+-        suffixIcon: StudioClearTextButton(controller: field),
+-      ),
+-    ),
+-    actions: [
+-      TextButton(
+-        onPressed: () => Navigator.pop(context),
+-        child: Text(context.l10n.cancel),
+-      ),
+-      TextButton(
+-        onPressed: () => Navigator.pop(context, field.text),
+-        child: Text(context.l10n.rename),
+-      ),
+-    ],
+-  );
+-}
+--- baseline/README.md
++++ task09c/README.md
+@@ -9,7 +9,7 @@
+ 
+ Implemented: real media catalog and SAF folder access; recording with audio, pause/resume, timers and interruption recovery; screenshot/crop/annotation and facecam; preview/share/rename/trash/restore; persisted editor drafts, trim/split/merge/crop/rotate/effects; MP4/GIF export queue; settings, searchable help and consent-based support handoff. Settings and drafts persist locally. Export should run with the app open.
+ 
+-The UI uses Dark Bento Studio, with persisted Dark/Light/System appearance across the app and video editor. The video preview keeps a black media surface. UI language is English. The five-position navigation keeps Create (+) as an action menu; reselecting a tab scrolls its content to the top. See the [design system](docs/ui/DESIGN_SYSTEM.md) and [UI/UX summary with screenshots](docs/ui/README.md).
++The UI uses Dark Bento Studio, with persisted Dark/Light/System appearance across the app and video editor. The video preview keeps a black media surface. The UI supports 12 languages with a persisted language selection or Follow System; see the [language catalog](lib/l10n/app_languages.dart). The five-position navigation keeps Create (+) as an action menu; reselecting a tab scrolls its content to the top. See the [design system](docs/ui/DESIGN_SYSTEM.md) and [UI/UX summary with screenshots](docs/ui/README.md).
+ 
+ Offline AI subtitles use whisper.cpp on Android, with optional multilingual model download/import, timed subtitle editing, SRT and MP4 burn-in. Audio stays on device. See the [P2/P3 quality report](docs/implementation/P2_P3_FINAL_QUALITY_REPORT_VI.md) for measured scope and open gates. Livestream remains deferred under [issue #1](https://github.com/duyhoang17930/XRecorder/issues/1). Ads, premium entitlements, floating recording controls and shake-to-stop are not exposed. Physical-device and production release gates remain open; see [release validation](docs/xrecorder/phase_13_validation.md).
+ 
+@@ -24,6 +24,7 @@
+ 
+ Project references:
+ 
++- [Current documentation, ownership contracts and historical reports](docs/README.md)
+ - [TASK07 P2/P3 globalization, native regression and remaining gates](docs/implementation/TASK_07_FINAL_REPORT_VI.md)
+ - [Product specification](docs/APP_SPEC_VI.md)
+ - [Technology research](docs/TECH_STACK_RESEARCH_VI.md)

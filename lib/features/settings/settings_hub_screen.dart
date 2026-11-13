@@ -81,7 +81,7 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
           AppSpacing.md + MediaQuery.paddingOf(context).bottom,
         ),
         children: [
-          SectionTitle(context.l10n.settings),
+          StudioRootHeader(context.l10n.settings),
           if (settings.persistenceError != null) ...[
             const SizedBox(height: AppSpacing.md),
             StudioCard(
@@ -112,16 +112,9 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
             child: Column(
               children: [
                 SettingsRow(
-                  context.l10n.videoQuality,
+                  context.l10n.recordingSettings,
                   icon: AppIcons.videoSettings,
-                  subtitle:
-                      '${settings.resolution} · ${settings.fps} FPS · ${settings.bitrate}',
-                  onTap: () => _open(context, '/settings/audio-video'),
-                ),
-                const Divider(height: 1, indent: 72),
-                SettingsRow(
-                  context.l10n.audioCountdownFacecam,
-                  icon: AppIcons.microphone,
+                  subtitle: context.l10n.recordingSettingsSummary,
                   onTap: () => _open(context, '/settings/audio-video'),
                 ),
               ],

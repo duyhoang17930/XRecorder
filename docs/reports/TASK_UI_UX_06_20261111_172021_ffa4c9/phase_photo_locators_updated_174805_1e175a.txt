@@ -1,0 +1,149 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/editor_hci_test.dart test/photo_tools_test.dart test/task09b_editor_interactions_test.dart test/editor_preview_load_queue_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/editor_hci_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +3: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +4: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +5: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +6: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +7: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: audio invalid range retains editor then corrected input saves
+00:03 +8: D:/FAU_App/XRecorder/test/editor_hci_test.dart: tool pickers preserve edits on Back and agree on selected shape
+00:04 +9: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:04 +10: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:04 +11: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:05 +12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: pointer samples repaint the canvas without rebuilding tools
+00:05 +13: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: subtitle actual add select update split merge invalid overlap delete cancel
+00:05 +14: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: subtitle actual add select update split merge invalid overlap delete cancel
+00:06 +15: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+00:06 +16: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:07 +17: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:07 +18: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:08 +19: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:08 +20: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=1.5
+00:09 +21: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=2.0
+
+Warning: A call to tap() with finder "Found 1 widget with key [<'photo-current-color'>]: [
+  OutlinedButton-[<'photo-current-color'>](dependencies: [IconTheme, InheritedCupertinoTheme, MediaQuery, _InheritedTheme, _LocalizationsScope-[GlobalKey#19dd5]], state: _ButtonStyleState#2e948),
+]" derived an Offset (Offset(261.4, 290.0)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderSemanticsAnnotations#88ed7 relayoutBoundary=up18
+The hit test result at that offset is: HitTestResult(RenderPointerListener#41bbb@Offset(245.4, 30.0), RenderSemanticsAnnotations#3e4fd@Offset(245.4, 30.0), RenderMouseRegion#aecca@Offset(245.4, 30.0), RenderSemanticsAnnotations#eb668@Offset(245.4, 30.0), _RenderInkFeatures#6534a@Offset(245.4, 30.0), RenderCustomPaint#51906@Offset(245.4, 30.0), RenderPhysicalShape#d58ab@Offset(245.4, 30.0), RenderConstrainedBox#7b9e7@Offset(245.4, 30.0), _RenderInputPadding#aa853@Offset(245.4, 30.0), RenderSemanticsAnnotations#e3f22@Offset(245.4, 30.0), RenderFlex#a555a@Offset(245.4, 30.0), RenderPadding#6d684@Offset(261.4, 38.0), RenderPadding#131c5@Offset(261.4, 38.0), RenderCustomMultiChildLayoutBox#b1dea@Offset(261.4, 290.0), _RenderInkFeatures#711d2@Offset(261.4, 290.0), RenderPhysicalModel#5dfc5@Offset(261.4, 290.0), RenderSemanticsAnnotations#a7661@Offset(261.4, 290.0), RenderRepaintBoundary#49464@Offset(261.4, 290.0), RenderIgnorePointer#50890@Offset(261.4, 290.0), RenderAnimatedOpacity#a3721@Offset(261.4, 290.0), RenderRepaintBoundary#1e24b@Offset(261.4, 290.0), RenderSemanticsAnnotations#57e99@Offset(261.4, 290.0), RenderOffstage#762ff@Offset(261.4, 290.0), RenderSemanticsAnnotations#bf25f@Offset(261.4, 290.0), _RenderTheater#07fb3@Offset(261.4, 290.0), RenderAbsorbPointer#d396f@Offset(261.4, 290.0), RenderPointerListener#4fbad@Offset(261.4, 290.0), RenderSemanticsAnnotations#a4981@Offset(261.4, 290.0), RenderCustomPaint#ff104@Offset(261.4, 290.0), RenderSemanticsAnnotations#bd63c@Offset(261.4, 290.0), RenderSemanticsAnnotations#448a9@Offset(261.4, 290.0), RenderSemanticsAnnotations#14b00@Offset(261.4, 290.0), RenderTapRegionSurface#63d20@Offset(261.4, 290.0), RenderSemanticsAnnotations#bc5d4@Offset(261.4, 290.0), RenderSemanticsAnnotations#d8764@Offset(261.4, 290.0), HitTestEntry<HitTestTarget>#70bbd(_ReusableRenderView#de2f3), HitTestEntry<HitTestTarget>#02f4f(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:349:24)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: No element
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:694:25)
+#1      WidgetController.element (package:flutter_test/src/controller.dart:888:30)
+#2      WidgetController.ensureVisible (package:flutter_test/src/controller.dart:2389:32)
+#3      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:353:24)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 320.0 landscape=true scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:09 +21 -1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 320.0 landscape=true scale=2.0
+  
+00:09 +21 -1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.0
+00:10 +22 -1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.5
+00:11 +23 -1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=2.0
+00:11 +24 -1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.0
+00:11 +25 -1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.5
+00:12 +26 -1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=2.0
+
+Warning: A call to tap() with finder "Found 1 widget with key [<'photo-current-color'>]: [
+  OutlinedButton-[<'photo-current-color'>](dependencies: [IconTheme, InheritedCupertinoTheme, MediaQuery, _InheritedTheme, _LocalizationsScope-[GlobalKey#9f2dc]], state: _ButtonStyleState#dd355),
+]" derived an Offset (Offset(261.4, 290.0)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderSemanticsAnnotations#52055 relayoutBoundary=up18
+The hit test result at that offset is: HitTestResult(_RenderInkFeatures#8625b@Offset(261.4, 290.0), RenderPhysicalModel#bbf22@Offset(261.4, 290.0), RenderSemanticsAnnotations#5d368@Offset(261.4, 290.0), RenderRepaintBoundary#263d8@Offset(261.4, 290.0), RenderIgnorePointer#03304@Offset(261.4, 290.0), RenderAnimatedOpacity#fb4be@Offset(261.4, 290.0), RenderRepaintBoundary#27235@Offset(261.4, 290.0), RenderSemanticsAnnotations#0ede7@Offset(261.4, 290.0), RenderOffstage#20598@Offset(261.4, 290.0), RenderSemanticsAnnotations#a44e7@Offset(261.4, 290.0), _RenderTheater#cf8c8@Offset(261.4, 290.0), RenderAbsorbPointer#9c57c@Offset(261.4, 290.0), RenderPointerListener#a501f@Offset(261.4, 290.0), RenderSemanticsAnnotations#99b24@Offset(261.4, 290.0), RenderCustomPaint#1127f@Offset(261.4, 290.0), RenderSemanticsAnnotations#a0a59@Offset(261.4, 290.0), RenderSemanticsAnnotations#364ce@Offset(261.4, 290.0), RenderSemanticsAnnotations#3ba9a@Offset(261.4, 290.0), RenderTapRegionSurface#33abd@Offset(261.4, 290.0), RenderSemanticsAnnotations#b7113@Offset(261.4, 290.0), RenderSemanticsAnnotations#d30ba@Offset(261.4, 290.0), HitTestEntry<HitTestTarget>#ddbcc(_ReusableRenderView#de2f3), HitTestEntry<HitTestTarget>#dc882(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:349:24)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: No element
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:694:25)
+#1      WidgetController.element (package:flutter_test/src/controller.dart:888:30)
+#2      WidgetController.ensureVisible (package:flutter_test/src/controller.dart:2389:32)
+#3      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:353:24)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 360.0 landscape=true scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:13 +26 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 360.0 landscape=true scale=2.0
+  
+00:13 +26 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.0
+00:13 +27 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.5
+00:13 +28 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=2.0
+00:14 +29 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.0
+00:14 +30 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.5
+00:15 +31 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=2.0
+00:15 +32 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.0
+00:16 +33 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.5
+00:16 +34 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=2.0
+00:16 +35 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.0
+00:17 +36 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.5
+00:17 +37 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=2.0
+00:18 +38 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects cancel is isolated; apply retains unknown values and retimes cues
+00:18 +39 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo output options cancel does not apply, apply preserves the selected contract
+00:18 +40 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 320.0 landscape=false text200 RTL
+00:19 +41 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 320.0 landscape=true text200 RTL
+00:19 +42 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 360.0 landscape=false text200 RTL
+00:19 +43 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 360.0 landscape=true text200 RTL
+00:19 +44 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 393.0 landscape=false text200 RTL
+00:20 +45 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 393.0 landscape=true text200 RTL
+00:20 +46 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 411.0 landscape=false text200 RTL
+00:20 +47 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 411.0 landscape=true text200 RTL
+00:20 +48 -2: Some tests failed.
+
+Failing tests:
+  D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=2.0
+  D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=2.0
+
+Exit=1

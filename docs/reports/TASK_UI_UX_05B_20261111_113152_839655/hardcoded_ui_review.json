@@ -1,0 +1,302 @@
+[
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 50,
+    "source": "_ColorSwatch(label: 'Background', color: colors.background),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 51,
+    "source": "_ColorSwatch(label: 'Surface', color: colors.surface),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 52,
+    "source": "_ColorSwatch(label: 'Card', color: colors.card),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 53,
+    "source": "_ColorSwatch(label: 'Elevated', color: colors.elevated),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 54,
+    "source": "_ColorSwatch(label: 'Primary', color: colors.primary),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 55,
+    "source": "_ColorSwatch(label: 'Cyan', color: colors.cyan),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 56,
+    "source": "_ColorSwatch(label: 'Warning', color: colors.warning),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 71,
+    "source": "RecordActionButton(onPressed: () {}, label: 'Record action'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 76,
+    "source": "label: const Text('Outlined action'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 84,
+    "source": "child: const Text('Text action'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 95,
+    "source": "PopupMenuItem(value: 'edit', child: Text('Edit')),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 96,
+    "source": "PopupMenuItem(value: 'share', child: Text('Share')),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 119,
+    "source": "DropdownMenuItem(value: 'Compact', child: Text('Compact')),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 122,
+    "source": "child: Text('Balanced'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 126,
+    "source": "child: Text('High quality'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 135,
+    "source": "label: 'Resolution',",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 142,
+    "source": "title: const Text('Include system audio'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 177,
+    "source": "const RecordingStatusIndicator(label: 'Ready to record'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 201,
+    "source": "title: const Text('Confirmation dialog'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 209,
+    "source": "child: const Text('Cancel'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 213,
+    "source": "child: const Text('Continue'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 218,
+    "source": "child: const Text('Show dialog'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\core\\ui\\showcase\\component_gallery.dart",
+    "line": 249,
+    "source": "child: const Text('Show bottom sheet'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\recording\\recording_service.dart",
+    "line": 653,
+    "source": "const Expanded(child: Text('Switch to the screen you want')),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\recording\\recording_service.dart",
+    "line": 656,
+    "source": "child: const Text('Cancel'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\recording\\recording_service.dart",
+    "line": 730,
+    "source": "child: const Text('Help'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\recording\\recording_service.dart",
+    "line": 756,
+    "source": "label: const Text('Stop'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\recording\\recording_service.dart",
+    "line": 834,
+    "source": "child: const Text('View'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\audio_video_settings_screen.dart",
+    "line": 9,
+    "source": "appBar: AppBar(title: const Text('Audio & Video Settings')),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 125,
+    "source": "label: 'Recording mode',",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 145,
+    "source": "label: 'Resolution',",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 169,
+    "source": "label: 'Target FPS',",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 184,
+    "source": "label: 'Bitrate',",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 199,
+    "source": "label: 'Video codec',",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 214,
+    "source": "label: 'Orientation',",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 222,
+    "source": "label: 'Audio source',",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 269,
+    "source": "title: const Text('Microphone noise reduction'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 271,
+    "source": "? const Text('Not supported by this device')",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 282,
+    "source": "label: 'Pre-start countdown',",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 289,
+    "source": "title: const Text('Facecam'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 291,
+    "source": "? const Text('No front camera available')",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 305,
+    "source": "title: const Text('Show touches'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 312,
+    "source": "child: const Text('Close'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 317,
+    "source": "child: const Text('Touch-indicator guidance'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 321,
+    "source": "title: const Text('Auto-stop'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 355,
+    "source": "title: const Text('Auto-stop'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 365,
+    "source": "label: 'Duration',",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 403,
+    "source": "title: const Text('Auto-stop duration'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 422,
+    "source": "child: const Text('Cancel'),",
+    "requiresContextReview": true
+  },
+  {
+    "path": "lib\\features\\settings\\recording_settings_form.dart",
+    "line": 433,
+    "source": "child: const Text('Save'),",
+    "requiresContextReview": true
+  }
+]

@@ -1,0 +1,108 @@
+[
+  {
+    "path": "tool/analyze_whisper_benchmark.py",
+    "function": "def distance(a,b):\n    previous=list(range(len(b)+1))\n    for i,x in enumerate(a,1):\n        current=[i]\n        for j,y in enumerate(b,1):\n            current.append(min(current[-1]+1,previous[j]+1,previous[j-1]+(x!=y)))\n        previous=current\n    return previous[-1]",
+    "cases": [
+      {
+        "a": "",
+        "b": "",
+        "distance": 0
+      },
+      {
+        "a": "",
+        "b": "abc",
+        "distance": 3
+      },
+      {
+        "a": "kitten",
+        "b": "sitting",
+        "distance": 3
+      },
+      {
+        "a": "Ti?ng Vi?t",
+        "b": "Tieng Viet",
+        "distance": 2
+      },
+      {
+        "a": "?????",
+        "b": "?????",
+        "distance": 0
+      },
+      {
+        "a": "?",
+        "b": "é",
+        "distance": 2
+      },
+      {
+        "a": "?????",
+        "b": "?????",
+        "distance": 0
+      },
+      {
+        "a": [
+          "one",
+          "two"
+        ],
+        "b": [
+          "one",
+          "three",
+          "two"
+        ],
+        "distance": 1
+      }
+    ]
+  },
+  {
+    "path": "tool/evaluate_task07_asr.py",
+    "function": "def distance(a,b):\n    previous=list(range(len(b)+1))\n    for i,left in enumerate(a,1):\n        current=[i]\n        for j,right in enumerate(b,1):\n            current.append(min(current[-1]+1,previous[j]+1,previous[j-1]+(left!=right)))\n        previous=current\n    return previous[-1]",
+    "cases": [
+      {
+        "a": "",
+        "b": "",
+        "distance": 0
+      },
+      {
+        "a": "",
+        "b": "abc",
+        "distance": 3
+      },
+      {
+        "a": "kitten",
+        "b": "sitting",
+        "distance": 3
+      },
+      {
+        "a": "Ti?ng Vi?t",
+        "b": "Tieng Viet",
+        "distance": 2
+      },
+      {
+        "a": "?????",
+        "b": "?????",
+        "distance": 0
+      },
+      {
+        "a": "?",
+        "b": "é",
+        "distance": 2
+      },
+      {
+        "a": "?????",
+        "b": "?????",
+        "distance": 0
+      },
+      {
+        "a": [
+          "one",
+          "two"
+        ],
+        "b": [
+          "one",
+          "three",
+          "two"
+        ],
+        "distance": 1
+      }
+    ]
+  }
+]

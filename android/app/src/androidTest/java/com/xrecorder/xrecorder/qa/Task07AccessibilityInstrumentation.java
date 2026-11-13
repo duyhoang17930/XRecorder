@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 /** Real framework focus checks without suppressing the installed screen reader. */
 public final class Task07AccessibilityInstrumentation extends Instrumentation {
+    private Bundle ui05bPlayerArguments;
     private static final String PACKAGE = "com.xrecorder.xrecorder";
     private boolean task08History;
     private boolean task08Corpus;
@@ -46,6 +47,8 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
 
     @Override public void onCreate(Bundle arguments) {
         super.onCreate(arguments);
+        if (arguments != null && "player".equals(arguments.getString("ui05b")))
+            ui05bPlayerArguments = new Bundle(arguments);
         task08History = arguments != null && "history".equals(arguments.getString("task08"));
         task08Corpus = arguments != null && "corpus".equals(arguments.getString("task08"));
         task08HistoryMatrix = arguments != null && "history-matrix".equals(arguments.getString("task08"));
@@ -93,6 +96,10 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
     }
 
     @Override public void onStart() {
+        if (ui05bPlayerArguments != null) {
+            Ui05BPlayerInstrumentation.run(this, ui05bPlayerArguments);
+            return;
+        }
         if ("backup-owned-media".equals(task09bExportProcess)) {
             Task09BExportProcessInstrumentation.backupOwnedMedia(this, task09SourceUri);
             return;

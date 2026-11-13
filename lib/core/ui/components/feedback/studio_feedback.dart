@@ -91,6 +91,10 @@ void showNotice(
                 ),
               ),
       ),
+      snackBarAnimationStyle: AnimationStyle(
+        duration: context.motion(AppMotion.standard),
+        reverseDuration: context.motion(AppMotion.fast),
+      ),
     );
 }
 

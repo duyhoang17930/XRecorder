@@ -3,4 +3,5 @@
     <string name="p2_edit_video" formatted="false">Edit video</string>
     <string name="p2_edit_photo" formatted="false">Edit foto</string>
     <string name="p2_preview_unavailable" formatted="false">Video ini tidak dapat dimainkan atau akses telah dibatalkan.</string>
+    <string name="p2_back" formatted="false">Kembali</string>
 </resources>

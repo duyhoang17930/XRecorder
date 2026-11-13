@@ -1,0 +1,8 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot analyze --no-pub
+Analyzing XRecorder...                                          
+
+   info - Statements in an if should be enclosed in a block. Try wrapping the statement in a block - lib\features\editor\editor_selection.dart:13:7 - curly_braces_in_flow_control_structures
+
+1 issue found. (ran in 4.3s)
+
+Exit=1

@@ -1,0 +1,12 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot analyze --no-pub
+Analyzing XRecorder...                                          
+
+warning - A value for optional parameter 'seconds' isn't ever given. Try removing the unused parameter - lib\features\editor\editor_screen.dart:682:10 - unused_element_parameter
+   info - The import of 'dart:typed_data' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/foundation.dart'. Try removing the import directive - lib\features\editor\editor_timeline.dart:1:8 - unnecessary_import
+   info - Use the null-aware marker '?' rather than a null check via an 'if'. Try using '?' - lib\features\editor\editor_workspace.dart:45:37 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if'. Try using '?' - lib\features\editor\editor_workspace.dart:56:42 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if'. Try using '?' - lib\features\editor\editor_workspace.dart:66:15 - use_null_aware_elements
+
+5 issues found. (ran in 4.1s)
+
+Exit=1

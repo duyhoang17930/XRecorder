@@ -1,0 +1,93 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_05b_acceptance_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart
+00:00 +0: one recording entry opens existing P1 form and Back preserves preferences
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+A ValueNotifier<ThemeMode> was used after being disposed.
+Once you have called dispose() on a ValueNotifier<ThemeMode>, it can no longer be used.
+
+When the exception was thrown, this was the stack:
+#0      ChangeNotifier.debugAssertNotDisposed.<anonymous closure> (package:flutter/src/foundation/change_notifier.dart:184:9)
+#1      ChangeNotifier.debugAssertNotDisposed (package:flutter/src/foundation/change_notifier.dart:191:6)
+#2      ChangeNotifier.dispose (package:flutter/src/foundation/change_notifier.dart:377:27)
+#3      SettingsController.dispose (package:xrecorder/features/settings/settings_controller.dart:307:16)
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart:123:16)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  one recording entry opens existing P1 form and Back preserves preferences
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +0 -1: one recording entry opens existing P1 form and Back preserves preferences [E]
+  Test failed. See exception logs above.
+  The test description was: one recording entry opens existing P1 form and Back preserves preferences
+  
+00:02 +0 -1: Vietnamese sort uses context and keeps every existing option
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+A ValueNotifier<ThemeMode> was used after being disposed.
+Once you have called dispose() on a ValueNotifier<ThemeMode>, it can no longer be used.
+
+When the exception was thrown, this was the stack:
+#0      ChangeNotifier.debugAssertNotDisposed.<anonymous closure> (package:flutter/src/foundation/change_notifier.dart:184:9)
+#1      ChangeNotifier.debugAssertNotDisposed (package:flutter/src/foundation/change_notifier.dart:191:6)
+#2      ChangeNotifier.dispose (package:flutter/src/foundation/change_notifier.dart:377:27)
+#3      SettingsController.dispose (package:xrecorder/features/settings/settings_controller.dart:307:16)
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart:161:14)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  Vietnamese sort uses context and keeps every existing option
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +0 -2: Vietnamese sort uses context and keeps every existing option [E]
+  Test failed. See exception logs above.
+  The test description was: Vietnamese sort uses context and keeps every existing option
+  
+00:02 +0 -2: root headers width=320.0 scale=1.0 dark=false in LTR/RTL and landscape
+00:02 +1 -2: root headers width=320.0 scale=1.0 dark=true in LTR/RTL and landscape
+00:02 +2 -2: root headers width=320.0 scale=1.5 dark=false in LTR/RTL and landscape
+00:02 +3 -2: root headers width=320.0 scale=1.5 dark=true in LTR/RTL and landscape
+00:03 +4 -2: root headers width=320.0 scale=2.0 dark=false in LTR/RTL and landscape
+00:03 +5 -2: root headers width=320.0 scale=2.0 dark=true in LTR/RTL and landscape
+00:03 +6 -2: root headers width=360.0 scale=1.0 dark=false in LTR/RTL and landscape
+00:03 +7 -2: root headers width=360.0 scale=1.0 dark=true in LTR/RTL and landscape
+00:03 +8 -2: root headers width=360.0 scale=1.5 dark=false in LTR/RTL and landscape
+00:03 +9 -2: root headers width=360.0 scale=1.5 dark=true in LTR/RTL and landscape
+00:03 +10 -2: root headers width=360.0 scale=2.0 dark=false in LTR/RTL and landscape
+00:03 +11 -2: root headers width=360.0 scale=2.0 dark=true in LTR/RTL and landscape
+00:03 +12 -2: root headers width=393.0 scale=1.0 dark=false in LTR/RTL and landscape
+00:03 +13 -2: root headers width=393.0 scale=1.0 dark=true in LTR/RTL and landscape
+00:03 +14 -2: root headers width=393.0 scale=1.5 dark=false in LTR/RTL and landscape
+00:03 +15 -2: root headers width=393.0 scale=1.5 dark=true in LTR/RTL and landscape
+00:03 +16 -2: root headers width=393.0 scale=2.0 dark=false in LTR/RTL and landscape
+00:03 +17 -2: root headers width=393.0 scale=2.0 dark=true in LTR/RTL and landscape
+00:04 +18 -2: root headers width=411.0 scale=1.0 dark=false in LTR/RTL and landscape
+00:04 +19 -2: root headers width=411.0 scale=1.0 dark=true in LTR/RTL and landscape
+00:04 +20 -2: root headers width=411.0 scale=1.5 dark=false in LTR/RTL and landscape
+00:04 +21 -2: root headers width=411.0 scale=1.5 dark=true in LTR/RTL and landscape
+00:04 +22 -2: root headers width=411.0 scale=2.0 dark=false in LTR/RTL and landscape
+00:04 +23 -2: root headers width=411.0 scale=2.0 dark=true in LTR/RTL and landscape
+00:04 +24 -2: opening tap burst=2 reduced=false cannot activate sheet item
+00:04 +25 -2: opening tap burst=2 reduced=true cannot activate sheet item
+00:04 +26 -2: opening tap burst=3 reduced=false cannot activate sheet item
+00:04 +27 -2: opening tap burst=3 reduced=true cannot activate sheet item
+00:04 +28 -2: opening tap burst=5 reduced=false cannot activate sheet item
+00:04 +29 -2: opening tap burst=5 reduced=true cannot activate sheet item
+00:04 +30 -2: Some tests failed.
+
+Failing tests:
+  D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: Vietnamese sort uses context and keeps every existing option
+  D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart: one recording entry opens existing P1 form and Back preserves preferences
+
+Exit=1

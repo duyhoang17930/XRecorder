@@ -1,0 +1,11 @@
+﻿{
+    "files_removed":  2,
+    "logical_bytes_removed":  47853,
+    "free_before":  27948941312,
+    "free_after":  27948990464,
+    "observed_volume_free_delta":  49152,
+    "process_gate":  "No python/pythonw/pytest processes",
+    "whatif":  "Exact allowlist preview completed",
+    "actual_attributable_allocated_bytes":  null,
+    "limitation":  "Volume free delta may include concurrent host writes; allocation accounting not independently measured."
+}

@@ -12,6 +12,8 @@ import 'package:xrecorder/core/widgets/studio_create_sheet.dart';
 import 'package:xrecorder/features/editor/project_repository.dart';
 import 'package:xrecorder/features/media/media_library_screen.dart';
 import 'package:xrecorder/features/settings/settings_controller.dart';
+import 'package:xrecorder/features/settings/help_screen.dart';
+import 'package:xrecorder/features/settings/studio_identity.dart';
 
 import 'fixtures/catalog.dart';
 
@@ -184,27 +186,54 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets(
-    'Create is an action and unavailable tools have no tap behavior',
-    (tester) async {
-      await start(tester);
-      final router = GoRouter.of(tester.element(find.text('Video Library')));
-      await tester.tap(find.byTooltip('Create'));
-      await tester.pumpAndSettle();
-      expect(router.routeInformationProvider.value.uri.path, '/videos');
-      expect(find.text('Screen recording'), findsOneWidget);
-      for (final name in ['Recording region', 'Livestream', 'AI subtitles']) {
-        expect(
-          tester.widget<BentoCard>(find.widgetWithText(BentoCard, name)).onTap,
-          isNull,
-        );
-      }
-      await tester.tap(find.byTooltip('Close create menu'));
-      await tester.pumpAndSettle();
-      expect(find.text('Video Library'), findsOneWidget);
-      expect(tester.takeException(), isNull);
-    },
-  );
+  testWidgets('Create remains an action with compact available choices', (
+    tester,
+  ) async {
+    await start(tester);
+    final router = GoRouter.of(tester.element(find.text('Video Library')));
+    await tester.tap(find.byTooltip('Create'));
+    await tester.pumpAndSettle();
+    expect(router.routeInformationProvider.value.uri.path, '/videos');
+    final modal = find.byType(BottomSheet);
+    expect(
+      find.descendant(of: modal, matching: find.text('Record screen')),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(of: modal, matching: find.text('Screenshot')),
+      findsOneWidget,
+    );
+    for (final name in ['Recording region', 'Livestream', 'AI subtitles']) {
+      expect(
+        find.descendant(of: modal, matching: find.text(name)),
+        findsNothing,
+      );
+    }
+    await tester.tap(
+      find.descendant(of: modal, matching: find.byTooltip('Close')),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Video Library'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('legacy capture menu retains unavailable backend safeguards', (
+    tester,
+  ) async {
+    await start(tester);
+    final host = tester.element(find.text('Video Library'));
+    final closed = openStudioCreate(host);
+    await tester.pumpAndSettle();
+    for (final name in ['Recording region', 'Livestream', 'AI subtitles']) {
+      expect(
+        tester.widget<BentoCard>(find.widgetWithText(BentoCard, name)).onTap,
+        isNull,
+      );
+    }
+    await tester.tap(find.byTooltip('Close create menu'));
+    await tester.pumpAndSettle();
+    await closed;
+  });
 
   testWidgets('large catalogs build only visible media rows', (tester) async {
     final catalog = TestCatalog();
@@ -279,7 +308,12 @@ void main() {
           await tester.tap(find.byTooltip('Create'));
           await tester.pumpAndSettle();
           expect(tester.takeException(), isNull, reason: 'Create menu');
-          await tester.tap(find.byTooltip('Close create menu'));
+          await tester.tap(
+            find.descendant(
+              of: find.byType(BottomSheet),
+              matching: find.byTooltip('Close'),
+            ),
+          );
           await tester.pumpAndSettle();
         });
       }
@@ -362,10 +396,7 @@ void main() {
       final router = GoRouter.of(tester.element(find.text('Video Library')));
       router.go('/settings');
       await tester.pumpAndSettle();
-      for (final sample in [
-        ('Media storage', 'Movies/XRecorder'),
-        ('Privacy', 'Only explicit sharing'),
-      ]) {
+      for (final sample in [('Media storage', 'Movies/XRecorder')]) {
         await tester.scrollUntilVisible(
           find.text(sample.$1),
           200,
@@ -379,6 +410,54 @@ void main() {
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
       }
+      // UI02C moved policy access to the official link and local data-handling
+      // explanations to Help. Assert both contracts instead of the removed row.
+      final opened = <String>[];
+      final messenger =
+          TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+      messenger.setMockMethodCallHandler(StudioIdentity.channel, (call) async {
+        if (call.method == 'openStudioLink') {
+          opened.add(call.arguments as String);
+        }
+        return null;
+      });
+      addTearDown(
+        () => messenger.setMockMethodCallHandler(StudioIdentity.channel, null),
+      );
+      await tester.scrollUntilVisible(
+        find.text('Privacy Policy'),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await Scrollable.ensureVisible(
+        tester.element(find.text('Privacy Policy')),
+        alignment: .3,
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Privacy Policy'));
+      await tester.pumpAndSettle();
+      expect(opened, [StudioIdentity.privacy]);
+      expect(router.routeInformationProvider.value.uri.path, '/settings');
+      router.push('/help');
+      await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(
+        find.text('What leaves my device?'),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.tap(find.text('What leaves my device?'));
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          helpTopics.singleWhere((topic) => topic.category == 'Privacy').answer,
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.textContaining('transcription does not upload your media'),
+        findsOneWidget,
+      );
+      expect(tester.takeException(), isNull);
     },
   );
 }

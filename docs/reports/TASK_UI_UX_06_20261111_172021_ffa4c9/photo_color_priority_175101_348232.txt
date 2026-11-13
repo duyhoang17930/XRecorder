@@ -1,0 +1,45 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/editor_hci_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/editor_hci_test.dart
+00:00 +0: photo contextual controls retain color, drawing and undo across panels
+00:02 +1: tool pickers preserve edits on Back and agree on selected shape
+00:03 +2: photo text remains editable with a landscape keyboard
+00:03 +3: selected tool remains visible after viewport rotation
+00:03 +4: pointer samples repaint the canvas without rebuilding tools
+00:04 +5: stroke and crop inputs stay valid at endpoints and invalid samples
+00:04 +6: photo editor 320.0 landscape=false scale=1.0
+00:05 +7: photo editor 320.0 landscape=false scale=1.5
+00:05 +8: photo editor 320.0 landscape=false scale=2.0
+00:06 +9: photo editor 320.0 landscape=true scale=1.0
+00:06 +10: photo editor 320.0 landscape=true scale=1.5
+00:07 +11: photo editor 320.0 landscape=true scale=2.0
+00:08 +12: photo editor 360.0 landscape=false scale=1.0
+00:08 +13: photo editor 360.0 landscape=false scale=1.5
+00:09 +14: photo editor 360.0 landscape=false scale=2.0
+00:09 +15: photo editor 360.0 landscape=true scale=1.0
+00:10 +16: photo editor 360.0 landscape=true scale=1.5
+00:10 +17: photo editor 360.0 landscape=true scale=2.0
+00:10 +18: photo editor 393.0 landscape=false scale=1.0
+00:11 +19: photo editor 393.0 landscape=false scale=1.5
+00:11 +20: photo editor 393.0 landscape=false scale=2.0
+00:12 +21: photo editor 393.0 landscape=true scale=1.0
+00:12 +22: photo editor 393.0 landscape=true scale=1.5
+00:13 +23: photo editor 393.0 landscape=true scale=2.0
+00:13 +24: photo editor 411.0 landscape=false scale=1.0
+00:13 +25: photo editor 411.0 landscape=false scale=1.5
+00:14 +26: photo editor 411.0 landscape=false scale=2.0
+00:14 +27: photo editor 411.0 landscape=true scale=1.0
+00:15 +28: photo editor 411.0 landscape=true scale=1.5
+00:15 +29: photo editor 411.0 landscape=true scale=2.0
+00:15 +30: effects cancel is isolated; apply retains unknown values and retimes cues
+00:16 +31: photo output options cancel does not apply, apply preserves the selected contract
+00:16 +32: effects categories stay reachable 320.0 landscape=false text200 RTL
+00:16 +33: effects categories stay reachable 320.0 landscape=true text200 RTL
+00:17 +34: effects categories stay reachable 360.0 landscape=false text200 RTL
+00:17 +35: effects categories stay reachable 360.0 landscape=true text200 RTL
+00:17 +36: effects categories stay reachable 393.0 landscape=false text200 RTL
+00:18 +37: effects categories stay reachable 393.0 landscape=true text200 RTL
+00:18 +38: effects categories stay reachable 411.0 landscape=false text200 RTL
+00:18 +39: effects categories stay reachable 411.0 landscape=true text200 RTL
+00:18 +40: All tests passed!
+
+Exit=0

@@ -1,0 +1,3 @@
+INSTRUMENTATION_RESULT: readOnlyCaptureConfigCapabilities={"audioSources":["mute","microphone","internal","mixed"],"noiseReduction":false,"hevc":false,"presets":[],"encoders":[{"codec":"avc","name":"c2.android.avc.encoder","hardwareAccelerated":false},{"codec":"avc","name":"OMX.google.h264.encoder","hardwareAccelerated":false},{"codec":"hevc","name":"c2.android.hevc.encoder","hardwareAccelerated":false}]}
+INSTRUMENTATION_RESULT: ui05b={"status":"PASS","cases":[{"case":"visible-back","targetDp":48,"disposed":true},{"case":"system-back","targetDp":48,"disposed":true},{"case":"landscape-back","targetDp":48,"disposed":true},{"case":"reopen-back","targetDp":48,"disposed":true}],"sourceHashExact":true}
+INSTRUMENTATION_CODE: -1

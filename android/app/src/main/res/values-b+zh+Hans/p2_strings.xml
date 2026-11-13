@@ -3,4 +3,5 @@
     <string name="p2_edit_video" formatted="false">编辑视频</string>
     <string name="p2_edit_photo" formatted="false">编辑图片</string>
     <string name="p2_preview_unavailable" formatted="false">此视频无法播放或访问已被取消。</string>
+    <string name="p2_back" formatted="false">返回</string>
 </resources>

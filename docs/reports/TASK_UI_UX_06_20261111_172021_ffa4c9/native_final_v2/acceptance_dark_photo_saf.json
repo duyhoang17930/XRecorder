@@ -1,0 +1,30 @@
+[
+  {
+    "case": "existing-saf-draft-preview-rotation-read-only",
+    "time": 1794411838.9160514,
+    "labels": [
+      "Back",
+      "UI04_Editor_QA",
+      "Rename project",
+      "Export",
+      "Play preview",
+      "0.0 / 2.0 seconds",
+      "Preview position",
+      "0.0 seconds",
+      "Saved · Originals unchanged",
+      "Timeline",
+      "Add clip",
+      "Clip 1 · 2.0s\nTrim clip",
+      "0.0 seconds",
+      "2.0 seconds",
+      "Undo edit",
+      "Redo edit",
+      "Edit",
+      "Audio",
+      "Text",
+      "Subtitles",
+      "Effects",
+      "Transform"
+    ]
+  }
+]

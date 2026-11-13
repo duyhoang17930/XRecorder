@@ -1,0 +1,69 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/editor_hci_test.dart test/editor_effects_ui_test.dart test/photo_tools_test.dart test/project_controller_test.dart test/project_repository_test.dart test/editor_preview_load_queue_test.dart test/task09b_editor_interactions_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/editor_hci_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: speech history retry saves recognized cues without repeating inference
+00:00 +1: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: speech history retry saves recognized cues without repeating inference
+00:00 +2: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: speech history retry saves recognized cues without repeating inference
+00:00 +3: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: speech history retry saves recognized cues without repeating inference
+00:00 +4: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: speech history retry saves recognized cues without repeating inference
+00:00 +5: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: speech history retry saves recognized cues without repeating inference
+00:00 +6: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: speech history retry saves recognized cues without repeating inference
+00:01 +7: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: speech history retry saves recognized cues without repeating inference
+00:01 +8: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +9: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +10: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +11: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +13: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +14: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +15: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +16: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +17: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +18: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: audio edit all numeric fields gain voice noise and remove without mutating input
+00:03 +19: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: audio edit all numeric fields gain voice noise and remove without mutating input
+00:04 +20: D:/FAU_App/XRecorder/test/editor_hci_test.dart: tool pickers preserve edits on Back and agree on selected shape
+00:04 +21: D:/FAU_App/XRecorder/test/editor_hci_test.dart: tool pickers preserve edits on Back and agree on selected shape
+00:04 +22: D:/FAU_App/XRecorder/test/editor_effects_ui_test.dart: audio/layers/effects remain usable at 411.0 and text200
+00:04 +23: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:05 +24: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:05 +25: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:05 +26: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:06 +27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: stroke and crop inputs stay valid at endpoints and invalid samples
+00:06 +28: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: subtitle actual add select update split merge invalid overlap delete cancel
+00:07 +29: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: subtitle actual add select update split merge invalid overlap delete cancel
+00:07 +30: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.5
+00:08 +31: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:09 +32: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:10 +33: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:11 +34: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:11 +35: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=2.0
+00:11 +36: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.0
+00:12 +37: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.5
+00:12 +38: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=2.0
+00:13 +39: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.0
+00:13 +40: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.5
+00:14 +41: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=2.0
+00:14 +42: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.0
+00:14 +43: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.5
+00:15 +44: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=2.0
+00:15 +45: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.0
+00:16 +46: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.5
+00:16 +47: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=2.0
+00:17 +48: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.0
+00:17 +49: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.5
+00:17 +50: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=2.0
+00:18 +51: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.0
+00:18 +52: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.5
+00:19 +53: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=2.0
+00:19 +54: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects cancel is isolated; apply retains unknown values and retimes cues
+00:20 +55: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo output options cancel does not apply, apply preserves the selected contract
+00:20 +56: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 320.0 landscape=false text200 RTL
+00:20 +57: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 320.0 landscape=true text200 RTL
+00:20 +58: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 360.0 landscape=false text200 RTL
+00:21 +59: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 360.0 landscape=true text200 RTL
+00:21 +60: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 393.0 landscape=false text200 RTL
+00:21 +61: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 393.0 landscape=true text200 RTL
+00:22 +62: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 411.0 landscape=false text200 RTL
+00:22 +63: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 411.0 landscape=true text200 RTL
+00:22 +64: All tests passed!
+
+Exit=0

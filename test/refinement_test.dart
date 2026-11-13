@@ -19,6 +19,7 @@ import 'package:xrecorder/core/widgets/studio_widgets.dart';
 import 'package:lucide_flutter/lucide_flutter.dart';
 
 import 'fixtures/catalog.dart';
+import 'fixtures/visual_catalog.dart';
 
 class RefreshCatalog extends TestCatalog {
   int calls = 0;
@@ -117,11 +118,18 @@ void main() {
             }
             return null;
           });
-      await tester.pumpWidget(XRecorderApp(mediaRepository: TestCatalog()));
+      final image = (await tester.runAsync(fixtureImage))!;
+      await tester.pumpWidget(
+        XRecorderApp(mediaRepository: VisualCatalog(image)),
+      );
       await tester.pumpAndSettle();
       GoRouter.of(tester.element(find.text('Video Library'))).go('/editor');
       await tester.pumpAndSettle();
       await tester.tap(find.text('New video project'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Studio fixture 01.mp4'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(FilledButton).last);
       await tester.pumpAndSettle();
       await tester.tap(find.byTooltip('Back'));
       await tester.pumpAndSettle();
@@ -187,10 +195,15 @@ void main() {
           if (call.method == 'save') return pending.future;
           return null;
         });
-    final router = await start(tester);
+    final image = (await tester.runAsync(fixtureImage))!;
+    final router = await start(tester, catalog: VisualCatalog(image));
     router.go('/editor');
     await tester.pumpAndSettle();
     await tester.tap(find.text('New video project'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Studio fixture 01.mp4'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(FilledButton).last);
     await tester.pump();
     await tester.pumpWidget(const SizedBox.shrink());
     pending.complete();

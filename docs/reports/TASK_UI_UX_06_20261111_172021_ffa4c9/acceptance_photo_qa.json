@@ -1,0 +1,67 @@
+[
+  {
+    "case": "text150-toolbar-selection-and-apply",
+    "time": 1794407725.859673,
+    "labels": [
+      "Back",
+      "Photo editor",
+      "Undo photo edit",
+      "Redo photo edit",
+      "Red ink",
+      "Color",
+      "UI06_final",
+      "Clear text",
+      "110 characters remaining",
+      "Apply",
+      "Shapes",
+      "Text",
+      "Transform",
+      "All tools",
+      "Export quality",
+      "Save copy"
+    ]
+  },
+  {
+    "case": "save-copy-from-final-apk",
+    "time": 1794407776.6718185,
+    "labels": [
+      "Back",
+      "Media details",
+      "Edited_1794407772835.png",
+      "Preview",
+      "Preview",
+      "Share",
+      "Edit",
+      "Crop & annotate a copy",
+      "File management",
+      "Rename",
+      "Copy to folder",
+      "Move to folder"
+    ]
+  },
+  {
+    "case": "final-studio-unlocked-and-cancel-has-no-new-draft",
+    "time": 1794407788.9684637,
+    "labels": [
+      "3HRECORDER\nEditing Studio",
+      "Home screen shortcuts",
+      "New video project\nTrim, merge & effects",
+      "Edit photo\nCrop & annotate a copy",
+      "Saved drafts",
+      "Export queue",
+      "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4\n1 clips · 2.1s",
+      "Duplicate draft",
+      "Delete draft",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  }
+]

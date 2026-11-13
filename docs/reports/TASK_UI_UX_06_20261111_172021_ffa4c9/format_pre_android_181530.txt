@@ -1,0 +1,12 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe format lib/core/constants/app_icons.dart lib/core/ui/components/inputs/studio_fields.dart lib/core/widgets/studio_shell.dart lib/features/editor/editing_hub_screen.dart lib/features/editor/editor_preview.dart lib/features/editor/editor_screen.dart lib/features/editor/layers_editor.dart lib/features/editor/media_picker.dart lib/features/editor/project_effects.dart lib/features/media/media_library_screen.dart lib/features/media/photo_tools_screen.dart lib/features/media/video_details_screen.dart test/design_system_test.dart test/editor_hci_test.dart test/localization_test.dart test/refinement_test.dart test/ux_interaction_test.dart test/widget_test.dart lib/core/widgets/studio_quick_create.dart lib/features/editor/editor_entry.dart lib/features/editor/editor_timeline.dart lib/features/editor/editor_workspace.dart test/editor_workspace_layout_test.dart test/ui_ux_06_workflows_test.dart
+Formatted lib/features/editor/editor_screen.dart
+Formatted lib/features/media/photo_tools_screen.dart
+Formatted test/design_system_test.dart
+Formatted test/editor_hci_test.dart
+Formatted test/widget_test.dart
+Formatted lib/core/widgets/studio_quick_create.dart
+Formatted test/editor_workspace_layout_test.dart
+Formatted test/ui_ux_06_workflows_test.dart
+Formatted 24 files (8 changed) in 0.41 seconds.
+
+Exit=0

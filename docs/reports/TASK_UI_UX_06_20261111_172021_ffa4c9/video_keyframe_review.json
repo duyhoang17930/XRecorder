@@ -1,0 +1,44 @@
+[
+  {
+    "file": "UI06_acceptance_video_interactions.mp4",
+    "seconds": 115.258522,
+    "keyframeTimes": [
+      2.30517044,
+      23.051704400000002,
+      46.103408800000004,
+      69.1551132,
+      92.20681760000001,
+      111.80076634
+    ],
+    "contactSheet": "acceptance_video_video_keyframes.jpg",
+    "reviewScope": "Representative keyframes plus Android screenshots and assertion logs, not human continuous-playback usability acceptance."
+  },
+  {
+    "file": "UI06_acceptance_photo_interactions.mp4",
+    "seconds": 90.441411,
+    "keyframeTimes": [
+      1.80882822,
+      18.088282200000002,
+      36.176564400000004,
+      54.2648466,
+      72.35312880000001,
+      87.72816867
+    ],
+    "contactSheet": "acceptance_photo_video_keyframes.jpg",
+    "reviewScope": "Representative keyframes plus Android screenshots and assertion logs, not human continuous-playback usability acceptance."
+  },
+  {
+    "file": "UI06_acceptance_general_interactions.mp4",
+    "seconds": 106.919922,
+    "keyframeTimes": [
+      2.13839844,
+      21.383984400000003,
+      42.767968800000006,
+      64.1519532,
+      85.53593760000001,
+      103.71232434
+    ],
+    "contactSheet": "acceptance_general_video_keyframes.jpg",
+    "reviewScope": "Representative keyframes plus Android screenshots and assertion logs, not human continuous-playback usability acceptance."
+  }
+]

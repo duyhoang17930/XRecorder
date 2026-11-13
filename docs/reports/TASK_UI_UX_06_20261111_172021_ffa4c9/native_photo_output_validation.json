@@ -1,0 +1,26 @@
+{
+  "source": "/sdcard/Pictures/XRecorder/Edited_1794327406739.png",
+  "sourceDimensions": [
+    256,
+    128
+  ],
+  "sourceSha256": "be862241ed8f6c586e4a31f21cec0ac42a60e1cebfc8ff116df1b10c867d7891",
+  "sourceUnchanged": true,
+  "output": "/sdcard/Pictures/XRecorder/Edited_1794398254111.png",
+  "uri": "content://media/external/images/media/2319",
+  "dimensions": [
+    128,
+    229
+  ],
+  "mode": "PNG color type 6",
+  "sha256": "875fa7f24b79f4636d0a8ee68fbf45b14d900547b9cac01c2d178aed35c5968d",
+  "bytes": 8870,
+  "fullPngDecode": "PASS",
+  "cropAndQuarterTurnDimensions": "PASS",
+  "visualMarksEvidence": [
+    "final_v2_photo_text_applied.png",
+    "final_v2_photo_drawing.png",
+    "final_v2_photo_after_resume.png"
+  ],
+  "limitation": "Pixel decode and dimensions are verified; user visual acceptance remains pending."
+}

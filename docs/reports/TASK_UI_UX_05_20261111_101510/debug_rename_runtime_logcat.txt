@@ -1,0 +1,106 @@
+--------- beginning of main
+11-11 11:05:58.870 13544 13544 I order.xrecorder: Late-enabling -Xcheck:jni
+11-11 11:05:58.951 13544 13544 I order.xrecorder: Using CollectorTypeCMC GC.
+11-11 11:05:58.952 13544 13544 W order.xrecorder: Unexpected CPU variant for x86: x86_64.
+11-11 11:05:58.952 13544 13544 W order.xrecorder: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, alderlake, default
+11-11 11:05:58.991 13544 13544 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-11 11:05:59.159 13544 13544 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-11 11:05:59.159 13544 13544 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+11-11 11:05:59.419 13544 13544 D nativeloader: Configuring clns-9 for other apk /data/app/~~kAT27fuvf3X8Wym-Ak1qlA==/com.xrecorder.xrecorder-wUdzSOPKZ5mPDGzcyPvQZA==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~kAT27fuvf3X8Wym-Ak1qlA==/com.xrecorder.xrecorder-wUdzSOPKZ5mPDGzcyPvQZA==/lib/x86_64:/data/app/~~kAT27fuvf3X8Wym-Ak1qlA==/com.xrecorder.xrecorder-wUdzSOPKZ5mPDGzcyPvQZA==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.xrecorder.xrecorder
+11-11 11:05:59.431 13544 13544 I order.xrecorder: AssetManager2(0x7cc20b2287b8) locale list changing from [] to [en-US]
+11-11 11:05:59.442 13544 13544 V GraphicsEnvironment: Currently set values for:
+11-11 11:05:59.442 13544 13544 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-11 11:05:59.442 13544 13544 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-11 11:05:59.442 13544 13544 V GraphicsEnvironment: com.xrecorder.xrecorder is not listed in per-application setting
+11-11 11:05:59.442 13544 13544 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+11-11 11:05:59.442 13544 13544 V GraphicsEnvironment: com.xrecorder.xrecorder is not listed in ANGLE allowlist or settings, returning default
+11-11 11:05:59.443 13544 13544 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+--------- beginning of system
+11-11 11:05:59.502 13544 13559 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-11 11:05:59.513 13544 13544 I order.xrecorder: AssetManager2(0x7cc20b226b98) locale list changing from [] to [en-US]
+11-11 11:05:59.537 13544 13544 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-11 11:05:59.565 13544 13559 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-11 11:05:59.566 13544 13559 I EGL_emulation: Opening libGLESv2_emulation.so
+11-11 11:05:59.578 13544 13562 I ResourceExtractor: Found extracted resources res_timestamp-1-1794331057653
+11-11 11:05:59.579 13544 13562 I ResourceExtractor: Resource version mismatch res_timestamp-1-1794369931131
+11-11 11:05:59.580 13544 13559 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-11 11:05:59.582 13544 13561 D FlutterJNI: Beginning load of flutter...
+11-11 11:05:59.660 13544 13561 D nativeloader: Load /data/app/~~kAT27fuvf3X8Wym-Ak1qlA==/com.xrecorder.xrecorder-wUdzSOPKZ5mPDGzcyPvQZA==/base.apk!/lib/x86_64/libflutter.so using class loader ns clns-9 (caller=/data/app/~~kAT27fuvf3X8Wym-Ak1qlA==/com.xrecorder.xrecorder-wUdzSOPKZ5mPDGzcyPvQZA==/base.apk): ok
+11-11 11:05:59.666 13544 13561 D FlutterJNI: flutter (null) was loaded normally!
+11-11 11:05:59.673 13544 13563 D skia    : [SkFontMgr Android Parser] '/product/etc/fonts_customization.xml' could not be opened
+11-11 11:06:00.322 13544 13562 I ResourceExtractor: Extracted baseline resource assets/flutter_assets/kernel_blob.bin
+11-11 11:06:00.323 13544 13562 I ResourceExtractor: Extracted baseline resource assets/flutter_assets/vm_snapshot_data
+11-11 11:06:00.484 13544 13562 I ResourceExtractor: Extracted baseline resource assets/flutter_assets/isolate_snapshot_data
+11-11 11:06:00.505 13544 13544 I order.xrecorder: AssetManager2(0x7cc20b22dc18) locale list changing from [] to [en-US]
+11-11 11:06:00.532 13544 13544 W order.xrecorder: type=1400 audit(0.0:87): avc:  denied  { read } for  name="max_map_count" dev="proc" ino=21412 scontext=u:r:untrusted_app:s0:c219,c256,c512,c768 tcontext=u:object_r:proc_max_map_count:s0 tclass=file permissive=0 app=com.xrecorder.xrecorder
+11-11 11:06:00.567 13544 13544 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-11 11:06:00.574 13544 13564 I flutter : [IMPORTANT:flutter/shell/platform/android/android_context_gl_impeller.cc(104)] Using the Impeller rendering backend (OpenGLES).
+11-11 11:06:00.757 13544 13570 I flutter : The Dart VM service is listening on http://127.0.0.1:38445/B5MycGcdYrk=/
+11-11 11:06:01.722 13544 13544 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/view/accessibility/AccessibilityNodeInfo;->getSourceNodeId()J (runtime_flags=0, domain=platform, api=unsupported,test-api) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-11 11:06:01.722 13544 13544 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/view/accessibility/AccessibilityRecord;->getSourceNodeId()J (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-11 11:06:01.722 13544 13544 I order.xrecorder: hiddenapi: Accessing hidden field Landroid/view/accessibility/AccessibilityNodeInfo;->mChildNodeIds:Landroid/util/LongArray; (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-11 11:06:01.723 13544 13544 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/util/LongArray;->get(I)J (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-11 11:06:01.733 13544 13544 D AccessibilityBridge: Setting not found: accessibility_display_inversion_enabled, using default: 0
+11-11 11:06:01.751 13544 13544 D FlutterRenderer: Width is zero. 0,0
+11-11 11:06:01.758 13544 13544 D CompatChangeReporter: Compat change id reported: 377864165; UID 10219; state: ENABLED
+11-11 11:06:01.781 13544 13544 W HWUI    : Unknown dataspace 0
+11-11 11:06:03.298 13544 13544 I Choreographer: Skipped 90 frames!  The application may be doing too much work on its main thread.
+11-11 11:06:03.318 13544 13548 I order.xrecorder: Compiler allocated 5042KB to compile void android.view.ViewRootImpl.performTraversals()
+11-11 11:06:03.344 13544 13544 I WindowExtensionsImpl: Initializing Window Extensions, vendor API level=9, activity embedding enabled=true
+11-11 11:06:03.421 13544 13544 D FlutterRenderer: Width is zero. 0,0
+11-11 11:06:03.448 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:06:04.080 13544 13544 I Choreographer: Skipped 39 frames!  The application may be doing too much work on its main thread.
+11-11 11:06:04.096 13544 13544 D WindowLayoutComponentImpl: Register WindowLayoutInfoListener on Context=com.xrecorder.xrecorder.MainActivity@73e588f, of which baseContext=android.app.ContextImpl@fbeca87
+11-11 11:06:04.205 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:06:05.973 13544 13544 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-11 11:06:05.974 13544 13544 I order.xrecorder: AssetManager2(0x7cc20b22d5d8) locale list changing from [] to [en]
+11-11 11:06:06.057 13544 13544 I order.xrecorder: AssetManager2(0x7cc20b24fbd8) locale list changing from [] to [en-US]
+11-11 11:06:06.064 13544 13585 D ProfileInstaller: Installing profile for com.xrecorder.xrecorder
+11-11 11:06:06.136 13544 13544 D InsetsController: hide(ime(), fromIme=false)
+11-11 11:06:06.136 13544 13544 I ImeTracker: com.xrecorder.xrecorder:e25d395: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 11:06:07.657 13544 13584 W HWUI    : Image decoding logging dropped!
+11-11 11:06:12.559 13544 13549 I order.xrecorder: NativeAlloc concurrent mark compact GC freed 2403KB AllocSpace bytes, 12(244KB) LOS objects, 49% free, 2464KB/4929KB, paused 2.505ms,6.842ms total 43.148ms
+11-11 11:06:27.955 13544 13544 I order.xrecorder: AssetManager2(0x7cc20b257bf8) locale list changing from [] to [en-US]
+11-11 11:06:28.110 13544 13584 W HWUI    : Image decoding logging dropped!
+11-11 11:06:28.153 13544 13584 W HWUI    : Image decoding logging dropped!
+11-11 11:06:30.537 13544 13544 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@ccb2fe5
+11-11 11:06:37.131 13544 13544 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@ccb2fe5
+11-11 11:09:28.334 13544 13584 W HWUI    : Image decoding logging dropped!
+11-11 11:09:34.279 13544 13544 I ImeTracker: com.xrecorder.xrecorder:46793bf7: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+11-11 11:09:34.293 13544 13544 D InsetsController: show(ime(), fromIme=false)
+11-11 11:09:34.294 13544 13544 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+11-11 11:09:34.373 13544 13544 D InputConnectionAdaptor: The input method toggled cursor monitoring on
+11-11 11:09:34.376 13544 13544 I AssistStructure: Flattened final assist data: 472 bytes, containing 1 windows, 3 views
+11-11 11:09:34.650 13544 13544 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.xrecorder.xrecorder
+11-11 11:09:34.653 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:34.669 13544 13544 I ImeTracker: com.xrecorder.xrecorder:46793bf7: onShown
+11-11 11:09:34.670 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:34.672 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:39.542 13544 13544 I ImeTracker: com.xrecorder.xrecorder:a7b67f40: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+11-11 11:09:39.542 13544 13544 D InsetsController: hide(ime(), fromIme=false)
+11-11 11:09:39.542 13544 13544 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ImeBackAnimationController@66ab9ac
+11-11 11:09:39.543 13544 13544 D InsetsController: Setting requestedVisibleTypes to -9 (was -1)
+11-11 11:09:39.543 13544 13544 D CompatChangeReporter: Compat change id reported: 395521150; UID 10219; state: ENABLED
+11-11 11:09:39.565 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:39.602 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:39.603 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:39.850 13544 13544 I ImeTracker: system_server:1e7e67f3: onCancelled at PHASE_CLIENT_ON_CONTROLS_CHANGED
+11-11 11:09:45.584 13544 13544 I order.xrecorder: AssetManager2(0x7cc20b25c6f8) locale list changing from [] to [en-US]
+11-11 11:09:48.597 13544 13544 I ImeTracker: com.xrecorder.xrecorder:d24d2851: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+11-11 11:09:48.598 13544 13544 D InsetsController: show(ime(), fromIme=false)
+11-11 11:09:48.598 13544 13544 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+11-11 11:09:48.609 13544 13544 D InputConnectionAdaptor: The input method toggled cursor monitoring on
+11-11 11:09:48.616 13544 13544 I AssistStructure: Flattened final assist data: 472 bytes, containing 1 windows, 3 views
+11-11 11:09:48.946 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:48.963 13544 13544 I ImeTracker: com.xrecorder.xrecorder:d24d2851: onShown
+11-11 11:09:48.975 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:48.976 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:53.205 13544 13544 I ImeTracker: com.xrecorder.xrecorder:d186debf: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+11-11 11:09:53.206 13544 13544 D InsetsController: hide(ime(), fromIme=false)
+11-11 11:09:53.206 13544 13544 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ImeBackAnimationController@66ab9ac
+11-11 11:09:53.206 13544 13544 D InsetsController: Setting requestedVisibleTypes to -9 (was -1)
+11-11 11:09:53.209 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:53.244 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:53.246 13544 13544 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 11:09:53.475 13544 13544 I ImeTracker: system_server:9b0b8dcb: onCancelled at PHASE_CLIENT_ON_CONTROLS_CHANGED
+11-11 11:09:56.898 13544 13544 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@ccb2fe5

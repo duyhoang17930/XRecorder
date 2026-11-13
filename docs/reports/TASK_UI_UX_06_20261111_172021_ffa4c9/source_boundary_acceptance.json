@@ -1,0 +1,202 @@
+{
+  "baselineHead": "e008fbb095be62db9538f4c598cbff89e6ceb7aa",
+  "currentHead": "e008fbb095be62db9538f4c598cbff89e6ceb7aa",
+  "baselineTrackedFileCount": 473,
+  "changedSinceDirtyBaseline": [
+    {
+      "path": "lib/core/constants/app_icons.dart",
+      "before": "7eefcc8c4368c9294b7c62c3442b4aabfe657d45d2dd39bd9c6b0fff53c622b2",
+      "after": "b5ec974caf4900716914ca7c83a65d63387213122f04cd64bc08216085c1a20b"
+    },
+    {
+      "path": "lib/core/ui/components/inputs/studio_fields.dart",
+      "before": "d06ee24182d03c1254faa6237483d49c8ba5e2d0d8aa47e608cbd7bbae85ab3b",
+      "after": "984e55201bb197396b9e52730ba5eb28b951c0ff81af68c941d8f3deedac2f16"
+    },
+    {
+      "path": "lib/core/widgets/studio_shell.dart",
+      "before": "3952b64dda5a6798422cb4faaf5ab866c833fd04173aa52e8d5a238784b36cd3",
+      "after": "3214a2ded17c156943333e9adcdc26cdde3080f5fb14106a3697ce0346d1964a"
+    },
+    {
+      "path": "lib/features/editor/editing_hub_screen.dart",
+      "before": "4d9ec13f051e2efbaec18c0243777edd7c42c829f5bd4b3717fd4c5966e4fef4",
+      "after": "33f5090862783c924f4f16f2b599c42e2b26ace547c3eab8a1dd05bf14f8b467"
+    },
+    {
+      "path": "lib/features/editor/editor_preview.dart",
+      "before": "6d89447e58dc6aaffd2e9eef5b2d6a337ab0b6d68d55e629c845fc94b1ad032f",
+      "after": "bd399cf79a1561e467b3803571d6177ef955df7152bc74b6f0c6eab077451fda"
+    },
+    {
+      "path": "lib/features/editor/editor_screen.dart",
+      "before": "6bc48fe7797c4f2e119284691812d14efcc68a76a0d8680e528c020f378c145f",
+      "after": "ebf7b7f6e68b4e4e550741ead4a8e7c872d7e709582ac8e5a43795980818d424"
+    },
+    {
+      "path": "lib/features/editor/layers_editor.dart",
+      "before": "fef0a09e985f5bbbbe154a5274e4273605b22fe2d3be074167fa9d9a4ffedcc1",
+      "after": "3880ff65b4f807329d7b30b3e887006fb0cc13feb5f54ff1621ee936e9fb6e10"
+    },
+    {
+      "path": "lib/features/editor/media_picker.dart",
+      "before": "a36fc16c7accd597efde5c0634c4a9855b671b617155d55f1952ff9ceb8f46f3",
+      "after": "d7c4836959c307e07bdeffe8ec90905b33a7e84e49c4e78b3cfe1234aa1d85fb"
+    },
+    {
+      "path": "lib/features/editor/project_effects.dart",
+      "before": "c31eafecfda04300b415fc4c805dbeaf7df3c61fe5146a579fafc103986275bf",
+      "after": "b40637bad8d531e2733a58e3154f1236edfb72f61cfee4ee879454a457c41bd0"
+    },
+    {
+      "path": "lib/features/media/media_library_screen.dart",
+      "before": "dd8555d5b1dc52ea4632f0ddb67d91a0cedb18d748e85725e794c5bcf26e1666",
+      "after": "cd8e10441ac3b5f862e6cfbc76586a1fc4251b11f9675ef7fdaeda9c776a6cdb"
+    },
+    {
+      "path": "lib/features/media/photo_tools_screen.dart",
+      "before": "77bdf0e585cd1289a7923b40583c6f38b5944f1239478d4fb67935f21adff830",
+      "after": "160590819012477f14c8d24005f79e46fdf11ba0fba4c0b7311a94f8153d2628"
+    },
+    {
+      "path": "lib/features/media/video_details_screen.dart",
+      "before": "0914455ec9e7694c8e1c61e95d32c9ffa0ece5e37811bf0fb47a7fc81e90971c",
+      "after": "bff53a897cdadba6f385f79b77de591922676ffe7c55fec886ef36fa7283f97b"
+    },
+    {
+      "path": "lib/l10n/app_ar.arb",
+      "before": "ea455c35c7fee4aa92d0c668e2b5403246501f579088ff353ca729b5f1b71b4b",
+      "after": "3e4b7c2429775e8ea0154b22eedfeb61d03123c518b9ffd0116c26fe868c25b6"
+    },
+    {
+      "path": "lib/l10n/app_de.arb",
+      "before": "b306ee94d75d2eb8467f607161ea0c6e1ac9b137e84c4fe1a0ff59abca6a534e",
+      "after": "ee5da6940463248b8059be8d624906514e0cbc02efbac352720c064078d33638"
+    },
+    {
+      "path": "lib/l10n/app_en.arb",
+      "before": "e8abaa8354b08664cdba376fb76621e8a7d3758a6847fd835ad6bfc40c9c8e3c",
+      "after": "61d368c308dc0fd5b3dc61fe4f7a466a93e31b0a6ce30fd65d1a8ed797a7a656"
+    },
+    {
+      "path": "lib/l10n/app_es.arb",
+      "before": "4ca79eea387aca57dd8b2bc9b68f8bd2dd30c8c3cda9e5e1dcdec85445d8c7d7",
+      "after": "552c3630be3e9af39d813b3f94c596728035c9d26125a8b9e65bd7170adb46cc"
+    },
+    {
+      "path": "lib/l10n/app_fr.arb",
+      "before": "e49dc475e2d6dd62e09f0c16a3a27bd751eda7defeb8d984d3356e6d7f55b24e",
+      "after": "f0b0556f44c5ad90e8ac0e655ba84aa4ea284a2cbf12b169e4b754255bcb16d8"
+    },
+    {
+      "path": "lib/l10n/app_hi.arb",
+      "before": "62a7037298607e7aaaa5081a0d7524c5d28b959e5ca14be7c9bc03b5c4b1d156",
+      "after": "508eb2c3a7e71257c8967c6a64ea4795c1072205b381d380d8172437a17b7664"
+    },
+    {
+      "path": "lib/l10n/app_id.arb",
+      "before": "bd539da79da38fde2607fd462f86d8c738d7feceb1c81e6725bf6d8e63ae246e",
+      "after": "bd3e3b9678b96aca3866e1b73ace0b82d54d14ffa59d92bc7415f43aad50e364"
+    },
+    {
+      "path": "lib/l10n/app_ja.arb",
+      "before": "71c8d3bb3464afd54a19ce13502218db73f53b9e4df8a6a493862502210441e6",
+      "after": "8e83e4e7418e6f04394c9e0e17130354788d03ca0506a47266c956040918fc00"
+    },
+    {
+      "path": "lib/l10n/app_ko.arb",
+      "before": "cb0666ddf73cf7bd0fc3f8f858824bc7f964f9d48783bf4731c708e9dd189537",
+      "after": "b3db0d94ef685658c54ddab95d8e44e714a8e8bf6f5e3c6d915138f33cd713ae"
+    },
+    {
+      "path": "lib/l10n/app_pt.arb",
+      "before": "1242fcf121f2806e3a4b4f5297ad6ff5ab2dc9cbd6448ba91c91c049469d996e",
+      "after": "6417552372b3a84806e6ff408cee19ed2fa313593b47148e9c37b9eb0a4e5b7f"
+    },
+    {
+      "path": "lib/l10n/app_pt_BR.arb",
+      "before": "bcb076fbef5614c060666b8f3dcfbc32d48fb7590a0b17b0976daeb7989f937e",
+      "after": "df34ac096bdc9afb6db58f230dd39f94ab4b6e393de9d7ffe70284148e505f67"
+    },
+    {
+      "path": "lib/l10n/app_vi.arb",
+      "before": "5c9f5c195f66fdfb88a4c86eff0cf1c8d9c2deafafe219d33fd0ef53a6b8f26d",
+      "after": "08f53fd03938b646e97f28b465008aa73b9b3f5e96d15c391e696465c1e88e71"
+    },
+    {
+      "path": "lib/l10n/app_zh.arb",
+      "before": "76c3447ac25b397ed96794d0e709fc01de7aff05335496b770d65a0fa590fd4f",
+      "after": "cbeae0cf86195cea83c8fc7b788a416f85be9b1c9fa2e2e2e752074a18c8524f"
+    },
+    {
+      "path": "lib/l10n/app_zh_Hans.arb",
+      "before": "9c602c4bc806375b900f8e5e3560e6d7d08e434e0a21d660c7cce3527faa648d",
+      "after": "89d64a3a913c754312a5706160eb8015963b49554452be21c6ffef90f8a15ec1"
+    },
+    {
+      "path": "test/design_system_test.dart",
+      "before": "37671cf2ecb64c7e9374b8d642b23048622b7f325e13e7f0c8512e124b53917a",
+      "after": "eb16b8653150cb78e6cfa10207360d4638c5fb8fe518b457636b1aac11a3b24b"
+    },
+    {
+      "path": "test/editor_hci_test.dart",
+      "before": "4b821ef56cd79810b2ce973ea3aa4ecf7b5ae59056baa69cf538ab890e258368",
+      "after": "e293a736e763417eec1ab0ff2bb8bee1c47cb6193b5bb018603dfcbc4c20f109"
+    },
+    {
+      "path": "test/localization_test.dart",
+      "before": "726d3e9f82eb50f5fd0087ab66381476aef77ac6167bf447c0e73f8d2be32aec",
+      "after": "10081185b58d47a177f897623e0640582ccd5f61797287a94555022a3a566442"
+    },
+    {
+      "path": "test/refinement_test.dart",
+      "before": "8e29a88e10a7382e3c802b4ba32acff2a2670d8736a2bcfabfa2554d1a8a37f3",
+      "after": "fba98e1fef0ae22d32d8d769305007820ee478c25fa7ed65cb5c7054d0465ee6"
+    },
+    {
+      "path": "test/ux_interaction_test.dart",
+      "before": "6d9316cfbf56fe3b517fe53475bb468fe749ddb47bdc69a326de324a23dc35cc",
+      "after": "3148aa10b6d985bc2d02a045655d5c5bb8ce94c849884f72e4b4630501b58caf"
+    },
+    {
+      "path": "test/widget_test.dart",
+      "before": "4e2ae01a86dc7d1fcd074b511a08eb7b52feb43cb545d4cf0f382b4edd49ad3d",
+      "after": "c0f76ffd29cf60961a4793779b5d3e3569ffba55f61db9d928abfecd22ca225c"
+    }
+  ],
+  "missingBaselineFiles": [],
+  "protectedViolations": [],
+  "newSourceOrTests": [
+    "lib/core/widgets/studio_quick_create.dart",
+    "lib/features/editor/editor_entry.dart",
+    "lib/features/editor/editor_selection.dart",
+    "lib/features/editor/editor_timeline.dart",
+    "lib/features/editor/editor_workspace.dart",
+    "test/editor_workspace_layout_test.dart",
+    "test/ui_ux_06_workflows_test.dart"
+  ],
+  "baselineUntrackedPresence": {
+    "android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Ui05BPlayerInstrumentation.java": true,
+    "android/app/src/main/res/drawable/p2_chevron_back.xml": true,
+    "android/app/src/main/res/values/p2_ids.xml": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 164718.png": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 165104.png": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 165355.png": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 165627.png": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 165908.png": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 165922.png": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 170118.png": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 170208.png": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 170236.png": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 170439.png": true,
+    "docs/implementation/UI/Screenshot 2026-11-11 171109.png": true,
+    "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/": true,
+    "docs/reports/TASK_UI_UX_05_20261111_101510/": true,
+    "lib/core/ui/components/bottom_sheets/studio_sheet_launch.dart": true,
+    "test/fixtures/fonts/": true,
+    "test/ui_ux_05_motion_test.dart": true,
+    "test/ui_ux_05b_acceptance_test.dart": true
+  },
+  "scope": "Protected Android/P1, models/controller/repository and EditorPreview.kt byte-identical to UI06 preflight; existing UI05/05B differences against HEAD are preserved.",
+  "photoRenderAlgorithmTextUnchanged": true
+}

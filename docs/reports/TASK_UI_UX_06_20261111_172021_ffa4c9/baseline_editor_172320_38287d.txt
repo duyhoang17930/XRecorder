@@ -1,0 +1,5 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/editor_hci_test.dart test/editor_effects_ui_test.dart test/photo_tools_test.dart test/project_controller_test.dart test/project_repository_test.dart test/editor_preview_load_queue_test.dart test/task09b_editor_interactions_test.dart
+Flutter failed to open a file at "D:\Android\flutter\bin\cache\lockfile". The flutter tool cannot access the file or directory.
+Please ensure that the SDK and/or project is installed in a location that has read/write permissions for the current user.
+
+Exit=1

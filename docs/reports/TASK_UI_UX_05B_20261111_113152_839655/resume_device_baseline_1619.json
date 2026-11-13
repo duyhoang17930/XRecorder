@@ -1,0 +1,46 @@
+{
+  "privateHashes": {
+    "shared_prefs/p2_locale.xml": "87bf0345b0fdb43f7551ff7b4224828423b9c18b99e18950de9c54b41166a481",
+    "shared_prefs/onboarding_state.xml": "c16d57d1a312ef8b3a71627274face812ad92c10d8ed15ad7ebb493eb094a961",
+    "shared_prefs/app_settings.xml": "537becc23c68fd3c1e1ddb209502a981dee03086ad90af922c5710eece2e88f2",
+    "shared_prefs/media_catalog.xml": "c7f7e03c2f63ee74d6730ba1b62cb33d97bd83091768724b2efc4c645f78d6e2",
+    "files/projects/project_1794319906023720.json": "9689b4c7688b9a5c9edee6341beed505ec18a21bafeadefe7d2affcb34e24172",
+    "files/projects/project_1794327848468607.json": "0ba2836c98d8552e4dc613c70e531ee28aa38c0e49cc25947fd0441e1d0b83b3",
+    "files/export_jobs.json": "29e52b2cefb5798837a404914b21e9ae0a220c8f63a1d0d1353c814feb653a6a"
+  },
+  "differentFromTaskStart": [],
+  "settings": {
+    "version": 2,
+    "values": {
+      "themeMode": "light",
+      "appLocale": "en",
+      "speechLanguage": "auto",
+      "resolution": "1080p FHD",
+      "fps": "60",
+      "bitrate": "16 Mbps",
+      "codec": "H.264 / AVC",
+      "orientation": "Auto Sensor",
+      "audio": "Mixed Stream",
+      "countdown": "3s",
+      "gain": 100.0,
+      "cfr": true,
+      "hardware": true,
+      "noise": false,
+      "facecam": false,
+      "shake": true,
+      "screenOff": false,
+      "touches": false,
+      "cache": true,
+      "internalGain": 100.0,
+      "durationSeconds": 0,
+      "mode": "Normal"
+    }
+  },
+  "configuration": {
+    "font_scale": "1.0",
+    "user_rotation": "0",
+    "accelerometer_rotation": "1"
+  },
+  "size": "Physical size: 1080x2400\r\nOverride size: 411x920",
+  "density": "Physical density: 420\r\nOverride density: 160"
+}

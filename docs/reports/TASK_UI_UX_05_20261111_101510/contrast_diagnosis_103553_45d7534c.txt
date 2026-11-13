@@ -1,0 +1,17 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_05_motion_test.dart --plain-name "navigation accessibility dark=false scale=2.0"
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart
+test/ui_ux_05_motion_test.dart:184:59: Error: Member not found: 'writeOnlyExclusive'.
+              final sink = await file.open(mode: FileMode.writeOnlyExclusive);
+                                                          ^^^^^^^^^^^^^^^^^^
+00:00 +0 -1: loading D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart [E]
+  Failed to load "D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart":
+  Compilation failed for testPath=D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart: test/ui_ux_05_motion_test.dart:184:59: Error: Member not found: 'writeOnlyExclusive'.
+                final sink = await file.open(mode: FileMode.writeOnlyExclusive);
+                                                            ^^^^^^^^^^^^^^^^^^
+  .
+00:00 +0 -1: Some tests failed.
+
+Failing tests:
+  D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart: loading D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart
+
+Exit=1

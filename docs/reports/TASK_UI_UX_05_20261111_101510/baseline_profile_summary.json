@@ -1,0 +1,121 @@
+[
+  {
+    "scenario": "tabs",
+    "phase": "baseline",
+    "wallSeconds": 6.140999999999849,
+    "build": {
+      "frames": 0
+    },
+    "raster": {
+      "frames": 130,
+      "meanMs": 42.17506923076923,
+      "p50Ms": 41.766,
+      "p90Ms": 46.078,
+      "p99Ms": 57.663,
+      "maxMs": 59.671,
+      "over16_67ms": 130
+    }
+  },
+  {
+    "scenario": "create_sheets",
+    "phase": "baseline",
+    "wallSeconds": 6.4220000000000255,
+    "build": {
+      "frames": 0
+    },
+    "raster": {
+      "frames": 78,
+      "meanMs": 47.8109358974359,
+      "p50Ms": 47.671,
+      "p90Ms": 53.988,
+      "p99Ms": 120.51,
+      "maxMs": 120.51,
+      "over16_67ms": 78
+    }
+  },
+  {
+    "scenario": "settings_scroll",
+    "phase": "baseline",
+    "wallSeconds": 4.4370000000001255,
+    "build": {
+      "frames": 0
+    },
+    "raster": {
+      "frames": 87,
+      "meanMs": 43.650298850574714,
+      "p50Ms": 42.993,
+      "p90Ms": 49.292,
+      "p99Ms": 59.036,
+      "maxMs": 59.036,
+      "over16_67ms": 87
+    }
+  },
+  {
+    "scenario": "reselect",
+    "phase": "baseline",
+    "wallSeconds": 1.3279999999999745,
+    "build": {
+      "frames": 0
+    },
+    "raster": {
+      "frames": 16,
+      "meanMs": 42.55825,
+      "p50Ms": 43.429,
+      "p90Ms": 46.975,
+      "p99Ms": 48.643,
+      "maxMs": 48.643,
+      "over16_67ms": 16
+    }
+  },
+  {
+    "scenario": "color_picker",
+    "phase": "baseline",
+    "wallSeconds": 6.5620000000001255,
+    "build": {
+      "frames": 0
+    },
+    "raster": {
+      "frames": 131,
+      "meanMs": 26.354923664122136,
+      "p50Ms": 26.515,
+      "p90Ms": 31.564,
+      "p99Ms": 38.436,
+      "maxMs": 39.167,
+      "over16_67ms": 124
+    }
+  },
+  {
+    "scenario": "drawing",
+    "phase": "baseline",
+    "wallSeconds": 5.671999999999798,
+    "build": {
+      "frames": 0
+    },
+    "raster": {
+      "frames": 155,
+      "meanMs": 26.328670967741935,
+      "p50Ms": 26.519,
+      "p90Ms": 32.831,
+      "p99Ms": 46.992,
+      "maxMs": 65.941,
+      "over16_67ms": 142
+    }
+  },
+  {
+    "scenario": "photo_rotation",
+    "phase": "baseline",
+    "wallSeconds": 4.031999999999925,
+    "build": {
+      "frames": 0
+    },
+    "raster": {
+      "frames": 6,
+      "meanMs": 29.857333333333333,
+      "p50Ms": 23.685,
+      "p90Ms": 55.93,
+      "p99Ms": 55.93,
+      "maxMs": 55.93,
+      "over16_67ms": 4
+    }
+  }
+]

@@ -3,4 +3,5 @@
     <string name="p2_edit_video" formatted="false">वीडियो संपादित करें</string>
     <string name="p2_edit_photo" formatted="false">संपादित फोटो</string>
     <string name="p2_preview_unavailable" formatted="false">इस वीडियो को नहीं खेला जा सकता है या पहुंच रद्द कर दी गई है।</string>
+    <string name="p2_back" formatted="false">वापस</string>
 </resources>

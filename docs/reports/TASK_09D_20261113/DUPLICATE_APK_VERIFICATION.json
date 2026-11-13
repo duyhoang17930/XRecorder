@@ -1,0 +1,16 @@
+{
+  "files": [
+    {
+      "path": "build/uiux02/workspace/build/app/outputs/flutter-apk/app-debug.apk",
+      "bytes": 89467873,
+      "sha256": "a18bdf68262e243818ef6906e0842ae5aa2f78f8127815ad80374866a6b0c3ce"
+    },
+    {
+      "path": "build/uiux02/workspace/build/app/outputs/apk/debug/app-debug.apk",
+      "bytes": 89467873,
+      "sha256": "a18bdf68262e243818ef6906e0842ae5aa2f78f8127815ad80374866a6b0c3ce"
+    }
+  ],
+  "identical": true,
+  "task09d_fresh_sha256_verified": true
+}

@@ -9,6 +9,7 @@ import '../../core/domain/models.dart';
 import '../../core/presentation/thumbnail_image.dart';
 import '../../core/widgets/studio_widgets.dart';
 import '../../core/widgets/studio_create_sheet.dart';
+import '../../core/widgets/studio_quick_create.dart';
 import 'media_repository.dart';
 import 'media_sort.dart';
 import 'media_actions.dart';
@@ -206,7 +207,10 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
         child: ListView(
           shrinkWrap: true,
           children: [
-            StudioSheetHeader(title: context.l10n.sortMedia),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              child: StudioSheetHeader(title: context.l10n.sortMedia),
+            ),
             for (final value in MediaSort.values)
               if (value != MediaSort.duration || widget.kind == MediaKind.video)
                 ListTile(
@@ -300,11 +304,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '3HRECORDER',
-                    style: AppTypography.section.copyWith(color: c.primary),
-                  ),
-                  SectionTitle(
+                  StudioRootHeader(
                     video
                         ? context.l10n.videoLibrary
                         : context.l10n.photoLibrary,
@@ -328,12 +328,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                     const StudioRecordHero(),
                     const SizedBox(height: AppSpacing.sm),
                   ],
-                  const StudioQuickTools(compact: true),
-                  const SizedBox(height: AppSpacing.xs),
-                  Text(
-                    context.l10n.screenshotMinimizesTheAppAfterApproval3s,
-                    style: AppTypography.caption.copyWith(color: c.muted),
-                  ),
+                  const StudioLibraryQuickActions(),
                   const SizedBox(height: AppSpacing.md),
                   ...[
                     StudioSearchField(

@@ -1,0 +1,4 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe format --output=none --set-exit-if-changed lib/core/ui/components/cards/studio_cards.dart lib/core/ui/components/bottom_sheets/studio_sheet_launch.dart lib/core/widgets/studio_shell.dart lib/features/editor/editing_hub_screen.dart lib/features/media/media_library_screen.dart lib/features/settings/settings_hub_screen.dart test/design_system_test.dart test/localization_test.dart test/task09b_shared_interactions_test.dart test/widget_test.dart test/ui_ux_05b_acceptance_test.dart
+Formatted 11 files (0 changed) in 0.20 seconds.
+
+Exit=0

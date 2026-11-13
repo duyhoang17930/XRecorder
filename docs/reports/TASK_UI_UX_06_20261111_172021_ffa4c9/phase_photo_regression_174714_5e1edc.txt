@@ -1,0 +1,668 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/editor_hci_test.dart test/photo_tools_test.dart test/task09b_editor_interactions_test.dart test/editor_preview_load_queue_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/editor_hci_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:01 +2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +3: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +4: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:02 +5: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: No element
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:694:25)
+#1      WidgetController.element (package:flutter_test/src/controller.dart:888:30)
+#2      WidgetController.ensureVisible (package:flutter_test/src/controller.dart:2389:32)
+#3      main.tool (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:66:18)
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:97:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo contextual controls retain color, drawing and undo across panels
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +5 -1: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: audio edit all numeric fields gain voice noise and remove without mutating input
+00:02 +5 -1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels [E]
+  Test failed. See exception logs above.
+  The test description was: photo contextual controls retain color, drawing and undo across panels
+  
+00:03 +6 -1: D:/FAU_App/XRecorder/test/editor_hci_test.dart: tool pickers preserve edits on Back and agree on selected shape
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:159:21)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  tool pickers preserve edits on Back and agree on selected shape
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +6 -2: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: audio invalid range retains editor then corrected input saves
+00:03 +6 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: tool pickers preserve edits on Back and agree on selected shape [E]
+  Test failed. See exception logs above.
+  The test description was: tool pickers preserve edits on Back and agree on selected shape
+  
+00:03 +7 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo text remains editable with a landscape keyboard
+00:03 +8 -2: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:04 +8 -2: D:/FAU_App/XRecorder/test/editor_hci_test.dart: selected tool remains visible after viewport rotation
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:227:21)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  selected tool remains visible after viewport rotation
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +8 -3: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:04 +8 -3: D:/FAU_App/XRecorder/test/editor_hci_test.dart: selected tool remains visible after viewport rotation [E]
+  Test failed. See exception logs above.
+  The test description was: selected tool remains visible after viewport rotation
+  
+00:04 +9 -3: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:05 +10 -3: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: layers add text transforms sticker drawing order delete and commit
+00:05 +11 -3: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 320.0 landscape=false scale=1.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +11 -4: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: subtitle actual add select update split merge invalid overlap delete cancel
+00:05 +11 -4: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 320.0 landscape=false scale=1.0
+  
+00:05 +11 -4: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.5
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 320.0 landscape=false scale=1.5
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +11 -5: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: subtitle actual add select update split merge invalid overlap delete cancel
+00:05 +11 -5: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.5 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 320.0 landscape=false scale=1.5
+  
+00:06 +12 -5: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=2.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 320.0 landscape=false scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +12 -6: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:06 +12 -6: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 320.0 landscape=false scale=2.0
+  
+00:06 +12 -6: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=1.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 320.0 landscape=true scale=1.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +12 -7: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:06 +12 -7: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=1.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 320.0 landscape=true scale=1.0
+  
+00:07 +12 -7: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=1.5
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 320.0 landscape=true scale=1.5
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:07 +12 -8: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:07 +12 -8: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=1.5 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 320.0 landscape=true scale=1.5
+  
+00:07 +12 -8: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=2.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 320.0 landscape=true scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:07 +12 -9: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:07 +12 -9: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 320.0 landscape=true scale=2.0
+  
+00:07 +12 -9: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 360.0 landscape=false scale=1.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:07 +12 -10: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:07 +12 -10: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 360.0 landscape=false scale=1.0
+  
+00:08 +12 -10: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.5
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 360.0 landscape=false scale=1.5
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +12 -11: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:08 +12 -11: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.5 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 360.0 landscape=false scale=1.5
+  
+00:08 +12 -11: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=2.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 360.0 landscape=false scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +12 -12: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:08 +12 -12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 360.0 landscape=false scale=2.0
+  
+00:08 +12 -12: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 360.0 landscape=true scale=1.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +12 -13: D:/FAU_App/XRecorder/test/task09b_editor_interactions_test.dart: effects dropdowns commit selected values and retime timed overlays
+00:08 +12 -13: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 360.0 landscape=true scale=1.0
+  
+00:09 +13 -13: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.5
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 360.0 landscape=true scale=1.5
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:09 +13 -14: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.5 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 360.0 landscape=true scale=1.5
+  
+00:09 +13 -14: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=2.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 360.0 landscape=true scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:09 +13 -15: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 360.0 landscape=true scale=2.0
+  
+00:09 +13 -15: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 393.0 landscape=false scale=1.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:09 +13 -16: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 393.0 landscape=false scale=1.0
+  
+00:09 +13 -16: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.5
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 393.0 landscape=false scale=1.5
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:10 +13 -17: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.5 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 393.0 landscape=false scale=1.5
+  
+00:10 +13 -17: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=2.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 393.0 landscape=false scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:10 +13 -18: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 393.0 landscape=false scale=2.0
+  
+00:10 +13 -18: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 393.0 landscape=true scale=1.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:10 +13 -19: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 393.0 landscape=true scale=1.0
+  
+00:10 +13 -19: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.5
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 393.0 landscape=true scale=1.5
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:10 +13 -20: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.5 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 393.0 landscape=true scale=1.5
+  
+00:10 +13 -20: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=2.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 393.0 landscape=true scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:11 +13 -21: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 393.0 landscape=true scale=2.0
+  
+00:11 +13 -21: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 411.0 landscape=false scale=1.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:11 +13 -22: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 411.0 landscape=false scale=1.0
+  
+00:11 +13 -22: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.5
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 411.0 landscape=false scale=1.5
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:11 +13 -23: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.5 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 411.0 landscape=false scale=1.5
+  
+00:11 +13 -23: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=2.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 411.0 landscape=false scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:12 +13 -24: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 411.0 landscape=false scale=2.0
+  
+00:12 +13 -24: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 411.0 landscape=true scale=1.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:12 +13 -25: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 411.0 landscape=true scale=1.0
+  
+00:12 +13 -25: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.5
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 411.0 landscape=true scale=1.5
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:12 +13 -26: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.5 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 411.0 landscape=true scale=1.5
+  
+00:12 +13 -26: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=2.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _TypeError was thrown running a test:
+type 'EditorTool' is not a subtype of type 'ChoiceChip' in type cast
+
+When the exception was thrown, this was the stack:
+#0      WidgetController.widget (package:flutter_test/src/controller.dart:828:44)
+#1      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_hci_test.dart:323:22)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  photo editor 411.0 landscape=true scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:12 +13 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: photo editor 411.0 landscape=true scale=2.0
+  
+00:12 +13 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects cancel is isolated; apply retains unknown values and retimes cues
+00:13 +14 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo output options cancel does not apply, apply preserves the selected contract
+00:13 +15 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 320.0 landscape=false text200 RTL
+00:14 +16 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 320.0 landscape=true text200 RTL
+00:14 +17 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 360.0 landscape=false text200 RTL
+00:14 +18 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 360.0 landscape=true text200 RTL
+00:15 +19 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 393.0 landscape=false text200 RTL
+00:15 +20 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 393.0 landscape=true text200 RTL
+00:15 +21 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 411.0 landscape=false text200 RTL
+00:15 +22 -27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 411.0 landscape=true text200 RTL
+00:16 +23 -27: Some tests failed.
+
+Failing tests:
+  D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+  D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+  D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.5
+  D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=2.0
+  ... and 23 more
+
+Exit=1

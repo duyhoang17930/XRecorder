@@ -1,0 +1,2556 @@
+{
+  "scripts": [
+    {
+      "path": "tool/analyze_performance.py",
+      "purpose": "Summarize Task 03 raw measurements; no device mutations or media deletion.",
+      "imports": [
+        "collections",
+        "json",
+        "math",
+        "pathlib",
+        "re",
+        "statistics",
+        "subprocess"
+      ],
+      "references": [],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/analyze_task08_performance.py",
+      "purpose": "Summarize preserved raw TASK08 frames; writes new evidence only.",
+      "imports": [
+        "argparse",
+        "hashlib",
+        "json",
+        "math",
+        "pathlib",
+        "statistics"
+      ],
+      "references": [
+        "docs/implementation/TASK_08_PERFORMANCE_BASELINE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": []
+    },
+    {
+      "path": "tool/analyze_whisper_benchmark.py",
+      "purpose": "Measure recorded ASR outputs against the public fixture reference.",
+      "imports": [
+        "argparse",
+        "array",
+        "asr_metrics",
+        "csv",
+        "hashlib",
+        "io",
+        "json",
+        "math",
+        "pathlib",
+        "random",
+        "re",
+        "statistics",
+        "subprocess",
+        "tarfile",
+        "time",
+        "unicodedata",
+        "urllib.parse",
+        "urllib.request",
+        "wave"
+      ],
+      "references": [
+        "docs/implementation/P2_P3_AI_SUBTITLE_EVALUATION.md",
+        "docs/implementation/P2_P3_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "subprocess",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "tool/check_l10n.py",
+      "purpose": "Validate shipped ARBs without requiring a translation service or extra packages.",
+      "imports": [
+        "json",
+        "pathlib",
+        "re"
+      ],
+      "references": [
+        "docs/implementation/TASK_07_GLOBALIZATION_MATRIX.md",
+        "docs/implementation/TASK_07_TEST_EVIDENCE.md",
+        "docs/implementation/TASK_09_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": []
+    },
+    {
+      "path": "tool/drive_p2_p3_picker.py",
+      "purpose": "Operate only DocumentsUI on the dedicated QA emulator, retaining outputs.",
+      "imports": [
+        "argparse",
+        "pathlib",
+        "re",
+        "subprocess",
+        "time",
+        "xml.etree.ElementTree"
+      ],
+      "references": [
+        "docs/implementation/P2_P3_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/evaluate_task07_asr.py",
+      "purpose": "Script-aware, single-utterance ASR observations; never a global quality verdict.",
+      "imports": [
+        "argparse",
+        "asr_metrics",
+        "json",
+        "pathlib",
+        "statistics",
+        "unicodedata"
+      ],
+      "references": [],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": []
+    },
+    {
+      "path": "tool/fetch_task07_corpus.py",
+      "purpose": "Stream one real FLEURS test recording and reference per language into QA output.\n\nNo full-corpus download, arbitrary archive extraction, user-media access or upload.",
+      "imports": [
+        "csv",
+        "hashlib",
+        "io",
+        "json",
+        "pathlib",
+        "subprocess",
+        "tarfile",
+        "urllib.request"
+      ],
+      "references": [
+        "docs/implementation/TASK_07_ASR_CONTRACT_AND_BENCHMARK.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "subprocess",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "tool/generate_speech_languages.py",
+      "purpose": "Maintenance generator: pinned Whisper language table + Babel/CLDR display names.\n\nGenerated Dart/ARB data are checked in; the app never depends on Python or Babel.",
+      "imports": [
+        "babel",
+        "json",
+        "pathlib",
+        "re",
+        "sys"
+      ],
+      "references": [
+        "lib/features/editor/speech_languages.dart",
+        "docs/implementation/TASK_07_ASR_CONTRACT_AND_BENCHMARK.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": []
+    },
+    {
+      "path": "tool/kill_p2_p3_qa_process.py",
+      "purpose": "Kill only the verified idle-capture QA app after a real export has started.",
+      "imports": [
+        "json",
+        "pathlib",
+        "shlex",
+        "subprocess",
+        "sys",
+        "time"
+      ],
+      "references": [
+        "docs/implementation/P2_P3_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/p2_p3_recovery_fixture.py",
+      "purpose": "Inject a crash fixture only into the newly-created test draft on the dedicated AVD.",
+      "imports": [
+        "argparse",
+        "json",
+        "pathlib",
+        "re",
+        "subprocess",
+        "time"
+      ],
+      "references": [
+        "integration_test/p2_p3_recovery_test.dart",
+        "docs/implementation/P2_P3_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/performance_host.py",
+      "purpose": "Task 03 host measurements/consent. Stdlib only; never clear data or delete media.",
+      "imports": [
+        "argparse",
+        "json",
+        "pathlib",
+        "re",
+        "subprocess",
+        "time",
+        "urllib.parse",
+        "urllib.request",
+        "xml.etree.ElementTree"
+      ],
+      "references": [],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "clear",
+        "subprocess",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "tool/profile_task07_memory.py",
+      "purpose": "Read-only PSS samples for the dedicated TASK07 AVD; no process control.",
+      "imports": [
+        "argparse",
+        "json",
+        "pathlib",
+        "re",
+        "subprocess",
+        "time"
+      ],
+      "references": [],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/repository_inventory.py",
+      "purpose": "Read-only repository inventory; writes one new JSON report, never deletes files.\n\nDoes not follow junctions/symlinks or hash large build/AVD images. Use an output\noutside protected data. Existing reports are never overwritten.",
+      "imports": [
+        "argparse",
+        "collections",
+        "datetime",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "shutil",
+        "subprocess"
+      ],
+      "references": [],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/run_qa_existing_app.py",
+      "purpose": "Install with adb's non-destructive update, then attach a host Dart driver.\n\nNever use Flutter's install fallback: it may uninstall on insufficient storage.\nNo build, uninstall, clear-data, root, permission grants or file cleanup here.",
+      "imports": [
+        "argparse",
+        "datetime",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "shlex",
+        "subprocess",
+        "tarfile",
+        "threading",
+        "time",
+        "urllib.parse",
+        "uuid"
+      ],
+      "references": [
+        "tool/verify_ui.ps1",
+        "tool/tests/test_run_qa_existing_app.py",
+        "docs/implementation/TASK_08_CURRENT_AUDIT.md",
+        "docs/implementation/TASK_08_DATA_SAFETY_REPORT.md",
+        "docs/implementation/TASK_08_PERFORMANCE_BASELINE.md",
+        "docs/implementation/TASK_08_TEST_EVIDENCE.md",
+        "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+        "docs/implementation/TASK_09_BUG_REGISTER.md",
+        "docs/implementation/TASK_09_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "clear",
+        "subprocess",
+        "uninstall"
+      ]
+    },
+    {
+      "path": "tool/seed_export_recovery.py",
+      "purpose": "Only for export_recovery_test.dart on a disposable test install; adb run-as required.",
+      "imports": [
+        "json",
+        "os",
+        "pathlib",
+        "subprocess",
+        "time"
+      ],
+      "references": [
+        "integration_test/export_recovery_test.dart",
+        "docs/xrecorder/phase_13_validation.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/sync_p2_native_l10n.py",
+      "purpose": "Generate P2 Android labels from the same ARB source as Flutter.",
+      "imports": [
+        "json",
+        "pathlib",
+        "xml.sax.saxutils"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/TASK_UI_UX_05B_FINAL_ACCEPTANCE_REPORT.md",
+        "android/app/src/main/res/values-vi/p2_strings.xml",
+        "android/app/src/main/res/values-pt-rBR/p2_strings.xml",
+        "android/app/src/main/res/values-ko/p2_strings.xml",
+        "android/app/src/main/res/values-ja/p2_strings.xml",
+        "android/app/src/main/res/values-in/p2_strings.xml",
+        "android/app/src/main/res/values-hi/p2_strings.xml",
+        "android/app/src/main/res/values-fr/p2_strings.xml",
+        "android/app/src/main/res/values-es/p2_strings.xml",
+        "android/app/src/main/res/values-de/p2_strings.xml",
+        "android/app/src/main/res/values-b+zh+Hans/p2_strings.xml",
+        "android/app/src/main/res/values-ar/p2_strings.xml",
+        "android/app/src/main/res/values/p2_strings.xml"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": []
+    },
+    {
+      "path": "tool/validate_editor_audio.py",
+      "purpose": "Validate real Android editor outputs. No files are removed from the device.",
+      "imports": [
+        "PIL",
+        "argparse",
+        "array",
+        "io",
+        "json",
+        "math",
+        "pathlib",
+        "re",
+        "subprocess"
+      ],
+      "references": [
+        "tool/tests/test_run_qa_existing_app.py",
+        "docs/implementation/P2_P3_TEST_EVIDENCE.md",
+        "docs/implementation/TASK_08_TEST_EVIDENCE.md",
+        "docs/implementation/TASK_09_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/validate_p2_p3_outputs.py",
+      "purpose": "Independent fixture validation; never touches device media or deletes outputs.",
+      "imports": [
+        "argparse",
+        "array",
+        "hashlib",
+        "json",
+        "math",
+        "pathlib",
+        "re",
+        "subprocess"
+      ],
+      "references": [
+        "tool/tests/test_run_qa_existing_app.py",
+        "docs/implementation/P2_P3_TEST_EVIDENCE.md",
+        "docs/implementation/TASK_08_TEST_EVIDENCE.md",
+        "docs/implementation/TASK_09_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/verify_release.py",
+      "purpose": "Check packaged assets and native alignment: python tool/verify_release.py APK.",
+      "imports": [
+        "pathlib",
+        "struct",
+        "sys",
+        "zipfile"
+      ],
+      "references": [
+        "docs/xrecorder/phase_13_validation.md",
+        "docs/implementation/TASK_08_TEST_EVIDENCE.md",
+        "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+        "docs/implementation/TASK_09_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": []
+    },
+    {
+      "path": "tool/verify_task07_accessibility.py",
+      "purpose": "Run the tiny framework-only test APK on the isolated16KB QA AVD.",
+      "imports": [
+        "argparse",
+        "json",
+        "pathlib",
+        "re",
+        "subprocess",
+        "time"
+      ],
+      "references": [
+        "docs/implementation/TASK_07_FINAL_REPORT_VI.md",
+        "docs/implementation/TASK_07_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/verify_task07_subtitles.py",
+      "purpose": "Retained QA fixtures, Android-surface capture and independent MP4 validation.\n\nRun prepare, then capture alongside flutter drive, then validate. Never removes\nmedia, changes device settings, grants permissions or operates on a user AVD.",
+      "imports": [
+        "PIL",
+        "argparse",
+        "hashlib",
+        "io",
+        "json",
+        "pathlib",
+        "re",
+        "subprocess",
+        "time",
+        "xml.etree.ElementTree"
+      ],
+      "references": [],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "tool/tests/test_run_qa_existing_app.py",
+      "purpose": "Safety regression: a failed install must never lead to data removal.",
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "io",
+        "json",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "tarfile",
+        "tempfile",
+        "unittest",
+        "unittest.mock"
+      ],
+      "references": [
+        "docs/implementation/TASK_08_TEST_EVIDENCE.md",
+        "docs/implementation/TASK_09B_TEST_EVIDENCE.md"
+      ],
+      "owner": "Shared/repository; exact owner not recorded",
+      "reproducibility_evidence": false,
+      "decision": "retain active tool; no removal proof",
+      "side_effect_markers": [
+        "adb",
+        "clear",
+        "subprocess",
+        "uninstall"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_clip_menu_finish.py",
+      "purpose": null,
+      "imports": [
+        "pathlib",
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_crop_transform.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/resume_native_final_v2.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_dark_photo_saf.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/resume_native_final_v2.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_eraser_roundtrip.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2_extra.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_photo_qa.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_photo_rtl.py",
+      "purpose": null,
+      "imports": [
+        "ast",
+        "pathlib",
+        "qa06_interactions"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/resume_native_final_v2.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_photo_rtl_finish.py",
+      "purpose": null,
+      "imports": [
+        "ast",
+        "pathlib",
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_screens_qa.py",
+      "purpose": null,
+      "imports": [
+        "ast",
+        "pathlib",
+        "qa06_interactions"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "clear"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_tool_menus.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2_extra.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_video_qa.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/candidate1_video_qa.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/collect_data_preservation.py",
+      "purpose": "Read-only comparison with the UI06 archive and retained-source manifest.",
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa06",
+        "re",
+        "subprocess",
+        "sys",
+        "tarfile"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/collect_source_boundary.py",
+      "purpose": "Compare current source bytes with the dirty UI06 preflight, never Git HEAD.",
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "subprocess",
+        "sys"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/collect_storage_acceptance.py",
+      "purpose": "One final metadata walk; never follows reparse points or reads disk images.",
+      "imports": [
+        "json",
+        "os",
+        "pathlib",
+        "shutil",
+        "stat",
+        "sys"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/final_selection_qa.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/general_native_final.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "clear"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/guard_native_final.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/guard_native_return.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/photo_native_final.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_editors.py",
+      "purpose": "Supplement the completed core baseline without overwriting its evidence.",
+      "imports": [
+        "ast",
+        "json",
+        "pathlib",
+        "qa06",
+        "sys"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_runner.py",
+      "purpose": "Before/after use the identical UI05B scripts and the same retained QA media.",
+      "imports": [
+        "ast",
+        "pathlib",
+        "qa06",
+        "runpy",
+        "sys"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile_scenarios.py",
+      "purpose": null,
+      "imports": [],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_editors.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_runner.py",
+        "docs/reports/TASK_UI_UX_05_20261111_101510/profile_video.py",
+        "docs/reports/TASK_UI_UX_05_20261111_101510/TASK_UI_UX_05_REPORT.md",
+        "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/profile_video.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/qa06.py",
+      "purpose": "Reuse checked QA helpers, with this task's fresh identity/data baseline.",
+      "imports": [
+        "json",
+        "pathlib",
+        "qa05b",
+        "re",
+        "sys",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/qa06_interactions.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa06",
+        "re",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/responsive_native_final.py",
+      "purpose": null,
+      "imports": [
+        "ast",
+        "pathlib",
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/responsive_native_finish.py",
+      "purpose": null,
+      "imports": [
+        "ast",
+        "pathlib",
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/resume_authorized_avd.py",
+      "purpose": "Boot only the existing, identified TASK09B AVD, without snapshot rollback.",
+      "imports": [
+        "json",
+        "os",
+        "pathlib",
+        "subprocess",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/resume_native_final_v2.py",
+      "purpose": null,
+      "imports": [
+        "ast",
+        "pathlib",
+        "qa06_interactions",
+        "runpy",
+        "sys"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/review_video_keyframes.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "subprocess",
+        "sys"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_check.py",
+      "purpose": "Run one Flutter command, preserving UTF-8 output in an exclusive log.",
+      "imports": [
+        "datetime",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "uuid"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT.md",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/write_final_report.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2.py",
+      "purpose": "New evidence namespace for the last low-height layout fix; old files stay.",
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa06",
+        "runpy",
+        "sys"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2_extra.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "qa06",
+        "runpy",
+        "sys"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/selection_native_verified.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/summarize_performance.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "re"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/validate_acceptance_outputs.py",
+      "purpose": null,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa06",
+        "re",
+        "struct",
+        "subprocess"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/resume_native_final_v2.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/run_native_final_v2.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/validate_photo_output.py",
+      "purpose": null,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa06",
+        "struct",
+        "subprocess"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/validate_video_output.py",
+      "purpose": null,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa06",
+        "re",
+        "subprocess"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/verify_export_visual_content.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "subprocess"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/video_export_finish.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/video_native_final.py",
+      "purpose": null,
+      "imports": [
+        "qa06_interactions"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/write_final_report.py",
+      "purpose": "Create the final UTF-8 report exclusively; never replace prior evidence.",
+      "imports": [
+        "json",
+        "pathlib",
+        "sys"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "clear",
+        "uninstall"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/debug_reduced_motion_qa.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05",
+        "re",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/global_visual_qa.py",
+      "purpose": "Additional actual-main UI acceptance. Never save media or start capture.",
+      "imports": [
+        "json",
+        "qa05",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/main_visual_qa.py",
+      "purpose": "Compact actual-main-app interaction evidence; only QA fixture edits, no save.",
+      "imports": [
+        "json",
+        "qa05",
+        "re",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/main_visual_qa_v2.py",
+      "purpose": "Compact actual-main-app interaction evidence; only QA fixture edits, no save.",
+      "imports": [
+        "json",
+        "qa05",
+        "re",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/preservation_check.py",
+      "purpose": null,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "qa05",
+        "shutil",
+        "stat",
+        "tarfile"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/profile_scenarios.py",
+      "purpose": "Main-app profile scenarios: same ADB actions for before/after, no capture/export.",
+      "imports": [
+        "hashlib",
+        "json",
+        "math",
+        "qa05",
+        "re",
+        "statistics",
+        "sys",
+        "time",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_editors.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_runner.py",
+        "docs/reports/TASK_UI_UX_05_20261111_101510/profile_video.py",
+        "docs/reports/TASK_UI_UX_05_20261111_101510/TASK_UI_UX_05_REPORT.md",
+        "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/profile_video.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "clear",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/profile_video.py",
+      "purpose": "Supplemental profile scenario; paused preview never starts recording/export.",
+      "imports": [
+        "ast",
+        "json",
+        "math",
+        "qa05",
+        "re",
+        "statistics",
+        "sys",
+        "time",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_editors.py",
+        "docs/reports/TASK_UI_UX_05_20261111_101510/TASK_UI_UX_05_REPORT.md"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "clear",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/qa05.py",
+      "purpose": "UI03 main-app QA. All artifacts exclusive; only the identified QA AVD.",
+      "imports": [
+        "json",
+        "pathlib",
+        "re",
+        "struct",
+        "subprocess",
+        "time",
+        "uuid",
+        "xml.etree.ElementTree"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/rename_android_qa.py",
+      "purpose": null,
+      "imports": [
+        "qa05",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/rtl_visual_qa_v2.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "qa05",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/runtime_motion_fields_v2.py",
+      "purpose": "Read SDK objects without a compiler or application mutation.",
+      "imports": [
+        "pathlib"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/runtime_motion_field_diagnosis.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05",
+        "re",
+        "time",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/runtime_motion_object_diagnosis.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05",
+        "re",
+        "time",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/run_check.py",
+      "purpose": "Sequential Flutter CLI check with a collision-safe UTF-8 log.",
+      "imports": [
+        "datetime",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "uuid"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT.md",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/write_final_report.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05_20261111_101510/verify_runtime_motion.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05",
+        "re",
+        "time",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_05_20261111_101510/runtime_motion_fields_v2.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/after_main_qa.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05b",
+        "re",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/after_main_qa_v2.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05b",
+        "re",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/audit_localization.py",
+      "purpose": "Structural/heuristic inventory of every ARB. Never grades linguistic quality.",
+      "imports": [
+        "json",
+        "pathlib",
+        "re",
+        "subprocess"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/TASK_UI_UX_05B_FINAL_ACCEPTANCE_REPORT.md"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/before_remaining_v4.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05b",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/before_visual.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05b",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/before_visual_v2.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05b",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/before_visual_v3.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05b",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/build_native_tests.py",
+      "purpose": null,
+      "imports": [
+        "datetime",
+        "os",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/collect_final_device.py",
+      "purpose": "Read-only final identity, preferences, fixture and APK checks.",
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa05b"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/collect_final_host.py",
+      "purpose": "Read-only source/storage inventory; outputs are created exclusively.",
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "shutil",
+        "stat",
+        "struct",
+        "subprocess"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/connect_profile.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05b",
+        "re",
+        "sys",
+        "time",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_runner.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/final_main_qa.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa05b",
+        "re",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/localized_video.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "qa05b",
+        "re",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/localized_visual_qa.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "qa05b",
+        "re",
+        "time"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_photo_rtl.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_photo_rtl_finish.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_screens_qa.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/responsive_native_final.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/responsive_native_finish.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/resume_native_final_v2.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/profile_core.py",
+      "purpose": "Main-app profile scenarios: same ADB actions for before/after, no capture/export.",
+      "imports": [
+        "hashlib",
+        "json",
+        "math",
+        "qa05b",
+        "re",
+        "statistics",
+        "sys",
+        "time",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_runner.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "clear",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/profile_editor_only.py",
+      "purpose": "Main-app profile scenarios: same ADB actions for before/after, no capture/export.",
+      "imports": [
+        "hashlib",
+        "json",
+        "math",
+        "qa05b",
+        "re",
+        "statistics",
+        "sys",
+        "time",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_editors.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "clear",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/profile_scenarios.py",
+      "purpose": "Main-app profile scenarios: same ADB actions for before/after, no capture/export.",
+      "imports": [
+        "hashlib",
+        "json",
+        "math",
+        "qa05b",
+        "re",
+        "statistics",
+        "sys",
+        "time",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_editors.py",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_runner.py",
+        "docs/reports/TASK_UI_UX_05_20261111_101510/profile_video.py",
+        "docs/reports/TASK_UI_UX_05_20261111_101510/TASK_UI_UX_05_REPORT.md",
+        "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/profile_video.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "clear",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/profile_video.py",
+      "purpose": "Supplemental profile scenario; paused preview never starts recording/export.",
+      "imports": [
+        "ast",
+        "json",
+        "math",
+        "qa05b",
+        "re",
+        "statistics",
+        "sys",
+        "time",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/profile06_editors.py",
+        "docs/reports/TASK_UI_UX_05_20261111_101510/TASK_UI_UX_05_REPORT.md"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "clear",
+        "urlopen"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/qa05b.py",
+      "purpose": "UI05B main-app QA. All artifacts exclusive; only the identified QA AVD.",
+      "imports": [
+        "json",
+        "pathlib",
+        "re",
+        "struct",
+        "subprocess",
+        "time",
+        "uuid",
+        "xml.etree.ElementTree"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/run_check.py",
+      "purpose": "Sequential Flutter CLI check with a collision-safe UTF-8 log.",
+      "imports": [
+        "datetime",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "uuid"
+      ],
+      "references": [
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT.md",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+        "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/write_final_report.py"
+      ],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/run_player_native.py",
+      "purpose": null,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa05b",
+        "re"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/run_player_native_final.py",
+      "purpose": null,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa05b",
+        "re"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/run_player_native_v2.py",
+      "purpose": null,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa05b",
+        "re"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/editor_native_rtl_responsive.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "qa04",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/final_photo_boundaries.py",
+      "purpose": null,
+      "imports": [
+        "qa04",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/final_preservation_audit.py",
+      "purpose": "Read-only verification; every new host artifact uses exclusive creation.",
+      "imports": [
+        "datetime",
+        "hashlib",
+        "io",
+        "json",
+        "os",
+        "pathlib",
+        "qa04",
+        "shutil",
+        "subprocess",
+        "tarfile"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/native_cache_preview_final.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa04",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/photo_final_qa.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa04",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/photo_interaction_video_v2.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "qa04",
+        "re",
+        "struct",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/photo_keyboard_light_complete.py",
+      "purpose": null,
+      "imports": [
+        "qa04",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/photo_keyboard_light_qa.py",
+      "purpose": null,
+      "imports": [
+        "qa04",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/photo_keyboard_light_resume.py",
+      "purpose": null,
+      "imports": [
+        "qa04",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/preview_redraw_final.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa04",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/preview_rotation_diagnosis.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa04",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/qa04.py",
+      "purpose": "UI03 main-app QA. All artifacts exclusive; only the identified QA AVD.",
+      "imports": [
+        "json",
+        "pathlib",
+        "re",
+        "struct",
+        "subprocess",
+        "time",
+        "uuid",
+        "xml.etree.ElementTree"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/validate_photo_outputs.py",
+      "purpose": null,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa04",
+        "re",
+        "struct",
+        "subprocess"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/validate_video_output.py",
+      "purpose": null,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "qa04",
+        "subprocess"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/video_effects_qa_v4.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa04",
+        "re",
+        "tarfile",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_04_1794324770354/video_effects_resume_v5.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa04",
+        "re",
+        "subprocess",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/final_launch_run6.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa03",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/final_restore_run13.py",
+      "purpose": null,
+      "imports": [
+        "qa03",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/final_runtime_run12.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa03",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/orientation_editor_run4.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa03"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/orientation_main_run1.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "qa03",
+        "subprocess",
+        "time",
+        "uuid"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/orientation_media_run2.py",
+      "purpose": null,
+      "imports": [
+        "qa03",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/orientation_media_run3.py",
+      "purpose": null,
+      "imports": [
+        "qa03",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/orientation_preview_run8.py",
+      "purpose": null,
+      "imports": [
+        "qa03",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/orientation_video_run5.py",
+      "purpose": null,
+      "imports": [
+        "qa03",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": []
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/qa03.py",
+      "purpose": "UI03 main-app QA. All artifacts exclusive; only the identified QA AVD.",
+      "imports": [
+        "json",
+        "pathlib",
+        "re",
+        "struct",
+        "subprocess",
+        "time",
+        "uuid",
+        "xml.etree.ElementTree"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/responsive_run11.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "qa03",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/rtl_settled_run14.py",
+      "purpose": null,
+      "imports": [
+        "json",
+        "pathlib",
+        "qa03",
+        "re",
+        "time"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_03_1794317676949/verify_preservation.py",
+      "purpose": null,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "qa03",
+        "re",
+        "shutil",
+        "stat",
+        "subprocess",
+        "tarfile"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_02C_1794306547967/android_visual_qa_v3.py",
+      "purpose": "Focused main-app QA on the identified dedicated AVD; no capture actions.",
+      "imports": [
+        "json",
+        "pathlib",
+        "re",
+        "subprocess",
+        "time",
+        "uuid",
+        "xml.etree.ElementTree"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    },
+    {
+      "path": "docs/reports/TASK_UI_UX_02C_1794306547967/ui_helpers.py",
+      "purpose": "Focused main-app QA on the identified dedicated AVD; no capture actions.",
+      "imports": [
+        "json",
+        "pathlib",
+        "re",
+        "subprocess",
+        "time",
+        "uuid",
+        "xml.etree.ElementTree"
+      ],
+      "references": [],
+      "owner": "QA/history; retention owner required",
+      "reproducibility_evidence": true,
+      "decision": "retain; historical/protected",
+      "side_effect_markers": [
+        "adb",
+        "subprocess"
+      ]
+    }
+  ],
+  "syntax_errors": [],
+  "limits": "Inspected AST/docstring/imports/name references; scripts not executed. No-reference scripts retained. docs scripts remain historical reproduction evidence."
+}

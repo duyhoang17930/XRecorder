@@ -30,9 +30,9 @@ class _TrashScreenState extends State<TrashScreen> {
     setState(() => busy = true);
     try {
       if (!restore) {
-        final confirmed = await showDialog<bool>(
+        final confirmed = await showStudioDialog<bool>(
           context: context,
-          builder: (context) => AlertDialog(
+          builder: (context) => StudioDialog(
             title: Text(context.l10n.permanentlyDelete),
             content: Text(
               context.l10n.permanentDeleteName(

@@ -1,0 +1,10 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot analyze --no-pub
+Analyzing XRecorder...                                          
+
+   info - The import of 'package:flutter/services.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart'. Try removing the import directive - test\design_system_test.dart:4:8 - unnecessary_import
+   info - Statements in an if should be enclosed in a block. Try wrapping the statement in a block - test\design_system_test.dart:389:11 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block. Try wrapping the statement in a block - test\task09b_shared_interactions_test.dart:230:13 - curly_braces_in_flow_control_structures
+
+3 issues found. (ran in 8.6s)
+
+Exit=1

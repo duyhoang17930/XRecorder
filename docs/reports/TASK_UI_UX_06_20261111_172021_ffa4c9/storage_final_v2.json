@@ -1,0 +1,27 @@
+{
+  "beforeBuildBytes": 143312846400,
+  "afterBuild": {
+    "logicalBytes": 144166967059,
+    "files": 20567,
+    "skippedReparsePoints": []
+  },
+  "buildGrowthBytes": 854120659,
+  "beforeFreeBytes": 28422909952,
+  "afterFreeBytes": 27917234176,
+  "newUi06Evidence": {
+    "logicalBytes": 76762390,
+    "files": 472,
+    "skippedReparsePoints": []
+  },
+  "newUi06SafeInstallBackups": {
+    "logicalBytes": 729634576,
+    "files": 88,
+    "skippedReparsePoints": []
+  },
+  "newEvidenceAndBackupsBytes": 806396966,
+  "newAvds": 0,
+  "newFullAvdSnapshots": 0,
+  "filesDeletedByTask": 0,
+  "allocatedSize": "Not measured reliably; these are logical sizes, including existing sparse QCOW2 containers. Free-space deltas also include other workspace activity.",
+  "preservation": "No clean/cache/evidence deletion. Existing TASK08/09B AVD disks and snapshots retained. QA AVD resumed with no snapshot load/save."
+}

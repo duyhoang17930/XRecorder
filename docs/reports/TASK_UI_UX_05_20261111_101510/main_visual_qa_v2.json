@@ -1,0 +1,74 @@
+[
+  {
+    "branchScrollRetained": true,
+    "reselectTop": true,
+    "navTargets": {
+      "Video": [
+        12,
+        832,
+        95,
+        888
+      ],
+      "Photo": [
+        95,
+        832,
+        178,
+        888
+      ],
+      "Edit": [
+        178,
+        832,
+        260,
+        888
+      ],
+      "Settings": [
+        260,
+        832,
+        343,
+        888
+      ],
+      "Create": [
+        351,
+        834,
+        403,
+        886
+      ]
+    }
+  },
+  {
+    "reducedMotionSetting": "0",
+    "labels": [
+      "3HRECORDER",
+      "Photo Library",
+      "Trash",
+      "Storage",
+      "Screenshot",
+      "All tools",
+      "Screenshot minimizes the app after approval · 3s delay.",
+      "App media",
+      "Choose folder",
+      "Disconnect folder",
+      "Sort media",
+      "Newest",
+      "Your photos",
+      "2 items",
+      "11/10/2026\nsort_fixture.png\n327 Bytes",
+      "Actions for sort_fixture.png",
+      "slider_fixture.png\n5.0 KiB",
+      "Actions for slider_fixture.png",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "backgroundForeground": true
+  }
+]

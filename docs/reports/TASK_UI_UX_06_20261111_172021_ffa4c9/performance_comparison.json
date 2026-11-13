@@ -1,0 +1,410 @@
+{
+  "comparisons": [
+    {
+      "scenario": "tabs",
+      "before": {
+        "build": {
+          "frames": 138,
+          "meanMs": 5.512347826086956,
+          "p50Ms": 2.779,
+          "p90Ms": 14.306,
+          "p99Ms": 32.112,
+          "maxMs": 35.792,
+          "over16_67ms": 11
+        },
+        "raster": {
+          "frames": 138,
+          "meanMs": 43.230427536231886,
+          "p50Ms": 41.798,
+          "p90Ms": 51.453,
+          "p99Ms": 77.638,
+          "maxMs": 84.632,
+          "over16_67ms": 138
+        }
+      },
+      "after": {
+        "build": {
+          "frames": 128,
+          "meanMs": 4.644203125,
+          "p50Ms": 2.531,
+          "p90Ms": 11.884,
+          "p99Ms": 32.066,
+          "maxMs": 33.201,
+          "over16_67ms": 7
+        },
+        "raster": {
+          "frames": 128,
+          "meanMs": 40.9223671875,
+          "p50Ms": 39.986,
+          "p90Ms": 47.214,
+          "p99Ms": 54.428,
+          "maxMs": 73.109,
+          "over16_67ms": 128
+        }
+      }
+    },
+    {
+      "scenario": "create_sheets",
+      "before": {
+        "build": {
+          "frames": 82,
+          "meanMs": 5.409146341463415,
+          "p50Ms": 2.479,
+          "p90Ms": 13.78,
+          "p99Ms": 27.001,
+          "maxMs": 27.001,
+          "over16_67ms": 4
+        },
+        "raster": {
+          "frames": 82,
+          "meanMs": 45.08542682926829,
+          "p50Ms": 44.267,
+          "p90Ms": 53.823,
+          "p99Ms": 122.933,
+          "maxMs": 122.933,
+          "over16_67ms": 82
+        }
+      },
+      "after": {
+        "build": {
+          "frames": 89,
+          "meanMs": 3.459449438202247,
+          "p50Ms": 2.321,
+          "p90Ms": 6.688,
+          "p99Ms": 18.611,
+          "maxMs": 18.611,
+          "over16_67ms": 2
+        },
+        "raster": {
+          "frames": 89,
+          "meanMs": 43.96185393258427,
+          "p50Ms": 42.964,
+          "p90Ms": 51.661,
+          "p99Ms": 114.946,
+          "maxMs": 114.946,
+          "over16_67ms": 89
+        }
+      }
+    },
+    {
+      "scenario": "settings_scroll",
+      "before": {
+        "build": {
+          "frames": 86,
+          "meanMs": 2.528941860465116,
+          "p50Ms": 1.581,
+          "p90Ms": 4.785,
+          "p99Ms": 19.144,
+          "maxMs": 19.144,
+          "over16_67ms": 1
+        },
+        "raster": {
+          "frames": 86,
+          "meanMs": 40.57551162790698,
+          "p50Ms": 40.261,
+          "p90Ms": 45.555,
+          "p99Ms": 51.362,
+          "maxMs": 51.362,
+          "over16_67ms": 86
+        }
+      },
+      "after": {
+        "build": {
+          "frames": 87,
+          "meanMs": 2.0197701149425287,
+          "p50Ms": 1.688,
+          "p90Ms": 3.018,
+          "p99Ms": 13.468,
+          "maxMs": 13.468,
+          "over16_67ms": 0
+        },
+        "raster": {
+          "frames": 87,
+          "meanMs": 40.448770114942526,
+          "p50Ms": 40.159,
+          "p90Ms": 44.531,
+          "p99Ms": 50.641,
+          "maxMs": 50.641,
+          "over16_67ms": 87
+        }
+      }
+    },
+    {
+      "scenario": "reselect",
+      "before": {
+        "build": {
+          "frames": 17,
+          "meanMs": 4.2115294117647055,
+          "p50Ms": 2.446,
+          "p90Ms": 17.74,
+          "p99Ms": 18.57,
+          "maxMs": 18.57,
+          "over16_67ms": 2
+        },
+        "raster": {
+          "frames": 17,
+          "meanMs": 43.40370588235294,
+          "p50Ms": 43.397,
+          "p90Ms": 45.946,
+          "p99Ms": 77.681,
+          "maxMs": 77.681,
+          "over16_67ms": 17
+        }
+      },
+      "after": {
+        "build": {
+          "frames": 18,
+          "meanMs": 2.3900555555555556,
+          "p50Ms": 1.859,
+          "p90Ms": 3.359,
+          "p99Ms": 7.714,
+          "maxMs": 7.714,
+          "over16_67ms": 0
+        },
+        "raster": {
+          "frames": 18,
+          "meanMs": 36.528666666666666,
+          "p50Ms": 37.077,
+          "p90Ms": 41.066,
+          "p99Ms": 42.844,
+          "maxMs": 42.844,
+          "over16_67ms": 18
+        }
+      }
+    },
+    {
+      "scenario": "color_picker",
+      "before": {
+        "build": {
+          "frames": 125,
+          "meanMs": 2.742552,
+          "p50Ms": 1.816,
+          "p90Ms": 4.605,
+          "p99Ms": 13.546,
+          "maxMs": 13.758,
+          "over16_67ms": 0
+        },
+        "raster": {
+          "frames": 125,
+          "meanMs": 25.797968,
+          "p50Ms": 26.28,
+          "p90Ms": 31.824,
+          "p99Ms": 44.674,
+          "maxMs": 52.88,
+          "over16_67ms": 115
+        }
+      },
+      "after": {
+        "build": {
+          "frames": 122,
+          "meanMs": 3.1254836065573772,
+          "p50Ms": 2.204,
+          "p90Ms": 6.565,
+          "p99Ms": 13.23,
+          "maxMs": 17.149,
+          "over16_67ms": 1
+        },
+        "raster": {
+          "frames": 122,
+          "meanMs": 26.728040983606558,
+          "p50Ms": 26.805,
+          "p90Ms": 32.435,
+          "p99Ms": 54.006,
+          "maxMs": 58.071,
+          "over16_67ms": 113
+        }
+      }
+    },
+    {
+      "scenario": "drawing",
+      "before": {
+        "build": {
+          "frames": 144,
+          "meanMs": 2.5335972222222223,
+          "p50Ms": 1.858,
+          "p90Ms": 4.365,
+          "p99Ms": 12.132,
+          "maxMs": 14.78,
+          "over16_67ms": 0
+        },
+        "raster": {
+          "frames": 144,
+          "meanMs": 26.824638888888888,
+          "p50Ms": 27.673,
+          "p90Ms": 33.758,
+          "p99Ms": 37.484,
+          "maxMs": 38.346,
+          "over16_67ms": 129
+        }
+      },
+      "after": {
+        "build": {
+          "frames": 151,
+          "meanMs": 2.825887417218543,
+          "p50Ms": 2.138,
+          "p90Ms": 4.996,
+          "p99Ms": 12.992,
+          "maxMs": 13.04,
+          "over16_67ms": 0
+        },
+        "raster": {
+          "frames": 151,
+          "meanMs": 25.89332450331126,
+          "p50Ms": 26.153,
+          "p90Ms": 31.564,
+          "p99Ms": 53.104,
+          "maxMs": 55.173,
+          "over16_67ms": 138
+        }
+      }
+    },
+    {
+      "scenario": "photo_rotation",
+      "before": {
+        "build": {
+          "frames": 6,
+          "meanMs": 8.261333333333333,
+          "p50Ms": 1.076,
+          "p90Ms": 31.346,
+          "p99Ms": 31.346,
+          "maxMs": 31.346,
+          "over16_67ms": 1
+        },
+        "raster": {
+          "frames": 6,
+          "meanMs": 39.4565,
+          "p50Ms": 28.271,
+          "p90Ms": 90.174,
+          "p99Ms": 90.174,
+          "maxMs": 90.174,
+          "over16_67ms": 6
+        }
+      },
+      "after": {
+        "build": {
+          "frames": 6,
+          "meanMs": 8.226333333333333,
+          "p50Ms": 3.46,
+          "p90Ms": 18.104,
+          "p99Ms": 18.104,
+          "maxMs": 18.104,
+          "over16_67ms": 2
+        },
+        "raster": {
+          "frames": 6,
+          "meanMs": 38.116,
+          "p50Ms": 34.078,
+          "p90Ms": 65.498,
+          "p99Ms": 65.498,
+          "maxMs": 65.498,
+          "over16_67ms": 5
+        }
+      }
+    },
+    {
+      "scenario": "video_scrub",
+      "before": {
+        "build": {
+          "frames": 62,
+          "meanMs": 3.5489516129032257,
+          "p50Ms": 1.303,
+          "p90Ms": 4.708,
+          "p99Ms": 47.955,
+          "maxMs": 47.955,
+          "over16_67ms": 2
+        },
+        "raster": {
+          "frames": 62,
+          "meanMs": 12.201306451612902,
+          "p50Ms": 5.693,
+          "p90Ms": 40.892,
+          "p99Ms": 69.32,
+          "maxMs": 69.32,
+          "over16_67ms": 13
+        }
+      },
+      "after": {
+        "build": {
+          "frames": 67,
+          "meanMs": 1.6684179104477612,
+          "p50Ms": 1.448,
+          "p90Ms": 2.912,
+          "p99Ms": 5.207,
+          "maxMs": 5.207,
+          "over16_67ms": 0
+        },
+        "raster": {
+          "frames": 67,
+          "meanMs": 12.03210447761194,
+          "p50Ms": 5.574,
+          "p90Ms": 20.44,
+          "p99Ms": 104.556,
+          "maxMs": 104.556,
+          "over16_67ms": 10
+        }
+      }
+    },
+    {
+      "scenario": "video_rotation",
+      "before": {
+        "build": {
+          "frames": 6,
+          "meanMs": 11.207333333333333,
+          "p50Ms": 7.894,
+          "p90Ms": 29.188,
+          "p99Ms": 29.188,
+          "maxMs": 29.188,
+          "over16_67ms": 1
+        },
+        "raster": {
+          "frames": 6,
+          "meanMs": 20.414166666666667,
+          "p50Ms": 18.446,
+          "p90Ms": 34.307,
+          "p99Ms": 34.307,
+          "maxMs": 34.307,
+          "over16_67ms": 4
+        }
+      },
+      "after": {
+        "build": {
+          "frames": 8,
+          "meanMs": 19.127875,
+          "p50Ms": 11.315,
+          "p90Ms": 46.732,
+          "p99Ms": 46.732,
+          "maxMs": 46.732,
+          "over16_67ms": 3
+        },
+        "raster": {
+          "frames": 8,
+          "meanMs": 23.663874999999997,
+          "p50Ms": 15.863,
+          "p90Ms": 75.817,
+          "p99Ms": 75.817,
+          "maxMs": 75.817,
+          "over16_67ms": 4
+        }
+      }
+    }
+  ],
+  "memoryKb": {
+    "baseline": {
+      "TOTAL PSS": 156829,
+      "TOTAL RSS": 264356
+    },
+    "after": {
+      "TOTAL PSS": 164793,
+      "TOTAL RSS": 270492
+    }
+  },
+  "device": "ThreeHRecorder_TASK09B_API36, SwiftShader, 411x920/160dpi, Light/English/font1.0",
+  "measurementRevision": "UI06 presentation candidate before final Studio route and accessibility lifecycle fixes. Final debug/profile rebuilt and functionally retested; no equivalent final frame benchmark after those fixes.",
+  "datasetDifference": "App media remained the same before these samples; one UI06 QA draft had been added to Studio. Root-tab comparison is not a perfectly identical data set. Editor benchmarks use the same retained image URI and unchanged UI04 SAF project.",
+  "limitations": [
+    "Build/raster trace durations, not presented-frame counts or certified FPS.",
+    "Rotation has only6\u20138 frame samples; no performance PASS from that sample.",
+    "Later session resumed with a personal emulator also running; no control or benchmarking on that device.",
+    "No authorized hardware-GPU/physical-device acceptance; overall performance PARTIAL."
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "classification_counts": {
+    "D REQUIRED CONFIGURATION": 666,
+    "L UNKNOWN / PROTECTED": 4167,
+    "C ACTIVE TOOL": 21,
+    "I REGENERABLE BUILD ARTIFACT": 11737,
+    "B ACTIVE TEST": 139,
+    "A ACTIVE SOURCE": 339,
+    "F CURRENT DOCUMENTATION": 88,
+    "G HISTORICAL DOCUMENTATION": 464,
+    "H QA / RECOVERY EVIDENCE": 11602,
+    "E REQUIRED ASSET": 65
+  },
+  "python_scripts_reviewed": 132,
+  "python_syntax_errors": [],
+  "config_parsed": 686,
+  "config_errors": [
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_semantics_preflight.xml",
+      "error": "syntax error: line 1, column 0",
+      "baseline_sha256": "03df3acbb061e8724961b6980f150d801858d9c4d9a3fa1f832afe3a6ff5c228",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/error_recovery_before.xml",
+      "error": "junk after document element: line 1, column 13130",
+      "baseline_sha256": "bea7f7087362702ba828327ac49841fddd7a856f405a48cd5c5a5f62c341b65c",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/error_recovery_consent.xml",
+      "error": "junk after document element: line 1, column 6242",
+      "baseline_sha256": "724f59c880b93f1534437cee693a2e42e9c169bc8c4dd444e7c8f42e159115da",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_countdown5.xml",
+      "error": "junk after document element: line 1, column 11147",
+      "baseline_sha256": "e2da77d3a8e03a6c56d422ee000501ec00845cc4e0db395900fcedccd4bde292",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_initial.xml",
+      "error": "junk after document element: line 1, column 17470",
+      "baseline_sha256": "895b0a04cf31c44a366983570c3fc03e1bfdab12766c9ce5300fb2ce9f731da9",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_mute.xml",
+      "error": "junk after document element: line 1, column 11147",
+      "baseline_sha256": "50007dfe03d500fcbdb02e91a1078e8cc15cc9ef63f402a6970da3dac41c6dc9",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_scroll0.xml",
+      "error": "junk after document element: line 1, column 17470",
+      "baseline_sha256": "895b0a04cf31c44a366983570c3fc03e1bfdab12766c9ce5300fb2ce9f731da9",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_scroll1.xml",
+      "error": "junk after document element: line 1, column 16711",
+      "baseline_sha256": "b3af810f4b7d821806c32f9f10c3306511b42abe880eb1a7eb3d2f10102502e2",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_scroll2.xml",
+      "error": "junk after document element: line 1, column 11147",
+      "baseline_sha256": "50007dfe03d500fcbdb02e91a1078e8cc15cc9ef63f402a6970da3dac41c6dc9",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_timer_current.xml",
+      "error": "junk after document element: line 1, column 11147",
+      "baseline_sha256": "e2da77d3a8e03a6c56d422ee000501ec00845cc4e0db395900fcedccd4bde292",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_after_unlock_ui.xml",
+      "error": "junk after document element: line 1, column 13094",
+      "baseline_sha256": "2f47041680f16ff0a9076f3675ed9b22759198a34c308922c3c93b0590deb757",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_denied_final_app_info.xml",
+      "error": "junk after document element: line 1, column 13138",
+      "baseline_sha256": "5212c72712964e0ffb1587c87fee18ec987a9be3c6efbdcd22d17036c10da229",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_denied_final_options.xml",
+      "error": "junk after document element: line 1, column 24502",
+      "baseline_sha256": "87c9bf2720038c4229bb1e07055c0da9c441b404993899e52fbd3d00f93ac316",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_actual_ui.xml",
+      "error": "junk after document element: line 1, column 13130",
+      "baseline_sha256": "bea7f7087362702ba828327ac49841fddd7a856f405a48cd5c5a5f62c341b65c",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_confirm_current.xml",
+      "error": "junk after document element: line 1, column 28198",
+      "baseline_sha256": "7f1843e61f56e907e52288a8a8ffde1cf9a67e863986a8324b4baec54dbe5f3b",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_robust_0.xml",
+      "error": "junk after document element: line 1, column 28198",
+      "baseline_sha256": "7f1843e61f56e907e52288a8a8ffde1cf9a67e863986a8324b4baec54dbe5f3b",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_robust_1.xml",
+      "error": "junk after document element: line 1, column 24481",
+      "baseline_sha256": "032975c3062065fb4c1a877925f4eb91a11e9e76ac77eac3c6708930d6783ba3",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_robust_2.xml",
+      "error": "junk after document element: line 1, column 13138",
+      "baseline_sha256": "c09e733a869d3eece9c918a22939cd82171019fd7491ef5c581bdf72d6eccd9e",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_robust_Record_screen.xml",
+      "error": "syntax error: line 1, column 0",
+      "baseline_sha256": "03df3acbb061e8724961b6980f150d801858d9c4d9a3fa1f832afe3a6ff5c228",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_robust_selected.xml",
+      "error": "junk after document element: line 1, column 13138",
+      "baseline_sha256": "4ec6ce6a3935618bcdfe3d310b540e8809f455cad41f7135292b0a93e206e4f2",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_runtime_after.xml",
+      "error": "junk after document element: line 1, column 5535",
+      "baseline_sha256": "4bfd261e7d1a88ad736cdff3a4583bc648d4a7dbd5756f86760b9652faed5c2c",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_runtime_dialog.xml",
+      "error": "junk after document element: line 1, column 5535",
+      "baseline_sha256": "4bfd261e7d1a88ad736cdff3a4583bc648d4a7dbd5756f86760b9652faed5c2c",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_runtime_Record_screen0.xml",
+      "error": "junk after document element: line 1, column 13094",
+      "baseline_sha256": "2f47041680f16ff0a9076f3675ed9b22759198a34c308922c3c93b0590deb757",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_runtime_Start_Recording0.xml",
+      "error": "junk after document element: line 1, column 18592",
+      "baseline_sha256": "078015efe792235dac404f86f59a13fc201c902fdde98d719e0ffb2df3ae5243",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/settings_nav_before.xml",
+      "error": "junk after document element: line 1, column 13115",
+      "baseline_sha256": "8b21f65bbe9edd562d911250499874d71f7b5f29948fa6beb8c7763ea0f12933",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/settings_root.xml",
+      "error": "junk after document element: line 1, column 12469",
+      "baseline_sha256": "ea3c079cb70ea9c543da4114e3a87d79bccbf740cbb5dbf9ed04432213e0a308",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_back1.xml",
+      "error": "junk after document element: line 1, column 12468",
+      "baseline_sha256": "cc4498173bee0b9d4ddd2ada21f89d5eed866386abe9538e09b1241492d44924",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_consent.xml",
+      "error": "junk after document element: line 1, column 6242",
+      "baseline_sha256": "724f59c880b93f1534437cee693a2e42e9c169bc8c4dd444e7c8f42e159115da",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_dialog.xml",
+      "error": "junk after document element: line 1, column 6078",
+      "baseline_sha256": "20ca9125b6a28d75ca50888acf6f87a8234c84bd7a329358ec65e7211f9a78d8",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_edited.xml",
+      "error": "junk after document element: line 1, column 6074",
+      "baseline_sha256": "4998288b4e8c2c6d7cb3f934526cfc65828589b40f6cd8d718a40db1ef465684",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_Record_screen.xml",
+      "error": "junk after document element: line 1, column 13087",
+      "baseline_sha256": "806e195c7b0d91deff81d09b47a2f2ae8948f7d73e679a1855257d14612d3d93",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_setting_before.xml",
+      "error": "junk after document element: line 1, column 11147",
+      "baseline_sha256": "e2da77d3a8e03a6c56d422ee000501ec00845cc4e0db395900fcedccd4bde292",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_Start_Recording.xml",
+      "error": "junk after document element: line 1, column 18591",
+      "baseline_sha256": "d00b00fca873a8b1e13294c107ea4a7e9b1de71aad04f53c737d8d808ff3e20b",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_Video.xml",
+      "error": "junk after document element: line 1, column 12468",
+      "baseline_sha256": "cc4498173bee0b9d4ddd2ada21f89d5eed866386abe9538e09b1241492d44924",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_Audio.xml",
+      "error": "junk after document element: line 1, column 12468",
+      "baseline_sha256": "cc4498173bee0b9d4ddd2ada21f89d5eed866386abe9538e09b1241492d44924",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_consent.xml",
+      "error": "junk after document element: line 1, column 6242",
+      "baseline_sha256": "724f59c880b93f1534437cee693a2e42e9c169bc8c4dd444e7c8f42e159115da",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_dialog.xml",
+      "error": "junk after document element: line 1, column 6076",
+      "baseline_sha256": "873cb11de2c403e1cd13db093a7a81b05f0da1ba697d372b3a86510709a9e61b",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_edited.xml",
+      "error": "junk after document element: line 1, column 6074",
+      "baseline_sha256": "333ba166ab514093b4126e7108bfdf9308620f9f9fc74daa413b5732f9df17c2",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_Record_screen.xml",
+      "error": "junk after document element: line 1, column 13087",
+      "baseline_sha256": "806e195c7b0d91deff81d09b47a2f2ae8948f7d73e679a1855257d14612d3d93",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_Settings.xml",
+      "error": "junk after document element: line 1, column 13087",
+      "baseline_sha256": "806e195c7b0d91deff81d09b47a2f2ae8948f7d73e679a1855257d14612d3d93",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_settings_scroll0.xml",
+      "error": "junk after document element: line 1, column 17145",
+      "baseline_sha256": "033c47d82496b9339206a0bb74e184b4263c20ac91d40166eb03ba38fdb766c6",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_settings_scroll1.xml",
+      "error": "junk after document element: line 1, column 11145",
+      "baseline_sha256": "7b1d60746b2e5252f533492522654acf1644218c4afaae58cf133860a04fb406",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_Start_Recording.xml",
+      "error": "junk after document element: line 1, column 18591",
+      "baseline_sha256": "d00b00fca873a8b1e13294c107ea4a7e9b1de71aad04f53c737d8d808ff3e20b",
+      "decision": "retain; do not repair historical evidence"
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_Video.xml",
+      "error": "junk after document element: line 1, column 12468",
+      "baseline_sha256": "cc4498173bee0b9d4ddd2ada21f89d5eed866386abe9538e09b1241492d44924",
+      "decision": "retain; do not repair historical evidence"
+    }
+  ],
+  "config_skipped": [],
+  "duplicate_asset_document_groups": 2,
+  "large_files_retained": 97,
+  "absent_directories": [
+    "scripts",
+    "tools"
+  ],
+  "limits": "Classification is conservative metadata routing, not a claim every historical script/API is obsolete or every native symbol was proven live."
+}

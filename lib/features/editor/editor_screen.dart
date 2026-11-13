@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/widgets/studio_widgets.dart';
+import '../../core/ui/components/dialogs/studio_name_dialog.dart';
 import '../../core/domain/models.dart';
 import 'project_controller.dart';
 import 'project_repository.dart';
@@ -12,6 +13,9 @@ import 'media_picker.dart';
 import 'project_effects.dart';
 import 'subtitles.dart';
 import 'subtitle_editor.dart';
+import 'editor_workspace.dart';
+import 'editor_timeline.dart';
+import 'editor_selection.dart';
 
 class EditorScreen extends StatefulWidget {
   const EditorScreen({super.key, required this.id});
@@ -27,9 +31,16 @@ class _EditorScreenState extends State<EditorScreen> {
   String? error;
   int selected = 0;
   Duration position = Duration.zero;
+  final playhead = ValueNotifier(Duration.zero);
+  final timelineScroll = ScrollController();
+  String? panel;
   bool exporting = false, pickingMedia = false;
   bool leaving = false, allowLeave = false;
   Future<void> leave() async {
+    if (panel != null) {
+      setState(() => panel = null);
+      return;
+    }
     if (leaving) return;
     leaving = true;
     try {
@@ -76,7 +87,16 @@ class _EditorScreenState extends State<EditorScreen> {
   Future<void> renameProject() async {
     final name = await showStudioDialog<String>(
       context: context,
-      builder: (_) => _ProjectNameDialog(initial: controller!.project.title),
+      builder: (dialog) => StudioNameDialog(
+        initial: controller!.project.title,
+        title: dialog.l10n.projectName,
+        label: dialog.l10n.name,
+        maxLength: 80,
+        submitLabel: dialog.l10n.saveName,
+        onSubmit: (value) {
+          if (value.trim().isNotEmpty) Navigator.pop(dialog, value.trim());
+        },
+      ),
     );
     if (mounted && name != null) {
       controller!.change(controller!.project.copyWith(title: name));
@@ -132,6 +152,46 @@ class _EditorScreenState extends State<EditorScreen> {
     }
   }
 
+  void changeClips(VoidCallback action, {int? preferredSelection}) {
+    final before = controller!.project.clips;
+    final index = selected;
+    act(() {
+      action();
+      if (!mounted) return;
+      setState(() {
+        final after = controller!.project.clips;
+        selected = after.isEmpty
+            ? 0
+            : (preferredSelection ?? retainClipSelection(before, after, index))
+                  .clamp(0, after.length - 1);
+        if (controller!.project.clips.isEmpty) panel = null;
+      });
+    });
+  }
+
+  void clipOption(String value) {
+    final model = controller!;
+    final index = selected;
+    switch (value) {
+      case 'earlier':
+        changeClips(
+          () => model.move(index, index - 1),
+          preferredSelection: index - 1,
+        );
+      case 'later':
+        changeClips(
+          () => model.move(index, index + 1),
+          preferredSelection: index + 1,
+        );
+      case 'duplicate':
+        changeClips(() => model.duplicate(index));
+      case 'relink':
+        relink(index);
+      case 'remove':
+        changeClips(() => model.remove(index), preferredSelection: index);
+    }
+  }
+
   Future<void> relink(int index) async {
     if (pickingMedia) return;
     setState(() => pickingMedia = true);
@@ -179,9 +239,51 @@ class _EditorScreenState extends State<EditorScreen> {
     }
   }
 
+  Future<void> effects([int section = 0]) async {
+    await preview.currentState?.command('pause');
+    if (!mounted) return;
+    final model = controller!;
+    final next = await editProjectEffects(
+      context,
+      model.project.effects,
+      durationMs: model.project.duration.inMilliseconds,
+      initialSection: section,
+    );
+    if (next != null && mounted) {
+      model.change(model.project.copyWith(effects: next));
+    }
+  }
+
+  Future<void> subtitles() async {
+    try {
+      await preview.currentState?.command('pause');
+      if (!mounted) return;
+      final model = controller!;
+      final next = await editSubtitles(
+        context,
+        SubtitleTrack.decode(
+          model.project.effects['subtitles'],
+          model.project.duration.inMilliseconds,
+        ),
+        project: model.project,
+      );
+      if (mounted && next != null) {
+        model.change(
+          model.project.copyWith(
+            effects: {...model.project.effects, 'subtitles': next.toJson()},
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) showFailure(context, e, operation: UserOperation.editClip);
+    }
+  }
+
   @override
   void dispose() {
     controller?.dispose();
+    playhead.dispose();
+    timelineScroll.dispose();
     super.dispose();
   }
 
@@ -221,23 +323,21 @@ class _EditorScreenState extends State<EditorScreen> {
       listenable: model,
       builder: (context, _) {
         final project = model.project;
+        if (project.clips.isEmpty) panel = null;
         selected = selected.clamp(0, (project.clips.length - 1).clamp(0, 30));
         final clip = project.clips.isEmpty ? null : project.clips[selected];
+        void selectPanel(String next) =>
+            setState(() => panel = panel == next ? null : next);
         return PopScope(
-          canPop: allowLeave || (!model.saving && model.saveError == null),
+          canPop:
+              panel == null &&
+              (allowLeave || (!model.saving && model.saveError == null)),
           onPopInvokedWithResult: (didPop, _) {
             if (!didPop) leave();
           },
           child: Scaffold(
             appBar: AppBar(
               leading: BackButton(onPressed: leave),
-              actions: [
-                IconButton(
-                  tooltip: context.l10n.renameProject,
-                  onPressed: renameProject,
-                  icon: const Icon(AppIcons.rename),
-                ),
-              ],
               title: Tooltip(
                 message: project.title,
                 child: Text(
@@ -246,555 +346,455 @@ class _EditorScreenState extends State<EditorScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-            ),
-            bottomNavigationBar: SafeArea(
-              top: false,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
+              actions: [
+                IconButton(
+                  tooltip: context.l10n.renameProject,
+                  onPressed: renameProject,
+                  icon: const Icon(AppIcons.rename),
                 ),
-                child: Wrap(
-                  alignment: WrapAlignment.end,
-                  spacing: 8,
+                FilledButton(
+                  onPressed: exporting || project.clips.isEmpty ? null : export,
+                  child: Text(
+                    exporting ? context.l10n.starting : context.l10n.export,
+                  ),
+                ),
+              ],
+            ),
+            body: VideoEditorWorkspace(
+              preview: project.clips.isNotEmpty
+                  ? EditorPreview(
+                      key: preview,
+                      fitViewport: true,
+                      project: project,
+                      onPosition: (value) {
+                        if (!mounted) return;
+                        position = value;
+                        playhead.value = value;
+                      },
+                    )
+                  : Center(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            StudioEmptyState(
+                              title: context.l10n.addYourFirstClip,
+                              description:
+                                  context.l10n.editACopyOriginalsStayUnchanged,
+                              icon: AppIcons.videos,
+                            ),
+                            TextButton.icon(
+                              onPressed: pickingMedia ? null : add,
+                              icon: const Icon(AppIcons.create),
+                              label: Text(context.l10n.addClip),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+              status: Column(
+                children: [
+                  Text(
+                    context.message(
+                      model.saveError != null
+                          ? UserMessages.failure(
+                              model.saveError,
+                              operation: UserOperation.saveDraft,
+                            ).text
+                          : model.saving
+                          ? context.l10n.savingDraft
+                          : context.l10n.savedOriginalsUnchanged,
+                    ),
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                  if (model.saveError != null)
+                    TextButton(
+                      onPressed: model.retrySave,
+                      child: Text(context.l10n.retrySaving),
+                    ),
+                ],
+              ),
+              transport: ValueListenableBuilder<Duration>(
+                valueListenable: playhead,
+                builder: (context, current, _) => Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
-                      tooltip: context.l10n.undoEdit,
-                      onPressed: model.canUndo ? model.undo : null,
-                      icon: const Icon(AppIcons.undo),
-                    ),
-                    IconButton(
-                      tooltip: context.l10n.redoEdit,
-                      onPressed: model.canRedo ? model.redo : null,
-                      icon: const Icon(AppIcons.redo),
-                    ),
-                    FilledButton.icon(
-                      onPressed: exporting || project.clips.isEmpty
-                          ? null
-                          : export,
-                      icon: Icon(
-                        exporting ? AppIcons.processing : AppIcons.export,
-                      ),
-                      label: Text(
-                        exporting ? context.l10n.starting : context.l10n.export,
+                    Text(
+                      context.l10n.playheadTime(
+                        context.displayValue(
+                          context.decimal(
+                            current.inMilliseconds / 1000,
+                            digits: 1,
+                          ),
+                        ),
+                        context.displayValue(
+                          context.decimal(
+                            project.duration.inMilliseconds / 1000,
+                            digits: 1,
+                          ),
+                        ),
                       ),
                     ),
+                    if (project.duration > Duration.zero)
+                      Semantics(
+                        label: context.l10n.previewPosition,
+                        child: Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: Slider(
+                            key: const ValueKey('editor-playhead'),
+                            value: current.inMilliseconds.toDouble().clamp(
+                              0,
+                              project.duration.inMilliseconds.toDouble(),
+                            ),
+                            max: project.duration.inMilliseconds.toDouble(),
+                            onChanged: (v) => preview.currentState?.command(
+                              'seek',
+                              v.round(),
+                            ),
+                            semanticFormatterCallback: context.spokenValue(
+                              (strings, value) => strings.secondsValue(value),
+                              multiplier: .001,
+                              digits: 1,
+                            ),
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
-            ),
-            body: ListView(
-              padding: const EdgeInsets.all(AppSpacing.md),
-              children: [
-                Text(
-                  context.message(
-                    model.saveError != null
-                        ? UserMessages.failure(
-                            model.saveError,
-                            operation: UserOperation.saveDraft,
-                          ).text
-                        : (model.saving
-                              ? context.l10n.savingDraft
-                              : context.l10n.savedOriginalsUnchanged),
-                  ),
-                ),
-                if (model.saveError != null)
-                  TextButton(
-                    onPressed: model.retrySave,
-                    child: Text(context.l10n.retrySaving),
-                  ),
-                if (project.clips.isNotEmpty)
-                  EditorPreview(
-                    key: preview,
-                    project: project,
-                    onPosition: (value) {
-                      if (mounted) setState(() => position = value);
-                    },
-                  )
-                else
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: AppSpacing.lg),
-                    child: StudioEmptyState(
-                      title: context.l10n.addYourFirstClip,
-                      description: context.l10n.editACopyOriginalsStayUnchanged,
-                      icon: AppIcons.videos,
-                    ),
-                  ),
-                Text(
-                  context.l10n.playheadTime(
-                    context.displayValue(
-                      context.decimal(
-                        (position.inMilliseconds / 1000),
-                        digits: 1,
-                      ),
-                    ),
-                    context.displayValue(
-                      context.decimal(
-                        (project.duration.inMilliseconds / 1000),
-                        digits: 1,
-                      ),
-                    ),
-                  ),
-                ),
-                if (project.duration > Duration.zero)
-                  Semantics(
-                    label: context.l10n.previewPosition,
-                    child: Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: Slider(
-                        value: position.inMilliseconds.toDouble().clamp(
-                          0,
-                          project.duration.inMilliseconds.toDouble(),
-                        ),
-                        max: project.duration.inMilliseconds.toDouble(),
-                        onChanged: (v) =>
-                            preview.currentState?.command('seek', v.round()),
-                        semanticFormatterCallback: context.spokenValue(
-                          (strings, value) => strings.secondsValue(value),
-                          multiplier: .001,
-                          digits: 1,
+              timeline: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          context.l10n.timeline,
+                          style: Theme.of(context).textTheme.titleSmall,
                         ),
                       ),
-                    ),
+                      IconButton(
+                        tooltip: context.l10n.addClip,
+                        onPressed: pickingMedia ? null : add,
+                        icon: const Icon(AppIcons.create),
+                      ),
+                    ],
                   ),
-                Wrap(
-                  spacing: 8,
-                  children: [
-                    TextButton.icon(
-                      onPressed: project.clips.isEmpty
-                          ? null
-                          : () async {
-                              try {
-                                await preview.currentState?.command('pause');
-                                if (!context.mounted) return;
-                                final track = await editSubtitles(
-                                  context,
-                                  SubtitleTrack.decode(
-                                    model.project.effects['subtitles'],
-                                    model.project.duration.inMilliseconds,
-                                  ),
-                                  project: model.project,
-                                );
-                                if (mounted && track != null) {
-                                  model.change(
-                                    model.project.copyWith(
-                                      effects: {
-                                        ...model.project.effects,
-                                        'subtitles': track.toJson(),
-                                      },
-                                    ),
-                                  );
-                                }
-                              } catch (e) {
-                                if (context.mounted) {
-                                  showFailure(
-                                    context,
-                                    e,
-                                    operation: UserOperation.editClip,
-                                  );
-                                }
-                              }
-                            },
-                      icon: const Icon(AppIcons.captions),
-                      label: Text(context.l10n.subtitles),
-                    ),
-                    TextButton.icon(
-                      onPressed: () async {
-                        await preview.currentState?.command('pause');
-                        if (!context.mounted) return;
-                        final effects = await editProjectEffects(
-                          context,
-                          project.effects,
-                          durationMs: project.duration.inMilliseconds,
-                        );
-                        if (effects != null && mounted) {
-                          model.change(
-                            model.project.copyWith(effects: effects),
-                          );
-                        }
+                  if (project.clips.isNotEmpty)
+                    EditorTimeline(
+                      project: project,
+                      selected: selected,
+                      position: playhead,
+                      scrollController: timelineScroll,
+                      frame: frame,
+                      onSelect: (i) {
+                        setState(() => selected = i);
+                        final start =
+                            project.clips
+                                .take(i)
+                                .fold<int>(
+                                  0,
+                                  (total, c) =>
+                                      total + c.duration.inMilliseconds,
+                                ) ~/
+                            project.speed;
+                        preview.currentState?.command('seek', start);
                       },
-                      icon: const Icon(AppIcons.settings),
-                      label: Text(context.l10n.effects),
-                    ),
-                    TextButton.icon(
-                      onPressed: pickingMedia ? null : add,
-                      icon: const Icon(AppIcons.create),
-                      label: Text(context.l10n.addClip),
-                    ),
-                    TextButton.icon(
-                      onPressed: clip == null
-                          ? null
-                          : () => act(() => model.split(position)),
-                      icon: const Icon(AppIcons.split),
-                      label: Text(context.l10n.split),
-                    ),
-                  ],
-                ),
-                if (project.clips.isNotEmpty)
-                  SectionTitle(context.l10n.timeline),
-                if (project.clips.isNotEmpty)
-                  SizedBox(
-                    height:
-                        AppSize.timeline *
-                        (MediaQuery.textScalerOf(context).scale(14) / 14).clamp(
-                          1,
-                          2,
+                      onSeek: (time) => preview.currentState?.command(
+                        'seek',
+                        time.inMilliseconds,
+                      ),
+                      onTrim: (i, range) => act(
+                        () => model.update(
+                          i,
+                          project.clips[i].copyWith(
+                            inPoint: Duration(
+                              milliseconds: range.start.round(),
+                            ),
+                            outPoint: Duration(milliseconds: range.end.round()),
+                          ),
                         ),
-                    child: Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          for (var i = 0; i < project.clips.length; i++)
-                            InkWell(
-                              onTap: () {
-                                setState(() => selected = i);
-                                preview.currentState?.command(
-                                  'seek',
-                                  project.clips
-                                          .take(i)
-                                          .fold<int>(
-                                            0,
-                                            (total, c) =>
-                                                total +
-                                                c.duration.inMilliseconds,
-                                          ) ~/
-                                      project.speed,
-                                );
-                              },
-                              child: Container(
-                                width: 150,
-                                margin: const EdgeInsets.only(right: 8),
-                                decoration: BoxDecoration(
-                                  color: context.studioColors.elevated,
-                                  borderRadius: BorderRadius.circular(
-                                    AppRadius.control,
-                                  ),
-                                  border: Border.all(
-                                    color: selected == i
-                                        ? Theme.of(context).colorScheme.primary
-                                        : context.studioColors.border,
-                                    width: AppBorder.focused,
-                                  ),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: FutureBuilder<Uint8List?>(
-                                        future: frame(
-                                          project.clips[i].mediaId,
-                                          project
-                                              .clips[i]
-                                              .inPoint
-                                              .inMilliseconds,
-                                        ),
-                                        builder: (context, snapshot) =>
-                                            snapshot.data == null
-                                            ? const Center(
-                                                child: Icon(AppIcons.videos),
-                                              )
-                                            : Image.memory(
-                                                snapshot.data!,
-                                                fit: BoxFit.cover,
-                                              ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(
-                                        AppSpacing.xs,
-                                      ),
-                                      child: Text(
-                                        context.l10n.clipDurationLabel(
-                                          context.displayValue(i + 1),
-                                          context.displayValue(
-                                            context.decimal(
-                                              (project
-                                                      .clips[i]
-                                                      .duration
-                                                      .inMilliseconds /
-                                                  1000),
-                                              digits: 1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                      ),
+                    ),
+                ],
+              ),
+              tools: EditorToolStrip(
+                children: [
+                  EditorTool(
+                    label: context.l10n.edit,
+                    icon: AppIcons.split,
+                    selected: panel == 'edit',
+                    onPressed: clip == null ? null : () => selectPanel('edit'),
+                  ),
+                  EditorTool(
+                    label: context.l10n.editorAudio,
+                    icon: AppIcons.microphone,
+                    onPressed: () => effects(1),
+                  ),
+                  EditorTool(
+                    label: context.message('Text'),
+                    icon: AppIcons.text,
+                    onPressed: () => effects(3),
+                  ),
+                  EditorTool(
+                    label: context.l10n.subtitles,
+                    icon: AppIcons.captions,
+                    onPressed: project.clips.isEmpty ? null : subtitles,
+                  ),
+                  EditorTool(
+                    label: context.l10n.effects,
+                    icon: AppIcons.edit,
+                    onPressed: () => effects(),
+                  ),
+                  EditorTool(
+                    label: context.l10n.editorTransform,
+                    icon: AppIcons.crop,
+                    selected: panel == 'transform',
+                    onPressed: clip == null
+                        ? null
+                        : () => selectPanel('transform'),
+                  ),
+                  EditorTool(
+                    label: context.l10n.editorExportQuality,
+                    icon: AppIcons.settings,
+                    onPressed: () => effects(4),
+                  ),
+                ],
+              ),
+              history: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    tooltip: context.l10n.undoEdit,
+                    onPressed: model.canUndo
+                        ? () => changeClips(model.undo)
+                        : null,
+                    icon: const Icon(AppIcons.undo),
+                  ),
+                  IconButton(
+                    tooltip: context.l10n.redoEdit,
+                    onPressed: model.canRedo
+                        ? () => changeClips(model.redo)
+                        : null,
+                    icon: const Icon(AppIcons.redo),
+                  ),
+                ],
+              ),
+              contextual: clip == null || panel == null
+                  ? null
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                panel == 'edit'
+                                    ? context.l10n.edit
+                                    : context.l10n.editorTransform,
                               ),
                             ),
-                        ],
-                      ),
-                    ),
-                  ),
-                for (var i = 0; i < project.clips.length; i++)
-                  Card(
-                    color: selected == i
-                        ? Theme.of(context).colorScheme.primaryContainer
-                        : null,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        ListTile(
-                          onTap: () => setState(() => selected = i),
-                          title: Text(
-                            context.l10n.sequenceLabel(
-                              context.displayValue(i + 1),
-                              context.displayValue(project.clips[i].title),
+                            IconButton(
+                              tooltip: context.l10n.close,
+                              onPressed: () => setState(() => panel = null),
+                              icon: const Icon(AppIcons.close),
+                            ),
+                          ],
+                        ),
+                        if (panel == 'edit') ...[
+                          Tooltip(
+                            message: clip.title,
+                            child: Text(
+                              context.l10n.selectedClipName(clip.title),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          subtitle: Text(
-                            context.l10n.secondsShort(
+                          Text(
+                            context.l10n.trimTimeRange(
                               context.displayValue(
                                 context.decimal(
-                                  (project.clips[i].duration.inMilliseconds /
-                                      1000),
+                                  clip.inPoint.inMilliseconds / 1000,
+                                  digits: 1,
+                                ),
+                              ),
+                              context.displayValue(
+                                context.decimal(
+                                  clip.outPoint.inMilliseconds / 1000,
                                   digits: 1,
                                 ),
                               ),
                             ),
+                            style: Theme.of(context).textTheme.labelSmall,
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppSpacing.xs,
-                          ),
-                          child: Wrap(
-                            alignment: WrapAlignment.end,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              IconButton(
-                                tooltip: context.l10n.moveEarlier,
-                                onPressed: i == 0
-                                    ? null
-                                    : () => model.move(i, i - 1),
-                                icon: const Icon(AppIcons.moveEarlier),
+                              TextButton.icon(
+                                onPressed: () =>
+                                    changeClips(() => model.split(position)),
+                                icon: const Icon(AppIcons.split),
+                                label: Text(context.l10n.split),
                               ),
-                              IconButton(
-                                tooltip: context.l10n.moveLater,
-                                onPressed: i == project.clips.length - 1
-                                    ? null
-                                    : () => model.move(i, i + 1),
-                                icon: const Icon(AppIcons.moveLater),
-                              ),
-                              IconButton(
-                                tooltip: context.l10n.duplicateClip,
-                                onPressed: () => act(() => model.duplicate(i)),
-                                icon: const Icon(AppIcons.create),
-                              ),
-                              IconButton(
-                                tooltip: context.l10n.replaceSource,
-                                onPressed: pickingMedia
-                                    ? null
-                                    : () => relink(i),
-                                icon: const Icon(AppIcons.folderOpen),
-                              ),
-                              IconButton(
-                                tooltip: context.l10n.removeClipFromProject,
-                                onPressed: () => model.remove(i),
-                                icon: const Icon(AppIcons.close),
+                              PopupMenuButton<String>(
+                                tooltip: context.l10n.clipOptions,
+                                onSelected: clipOption,
+                                icon: const Icon(AppIcons.more),
+                                itemBuilder: (_) => [
+                                  PopupMenuItem(
+                                    value: 'duplicate',
+                                    child: Text(context.l10n.duplicateClip),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'earlier',
+                                    enabled: selected > 0,
+                                    child: Text(context.l10n.moveEarlier),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'later',
+                                    enabled:
+                                        selected < project.clips.length - 1,
+                                    child: Text(context.l10n.moveLater),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'relink',
+                                    enabled: !pickingMedia,
+                                    child: Text(context.l10n.replaceSource),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'remove',
+                                    child: Text(
+                                      context.l10n.removeClipFromProject,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                if (clip != null) ...[
-                  const Divider(),
-                  Text(
-                    context.l10n.selectedClipName(
-                      context.displayValue(clip.title),
-                    ),
-                  ),
-                  Text(
-                    context.l10n.trimTimeRange(
-                      context.displayValue(
-                        context.decimal(
-                          (clip.inPoint.inMilliseconds / 1000),
-                          digits: 1,
-                        ),
-                      ),
-                      context.displayValue(
-                        context.decimal(
-                          (clip.outPoint.inMilliseconds / 1000),
-                          digits: 1,
-                        ),
-                      ),
-                    ),
-                  ),
-                  _EditRange(
-                    label: context.l10n.trimClip,
-                    seconds: true,
-                    key: ValueKey(
-                      'trim-$selected-${clip.inPoint}-${clip.outPoint}',
-                    ),
-                    value: RangeValues(
-                      clip.inPoint.inMilliseconds.toDouble(),
-                      clip.outPoint.inMilliseconds.toDouble(),
-                    ),
-                    max: clip.sourceDuration.inMilliseconds.toDouble(),
-                    minimum: 200,
-                    onCommit: (v) => act(
-                      () => model.update(
-                        selected,
-                        clip.copyWith(
-                          inPoint: Duration(milliseconds: v.start.round()),
-                          outPoint: Duration(milliseconds: v.end.round()),
-                        ),
-                      ),
-                    ),
-                  ),
-                  TextButton.icon(
-                    onPressed: () => model.update(
-                      selected,
-                      clip.copyWith(rotation: (clip.rotation + 90) % 360),
-                    ),
-                    icon: const Icon(AppIcons.rotate),
-                    label: Text(
-                      context.l10n.rotationValue(
-                        context.displayValue(clip.rotation),
-                      ),
-                    ),
-                  ),
-                  Wrap(
-                    children: [
-                      TextButton(
-                        onPressed: () => model.update(
-                          selected,
-                          clip.copyWith(flipH: !clip.flipH),
-                        ),
-                        child: Text(
-                          context.l10n.flipHorizontalState(
-                            clip.flipH ? ' · ${context.l10n.on}' : '',
+                        ],
+                        if (panel == 'transform') ...[
+                          TextButton.icon(
+                            onPressed: () => model.update(
+                              selected,
+                              clip.copyWith(
+                                rotation: (clip.rotation + 90) % 360,
+                              ),
+                            ),
+                            icon: const Icon(AppIcons.rotate),
+                            label: Text(
+                              context.l10n.rotationValue(
+                                context.displayValue(clip.rotation),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () => model.update(
-                          selected,
-                          clip.copyWith(flipV: !clip.flipV),
-                        ),
-                        child: Text(
-                          context.l10n.flipVerticalState(
-                            clip.flipV ? ' · ${context.l10n.on}' : '',
+                          Wrap(
+                            children: [
+                              TextButton(
+                                onPressed: () => model.update(
+                                  selected,
+                                  clip.copyWith(flipH: !clip.flipH),
+                                ),
+                                child: Text(
+                                  context.l10n.flipHorizontalState(
+                                    clip.flipH ? ' · ${context.l10n.on}' : '',
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () => model.update(
+                                  selected,
+                                  clip.copyWith(flipV: !clip.flipV),
+                                ),
+                                child: Text(
+                                  context.l10n.flipVerticalState(
+                                    clip.flipV ? ' · ${context.l10n.on}' : '',
+                                  ),
+                                ),
+                              ),
+                              if (clip.isImage)
+                                for (final seconds in [2, 5, 10])
+                                  TextButton(
+                                    onPressed: () => model.update(
+                                      selected,
+                                      clip.copyWith(
+                                        inPoint: Duration.zero,
+                                        outPoint: Duration(seconds: seconds),
+                                        sourceDuration: Duration(
+                                          seconds: seconds,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      context.l10n.photoDuration(
+                                        context.displayValue(seconds),
+                                      ),
+                                    ),
+                                  ),
+                            ],
                           ),
-                        ),
-                      ),
-                      if (clip.isImage)
-                        for (final seconds in [2, 5, 10])
+                          Text(context.l10n.cropLeftRight),
+                          _EditRange(
+                            label: context.l10n.cropLeftAndRight,
+                            key: ValueKey(
+                              'horizontal-$selected-${clip.cropLeft}-${clip.cropRight}',
+                            ),
+                            value: RangeValues(clip.cropLeft, clip.cropRight),
+                            max: 1,
+                            minimum: .02,
+                            onCommit: (v) => act(
+                              () => model.update(
+                                selected,
+                                clip.copyWith(
+                                  cropLeft: v.start,
+                                  cropRight: v.end,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Text(context.l10n.cropTopBottom),
+                          _EditRange(
+                            label: context.l10n.cropTopAndBottom,
+                            key: ValueKey(
+                              'vertical-$selected-${clip.cropTop}-${clip.cropBottom}',
+                            ),
+                            value: RangeValues(clip.cropTop, clip.cropBottom),
+                            max: 1,
+                            minimum: .02,
+                            onCommit: (v) => act(
+                              () => model.update(
+                                selected,
+                                clip.copyWith(
+                                  cropTop: v.start,
+                                  cropBottom: v.end,
+                                ),
+                              ),
+                            ),
+                          ),
                           TextButton(
                             onPressed: () => model.update(
                               selected,
                               clip.copyWith(
-                                inPoint: Duration.zero,
-                                outPoint: Duration(seconds: seconds),
-                                sourceDuration: Duration(seconds: seconds),
+                                cropLeft: 0,
+                                cropTop: 0,
+                                cropRight: 1,
+                                cropBottom: 1,
+                                rotation: 0,
+                                flipH: false,
+                                flipV: false,
                               ),
                             ),
-                            child: Text(
-                              context.l10n.photoDuration(
-                                context.displayValue(seconds),
-                              ),
-                            ),
+                            child: Text(context.l10n.resetCropRotation),
                           ),
-                    ],
-                  ),
-                  Text(context.l10n.cropLeftRight),
-                  _EditRange(
-                    label: context.l10n.cropLeftAndRight,
-                    key: ValueKey(
-                      'horizontal-$selected-${clip.cropLeft}-${clip.cropRight}',
+                        ],
+                      ],
                     ),
-                    value: RangeValues(clip.cropLeft, clip.cropRight),
-                    max: 1,
-                    minimum: .02,
-                    onCommit: (v) => act(
-                      () => model.update(
-                        selected,
-                        clip.copyWith(cropLeft: v.start, cropRight: v.end),
-                      ),
-                    ),
-                  ),
-                  Text(context.l10n.cropTopBottom),
-                  _EditRange(
-                    label: context.l10n.cropTopAndBottom,
-                    key: ValueKey(
-                      'vertical-$selected-${clip.cropTop}-${clip.cropBottom}',
-                    ),
-                    value: RangeValues(clip.cropTop, clip.cropBottom),
-                    max: 1,
-                    minimum: .02,
-                    onCommit: (v) => act(
-                      () => model.update(
-                        selected,
-                        clip.copyWith(cropTop: v.start, cropBottom: v.end),
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () => model.update(
-                      selected,
-                      clip.copyWith(
-                        cropLeft: 0,
-                        cropTop: 0,
-                        cropRight: 1,
-                        cropBottom: 1,
-                        rotation: 0,
-                        flipH: false,
-                        flipV: false,
-                      ),
-                    ),
-                    child: Text(context.l10n.resetCropRotation),
-                  ),
-                ],
-              ],
             ),
           ),
         );
       },
     );
   }
-}
-
-class _ProjectNameDialog extends StatefulWidget {
-  const _ProjectNameDialog({required this.initial});
-  final String initial;
-  @override
-  State<_ProjectNameDialog> createState() => _ProjectNameDialogState();
-}
-
-class _ProjectNameDialogState extends State<_ProjectNameDialog> {
-  late final field = TextEditingController(text: widget.initial);
-
-  @override
-  void dispose() {
-    field.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => StudioDialog(
-    title: Text(context.l10n.projectName),
-    content: TextField(
-      controller: field,
-      maxLength: 80,
-      decoration: InputDecoration(labelText: context.l10n.name),
-    ),
-    actions: [
-      TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: Text(context.l10n.cancel),
-      ),
-      TextButton(
-        onPressed: () {
-          if (field.text.trim().isNotEmpty) {
-            Navigator.pop(context, field.text.trim());
-          }
-        },
-        child: Text(context.l10n.saveName),
-      ),
-    ],
-  );
 }
 
 class _EditRange extends StatefulWidget {
@@ -805,13 +805,11 @@ class _EditRange extends StatefulWidget {
     required this.minimum,
     required this.onCommit,
     required this.label,
-    this.seconds = false,
   });
   final RangeValues value;
   final double max, minimum;
   final ValueChanged<RangeValues> onCommit;
   final String label;
-  final bool seconds;
   @override
   State<_EditRange> createState() => _EditRangeState();
 }
@@ -830,16 +828,10 @@ class _EditRangeState extends State<_EditRange> {
           if (v.end - v.start >= widget.minimum) setState(() => value = v);
         },
         onChangeEnd: (_) => widget.onCommit(value),
-        semanticFormatterCallback: widget.seconds
-            ? context.spokenValue(
-                (strings, value) => strings.secondsValue(value),
-                multiplier: .001,
-                digits: 1,
-              )
-            : context.spokenValue(
-                (strings, value) => strings.accessibilityValue40(value),
-                multiplier: 100,
-              ),
+        semanticFormatterCallback: context.spokenValue(
+          (strings, value) => strings.accessibilityValue40(value),
+          multiplier: 100,
+        ),
       ),
     ),
   );

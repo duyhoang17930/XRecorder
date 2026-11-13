@@ -1,0 +1,38 @@
+[
+  {
+    "branchScrollRetained": true,
+    "reselectTop": true,
+    "navTargets": {
+      "Video": [
+        12,
+        832,
+        95,
+        888
+      ],
+      "Photo": [
+        95,
+        832,
+        178,
+        888
+      ],
+      "Edit": [
+        178,
+        832,
+        260,
+        888
+      ],
+      "Settings": [
+        260,
+        832,
+        343,
+        888
+      ],
+      "Create": [
+        351,
+        834,
+        403,
+        886
+      ]
+    }
+  }
+]

@@ -1,0 +1,252 @@
+{
+  "head": "e008fbb095be62db9538f4c598cbff89e6ceb7aa",
+  "branch": "main",
+  "status": " M android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Task07AccessibilityInstrumentation.java\n M android/app/src/main/kotlin/com/xrecorder/xrecorder/media/VideoPreviewActivity.kt\n M android/app/src/main/res/values-ar/p2_strings.xml\n M android/app/src/main/res/values-b+zh+Hans/p2_strings.xml\n M android/app/src/main/res/values-de/p2_strings.xml\n M android/app/src/main/res/values-es/p2_strings.xml\n M android/app/src/main/res/values-fr/p2_strings.xml\n M android/app/src/main/res/values-hi/p2_strings.xml\n M android/app/src/main/res/values-in/p2_strings.xml\n M android/app/src/main/res/values-ja/p2_strings.xml\n M android/app/src/main/res/values-ko/p2_strings.xml\n M android/app/src/main/res/values-pt-rBR/p2_strings.xml\n M android/app/src/main/res/values-vi/p2_strings.xml\n M android/app/src/main/res/values/p2_strings.xml\n M lib/core/ui/components/cards/studio_cards.dart\n M lib/core/ui/components/dialogs/studio_dialog.dart\n M lib/core/ui/components/feedback/studio_feedback.dart\n M lib/core/ui/theme/app_theme.dart\n M lib/core/ui/theme/motion.dart\n M lib/core/widgets/studio_shell.dart\n M lib/features/editor/editing_hub_screen.dart\n M lib/features/media/media_library_screen.dart\n M lib/features/media/trash_screen.dart\n M lib/features/media/video_details_screen.dart\n M lib/features/settings/settings_hub_screen.dart\n M lib/l10n/app_ar.arb\n M lib/l10n/app_de.arb\n M lib/l10n/app_en.arb\n M lib/l10n/app_es.arb\n M lib/l10n/app_fr.arb\n M lib/l10n/app_hi.arb\n M lib/l10n/app_id.arb\n M lib/l10n/app_ja.arb\n M lib/l10n/app_ko.arb\n M lib/l10n/app_pt.arb\n M lib/l10n/app_pt_BR.arb\n M lib/l10n/app_vi.arb\n M lib/l10n/app_zh.arb\n M lib/l10n/app_zh_Hans.arb\n M test/design_system_test.dart\n M test/localization_test.dart\n M test/task09b_shared_interactions_test.dart\n M test/ux_interaction_test.dart\n M test/widget_test.dart\n M tool/sync_p2_native_l10n.py\n?? android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Ui05BPlayerInstrumentation.java\n?? android/app/src/main/res/drawable/p2_chevron_back.xml\n?? android/app/src/main/res/values/p2_ids.xml\n?? docs/reports/TASK_UI_UX_05B_20261111_113152_839655/\n?? docs/reports/TASK_UI_UX_05_20261111_101510/\n?? lib/core/ui/components/bottom_sheets/studio_sheet_launch.dart\n?? test/fixtures/fonts/\n?? test/ui_ux_05_motion_test.dart\n?? test/ui_ux_05b_acceptance_test.dart\n",
+  "baselineFileCount": 473,
+  "missingBaselineFiles": [],
+  "changedSinceUI05BStart": [
+    "android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Task07AccessibilityInstrumentation.java",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/media/VideoPreviewActivity.kt",
+    "android/app/src/main/res/values-ar/p2_strings.xml",
+    "android/app/src/main/res/values-b+zh+Hans/p2_strings.xml",
+    "android/app/src/main/res/values-de/p2_strings.xml",
+    "android/app/src/main/res/values-es/p2_strings.xml",
+    "android/app/src/main/res/values-fr/p2_strings.xml",
+    "android/app/src/main/res/values-hi/p2_strings.xml",
+    "android/app/src/main/res/values-in/p2_strings.xml",
+    "android/app/src/main/res/values-ja/p2_strings.xml",
+    "android/app/src/main/res/values-ko/p2_strings.xml",
+    "android/app/src/main/res/values-pt-rBR/p2_strings.xml",
+    "android/app/src/main/res/values-vi/p2_strings.xml",
+    "android/app/src/main/res/values/p2_strings.xml",
+    "lib/core/ui/components/cards/studio_cards.dart",
+    "lib/core/widgets/studio_shell.dart",
+    "lib/features/editor/editing_hub_screen.dart",
+    "lib/features/media/media_library_screen.dart",
+    "lib/features/settings/settings_hub_screen.dart",
+    "lib/l10n/app_ar.arb",
+    "lib/l10n/app_de.arb",
+    "lib/l10n/app_en.arb",
+    "lib/l10n/app_es.arb",
+    "lib/l10n/app_fr.arb",
+    "lib/l10n/app_hi.arb",
+    "lib/l10n/app_id.arb",
+    "lib/l10n/app_ja.arb",
+    "lib/l10n/app_ko.arb",
+    "lib/l10n/app_pt.arb",
+    "lib/l10n/app_pt_BR.arb",
+    "lib/l10n/app_vi.arb",
+    "lib/l10n/app_zh.arb",
+    "lib/l10n/app_zh_Hans.arb",
+    "test/design_system_test.dart",
+    "test/localization_test.dart",
+    "test/task09b_shared_interactions_test.dart",
+    "test/widget_test.dart"
+  ],
+  "protectedSource": [
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/MainActivity.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/editor/EditorPreview.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/AudioDuckingEngine.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureBridge.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureConfig.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureNotificationPolicy.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureRequests.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureService.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureState.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureTiming.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/DrawingOverlay.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/DrawingStrokeEngine.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FacecamGeometry.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FacecamOverlay.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FloatingControlGeometry.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FloatingRecordingControls.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/MediaOutput.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/Mp4RecoveryEngine.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/RecordingMuxer.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/RegionCropGeometry.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/ScreenshotPixels.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/SessionAudio.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/ShakeDetectorEngine.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/TouchIndicatorEngine.kt",
+      "unchanged": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/VideoEncoder.kt",
+      "unchanged": true
+    },
+    {
+      "path": "lib/features/recording/capture_status_presentation.dart",
+      "unchanged": true
+    },
+    {
+      "path": "lib/features/recording/recording_service.dart",
+      "unchanged": true
+    },
+    {
+      "path": "lib/features/recording/recording_setup_sheet.dart",
+      "unchanged": true
+    },
+    {
+      "path": "lib/features/settings/audio_video_settings_screen.dart",
+      "unchanged": true
+    },
+    {
+      "path": "lib/features/settings/recording_settings_form.dart",
+      "unchanged": true
+    },
+    {
+      "path": "lib/features/settings/settings_controller.dart",
+      "unchanged": true
+    }
+  ],
+  "buildAfter": {
+    "logicalBytes": 143312453184,
+    "fileCount": 20456,
+    "skipped": [],
+    "allocatedBytes": "NOT MEASURED"
+  },
+  "taskEvidence": {
+    "logicalBytes": 49538853,
+    "fileCount": 180,
+    "skipped": [],
+    "allocatedBytes": "NOT MEASURED"
+  },
+  "taskInstallBackups": {
+    "logicalBytes": 455666645,
+    "fileCount": 40,
+    "skipped": [],
+    "allocatedBytes": "NOT MEASURED"
+  },
+  "freeBytesAfter": 28429213696,
+  "freeBytesBefore": 29150134272,
+  "headerPixels": [
+    {
+      "tab": "video",
+      "size": [
+        411,
+        920
+      ],
+      "brandBoundingBox": [
+        17,
+        73,
+        102,
+        82
+      ]
+    },
+    {
+      "tab": "photo",
+      "size": [
+        411,
+        920
+      ],
+      "brandBoundingBox": [
+        17,
+        73,
+        102,
+        82
+      ]
+    },
+    {
+      "tab": "edit",
+      "size": [
+        411,
+        920
+      ],
+      "brandBoundingBox": [
+        17,
+        73,
+        102,
+        82
+      ]
+    },
+    {
+      "tab": "settings",
+      "size": [
+        411,
+        920
+      ],
+      "brandBoundingBox": [
+        17,
+        73,
+        102,
+        82
+      ]
+    }
+  ],
+  "debugApkSha256": "769077768f79d77d32ece76be460acc61aa5acd15592b1ab58ff06c6189ec566",
+  "profileApkSha256": "14fcb96fecb383790331a73c3d829532ed0258f7b033a8d7fe919903cd77a7a0"
+}

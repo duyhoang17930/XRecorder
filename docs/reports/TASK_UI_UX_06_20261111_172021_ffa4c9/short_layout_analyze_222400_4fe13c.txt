@@ -1,0 +1,5 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot analyze --no-pub
+Analyzing XRecorder...                                          
+No issues found! (ran in 5.1s)
+
+Exit=0

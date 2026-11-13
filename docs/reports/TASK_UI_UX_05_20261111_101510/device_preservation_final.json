@@ -1,0 +1,62 @@
+{
+  "hashes": {
+    "shared_prefs/p2_locale.xml": {
+      "before": "87bf0345b0fdb43f7551ff7b4224828423b9c18b99e18950de9c54b41166a481",
+      "after": "87bf0345b0fdb43f7551ff7b4224828423b9c18b99e18950de9c54b41166a481",
+      "exact": true
+    },
+    "shared_prefs/onboarding_state.xml": {
+      "before": "c16d57d1a312ef8b3a71627274face812ad92c10d8ed15ad7ebb493eb094a961",
+      "after": "c16d57d1a312ef8b3a71627274face812ad92c10d8ed15ad7ebb493eb094a961",
+      "exact": true
+    },
+    "shared_prefs/app_settings.xml": {
+      "before": "e6015fa4fc5e8fdbfc1d2ca76ffab5f27e06cdedbd672d82869a80d7c12839cb",
+      "after": "e6015fa4fc5e8fdbfc1d2ca76ffab5f27e06cdedbd672d82869a80d7c12839cb",
+      "exact": true
+    },
+    "shared_prefs/media_catalog.xml": {
+      "before": "c7f7e03c2f63ee74d6730ba1b62cb33d97bd83091768724b2efc4c645f78d6e2",
+      "after": "c7f7e03c2f63ee74d6730ba1b62cb33d97bd83091768724b2efc4c645f78d6e2",
+      "exact": true
+    },
+    "files/projects/project_1794319906023720.json": {
+      "before": "9689b4c7688b9a5c9edee6341beed505ec18a21bafeadefe7d2affcb34e24172",
+      "after": "9689b4c7688b9a5c9edee6341beed505ec18a21bafeadefe7d2affcb34e24172",
+      "exact": true
+    },
+    "files/projects/project_1794327848468607.json": {
+      "before": "0ba2836c98d8552e4dc613c70e531ee28aa38c0e49cc25947fd0441e1d0b83b3",
+      "after": "0ba2836c98d8552e4dc613c70e531ee28aa38c0e49cc25947fd0441e1d0b83b3",
+      "exact": true
+    },
+    "files/export_jobs.json": {
+      "before": "29e52b2cefb5798837a404914b21e9ae0a220c8f63a1d0d1353c814feb653a6a",
+      "after": "29e52b2cefb5798837a404914b21e9ae0a220c8f63a1d0d1353c814feb653a6a",
+      "exact": true
+    },
+    "/sdcard/Download/UI02C_1794308051935/slider_fixture.png": {
+      "before": "399d4169a5a322c63d8fee240ff29c91893ccd8c854262a1afc09e2bcfd8b8ff",
+      "after": "399d4169a5a322c63d8fee240ff29c91893ccd8c854262a1afc09e2bcfd8b8ff",
+      "exact": true
+    },
+    "/sdcard/Download/UI02C_1794308051935/sort_fixture.png": {
+      "before": "c656e0de5f2ab3262b038e61ca09cbe3342f764d855e64de7ac5846b4b45eaf9",
+      "after": "c656e0de5f2ab3262b038e61ca09cbe3342f764d855e64de7ac5846b4b45eaf9",
+      "exact": true
+    }
+  },
+  "allExact": true,
+  "configuration": {
+    "size": "Physical size: 1080x2400\r\nOverride size: 411x920",
+    "density": "Physical density: 420\r\nOverride density: 160",
+    "rotationAuto": "1",
+    "rotation": "0",
+    "fontScale": "1.0",
+    "animator": "null"
+  },
+  "configurationRestored": true,
+  "packageIdentity": "package:com.xrecorder.xrecorder uid:10219\r\npackage:com.xrecorder.xrecorder.test uid:10218",
+  "identityUnchanged": true,
+  "transitionScale": "1.0"
+}

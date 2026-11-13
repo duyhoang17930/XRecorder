@@ -1,0 +1,16 @@
+[
+  {
+    "seconds": "0.4",
+    "meanRgbValue": 112.2421875,
+    "channelSpan": 204,
+    "nonBlank": "PASS",
+    "image": "acceptance_export_frame_0.png"
+  },
+  {
+    "seconds": "3.0",
+    "meanRgbValue": 86.6044921875,
+    "channelSpan": 242,
+    "nonBlank": "PASS",
+    "image": "acceptance_export_frame_1.png"
+  }
+]

@@ -4,9 +4,12 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/domain/models.dart';
 import '../../core/widgets/studio_widgets.dart';
+import '../../core/ui/components/dialogs/studio_name_dialog.dart';
 import 'media_repository.dart';
 import 'media_library_screen.dart';
 import 'media_actions.dart';
+import '../editor/editor_entry.dart';
+import '../editor/project_repository.dart';
 
 class VideoDetailsScreen extends StatefulWidget {
   const VideoDetailsScreen({super.key, required this.id});
@@ -19,6 +22,24 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
   Future<MediaItem?>? _item;
   final actions = AndroidMediaActions();
   bool busy = false;
+  String? editingProjectId;
+
+  Future<void> editVideo(MediaItem item) async {
+    final repository = AndroidEditProjectRepository();
+    final previous = editingProjectId;
+    final existing = previous == null ? null : await repository.find(previous);
+    if (!mounted) return;
+    final project =
+        existing ??
+        await createEditorProject(
+          media: [item],
+          title: item.displayName,
+          repository: repository,
+        );
+    editingProjectId = project.id;
+    if (mounted) await context.push('/editor/project/${project.id}');
+  }
+
   void closeDetails(MediaItem item) {
     if (context.canPop()) {
       context.pop();
@@ -51,29 +72,17 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
   }
 
   Future<void> rename(MediaItem item) async {
-    final field = TextEditingController(text: item.displayName);
-    final name = await showDialog<String>(
+    final name = await showStudioDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(context.l10n.renameMedia),
-        content: TextField(
-          controller: field,
-          maxLength: 120,
-          decoration: InputDecoration(labelText: context.l10n.filename),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(context.l10n.cancel),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, field.text),
-            child: Text(context.l10n.rename),
-          ),
-        ],
+      builder: (dialog) => StudioNameDialog(
+        initial: item.displayName,
+        title: dialog.l10n.renameMedia,
+        label: dialog.l10n.filename,
+        maxLength: 120,
+        submitLabel: dialog.l10n.rename,
+        onSubmit: (value) => Navigator.pop(dialog, value),
       ),
     );
-    field.dispose();
     if (name == null || !mounted) return;
     final id = await actions.rename(item.uri, name);
     if (!mounted) return;
@@ -86,9 +95,9 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
   }
 
   Future<void> trash(MediaItem item) async {
-    final confirm = await showDialog<bool>(
+    final confirm = await showStudioDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) => StudioDialog(
         title: Text(context.l10n.moveToTrash756188),
         content: Text(
           context.l10n.moveMediaToTrashName(
@@ -202,7 +211,8 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
               child: MediaThumbnail(item: item),
             ),
             SectionTitle(item.displayName),
-            if (busy) const LinearProgressIndicator(),
+            if (busy && (ModalRoute.of(context)?.isCurrent ?? true))
+              const LinearProgressIndicator(),
             SectionTitle(context.l10n.preview),
             Wrap(
               spacing: 8,
@@ -232,6 +242,14 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                   icon: const Icon(AppIcons.share),
                   label: Text(context.l10n.share),
                 ),
+                if (item.kind == MediaKind.video &&
+                    item.duration != null &&
+                    item.duration! >= const Duration(milliseconds: 200))
+                  OutlinedButton.icon(
+                    onPressed: busy ? null : () => run(() => editVideo(item)),
+                    icon: const Icon(AppIcons.edit),
+                    label: Text(context.l10n.editVideo),
+                  ),
               ],
             ),
             if (item.kind == MediaKind.image) ...[
@@ -246,6 +264,11 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 label: Text(context.l10n.cropAnnotateACopy),
               ),
             ],
+            if (item.kind != MediaKind.image &&
+                (item.kind != MediaKind.video ||
+                    item.duration == null ||
+                    item.duration! < const Duration(milliseconds: 200)))
+              Text(context.l10n.chooseAPlayableVideoOfAtLeast),
             SectionTitle(context.l10n.fileManagement),
             Wrap(
               spacing: 8,

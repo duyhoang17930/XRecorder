@@ -1,0 +1,17 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_06_workflows_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart
+00:00 +0: project launch validates every clip before the only save
+00:00 +1: media picker batch returns only explicit supported selection
+00:01 +2: media picker photo returns only explicit supported selection
+00:01 +3: media picker cancel returns only explicit supported selection
+00:01 +4: cancel New video leaves every draft untouched
+00:02 +5: Media Details Edit keeps URI and reuses its launched project: content://media/external/video/media/42
+00:02 +6: Media Details Edit keeps URI and reuses its launched project: content://com.android.externalstorage.documents/document/primary%3AMovies%2Fqa.mp4
+00:02 +7: timeline position does not decode again; trim commits once at gesture end
+00:03 +8: Clear text keeps focus and never submits: en
+00:03 +9: Clear text keeps focus and never submits: vi
+00:03 +10: Clear text keeps focus and never submits: ar
+00:03 +11: Clear text keeps focus and never submits: de
+00:03 +12: All tests passed!
+
+Exit=0

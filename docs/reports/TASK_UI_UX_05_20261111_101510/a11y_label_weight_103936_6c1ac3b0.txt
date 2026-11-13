@@ -1,0 +1,19 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_05_motion_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: page transition rebuilds do not accumulate animation listeners
+00:00 +1: one dialog per nested origin, current dialog can open a child
+00:00 +2: notices finish their entrance immediately with Reduce Motion
+00:01 +3: navigation accessibility dark=false scale=1.0
+00:01 +4: navigation accessibility dark=false scale=1.5
+00:01 +5: navigation accessibility dark=false scale=2.0
+00:01 +6: navigation labels contrast over black and white media dark=false
+00:01 +7: navigation accessibility dark=true scale=1.0
+00:01 +8: navigation accessibility dark=true scale=1.5
+00:01 +9: navigation accessibility dark=true scale=2.0
+00:01 +10: navigation labels contrast over black and white media dark=true
+00:01 +11: high contrast disables glass filtering; rapid selection stays clipped
+00:01 +12: (tearDownAll)
+00:01 +12: All tests passed!
+
+Exit=0

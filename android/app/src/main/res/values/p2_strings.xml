@@ -3,4 +3,5 @@
     <string name="p2_edit_video" formatted="false">Edit video</string>
     <string name="p2_edit_photo" formatted="false">Edit photo</string>
     <string name="p2_preview_unavailable" formatted="false">This video cannot be played or access was revoked.</string>
+    <string name="p2_back" formatted="false">Back</string>
 </resources>

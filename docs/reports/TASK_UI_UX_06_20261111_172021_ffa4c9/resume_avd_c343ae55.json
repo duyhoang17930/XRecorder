@@ -1,0 +1,19 @@
+{
+  "pid": 9992,
+  "args": [
+    "C:\\Users\\dangh\\AppData\\Local\\Android\\sdk\\emulator\\emulator.exe",
+    "-avd",
+    "ThreeHRecorder_TASK09B_API36",
+    "-port",
+    "5570",
+    "-gpu",
+    "swiftshader_indirect",
+    "-no-snapshot-load",
+    "-no-snapshot-save",
+    "-no-window"
+  ],
+  "existingAvd": "D:\\FAU_App\\XRecorder\\build\\verification\\task09b\\run_20261109T113727956224Z_f64203\\avds\\ThreeHRecorder_TASK09B_API36.avd",
+  "noSnapshotLoad": true,
+  "noSnapshotSave": true,
+  "noNewAvd": true
+}

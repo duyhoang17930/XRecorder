@@ -12,6 +12,7 @@ Future<Map<String, Object>?> editProjectEffects(
   BuildContext context,
   Map<String, Object> current, {
   required int durationMs,
+  int initialSection = 0,
 }) async {
   if (!context.mounted || ModalRoute.of(context)?.isCurrent == false) {
     return null;
@@ -19,21 +20,30 @@ Future<Map<String, Object>?> editProjectEffects(
   return Navigator.of(context, rootNavigator: true).push<Map<String, Object>>(
     MaterialPageRoute(
       fullscreenDialog: true,
-      builder: (_) => _EffectsScreen(current: current, durationMs: durationMs),
+      builder: (_) => _EffectsScreen(
+        current: current,
+        durationMs: durationMs,
+        initialSection: initialSection,
+      ),
     ),
   );
 }
 
 class _EffectsScreen extends StatefulWidget {
-  const _EffectsScreen({required this.current, required this.durationMs});
+  const _EffectsScreen({
+    required this.current,
+    required this.durationMs,
+    required this.initialSection,
+  });
   final Map<String, Object> current;
   final int durationMs;
+  final int initialSection;
   @override
   State<_EffectsScreen> createState() => _EffectsScreenState();
 }
 
 class _EffectsScreenState extends State<_EffectsScreen> {
-  int section = 0;
+  late int section = widget.initialSection.clamp(0, 4);
   bool pickingMusic = false;
   String? musicError;
   String? validationError;

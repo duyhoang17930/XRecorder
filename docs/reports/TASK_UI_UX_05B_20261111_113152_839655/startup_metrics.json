@@ -1,0 +1,29 @@
+{
+  "method": "engine-entry to first completed GPURasterizer::Draw, not physical presentation or time-to-usable; hierarchy observation includes ADB overhead",
+  "rows": [
+    {
+      "phase": "baseline",
+      "engineEntryMicros": 5574516828,
+      "firstRasterCompletionMicros": 5575672955,
+      "engineToFirstRasterMs": 1156.127,
+      "engineToFirstUIFrameEndMs": 1067.448,
+      "readyObservation": 6.078000000000429
+    },
+    {
+      "phase": "after",
+      "engineEntryMicros": 6585225140,
+      "firstRasterCompletionMicros": 6587251811,
+      "engineToFirstRasterMs": 2026.671,
+      "engineToFirstUIFrameEndMs": 742.513,
+      "readyObservation": 8.796000000000276
+    },
+    {
+      "phase": "final",
+      "engineEntryMicros": 8114082691,
+      "firstRasterCompletionMicros": 8115234284,
+      "engineToFirstRasterMs": 1151.593,
+      "engineToFirstUIFrameEndMs": 358.44,
+      "readyObservation": 6.328000000001339
+    }
+  ]
+}

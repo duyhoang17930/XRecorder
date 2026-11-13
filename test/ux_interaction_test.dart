@@ -354,6 +354,14 @@ void main() {
       );
       card.onTap!();
       card.onTap!();
+      await tester.pumpAndSettle();
+      expect(saves, 0); // Opening/cancelling selection must not save a draft.
+      expect(find.text('Choose media'), findsOneWidget);
+      await tester.tap(find.text('Studio fixture 01.mp4'));
+      await tester.pumpAndSettle();
+      final add = tester.widget<FilledButton>(find.byType(FilledButton).last);
+      add.onPressed!();
+      add.onPressed!(); // A stale callback must not pop the editor branch.
       await tester.pump();
       expect(saves, 1);
       pending.complete();
@@ -398,6 +406,60 @@ void main() {
       tester.view.resetViewInsets();
     },
   );
+  testWidgets('media rename survives Cancel/Save while the keyboard closes', (
+    tester,
+  ) async {
+    await start(tester);
+    final old = catalog.items.first;
+    final item = MediaItem(
+      id: old.id,
+      uri: old.uri,
+      kind: old.kind,
+      displayName: old.displayName,
+      mimeType: old.mimeType,
+      sizeBytes: old.sizeBytes,
+      createdAt: old.createdAt,
+      modifiedAt: old.modifiedAt,
+      source: old.source,
+      owned: true,
+    );
+    catalog.items[0] = item;
+    final renamed = <Object?>[];
+    messenger.setMockMethodCallHandler(
+      const MethodChannel('com.xrecorder/media'),
+      (call) async {
+        if (call.method == 'rename') {
+          renamed.add(call.arguments);
+          return item.id;
+        }
+        return null;
+      },
+    );
+    router.push('/media/${Uri.encodeComponent(item.id)}');
+    await tester.pump();
+    await settleImage(tester);
+    for (final save in [false, true]) {
+      final rename = find.widgetWithText(TextButton, 'Rename');
+      await tester.ensureVisible(rename);
+      await tester.tap(rename);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      await tester.enterText(find.byType(TextField), 'UI05 media name.mp4');
+      tester.view.viewInsets = const FakeViewPadding(bottom: 260);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      await tester.tap(
+        find.widgetWithText(TextButton, save ? 'Rename' : 'Cancel').last,
+      );
+      tester.view.resetViewInsets();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 40));
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+      expect(renamed.length, save ? 1 : 0);
+    }
+    expect((renamed.single as Map)['name'], 'UI05 media name.mp4');
+  });
   testWidgets(
     'editor waits for autosave and failed save keeps a recovery path before leaving',
     (tester) async {

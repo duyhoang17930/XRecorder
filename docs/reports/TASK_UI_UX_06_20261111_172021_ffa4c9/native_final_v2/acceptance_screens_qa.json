@@ -1,0 +1,17 @@
+[
+  {
+    "case": "final-rapid-create",
+    "taps": 2,
+    "modalRemained": true
+  },
+  {
+    "case": "final-rapid-create",
+    "taps": 3,
+    "modalRemained": true
+  },
+  {
+    "case": "final-rapid-create",
+    "taps": 5,
+    "modalRemained": true
+  }
+]

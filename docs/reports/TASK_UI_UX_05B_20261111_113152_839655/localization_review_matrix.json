@@ -1,0 +1,114 @@
+[
+  {
+    "locale": "ar",
+    "keys": 707,
+    "changed": 19,
+    "flagged": 6,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "de",
+    "keys": 707,
+    "changed": 19,
+    "flagged": 10,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "en",
+    "keys": 707,
+    "changed": 2,
+    "flagged": 0,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "es",
+    "keys": 707,
+    "changed": 18,
+    "flagged": 11,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "fr",
+    "keys": 707,
+    "changed": 16,
+    "flagged": 17,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "hi",
+    "keys": 707,
+    "changed": 18,
+    "flagged": 8,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "id",
+    "keys": 707,
+    "changed": 18,
+    "flagged": 15,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "ja",
+    "keys": 707,
+    "changed": 17,
+    "flagged": 5,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "ko",
+    "keys": 707,
+    "changed": 18,
+    "flagged": 8,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "pt",
+    "keys": 707,
+    "changed": 16,
+    "flagged": 12,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "pt_BR",
+    "keys": 707,
+    "changed": 16,
+    "flagged": 12,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "vi",
+    "keys": 707,
+    "changed": 433,
+    "flagged": 10,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "zh",
+    "keys": 707,
+    "changed": 18,
+    "flagged": 6,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  },
+  {
+    "locale": "zh_Hans",
+    "keys": 707,
+    "changed": 18,
+    "flagged": 6,
+    "structuralErrors": [],
+    "linguisticAcceptance": "NATIVE_SPEAKER_REVIEW_REQUIRED"
+  }
+]

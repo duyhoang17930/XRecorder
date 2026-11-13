@@ -1,0 +1,177 @@
+{
+  "avd": "ThreeHRecorder_TASK09B_API36",
+  "serial": "emulator-5570",
+  "uid": "package:com.xrecorder.xrecorder uid:10219\r\npackage:com.xrecorder.xrecorder.test uid:10218\r\n",
+  "uidUnchanged": true,
+  "privateData": [
+    {
+      "path": "files/projects/project_1794319906023720.json",
+      "baselineSha256": "9689b4c7688b9a5c9edee6341beed505ec18a21bafeadefe7d2affcb34e24172",
+      "currentSha256": "9689b4c7688b9a5c9edee6341beed505ec18a21bafeadefe7d2affcb34e24172",
+      "unchanged": true
+    },
+    {
+      "path": "files/projects/project_1794327848468607.json",
+      "baselineSha256": "0ba2836c98d8552e4dc613c70e531ee28aa38c0e49cc25947fd0441e1d0b83b3",
+      "currentSha256": "0ba2836c98d8552e4dc613c70e531ee28aa38c0e49cc25947fd0441e1d0b83b3",
+      "unchanged": true
+    },
+    {
+      "path": "files/projects/project_1794391101147150.json",
+      "baselineSha256": "15da6bfa71a7f0282f0756e8fd4f03cf87a2be9432a9f325bce4e7a6a449c14a",
+      "currentSha256": "15da6bfa71a7f0282f0756e8fd4f03cf87a2be9432a9f325bce4e7a6a449c14a",
+      "unchanged": true
+    },
+    {
+      "path": "files/projects/project_1794391180894574.json",
+      "baselineSha256": "e3a37ccd29c8c33d2ed7e71e381397dd97f5cde116def2c26e5fb1bd1f6182ea",
+      "currentSha256": "e3a37ccd29c8c33d2ed7e71e381397dd97f5cde116def2c26e5fb1bd1f6182ea",
+      "unchanged": true
+    },
+    {
+      "path": "files/projects/project_1794391454804844.json",
+      "baselineSha256": "d6678d200afa3621645c7428ee13014ea2ad3907a7a4d46db0d44cad147f740c",
+      "currentSha256": "d6678d200afa3621645c7428ee13014ea2ad3907a7a4d46db0d44cad147f740c",
+      "unchanged": true
+    },
+    {
+      "path": "files/projects/project_1794391617348730.json",
+      "baselineSha256": "709ca29811b24d937d427afa5561e2c73f8fbc96ffb127391e2cf853bc748f61",
+      "currentSha256": "709ca29811b24d937d427afa5561e2c73f8fbc96ffb127391e2cf853bc748f61",
+      "unchanged": true
+    },
+    {
+      "path": "files/projects/project_1794391687640632.json",
+      "baselineSha256": "e13804dee445fe77e7e990e110a49499c82cffb121946c977a206606533a272f",
+      "currentSha256": "e13804dee445fe77e7e990e110a49499c82cffb121946c977a206606533a272f",
+      "unchanged": true
+    },
+    {
+      "path": "files/export_jobs.json",
+      "oldRecordsPreserved": true,
+      "oldCount": 1,
+      "currentCount": 3,
+      "addedJobIds": [
+        "f0152aee-90ad-4334-bedd-cef9b0556649",
+        "e8f87bba-7b39-4b81-850c-37558051b1f2"
+      ]
+    },
+    {
+      "path": "shared_prefs/p2_locale.xml",
+      "baselineSha256": "87bf0345b0fdb43f7551ff7b4224828423b9c18b99e18950de9c54b41166a481",
+      "currentSha256": "87bf0345b0fdb43f7551ff7b4224828423b9c18b99e18950de9c54b41166a481",
+      "unchanged": true
+    },
+    {
+      "path": "shared_prefs/onboarding_state.xml",
+      "baselineSha256": "c16d57d1a312ef8b3a71627274face812ad92c10d8ed15ad7ebb493eb094a961",
+      "currentSha256": "c16d57d1a312ef8b3a71627274face812ad92c10d8ed15ad7ebb493eb094a961",
+      "unchanged": true
+    },
+    {
+      "path": "shared_prefs/app_settings.xml",
+      "baselineSha256": "5df7fb50a866b765d7fe90daae5f98c207767ed49f522b420a03f99ad82e91df",
+      "currentSha256": "5df7fb50a866b765d7fe90daae5f98c207767ed49f522b420a03f99ad82e91df",
+      "unchanged": true
+    },
+    {
+      "path": "shared_prefs/media_catalog.xml",
+      "baselineSha256": "3325d2a819fdd8062c2cdc48a09b995c9b012915bcdf88b1cf9742a7f057c793",
+      "currentSha256": "3325d2a819fdd8062c2cdc48a09b995c9b012915bcdf88b1cf9742a7f057c793",
+      "unchanged": true
+    },
+    {
+      "path": "shared_prefs/capture_journal.xml",
+      "baselineSha256": "062eb82792f1ae7d93855b92c759cc9e4e31875bebf95aa05831de0e2318760e",
+      "currentSha256": "3975241e990c7f614707ccba377e3b7e44fbff9e2d3c09c3437466c9f0e93de1",
+      "unchanged": false
+    }
+  ],
+  "retainedMedia": [
+    {
+      "path": "/sdcard/Pictures/XRecorder/Edited_1794327406739.png",
+      "baselineSha256": "be862241ed8f6c586e4a31f21cec0ac42a60e1cebfc8ff116df1b10c867d7891",
+      "currentSha256": "be862241ed8f6c586e4a31f21cec0ac42a60e1cebfc8ff116df1b10c867d7891",
+      "unchanged": true
+    },
+    {
+      "path": "/sdcard/Pictures/XRecorder/heheh.png",
+      "baselineSha256": "cf231d99e67112424d1a3654e85a80e93afb0c3d87250735029d424646e1af6b",
+      "currentSha256": "cf231d99e67112424d1a3654e85a80e93afb0c3d87250735029d424646e1af6b",
+      "unchanged": true
+    },
+    {
+      "path": "/sdcard/Pictures/XRecorder/Edited_1794391245809.png",
+      "baselineSha256": "a46dc71ea956f9346b4cb5e8b97a9e42dcbb1cbcfde7dd459d6506af415ac45d",
+      "currentSha256": "a46dc71ea956f9346b4cb5e8b97a9e42dcbb1cbcfde7dd459d6506af415ac45d",
+      "unchanged": true
+    },
+    {
+      "path": "/sdcard/Movies/XRecorder/Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+      "baselineSha256": "81f4af10f09032118ecdfb8e20a23c48dce68da4573582b00e55a0f0f577a6e3",
+      "currentSha256": "81f4af10f09032118ecdfb8e20a23c48dce68da4573582b00e55a0f0f577a6e3",
+      "unchanged": true
+    }
+  ],
+  "newQaProjects": [
+    {
+      "file": "files/projects/project_1794396351822793.json",
+      "title": "UI06_CandidateSelect",
+      "clips": 2
+    },
+    {
+      "file": "files/projects/project_1794397716748579.json",
+      "title": "UI06_Final_Video",
+      "clips": 2
+    },
+    {
+      "file": "files/projects/project_1794397880008428.json",
+      "title": "UI06_Final_Video_V2",
+      "clips": 3
+    },
+    {
+      "file": "files/projects/project_1794398600630210.json",
+      "title": "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+      "clips": 1
+    },
+    {
+      "file": "files/projects/project_1794407916253079.json",
+      "title": "UI06_Acceptance",
+      "clips": 3
+    }
+  ],
+  "configuration": {
+    "font_scale": "1.0",
+    "user_rotation": "0",
+    "accelerometer_rotation": "1",
+    "transition_animation_scale": "1.0",
+    "animator_duration_scale": "null"
+  },
+  "configurationMatchesBaseline": true,
+  "display": "Physical size: 1080x2400\r\nOverride size: 411x920\r\n",
+  "density": "Physical density: 420\r\nOverride density: 160\r\n",
+  "installedApkSha256": "b159742bd30fcbcd95a0fa634860867afb47d5727c98761cda1f3ac3c12b5ce9",
+  "expectedApkSha256": "b159742bd30fcbcd95a0fa634860867afb47d5727c98761cda1f3ac3c12b5ce9",
+  "correctApkInstalled": true,
+  "scope": "11 immutable original private files, original queue rows and four public sources verified. P1 idle journal changed only two runtime countdown fields; documented separately, not claimed byte-identical.",
+  "journalInterpretation": {
+    "exactDelta": [
+      {
+        "field": "config.countdown",
+        "before": 3,
+        "after": 0
+      },
+      {
+        "field": "countdownRemaining",
+        "before": 3,
+        "after": 0
+      }
+    ],
+    "owner": "P1",
+    "sourceChanged": false,
+    "manualRestorePerformed": false,
+    "originalArchivePreserved": true
+  },
+  "immutablePrivateFilesVerified": 11,
+  "allOriginalQueueRowsPreserved": true
+}

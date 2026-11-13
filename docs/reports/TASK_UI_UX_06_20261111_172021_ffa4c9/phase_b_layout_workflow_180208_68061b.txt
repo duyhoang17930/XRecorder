@@ -1,0 +1,661 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/editor_workspace_layout_test.dart test/ui_ux_06_workflows_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.0 landscape=false
+00:00 +1: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.0 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 320.0 scale=1.0 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +1 -1: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: media picker batch returns only explicit supported selection
+00:01 +1 -1: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.0 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 320.0 scale=1.0 landscape=false
+  
+00:01 +1 -1: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.0 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 320.0 scale=1.0 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +1 -2: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: media picker batch returns only explicit supported selection
+00:01 +1 -2: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.0 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 320.0 scale=1.0 landscape=true
+  
+00:01 +1 -2: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.5 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 320.0 scale=1.5 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +1 -3: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: media picker batch returns only explicit supported selection
+00:01 +1 -3: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.5 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 320.0 scale=1.5 landscape=false
+  
+00:01 +2 -3: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.5 landscape=true
+00:02 +3 -3: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.5 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 320.0 scale=1.5 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +3 -4: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: media picker cancel returns only explicit supported selection
+00:02 +3 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.5 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 320.0 scale=1.5 landscape=true
+  
+00:02 +4 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=2.0 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 320.0 scale=2.0 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +4 -5: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: cancel New video leaves every draft untouched
+00:02 +4 -5: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=2.0 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 320.0 scale=2.0 landscape=false
+  
+00:02 +4 -5: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=2.0 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 320.0 scale=2.0 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +4 -6: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: cancel New video leaves every draft untouched
+00:02 +4 -6: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=2.0 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 320.0 scale=2.0 landscape=true
+  
+00:02 +4 -6: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.0 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 360.0 scale=1.0 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +4 -7: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: cancel New video leaves every draft untouched
+00:02 +4 -7: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.0 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 360.0 scale=1.0 landscape=false
+  
+00:03 +4 -7: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.0 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 360.0 scale=1.0 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +4 -8: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: cancel New video leaves every draft untouched
+00:03 +4 -8: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.0 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 360.0 scale=1.0 landscape=true
+  
+00:03 +5 -8: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.5 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 360.0 scale=1.5 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +5 -9: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact Create preserves guard for 2 rapid taps
+00:03 +5 -9: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.5 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 360.0 scale=1.5 landscape=false
+  
+00:03 +5 -9: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.5 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 360.0 scale=1.5 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +5 -10: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact Create preserves guard for 2 rapid taps
+00:03 +5 -10: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.5 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 360.0 scale=1.5 landscape=true
+  
+00:03 +5 -10: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=2.0 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 360.0 scale=2.0 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +5 -11: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact Create preserves guard for 2 rapid taps
+00:03 +5 -11: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=2.0 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 360.0 scale=2.0 landscape=false
+  
+00:03 +6 -11: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=2.0 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 360.0 scale=2.0 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +6 -12: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact Create preserves guard for 3 rapid taps
+00:03 +6 -12: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=2.0 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 360.0 scale=2.0 landscape=true
+  
+00:03 +6 -12: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.0 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 393.0 scale=1.0 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +6 -13: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact Create preserves guard for 3 rapid taps
+00:04 +6 -13: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.0 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 393.0 scale=1.0 landscape=false
+  
+00:04 +7 -13: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.0 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 393.0 scale=1.0 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +7 -14: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact Create preserves guard for 5 rapid taps
+00:04 +7 -14: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.0 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 393.0 scale=1.0 landscape=true
+  
+00:04 +8 -14: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.5 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 393.0 scale=1.5 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +8 -15: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Media Details Edit keeps URI and reuses its launched project: content://media/external/video/media/42
+00:04 +8 -15: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.5 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 393.0 scale=1.5 landscape=false
+  
+00:04 +8 -15: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.5 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 393.0 scale=1.5 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +8 -16: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Media Details Edit keeps URI and reuses its launched project: content://media/external/video/media/42
+00:04 +8 -16: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.5 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 393.0 scale=1.5 landscape=true
+  
+00:04 +8 -16: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=2.0 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 393.0 scale=2.0 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +8 -17: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Media Details Edit keeps URI and reuses its launched project: content://media/external/video/media/42
+00:04 +8 -17: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=2.0 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 393.0 scale=2.0 landscape=false
+  
+00:04 +9 -17: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=2.0 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 393.0 scale=2.0 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:04 +9 -18: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Media Details Edit keeps URI and reuses its launched project: content://com.android.externalstorage.documents/document/primary%3AMovies%2Fqa.mp4
+00:04 +9 -18: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=2.0 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 393.0 scale=2.0 landscape=true
+  
+00:04 +10 -18: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.0 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 411.0 scale=1.0 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +10 -19: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: timeline position does not decode again; trim commits once at gesture end
+00:05 +10 -19: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.0 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 411.0 scale=1.0 landscape=false
+  
+00:05 +11 -19: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.0 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 411.0 scale=1.0 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +11 -20: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Clear text keeps focus and never submits: en
+00:05 +11 -20: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.0 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 411.0 scale=1.0 landscape=true
+  
+00:05 +12 -20: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.5 landscape=false
+00:05 +13 -20: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.5 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 411.0 scale=1.5 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +13 -21: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Clear text keeps focus and never submits: ar
+00:05 +13 -21: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.5 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 411.0 scale=1.5 landscape=false
+  
+00:05 +14 -21: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.5 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 411.0 scale=1.5 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +14 -22: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Clear text keeps focus and never submits: de
+00:05 +14 -22: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.5 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 411.0 scale=1.5 landscape=true
+  
+00:05 +15 -22: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=2.0 landscape=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 411.0 scale=2.0 landscape=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +15 -23: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=2.0 landscape=false [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 411.0 scale=2.0 landscape=false
+  
+00:05 +15 -23: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=2.0 landscape=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than <48>
+  Actual: <0.0>
+   Which: is not a value greater than <48>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart:150:13)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart line 150
+The test description was:
+  video workspace 411.0 scale=2.0 landscape=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:05 +15 -24: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=2.0 landscape=true [E]
+  Test failed. See exception logs above.
+  The test description was: video workspace 411.0 scale=2.0 landscape=true
+  
+00:05 +15 -24: Some tests failed.
+
+Failing tests:
+  D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.0 landscape=false
+  D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.0 landscape=true
+  D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.5 landscape=false
+  D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.5 landscape=true
+  ... and 20 more
+
+Exit=1

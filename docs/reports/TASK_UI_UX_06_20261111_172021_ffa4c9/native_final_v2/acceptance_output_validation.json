@@ -1,0 +1,288 @@
+{
+  "apk": {
+    "debug": {
+      "sha256": "92d0047b7dcfab36ab731b3179c40d86b23f6afea813e9654ec9b0f3e68b6edf",
+      "bytes": 120022152
+    },
+    "profile": {
+      "sha256": "f819caac96d3ba667488650e4f545542bdd56c77589a3597a193c61c40fa319d",
+      "bytes": 59960067
+    }
+  },
+  "video": {
+    "file": "acceptance_output.mp4",
+    "devicePath": "/storage/emulated/0/Movies/XRecorder/Edited_e17709af-3cb3-44e9-9324-7f15a6e4fcb1.mp4",
+    "job": {
+      "id": "e17709af-3cb3-44e9-9324-7f15a6e4fcb1",
+      "project": {
+        "effects": {
+          "voice": "none",
+          "fps": 30,
+          "format": "mp4",
+          "noiseReduction": false,
+          "bitrate": 0,
+          "fadeInMs": 0,
+          "gifEdge": 320,
+          "speed": 1,
+          "volume": 1,
+          "filter": "grayscale",
+          "subtitleColor": "white",
+          "aspect": 0,
+          "fadeOutMs": 0,
+          "pitch": 1,
+          "subtitleSize": "normal",
+          "subtitlePosition": "bottom",
+          "text": "",
+          "gifRepeats": 0,
+          "musicVolume": 0.5,
+          "subtitleBackground": "dark",
+          "height": 0,
+          "gifFps": 10
+        },
+        "clips": [
+          {
+            "cropLeft": 0,
+            "cropTop": 0,
+            "outMs": 953,
+            "rotation": 0,
+            "cropRight": 1,
+            "flipH": false,
+            "mediaId": "content://media/external/video/media/1536",
+            "title": "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+            "isImage": false,
+            "sourceDurationMs": 2066,
+            "cropBottom": 1,
+            "flipV": false,
+            "inMs": 0
+          },
+          {
+            "cropLeft": 0,
+            "cropTop": 0,
+            "outMs": 1593,
+            "rotation": 0,
+            "cropRight": 1,
+            "flipH": false,
+            "mediaId": "content://media/external/video/media/1536",
+            "title": "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+            "isImage": false,
+            "sourceDurationMs": 2066,
+            "cropBottom": 1,
+            "flipV": false,
+            "inMs": 953
+          },
+          {
+            "cropLeft": 0,
+            "cropTop": 0,
+            "outMs": 5000,
+            "rotation": 0,
+            "cropRight": 1,
+            "flipH": false,
+            "mediaId": "content://media/external/images/media/1451",
+            "title": "Edited_1794327406739.png",
+            "isImage": true,
+            "sourceDurationMs": 5000,
+            "cropBottom": 1,
+            "flipV": false,
+            "inMs": 0
+          }
+        ],
+        "id": "project_1794411087454625",
+        "title": "UI06_Acceptance",
+        "version": 1,
+        "updatedAt": 1794411152539
+      },
+      "state": "completed",
+      "progress": 100,
+      "startedAt": 1794411177978,
+      "pending": "content://media/external/video/media/2777",
+      "uri": "content://media/external/video/media/2777",
+      "outputBytes": 519480,
+      "finishedAt": 1794411184557
+    },
+    "expectedSeconds": 6.593,
+    "decodedFrames": 198,
+    "ptsStrictlyIncreasing": true,
+    "fullDecode": "PASS",
+    "grayscaleSamples": [
+      {
+        "seconds": "0.4",
+        "meanRgbChannelDifference": 0.0
+      },
+      {
+        "seconds": "3.0",
+        "meanRgbChannelDifference": 0.0
+      }
+    ],
+    "bytes": 519480,
+    "sha256": "0f39b216e70009d7e22f8e60096c62c8bb11a25abc0b1c0c8235927d2e16b3ae",
+    "probe": {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "aac",
+          "codec_long_name": "AAC (Advanced Audio Coding)",
+          "profile": "LC",
+          "codec_type": "audio",
+          "codec_tag_string": "mp4a",
+          "codec_tag": "0x6134706d",
+          "sample_fmt": "fltp",
+          "sample_rate": "44100",
+          "channels": 2,
+          "channel_layout": "stereo",
+          "bits_per_sample": 0,
+          "initial_padding": 0,
+          "id": "0x1",
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/44100",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 292224,
+          "duration": "6.626395",
+          "bit_rate": "130643",
+          "nb_frames": "286",
+          "nb_read_frames": "285",
+          "extradata_size": 2,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0
+          },
+          "tags": {
+            "creation_time": "2026-11-09T14:12:00.000000Z",
+            "language": "eng",
+            "handler_name": "SoundHandle",
+            "vendor_id": "[0][0][0][0]"
+          }
+        },
+        {
+          "index": 1,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "Constrained Baseline",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "width": 96,
+          "height": 64,
+          "coded_width": 96,
+          "coded_height": 64,
+          "closed_captions": 0,
+          "film_grain": 0,
+          "has_b_frames": 0,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "3:2",
+          "pix_fmt": "yuv420p",
+          "level": 41,
+          "color_range": "tv",
+          "color_space": "bt709",
+          "color_transfer": "bt709",
+          "color_primaries": "bt709",
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "refs": 1,
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x2",
+          "r_frame_rate": "120/1",
+          "avg_frame_rate": "198000/6593",
+          "time_base": "1/90000",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 593370,
+          "duration": "6.593000",
+          "bit_rate": "12891",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "198",
+          "nb_read_frames": "198",
+          "extradata_size": 33,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0
+          },
+          "tags": {
+            "creation_time": "2026-11-09T14:12:00.000000Z",
+            "language": "eng",
+            "handler_name": "VideoHandle",
+            "vendor_id": "[0][0][0][0]"
+          }
+        }
+      ],
+      "format": {
+        "filename": "D:\\FAU_App\\XRecorder\\docs\\reports\\TASK_UI_UX_06_20261111_172021_ffa4c9\\native_final_v2\\acceptance_output.mp4",
+        "nb_streams": 2,
+        "nb_programs": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "6.626395",
+        "size": "519480",
+        "bit_rate": "627164",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "131072",
+          "compatible_brands": "isomiso2mp41",
+          "creation_time": "2026-11-09T14:12:00.000000Z"
+        }
+      }
+    }
+  },
+  "photos": [
+    {
+      "file": "acceptance_photo_output.png",
+      "devicePath": "/sdcard/Pictures/XRecorder/Edited_1794411036727.png",
+      "dimensions": [
+        256,
+        128
+      ],
+      "bytes": 8412,
+      "sha256": "c0a01791735bf6f0460f580dbd9df17003d208dcb009a5218d867a98139f9af2",
+      "fullDecode": "PASS"
+    },
+    {
+      "file": "acceptance_crop_output.png",
+      "devicePath": "/sdcard/Pictures/XRecorder/Edited_1794411755325.png",
+      "dimensions": [
+        128,
+        229
+      ],
+      "bytes": 6925,
+      "sha256": "669301a2f2e49210cc6133e222d36ef3831d569ba5c96fe9c1a16b333ca711bb",
+      "fullDecode": "PASS"
+    }
+  ],
+  "limitations": [
+    "Retained short synthetic QA media, not a large/long-media certification.",
+    "Full audio decode is not human listening or a complete A/V sync test."
+  ]
+}

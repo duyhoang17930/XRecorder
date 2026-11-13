@@ -12,6 +12,7 @@ import 'package:xrecorder/features/editor/project_repository.dart';
 import 'package:xrecorder/features/recording/recording_service.dart';
 import 'package:xrecorder/features/settings/help_screen.dart';
 import 'package:xrecorder/features/settings/settings_controller.dart';
+import 'package:xrecorder/features/settings/studio_identity.dart';
 
 import 'fixtures/catalog.dart';
 import 'fixtures/interaction_probe.dart';
@@ -194,7 +195,7 @@ void main() {
         await start(tester);
         for (final row in [
           ('Media storage', 'Close'),
-          ('Privacy', 'Close'),
+          ('View introduction', 'Skip'),
           ('Trash & restore', 'Trash'),
           ('Export queue', 'Exports'),
           ('Help & guides', 'Help & guides'),
@@ -220,6 +221,22 @@ void main() {
             await tester.pumpAndSettle();
           }
         }
+        // Policy/Terms are external HTTPS links, not the retired Privacy dialog.
+        final opened = <String>[];
+        messenger.setMockMethodCallHandler(StudioIdentity.channel, (
+          call,
+        ) async {
+          if (call.method == 'openStudioLink') {
+            opened.add(call.arguments as String);
+          }
+          return null;
+        });
+        for (final title in ['Privacy Policy', 'Terms of Use']) {
+          await tap(tester, find.text(title));
+          expect(router.routeInformationProvider.value.uri.path, '/settings');
+          expect(store.writes, 0);
+        }
+        expect(opened, [StudioIdentity.privacy, StudioIdentity.terms]);
         expect(store.document, isNull);
       } finally {
         await tester.pumpWidget(const SizedBox());

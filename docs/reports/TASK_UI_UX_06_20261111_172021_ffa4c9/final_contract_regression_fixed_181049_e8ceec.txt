@@ -1,0 +1,135 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/design_system_test.dart test/localization_test.dart test/widget_test.dart test/editor_hci_test.dart test/ui_ux_06_workflows_test.dart test/editor_workspace_layout_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/design_system_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/design_system_test.dart: semantic palette meets readable contrast in both modes
+00:00 +1: D:/FAU_App/XRecorder/test/design_system_test.dart: appearance persists without changing recording snapshot or schema
+00:00 +2: D:/FAU_App/XRecorder/test/localization_test.dart: cached formats keep locale and precision independent
+00:01 +3: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:01 +4: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:01 +5: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:01 +6: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:01 +7: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:01 +8: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:01 +9: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:01 +10: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:01 +11: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +12: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +13: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +14: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +15: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +16: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +17: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +18: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +19: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +20: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +21: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +22: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:02 +23: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:03 +24: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:03 +25: D:/FAU_App/XRecorder/test/design_system_test.dart: theme switching follows system and retains library state
+00:03 +26: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +27: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +28: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +29: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:03 +30: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:04 +31: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:04 +32: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:04 +33: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:04 +34: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:04 +35: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:04 +36: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:05 +37: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:05 +38: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:05 +39: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:05 +40: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:05 +41: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:05 +42: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo contextual controls retain color, drawing and undo across panels
+00:05 +43: D:/FAU_App/XRecorder/test/widget_test.dart: Revoked access offers retry and recovers
+00:05 +44: D:/FAU_App/XRecorder/test/widget_test.dart: Revoked access offers retry and recovers
+00:05 +45: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact Create preserves guard for 2 rapid taps
+00:05 +46: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:05 +47: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:05 +48: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:06 +49: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:06 +50: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:06 +51: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:06 +52: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:06 +53: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:06 +54: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:06 +55: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:06 +56: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:07 +57: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=dark
+00:07 +58: D:/FAU_App/XRecorder/test/widget_test.dart: Settings shared with recording setup and reset
+00:07 +59: D:/FAU_App/XRecorder/test/widget_test.dart: Settings shared with recording setup and reset
+00:07 +60: D:/FAU_App/XRecorder/test/widget_test.dart: Settings shared with recording setup and reset
+00:07 +61: D:/FAU_App/XRecorder/test/widget_test.dart: Settings shared with recording setup and reset
+00:07 +62: D:/FAU_App/XRecorder/test/widget_test.dart: Settings shared with recording setup and reset
+00:07 +63: D:/FAU_App/XRecorder/test/widget_test.dart: Settings shared with recording setup and reset
+00:07 +64: D:/FAU_App/XRecorder/test/widget_test.dart: Settings shared with recording setup and reset
+00:07 +65: D:/FAU_App/XRecorder/test/widget_test.dart: Settings shared with recording setup and reset
+00:07 +66: D:/FAU_App/XRecorder/test/widget_test.dart: Settings shared with recording setup and reset
+00:07 +67: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=light
+00:07 +68: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=light
+00:07 +69: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=light
+00:08 +70: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=light
+00:08 +71: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=light
+00:08 +72: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=light
+00:08 +73: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=light
+00:08 +74: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=1.0 theme=light
+00:08 +75: D:/FAU_App/XRecorder/test/widget_test.dart: Compact routes, large text, missing media and unknown routes
+00:08 +76: D:/FAU_App/XRecorder/test/widget_test.dart: Compact routes, large text, missing media and unknown routes
+00:08 +77: D:/FAU_App/XRecorder/test/widget_test.dart: Compact routes, large text, missing media and unknown routes
+00:08 +78: D:/FAU_App/XRecorder/test/widget_test.dart: Compact routes, large text, missing media and unknown routes
+00:08 +79: D:/FAU_App/XRecorder/test/widget_test.dart: Compact routes, large text, missing media and unknown routes
+00:08 +80: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=2.0 theme=dark
+00:08 +81: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=320.0 scale=2.0 theme=dark
+00:09 +82: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+00:09 +83: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.0
+00:09 +84: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=600.0 scale=1.0 theme=dark
+00:10 +85: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=1.5
+00:10 +86: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=600.0 scale=1.0 theme=light
+00:11 +87: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=false scale=2.0
+00:11 +88: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=600.0 scale=2.0 theme=dark
+00:11 +89: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=1.0
+00:12 +90: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=600.0 scale=2.0 theme=light
+00:12 +91: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=1.5
+00:13 +92: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=1024.0 scale=1.0 theme=dark
+00:13 +93: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 320.0 landscape=true scale=2.0
+00:13 +94: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=1024.0 scale=1.0 theme=light
+00:13 +95: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.0
+00:14 +96: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=1024.0 scale=2.0 theme=dark
+00:14 +97: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=1.5
+00:14 +98: D:/FAU_App/XRecorder/test/design_system_test.dart: routes fit width=1024.0 scale=2.0 theme=light
+00:14 +99: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=2.0
+00:14 +100: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=2.0
+00:15 +101: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=2.0
+00:15 +102: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=2.0
+00:15 +103: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=false scale=2.0
+00:15 +104: D:/FAU_App/XRecorder/test/design_system_test.dart: concise settings disclose the complete storage and privacy information
+00:15 +105: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.0
+00:15 +106: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=1.5
+00:16 +107: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 360.0 landscape=true scale=2.0
+00:16 +108: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.0
+00:17 +109: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=1.5
+00:17 +110: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=false scale=2.0
+00:18 +111: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.0
+00:18 +112: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=1.5
+00:18 +113: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 393.0 landscape=true scale=2.0
+00:19 +114: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.0
+00:19 +115: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=1.5
+00:20 +116: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=false scale=2.0
+00:20 +117: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.0
+00:20 +118: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=1.5
+00:21 +119: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo editor 411.0 landscape=true scale=2.0
+00:21 +120: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects cancel is isolated; apply retains unknown values and retimes cues
+00:22 +121: D:/FAU_App/XRecorder/test/editor_hci_test.dart: photo output options cancel does not apply, apply preserves the selected contract
+00:22 +122: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 320.0 landscape=false text200 RTL
+00:22 +123: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 320.0 landscape=true text200 RTL
+00:23 +124: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 360.0 landscape=false text200 RTL
+00:23 +125: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 360.0 landscape=true text200 RTL
+00:23 +126: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 393.0 landscape=false text200 RTL
+00:23 +127: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 393.0 landscape=true text200 RTL
+00:24 +128: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 411.0 landscape=false text200 RTL
+00:24 +129: D:/FAU_App/XRecorder/test/editor_hci_test.dart: effects categories stay reachable 411.0 landscape=true text200 RTL
+00:24 +130: All tests passed!
+
+Exit=0

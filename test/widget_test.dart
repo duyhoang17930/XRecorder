@@ -174,7 +174,7 @@ void main() {
     await start(tester);
     await tester.tap(find.text('Settings'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Video quality'));
+    await tester.tap(find.text('Recording settings'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('720p HD'));
     await tester.pumpAndSettle();
@@ -182,7 +182,12 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Create'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Screen recording'));
+    await tester.tap(
+      find.descendant(
+        of: find.byType(BottomSheet),
+        matching: find.text('Record screen'),
+      ),
+    );
     await tester.pumpAndSettle();
     expect(
       tester

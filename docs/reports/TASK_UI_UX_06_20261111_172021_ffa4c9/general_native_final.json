@@ -1,0 +1,42 @@
+[
+  {
+    "case": "root-header",
+    "tab": "Video",
+    "brandBounds": [
+      16,
+      68,
+      103,
+      86
+    ]
+  },
+  {
+    "case": "root-header",
+    "tab": "Photo",
+    "brandBounds": [
+      16,
+      68,
+      103,
+      86
+    ]
+  },
+  {
+    "case": "root-header",
+    "tab": "Edit",
+    "brandBounds": [
+      16,
+      68,
+      395,
+      166
+    ]
+  },
+  {
+    "case": "root-header",
+    "tab": "Settings",
+    "brandBounds": [
+      16,
+      68,
+      395,
+      166
+    ]
+  }
+]

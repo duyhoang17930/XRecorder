@@ -18,6 +18,10 @@ import re
 import time
 import urllib.parse
 
+if __package__:
+    from .asr_metrics import distance
+else:
+    from asr_metrics import distance
 
 def prepare_corpus(out):
     """Small licensed subset; preserve originals and distinguish train/test."""
@@ -133,14 +137,6 @@ if args.sample_log:
 
 def normalize(text):
     return ''.join(c for c in unicodedata.normalize('NFC',text.lower()) if c.isalpha())
-def distance(a,b):
-    previous=list(range(len(b)+1))
-    for i,x in enumerate(a,1):
-        current=[i]
-        for j,y in enumerate(b,1):
-            current.append(min(current[-1]+1,previous[j]+1,previous[j-1]+(x!=y)))
-        previous=current
-    return previous[-1]
 if args.evaluate_corpus:
     corpus = {v['file']:v for v in json.loads((args.evaluate_corpus/'manifest.json').read_text(encoding='utf-8'))}
     report=json.loads(args.native_report.read_text(encoding='utf-8'))

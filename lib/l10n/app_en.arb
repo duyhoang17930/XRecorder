@@ -1,4 +1,10 @@
 {
+  "clipOptions": "Clip options",
+  "homeScreenShortcuts": "Home screen shortcuts",
+  "captureScreenshot": "Screenshot",
+  "clearText": "Clear text",
+  "recordingSettings": "Recording settings",
+  "recordingSettingsSummary": "Video quality, audio & recording options",
   "editorAllTools": "All tools",
   "editorAudio": "Audio",
   "editorOverlays": "Overlays",

@@ -15,8 +15,21 @@ Future<MediaItem?> pickEditorMedia(BuildContext context) =>
       builder: (_) => const _MediaPicker(),
     );
 
+Future<List<MediaItem>?> pickEditorMediaBatch(BuildContext context) =>
+    showStudioDialog<List<MediaItem>>(
+      context: context,
+      builder: (_) => const _MediaPicker(multiple: true),
+    );
+
+Future<MediaItem?> pickEditorPhoto(BuildContext context) =>
+    showStudioDialog<MediaItem>(
+      context: context,
+      builder: (_) => const _MediaPicker(photoOnly: true),
+    );
+
 class _MediaPicker extends StatefulWidget {
-  const _MediaPicker();
+  const _MediaPicker({this.multiple = false, this.photoOnly = false});
+  final bool multiple, photoOnly;
   @override
   State<_MediaPicker> createState() => _MediaPickerState();
 }
@@ -27,6 +40,13 @@ class _MediaPickerState extends State<_MediaPicker> {
   bool busy = false;
   Uri? selectedFolder;
   MediaKind kind = MediaKind.video;
+  final selected = <String, MediaItem>{};
+  void completeSelection() {
+    if (busy || selected.isEmpty) return;
+    setState(() => busy = true);
+    Navigator.pop(context, selected.values.toList());
+  }
+
   void loadMedia({Uri? folder}) {
     if (!mounted) return;
     final next = MediaScope.of(context).list(kind: kind, folder: folder);
@@ -59,6 +79,10 @@ class _MediaPickerState extends State<_MediaPicker> {
 
   Future<void> choose(MediaItem item) async {
     if (busy) return;
+    if (widget.multiple && selected.containsKey(item.id)) {
+      setState(() => selected.remove(item.id));
+      return;
+    }
     setState(() {
       busy = true;
       error = null;
@@ -69,12 +93,21 @@ class _MediaPickerState extends State<_MediaPicker> {
           (loaded.kind == MediaKind.video &&
               (loaded.duration == null ||
                   loaded.duration! < const Duration(milliseconds: 200))) ||
-          (loaded.kind != MediaKind.video && loaded.kind != MediaKind.image)) {
+          (loaded.kind != MediaKind.video && loaded.kind != MediaKind.image) ||
+          (widget.photoOnly && loaded.kind != MediaKind.image)) {
         throw const FormatException(
           'Choose a playable video or a still photo.',
         );
       }
-      if (mounted) Navigator.pop(context, loaded);
+      if (!mounted) return;
+      if (widget.multiple) {
+        if (selected.length >= 30) {
+          throw const FormatException('Maximum 30 clips.');
+        }
+        setState(() => selected[loaded.id] = loaded);
+      } else {
+        Navigator.pop(context, loaded);
+      }
     } catch (e) {
       if (mounted) {
         setState(
@@ -92,7 +125,10 @@ class _MediaPickerState extends State<_MediaPicker> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    items ??= MediaScope.of(context).list(kind: MediaKind.video);
+    if (items == null) {
+      kind = widget.photoOnly ? MediaKind.image : MediaKind.video;
+      items = MediaScope.of(context).list(kind: kind);
+    }
   }
 
   @override
@@ -126,10 +162,10 @@ class _MediaPickerState extends State<_MediaPicker> {
                         child: Wrap(
                           spacing: 8,
                           children: [
-                            for (final type in [
-                              MediaKind.video,
-                              MediaKind.image,
-                            ])
+                            for (final type
+                                in widget.photoOnly
+                                    ? [MediaKind.image]
+                                    : [MediaKind.video, MediaKind.image])
                               ChoiceChip(
                                 label: Text(
                                   type == MediaKind.video
@@ -205,6 +241,9 @@ class _MediaPickerState extends State<_MediaPicker> {
                           itemBuilder: (context, index) {
                             final item = rows[index];
                             return ListTile(
+                              selected: selected.containsKey(item.id),
+                              selectedTileColor: context.studioColors.primary
+                                  .withValues(alpha: .10),
                               leading: SizedBox(
                                 width: 48,
                                 height: 48,
@@ -212,6 +251,13 @@ class _MediaPickerState extends State<_MediaPicker> {
                               ),
                               title: Text(item.displayName),
                               subtitle: Text(context.fileSize(item.sizeBytes)),
+                              trailing: widget.multiple
+                                  ? Icon(
+                                      selected.containsKey(item.id)
+                                          ? AppIcons.selected
+                                          : AppIcons.unselected,
+                                    )
+                                  : null,
                               onTap: busy ? null : () => choose(item),
                             );
                           },
@@ -228,6 +274,13 @@ class _MediaPickerState extends State<_MediaPicker> {
                 child: Text(context.l10n.cancel),
               ),
             ),
+            if (widget.multiple)
+              FilledButton(
+                onPressed: busy || selected.isEmpty ? null : completeSelection,
+                child: Text(
+                  '${context.l10n.addClip} · ${context.l10n.clipCount(selected.length)}',
+                ),
+              ),
           ],
         ),
       ),

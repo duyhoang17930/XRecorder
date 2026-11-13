@@ -1,0 +1,4 @@
+Formatted lib/features/editor/editor_screen.dart
+Formatted lib/features/editor/editor_selection.dart
+Formatted test/ui_ux_06_workflows_test.dart
+Formatted 4 files (3 changed) in 0.09 seconds.

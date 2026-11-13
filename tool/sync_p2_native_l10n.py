@@ -1,4 +1,4 @@
-"""Generate the three P2 Android labels from the same ARB source as Flutter."""
+"""Generate P2 Android labels from the same ARB source as Flutter."""
 import json
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -9,7 +9,8 @@ LOCALES = {"en": "values", "vi": "values-vi", "es": "values-es",
            "id": "values-in", "ja": "values-ja", "ko": "values-ko",
            "zh_Hans": "values-b+zh+Hans", "hi": "values-hi", "ar": "values-ar"}
 KEYS = {"p2_edit_video": "editVideo", "p2_edit_photo": "editPhoto",
-        "p2_preview_unavailable": "thisVideoCannotBePlayedOrAccess"}
+        "p2_preview_unavailable": "thisVideoCannotBePlayedOrAccess",
+        "p2_back": "onboardingBack"}
 
 
 def synchronize():

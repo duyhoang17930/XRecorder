@@ -1,0 +1,164 @@
+[
+  {
+    "case": "root-header",
+    "tab": "Video",
+    "brandBounds": [
+      16,
+      68,
+      103,
+      86
+    ]
+  },
+  {
+    "case": "root-header",
+    "tab": "Photo",
+    "brandBounds": [
+      16,
+      68,
+      103,
+      86
+    ]
+  },
+  {
+    "case": "root-header",
+    "tab": "Edit",
+    "brandBounds": [
+      16,
+      68,
+      395,
+      166
+    ]
+  },
+  {
+    "case": "root-header",
+    "tab": "Settings",
+    "brandBounds": [
+      16,
+      68,
+      395,
+      166
+    ]
+  },
+  {
+    "case": "rapid-create",
+    "taps": 2,
+    "sheetStable": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Create",
+      "Close",
+      "Record screen\nVideo quality, audio & recording options",
+      "Screenshot\nScreenshot minimizes the app after approval · 3s delay.",
+      "Recording settings",
+      "Editing Studio"
+    ]
+  },
+  {
+    "case": "rapid-create",
+    "taps": 3,
+    "sheetStable": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Create",
+      "Close",
+      "Record screen\nVideo quality, audio & recording options",
+      "Screenshot\nScreenshot minimizes the app after approval · 3s delay.",
+      "Recording settings",
+      "Editing Studio"
+    ]
+  },
+  {
+    "case": "rapid-create",
+    "taps": 5,
+    "sheetStable": true,
+    "labels": [
+      "Scrim",
+      "Dismiss",
+      "Create",
+      "Close",
+      "Record screen\nVideo quality, audio & recording options",
+      "Screenshot\nScreenshot minimizes the app after approval · 3s delay.",
+      "Recording settings",
+      "Editing Studio"
+    ]
+  },
+  {
+    "case": "details-edit-video-reuses-launch-project",
+    "time": 1794398606.4068093,
+    "labels": [
+      "Back",
+      "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+      "Rename project",
+      "Export",
+      "Play preview",
+      "0.0 / 2.1 seconds",
+      "Preview position",
+      "0.0 seconds",
+      "Saved · Originals unchanged",
+      "Timeline",
+      "Add clip",
+      "Clip 1 · 2.1s\nTrim clip",
+      "0.0 seconds",
+      "2.1 seconds",
+      "Undo edit",
+      "Redo edit",
+      "Edit",
+      "Audio",
+      "Text",
+      "Subtitles",
+      "Effects",
+      "Transform"
+    ]
+  },
+  {
+    "case": "rename-clear-cancel-no-submit",
+    "time": 1794398623.7211702,
+    "labels": [
+      "Back",
+      "Media details",
+      "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+      "Preview",
+      "Preview",
+      "Share",
+      "Edit video",
+      "File management",
+      "Rename",
+      "Copy to folder",
+      "Move to folder",
+      "Move to Trash",
+      "Size\n426.3 KiB",
+      "Format\nvideo/mp4"
+    ]
+  },
+  {
+    "case": "settings-six-flings-no-persistent-distortion-observed",
+    "time": 1794398637.9800103,
+    "labels": [
+      "3HRECORDER\nSettings",
+      "CAPTURE",
+      "Recording settings\nVideo quality, audio & recording options",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nEnglish",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Trash & restore\nCleanup on opening Trash after 24 hours",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  }
+]

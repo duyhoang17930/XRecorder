@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "transition_animation_scale": "0",
+      "featuresBits": 132,
+      "disableAnimations": true
+    },
+    {
+      "transition_animation_scale": "1",
+      "featuresBits": 128,
+      "disableAnimations": false
+    }
+  ],
+  "restored": "1.0",
+  "source": "SDK dart:ui AccessibilityFeatures._kDisableAnimationsIndex == 1 << 2"
+}

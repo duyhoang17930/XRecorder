@@ -1,0 +1,9 @@
+{
+  "result": "PASS_WITH_DOCUMENTED_LOCATOR_RESUME",
+  "originalCoreScriptsPassed": [
+    "photo",
+    "video"
+  ],
+  "resumedScripts": 4,
+  "screensContinuation": "acceptance_screens_resume.json"
+}

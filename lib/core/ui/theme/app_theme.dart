@@ -277,7 +277,7 @@ class StudioPageTransitions extends PageTransitionsBuilder {
   ) {
     if (context.reduceMotion) return child;
     return FadeTransition(
-      opacity: CurvedAnimation(parent: animation, curve: AppMotion.enter),
+      opacity: animation.drive(CurveTween(curve: AppMotion.enter)),
       child: child,
     );
   }

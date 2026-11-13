@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import '../../core/domain/models.dart';
 import '../../core/widgets/studio_widgets.dart';
 import 'project_repository.dart';
+import 'editor_entry.dart';
+import 'media_picker.dart';
 
 class EditingHubScreen extends StatefulWidget {
   const EditingHubScreen({super.key});
@@ -65,13 +67,13 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
     if (creating) return;
     setState(() => creating = true);
     try {
-      final project = EditProject(
-        id: 'project_${DateTime.now().microsecondsSinceEpoch}',
+      final media = await pickEditorMediaBatch(context);
+      if (!mounted || media == null || media.isEmpty) return;
+      final project = await createEditorProject(
+        media: media,
         title: context.l10n.videoProject,
-        clips: [],
-        updatedAt: DateTime.now(),
+        repository: repository,
       );
-      await repository.save(project);
       if (mounted) await open(project.id);
     } catch (e) {
       if (mounted) {
@@ -104,6 +106,22 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
     }
   }
 
+  Future<void> editPhoto() async {
+    if (creating || opening) return;
+    setState(() => creating = true);
+    try {
+      final media = await pickEditorPhoto(context);
+      if (mounted && media != null) {
+        // Save copy replaces the photo route with Media Details. The picker
+        // command ends at launch; awaiting the replaced route can leave this
+        // hub's creation guard locked after the user returns.
+        context.push<void>('/photo-tools/${Uri.encodeComponent(media.id)}');
+      }
+    } finally {
+      if (mounted) setState(() => creating = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) => ListView(
     primary: true,
@@ -114,18 +132,23 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
       AppSpacing.md + MediaQuery.paddingOf(context).bottom,
     ),
     children: [
-      SectionTitle(context.l10n.editingStudio),
-      Wrap(
-        children: [
-          for (final kind in ['video', 'photo'])
-            TextButton.icon(
-              onPressed: pinning ? null : () => pin(kind),
-              icon: const Icon(AppIcons.create),
-              label: Text(
-                context.l10n.pinEditorShortcut(context.effectValue(kind)),
+      StudioRootHeader(
+        context.l10n.editingStudio,
+        trailing: PopupMenuButton<String>(
+          tooltip: context.l10n.homeScreenShortcuts,
+          enabled: !pinning,
+          onSelected: pin,
+          icon: const Icon(AppIcons.more),
+          itemBuilder: (_) => [
+            for (final kind in ['video', 'photo'])
+              PopupMenuItem(
+                value: kind,
+                child: Text(
+                  context.l10n.pinEditorShortcut(context.effectValue(kind)),
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
       StudioBentoGrid(
         children: [
@@ -141,7 +164,7 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
             description: context.l10n.cropAnnotateACopy,
             icon: AppIcons.photoEdit,
             accent: context.studioColors.cyan,
-            onTap: () => context.go('/photos'),
+            onTap: creating || opening ? null : editPhoto,
           ),
         ],
       ),
@@ -232,9 +255,9 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
                             tooltip: context.l10n.deleteDraft,
                             icon: const Icon(AppIcons.trash),
                             onPressed: () async {
-                              final confirmed = await showDialog<bool>(
+                              final confirmed = await showStudioDialog<bool>(
                                 context: context,
-                                builder: (context) => AlertDialog(
+                                builder: (context) => StudioDialog(
                                   title: Text(context.l10n.deleteDraft785099),
                                   content: Text(
                                     context

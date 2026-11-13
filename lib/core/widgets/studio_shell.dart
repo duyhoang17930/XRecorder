@@ -7,12 +7,13 @@ import 'package:go_router/go_router.dart';
 import '../../features/recording/recording_service.dart';
 import '../constants/app_icons.dart';
 import '../domain/models.dart' show RecordingState;
+import '../ui/components/bottom_sheets/studio_sheet_launch.dart';
 import '../ui/theme/colors.dart';
 import '../ui/theme/motion.dart';
 import '../ui/theme/radius.dart';
 import '../ui/theme/spacing.dart';
 import '../ui/theme/typography.dart';
-import 'studio_create_sheet.dart';
+import 'studio_quick_create.dart';
 import 'studio_tab_scroll.dart';
 
 class StudioShell extends StatefulWidget {
@@ -28,7 +29,7 @@ class _StudioShellState extends State<StudioShell> {
     if (_openingCreate) return;
     _openingCreate = true;
     try {
-      await openStudioCreate(context);
+      await openQuickCreate(context);
     } finally {
       _openingCreate = false;
     }
@@ -109,6 +110,7 @@ class _StudioShellState extends State<StudioShell> {
 }
 
 class StudioBottomNavigation extends StatelessWidget {
+  static final _glassFilter = ImageFilter.blur(sigmaX: 6, sigmaY: 6);
   const StudioBottomNavigation({
     super.key,
     required this.selected,
@@ -126,9 +128,8 @@ class StudioBottomNavigation extends StatelessWidget {
     final c = context.studioColors;
     final reduceMotion = context.reduceMotion;
     final tabDuration = reduceMotion ? Duration.zero : AppMotion.standard;
-    final indicatorDuration = reduceMotion
-        ? Duration.zero
-        : const Duration(milliseconds: 260);
+    final indicatorDuration = context.motion(AppMotion.navigationIndicator);
+    final highContrast = MediaQuery.highContrastOf(context);
     final radius = BorderRadius.circular(AppRadius.pill);
     final dark = Theme.of(context).brightness == Brightness.dark;
     return SafeArea(
@@ -162,11 +163,12 @@ class StudioBottomNavigation extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: radius,
                       child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        enabled: !highContrast,
+                        filter: _glassFilter,
                         child: DecoratedBox(
                           decoration: BoxDecoration(
                             color: c.surface.withValues(
-                              alpha: dark ? .74 : .76,
+                              alpha: highContrast ? 1 : (dark ? .90 : .92),
                             ),
                             borderRadius: radius,
                             border: Border.all(
@@ -251,18 +253,21 @@ class StudioBottomNavigation extends StatelessWidget {
                   dimension: AppSize.create,
                   child: Tooltip(
                     message: context.l10n.create,
-                    child: FilledButton(
-                      onPressed: onCreate,
-                      style: FilledButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        minimumSize: const Size.square(AppSize.create),
-                        tapTargetSize: MaterialTapTargetSize.padded,
-                        shape: const CircleBorder(),
-                      ),
-                      child: Icon(
-                        AppIcons.create,
-                        semanticLabel: context.l10n.create,
-                        size: AppIconSize.primary,
+                    child: Builder(
+                      builder: (buttonContext) => FilledButton(
+                        onPressed: () =>
+                            runStudioSheetLaunch(buttonContext, onCreate),
+                        style: FilledButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size.square(AppSize.create),
+                          tapTargetSize: MaterialTapTargetSize.padded,
+                          shape: const CircleBorder(),
+                        ),
+                        child: Icon(
+                          AppIcons.create,
+                          semanticLabel: context.l10n.create,
+                          size: AppIconSize.primary,
+                        ),
                       ),
                     ),
                   ),
@@ -319,7 +324,11 @@ class StudioBottomNavigation extends StatelessWidget {
                       duration: duration,
                       curve: AppMotion.emphasized,
                       style: AppTypography.navigation.copyWith(
-                        color: active ? c.primary : c.muted,
+                        fontFamily: AppFonts.family,
+                        fontWeight: FontWeight.w700,
+                        color: active
+                            ? c.text
+                            : Color.lerp(c.text, c.muted, .35),
                       ),
                       child: FittedBox(
                         fit: BoxFit.scaleDown,

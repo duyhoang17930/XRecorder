@@ -1,0 +1,47 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_05_motion_test.dart --plain-name "navigation accessibility dark=false scale=2.0"
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: navigation accessibility dark=false scale=2.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: Text contrast should follow WCAG guidelines
+  Actual: <Instance of 'WidgetTester'>
+   Which: SemanticsNode#11(Rect.fromLTRB(0.0, 0.0, 60.0, 56.0), actions: [focus, tap], flags:
+[isButton, hasEnabledState, isEnabled, isFocusable], label: "الإعدادات", textDirection: rtl):
+          Expected contrast ratio of at least 4.5 but found 2.11 for a font size of 12.0.
+          The computed colors was:
+          light - Color(alpha: 1.0000, red: 0.9882, green: 0.9922, blue: 0.9922, colorSpace:
+ColorSpace.sRGB), dark - Color(alpha: 1.0000, red: 0.6745, green: 0.6941, blue: 0.7255, colorSpace:
+ColorSpace.sRGB)
+          See also: https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
+
+When the exception was thrown, this was the stack:
+#0      fail (package:matcher/src/expect/expect.dart:187:31)
+#1      _expect.<anonymous closure> (package:matcher/src/expect/expect.dart:155:13)
+<asynchronous suspension>
+<asynchronous suspension>
+#8      expectLater.<anonymous closure> (package:flutter_test/src/widget_tester.dart:508:19)
+<asynchronous suspension>
+#9      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart:190:11)
+<asynchronous suspension>
+#10     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#11     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 7 frames from dart:async and package:stack_trace)
+
+The test description was:
+  navigation accessibility dark=false scale=2.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -1: navigation accessibility dark=false scale=2.0 [E]
+  Test failed. See exception logs above.
+  The test description was: navigation accessibility dark=false scale=2.0
+  
+00:01 +0 -1: (tearDownAll)
+00:01 +0 -1: Some tests failed.
+
+Failing tests:
+  D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart: navigation accessibility dark=false scale=2.0
+
+Exit=1

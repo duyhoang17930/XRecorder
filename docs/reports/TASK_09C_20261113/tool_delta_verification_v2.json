@@ -1,0 +1,14 @@
+[
+  {
+    "path": "tool/analyze_whisper_benchmark.py",
+    "baseline_reconstruction_match": true,
+    "baseline_sha256": "c96b611aff9f8a87e5d1f9f28e028ea25b502cb1bba5432d6a4acf3959caec9b",
+    "current_sha256": "372c7287f742184e4086ba695fb333a99f043367af38d85525a53d1d2a10c051"
+  },
+  {
+    "path": "tool/evaluate_task07_asr.py",
+    "baseline_reconstruction_match": true,
+    "baseline_sha256": "e5e9f45f89a92b4a1aca4499626656344b9bb118750c49d7d88cc356a2abb624",
+    "current_sha256": "88c054eec96f66481beac4ff92832bf2f71dda64ac58b344a4a479fa4dc74a07"
+  }
+]

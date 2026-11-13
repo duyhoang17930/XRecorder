@@ -1,0 +1,685 @@
+[
+  {
+    "sha256": "669301a2f2e49210cc6133e222d36ef3831d569ba5c96fe9c1a16b333ca711bb",
+    "extension": ".png",
+    "size_each": 6925,
+    "paths": [
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_crop_output.png",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/native_final_v2/acceptance_crop_output.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "extension": ".json",
+    "size_each": 2,
+    "paths": [
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_photo_rtl.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/after_editor_profile_actions.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/baseline_editor_profile_summary.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/baseline_editor_v2_editor_profile_actions.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/before_stretch_actions.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/final_selection_qa.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/general_native_final_v2.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/guard_native_final.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/responsive_native_final.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/after_editor_profile_actions.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/after_main_qa.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/baseline_editor_profile_actions.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/before_remaining_v4.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/before_visual.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/before_visual_v2.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/before_visual_v3.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/final_editor_profile_actions.json",
+      "docs/p1/test_evidence/task_00_06/overlay_nodes.json",
+      "docs/p1/test_evidence/task_00_06/overlay_paused_nodes.json",
+      "docs/p1/test_evidence/task_00_06/screenshot_ui_nodes.json"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "537cfea325039715814dce0e706a6b9d30b32825b33504fcd552af01fb9997be",
+    "extension": ".txt",
+    "size_each": 115,
+    "paths": [
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/acceptance_uri_permissions.txt",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/final_uri_permissions.txt",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/final_v2_uri_permissions.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "f82a98c777fab7ae21cfbb4601b4559a6aa6d610979ab09e791edb040195734c",
+    "extension": ".json",
+    "size_each": 643,
+    "paths": [
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/after_profile_actions.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/baseline_editor_profile_actions.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/baseline_profile_actions.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/after_profile_actions.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/final_profile_actions.json"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "52a74ab020e969d08bdb56d5dd8936f87296a93f84b4027075dd078af64cb21c",
+    "extension": ".txt",
+    "size_each": 288,
+    "paths": [
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/gen_l10n_clip_options_183409_af8321.txt",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/gen_l10n_inputs_172633_849122.txt",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/gen_l10n_workflows_173107_73fb29.txt",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/gen_l10n_114516_ff0f48e8.txt",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/gen_l10n_final_115526_9fed94fb.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "9c3c5d4969bd7b00c2ace98abf735ae35cb5ee82151e08f613c2ec498ff6afa6",
+    "extension": ".txt",
+    "size_each": 229,
+    "paths": [
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/guard_analyze_190553_6c4eef.txt",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/pre_android_analyze_181530_6af49d.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "bde00287cea2bf072d8f101a8cfededf3c13596ec95fb08a272790af7001b387",
+    "extension": ".png",
+    "size_each": 34570,
+    "paths": [
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/guard_final_photo_resumed.png",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/guard_final_photo_text.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "9b98eb93efd5f285492dddc1d7003a9bf9feb682ad3ffc9cf3e72d7a70808156",
+    "extension": ".txt",
+    "size_each": 229,
+    "paths": [
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/short_layout_analyze_222400_4fe13c.txt",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/toolbar_analyze_213014_75e591.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "1437537ba5d0befc73c6bdfeb4deda5c4d3a6330a5fa04542c38c8dbe2e5fa24",
+    "extension": ".json",
+    "size_each": 63,
+    "paths": [
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/vm_baseline_connection.json",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/vm_baseline_editor_v2_connection.json"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "910bd70174dd2f6df5e278d9caa9355bcd82c5dd06ba2f4c50071e2d70d650c3",
+    "extension": ".png",
+    "size_each": 40210,
+    "paths": [
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/native_final_v2/acceptance_photo_marks_360_text150.png",
+      "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/native_final_v2/acceptance_photo_resumed.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "a2515d242e06cf8934ab48a74af380cc98ba022bbf7520a9b19e0b98e433177e",
+    "extension": ".json",
+    "size_each": 659,
+    "paths": [
+      "docs/reports/TASK_UI_UX_05_20261111_101510/after_profile_actions.json",
+      "docs/reports/TASK_UI_UX_05_20261111_101510/baseline_profile_actions.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/baseline_profile_actions.json"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "ea1620212bfae3c338ce59f63665cad534703e89b5ab80a07b6cc9307ae6258c",
+    "extension": ".png",
+    "size_each": 29579,
+    "paths": [
+      "docs/reports/TASK_UI_UX_05_20261111_101510/after_selected_rectangle_v2.png",
+      "docs/reports/TASK_UI_UX_05_20261111_101510/create_locator_diagnosis.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "f69c4c46c94f47e982e2c5cc4ee3ee88437e7875063c7ff3ba8e902de8eeb7aa",
+    "extension": ".json",
+    "size_each": 519,
+    "paths": [
+      "docs/reports/TASK_UI_UX_05_20261111_101510/after_video_profile_actions.json",
+      "docs/reports/TASK_UI_UX_05_20261111_101510/baseline_video_profile_actions.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/after_video_profile_actions.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/baseline_video_profile_actions.json",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/final_video_profile_actions.json"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "86c1ec5d22f51a86f3412af3dbeb5b465cb2c9b9e80c034f637105e50ef7bffb",
+    "extension": ".png",
+    "size_each": 10312,
+    "paths": [
+      "docs/reports/TASK_UI_UX_05_20261111_101510/navigation_contrast_1794368181395828.png",
+      "docs/reports/TASK_UI_UX_05_20261111_101510/navigation_contrast_1794368318012909.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "bdd25d9b70866388ed24a86c1fbe8a760d2d0dd06e1a3d3934020f6cd38f0f14",
+    "extension": ".png",
+    "size_each": 62970,
+    "paths": [
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/final_header_settings_light.png",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/final_settings_capture_light.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3",
+    "extension": ".txt",
+    "size_each": 38,
+    "paths": [
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/install_native_test.txt",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/install_native_test_final.txt",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/install_native_test_v2.txt",
+      "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_install.txt",
+      "docs/p1/test_evidence/task_00_06/cancel_install.txt",
+      "docs/p1/test_evidence/task_00_06/configuration_install.txt",
+      "docs/p1/test_evidence/task_00_06/controls_install.txt",
+      "docs/p1/test_evidence/task_00_06/main_install.txt",
+      "docs/p1/test_evidence/task_00_06/output30_install.txt",
+      "docs/p1/test_evidence/task_00_06/screenshot_install.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "91f1fa98e7d2cbd3996aaf308c69d00b2422bfef26e1108b157502d47710167c",
+    "extension": ".txt",
+    "size_each": 734,
+    "paths": [
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/native_player_result_final.txt",
+      "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/native_player_result_v2.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "4f38cf67599ab04e1cb342c20e9cad658631458169c9db359af38d4309b5182d",
+    "extension": ".png",
+    "size_each": 28819,
+    "paths": [
+      "docs/reports/TASK_UI_UX_04_1794324770354/final_color_picker_dark.png",
+      "docs/reports/TASK_UI_UX_04_1794324770354/Final_color_picker_portrait_0.png",
+      "docs/reports/TASK_UI_UX_04_1794324770354/Final_color_picker_portrait_2.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "extension": ".txt",
+    "size_each": 0,
+    "paths": [
+      "docs/reports/TASK_UI_UX_04_1794324770354/final_staged_files.txt",
+      "docs/p1/test_evidence/task_00_06/mic_deny_actual_video_ids_after.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "582b5b5cb83f0017f26584b4f82359aecba23010b3d15ff61f51ea315e7f2e9c",
+    "extension": ".json",
+    "size_each": 1807,
+    "paths": [
+      "docs/reports/TASK_UI_UX_04_1794324770354/native_cache_preview_final.json",
+      "docs/reports/TASK_UI_UX_04_1794324770354/preview_redraw_final.json"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "813fcb0ae5126bc43e2808992289c11593428a36deca4729e54e34089e74c106",
+    "extension": ".png",
+    "size_each": 28737,
+    "paths": [
+      "docs/reports/TASK_UI_UX_04_1794324770354/photo_drawn.png",
+      "docs/reports/TASK_UI_UX_04_1794324770354/photo_redone.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "739fb4df46aaff6484de0ff12307b723c2019d450e7845127ce60a7aab7e734d",
+    "extension": ".png",
+    "size_each": 28765,
+    "paths": [
+      "docs/reports/TASK_UI_UX_04_1794324770354/photo_drawn_v2.png",
+      "docs/reports/TASK_UI_UX_04_1794324770354/photo_redone_v2.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "47a817bfb85deb67e9f063fbd339ace82c0178cf8406802404f93365dc3fe95b",
+    "extension": ".png",
+    "size_each": 43195,
+    "paths": [
+      "docs/reports/TASK_UI_UX_04_1794324770354/Video_editor_after_apply_portrait_3.png",
+      "docs/reports/TASK_UI_UX_04_1794324770354/video_editor_applied.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "3842bd9e1a828d988130111e842ffb3b86c5ec4adc5bf0b5222bfebf887718f7",
+    "extension": ".png",
+    "size_each": 54579,
+    "paths": [
+      "docs/reports/TASK_UI_UX_03_1794317676949/About_dialog_portrait_18.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/About_dialog_portrait_20.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "446e2e743fed4606d85f1439cb3ba8dd9e77d4ffe74b102fb366b85913b5fdaf",
+    "extension": ".png",
+    "size_each": 113651,
+    "paths": [
+      "docs/reports/TASK_UI_UX_03_1794317676949/final_build_onboarding_3.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/Final_onboarding_landscape_portrait_0.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/Final_onboarding_landscape_portrait_2.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "9ddecf1732e2c0c39a40d74dc934a0cc85165e553dece649f27763e1aa7d5299",
+    "extension": ".png",
+    "size_each": 71323,
+    "paths": [
+      "docs/reports/TASK_UI_UX_03_1794317676949/home_after_no_splash.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/Videos_portrait_0.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/Videos_portrait_2.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "e3fd3436740f20d353ca70c4f18a4d0b9e3da5b41129f36b219fcdc0fa4eb36d",
+    "extension": ".png",
+    "size_each": 46375,
+    "paths": [
+      "docs/reports/TASK_UI_UX_03_1794317676949/Language_dialog_portrait_4.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/Language_dialog_portrait_6.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "ed7d544b605194b5b0b2fcc031530e4a5b1509024536dc2d715b5507bca58b54",
+    "extension": ".png",
+    "size_each": 103202,
+    "paths": [
+      "docs/reports/TASK_UI_UX_03_1794317676949/Media_Details_portrait_0.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/Media_Details_portrait_2.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "df041822f6788b86d7794ee8e6b535662f4ddc4f08d4595686c6404c64c4658b",
+    "extension": ".png",
+    "size_each": 80100,
+    "paths": [
+      "docs/reports/TASK_UI_UX_03_1794317676949/onboarding_final_1.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/Onboarding_portrait_12.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/Onboarding_portrait_14.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "61dc0e805ee707b124f99f775f3db1e0af5da5e5f6a2f81a4f211665bf6f90b5",
+    "extension": ".png",
+    "size_each": 60502,
+    "paths": [
+      "docs/reports/TASK_UI_UX_03_1794317676949/Photo_Editor_v4_portrait_0.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/Photo_Editor_v4_portrait_2.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "0f23215dfc754a3c126235c937e3c7dae2c14ff8d52e0892a30bd31a59e88dd7",
+    "extension": ".png",
+    "size_each": 15371,
+    "paths": [
+      "docs/reports/TASK_UI_UX_03_1794317676949/Photo_Preview_v3_portrait_0.png",
+      "docs/reports/TASK_UI_UX_03_1794317676949/Photo_Preview_v3_portrait_2.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "a9f58776a09b5dac438049683f24bf85764e0ff8e7455952456165c68c158627",
+    "extension": ".txt",
+    "size_each": 13,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06_fix_retest/git_diff_check_final.txt",
+      "docs/p1/test_evidence/task_00_06/git_diff_check_final.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "64486e20e9ca3ed705c60223de816f63e314df741ed1bdf7fa06b4dac988e84c",
+    "extension": ".txt",
+    "size_each": 2207,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06_fix_retest/git_status_before.txt",
+      "docs/p1/test_evidence/task_00_06/git_status_current.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "c78f9b38f080121cd81507fe545992dbe5f71c8adbc10f68fae1eb65c0936234",
+    "extension": ".txt",
+    "size_each": 2465,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06_fix_retest/git_status_final.txt",
+      "docs/p1/test_evidence/mediaprojection_consent_flow/git_status_before.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "2ee5de6cae187a8c98eceb7130b25e5fd38815e77f2c935f58e4df1d6b4fe716",
+    "extension": ".xml",
+    "size_each": 1075,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_final_journal.xml",
+      "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/native_before.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "03df3acbb061e8724961b6980f150d801858d9c4d9a3fa1f832afe3a6ff5c228",
+    "extension": ".xml",
+    "size_each": 59,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_semantics_preflight.xml",
+      "docs/p1/test_evidence/task_00_06/mic_deny_robust_Record_screen.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "22f81409697dfe4dc7725ebb22cb0f15d83bf68cadfd97900549703724352f89",
+    "extension": ".txt",
+    "size_each": 79,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/cancel_cleanup_projection.txt",
+      "docs/p1/test_evidence/task_00_06/current_projection.txt",
+      "docs/p1/test_evidence/task_00_06/long_cleanup_projection.txt",
+      "docs/p1/test_evidence/task_00_06/output30_cleanup_projection.txt",
+      "docs/p1/test_evidence/task_00_06/performance_cleanup_projection.txt",
+      "docs/p1/test_evidence/task_00_06/screenshot_cleanup_projection.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "44009d1664d1b66d17ec4859a9e03642b0125d242c05eac9c101806e2397fb7c",
+    "extension": ".txt",
+    "size_each": 68,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/cancel_cleanup_service.txt",
+      "docs/p1/test_evidence/task_00_06/controls_cleanup.txt",
+      "docs/p1/test_evidence/task_00_06/current_services.txt",
+      "docs/p1/test_evidence/task_00_06/long_cleanup_service.txt",
+      "docs/p1/test_evidence/task_00_06/output30_cleanup_service.txt",
+      "docs/p1/test_evidence/task_00_06/performance_cleanup_service.txt",
+      "docs/p1/test_evidence/task_00_06/screenshot_cleanup_service.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "20c205ccf99802ba017431ae245632d843902e132fa712d8fd1f794a97edfed3",
+    "extension": ".xml",
+    "size_each": 6305,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/cancel_countdown_consent.xml",
+      "docs/p1/test_evidence/task_00_06/cancel_recording_consent.xml",
+      "docs/p1/test_evidence/task_00_06/cancel_retry_countdown_consent.xml",
+      "docs/p1/test_evidence/task_00_06/cancel_retry_paused_consent.xml",
+      "docs/p1/test_evidence/task_00_06/cancel_retry_recording_consent.xml",
+      "docs/p1/test_evidence/task_00_06/controls_consent.xml",
+      "docs/p1/test_evidence/task_00_06/landscape_consent.xml",
+      "docs/p1/test_evidence/task_00_06/long_consent.xml",
+      "docs/p1/test_evidence/task_00_06/output30_consent.xml",
+      "docs/p1/test_evidence/task_00_06/performance_consent.xml",
+      "docs/p1/test_evidence/task_00_06/screenshot_BACK_consent.xml",
+      "docs/p1/test_evidence/task_00_06/screenshot_CAPTURE_1_consent.xml",
+      "docs/p1/test_evidence/task_00_06/screenshot_CAPTURE_2_consent.xml",
+      "docs/p1/test_evidence/task_00_06/screenshot_DENY_consent.xml",
+      "docs/p1/test_evidence/task_00_06/screenshot_video_consent.xml",
+      "docs/p1/test_evidence/task_00_06/T02-01_mixed_consent.xml",
+      "docs/p1/test_evidence/task_00_06/T02-03_video_consent_denied.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "1a30b0570f3039910d5c91a41794971fb960871d8217fe9ec8fbe0ecdec42413",
+    "extension": ".txt",
+    "size_each": 64,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/cancel_launch.txt",
+      "docs/p1/test_evidence/task_00_06/cancel_launch_retry.txt",
+      "docs/p1/test_evidence/task_00_06/cancel_retry_launch.txt",
+      "docs/p1/test_evidence/task_00_06/configuration_launch.txt",
+      "docs/p1/test_evidence/task_00_06/controls_launch.txt",
+      "docs/p1/test_evidence/task_00_06/long_return_after_autostop.txt",
+      "docs/p1/test_evidence/task_00_06/main_launch.txt",
+      "docs/p1/test_evidence/task_00_06/microphone_return_app.txt",
+      "docs/p1/test_evidence/task_00_06/output30_launch.txt",
+      "docs/p1/test_evidence/task_00_06/screenshot_launch.txt",
+      "docs/p1/test_evidence/task_00_06/screenshot_return1_launch.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "878d1e72797e5098e5499f771b531409eb5574fc707621abecfabbabe00f19cf",
+    "extension": ".json",
+    "size_each": 607,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/controls_consent_actions.json",
+      "docs/p1/test_evidence/task_00_06/screenshot_video_actions.json"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "bea7f7087362702ba828327ac49841fddd7a856f405a48cd5c5a5f62c341b65c",
+    "extension": ".xml",
+    "size_each": 13167,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/error_recovery_before.xml",
+      "docs/p1/test_evidence/task_00_06/mic_deny_actual_ui.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "724f59c880b93f1534437cee693a2e42e9c169bc8c4dd444e7c8f42e159115da",
+    "extension": ".xml",
+    "size_each": 6339,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/error_recovery_consent.xml",
+      "docs/p1/test_evidence/task_00_06/timer30_consent.xml",
+      "docs/p1/test_evidence/task_00_06/timer60_consent.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "e2da77d3a8e03a6c56d422ee000501ec00845cc4e0db395900fcedccd4bde292",
+    "extension": ".xml",
+    "size_each": 11181,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/full_settings_countdown5.xml",
+      "docs/p1/test_evidence/task_00_06/full_settings_timer_current.xml",
+      "docs/p1/test_evidence/task_00_06/timer30_setting_before.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "895b0a04cf31c44a366983570c3fc03e1bfdab12766c9ce5300fb2ce9f731da9",
+    "extension": ".xml",
+    "size_each": 17506,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/full_settings_initial.xml",
+      "docs/p1/test_evidence/task_00_06/full_settings_scroll0.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "50007dfe03d500fcbdb02e91a1078e8cc15cc9ef63f402a6970da3dac41c6dc9",
+    "extension": ".xml",
+    "size_each": 11181,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/full_settings_mute.xml",
+      "docs/p1/test_evidence/task_00_06/full_settings_scroll2.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "4c8d56ec0cd2fa4d6eaa7e220b33bdaa3645d521ae61c577dc2cdf029b28573e",
+    "extension": ".xml",
+    "size_each": 14067,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/long_paused_1.xml",
+      "docs/p1/test_evidence/task_00_06/long_paused_2.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "2f47041680f16ff0a9076f3675ed9b22759198a34c308922c3c93b0590deb757",
+    "extension": ".xml",
+    "size_each": 13131,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/microphone_after_unlock_ui.xml",
+      "docs/p1/test_evidence/task_00_06/mic_deny_runtime_Record_screen0.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "80bc322a8b4104dd264d6b6feb5abbb8d348cbb814fb5921495298248e61997c",
+    "extension": ".txt",
+    "size_each": 706,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/microphone_denied_video_ids_before.txt",
+      "docs/p1/test_evidence/task_00_06/T02-03_video_ids_after_deny.txt",
+      "docs/p1/test_evidence/task_00_06/unsupported_after_video_ids.txt",
+      "docs/p1/test_evidence/task_00_06/unsupported_before_video_ids.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "7f1843e61f56e907e52288a8a8ffde1cf9a67e863986a8324b4baec54dbe5f3b",
+    "extension": ".xml",
+    "size_each": 28324,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/mic_deny_confirm_current.xml",
+      "docs/p1/test_evidence/task_00_06/mic_deny_robust_0.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "4bfd261e7d1a88ad736cdff3a4583bc648d4a7dbd5756f86760b9652faed5c2c",
+    "extension": ".xml",
+    "size_each": 5583,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/mic_deny_runtime_after.xml",
+      "docs/p1/test_evidence/task_00_06/mic_deny_runtime_dialog.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "d3a37a2572ee2f1801b5e968ef0d1b468733a05ce22239b1b22325431c16c4f9",
+    "extension": ".png",
+    "size_each": 32014,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/output30_decoded_10.png",
+      "docs/p1/test_evidence/task_00_06/output30_decoded_20.png",
+      "docs/p1/test_evidence/task_00_06/output30_frame_2s.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "93cfb18e3cb1ac513edec7942e168729ac81ceb47150891ed724045365c54234",
+    "extension": ".xml",
+    "size_each": 19349,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/record_setup_initial.xml",
+      "docs/p1/test_evidence/task_00_06/unsupported_after.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "b569e204f35bb754f5e0ee21440d71c148b1359c8b65ab3f0a6da6e42c970cb9",
+    "extension": ".txt",
+    "size_each": 184,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/replay_screenshot_mediastore.txt",
+      "docs/p1/test_evidence/task_00_06/T06-07_shot_5_mediastore.txt"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "cc4498173bee0b9d4ddd2ada21f89d5eed866386abe9538e09b1241492d44924",
+    "extension": ".xml",
+    "size_each": 12505,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/timer30_back1.xml",
+      "docs/p1/test_evidence/task_00_06/timer30_Video.xml",
+      "docs/p1/test_evidence/task_00_06/timer60_Audio.xml",
+      "docs/p1/test_evidence/task_00_06/timer60_Video.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "806e195c7b0d91deff81d09b47a2f2ae8948f7d73e679a1855257d14612d3d93",
+    "extension": ".xml",
+    "size_each": 13124,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/timer30_Record_screen.xml",
+      "docs/p1/test_evidence/task_00_06/timer60_Record_screen.xml",
+      "docs/p1/test_evidence/task_00_06/timer60_Settings.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "d00b00fca873a8b1e13294c107ea4a7e9b1de71aad04f53c737d8d808ff3e20b",
+    "extension": ".xml",
+    "size_each": 18626,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/timer30_Start_Recording.xml",
+      "docs/p1/test_evidence/task_00_06/timer60_Start_Recording.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "5ae810db0c8008479c50d7a67009e4d0411a12402d2063f540541237c28b5e9a",
+    "extension": ".xml",
+    "size_each": 1069,
+    "paths": [
+      "docs/p1/test_evidence/task_00_06/unsupported_after_journal.xml",
+      "docs/p1/test_evidence/task_00_06/unsupported_before_journal.xml"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "fc365572607d3d3978a969a46bcc47621ffc96b27f80e300a0d03c94faf9990a",
+    "extension": ".png",
+    "size_each": 11185,
+    "paths": [
+      "docs/implementation/TASK_UI_UX_02_EVIDENCE_20261110_121400/animated_splash_v2_1050ms.png",
+      "docs/implementation/TASK_UI_UX_02_EVIDENCE_20261110_121400/animated_splash_v2_450ms.png",
+      "docs/implementation/TASK_UI_UX_02_EVIDENCE_20261110_121400/animated_splash_v2_750ms.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  },
+  {
+    "sha256": "8d7b5941c2a2465cfe2ff53c884a4faad30f463ce800ac68fc8eff5caa6ef7a4",
+    "extension": ".png",
+    "size_each": 11123,
+    "paths": [
+      "docs/implementation/TASK_UI_UX_02_EVIDENCE_20261110_121400/startup_reveal_late.png",
+      "docs/implementation/TASK_UI_UX_02_EVIDENCE_20261110_121400/startup_reveal_middle.png"
+    ],
+    "decision": "retain: task evidence/report linkage and lineage; no deletion authorized"
+  }
+]

@@ -1,0 +1,80 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_06_workflows_test.dart test/ux_interaction_test.dart test/localization_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart
+test/ui_ux_06_workflows_test.dart:5:8: Error: Error when reading 'lib/l10n/app_localizations.dart': The system cannot find the file specified
+import 'package:xrecorder/l10n/app_localizations.dart';
+       ^
+test/ui_ux_06_workflows_test.dart:16:27: Error: Undefined name 'AppLocalizations'.
+        supportedLocales: AppLocalizations.supportedLocales,
+                          ^^^^^^^^^^^^^^^^
+test/ui_ux_06_workflows_test.dart:17:33: Error: Undefined name 'AppLocalizations'.
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+                                ^^^^^^^^^^^^^^^^
+00:00 +0 -1: loading D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart [E]
+  Failed to load "D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart":
+  Compilation failed for testPath=D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: test/ui_ux_06_workflows_test.dart:5:8: Error: Error when reading 'lib/l10n/app_localizations.dart': The system cannot find the file specified
+  import 'package:xrecorder/l10n/app_localizations.dart';
+         ^
+  test/ui_ux_06_workflows_test.dart:16:27: Error: Undefined name 'AppLocalizations'.
+          supportedLocales: AppLocalizations.supportedLocales,
+                            ^^^^^^^^^^^^^^^^
+  test/ui_ux_06_workflows_test.dart:17:33: Error: Undefined name 'AppLocalizations'.
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+                                  ^^^^^^^^^^^^^^^^
+  .
+  Error: The Dart compiler exited unexpectedly.
+  package:flutter_tools/src/base/common.dart 34:3  throwToolExit
+  package:flutter_tools/src/compile.dart 1024:11   DefaultResidentCompiler._compile.<fn>
+  dart:async/zone_root.dart 48:47                  _rootRunUnary
+  dart:async/zone.dart 816:35                      _CustomZone.runUnary
+  dart:async/future_impl.dart 948:45               Future._propagateToListeners.handleValueCallback
+  dart:async/future_impl.dart 977:13               Future._propagateToListeners
+  dart:async/future_impl.dart 862:9                Future._propagateToListeners
+  dart:async/future_impl.dart 720:5                Future._completeWithValue
+  dart:async/future_impl.dart 804:7                Future._asyncCompleteWithValue.<fn>
+  dart:async/zone_root.dart 35:13                  _rootRun
+  dart:async/zone.dart 810:35                      _CustomZone.run
+  dart:async/zone.dart 702:7                       _CustomZone.runGuarded
+  dart:async/zone.dart 743:23                      _CustomZone.bindCallbackGuarded.<fn>
+  dart:async/schedule_microtask.dart 40:35         _microtaskLoop
+  dart:async/schedule_microtask.dart 49:5          _startMicrotaskLoop
+  dart:isolate-patch/isolate_patch.dart 127:13     _runPendingImmediateCallback
+  dart:isolate-patch/isolate_patch.dart 193:5      _RawReceivePort._handleMessage
+  
+00:00 +0 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:00 +1 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +2 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +3 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +4 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +5 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +6 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +7 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +8 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +9 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +10 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +11 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +12 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +13 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +14 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +15 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +16 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +17 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +18 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +19 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:02 +20 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 light at 200 percent
+00:03 +21 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 dark at 200 percent
+00:03 +22 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 light at 200 percent
+00:04 +23 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 dark at 200 percent
+00:04 +24 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: picker is lazy and repeated folder requests coalesce; cancel stays reachable with keyboard
+00:05 +25 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: export finalizing is shown as Saving and has no unsafe cancel
+00:05 +26 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo read failure offers retry and recovers
+00:05 +27 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: saving a photo blocks repeated save and exit; failure preserves edits
+00:05 +28 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: new project double tap creates one draft and opening is reversible
+00:06 +29 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: project rename survives dialog exit and keyboard inset animation
+00:06 +30 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: media rename survives Cancel/Save while the keyboard closes
+00:07 +31 -1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: editor waits for autosave and failed save keeps a recovery path before leaving
+00:07 +32 -1: Some tests failed.
+
+Failing tests:
+  D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: loading D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart
+
+Exit=1

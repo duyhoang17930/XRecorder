@@ -1,0 +1,28 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_06_workflows_test.dart --reporter expanded
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart
+00:00 +0: selection follows the clip through reorder, Undo and Redo
+00:00 +1: project launch validates every clip before the only save
+00:00 +2: media picker batch returns only explicit supported selection
+00:01 +3: media picker photo returns only explicit supported selection
+00:01 +4: media picker cancel returns only explicit supported selection
+00:01 +5: picker layout Size(320.0, 800.0) photo=false RTL text200
+00:01 +6: picker layout Size(320.0, 800.0) photo=true RTL text200
+00:02 +7: picker layout Size(800.0, 320.0) photo=false RTL text200
+00:02 +8: picker layout Size(800.0, 320.0) photo=true RTL text200
+00:02 +9: cancel New video leaves every draft untouched
+00:03 +10: compact Create preserves guard for 2 rapid taps
+00:03 +11: compact Create preserves guard for 3 rapid taps
+00:03 +12: compact Create preserves guard for 5 rapid taps
+00:04 +13: compact All tools preserves guard for 2 rapid taps
+00:04 +14: compact All tools preserves guard for 3 rapid taps
+00:04 +15: compact All tools preserves guard for 5 rapid taps
+00:04 +16: Media Details Edit keeps URI and reuses its launched project: content://media/external/video/media/42
+00:04 +17: Media Details Edit keeps URI and reuses its launched project: content://com.android.externalstorage.documents/document/primary%3AMovies%2Fqa.mp4
+00:05 +18: timeline position does not decode again; trim commits once at gesture end
+00:05 +19: Clear text keeps focus and never submits: en
+00:05 +20: Clear text keeps focus and never submits: vi
+00:05 +21: Clear text keeps focus and never submits: ar
+00:05 +22: Clear text keeps focus and never submits: de
+00:05 +23: All tests passed!
+
+Exit=0

@@ -1,0 +1,80 @@
+{
+  "file": "files/projects/project_1794411087454625.json",
+  "project": {
+    "version": 1,
+    "id": "project_1794411087454625",
+    "title": "UI06_Acceptance",
+    "updatedAt": 1794411152539,
+    "clips": [
+      {
+        "mediaId": "content://media/external/video/media/1536",
+        "title": "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+        "inMs": 0,
+        "outMs": 953,
+        "sourceDurationMs": 2066,
+        "rotation": 0,
+        "isImage": false,
+        "flipH": false,
+        "flipV": false,
+        "cropLeft": 0.0,
+        "cropTop": 0.0,
+        "cropRight": 1.0,
+        "cropBottom": 1.0
+      },
+      {
+        "mediaId": "content://media/external/video/media/1536",
+        "title": "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+        "inMs": 953,
+        "outMs": 1593,
+        "sourceDurationMs": 2066,
+        "rotation": 0,
+        "isImage": false,
+        "flipH": false,
+        "flipV": false,
+        "cropLeft": 0.0,
+        "cropTop": 0.0,
+        "cropRight": 1.0,
+        "cropBottom": 1.0
+      },
+      {
+        "mediaId": "content://media/external/images/media/1451",
+        "title": "Edited_1794327406739.png",
+        "inMs": 0,
+        "outMs": 5000,
+        "sourceDurationMs": 5000,
+        "rotation": 0,
+        "isImage": true,
+        "flipH": false,
+        "flipV": false,
+        "cropLeft": 0.0,
+        "cropTop": 0.0,
+        "cropRight": 1.0,
+        "cropBottom": 1.0
+      }
+    ],
+    "effects": {
+      "speed": 1.0,
+      "volume": 1.0,
+      "pitch": 1.0,
+      "height": 0,
+      "fps": 30,
+      "filter": "grayscale",
+      "aspect": 0.0,
+      "musicVolume": 0.5,
+      "format": "mp4",
+      "bitrate": 0,
+      "gifFps": 10,
+      "gifEdge": 320,
+      "gifRepeats": 0,
+      "fadeInMs": 0,
+      "fadeOutMs": 0,
+      "voice": "none",
+      "noiseReduction": false,
+      "subtitleColor": "white",
+      "subtitleSize": "normal",
+      "subtitleBackground": "dark",
+      "subtitlePosition": "bottom",
+      "text": ""
+    }
+  }
+}

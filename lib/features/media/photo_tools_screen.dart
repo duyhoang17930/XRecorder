@@ -12,6 +12,7 @@ import 'package:go_router/go_router.dart';
 
 import 'media_repository.dart';
 import 'photo_editor_panels.dart';
+import '../editor/editor_workspace.dart';
 
 class PhotoMark {
   PhotoMark(
@@ -139,6 +140,7 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
   final label = TextEditingController();
   final _textFocus = FocusNode();
   final _textFieldKey = GlobalKey(debugLabel: 'photo-annotation-text');
+  (Size, EdgeInsets, EdgeInsets, double, Locale, TextDirection)? _toolLayout;
   RangeValues horizontal = const RangeValues(0, 1),
       vertical = const RangeValues(0, 1);
   final marks = <PhotoMark>[];
@@ -209,16 +211,28 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Portrait/landscape and IME layouts can recreate the toolbar viewport.
-    // Reveal the active tool after layout without changing editing history.
-    MediaQuery.of(context);
-    _revealTool(_selectedTool);
+    // Reveal after geometry/locale changes only. Accessibility attachment also
+    // updates MediaQuery; it must not undo the user's manual toolbar scroll.
+    final layout = (
+      MediaQuery.sizeOf(context),
+      MediaQuery.viewInsetsOf(context),
+      MediaQuery.paddingOf(context),
+      MediaQuery.textScalerOf(context).scale(14),
+      Localizations.localeOf(context),
+      Directionality.of(context),
+    );
+    if (_toolLayout != layout) {
+      _toolLayout = layout;
+      _revealTool(_selectedTool);
+    }
   }
 
   String get _selectedTool => panel != 'draw'
       ? panel
       : ['Rectangle', 'Circle', 'Arrow'].contains(tool)
       ? 'shapes'
+      : tool == 'Pen' || tool == 'Eraser'
+      ? 'pen'
       : tool.toLowerCase();
 
   Future<void> load() async {
@@ -442,15 +456,12 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
       padding: const EdgeInsetsDirectional.only(end: AppSpacing.xs),
       child: ConstrainedBox(
         constraints: const BoxConstraints(minHeight: AppSize.touchTarget),
-        child: ChoiceChip(
-          chipAnimationStyle: AppMotion.chipStyle(
-            reduceMotion: context.reduceMotion,
-          ),
+        child: EditorTool(
           key: ValueKey(id),
-          avatar: Icon(icon, size: AppIconSize.small),
-          label: Text(name),
+          icon: icon,
+          label: name,
           selected: selected,
-          onSelected: saving ? null : (_) => action(),
+          onPressed: saving ? null : action,
         ),
       ),
     );
@@ -464,14 +475,21 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
               child: Row(
                 children: [
                   button(
-                    context.message('Pen'),
+                    context.l10n.editorCrop,
+                    AppIcons.crop,
+                    panel == 'crop',
+                    () => _selectPanel('crop'),
+                    'photo-tool-crop',
+                  ),
+                  button(
+                    context.l10n.drawing,
                     AppIcons.pen,
-                    panel == 'draw' && tool == 'Pen',
+                    panel == 'draw' && (tool == 'Pen' || tool == 'Eraser'),
                     () => _tool('Pen'),
                     'photo-tool-pen',
                   ),
                   button(
-                    shapes ? context.message(tool) : context.l10n.editorShapes,
+                    context.l10n.editorShapes,
                     AppIcons.shapes,
                     panel == 'draw' && shapes,
                     _shapes,
@@ -483,20 +501,6 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                     panel == 'draw' && tool == 'Text',
                     () => _tool('Text'),
                     'photo-tool-text',
-                  ),
-                  button(
-                    context.message('Eraser'),
-                    AppIcons.eraser,
-                    panel == 'draw' && tool == 'Eraser',
-                    () => _tool('Eraser'),
-                    'photo-tool-eraser',
-                  ),
-                  button(
-                    context.l10n.editorCrop,
-                    AppIcons.crop,
-                    panel == 'crop',
-                    () => _selectPanel('crop'),
-                    'photo-tool-crop',
                   ),
                   button(
                     context.l10n.editorTransform,
@@ -556,6 +560,42 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
     ],
   );
 
+  Widget _drawingTools() => Wrap(
+    spacing: AppSpacing.xs,
+    children: [
+      for (final value in ['Pen', 'Eraser'])
+        ChoiceChip(
+          key: ValueKey('photo-context-${value.toLowerCase()}'),
+          label: Text(context.message(value)),
+          avatar: Icon(
+            value == 'Pen' ? AppIcons.pen : AppIcons.eraser,
+            size: AppIconSize.small,
+          ),
+          selected: tool == value,
+          onSelected: saving ? null : (_) => _tool(value),
+        ),
+    ],
+  );
+
+  void _applyText() {
+    final text = label.text.trim();
+    if (saving || text.isEmpty) return;
+    setState(() {
+      remember();
+      _activeMark = null;
+      marks.add(
+        PhotoMark(
+          'Text',
+          color,
+          [const Offset(.5, .5)],
+          width: strokeWidth,
+          text: text,
+        ),
+      );
+    });
+    _textFocus.unfocus();
+  }
+
   Widget _contextualControls(ui.Image source, {bool compact = false}) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
@@ -565,6 +605,8 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
           context.message(error!),
           style: TextStyle(color: context.studioColors.warning),
         ),
+      if (panel == 'draw' && ['Rectangle', 'Circle', 'Arrow'].contains(tool))
+        Text(context.message(tool), style: AppTypography.bodyEmphasis),
       if (panel == 'crop') ...[
         _cropSlider(
           context.l10n.cropLeftRight,
@@ -640,6 +682,7 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
           ],
         ),
       ] else if (tool == 'Eraser') ...[
+        _drawingTools(),
         Text(context.l10n.photoDragToErase),
       ] else ...[
         if (!compact || tool != 'Text')
@@ -661,7 +704,8 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
             ),
           ),
         if (!compact || tool != 'Text') const SizedBox(height: AppSpacing.xs),
-        if (tool == 'Text')
+        if (tool == 'Pen') _drawingTools(),
+        if (tool == 'Text') ...[
           TextField(
             key: _textFieldKey,
             controller: label,
@@ -671,10 +715,23 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
             onSubmitted: (_) => _textFocus.unfocus(),
             decoration: InputDecoration(
               labelText: context.l10n.textToPlaceOnPhoto,
+              suffixIcon: StudioClearTextButton(
+                controller: label,
+                enabled: !saving,
+              ),
               counterText: compact ? '' : null,
             ),
-          )
-        else ...[
+          ),
+          ValueListenableBuilder<TextEditingValue>(
+            valueListenable: label,
+            builder: (context, value, _) => TextButton(
+              onPressed: saving || value.text.trim().isEmpty
+                  ? null
+                  : _applyText,
+              child: Text(context.l10n.editorApply),
+            ),
+          ),
+        ] else ...[
           Wrap(
             alignment: WrapAlignment.spaceBetween,
             spacing: AppSpacing.xs,
@@ -845,29 +902,44 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
       child: LayoutBuilder(
         builder: (context, box) {
           final toolHeight = math.max(
-            48.0,
-            MediaQuery.textScalerOf(context).scale(14) * 1.5 + 20,
+            64.0,
+            MediaQuery.textScalerOf(context).scale(14) * 1.5 + 48,
           );
           final controls = SingleChildScrollView(
             key: ValueKey('photo-controls-$panel-$tool'),
             primary: false,
             child: _contextualControls(source, compact: box.maxHeight < 140),
           );
-          if (box.maxHeight < 140) return controls;
-          if (box.maxWidth >= 600 && box.maxWidth > box.maxHeight) {
+          final landscape = box.maxWidth >= 600 && box.maxWidth > box.maxHeight;
+          final shortWorkspace = box.maxHeight < 140;
+          final keyboardVisible = MediaQuery.viewInsetsOf(context).bottom > 0;
+          if (shortWorkspace && (!landscape || keyboardVisible)) {
+            return controls;
+          }
+          if (landscape) {
             return Row(
               children: [
                 Expanded(child: _preview(source)),
                 const SizedBox(width: AppSpacing.md),
                 SizedBox(
                   width: (box.maxWidth * .38).clamp(260, 360),
-                  child: Column(
-                    children: [
-                      _toolbar(toolHeight),
-                      const SizedBox(height: AppSpacing.xs),
-                      Expanded(child: controls),
-                    ],
-                  ),
+                  child: shortWorkspace
+                      ? SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              _toolbar(toolHeight),
+                              const SizedBox(height: AppSpacing.xs),
+                              _contextualControls(source),
+                            ],
+                          ),
+                        )
+                      : Column(
+                          children: [
+                            _toolbar(toolHeight),
+                            const SizedBox(height: AppSpacing.xs),
+                            Expanded(child: controls),
+                          ],
+                        ),
                 ),
               ],
             );
@@ -883,11 +955,11 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
             children: [
               Expanded(child: _preview(source)),
               const SizedBox(height: AppSpacing.xs),
-              _toolbar(toolHeight),
               ConstrainedBox(
                 constraints: BoxConstraints(maxHeight: panelHeight),
                 child: controls,
               ),
+              _toolbar(toolHeight),
             ],
           );
         },

@@ -5,21 +5,15 @@ import statistics
 import unicodedata
 from pathlib import Path
 
+if __package__:
+    from .asr_metrics import distance
+else:
+    from asr_metrics import distance
 
 def normalize(text):
     # Retain letters, marks and digits: Hindi matras/virama and VI accents matter.
     text=unicodedata.normalize('NFKC',text).casefold()
     return ' '.join(''.join(c if unicodedata.category(c)[0] in 'LMN' or c.isspace() else ' ' for c in text).split())
-
-
-def distance(a,b):
-    previous=list(range(len(b)+1))
-    for i,left in enumerate(a,1):
-        current=[i]
-        for j,right in enumerate(b,1):
-            current.append(min(current[-1]+1,previous[j]+1,previous[j-1]+(left!=right)))
-        previous=current
-    return previous[-1]
 
 
 def evaluate(corpus,report_path,memory_path):

@@ -1,0 +1,29 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/editor_workspace_layout_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart
+00:00 +0: video workspace 320.0 scale=1.0 landscape=false
+00:01 +1: video workspace 320.0 scale=1.0 landscape=true
+00:01 +2: video workspace 320.0 scale=1.5 landscape=false
+00:01 +3: video workspace 320.0 scale=1.5 landscape=true
+00:01 +4: video workspace 320.0 scale=2.0 landscape=false
+00:01 +5: video workspace 320.0 scale=2.0 landscape=true
+00:01 +6: video workspace 360.0 scale=1.0 landscape=false
+00:02 +7: video workspace 360.0 scale=1.0 landscape=true
+00:02 +8: video workspace 360.0 scale=1.5 landscape=false
+00:02 +9: video workspace 360.0 scale=1.5 landscape=true
+00:02 +10: video workspace 360.0 scale=2.0 landscape=false
+00:02 +11: video workspace 360.0 scale=2.0 landscape=true
+00:02 +12: video workspace 393.0 scale=1.0 landscape=false
+00:02 +13: video workspace 393.0 scale=1.0 landscape=true
+00:02 +14: video workspace 393.0 scale=1.5 landscape=false
+00:02 +15: video workspace 393.0 scale=1.5 landscape=true
+00:03 +16: video workspace 393.0 scale=2.0 landscape=false
+00:03 +17: video workspace 393.0 scale=2.0 landscape=true
+00:03 +18: video workspace 411.0 scale=1.0 landscape=false
+00:03 +19: video workspace 411.0 scale=1.0 landscape=true
+00:03 +20: video workspace 411.0 scale=1.5 landscape=false
+00:03 +21: video workspace 411.0 scale=1.5 landscape=true
+00:03 +22: video workspace 411.0 scale=2.0 landscape=false
+00:03 +23: video workspace 411.0 scale=2.0 landscape=true
+00:03 +24: All tests passed!
+
+Exit=0

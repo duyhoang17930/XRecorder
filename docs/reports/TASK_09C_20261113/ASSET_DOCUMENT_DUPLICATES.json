@@ -1,0 +1,54 @@
+[
+  {
+    "sha256": "a1b801954d75fd7a46ba1e9ae4aed6fcf311eb7cff1965fcd37df46dee5b331c",
+    "files": [
+      {
+        "path": "image/1793760717141_1972596113707275102_g3052623449332817763_5a6b1e5c05d0b9459073427beb809949.jpg",
+        "bytes": 107126,
+        "mtime_ns": 1793760829529691600,
+        "sha256": "a1b801954d75fd7a46ba1e9ae4aed6fcf311eb7cff1965fcd37df46dee5b331c"
+      },
+      {
+        "path": "image/1793760789371_1972596113707275102_g3052623449332817763_5a6b1e5c05d0b9459073427beb809949.jpg",
+        "bytes": 107126,
+        "mtime_ns": 1793760842596078500,
+        "sha256": "a1b801954d75fd7a46ba1e9ae4aed6fcf311eb7cff1965fcd37df46dee5b331c"
+      }
+    ],
+    "references": {
+      "image/1793760717141_1972596113707275102_g3052623449332817763_5a6b1e5c05d0b9459073427beb809949.jpg": [
+        "docs/REFERENCE_INDEX.md"
+      ],
+      "image/1793760789371_1972596113707275102_g3052623449332817763_5a6b1e5c05d0b9459073427beb809949.jpg": [
+        "docs/REFERENCE_INDEX.md"
+      ]
+    },
+    "decision": "retain: reference assets or Android resource qualifiers"
+  },
+  {
+    "sha256": "39e8f338ec0e87b7a889fca21f57a1c2087aa5bdaec92a77c331631f6a3b3623",
+    "files": [
+      {
+        "path": "android/app/src/main/res/drawable-v21/launch_background.xml",
+        "bytes": 221,
+        "mtime_ns": 1794294016132495600,
+        "sha256": "39e8f338ec0e87b7a889fca21f57a1c2087aa5bdaec92a77c331631f6a3b3623"
+      },
+      {
+        "path": "android/app/src/main/res/drawable/launch_background.xml",
+        "bytes": 221,
+        "mtime_ns": 1794294015435928500,
+        "sha256": "39e8f338ec0e87b7a889fca21f57a1c2087aa5bdaec92a77c331631f6a3b3623"
+      }
+    ],
+    "references": {
+      "android/app/src/main/res/drawable-v21/launch_background.xml": [
+        "docs/reports/TASK_UI_UX_03_1794317676949/TASK_UI_UX_03_FINAL_REPORT.md"
+      ],
+      "android/app/src/main/res/drawable/launch_background.xml": [
+        "docs/reports/TASK_UI_UX_03_1794317676949/TASK_UI_UX_03_FINAL_REPORT.md"
+      ]
+    },
+    "decision": "retain: reference assets or Android resource qualifiers"
+  }
+]

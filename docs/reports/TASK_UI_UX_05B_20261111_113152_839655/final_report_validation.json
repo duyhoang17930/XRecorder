@@ -1,0 +1,29 @@
+{
+  "reports": [
+    {
+      "report": "TASK_UI_UX_05B_FINAL_ACCEPTANCE_REPORT.md",
+      "utf8": true,
+      "replacementCharacters": 0
+    },
+    {
+      "report": "P1_UI05B_HANDOFF.md",
+      "utf8": true,
+      "replacementCharacters": 0
+    }
+  ],
+  "brokenLinks": [],
+  "diffCheckExit": 0,
+  "diffCheckStdout": "",
+  "diffCheckStderr": "warning: in the working copy of 'android/app/src/androidTest/AndroidManifest.xml', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Task07AccessibilityInstrumentation.java', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'lib/core/widgets/studio_shell.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'test/localization_test.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'test/task09b_shared_interactions_test.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'test/ux_interaction_test.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tool/sync_p2_native_l10n.py', LF will be replaced by CRLF the next time Git touches it\n",
+  "protectedSourceAllUnchanged": true,
+  "createSheetUnchanged": true,
+  "privateHashesAllUnchanged": true,
+  "mediaHashesAllUnchanged": true,
+  "priorUntrackedStillPresent": {
+    "docs/reports/TASK_UI_UX_05_20261111_101510": true,
+    "test/fixtures/fonts": true,
+    "test/ui_ux_05_motion_test.dart": true
+  },
+  "evidenceBytesAtClose": 51749422,
+  "freeBytesAtClose": 28426153984
+}

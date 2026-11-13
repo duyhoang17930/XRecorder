@@ -3,4 +3,5 @@
     <string name="p2_edit_video" formatted="false">تحرير الفيديو</string>
     <string name="p2_edit_photo" formatted="false">Edit الصورة</string>
     <string name="p2_preview_unavailable" formatted="false">لم يتم تشغيل هذا الفيديو أو تم إلغاء الوصول إليه.</string>
+    <string name="p2_back" formatted="false">رجوع</string>
 </resources>

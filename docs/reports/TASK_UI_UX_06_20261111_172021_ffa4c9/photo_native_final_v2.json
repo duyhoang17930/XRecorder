@@ -1,0 +1,77 @@
+[
+  {
+    "case": "photo-crop-range",
+    "time": 1794398206.2471945,
+    "labels": [
+      "Back",
+      "Photo editor",
+      "Undo photo edit",
+      "Redo photo edit",
+      "Crop left / right",
+      "0% – 89%",
+      "Crop left and right",
+      "0 percent",
+      "89 percent",
+      "Crop top / bottom",
+      "0% – 100%",
+      "Crop top and bottom",
+      "0 percent",
+      "100 percent",
+      "Reset crop",
+      "Crop",
+      "Drawing",
+      "Shapes",
+      "Text",
+      "Transform",
+      "All tools",
+      "Export quality",
+      "Save copy"
+    ]
+  },
+  {
+    "case": "photo-color-width-draw-history",
+    "time": 1794398239.2011206,
+    "labels": [
+      "Back",
+      "Photo editor",
+      "Undo photo edit",
+      "Redo photo edit",
+      "Cyan ink",
+      "Color",
+      "Pen",
+      "Eraser",
+      "Stroke width",
+      "3 pixels",
+      "Stroke width",
+      "3 pixels",
+      "Crop",
+      "Drawing",
+      "Shapes",
+      "Text",
+      "Transform",
+      "All tools",
+      "Export quality",
+      "Save copy"
+    ]
+  },
+  {
+    "case": "photo-save-copy",
+    "time": 1794398256.8719602,
+    "labels": [
+      "Back",
+      "Media details",
+      "Edited_1794398254111.png",
+      "Preview",
+      "Preview",
+      "Share",
+      "Edit",
+      "Crop & annotate a copy",
+      "File management",
+      "Rename",
+      "Copy to folder",
+      "Move to folder",
+      "Move to Trash",
+      "Size\n8.7 KiB"
+    ]
+  }
+]

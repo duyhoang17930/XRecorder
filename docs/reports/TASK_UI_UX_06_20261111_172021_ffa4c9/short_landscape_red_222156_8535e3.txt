@@ -1,0 +1,6 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/editor_hci_test.dart --plain-name "short RTL landscape retains canvas and reachable tools" --reporter expanded
+00:00 +0: loading D:/FAU_App/XRecorder/test/editor_hci_test.dart
+00:00 +0: short RTL landscape retains canvas and reachable tools
+00:01 +1: All tests passed!
+
+Exit=0

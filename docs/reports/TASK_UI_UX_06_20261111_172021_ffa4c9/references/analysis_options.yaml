@@ -1,0 +1,5 @@
+# Foreign reference source snapshots, not code built or imported by 3HRecorder.
+# Keep the source/notice bytes for provenance; production/tests remain analyzed.
+analyzer:
+  exclude:
+    - '**/*.dart'

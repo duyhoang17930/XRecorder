@@ -120,15 +120,53 @@ class StudioBadge extends StatelessWidget {
   }
 }
 
-class SectionTitle extends StatelessWidget {
-  const SectionTitle(this.title, {super.key, this.trailing});
+/// Branding for the four shell roots; nested pages retain their own AppBar.
+class StudioRootHeader extends StatelessWidget {
+  const StudioRootHeader(this.title, {super.key, this.trailing});
   final String title;
   final Widget? trailing;
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        '3HRECORDER',
+        style: AppTypography.section.copyWith(
+          color: context.studioColors.primary,
+        ),
+      ),
+      SectionTitle(
+        title,
+        trailing: trailing,
+        minimumHeight: AppSize.touchTarget,
+      ),
+    ],
+  );
+}
+
+class SectionTitle extends StatelessWidget {
+  const SectionTitle(
+    this.title, {
+    super.key,
+    this.trailing,
+    this.minimumHeight = 0,
+  });
+  final String title;
+  final Widget? trailing;
+  final double minimumHeight;
   @override
   Widget build(BuildContext context) {
-    final heading = Semantics(
-      header: true,
-      child: Text(title, style: Theme.of(context).textTheme.titleLarge),
+    final heading = ConstrainedBox(
+      constraints: BoxConstraints(minHeight: minimumHeight),
+      child: Align(
+        alignment: AlignmentDirectional.centerStart,
+        heightFactor: 1,
+        child: Semantics(
+          header: true,
+          child: Text(title, style: Theme.of(context).textTheme.titleLarge),
+        ),
+      ),
     );
     // Long translated counts/actions must not consume the entire heading row
     // at large text sizes. Both pieces keep full text and their touch targets.

@@ -1,0 +1,17 @@
+{
+  "baselineCount": 473,
+  "changed": [
+    "lib/core/ui/components/dialogs/studio_dialog.dart",
+    "lib/core/ui/components/feedback/studio_feedback.dart",
+    "lib/core/ui/theme/app_theme.dart",
+    "lib/core/ui/theme/motion.dart",
+    "lib/core/widgets/studio_shell.dart",
+    "lib/features/editor/editing_hub_screen.dart",
+    "lib/features/media/trash_screen.dart",
+    "lib/features/media/video_details_screen.dart",
+    "test/ux_interaction_test.dart"
+  ],
+  "missing": [],
+  "androidAllExact": true,
+  "editorPreviewExact": true
+}

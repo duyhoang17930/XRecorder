@@ -1,0 +1,185 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/design_system_test.dart test/localization_test.dart test/widget_test.dart test/editor_hci_test.dart test/ui_ux_06_workflows_test.dart test/editor_workspace_layout_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/design_system_test.dart
+lib/features/media/photo_tools_screen.dart:711:40: Error: The getter 'apply' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:xrecorder/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'apply'.
+              child: Text(context.l10n.apply),
+                                       ^^^^^
+00:00 +0 -1: loading D:/FAU_App/XRecorder/test/design_system_test.dart [E]
+  Failed to load "D:/FAU_App/XRecorder/test/design_system_test.dart":
+  Compilation failed for testPath=D:/FAU_App/XRecorder/test/design_system_test.dart: lib/features/media/photo_tools_screen.dart:711:40: Error: The getter 'apply' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:xrecorder/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'apply'.
+                child: Text(context.l10n.apply),
+                                         ^^^^^
+  .
+  Error: The Dart compiler exited unexpectedly.
+  package:flutter_tools/src/base/common.dart 34:3  throwToolExit
+  package:flutter_tools/src/compile.dart 1024:11   DefaultResidentCompiler._compile.<fn>
+  dart:async/zone_root.dart 48:47                  _rootRunUnary
+  dart:async/zone.dart 816:35                      _CustomZone.runUnary
+  dart:async/future_impl.dart 948:45               Future._propagateToListeners.handleValueCallback
+  dart:async/future_impl.dart 977:13               Future._propagateToListeners
+  dart:async/future_impl.dart 862:9                Future._propagateToListeners
+  dart:async/future_impl.dart 720:5                Future._completeWithValue
+  dart:async/future_impl.dart 804:7                Future._asyncCompleteWithValue.<fn>
+  dart:async/zone_root.dart 35:13                  _rootRun
+  dart:async/zone.dart 810:35                      _CustomZone.run
+  dart:async/zone.dart 702:7                       _CustomZone.runGuarded
+  dart:async/zone.dart 743:23                      _CustomZone.bindCallbackGuarded.<fn>
+  dart:async/schedule_microtask.dart 40:35         _microtaskLoop
+  dart:async/schedule_microtask.dart 49:5          _startMicrotaskLoop
+  dart:isolate-patch/isolate_patch.dart 127:13     _runPendingImmediateCallback
+  dart:isolate-patch/isolate_patch.dart 193:5      _RawReceivePort._handleMessage
+  
+lib/features/media/photo_tools_screen.dart:711:40: Error: The getter 'apply' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:xrecorder/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'apply'.
+              child: Text(context.l10n.apply),
+                                       ^^^^^
+00:00 +0 -2: loading D:/FAU_App/XRecorder/test/widget_test.dart [E]
+  Failed to load "D:/FAU_App/XRecorder/test/widget_test.dart":
+  Compilation failed for testPath=D:/FAU_App/XRecorder/test/widget_test.dart: lib/features/media/photo_tools_screen.dart:711:40: Error: The getter 'apply' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:xrecorder/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'apply'.
+                child: Text(context.l10n.apply),
+                                         ^^^^^
+  .
+00:00 +0 -2: loading D:/FAU_App/XRecorder/test/design_system_test.dart [E]
+  Error: The Dart compiler exited unexpectedly.
+  package:flutter_tools/src/base/common.dart 34:3  throwToolExit
+  package:flutter_tools/src/compile.dart 1024:11   DefaultResidentCompiler._compile.<fn>
+  dart:async/zone_root.dart 48:47                  _rootRunUnary
+  dart:async/zone.dart 816:35                      _CustomZone.runUnary
+  dart:async/future_impl.dart 948:45               Future._propagateToListeners.handleValueCallback
+  dart:async/future_impl.dart 977:13               Future._propagateToListeners
+  dart:async/future_impl.dart 862:9                Future._propagateToListeners
+  dart:async/future_impl.dart 720:5                Future._completeWithValue
+  dart:async/future_impl.dart 804:7                Future._asyncCompleteWithValue.<fn>
+  dart:async/zone_root.dart 35:13                  _rootRun
+  dart:async/zone.dart 810:35                      _CustomZone.run
+  dart:async/zone.dart 702:7                       _CustomZone.runGuarded
+  dart:async/zone.dart 743:23                      _CustomZone.bindCallbackGuarded.<fn>
+  dart:async/schedule_microtask.dart 40:35         _microtaskLoop
+  dart:async/schedule_microtask.dart 49:5          _startMicrotaskLoop
+  dart:isolate-patch/isolate_patch.dart 127:13     _runPendingImmediateCallback
+  dart:isolate-patch/isolate_patch.dart 193:5      _RawReceivePort._handleMessage
+  
+00:00 +0 -2: D:/FAU_App/XRecorder/test/localization_test.dart: cached formats keep locale and precision independent
+00:00 +1 -2: D:/FAU_App/XRecorder/test/localization_test.dart: shipping ARB resources keep every key, typed placeholder and Arabic plural category
+00:01 +2 -2: D:/FAU_App/XRecorder/test/localization_test.dart: locale edits preserve corrupt and future preferences verbatim
+00:01 +3 -2: D:/FAU_App/XRecorder/test/localization_test.dart: legacy settings migrate with system locale and retain capture choices
+00:01 +4 -2: D:/FAU_App/XRecorder/test/localization_test.dart: locale persistence is additive and does not change capture settings
+00:01 +5 -2: D:/FAU_App/XRecorder/test/localization_test.dart: unknown saved locale follows system and supported tags stay canonical
+00:01 +6 -2: D:/FAU_App/XRecorder/test/localization_test.dart: localized decimal input preserves ASCII serialization and rejects ambiguity
+00:01 +7 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads en and keeps media coordinates LTR
+00:01 +8 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads vi and keeps media coordinates LTR
+00:01 +9 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads es and keeps media coordinates LTR
+00:01 +10 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads pt-BR and keeps media coordinates LTR
+00:01 +11 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads fr and keeps media coordinates LTR
+00:01 +12 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads de and keeps media coordinates LTR
+00:01 +13 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads id and keeps media coordinates LTR
+00:01 +14 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads ja and keeps media coordinates LTR
+00:01 +15 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads ko and keeps media coordinates LTR
+00:01 +16 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads zh-Hans and keeps media coordinates LTR
+00:01 +17 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads hi and keeps media coordinates LTR
+00:01 +18 -2: D:/FAU_App/XRecorder/test/localization_test.dart: loads ar and keeps media coordinates LTR
+lib/features/media/photo_tools_screen.dart:711:40: Error: The getter 'apply' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:xrecorder/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'apply'.
+              child: Text(context.l10n.apply),
+                                       ^^^^^
+00:04 +19 -3: loading D:/FAU_App/XRecorder/test/editor_hci_test.dart [E]
+  Failed to load "D:/FAU_App/XRecorder/test/editor_hci_test.dart":
+  Compilation failed for testPath=D:/FAU_App/XRecorder/test/editor_hci_test.dart: lib/features/media/photo_tools_screen.dart:711:40: Error: The getter 'apply' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:xrecorder/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'apply'.
+                child: Text(context.l10n.apply),
+                                         ^^^^^
+  .
+00:04 +19 -3: loading D:/FAU_App/XRecorder/test/design_system_test.dart [E]
+  Error: The Dart compiler exited unexpectedly.
+  package:flutter_tools/src/base/common.dart 34:3  throwToolExit
+  package:flutter_tools/src/compile.dart 1024:11   DefaultResidentCompiler._compile.<fn>
+  dart:async/zone_root.dart 48:47                  _rootRunUnary
+  dart:async/zone.dart 816:35                      _CustomZone.runUnary
+  dart:async/future_impl.dart 948:45               Future._propagateToListeners.handleValueCallback
+  dart:async/future_impl.dart 977:13               Future._propagateToListeners
+  dart:async/future_impl.dart 862:9                Future._propagateToListeners
+  dart:async/future_impl.dart 720:5                Future._completeWithValue
+  dart:async/future_impl.dart 804:7                Future._asyncCompleteWithValue.<fn>
+  dart:async/zone_root.dart 35:13                  _rootRun
+  dart:async/zone.dart 810:35                      _CustomZone.run
+  dart:async/zone.dart 702:7                       _CustomZone.runGuarded
+  dart:async/zone.dart 743:23                      _CustomZone.bindCallbackGuarded.<fn>
+  dart:async/schedule_microtask.dart 40:35         _microtaskLoop
+  dart:async/schedule_microtask.dart 49:5          _startMicrotaskLoop
+  dart:isolate-patch/isolate_patch.dart 127:13     _runPendingImmediateCallback
+  dart:isolate-patch/isolate_patch.dart 193:5      _RawReceivePort._handleMessage
+  
+lib/features/media/photo_tools_screen.dart:711:40: Error: The getter 'apply' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:xrecorder/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'apply'.
+              child: Text(context.l10n.apply),
+                                       ^^^^^
+00:09 +19 -4: loading D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart [E]
+  Failed to load "D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart":
+  Compilation failed for testPath=D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: lib/features/media/photo_tools_screen.dart:711:40: Error: The getter 'apply' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:xrecorder/l10n/generated/app_localizations.dart' ('lib/l10n/generated/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'apply'.
+                child: Text(context.l10n.apply),
+                                         ^^^^^
+  .
+00:09 +19 -4: loading D:/FAU_App/XRecorder/test/design_system_test.dart [E]
+  Error: The Dart compiler exited unexpectedly.
+  package:flutter_tools/src/base/common.dart 34:3  throwToolExit
+  package:flutter_tools/src/compile.dart 1024:11   DefaultResidentCompiler._compile.<fn>
+  dart:async/zone_root.dart 48:47                  _rootRunUnary
+  dart:async/zone.dart 816:35                      _CustomZone.runUnary
+  dart:async/future_impl.dart 948:45               Future._propagateToListeners.handleValueCallback
+  dart:async/future_impl.dart 977:13               Future._propagateToListeners
+  dart:async/future_impl.dart 862:9                Future._propagateToListeners
+  dart:async/future_impl.dart 720:5                Future._completeWithValue
+  dart:async/future_impl.dart 804:7                Future._asyncCompleteWithValue.<fn>
+  dart:async/zone_root.dart 35:13                  _rootRun
+  dart:async/zone.dart 810:35                      _CustomZone.run
+  dart:async/zone.dart 702:7                       _CustomZone.runGuarded
+  dart:async/zone.dart 743:23                      _CustomZone.bindCallbackGuarded.<fn>
+  dart:async/schedule_microtask.dart 40:35         _microtaskLoop
+  dart:async/schedule_microtask.dart 49:5          _startMicrotaskLoop
+  dart:isolate-patch/isolate_patch.dart 127:13     _runPendingImmediateCallback
+  dart:isolate-patch/isolate_patch.dart 193:5      _RawReceivePort._handleMessage
+  
+00:14 +19 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.0 landscape=false
+00:15 +20 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.0 landscape=true
+00:15 +21 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.5 landscape=false
+00:15 +22 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=1.5 landscape=true
+00:16 +23 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=2.0 landscape=false
+00:16 +24 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 320.0 scale=2.0 landscape=true
+00:16 +25 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.0 landscape=false
+00:16 +26 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.0 landscape=true
+00:16 +27 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.5 landscape=false
+00:16 +28 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=1.5 landscape=true
+00:16 +29 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=2.0 landscape=false
+00:17 +30 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 360.0 scale=2.0 landscape=true
+00:17 +31 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.0 landscape=false
+00:17 +32 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.0 landscape=true
+00:17 +33 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.5 landscape=false
+00:17 +34 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=1.5 landscape=true
+00:17 +35 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=2.0 landscape=false
+00:17 +36 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 393.0 scale=2.0 landscape=true
+00:17 +37 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.0 landscape=false
+00:18 +38 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.0 landscape=true
+00:18 +39 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.5 landscape=false
+00:18 +40 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=1.5 landscape=true
+00:18 +41 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=2.0 landscape=false
+00:18 +42 -4: D:/FAU_App/XRecorder/test/editor_workspace_layout_test.dart: video workspace 411.0 scale=2.0 landscape=true
+00:18 +43 -4: Some tests failed.
+
+Failing tests:
+  D:/FAU_App/XRecorder/test/design_system_test.dart: loading D:/FAU_App/XRecorder/test/design_system_test.dart
+  D:/FAU_App/XRecorder/test/editor_hci_test.dart: loading D:/FAU_App/XRecorder/test/editor_hci_test.dart
+  D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: loading D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart
+  D:/FAU_App/XRecorder/test/widget_test.dart: loading D:/FAU_App/XRecorder/test/widget_test.dart
+
+Exit=1

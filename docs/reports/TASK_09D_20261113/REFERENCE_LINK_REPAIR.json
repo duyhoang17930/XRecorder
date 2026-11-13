@@ -1,0 +1,9 @@
+{
+  "path": "docs/REFERENCE_INDEX.md",
+  "old_sha256": "76e8de5bd0f1f0c9ba1b1540fdf8222e437ae56241e01927af3b6b3133465cc3",
+  "new_sha256": "1f0a7b935cb4b5422440fbc7f92d61e9d493965f2b48593ee03e187a847cb22a",
+  "links_repaired": 90,
+  "change": "Only Markdown target prefix ../images/ -> ../image/; every destination exists",
+  "reversible_prefix_repair_matches_original_hash": true,
+  "asset_bytes_changed": 0
+}

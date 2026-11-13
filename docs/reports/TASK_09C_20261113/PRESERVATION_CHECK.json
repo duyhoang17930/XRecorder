@@ -1,0 +1,1829 @@
+{
+  "head_unchanged": true,
+  "staging_unchanged_and_empty": true,
+  "missing_files": [
+    "tool/__pycache__/evaluate_task07_asr.cpython-311.pyc",
+    "tool/__pycache__/run_qa_existing_app.cpython-311.pyc"
+  ],
+  "expected_task09c_changed_files": [
+    "README.md",
+    "tool/analyze_whisper_benchmark.py",
+    "tool/evaluate_task07_asr.py",
+    "lib/features/media/video_details_screen.dart",
+    "lib/features/editor/editor_screen.dart"
+  ],
+  "unexpected_changes": [],
+  "p1_and_shared_hash_checks": [
+    {
+      "path": "lib/features/settings/audio_video_settings_screen.dart",
+      "hash_match": true
+    },
+    {
+      "path": "lib/features/settings/recording_settings_form.dart",
+      "hash_match": true
+    },
+    {
+      "path": "lib/features/settings/settings_controller.dart",
+      "hash_match": true
+    },
+    {
+      "path": "lib/features/recording/capture_status_presentation.dart",
+      "hash_match": true
+    },
+    {
+      "path": "lib/features/recording/recording_service.dart",
+      "hash_match": true
+    },
+    {
+      "path": "lib/features/recording/recording_setup_sheet.dart",
+      "hash_match": true
+    },
+    {
+      "path": "lib/core/widgets/studio_create_sheet.dart",
+      "hash_match": true
+    },
+    {
+      "path": "lib/core/domain/models.dart",
+      "hash_match": true
+    },
+    {
+      "path": "lib/core/domain/repositories.dart",
+      "hash_match": true
+    },
+    {
+      "path": "lib/app/router/app_router.dart",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/FLOATING_CONTROLS_COMPACT_OUTPUT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/FLOATING_CONTROLS_F06_F12_F14.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/MEDIAPROJECTION_CONSENT_FLOW_FIX.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/RECORDING_SETTINGS_LAYOUT_P2_REQUEST.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_00_06_LOCAL_FIX_REPORT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_00_06_P2_FIX_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_00_06_REAL_DEVICE_TEST_REPORT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_00_OWNERSHIP_AND_CONTRACT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_00_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_01_RECORDING_ENGINE_AUDIT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_02_MEDIAPROJECTION_SESSION_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_03_AUDIO_ENGINE_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_03_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_04_VIDEO_QUALITY_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_05_COUNTDOWN_AUTOSTOP_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_06_SCREENSHOT_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_07_NOTIFICATION_CONTROLS_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_07_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_08_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_08_REGION_RECORDING_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_09_FLOATING_BALL_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_09_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_10_FLOATING_BALL_CUSTOMIZATION_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_10_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_11_DRAWING_OVERLAY_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_11_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_12_FACECAM_BOTH_LANDSCAPE_FIX.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_12_FACECAM_EFFECTS_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_12_FACECAM_LANDSCAPE_ROTATION_FIX.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_12_FACECAM_ORIENTATION_FIX.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_12_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_13_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_13_SHAKE_TOUCH_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_14_NOISE_DUCKING_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_14_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_15_P2_INTEGRATION_REQUESTS.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/TASK_15_RELIABILITY_MP4_RECOVERY_RESULT.md",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/aspect_existing_frames_analysis.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/final_validation.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/fps_existing_evidence_analysis.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/git_diff_check_final.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/git_diff_stat_final.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/git_identity.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/git_status_before.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/git_status_final.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/local_main_apk.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/native_test_summary.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/production_diff_baseline_verification.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/production_incremental_diff.patch",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/source_before_sha256.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/source_change_inventory.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/TEST-com.xrecorder.xrecorder.recording.AudioVideoMathTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/TEST-com.xrecorder.xrecorder.recording.CaptureJournalTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/TEST-com.xrecorder.xrecorder.recording.CaptureRequestsTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/TEST-com.xrecorder.xrecorder.recording.CaptureTimingTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/TEST-com.xrecorder.xrecorder.recording.FloatingControlGeometryTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/TEST-com.xrecorder.xrecorder.recording.ScreenshotPixelsTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/TEST-com.xrecorder.xrecorder.recording.VideoBitrateTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_apk.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_device_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_device_logcat.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_final_journal.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_install.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_pid.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/cancel_semantics_preflight.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/native_before.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06_fix_retest/pre_local_scope_device_attempt/package_before.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/advanced_initial.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/advanced_initial.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/advanced_initial_nodes.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/advanced_scrolled1.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/advanced_scrolled2.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/all_media_analysis.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_apk.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_attempt1_result.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_cleanup_projection.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_cleanup_service.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_countdown_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_external_interruption.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_install.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_launch.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_launch_retry.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_logcat.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_native_final.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_pid.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_recording_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_retry_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_retry_countdown_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_retry_launch.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_retry_logcat.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_retry_paused_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_retry_pid.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/cancel_retry_recording_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/configuration_apk_sha256.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/configuration_install.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/configuration_launch.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/configuration_logcat.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/configuration_media_analysis.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/configuration_signer.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/config_internal.mp4",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/config_internal_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/config_microphone.mp4",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/config_microphone_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/config_mixed.mp4",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/config_mixed_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/config_mute.mp4",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/config_mute_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls.mp4",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_apk.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_cleanup.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_consent.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_consent_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_decode.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_install.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_journal.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_launch.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_logcat.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/controls_pid.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/current_permissions.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/current_projection.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/current_services.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/document_audit.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/environment.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/error_recovery.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/error_recovery_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/error_recovery_before.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/error_recovery_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/error_recovery_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/error_recovery_native.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/error_recovery_png_validation.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/final_device_state.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_countdown5.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_countdown_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_initial.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_mute.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_open_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_scroll0.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_scroll1.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_scroll2.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/full_settings_timer_current.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/git_diff_check_final.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/git_identity.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/git_status_before.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/git_status_current.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/host_logcat_cleanup.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/installed_main_build_verified.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/landscape_before_stop.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/landscape_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/landscape_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/landscape_native_completed.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/landscape_native_recording.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/landscape_setup_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/landscape_start_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_advanced_codec_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_after_background.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_autostop_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_autostop_observations.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_background_return.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_before_background_deadline.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_cleanup_projection.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_cleanup_service.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_enable_autostop_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_frame_0.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_frame_2115.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_frame_4229.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_paused.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_paused_1.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_paused_2.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_pause_resume_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_portrait_scroll_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_recording_setup_basic_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_recording_started.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_retry_start_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_return_after_autostop.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_start_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_start_states.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_temp_cleanup.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_ui_after_background.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_ui_recording.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/long_ui_recording.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_apk.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_home.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_home.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_home_nodes.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_install.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_launch.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_library_scrolled.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_library_scrolled.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_library_scrolled_nodes.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_library_scroll_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_logcat.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_open_record_setup_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_pid.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_return_top_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/main_scrollables.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/media_privacy_retention.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_after_unlock_ui.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_app_info.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_app_info_launch.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_denied_retry_start_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_denied_setup_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_denied_video_ids_before.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_deny_setting_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_open_microphone_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_open_permissions_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_permissions_before.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_permission_after_setting.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_permission_after_setting.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_permission_after_unlock.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_permission_options.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_retry_unexpected_recording.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_retry_unexpected_stopped.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/microphone_return_app.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_denied_final_app_info.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_denied_final_options.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_actual_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_actual_native.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_actual_ui.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_actual_video_ids_after.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_confirm_current.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_robust_0.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_robust_1.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_robust_2.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_robust_Record_screen.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_robust_selected.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_runtime_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_runtime_after.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_runtime_dialog.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_runtime_native.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_runtime_Record_screen0.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_runtime_Start_Recording0.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/mic_deny_video_catalog_valid_after.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/native_current_while_locked.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30.mp4",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_apk.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_cleanup_projection.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_cleanup_service.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_consent.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_consent_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_decoded_0.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_decoded_1.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_decoded_10.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_decoded_20.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_decoded_30.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_frame_10s.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_frame_20s.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_frame_2s.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_frame_analysis.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_frame_near_10s.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_frame_near_20s.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_frame_near_28s.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_frame_near_2s.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_install.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_launch.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_logcat.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_native_completed.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_native_recording.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_pid.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_projection_active.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_screen_recording.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/output30_service_active.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_bubble.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_bubble_window.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_cleanup.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_collapse_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_dragged.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_dragged_window.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_expanded_photo_library.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_expand_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_nodes.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_notification_observation.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_notification_scroll_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_notification_structure.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_outside_touch_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_outside_touch_native.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_outside_touch_photo_library.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_outside_touch_photo_library.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_paused.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_paused.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_paused_nodes.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_pause_stop_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_screenshot_resume_drag_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_show_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/overlay_window_bounds.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/performance_cleanup_projection.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/performance_cleanup_service.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/performance_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/performance_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/performance_native_recording.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/performance_overlay_notification_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/performance_paused_before_notification.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/performance_start_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/record_setup_initial.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/record_setup_initial.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/record_setup_initial_nodes.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/replay_screenshot_dimensions_failure.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/replay_screenshot_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/report_validation.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_apk.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_BACK_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_CAPTURE_1_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_CAPTURE_2_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_cleanup_projection.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_cleanup_service.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_DENY_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_final_journal.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_install.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_launch.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_logcat.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_media_analysis.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_native_1.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_native_1_analysis.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_native_1_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_native_2.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_native_2_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_native_2_state.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_pid.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_return1_launch.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_return2_launch.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_ui_nodes.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_video.mp4",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_video_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_video_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/screenshot_video_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/secure_keyguard_blocker.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/settings_nav_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/settings_nav_before.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/settings_root.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/source_before_sha256.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/source_freeze_check.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/source_freeze_final.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/source_freeze_interim.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T02-01_mixed_consent.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T02-01_mixed_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T02-01_mixed_consent_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T02-03_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T02-03_native_after_deny.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T02-03_video_consent_denied.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T02-03_video_consent_denied.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T02-03_video_ids_after_deny.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_repeated_screenshots.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_shot_1.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_shot_1_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_shot_2.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_shot_2_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_shot_3.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_shot_3_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_shot_4.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_shot_4_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_shot_5.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/T06-07_shot_5_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/test_cases.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_back1.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_decode_validation.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_dialog.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_edited.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_final_native.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_frame_0.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_frame_100.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_frame_200.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_own_app.mp4",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_Record_screen.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_settings_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_setting_before.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_Start_Recording.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_timeline.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer30_Video.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_actions.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_Audio.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_consent.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_decode_validation.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_dialog.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_edited.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_final_native.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_mediastore.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_own_app.mp4",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_Record_screen.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_Settings.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_settings_scroll0.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_settings_scroll1.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_Start_Recording.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_timeline.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/timer60_Video.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/unsupported_after.png",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/unsupported_after.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/unsupported_after_journal.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/unsupported_after_video_ids.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/unsupported_before_journal.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/unsupported_before_video_ids.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/task_00_06/unsupported_start_action.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/CaptureBridge.kt.before",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/CaptureRequests.kt.before",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/final_validation.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/git_diff_stat_final.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/git_identity.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/git_status_before.txt",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/incremental_native_diff.patch",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/source_before_sha256.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/summary.json",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/TEST-com.xrecorder.xrecorder.recording.AudioVideoMathTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/TEST-com.xrecorder.xrecorder.recording.CaptureJournalTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/TEST-com.xrecorder.xrecorder.recording.CaptureRequestsTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/TEST-com.xrecorder.xrecorder.recording.CaptureTimingTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/TEST-com.xrecorder.xrecorder.recording.FloatingControlGeometryTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/TEST-com.xrecorder.xrecorder.recording.ScreenshotPixelsTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "docs/p1/test_evidence/mediaprojection_consent_flow/TEST-com.xrecorder.xrecorder.recording.VideoBitrateTest.xml",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/MainActivity.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/AudioDuckingEngine.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureBridge.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureConfig.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureNotificationPolicy.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureRequests.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureService.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureState.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureTiming.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/DrawingOverlay.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/DrawingStrokeEngine.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FacecamGeometry.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FacecamOverlay.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FloatingControlGeometry.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FloatingRecordingControls.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/MediaOutput.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/Mp4RecoveryEngine.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/RecordingMuxer.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/RegionCropGeometry.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/ScreenshotPixels.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/SessionAudio.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/ShakeDetectorEngine.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/TouchIndicatorEngine.kt",
+      "hash_match": true
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/VideoEncoder.kt",
+      "hash_match": true
+    }
+  ],
+  "unchanged_hashed_files": 2388,
+  "protected_metadata_deltas": [],
+  "limits": "Protected build/AVD/model files checked by size+mtime only; device private storage not accessed. Five changed files verified by inverse TASK09C patch against baseline hashes, never written from HEAD."
+}

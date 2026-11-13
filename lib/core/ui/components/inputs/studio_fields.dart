@@ -1,7 +1,36 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants/app_icons.dart';
+import '../../../../l10n/localization.dart';
+
 import '../../theme/colors.dart';
 import '../../theme/typography.dart';
+
+/// Controller remains owned by its field/dialog until the route unmounts.
+/// Clearing edits the text only; it never submits or changes keyboard focus.
+class StudioClearTextButton extends StatelessWidget {
+  const StudioClearTextButton({
+    super.key,
+    required this.controller,
+    this.enabled = true,
+  });
+  final TextEditingController controller;
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context) =>
+      ValueListenableBuilder<TextEditingValue>(
+        valueListenable: controller,
+        builder: (context, value, _) => value.text.isEmpty
+            ? const SizedBox.shrink()
+            : IconButton(
+                tooltip: context.l10n.clearText,
+                constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+                onPressed: enabled ? controller.clear : null,
+                icon: const Icon(AppIcons.close),
+              ),
+      );
+}
 
 class StudioTextField extends StatelessWidget {
   const StudioTextField({

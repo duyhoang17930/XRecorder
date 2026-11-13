@@ -1,0 +1,50 @@
+{
+  "historical_files_inspected": 14890,
+  "categories": {
+    "H": 1091,
+    "C": 12695,
+    "B": 758,
+    "A": 138,
+    "F": 204,
+    "G": 4
+  },
+  "reference_text_files": 3170,
+  "groups": {
+    "P01": {
+      "files": 1,
+      "logical_bytes": 89467873,
+      "allocated_bytes": 89468928
+    },
+    "P02": {
+      "files": 148,
+      "logical_bytes": 7399823866,
+      "allocated_bytes": 7400128512
+    },
+    "P03": {
+      "files": 548,
+      "logical_bytes": 81164195,
+      "allocated_bytes": 82285640
+    },
+    "P04": {
+      "files": 697,
+      "logical_bytes": 101044928,
+      "allocated_bytes": 102112480
+    },
+    "P05": {
+      "files": 105,
+      "logical_bytes": 4568060,
+      "allocated_bytes": 4693632
+    },
+    "P06": {
+      "files": 98,
+      "logical_bytes": 31749110394,
+      "allocated_bytes": 31475942592
+    },
+    "P07": {
+      "files": 10989,
+      "logical_bytes": 2172729648,
+      "allocated_bytes": 2188947088
+    }
+  },
+  "limits": "Reused TASK09C paths, no new full-tree traversal. Reference matching is conservative and bounded. This classifier never deletes or moves files; the separate three-cache cleanup is recorded in FILES_REMOVED_MANIFEST.json."
+}

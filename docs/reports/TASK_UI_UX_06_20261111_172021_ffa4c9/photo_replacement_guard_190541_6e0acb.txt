@@ -1,0 +1,42 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_06_workflows_test.dart test/ux_interaction_test.dart --reporter expanded
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart
+00:00 +0: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: selection follows the clip through reorder, Undo and Redo
+00:00 +1: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:00 +2: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +3: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +4: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +5: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +6: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:01 +7: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:02 +8: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:02 +9: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: repeated Create opens one sheet and handoff to recording setup works
+00:02 +10: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: photo Save copy replacement does not lock Studio creation
+00:02 +11: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 light at 200 percent
+00:02 +12: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: cancel New video leaves every draft untouched
+00:03 +13: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 dark at 200 percent
+00:03 +14: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 320.0 dark at 200 percent
+00:03 +15: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact Create preserves guard for 3 rapid taps
+00:03 +16: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 light at 200 percent
+00:04 +17: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact Create preserves guard for 5 rapid taps
+00:04 +18: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 dark at 200 percent
+00:04 +19: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 dark at 200 percent
+00:04 +20: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo controls and discard guard fit 411.0 dark at 200 percent
+00:04 +21: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: compact All tools preserves guard for 5 rapid taps
+00:04 +22: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: picker is lazy and repeated folder requests coalesce; cancel stays reachable with keyboard
+00:04 +23: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Media Details Edit keeps URI and reuses its launched project: content://media/external/video/media/42
+00:05 +24: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: Media Details Edit keeps URI and reuses its launched project: content://media/external/video/media/42
+00:05 +25: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo read failure offers retry and recovers
+00:05 +26: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: photo read failure offers retry and recovers
+00:05 +27: D:/FAU_App/XRecorder/test/ui_ux_06_workflows_test.dart: timeline position does not decode again; trim commits once at gesture end
+00:05 +28: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: saving a photo blocks repeated save and exit; failure preserves edits
+00:05 +29: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: saving a photo blocks repeated save and exit; failure preserves edits
+00:05 +30: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: saving a photo blocks repeated save and exit; failure preserves edits
+00:05 +31: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: saving a photo blocks repeated save and exit; failure preserves edits
+00:05 +32: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: saving a photo blocks repeated save and exit; failure preserves edits
+00:05 +33: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: new project double tap creates one draft and opening is reversible
+00:06 +34: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: project rename survives dialog exit and keyboard inset animation
+00:07 +35: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: media rename survives Cancel/Save while the keyboard closes
+00:07 +36: D:/FAU_App/XRecorder/test/ux_interaction_test.dart: editor waits for autosave and failed save keeps a recovery path before leaving
+00:08 +37: All tests passed!
+
+Exit=0

@@ -1,0 +1,18 @@
+[
+  {
+    "source": "tool/analyze_whisper_benchmark.py",
+    "cases": 8,
+    "match": true
+  },
+  {
+    "source": "tool/evaluate_task07_asr.py",
+    "cases": 8,
+    "match": true
+  },
+  {
+    "preserved_native_report": "build/verification/task07/g2_native_asr_after/emulator_verification.json",
+    "rows": 41,
+    "entire_evaluation_equal": true,
+    "native_reexecuted": false
+  }
+]

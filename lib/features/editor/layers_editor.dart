@@ -222,7 +222,10 @@ class _LayerDialogState extends State<_LayerDialog> {
               controller: text,
               maxLength: 2000,
               maxLines: 4,
-              decoration: InputDecoration(labelText: context.l10n.layerText),
+              decoration: InputDecoration(
+                labelText: context.l10n.layerText,
+                suffixIcon: StudioClearTextButton(controller: text),
+              ),
             ),
           if (value['kind'] == 'sticker')
             DropdownButtonFormField<String>(

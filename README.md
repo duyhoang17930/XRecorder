@@ -9,7 +9,7 @@ flutter run -d <android-device-id>
 
 Implemented: real media catalog and SAF folder access; recording with audio, pause/resume, timers and interruption recovery; screenshot/crop/annotation and facecam; preview/share/rename/trash/restore; persisted editor drafts, trim/split/merge/crop/rotate/effects; MP4/GIF export queue; settings, searchable help and consent-based support handoff. Settings and drafts persist locally. Export should run with the app open.
 
-The UI uses Dark Bento Studio, with persisted Dark/Light/System appearance across the app and video editor. The video preview keeps a black media surface. UI language is English. The five-position navigation keeps Create (+) as an action menu; reselecting a tab scrolls its content to the top. See the [design system](docs/ui/DESIGN_SYSTEM.md) and [UI/UX summary with screenshots](docs/ui/README.md).
+The UI uses Dark Bento Studio, with persisted Dark/Light/System appearance across the app and video editor. The video preview keeps a black media surface. The UI supports 12 languages with a persisted language selection or Follow System; see the [language catalog](lib/l10n/app_languages.dart). The five-position navigation keeps Create (+) as an action menu; reselecting a tab scrolls its content to the top. See the [design system](docs/ui/DESIGN_SYSTEM.md) and [UI/UX summary with screenshots](docs/ui/README.md).
 
 Offline AI subtitles use whisper.cpp on Android, with optional multilingual model download/import, timed subtitle editing, SRT and MP4 burn-in. Audio stays on device. See the [P2/P3 quality report](docs/implementation/P2_P3_FINAL_QUALITY_REPORT_VI.md) for measured scope and open gates. Livestream remains deferred under [issue #1](https://github.com/duyhoang17930/XRecorder/issues/1). Ads, premium entitlements, floating recording controls and shake-to-stop are not exposed. Physical-device and production release gates remain open; see [release validation](docs/xrecorder/phase_13_validation.md).
 
@@ -24,6 +24,7 @@ Integration recording tests require accepting Android permission and screen-shar
 
 Project references:
 
+- [Current documentation, ownership contracts and historical reports](docs/README.md)
 - [TASK07 P2/P3 globalization, native regression and remaining gates](docs/implementation/TASK_07_FINAL_REPORT_VI.md)
 - [Product specification](docs/APP_SPEC_VI.md)
 - [Technology research](docs/TECH_STACK_RESEARCH_VI.md)

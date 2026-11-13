@@ -1,0 +1,10 @@
+--- a/lib/features/settings/recording_settings_form.dart
++++ b/lib/features/settings/recording_settings_form.dart
+@@
+           content: Column(
+             mainAxisSize: MainAxisSize.min,
++            crossAxisAlignment: CrossAxisAlignment.start,
+             children: [
+               const Text('1–86400 seconds, or 0 for no limit.'),
++              const SizedBox(height: 24),
+               TextFormField(

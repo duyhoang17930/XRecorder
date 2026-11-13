@@ -1,0 +1,37 @@
+[
+  {
+    "case": "remove-undo-replace-source-cancel-native",
+    "time": 1794409319.9648094,
+    "labels": [
+      "Back",
+      "UI06_CandidateSelect",
+      "Rename project",
+      "Export",
+      "Play preview",
+      "0.0 / 7.1 seconds",
+      "Preview position",
+      "0.0 seconds",
+      "Edit",
+      "Close",
+      "Selected clip: Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+      "Trim 0.0–2.1s",
+      "Split",
+      "Clip options",
+      "Saved · Originals unchanged",
+      "Timeline",
+      "Add clip",
+      "Clip 1 · 5.0s",
+      "Clip 2 · 2.1s\nTrim clip",
+      "0.0 seconds",
+      "2.1 seconds",
+      "Undo edit",
+      "Redo edit",
+      "Edit",
+      "Audio",
+      "Text",
+      "Subtitles",
+      "Effects",
+      "Transform"
+    ]
+  }
+]

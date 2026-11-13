@@ -2,6 +2,8 @@ include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude:
+    # Read-only upstream source snapshots; not compiled/imported by this app.
+    - docs/reports/**/references/**
     - build/**
     - android/**
     - ios/**

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "D:\\FAU_App\\XRecorder\\tool\\__pycache__\\evaluate_task07_asr.cpython-311.pyc",
+    "relative_path": "tool/__pycache__/evaluate_task07_asr.cpython-311.pyc",
+    "source": "D:\\FAU_App\\XRecorder\\tool\\evaluate_task07_asr.py",
+    "size": 12030,
+    "sha256": "372e8b9aaaf39fc980ce052807ad0e137dc1d1e998d27436847a8ce0b3e61977",
+    "classification": "I. REGENERABLE BUILD ARTIFACT",
+    "group": "A",
+    "git_status": "ignored; not tracked/staged",
+    "owner": "P2/P3 tool cache",
+    "references": "CPython bytecode with valid header and retained .py source; explicit .pyc filename absent from source/test/report guidance. No recovery or QA-evidence directory. Process gate and WhatIf required before deletion.",
+    "deletion_eligibility": "eligible after no-active-Python gate",
+    "approval_status": "authorized by TASK09C Group A",
+    "result": "planned"
+  },
+  {
+    "path": "D:\\FAU_App\\XRecorder\\tool\\__pycache__\\run_qa_existing_app.cpython-311.pyc",
+    "relative_path": "tool/__pycache__/run_qa_existing_app.cpython-311.pyc",
+    "source": "D:\\FAU_App\\XRecorder\\tool\\run_qa_existing_app.py",
+    "size": 35823,
+    "sha256": "2262573da2b8c2e213897829c6042be64909f5bd6f6e36a83766d396a0135910",
+    "classification": "I. REGENERABLE BUILD ARTIFACT",
+    "group": "A",
+    "git_status": "ignored; not tracked/staged",
+    "owner": "P2/P3 tool cache",
+    "references": "CPython bytecode with valid header and retained .py source; explicit .pyc filename absent from source/test/report guidance. No recovery or QA-evidence directory. Process gate and WhatIf required before deletion.",
+    "deletion_eligibility": "eligible after no-active-Python gate",
+    "approval_status": "authorized by TASK09C Group A",
+    "result": "planned"
+  }
+]

@@ -1,0 +1,5 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot build apk --debug --no-pub --target-platform android-x64
+Running Gradle task 'assembleDebug'...                             17.1s
+√ Built build\app\outputs\flutter-apk\app-debug.apk
+
+Exit=0

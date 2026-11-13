@@ -1,0 +1,21 @@
+--------- beginning of system
+11-11 22:28:54.850 24400 24414 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-11 22:29:06.957 24400 24400 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-11 22:29:42.301 24400 24400 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+11-11 22:29:45.157 24400 24400 D InsetsController: Setting requestedVisibleTypes to -9 (was -1)
+11-11 22:31:38.868 24400 24400 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+11-11 22:31:44.001 24400 24400 D InsetsController: Setting requestedVisibleTypes to -9 (was -1)
+11-11 22:35:24.439 24400 24400 V Configuration: Updating configuration, locales updated from [en_US] to [ar]
+11-11 22:41:34.499 24400 24400 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-11 22:44:24.363 24400 24400 V Configuration: Updating configuration, locales updated from [en_US] to [ar]
+11-11 22:45:32.161 24400 24400 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+--------- beginning of main
+11-11 22:49:03.664 24400 28367 D BufferPoolAccessor2.0: bufferpool2 0x785cc71e8198 : 0(0 size) total buffers - 0(0 size) used buffers - 18/23 (recycle/alloc) - 5/22 (fetch/transfer)
+11-11 22:49:03.664 24400 28367 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+11-11 22:49:25.504 24400 24488 W HWUI    : Image decoding logging dropped!
+11-11 22:49:26.180 24400 28368 D BufferPoolAccessor2.0: bufferpool2 0x785cc70f2af8 : 0(0 size) total buffers - 0(0 size) used buffers - 65/71 (recycle/alloc) - 6/66 (fetch/transfer)
+11-11 22:49:26.180 24400 28368 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x785cc70f2af8 cached: 0/0M, 0/0% in use; allocs: 71, 92% recycled; transfers: 66, 91% unfetched
+11-11 22:49:31.186 24400 28367 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 0
+11-11 22:49:53.151 24400 24400 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@fe0b7f8
+11-11 22:50:21.208 24400 24488 W HWUI    : Image decoding logging dropped!
+11-11 22:50:24.317 24400 24400 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@fe0b7f8

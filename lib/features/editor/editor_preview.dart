@@ -18,9 +18,11 @@ class EditorPreview extends StatefulWidget {
     super.key,
     required this.project,
     required this.onPosition,
+    this.fitViewport = false,
   });
   final EditProject project;
   final ValueChanged<Duration> onPosition;
+  final bool fitViewport;
   @override
   State<EditorPreview> createState() => EditorPreviewState();
 }
@@ -215,70 +217,74 @@ class EditorPreviewState extends State<EditorPreview>
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-    children: [
-      ColoredBox(
-        color: Colors.black,
-        child: Align(
-          heightFactor: 1,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: MediaQuery.sizeOf(context).height * .4,
-            ),
-            child: AspectRatio(
-              aspectRatio: aspectRatio,
-              // Media3's SurfaceView needs composition in the Android hierarchy.
-              // Its video surface can be attached after platform-view creation;
-              // do not rely on texture-mode detection before that attachment.
-              child: PlatformViewLink(
-                viewType: 'com.xrecorder/editor_preview',
-                surfaceFactory: (context, controller) => AndroidViewSurface(
-                  controller: controller as AndroidViewController,
-                  hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-                  gestureRecognizers: const {},
-                ),
-                onCreatePlatformView: (params) {
-                  return PlatformViewsService.initExpensiveAndroidView(
-                      id: params.id,
-                      viewType: 'com.xrecorder/editor_preview',
-                      layoutDirection: TextDirection.ltr,
-                    )
-                    ..addOnPlatformViewCreatedListener(
-                      params.onPlatformViewCreated,
-                    )
-                    ..addOnPlatformViewCreatedListener((id) {
-                      _loadedDocument = null;
-                      channel = MethodChannel(
-                        'com.xrecorder/editor_preview/$id',
-                      );
-                      load();
-                      timer?.cancel();
-                      timer = Timer.periodic(
-                        const Duration(milliseconds: 250),
-                        (_) => poll(),
-                      );
-                    })
-                    ..create();
-                },
+  Widget build(BuildContext context) {
+    final surface = ColoredBox(
+      color: Colors.black,
+      child: Align(
+        heightFactor: 1,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.sizeOf(context).height * .4,
+          ),
+          child: AspectRatio(
+            aspectRatio: aspectRatio,
+            // Media3's SurfaceView needs composition in the Android hierarchy.
+            // Its video surface can be attached after platform-view creation;
+            // do not rely on texture-mode detection before that attachment.
+            child: PlatformViewLink(
+              viewType: 'com.xrecorder/editor_preview',
+              surfaceFactory: (context, controller) => AndroidViewSurface(
+                controller: controller as AndroidViewController,
+                hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+                gestureRecognizers: const {},
               ),
+              onCreatePlatformView: (params) {
+                return PlatformViewsService.initExpensiveAndroidView(
+                    id: params.id,
+                    viewType: 'com.xrecorder/editor_preview',
+                    layoutDirection: TextDirection.ltr,
+                  )
+                  ..addOnPlatformViewCreatedListener(
+                    params.onPlatformViewCreated,
+                  )
+                  ..addOnPlatformViewCreatedListener((id) {
+                    _loadedDocument = null;
+                    channel = MethodChannel('com.xrecorder/editor_preview/$id');
+                    load();
+                    timer?.cancel();
+                    timer = Timer.periodic(
+                      const Duration(milliseconds: 250),
+                      (_) => poll(),
+                    );
+                  })
+                  ..create();
+              },
             ),
           ),
         ),
       ),
-      if (error != null)
-        Text(
-          context.message(
-            UserMessages.failure(error, operation: UserOperation.preview).text,
+    );
+    return Column(
+      children: [
+        if (widget.fitViewport) Expanded(child: surface) else surface,
+        if (error != null)
+          Text(
+            context.message(
+              UserMessages.failure(
+                error,
+                operation: UserOperation.preview,
+              ).text,
+            ),
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
-          style: TextStyle(color: Theme.of(context).colorScheme.error),
+        TextButton.icon(
+          onPressed: () => command(playing ? 'pause' : 'play'),
+          icon: Icon(playing ? AppIcons.pause : AppIcons.play),
+          label: Text(
+            playing ? context.l10n.pausePreview : context.l10n.playPreview,
+          ),
         ),
-      TextButton.icon(
-        onPressed: () => command(playing ? 'pause' : 'play'),
-        icon: Icon(playing ? AppIcons.pause : AppIcons.play),
-        label: Text(
-          playing ? context.l10n.pausePreview : context.l10n.playPreview,
-        ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }

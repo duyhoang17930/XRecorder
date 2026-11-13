@@ -1,0 +1,175 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_05_motion_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart
+00:00 +0: page transition rebuilds do not accumulate animation listeners
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: empty
+  Actual: Set:[
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            Closure: (AnimationStatus) => void from Function '_updateCurveDirection@486411118':.,
+            ...
+          ]
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart:36:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart line 36
+The test description was:
+  page transition rebuilds do not accumulate animation listeners
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: page transition rebuilds do not accumulate animation listeners [E]
+  Test failed. See exception logs above.
+  The test description was: page transition rebuilds do not accumulate animation listeners
+  
+00:00 +0 -1: one dialog per nested origin, current dialog can open a child
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 2 widgets with text "Parent dialog": [
+            Text("Parent dialog", dependencies: [DefaultSelectionStyle, DefaultTextStyle,
+MediaQuery]),
+            Text("Parent dialog", dependencies: [DefaultSelectionStyle, DefaultTextStyle,
+MediaQuery]),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart:52:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart line 52
+The test description was:
+  one dialog per nested origin, current dialog can open a child
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -2: one dialog per nested origin, current dialog can open a child [E]
+  Test failed. See exception logs above.
+  The test description was: one dialog per nested origin, current dialog can open a child
+  
+00:00 +0 -2: notices finish their entrance immediately with Reduce Motion
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: true
+  Actual: <false>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart:73:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart line 73
+The test description was:
+  notices finish their entrance immediately with Reduce Motion
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -3: notices finish their entrance immediately with Reduce Motion [E]
+  Test failed. See exception logs above.
+  The test description was: notices finish their entrance immediately with Reduce Motion
+  
+00:01 +0 -3: navigation labels contrast over black and white media dark=false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than or equal to <4.5>
+  Actual: <3.170530901995313>
+   Which: is not a value greater than or equal to <4.5>
+label 0 over Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace:
+ColorSpace.sRGB)
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart:93:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart line 93
+The test description was:
+  navigation labels contrast over black and white media dark=false
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -4: navigation labels contrast over black and white media dark=false [E]
+  Test failed. See exception logs above.
+  The test description was: navigation labels contrast over black and white media dark=false
+  
+00:01 +0 -4: navigation labels contrast over black and white media dark=true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: a value greater than or equal to <4.5>
+  Actual: <2.39680786006504>
+   Which: is not a value greater than or equal to <4.5>
+label 0 over Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace:
+ColorSpace.sRGB)
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart:93:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart line 93
+The test description was:
+  navigation labels contrast over black and white media dark=true
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -5: navigation labels contrast over black and white media dark=true [E]
+  Test failed. See exception logs above.
+  The test description was: navigation labels contrast over black and white media dark=true
+  
+00:01 +0 -5: Some tests failed.
+
+Failing tests:
+  D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart: navigation labels contrast over black and white media dark=false
+  D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart: navigation labels contrast over black and white media dark=true
+  D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart: notices finish their entrance immediately with Reduce Motion
+  D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart: one dialog per nested origin, current dialog can open a child
+  D:/FAU_App/XRecorder/test/ui_ux_05_motion_test.dart: page transition rebuilds do not accumulate animation listeners
+
+Exit=1

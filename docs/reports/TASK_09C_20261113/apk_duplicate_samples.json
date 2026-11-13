@@ -1,0 +1,32 @@
+[
+  {
+    "files": [
+      {
+        "path": "build/verification/task09/run_20261109T091518633188Z/TASK09-main-final-v1-app-arm64-v8a-profile.apk",
+        "bytes": 48538842,
+        "sha256": "5f2aa460ab126cc6894f05b03f49eb3b634dbc005c2d8200a7002e5d2195bd3e"
+      },
+      {
+        "path": "build/verification/task09/run_20261109T091518633188Z/TASK09-main-final-v2-app-arm64-v8a-profile.apk",
+        "bytes": 48538842,
+        "sha256": "3ead2c63181b3ef2dfc9579a6f3c244efd74b7b3971051b2ccd25b4825ef4103"
+      }
+    ],
+    "identical": false
+  },
+  {
+    "files": [
+      {
+        "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/TASK09B-document-v1-x64.apk",
+        "bytes": 39460830,
+        "sha256": "4260c367eaac7d205b2f31ea8fe0ddd257a8f422032240bea2ada094ae84cc30"
+      },
+      {
+        "path": "build/verification/task09b/run_20261109T113727956224Z_f64203/TASK09B-document-v2-x64.apk",
+        "bytes": 39460830,
+        "sha256": "43a1bb9cadeaf69b39dbb7a2c0fc29a4dfeeb02b79881aea4335387499878f58"
+      }
+    ],
+    "identical": false
+  }
+]

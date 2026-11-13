@@ -5,22 +5,36 @@ import '../../theme/motion.dart';
 import '../../theme/spacing.dart';
 import '../../theme/typography.dart';
 
+final _dialogOrigins = Expando<Set<ModalRoute<dynamic>?>>();
+
 Future<T?> showStudioDialog<T>({
   required BuildContext context,
   required WidgetBuilder builder,
   bool barrierDismissible = true,
-}) {
-  if (ModalRoute.of(context)?.isCurrent == false) return Future<T?>.value();
-  return showDialog<T>(
-    context: context,
-    barrierDismissible: barrierDismissible,
-    barrierColor: AppColors.mediaScrim,
-    builder: builder,
-    animationStyle: AnimationStyle(
-      duration: context.motion(AppMotion.standard),
-      reverseDuration: context.motion(AppMotion.fast),
-    ),
-  );
+}) async {
+  if (!context.mounted) return null;
+  final origin = ModalRoute.of(context);
+  if (origin?.isCurrent == false) return null;
+  final navigator = Navigator.of(context, rootNavigator: true);
+  final origins = _dialogOrigins[navigator] ??= <ModalRoute<dynamic>?>{};
+  // A branch route can remain current while a root dialog covers its shell.
+  // Lock that origin synchronously; a current dialog may still open a child.
+  if (!origins.add(origin)) return null;
+  try {
+    return await showDialog<T>(
+      context: context,
+      useRootNavigator: true,
+      barrierDismissible: barrierDismissible,
+      barrierColor: AppColors.mediaScrim,
+      builder: builder,
+      animationStyle: AnimationStyle(
+        duration: context.motion(AppMotion.standard),
+        reverseDuration: context.motion(AppMotion.fast),
+      ),
+    );
+  } finally {
+    origins.remove(origin);
+  }
 }
 
 class StudioDialog extends StatelessWidget {

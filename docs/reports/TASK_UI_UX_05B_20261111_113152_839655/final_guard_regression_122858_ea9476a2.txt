@@ -1,0 +1,43 @@
+D:\Android\flutter\bin\cache\dart-sdk\bin\dart.exe D:\Android\flutter\bin\cache\flutter_tools.snapshot test --no-pub test/ui_ux_05b_acceptance_test.dart
+00:00 +0: loading D:/FAU_App/XRecorder/test/ui_ux_05b_acceptance_test.dart
+00:00 +0: one recording entry opens existing P1 form and Back preserves preferences
+00:02 +1: Vietnamese sort uses context and keeps every existing option
+00:02 +2: root headers width=320.0 scale=1.0 dark=false in LTR/RTL and landscape
+00:03 +3: root headers width=320.0 scale=1.0 dark=true in LTR/RTL and landscape
+00:03 +4: root headers width=320.0 scale=1.5 dark=false in LTR/RTL and landscape
+00:03 +5: root headers width=320.0 scale=1.5 dark=true in LTR/RTL and landscape
+00:03 +6: root headers width=320.0 scale=2.0 dark=false in LTR/RTL and landscape
+00:03 +7: root headers width=320.0 scale=2.0 dark=true in LTR/RTL and landscape
+00:03 +8: root headers width=360.0 scale=1.0 dark=false in LTR/RTL and landscape
+00:03 +9: root headers width=360.0 scale=1.0 dark=true in LTR/RTL and landscape
+00:03 +10: root headers width=360.0 scale=1.5 dark=false in LTR/RTL and landscape
+00:03 +11: root headers width=360.0 scale=1.5 dark=true in LTR/RTL and landscape
+00:04 +12: root headers width=360.0 scale=2.0 dark=false in LTR/RTL and landscape
+00:04 +13: root headers width=360.0 scale=2.0 dark=true in LTR/RTL and landscape
+00:04 +14: root headers width=393.0 scale=1.0 dark=false in LTR/RTL and landscape
+00:04 +15: root headers width=393.0 scale=1.0 dark=true in LTR/RTL and landscape
+00:04 +16: root headers width=393.0 scale=1.5 dark=false in LTR/RTL and landscape
+00:04 +17: root headers width=393.0 scale=1.5 dark=true in LTR/RTL and landscape
+00:04 +18: root headers width=393.0 scale=2.0 dark=false in LTR/RTL and landscape
+00:04 +19: root headers width=393.0 scale=2.0 dark=true in LTR/RTL and landscape
+00:04 +20: root headers width=411.0 scale=1.0 dark=false in LTR/RTL and landscape
+00:04 +21: root headers width=411.0 scale=1.0 dark=true in LTR/RTL and landscape
+00:04 +22: root headers width=411.0 scale=1.5 dark=false in LTR/RTL and landscape
+00:04 +23: root headers width=411.0 scale=1.5 dark=true in LTR/RTL and landscape
+00:05 +24: root headers width=411.0 scale=2.0 dark=false in LTR/RTL and landscape
+00:05 +25: root headers width=411.0 scale=2.0 dark=true in LTR/RTL and landscape
+00:05 +26: opening tap burst=2 reduced=false width=411.0 cannot activate sheet or scrim
+00:05 +27: opening tap burst=2 reduced=true width=411.0 cannot activate sheet or scrim
+00:05 +28: opening tap burst=3 reduced=false width=411.0 cannot activate sheet or scrim
+00:05 +29: opening tap burst=3 reduced=true width=411.0 cannot activate sheet or scrim
+00:05 +30: opening tap burst=5 reduced=false width=411.0 cannot activate sheet or scrim
+00:05 +31: opening tap burst=5 reduced=true width=411.0 cannot activate sheet or scrim
+00:05 +32: opening tap burst=2 reduced=false width=800.0 cannot activate sheet or scrim
+00:05 +33: opening tap burst=2 reduced=true width=800.0 cannot activate sheet or scrim
+00:05 +34: opening tap burst=3 reduced=false width=800.0 cannot activate sheet or scrim
+00:05 +35: opening tap burst=3 reduced=true width=800.0 cannot activate sheet or scrim
+00:05 +36: opening tap burst=5 reduced=false width=800.0 cannot activate sheet or scrim
+00:06 +37: opening tap burst=5 reduced=true width=800.0 cannot activate sheet or scrim
+00:06 +38: All tests passed!
+
+Exit=0

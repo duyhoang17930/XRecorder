@@ -1,0 +1,2 @@
+dart format: 10 scoped Dart files, 0 changed, exit 0.
+git diff --check: exit 0; LF/CRLF informational warnings only.

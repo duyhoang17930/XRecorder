@@ -1,0 +1,38 @@
+[
+  {
+    "case": "rename-cancel-keyboard-0",
+    "labels": [
+      "Back",
+      "Media details",
+      "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+      "Preview",
+      "Preview",
+      "Share",
+      "File management",
+      "Rename",
+      "Copy to folder",
+      "Move to folder",
+      "Move to Trash",
+      "Size\n426.3 KiB",
+      "Format\nvideo/mp4"
+    ]
+  },
+  {
+    "case": "rename-cancel-keyboard-1",
+    "labels": [
+      "Back",
+      "Media details",
+      "Edited_ca13829a-b90f-4ac0-96f1-8723256517db.mp4",
+      "Preview",
+      "Preview",
+      "Share",
+      "File management",
+      "Rename",
+      "Copy to folder",
+      "Move to folder",
+      "Move to Trash",
+      "Size\n426.3 KiB",
+      "Format\nvideo/mp4"
+    ]
+  }
+]

@@ -1,0 +1,722 @@
+[
+  {
+    "document": "docs/APP_SPEC_VI.md",
+    "target": "implementation/P2_P3_AI_SUBTITLE_EVALUATION.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/APP_SPEC_VI.md",
+    "target": "implementation/P2_P3_FINAL_QUALITY_REPORT_VI.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/repository_audit.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/phase_1_validation.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/phase_2_validation.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/phase_3_validation.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/phase_4_validation.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/phase_5_validation.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/phase_6_validation.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/phase_7_validation.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/phase_8_validation.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/phase_9_validation.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/REFERENCE_INDEX.md",
+    "target": "xrecorder/phase_11_validation.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/TECH_STACK_RESEARCH_VI.md",
+    "target": "implementation/P2_P3_AI_SUBTITLE_EVALUATION.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_07_ASR_CONTRACT_AND_BENCHMARK.md",
+    "target": "TASK_07_TEST_EVIDENCE.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_BUG_REGISTER.md",
+    "target": "TASK_09_BUG_REGISTER.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_FINAL_REPORT_VI.md",
+    "target": "TASK_09B_GLOBAL_HCI_REPORT.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_FINAL_REPORT_VI.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/profile_ab_summary_v1.json",
+    "proposal": "P05",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_FINAL_REPORT_VI.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/profile_ab_decision_v1.json",
+    "proposal": "P05",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_FINAL_REPORT_VI.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/main_startup_ab_e0f130a1d7d448c88a1972f1e90153a3/startup_ab.json",
+    "proposal": "P05",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_FINAL_REPORT_VI.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/final_main_build_v3.py",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_FINAL_REPORT_VI.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/compact_main_qa_v1.py",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_FINAL_REPORT_VI.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/preservation_final_v1_8a2a65dc5c05469daf3e38dfa69559e3.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_FINAL_REPORT_VI.md",
+    "target": "TASK_09B_SOURCE_AND_RUNTIME_INVENTORY.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_FINAL_REPORT_VI.md",
+    "target": "TASK_09B_GLOBAL_HCI_REPORT.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_FINAL_REPORT_VI.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/preservation_final_v1_7929eb3d28a54024a61c275b8bdec6c9.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_P1_HANDOFF_UPDATE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/flutter_full_v3_boundary_candidate.jsonl",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_P1_HANDOFF_UPDATE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/flutter_full_summary_v3.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_P1_HANDOFF_UPDATE.md",
+    "target": "../../build/verification/task09/run_20261109T091518633188Z/portrait_probe_task09_v1.log",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_SCENARIO_MATRIX.md",
+    "target": "TASK_09_TEST_EVIDENCE.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/flutter_full_summary_v3.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/flutter_full_v3_boundary_candidate.jsonl",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/junit_final_v6/summary.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/source_inventory_final_v3.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/export_process_19e26e3d3525480b990a3dcaf0771501/verification.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/export_process_19e26e3d3525480b990a3dcaf0771501/independent_validation_v2_c50a529f176849fca724168e1e186101/verification.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "TASK_09B_GLOBAL_HCI_REPORT.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/library_source_archive_0c4ac8d90dcf40a28609a47c20465ba8/verification.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/profile_ab_summary_v1.json",
+    "proposal": "P05",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/profile_ab_decision_v1.json",
+    "proposal": "P05",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/profile_ab_v1.py",
+    "proposal": "P05",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/main_startup_ab_e0f130a1d7d448c88a1972f1e90153a3/startup_ab.json",
+    "proposal": "P05",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/final_main_apks_v1.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/compact_main_qa_v1.py",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/native_ui_7a2beb51da9f41059a58bfecd12dd4b7/main_package_smoke.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/native_ui_1f7a83f5795d4fe78749cc400b85fa7a/main_package_smoke.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/native_ui_93462000268b4c759a1bbd688e746d9d/shortcuts.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/native_ui_7cd8864ad0d340f89a29491849b08db8/shortcuts.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/preservation_final_v1_8a2a65dc5c05469daf3e38dfa69559e3.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "TASK_09_TEST_EVIDENCE.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09B_TEST_EVIDENCE.md",
+    "target": "../../build/verification/task09b/run_20261109T113727956224Z_f64203/preservation_final_v1_7929eb3d28a54024a61c275b8bdec6c9.json",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09_P1_HANDOFF.md",
+    "target": "../../build/verification/task09/run_20261109T091518633188Z/baseline_flutter.log",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09_P1_HANDOFF.md",
+    "target": "../../build/verification/task09/run_20261109T091518633188Z/final_flutter_v4.log",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/implementation/TASK_09_P1_HANDOFF.md",
+    "target": "../../build/verification/task09/run_20261109T091518633188Z/portrait_probe_task09_v1.log",
+    "proposal": "P07",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/performance/README.md",
+    "target": "METRICS.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/P1_UI05B_HANDOFF.md",
+    "target": "full_host_final_161726_24f0a8b3.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/P1_UI05B_HANDOFF.md",
+    "target": "native_player_result_final.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/P1_UI05B_HANDOFF.md",
+    "target": "final_recording_destination_light.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/P1_UI05B_HANDOFF.md",
+    "target": "hardcoded_ui_review.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/P1_UI05B_HANDOFF.md",
+    "target": "final_host_storage_preservation.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_05B_20261111_113152_839655/P1_UI05B_HANDOFF.md",
+    "target": "final_device_preservation.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/P1_UI06_HANDOFF.md",
+    "target": "data_preservation_acceptance.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "EDITOR_REDESIGN_REFERENCE_AUDIT.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "PHASE_A_EDITOR_ARCHITECTURE.md",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "editor_wireframe.svg",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_screens_qa.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_create.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_root_video.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "selection_native_verified.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_tool_menus.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_eraser_roundtrip.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "source_boundary_final_v2.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "format_180202_75414e.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "short_layout_analyze_222400_4fe13c.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "short_android_insets_green_222329_2ed5f6.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "workspace_surface_fixture_180300_c48c4b.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "final_v2_full_222727_bd151e.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "final_v2_debug_222607_a6159a.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "final_v2_profile_222627_84f947.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "toolbar_accessibility_red_212910_76b387.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "short_android_insets_red_222237_3bdcba.txt",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_apk_identity.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "baseline_editor_v2_paused_video_after_rotation.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_existing_saf_project.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "baseline_editor_v2_photo.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_photo_default_light.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_video_workspace.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_video_landscape.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_video_dark.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_video_dark_landscape.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_audio_dark.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_photo_keyboard_360_text150.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_photo_landscape_360_text150.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_photo_color_picker.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_photo_dark.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_photo_three_shapes.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_root_video.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_root_photo.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_root_edit.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_root_settings.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_media_details.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_clear_rename.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_video_320_arabic_text200.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_effects_arabic_landscape.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_photo_320_arabic_text200.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/UI06_acceptance_video_interactions.mp4",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/UI06_acceptance_photo_interactions.mp4",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/UI06_acceptance_general_interactions.mp4",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/UI06_acceptance_crop_transform.mp4",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/video_keyframe_review.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_screens_resume.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_output_validation.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_output.mp4",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_photo_output.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "native_final_v2/acceptance_crop_output.png",
+    "proposal": "P03",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "performance_comparison.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "storage_final.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/reports/TASK_UI_UX_06_20261111_172021_ffa4c9/TASK_UI_UX_06_EDITOR_REDESIGN_REPORT_v2.md",
+    "target": "resume_avd_c343ae55.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/ui/README.md",
+    "target": "verification.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  },
+  {
+    "document": "docs/ui/UX_REPORT_VI.md",
+    "target": "verification.json",
+    "proposal": "P04",
+    "required_action": "Keep original until archive catalog/link revision and dependency-closure check are approved; lossless bundle includes target and relevant reports."
+  }
+]

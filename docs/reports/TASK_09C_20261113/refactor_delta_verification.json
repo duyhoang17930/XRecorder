@@ -1,0 +1,28 @@
+[
+  {
+    "path": "lib/features/editor/editor_screen.dart",
+    "baseline_reconstruction_match": true,
+    "baseline_sha256": "ebf7b7f6e68b4e4e550741ead4a8e7c872d7e709582ac8e5a43795980818d424",
+    "current_sha256": "374e4aea898e1fd5153298e29888c3f407e6399f6ce027b7cd00550430e1910c"
+  },
+  {
+    "path": "lib/features/media/video_details_screen.dart",
+    "baseline_reconstruction_match": true,
+    "baseline_sha256": "bff53a897cdadba6f385f79b77de591922676ffe7c55fec886ef36fa7283f97b",
+    "current_sha256": "bf5b0cc9c8792efcb306d58875c67f26b57324b702683e4201c5127de24eb43f"
+  },
+  {
+    "path": "tool/evaluate_task07_asr.py",
+    "baseline_reconstruction_match": false
+  },
+  {
+    "path": "tool/analyze_whisper_benchmark.py",
+    "baseline_reconstruction_match": false
+  },
+  {
+    "path": "README.md",
+    "baseline_reconstruction_match": true,
+    "baseline_sha256": "4975f45abbb967f960461097557cf4479b8f6453075e394888c782cce9df41fc",
+    "current_sha256": "9b41bbc001a88e9e1c888fb56be8164fab8f331869b52cd5d0bf202129deef7b"
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "case": "debug-reduced-motion",
+    "settingsApplied": {
+      "transition_animation_scale": "0",
+      "animator_duration_scale": "0"
+    },
+    "labels": [
+      "Settings",
+      "CAPTURE",
+      "Video quality\n1080p FHD · 60 FPS · 16 Mbps",
+      "Audio, countdown & facecam",
+      "APPEARANCE",
+      "Theme\nSystem follows your device appearance.",
+      "Dark",
+      "Light",
+      "System",
+      "App language\nFollow system",
+      "YOUR WORKSPACE",
+      "Media storage\nSave locations",
+      "Trash & restore\nCleanup on opening Trash after 24 hours",
+      "Export queue",
+      "Video",
+      "Video",
+      "Photo",
+      "Photo",
+      "Edit",
+      "Edit",
+      "Settings",
+      "Settings",
+      "Create",
+      "Create"
+    ]
+  },
+  {
+    "restoredGlobals": {
+      "transition_animation_scale": "1.0",
+      "animator_duration_scale": "null"
+    }
+  }
+]

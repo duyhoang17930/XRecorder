@@ -1,0 +1,11 @@
+{
+  "buildBeforeBytes": 142268138091,
+  "buildAfterBytes": 142649801453,
+  "buildGrowthBytes": 381663362,
+  "buildFilesAfter": 20344,
+  "freeBeforeBytes": 29570678784,
+  "freeAfterBytes": 29151350784,
+  "evidenceBytes": 32426133,
+  "skippedReparseDirectories": [],
+  "measurement": "logical size, not allocated size; drive free may include unrelated activity"
+}

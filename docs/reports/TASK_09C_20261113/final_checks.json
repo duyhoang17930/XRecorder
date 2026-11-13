@@ -1,0 +1,36 @@
+{
+  "head_unchanged": true,
+  "staging_empty": true,
+  "expected_changed_files": [
+    "README.md",
+    "lib/features/editor/editor_screen.dart",
+    "lib/features/media/video_details_screen.dart",
+    "tool/analyze_whisper_benchmark.py",
+    "tool/evaluate_task07_asr.py"
+  ],
+  "unexpected_changed_files": [],
+  "missing_files": [
+    "tool/__pycache__/evaluate_task07_asr.cpython-311.pyc",
+    "tool/__pycache__/run_qa_existing_app.cpython-311.pyc"
+  ],
+  "unexpected_missing_files": [],
+  "git_diff_check_exit": 0,
+  "git_diff_check_stderr": "warning: in the working copy of 'android/app/src/androidTest/AndroidManifest.xml', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Task07AccessibilityInstrumentation.java', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'lib/core/widgets/studio_shell.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'test/editor_hci_test.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'test/localization_test.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'test/task09b_shared_interactions_test.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'test/ux_interaction_test.dart', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tool/evaluate_task07_asr.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tool/sync_p2_native_l10n.py', LF will be replaced by CRLF the next time Git touches it\n",
+  "new_text_whitespace": [],
+  "local_links_checked": 61,
+  "broken_links": [],
+  "control_character_files": [],
+  "local_dart_imports_checked": 368,
+  "broken_dart_imports": [],
+  "python_syntax_checked": [
+    "tool/repository_inventory.py",
+    "tool/asr_metrics.py",
+    "tool/tests/test_asr_metrics.py",
+    "tool/evaluate_task07_asr.py",
+    "tool/analyze_whisper_benchmark.py",
+    "docs/reports/TASK_09C_20261113/audit_metadata.py",
+    "docs/reports/TASK_09C_20261113/final_checks.py"
+  ],
+  "limits": "Local link targets checked, not remote URLs or every Markdown anchor. Historical XML/l10n baseline findings remain separate. Native/device QA not run.",
+  "task09c_integrity": "PASS"
+}

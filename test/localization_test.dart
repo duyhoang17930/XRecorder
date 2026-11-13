@@ -76,8 +76,12 @@ void main() {
             as Map<String, dynamic>;
     final source = read('en');
     final keys = source.keys.where((v) => !v.startsWith('@')).toSet();
-    for (final locale in AppLanguages.supported) {
-      final tag = locale.toLanguageTag().replaceAll('-', '_');
+    for (final tag in [
+      for (final locale in AppLanguages.supported)
+        locale.toLanguageTag().replaceAll('-', '_'),
+      'pt',
+      'zh',
+    ]) {
       final resource = read(tag);
       expect(
         resource.keys.where((v) => !v.startsWith('@')).toSet(),
@@ -132,9 +136,42 @@ void main() {
     }
     for (final pair in [('pt', 'pt_BR'), ('zh', 'zh_Hans')]) {
       final parent = read(pair.$1), child = read(pair.$2);
+      // Reviewed UI02 and UI06 ecrã/tela regional word choices are intentional. Keep every
+      // other alias string equal, and validate placeholders/plurals above for
+      // all 14 ARBs, including parents not exposed as separate UI locales.
+      const regionalPortuguese = {
+        'homeScreenShortcuts',
+        'captureScreenshot',
+        'onboardingEditTitle',
+        'onboardingSkip',
+        'onboardingNext',
+        'onboardingSaveFailed',
+        'onboardingProgress',
+      };
+      final differences = {
+        for (final key in keys)
+          if (parent[key] != child[key]) key,
+      };
+      expect(differences, pair.$1 == 'pt' ? regionalPortuguese : isEmpty);
+      if (pair.$1 == 'pt') {
+        expect(parent['onboardingNext'], 'Seguinte');
+        expect(child['onboardingNext'], 'Avançar');
+        expect(parent['onboardingSkip'], 'Ignorar');
+        expect(child['onboardingSkip'], 'Pular');
+        expect(parent['homeScreenShortcuts'], 'Atalhos do ecrã inicial');
+        expect(child['homeScreenShortcuts'], 'Atalhos da tela inicial');
+        expect(parent['captureScreenshot'], 'Captura de ecrã');
+        expect(child['captureScreenshot'], 'Captura de tela');
+      }
       expect(
-        {for (final key in keys) key: parent[key]},
-        {for (final key in keys) key: child[key]},
+        {
+          for (final key in keys)
+            if (!differences.contains(key)) key: parent[key],
+        },
+        {
+          for (final key in keys)
+            if (!differences.contains(key)) key: child[key],
+        },
       );
     }
   });

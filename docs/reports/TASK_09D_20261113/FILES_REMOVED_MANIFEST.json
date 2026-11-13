@@ -1,0 +1,76 @@
+{
+  "task": "TASK09D",
+  "files_removed": 3,
+  "logical_bytes_removed": 245697944,
+  "allocated_bytes_removed": 245702656,
+  "free_before": 27931983872,
+  "free_after": 28177686528,
+  "observed_volume_free_gain": 245702656,
+  "dry_run": "PASS: exact WhatIf before execution",
+  "exclusive_open": "PASS for all three files",
+  "process_gate": "Only previously verified IDE/daemon Dart processes; no test runner or Python",
+  "files": [
+    {
+      "path": "D:\\FAU_App\\XRecorder\\build\\test_cache\\build\\3c684ac4b56475b90b9300666ff7e487.cache.dill.track.dill",
+      "relative_path": "build/test_cache/build/3c684ac4b56475b90b9300666ff7e487.cache.dill.track.dill",
+      "logical_bytes": 80785168,
+      "allocated_bytes": 80785408,
+      "sha256": "bd213b0aa117542a71d56f037c5382aaa3d77b31b4c49a6f33c0c186fe455eb6",
+      "magic": "90abcdef",
+      "references": [
+        "build/verification/task07/g5_size_after_release.json",
+        "build/verification/task07/g5_size_before_release.json"
+      ],
+      "active_references": [],
+      "git_status": "ignored; not tracked/staged",
+      "regeneration": "Flutter TestCompiler creates incremental kernel at build/test_cache; reads source and package config, repopulates on next flutter test. SDK test_compiler.dart lines 104-138.",
+      "classification": "E regenerable temporary compiler cache",
+      "unique_evidence": false,
+      "protected": false,
+      "preflight": "requires current process gate, unchanged hash, exclusive handle, path containment and WhatIf"
+    },
+    {
+      "path": "D:\\FAU_App\\XRecorder\\build\\test_cache\\build\\e16ac8b54f137c36ef5418007d3d10dc.cache.dill.track.dill",
+      "relative_path": "build/test_cache/build/e16ac8b54f137c36ef5418007d3d10dc.cache.dill.track.dill",
+      "logical_bytes": 84065576,
+      "allocated_bytes": 84066304,
+      "sha256": "f3b84bf1b70df223cc0159152cf62db0424323066a8a014b0b41e038c777fc35",
+      "magic": "90abcdef",
+      "references": [
+        "build/verification/task08/m5_workspace_inventory_v1.json",
+        "build/verification/task08/m5_workspace_inventory_v2.json",
+        "build/verification/task08/m5_workspace_inventory_v3.json",
+        "build/verification/task07/g5_size_after_release.json",
+        "build/verification/task07/g5_size_before_release.json"
+      ],
+      "active_references": [],
+      "git_status": "ignored; not tracked/staged",
+      "regeneration": "Flutter TestCompiler creates incremental kernel at build/test_cache; reads source and package config, repopulates on next flutter test. SDK test_compiler.dart lines 104-138.",
+      "classification": "E regenerable temporary compiler cache",
+      "unique_evidence": false,
+      "protected": false,
+      "preflight": "requires current process gate, unchanged hash, exclusive handle, path containment and WhatIf"
+    },
+    {
+      "path": "D:\\FAU_App\\XRecorder\\build\\test_cache\\build\\f735b211c3ae5e7044c5ebcb3ecb25d0.cache.dill.track.dill",
+      "relative_path": "build/test_cache/build/f735b211c3ae5e7044c5ebcb3ecb25d0.cache.dill.track.dill",
+      "logical_bytes": 80847200,
+      "allocated_bytes": 80850944,
+      "sha256": "a62826a6458fcf39e963db5d134ab95f4b7dcb7d673c00a47c5c891a10c301b4",
+      "magic": "90abcdef",
+      "references": [
+        "build/verification/task07/g5_size_after_release.json",
+        "build/verification/task07/g5_size_before_release.json"
+      ],
+      "active_references": [],
+      "git_status": "ignored; not tracked/staged",
+      "regeneration": "Flutter TestCompiler creates incremental kernel at build/test_cache; reads source and package config, repopulates on next flutter test. SDK test_compiler.dart lines 104-138.",
+      "classification": "E regenerable temporary compiler cache",
+      "unique_evidence": false,
+      "protected": false,
+      "preflight": "requires current process gate, unchanged hash, exclusive handle, path containment and WhatIf"
+    }
+  ],
+  "historical_files_deleted": 0,
+  "limitation": "Volume delta can include unrelated host writes; allocation sizes and hard-link count were measured separately."
+}

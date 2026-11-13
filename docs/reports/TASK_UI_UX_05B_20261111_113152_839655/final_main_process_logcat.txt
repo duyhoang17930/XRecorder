@@ -1,0 +1,373 @@
+--------- beginning of main
+11-11 16:21:58.220  4412  4412 I order.xrecorder: Late-enabling -Xcheck:jni
+11-11 16:21:58.286  4412  4412 I order.xrecorder: Using CollectorTypeCMC GC.
+11-11 16:21:58.287  4412  4412 W order.xrecorder: Unexpected CPU variant for x86: x86_64.
+11-11 16:21:58.287  4412  4412 W order.xrecorder: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, alderlake, default
+11-11 16:21:58.348  4412  4412 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-11 16:21:58.601  4412  4412 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-11 16:21:58.601  4412  4412 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+11-11 16:21:58.940  4412  4412 D nativeloader: Configuring clns-9 for other apk /data/app/~~jBo2teRMUP-Tow2AnFZifw==/com.xrecorder.xrecorder-oUcJWE23qlAladJaIKeoeQ==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~jBo2teRMUP-Tow2AnFZifw==/com.xrecorder.xrecorder-oUcJWE23qlAladJaIKeoeQ==/lib/x86_64:/data/app/~~jBo2teRMUP-Tow2AnFZifw==/com.xrecorder.xrecorder-oUcJWE23qlAladJaIKeoeQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.xrecorder.xrecorder
+11-11 16:21:58.957  4412  4412 I order.xrecorder: AssetManager2(0x78bf8760e438) locale list changing from [] to [en-US]
+11-11 16:21:58.974  4412  4412 V GraphicsEnvironment: Currently set values for:
+11-11 16:21:58.974  4412  4412 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-11 16:21:58.974  4412  4412 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-11 16:21:58.974  4412  4412 V GraphicsEnvironment: com.xrecorder.xrecorder is not listed in per-application setting
+11-11 16:21:58.975  4412  4412 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+11-11 16:21:58.975  4412  4412 V GraphicsEnvironment: com.xrecorder.xrecorder is not listed in ANGLE allowlist or settings, returning default
+11-11 16:21:58.976  4412  4412 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+--------- beginning of system
+11-11 16:21:59.088  4412  4427 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-11 16:21:59.090  4412  4412 I order.xrecorder: AssetManager2(0x78bf8760beb8) locale list changing from [] to [en-US]
+11-11 16:21:59.123  4412  4412 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-11 16:21:59.164  4412  4427 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-11 16:21:59.165  4412  4427 I EGL_emulation: Opening libGLESv2_emulation.so
+11-11 16:21:59.169  4412  4430 I ResourceExtractor: Found extracted resources res_timestamp-1-1794373931146
+11-11 16:21:59.169  4412  4430 I ResourceExtractor: Resource version mismatch res_timestamp-1-1794388904192
+11-11 16:21:59.171  4412  4429 D FlutterJNI: Beginning load of flutter...
+11-11 16:21:59.176  4412  4427 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-11 16:21:59.252  4412  4429 D nativeloader: Load /data/app/~~jBo2teRMUP-Tow2AnFZifw==/com.xrecorder.xrecorder-oUcJWE23qlAladJaIKeoeQ==/base.apk!/lib/x86_64/libflutter.so using class loader ns clns-9 (caller=/data/app/~~jBo2teRMUP-Tow2AnFZifw==/com.xrecorder.xrecorder-oUcJWE23qlAladJaIKeoeQ==/base.apk): ok
+11-11 16:21:59.256  4412  4429 D FlutterJNI: flutter (null) was loaded normally!
+11-11 16:21:59.263  4412  4431 D skia    : [SkFontMgr Android Parser] '/product/etc/fonts_customization.xml' could not be opened
+11-11 16:21:59.689  4412  4430 I ResourceExtractor: Extracted baseline resource assets/flutter_assets/kernel_blob.bin
+11-11 16:21:59.689  4412  4430 I ResourceExtractor: Extracted baseline resource assets/flutter_assets/vm_snapshot_data
+11-11 16:21:59.765  4412  4430 I ResourceExtractor: Extracted baseline resource assets/flutter_assets/isolate_snapshot_data
+11-11 16:21:59.786  4412  4412 I order.xrecorder: AssetManager2(0x78bf87615af8) locale list changing from [] to [en-US]
+11-11 16:21:59.808  4412  4412 W order.xrecorder: type=1400 audit(0.0:47): avc:  denied  { read } for  name="max_map_count" dev="proc" ino=19298 scontext=u:r:untrusted_app:s0:c219,c256,c512,c768 tcontext=u:object_r:proc_max_map_count:s0 tclass=file permissive=0 app=com.xrecorder.xrecorder
+11-11 16:21:59.840  4412  4432 I flutter : [IMPORTANT:flutter/shell/platform/android/android_context_gl_impeller.cc(104)] Using the Impeller rendering backend (OpenGLES).
+11-11 16:21:59.841  4412  4412 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-11 16:21:59.984  4412  4438 I flutter : The Dart VM service is listening on http://127.0.0.1:40165/danAWV-XbxU=/
+11-11 16:22:00.238  4412  4412 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/view/accessibility/AccessibilityNodeInfo;->getSourceNodeId()J (runtime_flags=0, domain=platform, api=unsupported,test-api) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-11 16:22:00.238  4412  4412 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/view/accessibility/AccessibilityRecord;->getSourceNodeId()J (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-11 16:22:00.238  4412  4412 I order.xrecorder: hiddenapi: Accessing hidden field Landroid/view/accessibility/AccessibilityNodeInfo;->mChildNodeIds:Landroid/util/LongArray; (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-11 16:22:00.239  4412  4412 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/util/LongArray;->get(I)J (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app) using reflection: allowed
+11-11 16:22:00.247  4412  4412 D AccessibilityBridge: Setting not found: accessibility_display_inversion_enabled, using default: 0
+11-11 16:22:00.266  4412  4412 D FlutterRenderer: Width is zero. 0,0
+11-11 16:22:00.270  4412  4412 D CompatChangeReporter: Compat change id reported: 377864165; UID 10219; state: ENABLED
+11-11 16:22:00.285  4412  4412 W HWUI    : Unknown dataspace 0
+11-11 16:22:01.211  4412  4412 I Choreographer: Skipped 128 frames!  The application may be doing too much work on its main thread.
+11-11 16:22:01.236  4412  4417 I order.xrecorder: Compiler allocated 5042KB to compile void android.view.ViewRootImpl.performTraversals()
+11-11 16:22:01.242  4412  4412 I WindowExtensionsImpl: Initializing Window Extensions, vendor API level=9, activity embedding enabled=true
+11-11 16:22:01.312  4412  4412 D FlutterRenderer: Width is zero. 0,0
+11-11 16:22:01.320  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:22:01.883  4412  4412 I Choreographer: Skipped 33 frames!  The application may be doing too much work on its main thread.
+11-11 16:22:02.006  4412  4412 D WindowLayoutComponentImpl: Register WindowLayoutInfoListener on Context=com.xrecorder.xrecorder.MainActivity@2904d0d, of which baseContext=android.app.ContextImpl@cddfde6
+11-11 16:22:02.034  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:22:02.197  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:22:02.197  4412  4412 I ImeTracker: com.xrecorder.xrecorder:e1a556f6: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:22:02.218  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:22:03.665  4412  4412 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-11 16:22:03.668  4412  4412 I order.xrecorder: AssetManager2(0x78bf87630a38) locale list changing from [] to [en]
+11-11 16:22:03.677  4412  4412 I order.xrecorder: AssetManager2(0x78bf87629378) locale list changing from [] to [en-US]
+11-11 16:22:03.923  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:22:04.912  4412  4470 W HWUI    : Image decoding logging dropped!
+11-11 16:22:06.359  4412  4503 D ProfileInstaller: Installing profile for com.xrecorder.xrecorder
+11-11 16:22:09.611  4412  4418 I order.xrecorder: NativeAlloc concurrent mark compact GC freed 2474KB AllocSpace bytes, 12(244KB) LOS objects, 49% free, 2512KB/5025KB, paused 40.248ms,14.833ms total 91.113ms
+11-11 16:22:23.183  4412  4412 I order.xrecorder: AssetManager2(0x78bf8764c5f8) locale list changing from [] to [en-US]
+11-11 16:22:23.366  4412  4470 W HWUI    : Image decoding logging dropped!
+11-11 16:22:23.409  4412  4470 W HWUI    : Image decoding logging dropped!
+11-11 16:22:56.022  4412  5826 D AudioSystem: onNewServiceWithAdapter: media.audio_flinger service obtained 0x78bf076d2370
+11-11 16:22:56.023  4412  5826 D AudioSystem: getService: checking for service media.audio_flinger: 0x78bf1764a190
+11-11 16:22:56.035  4412  5826 I CameraManagerGlobal: Connecting to camera service
+11-11 16:22:58.962  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:23:06.624  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:23:10.209  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:23:14.083  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:23:20.925  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:23:29.523  4412  4470 W HWUI    : Image decoding logging dropped!
+11-11 16:23:31.915  4412  4412 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-11 16:23:31.916  4412  4412 I order.xrecorder: AssetManager2(0x78bf8764b018) locale list changing from [] to [en]
+11-11 16:23:31.953  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:31.953  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:31.954  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:31.956  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:31.956  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:32.269  4412  4412 D MediaPlayerNative: getMetadata
+11-11 16:23:32.298  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:32.815  4412  4425 W MediaPlayerNative: info/warning (3, 0)
+11-11 16:23:32.998  4412  4412 I Choreographer: Skipped 40 frames!  The application may be doing too much work on its main thread.
+11-11 16:23:33.023  4412  4412 D AudioSystem: onNewService: media.audio_policy service obtained 0x78bf1763f740
+11-11 16:23:33.025  4412  4412 D AudioSystem: getService: checking for service media.audio_policy: 0x78bf1763f740
+11-11 16:23:33.044  4412  4425 I HWUI    : Davey! duration=750ms; Flags=1, FrameTimelineVsyncId=20396, IntendedVsync=321868222048, Vsync=321918222046, InputEventId=0, HandleInputStart=321933362000, AnimationStart=321933381900, PerformTraversalsStart=321933410400, DrawStart=321954725400, FrameDeadline=321884888714, FrameStartTime=321933344800, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=321956152200, SyncStart=321956439700, IssueDrawCommandsStart=321956591900, SwapBuffers=322443212300, FrameCompleted=322619162700, DequeueBufferDuration=32400, QueueBufferDuration=327000, GpuCompleted=322619010700, SwapBuffersCompleted=322619162700, DisplayPresentTime=0, CommandSubmissionCompleted=322443212300, 
+11-11 16:23:33.047  4412  4412 D VRI[MainActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-11 16:23:33.176  4412  4418 I order.xrecorder: Background concurrent mark compact GC freed 2213KB AllocSpace bytes, 0(0B) LOS objects, 49% free, 3022KB/6045KB, paused 3.225ms,13.293ms total 137.169ms
+11-11 16:23:34.687  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@cc17a9e
+11-11 16:23:34.771  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:23:34.771  4412  4412 I ImeTracker: com.xrecorder.xrecorder:b843940: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:23:37.826  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:41.377  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:23:41.377  4412  4412 I ImeTracker: com.xrecorder.xrecorder:fe742618: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:23:41.454  4412  4412 D VRI[VideoPreviewActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-11 16:23:41.455  4412  4412 D VRI[VideoPreviewActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-11 16:23:41.465  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@cc17a9e
+11-11 16:23:41.585  4412  4412 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+11-11 16:23:41.586  4412  4412 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+11-11 16:23:41.586  4412  4412 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+11-11 16:23:41.586  4412  4412 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+11-11 16:23:41.591  4412  4412 D ViewRootImpl: Skipping stats log for color mode
+11-11 16:23:41.593  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.app.Activity$$ExternalSyntheticLambda0@3cc8984
+11-11 16:23:41.605  4412  4412 D ViewRootImpl: Skipping stats log for color mode
+11-11 16:23:41.619  4412  4412 E WindowManager: android.view.WindowLeaked: Activity com.xrecorder.xrecorder.media.VideoPreviewActivity has leaked window com.android.internal.policy.DecorView{e03e249 V.ED..... R....... 0,0-411,88}[] that was originally added here
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl.<init>(ViewRootImpl.java:1269)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl.<init>(ViewRootImpl.java:1256)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.WindowManagerGlobal.addView(WindowManagerGlobal.java:476)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.WindowManagerImpl.addView(WindowManagerImpl.java:158)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.widget.MediaController.show(MediaController.java:406)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.widget.MediaController.show(MediaController.java:356)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.widget.VideoView.toggleMediaControlsVisiblity(VideoView.java:790)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.widget.VideoView.onTouchEvent(VideoView.java:730)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.View.performOnTouchCallback(View.java:16645)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.View.dispatchTouchEvent(View.java:16598)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewGroup.dispatchTransformedTouchEvent(ViewGroup.java:3146)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewGroup.dispatchTouchEvent(ViewGroup.java:2771)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewGroup.dispatchTransformedTouchEvent(ViewGroup.java:3146)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewGroup.dispatchTouchEvent(ViewGroup.java:2771)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewGroup.dispatchTransformedTouchEvent(ViewGroup.java:3146)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewGroup.dispatchTouchEvent(ViewGroup.java:2771)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewGroup.dispatchTransformedTouchEvent(ViewGroup.java:3146)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewGroup.dispatchTouchEvent(ViewGroup.java:2771)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at com.android.internal.policy.DecorView.superDispatchTouchEvent(DecorView.java:475)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at com.android.internal.policy.PhoneWindow.superDispatchTouchEvent(PhoneWindow.java:2021)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.app.Activity.dispatchTouchEvent(Activity.java:4604)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at com.android.internal.policy.DecorView.dispatchTouchEvent(DecorView.java:433)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.View.dispatchPointerEvent(View.java:16938)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$ViewPostImeInputStage.processPointerEvent(ViewRootImpl.java:8228)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$ViewPostImeInputStage.onProcess(ViewRootImpl.java:7987)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$InputStage.deliver(ViewRootImpl.java:7369)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$InputStage.onDeliverToNext(ViewRootImpl.java:7426)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$InputStage.forward(ViewRootImpl.java:7392)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$AsyncInputStage.forward(ViewRootImpl.java:7558)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$InputStage.apply(ViewRootImpl.java:7400)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$AsyncInputStage.apply(ViewRootImpl.java:7615)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$InputStage.deliver(ViewRootImpl.java:7373)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$InputStage.onDeliverToNext(ViewRootImpl.java:7426)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$InputStage.forward(ViewRootImpl.java:7392)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$InputStage.apply(ViewRootImpl.java:7400)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$InputStage.deliver(ViewRootImpl.java:7373)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl.deliverInputEvent(ViewRootImpl.java:10533)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl.doProcessInputEvents(ViewRootImpl.java:10484)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl.enqueueInputEvent(ViewRootImpl.java:10452)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl.processRawInputEvent(ViewRootImpl.java:10897)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.ViewRootImpl$WindowInputEventReceiver.onInputEvent(ViewRootImpl.java:10655)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.view.InputEventReceiver.dispatchInputEvent(InputEventReceiver.java:300)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.os.MessageQueue.nativePollOnce(Native Method)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.os.MessageQueue.nextLegacy(MessageQueue.java:913)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.os.MessageQueue.next(MessageQueue.java:1025)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.os.Looper.loopOnce(Looper.java:196)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.os.Looper.loop(Looper.java:338)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at java.lang.reflect.Method.invoke(Native Method)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+11-11 16:23:41.619  4412  4412 E WindowManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+11-11 16:23:41.640  4412  4412 V Configuration: Updating configuration, locales updated from [] to [en_US]
+11-11 16:23:41.641  4412  4412 V Configuration: Updating configuration, locales updated from [] to [en_US]
+11-11 16:23:45.894  4412  4412 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-11 16:23:46.044  4412  4412 D MediaPlayerNative: getMetadata
+11-11 16:23:46.670  4412  7132 W MediaPlayerNative: info/warning (3, 0)
+11-11 16:23:46.773  4412  4412 D VRI[MainActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-11 16:23:46.895  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:23:46.989  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@dd65030
+11-11 16:23:47.099  4412  4412 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+11-11 16:23:47.100  4412  4412 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+11-11 16:23:47.100  4412  4412 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+11-11 16:23:47.100  4412  4412 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+11-11 16:23:47.103  4412  4412 D ViewRootImpl: Skipping stats log for color mode
+11-11 16:23:47.104  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.app.Activity$$ExternalSyntheticLambda0@82b2700
+11-11 16:23:47.109  4412  4412 D ViewRootImpl: Skipping stats log for color mode
+11-11 16:23:47.114  4412  4412 E WindowManager: android.view.WindowLeaked: Activity com.xrecorder.xrecorder.media.VideoPreviewActivity has leaked window com.android.internal.policy.DecorView{e438563 V.ED..... R.....I. 0,0-411,88}[] that was originally added here
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.view.ViewRootImpl.<init>(ViewRootImpl.java:1269)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.view.ViewRootImpl.<init>(ViewRootImpl.java:1256)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.view.WindowManagerGlobal.addView(WindowManagerGlobal.java:476)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.view.WindowManagerImpl.addView(WindowManagerImpl.java:158)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.widget.MediaController.show(MediaController.java:406)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at com.xrecorder.xrecorder.media.VideoPreviewActivity.onCreate$lambda$5(VideoPreviewActivity.kt:72)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at com.xrecorder.xrecorder.media.VideoPreviewActivity$$ExternalSyntheticLambda2.onPrepared(D8$$SyntheticClass:0)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.widget.VideoView$2.onPrepared(VideoView.java:499)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.media.MediaPlayer$EventHandler.handleMessage(MediaPlayer.java:3553)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.os.Handler.dispatchMessage(Handler.java:110)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.os.Looper.loopOnce(Looper.java:248)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.os.Looper.loop(Looper.java:338)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at java.lang.reflect.Method.invoke(Native Method)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+11-11 16:23:47.114  4412  4412 E WindowManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+11-11 16:23:47.117  4412  4412 I order.xrecorder: AssetManager2(0x78bf8766a0f8) locale list changing from [] to [en-US]
+11-11 16:23:47.118  4412  4412 I order.xrecorder: AssetManager2(0x78bf876109b8) locale list changing from [] to [en]
+11-11 16:23:47.119  4412  4412 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-11 16:23:47.120  4412  4412 I order.xrecorder: AssetManager2(0x78bf87672438) locale list changing from [] to [en]
+11-11 16:23:47.137  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:47.138  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:47.139  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:47.140  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:47.140  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:47.406  4412  4412 D MediaPlayerNative: getMetadata
+11-11 16:23:47.496  4412  4412 W HWUI    : Image decoding logging dropped!
+11-11 16:23:47.736  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:23:47.736  4412  4412 I ImeTracker: com.xrecorder.xrecorder:a0de4aaf: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:23:47.978  4412  4423 W MediaPlayerNative: info/warning (3, 0)
+11-11 16:23:49.321  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@f2918ba
+11-11 16:23:49.414  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:23:49.421  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:23:49.570  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:23:49.685  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:23:49.685  4412  4412 I ImeTracker: com.xrecorder.xrecorder:5ddd1537: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:23:50.093  4412  4412 D VRI[VideoPreviewActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-11 16:23:50.250  4412  4412 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+11-11 16:23:50.250  4412  4412 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+11-11 16:23:50.251  4412  4412 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+11-11 16:23:50.251  4412  4412 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+11-11 16:23:50.282  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.app.Activity$$ExternalSyntheticLambda0@c119903
+11-11 16:23:50.284  4412  4412 D ViewRootImpl: Skipping stats log for color mode
+11-11 16:23:52.581  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:23:52.584  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:23:52.934  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:23:52.934  4412  4412 I ImeTracker: com.xrecorder.xrecorder:d4e9d0d9: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:23:55.702  4412  4412 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-11 16:23:55.858  4412  4412 D MediaPlayerNative: getMetadata
+11-11 16:23:56.377  4412  7132 W MediaPlayerNative: info/warning (3, 0)
+11-11 16:23:56.639  4412  4412 D VRI[MainActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-11 16:23:58.549  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@b7c4330
+11-11 16:23:58.642  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:23:58.642  4412  4412 I ImeTracker: com.xrecorder.xrecorder:b68ffc56: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:23:59.338  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:23:59.338  4412  4412 I ImeTracker: com.xrecorder.xrecorder:84f7e0f1: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:23:59.773  4412  4412 D VRI[VideoPreviewActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-11 16:23:59.916  4412  4412 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+11-11 16:23:59.916  4412  4412 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+11-11 16:23:59.916  4412  4412 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+11-11 16:23:59.916  4412  4412 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+11-11 16:23:59.933  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.app.Activity$$ExternalSyntheticLambda0@1588239
+11-11 16:23:59.934  4412  4412 D ViewRootImpl: Skipping stats log for color mode
+11-11 16:24:04.433  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:24:09.472  4412  4418 W order.xrecorder: Cleared Reference was only reachable from finalizer (only reported once)
+11-11 16:24:09.497  4412  4418 I order.xrecorder: Background concurrent mark compact GC freed 2339KB AllocSpace bytes, 1(16KB) LOS objects, 49% free, 3631KB/7262KB, paused 1.056ms,5.202ms total 37.772ms
+11-11 16:24:17.185  4412  4412 D VRI[MainActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-11 16:24:17.738  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:24:17.738  4412  4412 I ImeTracker: com.xrecorder.xrecorder:52408563: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:27:55.627  4412  4412 I order.xrecorder: AssetManager2(0x78bf876235b8) locale list changing from [] to [en-US]
+11-11 16:27:58.661  4412  4412 V Configuration: Updating configuration, locales updated from [en_US] to [vi]
+11-11 16:27:58.665  4412  4412 I order.xrecorder: AssetManager2(0x78bf87675f98) locale list changing from [] to [vi]
+11-11 16:27:58.666  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:28:08.148  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:28:23.664  4412  4412 V Configuration: Updating configuration, locales updated from [en_US] to [ar]
+11-11 16:28:23.664  4412  4412 I order.xrecorder: AssetManager2(0x78bf87687f18) locale list changing from [] to [ar]
+11-11 16:28:23.665  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:28:24.250  4412  4412 I order.xrecorder: AssetManager2(0x78bf87656eb8) locale list changing from [] to [en-US]
+11-11 16:28:24.251  4412  4412 I order.xrecorder: AssetManager2(0x78bf87663398) locale list changing from [] to [vi]
+11-11 16:28:24.251  4412  4412 I order.xrecorder: AssetManager2(0x78bf87620098) locale list changing from [] to [ar]
+11-11 16:28:24.262  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:24.266  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:24.458  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:24.481  4412  4412 I order.xrecorder: AssetManager2(0x78bf8768bd98) locale list changing from [] to [en-US]
+11-11 16:28:24.510  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:33.820  4412  4412 I order.xrecorder: AssetManager2(0x78bf8765d5d8) locale list changing from [] to [en-US]
+11-11 16:28:33.846  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:33.853  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:34.145  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:28:34.145  4412  4412 I ImeTracker: com.xrecorder.xrecorder:a5b9c506: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:28:34.930  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:34.946  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:35.241  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:28:35.242  4412  4412 I ImeTracker: com.xrecorder.xrecorder:c1bda596: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:28:47.763  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:28:48.405  4412  4412 I order.xrecorder: AssetManager2(0x78bf87638a58) locale list changing from [] to [en-US]
+11-11 16:28:48.447  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:48.450  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:48.641  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:48.661  4412  4412 I order.xrecorder: AssetManager2(0x78bf8765c318) locale list changing from [] to [en-US]
+11-11 16:28:48.843  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:28:48.917  4412  4470 W HWUI    : Image decoding logging dropped!
+11-11 16:28:58.175  4412  4412 I order.xrecorder: AssetManager2(0x78bf8765f518) locale list changing from [] to [en-US]
+11-11 16:29:01.201  4412  4412 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-11 16:29:01.201  4412  4412 I order.xrecorder: AssetManager2(0x78bf876c3e78) locale list changing from [] to [en]
+11-11 16:29:01.203  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:29:05.224  4412  4412 I order.xrecorder: AssetManager2(0x78bf8761fa58) locale list changing from [] to [en-US]
+11-11 16:29:05.225  4412  4412 I order.xrecorder: AssetManager2(0x78bf876bf378) locale list changing from [] to [en]
+11-11 16:29:05.248  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:05.252  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:05.585  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:29:05.585  4412  4412 I ImeTracker: com.xrecorder.xrecorder:b70ba9b1: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:29:06.262  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:06.271  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:06.612  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:29:06.612  4412  4412 I ImeTracker: com.xrecorder.xrecorder:188ea25b: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:29:07.072  4412  4412 I order.xrecorder: AssetManager2(0x78bf876c0638) locale list changing from [] to [en-US]
+11-11 16:29:07.117  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:07.132  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:07.255  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:07.270  4412  4412 I order.xrecorder: AssetManager2(0x78bf876490d8) locale list changing from [] to [en-US]
+11-11 16:29:07.278  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:14.047  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:17.919  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:17.928  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:17.986  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:18.012  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:27.748  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:29.817  4412  4418 I order.xrecorder: Background concurrent mark compact GC freed 2379KB AllocSpace bytes, 8(416KB) LOS objects, 49% free, 3028KB/6056KB, paused 3.222ms,29.640ms total 138.134ms
+11-11 16:29:34.633  4412  4412 I order.xrecorder: AssetManager2(0x78bf876b7678) locale list changing from [] to [en-US]
+11-11 16:29:34.661  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:34.663  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:34.973  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:29:34.973  4412  4412 I ImeTracker: com.xrecorder.xrecorder:5a4bdae: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:29:37.685  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:37.693  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:37.943  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:29:37.943  4412  4412 I ImeTracker: com.xrecorder.xrecorder:eb1b173f: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:29:46.545  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:46.547  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:46.937  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:29:46.938  4412  4412 I ImeTracker: com.xrecorder.xrecorder:ba1f87a1: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:29:49.647  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:49.649  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:49.931  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:29:49.931  4412  4412 I ImeTracker: com.xrecorder.xrecorder:162d846e: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:29:58.829  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:58.832  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:29:59.246  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:29:59.246  4412  4412 I ImeTracker: com.xrecorder.xrecorder:4f50e694: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:30:02.017  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:02.026  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:02.285  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:30:02.286  4412  4412 I ImeTracker: com.xrecorder.xrecorder:eb69b3a3: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:30:10.979  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:10.988  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:11.522  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:30:11.523  4412  4412 I ImeTracker: com.xrecorder.xrecorder:6c2a22d7: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:30:14.044  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:14.050  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:14.409  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:30:14.411  4412  4412 I ImeTracker: com.xrecorder.xrecorder:17cd1d44: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:30:17.412  4412  4418 I order.xrecorder: Background concurrent mark compact GC freed 3009KB AllocSpace bytes, 0(0B) LOS objects, 49% free, 2837KB/5674KB, paused 1.635ms,6.620ms total 35.892ms
+11-11 16:30:23.550  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:30:31.907  4412  4412 I order.xrecorder: AssetManager2(0x78bf87638a58) locale list changing from [] to [en-US]
+11-11 16:30:34.899  4412  4412 I ImeTracker: com.xrecorder.xrecorder:41269a59: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+11-11 16:30:34.909  4412  4412 D InsetsController: show(ime(), fromIme=false)
+11-11 16:30:34.910  4412  4412 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+11-11 16:30:34.962  4412  4412 I AssistStructure: Flattened final assist data: 508 bytes, containing 1 windows, 3 views
+11-11 16:30:35.003  4412  4412 D InputConnectionAdaptor: The input method toggled cursor monitoring on
+11-11 16:30:36.347  4412  4412 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.xrecorder.xrecorder
+11-11 16:30:36.349  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:36.364  4412  4412 I ImeTracker: com.xrecorder.xrecorder:41269a59: onShown
+11-11 16:30:36.364  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:36.366  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:37.633  4412  4412 I ImeTracker: com.xrecorder.xrecorder:ce805041: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT_REQUEST_HIDE_WITH_CONTROL fromUser true
+11-11 16:30:37.634  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ImeBackAnimationController@fd35475
+11-11 16:30:37.635  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:30:37.635  4412  4412 D InsetsController: Setting requestedVisibleTypes to -9 (was -1)
+11-11 16:30:37.645  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:37.666  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:37.670  4412  4412 D FlutterJNI: Sending viewport metrics to the engine.
+11-11 16:30:37.839  4412  4412 I ImeTracker: system_server:a51256e1: onCancelled at PHASE_CLIENT_ON_CONTROLS_CHANGED
+11-11 16:30:37.839  4412  4412 D InputConnectionAdaptor: The input method toggled cursor monitoring on
+11-11 16:30:38.346  4412  4412 I ImeTracker: com.xrecorder.xrecorder:9c6ecd4f: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+11-11 16:30:38.346  4412  4412 D InsetsController: hide(ime(), fromIme=false)
+11-11 16:30:38.347  4412  4412 I ImeTracker: com.xrecorder.xrecorder:9c6ecd4f: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-11 16:30:38.347  4412  4412 D CompatChangeReporter: Compat change id reported: 395521150; UID 10219; state: ENABLED
+11-11 16:30:38.380  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:32:28.549  4412  4412 V Configuration: Updating configuration, locales updated from [en_US] to [vi]
+11-11 16:32:28.550  4412  4412 I order.xrecorder: AssetManager2(0x78bf87618398) locale list changing from [] to [vi]
+11-11 16:32:28.555  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:32:39.710  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
+11-11 16:32:48.985  4412  4412 I order.xrecorder: AssetManager2(0x78bf8763cf18) locale list changing from [] to [en-US]
+11-11 16:32:52.079  4412  4412 V Configuration: Updating configuration, locales updated from [en_US] to [en]
+11-11 16:32:52.079  4412  4412 I order.xrecorder: AssetManager2(0x78bf876571d8) locale list changing from [] to [en]
+11-11 16:32:52.080  4412  4412 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=io.flutter.embedding.android.FlutterActivity$1@f8b3108
