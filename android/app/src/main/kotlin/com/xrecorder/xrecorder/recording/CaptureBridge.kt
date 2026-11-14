@@ -26,7 +26,11 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
             "capabilities" -> {
                 pendingCapabilities.add(result)
                 capabilitiesWorker.execute {
-                    val value = runCatching { CaptureConfig.capabilities(activity) + mapOf("facecam" to hasFrontCamera()) }
+                    val value = runCatching { CaptureConfig.capabilities(activity) + mapOf(
+                        "facecam" to hasFrontCamera(),
+                        "displayWidth" to activity.resources.displayMetrics.widthPixels,
+                        "displayHeight" to activity.resources.displayMetrics.heightPixels
+                    ) }
                     main.post {
                         if (pendingCapabilities.remove(result)) {
                             value.fold({ result.success(it) }, { result.error("unavailable", "Could not check device capabilities. Try again.", null) })
@@ -35,6 +39,32 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
                 }
             }
             "current" -> result.success(CaptureState.snapshot())
+            "liveStatus" -> result.success(com.xrecorder.xrecorder.live.LiveCaptureState.snapshotFor(CaptureState.id, CaptureState.config.liveRequested, CaptureState.state))
+            "liveDestination", "saveLiveDestination", "forgetLiveDestination" -> {
+                // Reuse the serialized worker and engine-disposal result guard. Keystore/IO
+                // must not block the main thread or echo credentials in errors.
+                val args = call.arguments as? Map<*, *>
+                pendingCapabilities.add(result)
+                capabilitiesWorker.execute {
+                    val value = runCatching {
+                        val store = com.xrecorder.xrecorder.live.LiveDestinationStore(activity)
+                        when (call.method) {
+                            "liveDestination" -> store.read()
+                            "saveLiveDestination" -> {
+                                store.save(args?.get("name") as? String ?: "", args?.get("serverUrl") as? String ?: "", args?.get("streamKey") as? String ?: "")
+                                true
+                            }
+                            else -> { store.forget(); true }
+                        }
+                    }
+                    main.post {
+                        if (pendingCapabilities.remove(result)) value.fold(
+                            { result.success(it) },
+                            { result.error("destination_unavailable", "Could not access the saved livestream destination. Try again.", null) },
+                        )
+                    }
+                }
+            }
             "pause", "resume" -> {
                 if (call.argument<String>("sessionId") != CaptureState.id) { result.error("stale_session", "This session is no longer active.", null); return }
                 try { CaptureService.instance?.setPaused(call.method == "pause"); result.success(CaptureState.snapshot()) }
@@ -42,12 +72,22 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
             }
             "start", "screenshot" -> {
                 if (CaptureState.busy || CaptureRequests.awaitingResult || CaptureService.instance != null) { result.error("busy", "A recording is already being prepared or captured.", null); return }
-                val config = try { if(call.method == "screenshot") CaptureConfig(countdown=3) else CaptureConfig.from(activity, call.arguments as? Map<*,*>) }
+                val live = try {
+                    val args = call.arguments as? Map<*, *>
+                    if (call.method == "start" && args?.get("liveServer") != null)
+                        com.xrecorder.xrecorder.live.RtmpEndpoint.parse(args["liveServer"] as String, args["liveKey"] as? String ?: "")
+                    else null
+                } catch (_: Exception) { result.error("invalid_live", "Enter a valid RTMP/RTMPS server URL and stream key.", null); return }
+                val config = try { if(call.method == "screenshot")
+                    CaptureConfig(countdown=CaptureTiming.screenshotDelay((call.arguments as? Map<*, *>)?.get("countdown") ?: savedScreenshotDelay()))
+                    else CaptureConfig.from(activity, call.arguments as? Map<*,*>).copy(liveRequested = live != null) }
                     catch (e: Exception) { result.error("unsupported", e.message ?: "Unsupported capture settings", null); return }
-                CaptureState.screenshot = call.method == "screenshot"
+                if (live != null && config.codec != "avc") { result.error("unsupported", "Choose H264 in recording settings before livestreaming.", null); return }
                 if (config.facecam && !hasFrontCamera()) { result.error("unavailable","This device has no available front camera. Disable facecam to record.",null); return }
-                CaptureState.prepare(config); requestedSession = CaptureState.id
                 try {
+                    if (live != null) CaptureState.prepareLive(config, live)
+                    else CaptureState.prepare(config, call.method == "screenshot")
+                    requestedSession = CaptureState.id
                     if (!CaptureState.screenshot && Build.VERSION.SDK_INT >= 33 && activity.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
                         requestPermission(Manifest.permission.POST_NOTIFICATIONS, NOTIFICATIONS)
                     else ensureAudioPermission()
@@ -174,9 +214,14 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
             val manager = activity.getSystemService(MediaProjectionManager::class.java)
             // Reserve before creating the one-shot intent; never retain it for another session.
             // Video uses the system selector. Screenshots retain whole-screen capture.
-            if (Build.VERSION.SDK_INT >= 34 && CaptureState.screenshot) manager.createScreenCaptureIntent(MediaProjectionConfig.createConfigForDefaultDisplay()) else manager.createScreenCaptureIntent()
+            if (Build.VERSION.SDK_INT >= 34 && (CaptureState.screenshot || CaptureState.config.isRegion || CaptureState.config.facecam)) manager.createScreenCaptureIntent(MediaProjectionConfig.createConfigForDefaultDisplay()) else manager.createScreenCaptureIntent()
         }
     }
+    private fun savedScreenshotDelay(): Int = runCatching {
+        val document = activity.getSharedPreferences("app_settings", android.content.Context.MODE_PRIVATE).getString("document", null)
+        val saved = document?.let { org.json.JSONObject(it).optJSONObject("values")?.optString("screenshotDelay") }
+        saved?.removeSuffix("s")?.toIntOrNull()?.takeIf { it in listOf(1, 3, 5, 10) } ?: 3
+    }.getOrDefault(3)
     private fun consumeResult(code: Int): String? = CaptureRequests.consumeFor(
         code, requestedSession, receiverActive = !disposed,
         // Cancel clears requestedSession, but its system dialog must still drain.
@@ -218,15 +263,15 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
         if (request != CONSENT) return false
         if (requestedSession != CaptureState.id || CaptureState.state != "awaitingPermission") return true
         requestedSession = null
-        if (code != Activity.RESULT_OK || data == null) { CaptureState.transition("idle"); return true }
+        if (code != Activity.RESULT_OK || data == null) { com.xrecorder.xrecorder.live.LiveCaptureState.finish(CaptureState.id, "cancelled"); CaptureState.transition("idle"); return true }
         try {
             val intent = Intent(activity, CaptureService::class.java).putExtra("sessionId", CaptureState.id).putExtra("consent", data)
             if (Build.VERSION.SDK_INT >= 26) activity.startForegroundService(intent) else activity.startService(intent)
             // One-shot capture: leave our controls behind, then count down in the service.
             // No overlay/accessibility permission and no projection token reuse.
-            if (CaptureState.screenshot && !activity.moveTaskToBack(true)) {
+            if ((CaptureState.screenshot || CaptureState.config.isRegion || CaptureState.config.liveRequested) && !activity.moveTaskToBack(true)) {
                 CaptureService.instance?.stopCapture()
-                CaptureState.transition("failed", "Could not switch screens for the screenshot. Try again.")
+                CaptureState.transition("failed", "Could not switch screens for capture. Try again.")
             }
         } catch (_: Exception) { CaptureState.transition("failed", "Android did not allow the recording service to start.") }
         return true

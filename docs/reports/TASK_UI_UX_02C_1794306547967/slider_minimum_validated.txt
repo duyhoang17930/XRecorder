@@ -1,1 +1,0 @@
-['4 pixels at 2048 pixels wide', '0 percent', '100 percent', '0 percent', '100 percent']

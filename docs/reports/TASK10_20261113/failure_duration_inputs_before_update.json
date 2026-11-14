@@ -1,0 +1,83 @@
+{
+  "sessionId": "23638af0-586c-44c9-9120-3f9004b58e73",
+  "checkpointSha256": "5c02abc0609f14a6a4564e7af9327f72dc02203167144992c7625bcd44c52d8b",
+  "checkpoint": {
+    "version": 1,
+    "session": {
+      "id": "23638af0-586c-44c9-9120-3f9004b58e73",
+      "state": "recording",
+      "startedAt": 1794650557595,
+      "elapsedMs": 9996,
+      "outputUri": null,
+      "error": null,
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 30,
+        "bitrate": 8000000,
+        "codec": "avc",
+        "audio": "mixed",
+        "micGain": 1,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 3,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "c2.android.avc.encoder",
+        "isRegion": false,
+        "cropX": null,
+        "cropY": null,
+        "cropWidth": null,
+        "cropHeight": null,
+        "floatingScale": 1,
+        "floatingOpacity": 1,
+        "floatingRatioX": -1,
+        "floatingRatioY": -1,
+        "shakeToStop": true,
+        "showTouches": false,
+        "audioDucking": false,
+        "regionSourceWidth": 0,
+        "regionSourceHeight": 0,
+        "liveRequested": true
+      },
+      "countdownRemaining": 0,
+      "live": {
+        "sessionId": "23638af0-586c-44c9-9120-3f9004b58e73",
+        "state": "stopped",
+        "bitrate": 756426,
+        "retries": 0,
+        "sentVideoFrames": 132,
+        "sentAudioFrames": 437,
+        "droppedVideoFrames": 0,
+        "droppedAudioFrames": 0,
+        "sentBytes": 1338659,
+        "queuedBytes": 0
+      }
+    },
+    "pendingUri": null,
+    "pendingSessionId": "23638af0-586c-44c9-9120-3f9004b58e73",
+    "finalized": null,
+    "finalizedRaw": null,
+    "recoveryPending": null,
+    "videoPath": "/data/user/0/com.xrecorder.xrecorder/cache/capture_23638af0-586c-44c9-9120-3f9004b58e73.mp4",
+    "audioPath": "/data/user/0/com.xrecorder.xrecorder/cache/capture_23638af0-586c-44c9-9120-3f9004b58e73.m4a"
+  },
+  "inputs": {
+    "videoPath": {
+      "bytes": 1220016,
+      "sha256": "1fe05ef1c85798422c5f1a62da5b6ebe008da06204ef8ce36c7ed4aaef81eb50"
+    },
+    "audioPath": {
+      "bytes": 167075,
+      "sha256": "63b826d5d6e3f81abd18998c05e2f606488f8036d76436930eb2213289c31cb7"
+    }
+  }
+}

@@ -1,0 +1,191 @@
+I1114 03:10:30.348440   34804 opengles.cpp:291] android_startOpenglesRenderer: gpu info
+I1114 03:10:30.349047   34804 opengles.cpp:292] GPU #1
+  Make: 10de
+  Model: NVIDIA GeForce RTX 3050 Ti Laptop GPU
+  Device ID: 25a0
+
+I1114 03:10:30.654595   34804 userspace-boot-properties.cpp:766] Userspace boot properties:
+I1114 03:10:30.655274   34804 userspace-boot-properties.cpp:770]   androidboot.boot_devices=pci0000:00/0000:00:03.0 pci0000:00/0000:00:06.0
+I1114 03:10:30.655775   34804 userspace-boot-properties.cpp:770]   androidboot.dalvik.vm.heapsize=576m
+I1114 03:10:30.656258   34804 userspace-boot-properties.cpp:770]   androidboot.debug.hwui.renderer=skiagl
+I1114 03:10:30.656774   34804 userspace-boot-properties.cpp:770]   androidboot.hardware=ranchu
+I1114 03:10:30.657015   34804 userspace-boot-properties.cpp:770]   androidboot.hardware.gltransport=pipe
+I1114 03:10:30.657105   34804 userspace-boot-properties.cpp:770]   androidboot.hardware.vulkan=ranchu
+I1114 03:10:30.657193   34804 userspace-boot-properties.cpp:770]   androidboot.logcat=*:V
+I1114 03:10:30.657275   34804 userspace-boot-properties.cpp:770]   androidboot.opengles.version=196609
+I1114 03:10:30.657366   34804 userspace-boot-properties.cpp:770]   androidboot.qemu=1
+I1114 03:10:30.657450   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.adb.pubkey=QAAAAKHM6v2f6BnGBhywDFdYw6DNdSDwcRiGreTPK+65q4Sd+oWhCMppEP1LmzTeQUeaMr/QNAktowM5dnC+r31s7NV8y7qgps3zivjyrJuiYqDIm1nc2Y0V4qYcJA3EXu9ljCispwVbAOqMG6fGDrDk1EEi9gkMjuPQBTQwwjBeGM856tSIDmgFXvP/VVe6yqlmyVvyTibvzUBw81FT73tYjGr6/8xxyQWy/zBZZeclH8YuoHKUzZdRJmWLS9V7KpfHYjk4BS/XKOax5LDUCNJNfErJp/4ze4HnELsOna78BXNTgGjyk6BW1jfKi8U04/pr/4Xo/rmqxrFuqYIbadn0NSSvaJqjuhypYMVXL/nFVpx4PNUBCsOflHSZtLaeNzRYRmesxgQ1CyUFWmMQ+WJ7y784f3PibCRR1tSl9jfguQ7RBUctTfRd+IXVZ/D4J8V5iwDGCYZrSdovXe4sJ9dCLmGlgzqTkM0d9DjYxc3XC1VF8QPhugIRBpL3YfTOpQGp0NOTA2ZMXcfS4LHRKaP9qEv0daEckMhS8r3oUr4PycAHY+1LtZXad7rRkttK9PhD0MvUC9T/4YPrO6RZ13YGZgBXOPlqOsLbmFkBbKcY2mUzMZE/jnJ0M9iWaSExPGz16rkdJNBQ6ZCnpu7dhGXJ/zpQ3D7uvqmoSXQm0cWW/g7XCTgcfwEAAQA= @unknown
+I1114 03:10:30.657543   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.avd_name=Pixel_7
+I1114 03:10:30.657639   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.camera_hq_edge_processing=0
+I1114 03:10:30.657768   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.camera_protocol_ver=1
+I1114 03:10:30.657940   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.cpuvulkan.version=4202496
+I1114 03:10:30.658080   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.gltransport.drawFlushInterval=800
+I1114 03:10:30.658231   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.gltransport.name=pipe
+I1114 03:10:30.658354   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.hwcodec.avcdec=2
+I1114 03:10:30.658486   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.hwcodec.hevcdec=2
+I1114 03:10:30.658669   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.hwcodec.vpxdec=2
+I1114 03:10:30.658842   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.settings.system.screen_off_timeout=2147483647
+I1114 03:10:30.659029   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.virtiowifi=1
+I1114 03:10:30.659217   34804 userspace-boot-properties.cpp:770]   androidboot.qemu.vsync=60
+I1114 03:10:30.659436   34804 userspace-boot-properties.cpp:770]   androidboot.serialno=EMULATOR36X1X9X0
+I1114 03:10:30.659579   34804 userspace-boot-properties.cpp:770]   androidboot.vbmeta.digest=f424461a0a397fda72fd179bc94e871022314ef1502d4ea1133175a87b4746ed
+I1114 03:10:30.659729   34804 userspace-boot-properties.cpp:770]   androidboot.vbmeta.hash_alg=sha256
+I1114 03:10:30.659862   34804 userspace-boot-properties.cpp:770]   androidboot.vbmeta.size=6720
+I1114 03:10:30.659978   34804 userspace-boot-properties.cpp:770]   androidboot.veritymode=enforcing
+netsimd I 11-13 20:10:30.713 daemon\src\rust_main.rs:100 - netsim artifacts path: "C:\\Users\\dangh\\AppData\\Local\\Temp\\netsimd"
+netsimd I 11-13 20:10:30.713 daemon\src\rust_main.rs:103 - NetsimdArgs {
+    fd_startup_str: None,
+    no_cli_ui: true,
+    no_web_ui: true,
+    pcap: false,
+    disable_address_reuse: false,
+    hci_port: None,
+    connector_instance: None,
+    instance: None,
+    logtostderr: false,
+    dev: false,
+    forward_host_mdns: false,
+    vsock: None,
+    config: None,
+    host_dns: Some(
+        "192.168.2.253",
+    ),
+    http_proxy: None,
+    wifi_tap: None,
+    wifi: None,
+    test_beacons: false,
+    no_test_beacons: false,
+    no_shutdown: false,
+    verbose: false,
+    version: false,
+    rssi: None,
+}
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+[h264 @ 000001DA52527F40] no frame!
+[h264 @ 000001DA52527F40] no frame!
+[h264 @ 000001DA172322C0] no frame!
+[h264 @ 000001DA172322C0] no frame!
+[h264 @ 000001DA6BAE8500] no frame!
+[h264 @ 000001DA6BAE8500] no frame!
+[h264 @ 000001DA6BAE5BC0] no frame!
+[h264 @ 000001DA6BAE5BC0] no frame!
+[h264 @ 000001DA6AE82C00] no frame!
+[h264 @ 000001DA6AE82C00] no frame!
+[h264 @ 000001DA6BAE6500] no frame!
+[h264 @ 000001DA6BAE6500] no frame!
+[h264 @ 000001DA6BAE29C0] no frame!
+[h264 @ 000001DA6BAE29C0] no frame!
+[h264 @ 000001DA6BAE32C0] no frame!
+[h264 @ 000001DA6BAE32C0] no frame!
+[h264 @ 000001DA6BAE29C0] no frame!
+[h264 @ 000001DA6BAE29C0] no frame!
+[h264 @ 000001DA6BAE6500] no frame!
+[h264 @ 000001DA6BAE6500] no frame!
+[h264 @ 000001DA6AE83500] no frame!
+[h264 @ 000001DA6AE83500] no frame!
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+[h264 @ 000001DA6AE83500] no frame!
+[h264 @ 000001DA6AE83500] no frame!
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+[h264 @ 000001DA6BAE29C0] no frame!
+[h264 @ 000001DA6BAE29C0] no frame!
+[h264 @ 000001DA6BAE3740] no frame!
+[h264 @ 000001DA6BAE3740] no frame!
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+[h264 @ 000001DA6BAE9280] no frame!
+[h264 @ 000001DA6BAE9280] no frame!
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+[h264 @ 000001DA16FD1B40] no frame!
+[h264 @ 000001DA16FD1B40] no frame!
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+[h264 @ 000001DA21D5A780] no frame!
+[h264 @ 000001DA21D5A780] no frame!
+C:/buildbot/src/googleplex-android/emu-36-1-release/hardware/google/gfxstream/host/gl/glestranslator/GLES_V2/GLESv30Imp.cpp:glWaitSync:552 error 0x501
+[h264 @ 000001DA23084900] no frame!
+[h264 @ 000001DA23084900] no frame!
+[h264 @ 000001DA9E9A7E00] no frame!
+[h264 @ 000001DA9E9A7E00] no frame!
+[h264 @ 000001D9049CF500] no frame!
+[h264 @ 000001D9049CF500] no frame!
+[h264 @ 000001DA21D59540] no frame!
+[h264 @ 000001DA21D59540] no frame!
+[h264 @ 000001DA228929C0] no frame!
+[h264 @ 000001DA228929C0] no frame!
+[h264 @ 000001DA30E24F00] no frame!
+[h264 @ 000001DA30E24F00] no frame!
+[h264 @ 000001D9049CF500] no frame!
+[h264 @ 000001D9049CF500] no frame!
+[h264 @ 000001DA21D5A780] no frame!
+[h264 @ 000001DA21D5A780] no frame!
+[h264 @ 000001D9049D0740] no frame!
+[h264 @ 000001D9049D0740] no frame!
+[h264 @ 000001DA23084900] no frame!
+[h264 @ 000001DA23084900] no frame!
+[h264 @ 000001DA5CE032C0] no frame!
+[h264 @ 000001DA5CE032C0] no frame!
+[h264 @ 000001DA5D07A080] no frame!
+[h264 @ 000001DA5D07A080] no frame!
+[h264 @ 000001D9055534C0] no frame!
+[h264 @ 000001D9055534C0] no frame!
+[h264 @ 000001DA2D4C9E40] no frame!
+[h264 @ 000001DA2D4C9E40] no frame!
+[h264 @ 000001DA30E24A40] no frame!
+[h264 @ 000001DA30E24A40] no frame!
+[h264 @ 000001DA224D65C0] no frame!
+[h264 @ 000001DA224D65C0] no frame!
+[h264 @ 000001DA31E1E1C0] no frame!
+[h264 @ 000001DA31E1E1C0] no frame!
+[h264 @ 000001DA27FE5B80] no frame!
+[h264 @ 000001DA27FE5B80] no frame!
+[h264 @ 000001DA9FB8C9C0] no frame!
+[h264 @ 000001DA9FB8C9C0] no frame!
+[h264 @ 000001DA27FE5B80] no frame!
+[h264 @ 000001DA27FE5B80] no frame!
+[h264 @ 000001DA2D4C9E40] no frame!
+[h264 @ 000001DA2D4C9E40] no frame!
+[h264 @ 000001DA21D59540] no frame!
+[h264 @ 000001DA21D59540] no frame!
+[h264 @ 000001DA30E25380] no frame!
+[h264 @ 000001DA30E25380] no frame!
+[h264 @ 000001DA30E245C0] no frame!
+[h264 @ 000001DA30E245C0] no frame!
+[h264 @ 000001D90555EF80] no frame!
+[h264 @ 000001D90555EF80] no frame!
+[h264 @ 000001DA2D4CAC00] no frame!
+[h264 @ 000001DA2D4CAC00] no frame!
+[h264 @ 000001D903825240] no frame!
+[h264 @ 000001D903825240] no frame!
+[h264 @ 000001DA224D6A40] no frame!
+[h264 @ 000001DA224D6A40] no frame!
+[h264 @ 000001DA21D59E80] no frame!
+[h264 @ 000001DA21D59E80] no frame!
+[h264 @ 000001DA2D4C99C0] no frame!
+[h264 @ 000001DA2D4C99C0] no frame!
+[h264 @ 000001DA16A23200] no frame!
+[h264 @ 000001DA16A23200] no frame!
+[h264 @ 000001DAAAE69F00] no frame!
+[h264 @ 000001DAAAE69F00] no frame!
+[h264 @ 000001DA27FE6940] no frame!
+[h264 @ 000001DA27FE6940] no frame!
+[h264 @ 000001D90555F880] no frame!
+[h264 @ 000001D90555F880] no frame!
+[h264 @ 000001D90555F880] no frame!
+[h264 @ 000001D90555F880] no frame!
+[h264 @ 000001DA224D6100] no frame!
+[h264 @ 000001DA224D6100] no frame!
+[h264 @ 000001DA9FB8C0C0] no frame!
+[h264 @ 000001DA9FB8C0C0] no frame!
+[h264 @ 000001DA9EEFC300] no frame!
+[h264 @ 000001DA9EEFC300] no frame!
+[h264 @ 000001DA9EEF9E80] no frame!
+[h264 @ 000001DA9EEF9E80] no frame!
+[h264 @ 000001D90555E640] no frame!
+[h264 @ 000001D90555E640] no frame!
+[h264 @ 000001DA16A22D40] no frame!
+[h264 @ 000001DA16A22D40] no frame!
+[h264 @ 000001DA21D59E80] no frame!
+[h264 @ 000001DA21D59E80] no frame!

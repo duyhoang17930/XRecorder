@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "case": "moved task145 old export URI -> unavailable -> Retry -> unavailable -> Back",
+  "oldUri": "content://media/external/video/media/145",
+  "destinationPreserved": "/sdcard/Download/TASK10_20261113/3H_28264ed6_Edited_5e429845-a734-463d-97b4-9bb067033c80.mp4",
+  "destinationSha256": "4756aef4989b120279ca14b0dcb00e07d4abffe27d279c6e3c37a1dd2ebe6575",
+  "scope": "one positively identified task-created moved output; no personal files removed"
+}

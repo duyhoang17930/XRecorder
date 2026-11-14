@@ -1,0 +1,92 @@
+[
+  {
+    "sourceSeconds": 0,
+    "rms": 0.04004404690956627,
+    "correlation": 0.9867822875661185,
+    "offsetMs": 620.7291666666666
+  },
+  {
+    "sourceSeconds": 0.5,
+    "rms": 0.24918550198400588,
+    "correlation": 0.9999798470665665,
+    "offsetMs": 620.7291666666667
+  },
+  {
+    "sourceSeconds": 1,
+    "rms": 0.19685784052554262,
+    "correlation": 0.9999604656590968,
+    "offsetMs": 620.7291666666667
+  },
+  {
+    "sourceSeconds": 1.5,
+    "rms": 0.22531910994909968,
+    "correlation": 0.9999671360427252,
+    "offsetMs": 620.7291666666665
+  },
+  {
+    "sourceSeconds": 2,
+    "rms": 0.03544942455844373,
+    "correlation": 0.9997709071175825,
+    "offsetMs": 620.7291666666665
+  },
+  {
+    "sourceSeconds": 2.5,
+    "rms": 0.009068850982436028,
+    "correlation": 0.9994246945783446,
+    "offsetMs": 620.7291666666665
+  },
+  {
+    "sourceSeconds": 3,
+    "rms": 0.08424007524296791,
+    "correlation": 0.9974657231218208,
+    "offsetMs": 630.0208333333335
+  },
+  {
+    "sourceSeconds": 3.5,
+    "rms": 0.16959785512306108,
+    "correlation": 0.6191012258022865,
+    "offsetMs": 674.0
+  },
+  {
+    "sourceSeconds": 4,
+    "rms": 0.20517337033146815,
+    "correlation": 0.9999597857718817,
+    "offsetMs": 674.020833333333
+  },
+  {
+    "sourceSeconds": 4.5,
+    "rms": 0.008608806806997191,
+    "correlation": 0.9994101600310775,
+    "offsetMs": 674.020833333333
+  },
+  {
+    "sourceSeconds": 5,
+    "rms": 0.009872417115829427,
+    "correlation": 0.9994522872528098,
+    "offsetMs": 674.020833333333
+  },
+  {
+    "sourceSeconds": 5.5,
+    "rms": 0.185763838391517,
+    "correlation": 0.9999635535041909,
+    "offsetMs": 674.020833333333
+  },
+  {
+    "sourceSeconds": 6,
+    "rms": 0.16047310438532242,
+    "correlation": 0.9998758437105805,
+    "offsetMs": 674.020833333333
+  },
+  {
+    "sourceSeconds": 6.5,
+    "rms": 0.11236391058233552,
+    "correlation": 0.9999113258765436,
+    "offsetMs": 674.020833333333
+  },
+  {
+    "sourceSeconds": 7,
+    "rms": 0.19362555818726188,
+    "correlation": 0.999958888807377,
+    "offsetMs": 674.020833333333
+  }
+]

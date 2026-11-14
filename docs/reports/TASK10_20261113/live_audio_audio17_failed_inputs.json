@@ -1,0 +1,83 @@
+{
+  "sessionId": "5d60523a-b3eb-44ac-a2f1-23f12cc1fe54",
+  "checkpointSha256": "6ea30505281aaac9dd72691df919d43958ca964f3eecbcfc694b69e77e801a17",
+  "checkpoint": {
+    "version": 1,
+    "session": {
+      "id": "5d60523a-b3eb-44ac-a2f1-23f12cc1fe54",
+      "state": "failed",
+      "startedAt": 1794666866417,
+      "elapsedMs": 16598,
+      "outputUri": null,
+      "error": "Audio capture was interrupted. Try a different audio source or mute.",
+      "screenshot": false,
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "config": {
+        "width": 720,
+        "height": 1280,
+        "fps": 30,
+        "bitrate": 8000000,
+        "codec": "avc",
+        "audio": "mixed",
+        "micGain": 0,
+        "internalGain": 1,
+        "noiseReduction": false,
+        "countdown": 3,
+        "durationSeconds": 0,
+        "orientation": "automatic",
+        "mode": "normal",
+        "facecam": false,
+        "hardwareEncoding": true,
+        "encoderName": "c2.android.avc.encoder",
+        "isRegion": false,
+        "cropX": null,
+        "cropY": null,
+        "cropWidth": null,
+        "cropHeight": null,
+        "floatingScale": 1,
+        "floatingOpacity": 1,
+        "floatingRatioX": -1,
+        "floatingRatioY": -1,
+        "shakeToStop": true,
+        "showTouches": false,
+        "audioDucking": false,
+        "regionSourceWidth": 0,
+        "regionSourceHeight": 0,
+        "liveRequested": true
+      },
+      "countdownRemaining": 0,
+      "live": {
+        "sessionId": "5d60523a-b3eb-44ac-a2f1-23f12cc1fe54",
+        "state": "stopped",
+        "bitrate": 191185,
+        "retries": 0,
+        "sentVideoFrames": 45,
+        "sentAudioFrames": 355,
+        "droppedVideoFrames": 0,
+        "droppedAudioFrames": 0,
+        "sentBytes": 501482,
+        "queuedBytes": 0
+      }
+    },
+    "pendingUri": null,
+    "pendingSessionId": "5d60523a-b3eb-44ac-a2f1-23f12cc1fe54",
+    "finalized": null,
+    "finalizedRaw": null,
+    "recoveryPending": null,
+    "videoPath": "/data/user/0/com.xrecorder.xrecorder/cache/capture_5d60523a-b3eb-44ac-a2f1-23f12cc1fe54.mp4",
+    "audioPath": "/data/user/0/com.xrecorder.xrecorder/cache/capture_5d60523a-b3eb-44ac-a2f1-23f12cc1fe54.m4a"
+  },
+  "inputs": {
+    "videoPath": {
+      "bytes": 408102,
+      "sha256": "6cb67185e55b7a2d03f0bff8125b14d4487bd52db18fc1127cd4e3e86128d037"
+    },
+    "audioPath": {
+      "bytes": 144886,
+      "sha256": "577ab6568d1755f48fc8bd94309d0c4c7f86e2858060eb46eb5b1400e4cb56c7"
+    }
+  }
+}

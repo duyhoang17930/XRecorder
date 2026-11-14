@@ -1,0 +1,37 @@
+{
+  "captionPreview": {
+    "bbox": [
+      461,
+      684,
+      503,
+      703
+    ],
+    "width": 42,
+    "height": 19,
+    "pixels": 168,
+    "bands": 1
+  },
+  "captionResizedSaved": {
+    "bbox": [
+      461,
+      682,
+      503,
+      702
+    ],
+    "width": 42,
+    "height": 20,
+    "pixels": 172,
+    "bands": 1
+  },
+  "captionMaskAreaRatio": 0.9767441860465116,
+  "penPreview": {
+    "redMinusGreenEnergy": 61187.0,
+    "pixels": 335
+  },
+  "penResizedSaved": {
+    "redMinusGreenEnergy": 62886.0,
+    "pixels": 275
+  },
+  "penEnergyRatio": 0.9729828578697961,
+  "policy": "One caption band, <=2px bbox difference, area/pen energy ratios0.85..1.15; full-imageMAE<3. Alpha/text rasterization reported separately, not bit-exact."
+}

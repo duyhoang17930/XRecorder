@@ -7,6 +7,10 @@ import '../../features/recording/recording_setup_sheet.dart';
 import '../../features/recording/recording_service.dart';
 import '../../features/recording/capture_status_presentation.dart';
 import '../../features/settings/settings_controller.dart';
+import '../../features/recording/region_capture_page.dart';
+import '../../features/recording/livestream_page.dart';
+import '../domain/repositories.dart';
+import '../../l10n/localization.dart';
 import '../constants/app_icons.dart';
 import '../presentation/user_messages.dart';
 import '../ui/components/bottom_sheets/studio_bottom_sheet.dart';
@@ -80,7 +84,7 @@ class StudioRecordHero extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RecordingStatusIndicator(
-              label: status.label,
+              label: context.message(status.label),
               icon: status.icon,
               color: failed
                   ? c.warning
@@ -96,16 +100,17 @@ class StudioRecordHero extends StatelessWidget {
             if (!videoBusy) ...[
               const SizedBox(height: AppSpacing.md),
               Text(
-                'Screen recorder',
+                context.l10n.captureRecorderTitle,
                 style: Theme.of(context).textTheme.displayLarge,
               ),
               const SizedBox(height: AppSpacing.xs),
               Text(
-                '${settings.resolution} · ${settings.fps} FPS · ${settings.audio}',
+                '${context.message(settings.resolution)} · ${settings.fps} FPS · ${context.message(settings.audio)}',
                 style: TextStyle(color: c.muted),
               ),
               const SizedBox(height: AppSpacing.lg),
               RecordActionButton(
+                label: context.l10n.recordScreen,
                 onPressed: capture.busy
                     ? null
                     : () => openRecordingSetup(context),
@@ -144,7 +149,11 @@ class StudioQuickTools extends StatelessWidget {
 
     final screenshot = BentoCard(
       title: 'Screenshot',
-      description: 'Minimizes after approval · 3s delay',
+      description: context.l10n.screenshotDelaySummary(
+        context.displayValue(
+          SettingsScope.of(context).screenshotDelayDuration.inSeconds,
+        ),
+      ),
       icon: AppIcons.screenshot,
       accent: context.studioColors.cyan,
       badge: capture.busy ? 'Session active' : null,
@@ -153,7 +162,9 @@ class StudioQuickTools extends StatelessWidget {
           : () async {
               onDismiss?.call();
               try {
-                await capture.screenshot();
+                await capture.screenshot(
+                  delay: SettingsScope.of(context).screenshotDelayDuration,
+                );
               } catch (error) {
                 if (target.mounted) {
                   showFailure(
@@ -208,23 +219,37 @@ class StudioQuickTools extends StatelessWidget {
               ),
               screenshot,
               facecam,
-              const BentoCard(
-                title: 'Recording region',
+              BentoCard(
+                title: context.l10n.regionCapture,
                 icon: AppIcons.region,
-                badge: 'Unavailable',
+                onTap:
+                    capture.busy || capture.service is! RegionRecordingService
+                    ? null
+                    : () {
+                        onDismiss?.call();
+                        openRegionCapture(target);
+                      },
               ),
               countdown,
-              const BentoCard(
-                title: 'Livestream',
-                description: 'Not connected',
+              BentoCard(
+                title: context.message('Livestream'),
+                description: 'RTMP / RTMPS',
                 icon: AppIcons.livestream,
-                badge: 'Unavailable',
+                badge: capture.service is LivestreamRecordingService
+                    ? null
+                    : 'Unavailable',
+                onTap: capture.service is! LivestreamRecordingService
+                    ? null
+                    : () {
+                        onDismiss?.call();
+                        openLivestream(target);
+                      },
               ),
-              const BentoCard(
-                title: 'AI subtitles',
-                description: 'Not connected',
+              BentoCard(
+                title: context.l10n.offlineAutomaticSubtitles,
+                description: context.l10n.editingStudio,
                 icon: AppIcons.captions,
-                badge: 'Unavailable',
+                onTap: edit,
               ),
               editor,
             ],

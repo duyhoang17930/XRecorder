@@ -9,14 +9,22 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/domain/models.dart';
 import '../../core/domain/repositories.dart';
+import '../../l10n/localization.dart';
 
-class AndroidRecordingService implements RecordingService {
+class AndroidRecordingService
+    implements
+        RecordingService,
+        RegionRecordingService,
+        LivestreamRecordingService,
+        LivestreamDestinationStore,
+        DelayedScreenshotService {
   static const commands = MethodChannel('com.xrecorder/capture');
   static const events = EventChannel('com.xrecorder/capture/events');
   // One native subscription, shared by every observer/service instance.
-  static final Stream<RecordingSession> _sessions = events
+  static final Stream<Map<Object?, Object?>> _snapshots = events
       .receiveBroadcastStream()
-      .map((value) => decode(value as Map<Object?, Object?>));
+      .map((value) => value as Map<Object?, Object?>);
+  static final Stream<RecordingSession> _sessions = _snapshots.map(decode);
   static RecordingSession decode(Map<Object?, Object?> data) {
     final config = (data['config'] as Map<Object?, Object?>?) ?? data;
     // Screenshot config is a video preset, not the dimensions of its PNG.
@@ -147,9 +155,80 @@ class AndroidRecordingService implements RecordingService {
   @override
   Stream<RecordingSession> get sessions => _sessions;
   @override
+  Stream<Map<String, dynamic>> get liveStates => _snapshots.map(
+    (value) => Map<String, dynamic>.from(value['live'] as Map? ?? const {}),
+  );
+  @override
+  Future<Map<String, dynamic>> currentLive() async =>
+      await commands.invokeMapMethod<String, dynamic>('liveStatus') ?? {};
+  @override
+  Future<Map<String, String>?> loadLiveDestination() =>
+      commands.invokeMapMethod<String, String>('liveDestination');
+  @override
+  Future<void> saveLiveDestination({
+    required String name,
+    required String serverUrl,
+    required String streamKey,
+  }) => commands.invokeMethod<void>('saveLiveDestination', {
+    'name': name,
+    'serverUrl': serverUrl,
+    'streamKey': streamKey,
+  });
+  @override
+  Future<void> forgetLiveDestination() =>
+      commands.invokeMethod<void>('forgetLiveDestination');
+  @override
+  Future<RecordingSession> startLive(
+    RecordingSettings settings, {
+    required String serverUrl,
+    required String streamKey,
+  }) => start(settings, liveServer: serverUrl, liveKey: streamKey);
+  @override
   Future<RecordingSession?> currentSession() async => _call('current');
   @override
   Future<RecordingSession> screenshot() => _call('screenshot');
+  @override
+  Future<RecordingSession> screenshotAfter(Duration delay) {
+    if (!const [1, 3, 5, 10].contains(delay.inSeconds) ||
+        delay.inMilliseconds != delay.inSeconds * 1000) {
+      throw const DomainFailure(
+        FailureCode.invalid,
+        'Choose a screenshot delay of 1, 3, 5 or 10 seconds.',
+      );
+    }
+    return _call('screenshot', {'countdown': delay.inSeconds});
+  }
+
+  @override
+  Future<({int width, int height})> captureDisplay() async {
+    final data = await commands.invokeMapMethod<Object?, Object?>(
+      'capabilities',
+    );
+    final width = (data?['displayWidth'] as num?)?.toInt() ?? 0;
+    final height = (data?['displayHeight'] as num?)?.toInt() ?? 0;
+    if (width < 160 || height < 160) {
+      throw const DomainFailure(
+        FailureCode.unavailable,
+        'Screen dimensions are unavailable.',
+      );
+    }
+    return (width: width, height: height);
+  }
+
+  @override
+  Future<RecordingSession> startRegion(
+    RecordingSettings settings, {
+    required int cropX,
+    required int cropY,
+    required int cropWidth,
+    required int cropHeight,
+  }) => start(
+    settings,
+    cropX: cropX,
+    cropY: cropY,
+    cropWidth: cropWidth,
+    cropHeight: cropHeight,
+  );
   @override
   Future<RecordingSession> start(
     RecordingSettings settings, {
@@ -162,6 +241,8 @@ class AndroidRecordingService implements RecordingService {
     double? floatingRatioX,
     double? floatingRatioY,
     bool? audioDucking,
+    String? liveServer,
+    String? liveKey,
   }) async {
     final supported = await capabilities();
     final payload = <String, Object?>{
@@ -197,6 +278,10 @@ class AndroidRecordingService implements RecordingService {
     if (floatingRatioX != null) payload['floatingRatioX'] = floatingRatioX;
     if (floatingRatioY != null) payload['floatingRatioY'] = floatingRatioY;
     if (audioDucking != null) payload['audioDucking'] = audioDucking;
+    if (liveServer != null) {
+      payload['liveServer'] = liveServer;
+      payload['liveKey'] = liveKey;
+    }
     return _call('start', payload);
   }
 
@@ -204,7 +289,10 @@ class AndroidRecordingService implements RecordingService {
     final payload = <String, Object?>{};
     if (scale != null) payload['scale'] = scale;
     if (opacity != null) payload['opacity'] = opacity;
-    final res = await commands.invokeMethod<bool>('updateFloatingBall', payload);
+    final res = await commands.invokeMethod<bool>(
+      'updateFloatingBall',
+      payload,
+    );
     return res ?? false;
   }
 
@@ -234,8 +322,9 @@ class AndroidRecordingService implements RecordingService {
   }
 
   Future<Map<String, dynamic>> getDrawingState() async {
-    final res =
-        await commands.invokeMapMethod<String, dynamic>('getDrawingState');
+    final res = await commands.invokeMapMethod<String, dynamic>(
+      'getDrawingState',
+    );
     return res ?? const <String, dynamic>{};
   }
 
@@ -259,8 +348,9 @@ class AndroidRecordingService implements RecordingService {
   }
 
   Future<Map<String, dynamic>> getFacecamState() async {
-    final res =
-        await commands.invokeMapMethod<String, dynamic>('getFacecamState');
+    final res = await commands.invokeMapMethod<String, dynamic>(
+      'getFacecamState',
+    );
     return res ?? const <String, dynamic>{};
   }
 
@@ -422,7 +512,50 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     } catch (_) {}
   }
 
-  Future<void> start(RecordingSettings settings) async {
+  Future<void> start(RecordingSettings settings) =>
+      _start(() => service.start(settings));
+
+  Future<void> startLive(
+    RecordingSettings settings, {
+    required String serverUrl,
+    required String streamKey,
+  }) {
+    final adapter = service;
+    if (adapter is! LivestreamRecordingService) {
+      throw const DomainFailure(
+        FailureCode.unavailable,
+        'Livestream requires Android.',
+      );
+    }
+    return _start(
+      () => (adapter as LivestreamRecordingService).startLive(
+        settings,
+        serverUrl: serverUrl,
+        streamKey: streamKey,
+      ),
+    );
+  }
+
+  Future<void> startRegion(RecordingSettings settings, Rect pixels) {
+    final adapter = service;
+    if (adapter is! RegionRecordingService) {
+      throw const DomainFailure(
+        FailureCode.unavailable,
+        'Region recording requires Android.',
+      );
+    }
+    return _start(
+      () => (adapter as RegionRecordingService).startRegion(
+        settings,
+        cropX: pixels.left.round(),
+        cropY: pixels.top.round(),
+        cropWidth: pixels.width.round(),
+        cropHeight: pixels.height.round(),
+      ),
+    );
+  }
+
+  Future<void> _start(Future<RecordingSession> Function() request) async {
     if (busy) return;
     _requesting = true;
     _clearFeedback();
@@ -430,7 +563,7 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     dismissedId = null;
     try {
       final epoch = ++_snapshotEpoch;
-      final value = await service.start(settings);
+      final value = await request();
       if (epoch == _snapshotEpoch) _receive(value);
     } catch (e) {
       error = e.toString();
@@ -442,7 +575,7 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     }
   }
 
-  Future<void> screenshot() async {
+  Future<void> screenshot({Duration? delay}) async {
     if (busy) return;
     _requesting = true;
     _clearFeedback();
@@ -450,7 +583,9 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     dismissedId = null;
     try {
       final epoch = ++_snapshotEpoch;
-      final value = await service.screenshot();
+      final value = delay != null && service is DelayedScreenshotService
+          ? await (service as DelayedScreenshotService).screenshotAfter(delay)
+          : await service.screenshot();
       if (epoch == _snapshotEpoch) _receive(value);
     } catch (e) {
       if (e is DomainFailure ||
@@ -686,7 +821,7 @@ class CaptureStatusBar extends StatelessWidget {
                   child: Semantics(
                     liveRegion: true,
                     child: RecordingStatusIndicator(
-                      label: status.label,
+                      label: context.message(status.label),
                       icon: status.icon,
                       color:
                           failure != null ||
@@ -745,8 +880,8 @@ class CaptureStatusBar extends StatelessWidget {
                     ),
                     label: Text(
                       session.state == RecordingState.paused
-                          ? 'Resume'
-                          : 'Pause',
+                          ? context.message('Resume')
+                          : context.message('Pause'),
                     ),
                   ),
                 if (active)
@@ -812,7 +947,7 @@ class CaptureFeedbackCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Text(
-                    feedback.notice.text,
+                    context.message(feedback.notice.text),
                     style: AppTypography.bodySmall.copyWith(
                       color: c.text,
                       fontWeight: FontWeight.w600,

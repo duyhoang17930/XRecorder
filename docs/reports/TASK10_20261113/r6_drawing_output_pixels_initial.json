@@ -1,0 +1,42 @@
+{
+  "phases": {
+    "stroke": {
+      "screenInkPixels": 3977,
+      "estimatedVideoTime": 108.04184198379517,
+      "videoInkPixelsAtOffsets": [
+        1018,
+        1018,
+        0
+      ]
+    },
+    "undo": {
+      "screenInkPixels": 0,
+      "estimatedVideoTime": 114.1362612247467,
+      "videoInkPixelsAtOffsets": [
+        0,
+        0,
+        583
+      ]
+    },
+    "clear": {
+      "screenInkPixels": 3840,
+      "estimatedVideoTime": 120.66222858428955,
+      "videoInkPixelsAtOffsets": [
+        991,
+        991,
+        954
+      ]
+    },
+    "exit": {
+      "screenInkPixels": 3715,
+      "estimatedVideoTime": 125.93885278701782,
+      "videoInkPixelsAtOffsets": [
+        949,
+        949,
+        949
+      ]
+    }
+  },
+  "fullDecode": "r6_controls_media/validation.json",
+  "scope": "Draw and Undo pixel proof; Clear failed and was fixed afterward; Exit should retain visible ink at pass-through alpha."
+}

@@ -102,15 +102,15 @@ void main() {
       await tester.tap(find.text('Recording settings'));
       await tester.pumpAndSettle();
       expect(
-        GoRouterState.of(tester.element(find.text('Audio & Video Settings')))
+        GoRouterState.of(tester.element(find.text('Recording settings')))
             .uri
             .path,
         '/settings/audio-video',
       );
       expect(
-        find.text('Audio & Video Settings'),
+        find.text('Recording settings'),
         findsOneWidget,
-      ); // P1 title kept.
+      ); // Localized title; P1 route and preference-preservation contract kept.
       expect(find.byType(StudioRootHeader), findsNothing);
       router.pop();
       await tester.pumpAndSettle();

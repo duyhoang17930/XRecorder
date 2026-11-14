@@ -1,0 +1,72 @@
+{
+  "mediaStatus": "FAIL",
+  "workflowStatus": "PASS",
+  "scope": "Real Mixed capture while task115 plays; identified speech + full decodes + local/network packet and sampled pixel parity. Physical microphone quality is not tested.",
+  "sessionId": "2b3e7fea-9e62-4011-b2ee-c885ffa8f06a",
+  "uri": "content://media/external/video/media/154",
+  "nativeEndWorkflowPassed": true,
+  "speech": {
+    "local.mp4": {
+      "offsetMs": 2703.5,
+      "first5sCorrelation": 0.44825891795642336,
+      "fixedOffsetWindowCorrelations": [
+        0.21231476629794324,
+        0.8592676357705622,
+        -0.042797430686163526
+      ],
+      "decodedSamplesAt2kHz": 32811,
+      "sha256": "f2d15a2ed548f81f8899793bca63b743f3f67fbeb4a5b656914926f4aa98e527"
+    },
+    "received.mp4": {
+      "offsetMs": 2081.0,
+      "first5sCorrelation": 0.43468562108833936,
+      "fixedOffsetWindowCorrelations": [
+        0.46153645312855796,
+        0.4016737620081736,
+        0.027285235640398815
+      ],
+      "decodedSamplesAt2kHz": 31574,
+      "sha256": "d634c1dc8e49ede0b1738744a8a3eeade9625725bedb3db6739ace836ebc3df6"
+    }
+  },
+  "signalGateStatus": "FAIL",
+  "signalFailures": [
+    "local.mp4",
+    "received.mp4"
+  ],
+  "packetAndSampledPixelParityStatus": "PASS",
+  "packetAlignment": {
+    "v:0": {
+      "localPackets": 156,
+      "receivedPackets": 153,
+      "contiguousStart": 3,
+      "everyPacketSha256Exact": true,
+      "medianTimestampOffsetSeconds": 0.08029999999999937,
+      "timestampOffsetRangeSeconds": [
+        0.079844,
+        0.08084399999999999
+      ]
+    },
+    "a:0": {
+      "localPackets": 769,
+      "receivedPackets": 740,
+      "contiguousStart": 29,
+      "everyPacketSha256Exact": true,
+      "medianTimestampOffsetSeconds": 0.08033300000000043,
+      "timestampOffsetRangeSeconds": [
+        0.08016699999999999,
+        0.08033400000000057
+      ]
+    }
+  },
+  "relativeAvOffsetMs": 0.03300000000105996,
+  "rgbByteExactReceivedFrameSamples": [
+    0,
+    1,
+    38,
+    76,
+    114,
+    152
+  ],
+  "decodeEvidence": "live_audio_audio8_media/validation.json"
+}

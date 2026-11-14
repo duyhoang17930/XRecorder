@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "uri": "content://media/external/video/media/98",
+  "sourceVideoDurationUs": 314933,
+  "audioLeadUs": 700000,
+  "videoDuration": "0.314933",
+  "audioDuration": "0.320000",
+  "audioStart": "0.004000",
+  "firstFrameExact": true,
+  "fullDecode": "PASS",
+  "decodedVideoFrames": 10
+}

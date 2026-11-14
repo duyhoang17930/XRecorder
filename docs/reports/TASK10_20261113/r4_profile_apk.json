@@ -1,0 +1,7 @@
+{
+  "apk": "build\\app\\outputs\\flutter-apk\\app-profile.apk",
+  "sha256": "22ec590f25bc6a0a7a5f0f4b0d60aa1972f7e8e3a56f65d685bd9fe9813f6c8c",
+  "bytes": 60091139,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554"
+}

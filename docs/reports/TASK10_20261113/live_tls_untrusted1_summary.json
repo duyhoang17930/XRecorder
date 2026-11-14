@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "case": "live-refused",
+      "transport": {
+        "state": "connection_failed",
+        "bitrate": 0,
+        "retries": 2,
+        "sentVideoFrames": 0,
+        "sentAudioFrames": 0,
+        "droppedVideoFrames": 0,
+        "droppedAudioFrames": 0,
+        "sentBytes": 0,
+        "queuedBytes": 0
+      },
+      "sourceUri": "content://media/external/video/media/115",
+      "status": "PASS",
+      "states": [
+        "connecting",
+        "connecting",
+        "reconnecting",
+        "reconnecting",
+        "reconnecting",
+        "reconnecting",
+        "connection_failed"
+      ]
+    }
+  ],
+  "sourceByteExact": true,
+  "liveJournalByteExact": true,
+  "syntheticKeyAbsentFromLogcat": true,
+  "sourceSha256": "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f",
+  "receiver": null,
+  "untrustedTlsRejected": true,
+  "status": "PASS"
+}

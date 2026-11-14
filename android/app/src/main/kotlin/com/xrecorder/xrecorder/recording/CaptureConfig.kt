@@ -23,7 +23,10 @@ data class CaptureConfig(
     val floatingRatioY: Float = -1f,
     val shakeToStop: Boolean = true,
     val showTouches: Boolean = false,
-    val audioDucking: Boolean = false
+    val audioDucking: Boolean = false,
+    val regionSourceWidth: Int = 0,
+    val regionSourceHeight: Int = 0,
+    val liveRequested: Boolean = false
 ) {
     val isRegion: Boolean get() = cropWidth != null && cropHeight != null && cropWidth > 0 && cropHeight > 0
     val microphone: Boolean get() = audio == "microphone" || audio == "mixed"
@@ -35,8 +38,39 @@ data class CaptureConfig(
         "facecam" to facecam,"hardwareEncoding" to hardwareEncoding,"encoderName" to encoderName,
         "isRegion" to isRegion,"cropX" to cropX,"cropY" to cropY,"cropWidth" to cropWidth,"cropHeight" to cropHeight,
         "floatingScale" to floatingScale,"floatingOpacity" to floatingOpacity,"floatingRatioX" to floatingRatioX,"floatingRatioY" to floatingRatioY,
-        "shakeToStop" to shakeToStop,"showTouches" to showTouches,"audioDucking" to audioDucking)
+        "shakeToStop" to shakeToStop,"showTouches" to showTouches,"audioDucking" to audioDucking,
+        "regionSourceWidth" to regionSourceWidth,"regionSourceHeight" to regionSourceHeight,"liveRequested" to liveRequested)
     companion object {
+        /** Restore historical metadata only. A new capture must still call from(context, values).
+         * Display/encoder availability today must not rewrite a terminal session's snapshot.
+         */
+        internal fun restore(values: Map<*, *>): CaptureConfig {
+            val defaults = CaptureConfig()
+            fun int(key: String, fallback: Int) = (values[key] as? Number)?.toInt() ?: fallback
+            fun double(key: String, fallback: Double) = (values[key] as? Number)?.toDouble() ?: fallback
+            fun float(key: String, fallback: Float) = (values[key] as? Number)?.toFloat() ?: fallback
+            fun text(key: String, fallback: String) = values[key] as? String ?: fallback
+            fun bool(key: String, fallback: Boolean) = values[key] as? Boolean ?: fallback
+            return CaptureConfig(
+                width = int("width", defaults.width), height = int("height", defaults.height),
+                fps = int("fps", defaults.fps), bitrate = int("bitrate", defaults.bitrate),
+                codec = text("codec", defaults.codec), encoderName = text("encoderName", defaults.encoderName),
+                audio = text("audio", defaults.audio), micGain = double("micGain", defaults.micGain),
+                internalGain = double("internalGain", defaults.internalGain),
+                noiseReduction = bool("noiseReduction", defaults.noiseReduction),
+                countdown = int("countdown", defaults.countdown), durationSeconds = int("durationSeconds", defaults.durationSeconds),
+                orientation = text("orientation", defaults.orientation), mode = text("mode", defaults.mode),
+                facecam = bool("facecam", defaults.facecam), hardwareEncoding = bool("hardwareEncoding", defaults.hardwareEncoding),
+                cropX = (values["cropX"] as? Number)?.toInt(), cropY = (values["cropY"] as? Number)?.toInt(),
+                cropWidth = (values["cropWidth"] as? Number)?.toInt(), cropHeight = (values["cropHeight"] as? Number)?.toInt(),
+                floatingScale = float("floatingScale", defaults.floatingScale), floatingOpacity = float("floatingOpacity", defaults.floatingOpacity),
+                floatingRatioX = float("floatingRatioX", defaults.floatingRatioX), floatingRatioY = float("floatingRatioY", defaults.floatingRatioY),
+                regionSourceWidth = int("regionSourceWidth", 0), regionSourceHeight = int("regionSourceHeight", 0),
+                shakeToStop = bool("shakeToStop", defaults.shakeToStop), showTouches = bool("showTouches", defaults.showTouches),
+                audioDucking = bool("audioDucking", defaults.audioDucking),
+                liveRequested = bool("liveRequested", defaults.liveRequested)
+            )
+        }
         fun encoders(mime: String): List<MediaCodecInfo> = MediaCodecList(MediaCodecList.REGULAR_CODECS).codecInfos.filter {
             it.isEncoder && it.supportedTypes.any { type -> type.equals(mime,true) }
         }
@@ -149,7 +183,9 @@ data class CaptureConfig(
                 floatingRatioY = floatingConfig.ratioY,
                 shakeToStop = shakeToStop,
                 showTouches = showTouches,
-                audioDucking = audioDucking
+                audioDucking = audioDucking,
+                regionSourceWidth = if (sanitizedCrop != null) metrics.widthPixels else 0,
+                regionSourceHeight = if (sanitizedCrop != null) metrics.heightPixels else 0
             )
         }
         fun capabilities(context: Context? = null): Map<String,Any> {

@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "visible-back",
+      "targetDp": 48,
+      "disposed": true,
+      "exitMs": 475
+    },
+    {
+      "case": "system-back",
+      "targetDp": 48,
+      "disposed": true,
+      "exitMs": 331
+    },
+    {
+      "case": "landscape-back",
+      "targetDp": 48,
+      "disposed": true,
+      "exitMs": 175
+    },
+    {
+      "case": "reopen-back",
+      "targetDp": 48,
+      "disposed": true,
+      "exitMs": 415
+    }
+  ],
+  "sourceHashExact": true,
+  "settingsByteExact": true,
+  "terminalJournalByteExact": true,
+  "scope": "Original viewer4navigation/release cases; capture pixels/audio not repaired"
+}

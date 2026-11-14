@@ -1,0 +1,421 @@
+{
+  "case": "live-capture-audio",
+  "sessionId": "973599bb-325c-4e22-bcb4-2af85b3ae4c5",
+  "consentScreenshot": true,
+  "initialAudioTiming": {
+    "monotonicNs": 34335959944240,
+    "captureElapsedMs": 74,
+    "micUnderrunSamples": 0,
+    "mic": {
+      "timestampStatus": 0,
+      "framePosition": 34143,
+      "frameTimeNs": 34335957817040,
+      "bufferFrames": 96000
+    },
+    "internal": {
+      "timestampStatus": 0,
+      "framePosition": 21504,
+      "frameTimeNs": 34335965585040,
+      "bufferFrames": 3072
+    }
+  },
+  "playbackStartCaptureMs": 4394,
+  "audioTimeline": [
+    {
+      "monotonicNs": 34340309513740,
+      "captureElapsedMs": 4415,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 207056,
+        "frameTimeNs": 34340184181740,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 197632,
+        "frameTimeNs": 34340179293140,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34340811162440,
+      "captureElapsedMs": 4952,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 237235,
+        "frameTimeNs": 34340834242740,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 229376,
+        "frameTimeNs": 34340842780940,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34341348613640,
+      "captureElapsedMs": 5454,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 261656,
+        "frameTimeNs": 34341343013740,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 244736,
+        "frameTimeNs": 34341342851640,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34341850391040,
+      "captureElapsedMs": 5959,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 285764,
+        "frameTimeNs": 34341845260940,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 276480,
+        "frameTimeNs": 34341841566440,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34342356200040,
+      "captureElapsedMs": 6462,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 310236,
+        "frameTimeNs": 34342355092440,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 302080,
+        "frameTimeNs": 34342355057340,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34342857999140,
+      "captureElapsedMs": 6964,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 334072,
+        "frameTimeNs": 34342851676140,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 325632,
+        "frameTimeNs": 34342844349640,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34343360104840,
+      "captureElapsedMs": 7466,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 357996,
+        "frameTimeNs": 34343350088640,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 350208,
+        "frameTimeNs": 34343356520040,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34343863708540,
+      "captureElapsedMs": 7978,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 382649,
+        "frameTimeNs": 34343863708540,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 374784,
+        "frameTimeNs": 34343872935040,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34344374182040,
+      "captureElapsedMs": 8480,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 406966,
+        "frameTimeNs": 34344370303240,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 398336,
+        "frameTimeNs": 34344359155940,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34344875749940,
+      "captureElapsedMs": 8983,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 431318,
+        "frameTimeNs": 34344877638140,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 422912,
+        "frameTimeNs": 34344875749940,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34345386798940,
+      "captureElapsedMs": 9492,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 455401,
+        "frameTimeNs": 34345379373040,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 447488,
+        "frameTimeNs": 34345384115340,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34345889297940,
+      "captureElapsedMs": 9995,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 479182,
+        "frameTimeNs": 34345874809540,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 471040,
+        "frameTimeNs": 34345873974140,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34346391171840,
+      "captureElapsedMs": 10497,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 503768,
+        "frameTimeNs": 34346387015540,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 495616,
+        "frameTimeNs": 34346386051540,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34346896430540,
+      "captureElapsedMs": 11002,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 527550,
+        "frameTimeNs": 34346882469740,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 520192,
+        "frameTimeNs": 34346897490840,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 34347399179640,
+      "captureElapsedMs": 11505,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "framePosition": 552255,
+        "frameTimeNs": 34347397164740,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "framePosition": 543744,
+        "frameTimeNs": 34347388511340,
+        "bufferFrames": 3072
+      }
+    }
+  ],
+  "playback": {
+    "positionMs": 9685,
+    "durationMs": 11036,
+    "playing": true
+  },
+  "liveBeforeEnd": {
+    "sessionId": "973599bb-325c-4e22-bcb4-2af85b3ae4c5",
+    "state": "live",
+    "bitrate": 174427,
+    "retries": 0,
+    "sentVideoFrames": 107,
+    "sentAudioFrames": 509,
+    "droppedVideoFrames": 0,
+    "droppedAudioFrames": 0,
+    "sentBytes": 519509,
+    "queuedBytes": 0
+  },
+  "playerScreenshot": true,
+  "reopenedLiveRoute": true,
+  "status": "PASS",
+  "capture": {
+    "id": "973599bb-325c-4e22-bcb4-2af85b3ae4c5",
+    "state": "completed",
+    "startedAt": 1794644460338,
+    "elapsedMs": 19092,
+    "outputUri": "content://media/external/video/media/156",
+    "error": null,
+    "screenshot": false,
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mixed",
+      "micGain": 0,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 3,
+      "durationSeconds": 0,
+      "orientation": "automatic",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "c2.android.avc.encoder",
+      "isRegion": false,
+      "cropX": null,
+      "cropY": null,
+      "cropWidth": null,
+      "cropHeight": null,
+      "floatingScale": 1,
+      "floatingOpacity": 1,
+      "floatingRatioX": -1,
+      "floatingRatioY": -1,
+      "shakeToStop": true,
+      "showTouches": false,
+      "audioDucking": false,
+      "regionSourceWidth": 0,
+      "regionSourceHeight": 0,
+      "liveRequested": true
+    },
+    "countdownRemaining": 0,
+    "live": {
+      "sessionId": "973599bb-325c-4e22-bcb4-2af85b3ae4c5",
+      "state": "stopped",
+      "bitrate": 0,
+      "retries": 0,
+      "sentVideoFrames": 196,
+      "sentAudioFrames": 801,
+      "droppedVideoFrames": 0,
+      "droppedAudioFrames": 0,
+      "sentBytes": 993934,
+      "queuedBytes": 0
+    }
+  },
+  "sourceByteExact": true,
+  "sourceUri": "content://media/external/video/media/115",
+  "scope": "Real Flutter Start/End + normal consent + production player via native integration; independent file/audio validation required",
+  "cleanupCapture": {
+    "id": "973599bb-325c-4e22-bcb4-2af85b3ae4c5",
+    "state": "completed",
+    "startedAt": 1794644460338,
+    "elapsedMs": 19092,
+    "outputUri": "content://media/external/video/media/156",
+    "error": null,
+    "screenshot": false,
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mixed",
+      "micGain": 0,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 3,
+      "durationSeconds": 0,
+      "orientation": "automatic",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "c2.android.avc.encoder",
+      "isRegion": false,
+      "cropX": null,
+      "cropY": null,
+      "cropWidth": null,
+      "cropHeight": null,
+      "floatingScale": 1,
+      "floatingOpacity": 1,
+      "floatingRatioX": -1,
+      "floatingRatioY": -1,
+      "shakeToStop": true,
+      "showTouches": false,
+      "audioDucking": false,
+      "regionSourceWidth": 0,
+      "regionSourceHeight": 0,
+      "liveRequested": true
+    },
+    "countdownRemaining": 0,
+    "live": {
+      "sessionId": "973599bb-325c-4e22-bcb4-2af85b3ae4c5",
+      "state": "stopped",
+      "bitrate": 0,
+      "retries": 0,
+      "sentVideoFrames": 196,
+      "sentAudioFrames": 801,
+      "droppedVideoFrames": 0,
+      "droppedAudioFrames": 0,
+      "sentBytes": 993934,
+      "queuedBytes": 0
+    }
+  }
+}

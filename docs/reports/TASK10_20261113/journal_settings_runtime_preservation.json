@@ -1,0 +1,6 @@
+{
+  "terminalJournalByteExactAcrossRestart": true,
+  "settingsByteExactAcrossRestartAndSetupOpenClose": true,
+  "settingsSha256": "2869f3c1a6894a3323b406d876db72a8b5951b1546488f925dfd7a713847167a",
+  "journalSha256": "c09f0dd260ee7eaf3e7fd6b75e00f0aea53d6cdb1dfdb3b233e0bf785d1dcb46"
+}

@@ -1,0 +1,13 @@
+{
+  "fixtureSessionId": "1bc3aea1-6c04-4ccc-a9de-9f69cb920dab",
+  "state": "completed",
+  "originalUri": "content://media/external/video/media/46",
+  "mediaBytesUnchanged": true,
+  "sha256": "7c12d2be6c920b35b61f3a249e4f23c541c57d5d6b44c4bd990abe79af9b76c6",
+  "pendingClearedOnlyWithCompletedJournal": true,
+  "nativeChecks": "Mp4RecoveryEngine descriptor structure + owner + native tracks/dimensions + decoded frame",
+  "scope": "Publication completed before process loss, same task URI reused; no capture consent reused",
+  "notCovered": "IS_PENDING1 publish, unfinished A/V remux, missing-moov reconstruction, API24-28",
+  "apkSha256": "cba9d24c6d4a8c57a5370e8d4d6ad88265d2b764f35ebfa5ba7c26492d7dd610",
+  "apkBytes": 59960067
+}

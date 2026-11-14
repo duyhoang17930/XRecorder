@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "mainApk": "capture_status_profile_install.json",
+  "viAndArRootStatusTitleActionLocalized": true,
+  "canonicalRecordingValuesKept": true,
+  "arabicTrashCopyCorrected": true,
+  "appLanguageRestored": "en",
+  "screens": [
+    "p1_root_vi_localized.png",
+    "p1_root_ar_localized.png",
+    "p2_arabic_trash_copy_fixed.png"
+  ],
+  "limitations": "Targeted visible strings; human translation approval pending."
+}

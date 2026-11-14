@@ -1,0 +1,29 @@
+{
+  "status": "PASS_AFTER_ENVIRONMENT_RECOVERY",
+  "originalRun": "UI assertions PASS; finally failed on transient ADB daemon connection",
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "results": [
+    {
+      "locale": "vi",
+      "localizedTitle": true,
+      "gainSliders": 2,
+      "spokenUnitLocalized": true,
+      "backPreservesCanonicalSettings": true,
+      "noticeHelpChecked": true,
+      "invalidDurationChecked": false
+    },
+    {
+      "locale": "ar",
+      "localizedTitle": true,
+      "gainSliders": 2,
+      "spokenUnitLocalized": true,
+      "backPreservesCanonicalSettings": true,
+      "noticeHelpChecked": true,
+      "invalidDurationChecked": false
+    }
+  ],
+  "preferencesByteExactAfterRestore": true,
+  "restoredLanguage": "en",
+  "noEmulatorRestart": true
+}

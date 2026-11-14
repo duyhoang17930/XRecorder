@@ -1,0 +1,24 @@
+{
+  "case": "live-transport",
+  "submittedVideo": 159,
+  "submittedAudio": 375,
+  "transport": {
+    "state": "live",
+    "bitrate": 981700,
+    "retries": 0,
+    "sentVideoFrames": 160,
+    "sentAudioFrames": 376,
+    "droppedVideoFrames": 0,
+    "droppedAudioFrames": 0,
+    "sentBytes": 893565,
+    "queuedBytes": 0
+  },
+  "sourceUri": "content://media/external/video/media/52",
+  "status": "PASS",
+  "states": [
+    "connecting",
+    "connecting",
+    "live",
+    "stopped"
+  ]
+}

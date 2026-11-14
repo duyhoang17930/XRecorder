@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "scope": "main recording154 -> Library -> Editor -> Tiny -> reviewed/applied cue -> MP4 -> Gallery/native player; export parity to recording, not capture-quality acceptance",
+  "sourceUri": "content://media/external/video/media/154",
+  "outputUri": "content://media/external/video/media/155",
+  "bytes": 2313798,
+  "sha256": "8bed241688e7c75cc5c53de44c112ef8147c26751190d75c270b10b72c146516",
+  "displaySize": [
+    720,
+    1280
+  ],
+  "codedSize": [
+    1280,
+    720
+  ],
+  "rotationDegrees": -90,
+  "durationSeconds": 16.905292,
+  "decodedFrames": 152,
+  "subtitleCueMs": [
+    0,
+    12000
+  ],
+  "pixelChecks": [
+    {
+      "seconds": 1,
+      "unannotatedRegionMae": 1.7833531592935528,
+      "additionalNeutralBrightCaptionPixels": 6510
+    },
+    {
+      "seconds": 3,
+      "unannotatedRegionMae": 0.584571116255144,
+      "additionalNeutralBrightCaptionPixels": 12638
+    },
+    {
+      "seconds": 6,
+      "unannotatedRegionMae": 0.5817171156978738,
+      "additionalNeutralBrightCaptionPixels": 12804
+    },
+    {
+      "seconds": 11.5,
+      "unannotatedRegionMae": 0.5845202117626886,
+      "additionalNeutralBrightCaptionPixels": 12804
+    },
+    {
+      "seconds": 12.5,
+      "unannotatedRegionMae": 0.5842730570558985,
+      "additionalNeutralBrightCaptionPixels": 0
+    },
+    {
+      "seconds": 16,
+      "unannotatedRegionMae": 1.0907988790294925,
+      "additionalNeutralBrightCaptionPixels": 0
+    }
+  ],
+  "recordingToExportAudioCorrelation": 0.9999382868372808,
+  "aacAlignmentMs": 11.833333333333334,
+  "alignmentSampleRate": 48000,
+  "coarse2kHzCorrelation": 0.7836381131597425,
+  "sourceRecordingQualityGate": "FAIL remains in live_audio_audio8_output_validation.json"
+}

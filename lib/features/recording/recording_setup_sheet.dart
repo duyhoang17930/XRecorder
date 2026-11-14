@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../core/domain/models.dart';
 import '../../core/constants/app_icons.dart';
 import '../../core/presentation/user_messages.dart';
 import '../../core/ui/components/bottom_sheets/studio_bottom_sheet.dart';
@@ -12,39 +11,10 @@ import '../../core/ui/theme/typography.dart';
 import '../settings/settings_controller.dart';
 import '../settings/recording_settings_form.dart';
 import 'recording_service.dart';
+import 'recording_selection.dart';
+import '../../l10n/localization.dart';
 
-void validateRecordingSelection(
-  RecordingSettings settings,
-  RecordingCapabilities caps,
-) {
-  final longEdge = settings.width > settings.height
-      ? settings.width
-      : settings.height;
-  final shortEdge = settings.width < settings.height
-      ? settings.width
-      : settings.height;
-  final supported = caps.configurations.any(
-    (c) =>
-        c.width == longEdge &&
-        c.height == shortEdge &&
-        c.fps == settings.fps &&
-        c.codec == settings.codec,
-  );
-  final exceedsPerformance =
-      settings.mode == RecordingMode.performance &&
-      (longEdge > 1280 ||
-          shortEdge > 720 ||
-          settings.fps > 30 ||
-          (settings.bitrate ?? 0) > 8000000);
-  if (!supported ||
-      exceedsPerformance ||
-      !caps.audioSources.contains(settings.audioSource)) {
-    throw const DomainFailure(
-      FailureCode.invalid,
-      'The selected settings are unavailable. Choose a supported resolution, FPS, codec and audio source; Performance uses up to 720p, 30 FPS and 8 Mbps.',
-    );
-  }
-}
+export 'recording_selection.dart' show validateRecordingSelection;
 
 Future<void> openRecordingSetup(BuildContext context) =>
     showStudioBottomSheet<void>(
@@ -84,16 +54,16 @@ class _RecordingSetupSheetState extends State<RecordingSetupSheet> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 StudioSheetHeader(
-                  title: 'Recording settings',
+                  title: context.l10n.recordingSettings,
                   icon: AppIcons.settings,
                   actions: [
                     IconButton(
-                      tooltip: 'Reset defaults',
+                      tooltip: context.message('Reset defaults'),
                       onPressed: settings.reset,
                       icon: const Icon(AppIcons.reset),
                     ),
                     IconButton(
-                      tooltip: 'Close setup',
+                      tooltip: context.message('Close setup'),
                       onPressed: () => Navigator.pop(context),
                       icon: const Icon(AppIcons.close),
                     ),
@@ -106,7 +76,9 @@ class _RecordingSetupSheetState extends State<RecordingSetupSheet> {
                     children: [
                       for (final advanced in [false, true])
                         ChoiceChip(
-                          label: Text(advanced ? 'Advanced' : 'Basic'),
+                          label: Text(
+                            context.message(advanced ? 'Advanced' : 'Basic'),
+                          ),
                           selected: _advanced == advanced,
                           labelStyle: AppTypography.bodySmall.copyWith(
                             color: _advanced == advanced
@@ -127,14 +99,22 @@ class _RecordingSetupSheetState extends State<RecordingSetupSheet> {
                 ),
                 TextButton.icon(
                   icon: const Icon(AppIcons.screenshot),
-                  label: const Text('Screenshot · 3s delay'),
+                  label: Text(
+                    context.l10n.screenshotWithDelay(
+                      context.displayValue(
+                        settings.screenshotDelayDuration.inSeconds,
+                      ),
+                    ),
+                  ),
                   onPressed: capture.busy
                       ? null
                       : () async {
                           final target = Navigator.of(context).context;
                           Navigator.pop(context);
                           try {
-                            await capture.screenshot();
+                            await capture.screenshot(
+                              delay: settings.screenshotDelayDuration,
+                            );
                           } catch (e) {
                             if (target.mounted) {
                               showFailure(
@@ -147,7 +127,9 @@ class _RecordingSetupSheetState extends State<RecordingSetupSheet> {
                         },
                 ),
                 PrimaryButton(
-                  capture.busy ? 'Session already active' : 'Start Recording',
+                  context.message(
+                    capture.busy ? 'Session already active' : 'Start Recording',
+                  ),
                   icon: AppIcons.record,
                   onPressed: () async {
                     if (capture.busy) {

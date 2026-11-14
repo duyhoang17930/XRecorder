@@ -1,0 +1,71 @@
+[
+  {
+    "id": "speech_1794668778406681",
+    "type": "speech",
+    "model": "tiny",
+    "language": "auto",
+    "contractVersion": 2,
+    "resultLanguage": null,
+    "detectedLanguage": null,
+    "errorCode": "interrupted",
+    "allowUncertainSpeech": false,
+    "noSpeechDetected": false,
+    "speechActivity": null,
+    "memoryPreflight": null,
+    "projectId": "project_1794642438390083",
+    "sourceSignature": "{\"clips\":[{\"image\":false,\"inMs\":0,\"mediaId\":\"content://media/external/video/media/154\",\"outMs\":16886,\"sourceDurationMs\":16886}],\"effects\":{}}",
+    "createdAt": 1794668778453,
+    "state": "failed",
+    "phase": "restored",
+    "progress": 0,
+    "segments": [],
+    "error": "Interrupted when the application stopped. Start again; your draft and media are unchanged.",
+    "elapsedMs": 0,
+    "modelLoadMs": 0,
+    "inferenceMs": 0
+  },
+  {
+    "id": "speech_1794668877866772",
+    "type": "speech",
+    "model": "tiny",
+    "language": "auto",
+    "contractVersion": 2,
+    "resultLanguage": "en",
+    "detectedLanguage": "en",
+    "errorCode": null,
+    "allowUncertainSpeech": false,
+    "noSpeechDetected": false,
+    "speechActivity": {
+      "mean": 0.3594593107700348,
+      "max": 0.9999529123306274,
+      "voicedRatio": 0.35952380299568176,
+      "longestVoicedMs": 660,
+      "observedFrames": 1680,
+      "noClearSpeech": false
+    },
+    "memoryPreflight": {
+      "availableBytes": 1408462848,
+      "requiredBytes": 766605440,
+      "systemThresholdBytes": 226492416,
+      "totalBytes": 3115507712,
+      "pageBytes": 16384
+    },
+    "projectId": "project_1794642438390083",
+    "sourceSignature": "{\"clips\":[{\"image\":false,\"inMs\":0,\"mediaId\":\"content://media/external/video/media/154\",\"outMs\":16886,\"sourceDurationMs\":16886}],\"effects\":{}}",
+    "createdAt": 1794668877879,
+    "state": "completed",
+    "phase": "completed",
+    "progress": 1,
+    "segments": [
+      {
+        "startMs": 0,
+        "endMs": 12000,
+        "text": "And so my fellow Americans ask not what your country can do for you ask what you"
+      }
+    ],
+    "error": null,
+    "elapsedMs": 14237,
+    "modelLoadMs": 681,
+    "inferenceMs": 8372
+  }
+]

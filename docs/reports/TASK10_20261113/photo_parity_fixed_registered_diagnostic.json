@@ -1,0 +1,104 @@
+{
+  "status": "PENDING_REGISTERED_THRESHOLD",
+  "output": {
+    "uiStatus": "PASS",
+    "outputPixels": "PENDING_VALIDATION",
+    "uri": "content://media/external/images/media/150",
+    "name": "Edited_1794637472612.png",
+    "bytes": 1125489,
+    "sha256": "a4c7a7b1637a02b33fe68a21d9d6e2705762b8c450c174b5a171ccafc412b225",
+    "sourceByteExact": true,
+    "sameCaption": "TASK10_PHOTO",
+    "starInk": "Yellow",
+    "heartInk": "Cyan",
+    "heartUndoRedoExercised": true,
+    "estimatedFinalImageBox": [
+      237,
+      346,
+      605,
+      1344
+    ],
+    "starModeImageBox": [
+      237,
+      346,
+      605,
+      1344
+    ],
+    "heartModeImageBox": [
+      237,
+      346,
+      605,
+      1344
+    ],
+    "apkIdentity": "photo_parity_profile_install.json"
+  },
+  "fullDecode": "PASS",
+  "dimensions": [
+    922,
+    2048
+  ],
+  "maeChecks": [
+    {
+      "region": "inner_image",
+      "rect": [
+        3,
+        3,
+        603,
+        1343
+      ],
+      "mae": 1.466546849087894
+    },
+    {
+      "region": "caption_and_stroke",
+      "rect": [
+        273,
+        646,
+        576,
+        861
+      ],
+      "mae": 3.056760559776908
+    }
+  ],
+  "stickerPixels": {
+    "yellowStar": 24525,
+    "cyanHeart": 9873
+  },
+  "heartUndoRedo": [
+    {
+      "frame": "photo_parity_fixed_heart",
+      "cyanHeartPixels": 4284
+    },
+    {
+      "frame": "photo_parity_fixed_heart_undo",
+      "cyanHeartPixels": 0
+    },
+    {
+      "frame": "photo_parity_fixed_before_save",
+      "cyanHeartPixels": 4284
+    }
+  ],
+  "guideExclusion": "3physical pixels at image boundary; existing crop guide is1logical pixel and is not exported",
+  "expectedSourceSha256": "3885fcc8dbf2deb153cbab622c8bfadc15920957b20cc31e5c5b81fda2c6f7d0",
+  "registeredImageBox": [
+    237,
+    345,
+    606,
+    1346
+  ],
+  "registration": {
+    "reference": "untouched background in saved output",
+    "normalizedRegion": [
+      0.05,
+      0.72,
+      0.95,
+      0.97
+    ],
+    "stride": 8,
+    "sampledBackgroundMae": 1.6444219750589821,
+    "boundedOriginRadiusPixels": 2,
+    "boundedWidthRadiusPixels": 4,
+    "reason": "estimated frame includes a1logical-pixel white crop guide; not saved media",
+    "annotationPixelsExcluded": true
+  },
+  "earlierEstimatedFrameDiagnostic": "photo_parity_fixed_pixel_diagnostic.json"
+}

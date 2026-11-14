@@ -20,7 +20,8 @@ import android.view.WindowManager
  */
 internal class DrawingOverlay(
     private val context: Context,
-    val session: DrawingStrokeEngine.Session = DrawingStrokeEngine.Session()
+    val session: DrawingStrokeEngine.Session = DrawingStrokeEngine.Session(),
+    private val changed: () -> Unit = {}
 ) {
     private val windows = context.getSystemService(WindowManager::class.java)
 
@@ -46,6 +47,11 @@ internal class DrawingOverlay(
     ).apply {
         gravity = Gravity.TOP or Gravity.START
         title = "3HRecorder Drawing Overlay"
+        // Android 12+ blocks pass-through touches under opaque overlay windows.
+        // Keep existing ink visible at the platform's permitted obscuring opacity.
+        alpha = if (Build.VERSION.SDK_INT >= 31)
+            context.getSystemService(android.hardware.input.InputManager::class.java).maximumObscuringOpacityForTouch
+            else 1f
     }
 
     private val canvasView = @SuppressLint("ViewConstructor") object : View(context) {
@@ -121,11 +127,13 @@ internal class DrawingOverlay(
                 MotionEvent.ACTION_UP -> {
                     session.endStroke()
                     invalidate()
+                    changed()
                     return true
                 }
                 MotionEvent.ACTION_CANCEL -> {
                     session.endStroke()
                     invalidate()
+                    changed()
                     return true
                 }
                 else -> return false
@@ -155,6 +163,8 @@ internal class DrawingOverlay(
 
         session.setDrawingMode(enabled)
         params.flags = DrawingStrokeEngine.resolveWindowFlags(enabled)
+        params.alpha = if (enabled || Build.VERSION.SDK_INT < 31) 1f else
+            context.getSystemService(android.hardware.input.InputManager::class.java).maximumObscuringOpacityForTouch
         try {
             windows.updateViewLayout(canvasView, params)
             canvasView.invalidate()
@@ -170,6 +180,7 @@ internal class DrawingOverlay(
         val changed = session.undo()
         if (changed) {
             canvasView.invalidate()
+            this.changed()
         }
         return changed
     }
@@ -177,9 +188,8 @@ internal class DrawingOverlay(
     fun clear(): Int {
         if (closed) return 0
         val count = session.clear()
-        if (count > 0) {
-            canvasView.invalidate()
-        }
+        canvasView.invalidate()
+        changed()
         return count
     }
 

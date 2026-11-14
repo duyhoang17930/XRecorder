@@ -1,0 +1,7 @@
+{
+  "apk": "build\\app\\outputs\\apk\\profile\\app-profile.apk",
+  "sha256": "d06328265c2706adf6974d8c43c792518c2b99cda2ebe04ebfc3ed8e9e187457",
+  "bytes": 60091139,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554"
+}

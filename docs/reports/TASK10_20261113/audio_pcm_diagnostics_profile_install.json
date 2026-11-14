@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "cc0b6a19d21b81f9e723ed38836628ac345809693d36cbe87691e31264fd2bf2",
+  "apkBytes": 60288247,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Read-only PCM frame conservation and encoder stack diagnostics",
+  "freeBytes": {
+    "C:/": 6390583296,
+    "D:/": 24243998720
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "scope": "real native eight-track export, not human listening or main-UI full audio acceptance",
+  "sampleCount": 192960,
+  "duration": 4.02,
+  "frequencies": {
+    "440": 0.29932415069723733,
+    "880": 0.299577967238444
+  },
+  "expectedHalfSourceAmplitudes": {
+    "440": 0.3000003465019105,
+    "880": 0.300000261185446
+  },
+  "allSamplesFinite": true,
+  "fadeOnsetRms": 0.005620898060278464,
+  "middleRms": 0.29946407057549046,
+  "videoPixelChecks": [
+    {
+      "export": "baseline",
+      "time": 0.2,
+      "mae": 1.0
+    },
+    {
+      "export": "eightTrackMix",
+      "time": 0.2,
+      "mae": 1.0
+    },
+    {
+      "export": "baseline",
+      "time": 0.8,
+      "mae": 1.0
+    },
+    {
+      "export": "eightTrackMix",
+      "time": 0.8,
+      "mae": 1.0
+    },
+    {
+      "export": "baseline",
+      "time": 1.2,
+      "mae": 2.0
+    },
+    {
+      "export": "eightTrackMix",
+      "time": 1.2,
+      "mae": 2.0
+    },
+    {
+      "export": "baseline",
+      "time": 2.2,
+      "mae": 1.3333333333333333
+    },
+    {
+      "export": "eightTrackMix",
+      "time": 2.2,
+      "mae": 1.3333333333333333
+    },
+    {
+      "export": "baseline",
+      "time": 3.5,
+      "mae": 1.3333333333333333
+    },
+    {
+      "export": "eightTrackMix",
+      "time": 3.5,
+      "mae": 1.3333333333333333
+    }
+  ],
+  "draftPreservation": "editor_audio_gate1_runtime.txt",
+  "previewReloads": "editor_audio_gate1_preview_result.json"
+}

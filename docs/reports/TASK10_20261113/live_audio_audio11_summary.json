@@ -1,0 +1,519 @@
+{
+  "case": "live-capture-audio",
+  "sessionId": "22566e0b-9c96-4552-a6e3-177a20e414f2",
+  "consentScreenshot": true,
+  "initialAudioTiming": {
+    "monotonicNs": 36087320143440,
+    "captureElapsedMs": 299,
+    "micUnderrunSamples": 0,
+    "mic": {
+      "timestampStatus": 0,
+      "sampleRate": 48000,
+      "channels": 1,
+      "encoding": 2,
+      "framePosition": 43944,
+      "frameTimeNs": 36087318843840,
+      "bufferFrames": 96000
+    },
+    "internal": {
+      "timestampStatus": 0,
+      "sampleRate": 48000,
+      "channels": 1,
+      "encoding": 2,
+      "framePosition": 26624,
+      "frameTimeNs": 36087327033840,
+      "bufferFrames": 3072
+    }
+  },
+  "playbackStartCaptureMs": 6333,
+  "audioTimeline": [
+    {
+      "monotonicNs": 36093366342140,
+      "captureElapsedMs": 6364,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 325791,
+        "frameTimeNs": 36093414673940,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 299008,
+        "frameTimeNs": 36093406396240,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36093944061540,
+      "captureElapsedMs": 6913,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 350555,
+        "frameTimeNs": 36093930578240,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 322560,
+        "frameTimeNs": 36093923791940,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36094448567740,
+      "captureElapsedMs": 7418,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 375042,
+        "frameTimeNs": 36094440727740,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 350208,
+        "frameTimeNs": 36094449246440,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36094951680140,
+      "captureElapsedMs": 7921,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 399551,
+        "frameTimeNs": 36094951321440,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 372736,
+        "frameTimeNs": 36094938443140,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36095454556440,
+      "captureElapsedMs": 8424,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 423398,
+        "frameTimeNs": 36095448142740,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 398336,
+        "frameTimeNs": 36095450061240,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36095956949040,
+      "captureElapsedMs": 8927,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 447229,
+        "frameTimeNs": 36095944621440,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 419840,
+        "frameTimeNs": 36095954737240,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36096461995740,
+      "captureElapsedMs": 9431,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 471904,
+        "frameTimeNs": 36096458679440,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 445440,
+        "frameTimeNs": 36096451881940,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36096963386340,
+      "captureElapsedMs": 9933,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 495912,
+        "frameTimeNs": 36096958843940,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 467968,
+        "frameTimeNs": 36096943087640,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36097466132940,
+      "captureElapsedMs": 10435,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 520107,
+        "frameTimeNs": 36097462923540,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 494592,
+        "frameTimeNs": 36097458655340,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36097987693440,
+      "captureElapsedMs": 10958,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 544753,
+        "frameTimeNs": 36097976377440,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 518144,
+        "frameTimeNs": 36097966709740,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36098494182340,
+      "captureElapsedMs": 11463,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 569312,
+        "frameTimeNs": 36098488016540,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 543744,
+        "frameTimeNs": 36098479264340,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36098995752640,
+      "captureElapsedMs": 11966,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 593148,
+        "frameTimeNs": 36098984592640,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 568320,
+        "frameTimeNs": 36098991987640,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36099503379540,
+      "captureElapsedMs": 12475,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 618166,
+        "frameTimeNs": 36099505802740,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 591872,
+        "frameTimeNs": 36099505905440,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36100008584240,
+      "captureElapsedMs": 12989,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 642259,
+        "frameTimeNs": 36100007746040,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 617472,
+        "frameTimeNs": 36100014230740,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 36100523144740,
+      "captureElapsedMs": 13492,
+      "micUnderrunSamples": 0,
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 666821,
+        "frameTimeNs": 36100519465640,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 641024,
+        "frameTimeNs": 36100505082240,
+        "bufferFrames": 3072
+      }
+    }
+  ],
+  "playback": {
+    "positionMs": 8600,
+    "durationMs": 11036,
+    "playing": true
+  },
+  "liveBeforeEnd": {
+    "sessionId": "22566e0b-9c96-4552-a6e3-177a20e414f2",
+    "state": "live",
+    "bitrate": 352677,
+    "retries": 0,
+    "sentVideoFrames": 121,
+    "sentAudioFrames": 613,
+    "droppedVideoFrames": 0,
+    "droppedAudioFrames": 0,
+    "sentBytes": 604691,
+    "queuedBytes": 0
+  },
+  "playerScreenshot": true,
+  "reopenedLiveRoute": true,
+  "status": "PASS",
+  "capture": {
+    "id": "22566e0b-9c96-4552-a6e3-177a20e414f2",
+    "state": "completed",
+    "startedAt": 1794646211475,
+    "elapsedMs": 21298,
+    "outputUri": "content://media/external/video/media/157",
+    "error": null,
+    "screenshot": false,
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mixed",
+      "micGain": 0,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 3,
+      "durationSeconds": 0,
+      "orientation": "automatic",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "c2.android.avc.encoder",
+      "isRegion": false,
+      "cropX": null,
+      "cropY": null,
+      "cropWidth": null,
+      "cropHeight": null,
+      "floatingScale": 1,
+      "floatingOpacity": 1,
+      "floatingRatioX": -1,
+      "floatingRatioY": -1,
+      "shakeToStop": true,
+      "showTouches": false,
+      "audioDucking": false,
+      "regionSourceWidth": 0,
+      "regionSourceHeight": 0,
+      "liveRequested": true
+    },
+    "countdownRemaining": 0,
+    "live": {
+      "sessionId": "22566e0b-9c96-4552-a6e3-177a20e414f2",
+      "state": "stopped",
+      "bitrate": 18051,
+      "retries": 0,
+      "sentVideoFrames": 213,
+      "sentAudioFrames": 935,
+      "droppedVideoFrames": 0,
+      "droppedAudioFrames": 0,
+      "sentBytes": 1233513,
+      "queuedBytes": 0
+    }
+  },
+  "sourceByteExact": true,
+  "sourceUri": "content://media/external/video/media/115",
+  "scope": "Real Flutter Start/End + normal consent + production player via native integration; independent file/audio validation required",
+  "cleanupCapture": {
+    "id": "22566e0b-9c96-4552-a6e3-177a20e414f2",
+    "state": "completed",
+    "startedAt": 1794646211475,
+    "elapsedMs": 21298,
+    "outputUri": "content://media/external/video/media/157",
+    "error": null,
+    "screenshot": false,
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mixed",
+      "micGain": 0,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 3,
+      "durationSeconds": 0,
+      "orientation": "automatic",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "c2.android.avc.encoder",
+      "isRegion": false,
+      "cropX": null,
+      "cropY": null,
+      "cropWidth": null,
+      "cropHeight": null,
+      "floatingScale": 1,
+      "floatingOpacity": 1,
+      "floatingRatioX": -1,
+      "floatingRatioY": -1,
+      "shakeToStop": true,
+      "showTouches": false,
+      "audioDucking": false,
+      "regionSourceWidth": 0,
+      "regionSourceHeight": 0,
+      "liveRequested": true
+    },
+    "countdownRemaining": 0,
+    "live": {
+      "sessionId": "22566e0b-9c96-4552-a6e3-177a20e414f2",
+      "state": "stopped",
+      "bitrate": 18051,
+      "retries": 0,
+      "sentVideoFrames": 213,
+      "sentAudioFrames": 935,
+      "droppedVideoFrames": 0,
+      "droppedAudioFrames": 0,
+      "sentBytes": 1233513,
+      "queuedBytes": 0
+    }
+  },
+  "preferencesByteExact": true,
+  "testApkSha256": "d644fe33d5454ffdb58fc22701cc91b07ad23bedc84d0b8563e06ba7159ece31"
+}

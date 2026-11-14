@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "recoveryInputsByteExact": 3,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "uptime": "140.51 134.56",
+  "power": [
+    "mWakefulness=Awake",
+    "mWakefulness=1"
+  ],
+  "keyguard": [
+    "showing=false"
+  ]
+}

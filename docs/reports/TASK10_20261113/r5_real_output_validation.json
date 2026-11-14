@@ -1,0 +1,124 @@
+[
+  {
+    "case": "recording-pending",
+    "uri": "content://media/external/video/media/53",
+    "local": "r5_first_recording_pending.mp4",
+    "bytes": 1126162,
+    "sha256": "e15419ff0fb0abf4ffec50bbf7bc33147a36fedb58581951a9a865a059b7927c",
+    "fullDecode": "PASS",
+    "streams": [
+      {
+        "codec_type": "video",
+        "codec_name": "h264",
+        "width": 720,
+        "height": 1280,
+        "start_time": "0.000000",
+        "duration": "12.359544",
+        "nb_read_frames": "253"
+      }
+    ]
+  },
+  {
+    "case": "recording-png",
+    "uri": "content://media/external/images/media/55",
+    "local": "r5_first_recording_png.png",
+    "bytes": 1161041,
+    "sha256": "3789f1c282a3731222dcacd7c2f668a86cbf3b790caba21b005dd1eb64bc8721",
+    "fullDecode": "PASS",
+    "streams": [
+      {
+        "codec_type": "video",
+        "codec_name": "png",
+        "width": 2048,
+        "height": 922,
+        "start_time": null,
+        "duration": null,
+        "nb_read_frames": "1"
+      }
+    ]
+  },
+  {
+    "case": "recording-published-retry",
+    "uri": "content://media/external/video/media/64",
+    "local": "r5_first_recording_published_retry.mp4",
+    "bytes": 1329391,
+    "sha256": "524cd2917d8f1dfd15b177067a56092976fc4963b27d9b2368820c18d3915c13",
+    "fullDecode": "PASS",
+    "streams": [
+      {
+        "codec_type": "video",
+        "codec_name": "h264",
+        "width": 720,
+        "height": 1280,
+        "start_time": "0.000000",
+        "duration": "12.359544",
+        "nb_read_frames": "253"
+      },
+      {
+        "codec_type": "audio",
+        "codec_name": "aac",
+        "width": null,
+        "height": null,
+        "start_time": "0.013500",
+        "duration": "12.309333",
+        "nb_read_frames": "577"
+      }
+    ]
+  },
+  {
+    "case": "recording-remux",
+    "uri": "content://media/external/video/media/57",
+    "local": "r5_first_recording_remux.mp4",
+    "bytes": 1326974,
+    "sha256": "0bca78f9b1ab2ab6850a49257379dc7fc4bda5650471b3c8fe3bd2e2176168ce",
+    "fullDecode": "PASS",
+    "streams": [
+      {
+        "codec_type": "video",
+        "codec_name": "h264",
+        "width": 720,
+        "height": 1280,
+        "start_time": "0.000000",
+        "duration": "12.359544",
+        "nb_read_frames": "253"
+      },
+      {
+        "codec_type": "audio",
+        "codec_name": "aac",
+        "width": null,
+        "height": null,
+        "start_time": "0.213000",
+        "duration": "12.160000",
+        "nb_read_frames": "570"
+      }
+    ]
+  },
+  {
+    "case": "recording-remux-retry",
+    "uri": "content://media/external/video/media/59",
+    "local": "r5_first_recording_remux_retry.mp4",
+    "bytes": 1326974,
+    "sha256": "28c1275476987f643266f9b4e9ecb898a4ac00cff93ce651278b8d69db37a343",
+    "fullDecode": "PASS",
+    "streams": [
+      {
+        "codec_type": "video",
+        "codec_name": "h264",
+        "width": 720,
+        "height": 1280,
+        "start_time": "0.000000",
+        "duration": "12.359544",
+        "nb_read_frames": "253"
+      },
+      {
+        "codec_type": "audio",
+        "codec_name": "aac",
+        "width": null,
+        "height": null,
+        "start_time": "0.213000",
+        "duration": "12.160000",
+        "nb_read_frames": "570"
+      }
+    ]
+  }
+]

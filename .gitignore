@@ -73,3 +73,4 @@ stitch_screenflow_mobile_app_ui_system/
 # Local snapshots of dirty source are not application source or commit artifacts.
 /docs/reports/TASK_UI_UX_*/before_*.dart.txt
 /docs/reports/TASK_UI_UX_*/before_*.kt.txt
+archives

@@ -10,10 +10,11 @@ import android.view.Surface
 import java.nio.ByteBuffer
 
 /** Drains actual encoder packets; the MP4 timeline includes the final static frame. */
-class VideoEncoder(
+class VideoEncoder @JvmOverloads constructor(
     descriptor: ParcelFileDescriptor, legacyPath: String?, encoderName: String,
     width: Int, height: Int, bitrate: Int, private val fps: Int, private val mime: String = "video/avc",
-    private val onFirstFrame: () -> Unit, private val onFailure: () -> Unit
+    private val onFirstFrame: () -> Unit, private val onFailure: () -> Unit,
+    private val encodedOutput: EncodedOutput? = null
 ) {
     companion object {
         // Translate encoder-relative PTS into the monotonic clock used by pause ranges.
@@ -45,6 +46,11 @@ class VideoEncoder(
     @Synchronized private fun pausedBefore(timeNs: Long): Long =
         pauseRanges.sumOf { (start, end) -> (minOf(timeNs,end)-start).coerceAtLeast(0) } +
             if (pauseStartNs != 0L) (timeNs-pauseStartNs).coerceAtLeast(0) else 0L
+    fun requestKeyFrame() {
+        if (!aborted && failure == null) runCatching {
+            codec.setParameters(android.os.Bundle().apply { putInt(MediaCodec.PARAMETER_KEY_REQUEST_SYNC_FRAME, 0) })
+        }
+    }
     init {
         muxer = try {
             if (Build.VERSION.SDK_INT >= 26) MediaMuxer(descriptor.fileDescriptor, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
@@ -87,6 +93,7 @@ class VideoEncoder(
                 if (index == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
                     check(!muxing)
                     track = muxer.addTrack(codec.outputFormat); muxer.start(); muxing = true
+                    encodedOutput?.format(codec.outputFormat)
                 } else if (index >= 0) {
                     val buffer = codec.getOutputBuffer(index) ?: throw IllegalStateException("Encoder output missing")
                     if (info.size > 0 && info.flags and MediaCodec.BUFFER_FLAG_CODEC_CONFIG == 0) {
@@ -97,6 +104,7 @@ class VideoEncoder(
                         info.presentationTimeUs = maxOf(if(lastPts < 0) 0 else lastPts + 1000, info.presentationTimeUs - originPts - pausedBefore(captureTimeNs(info.presentationTimeUs, originPts, sourceStartNs)) / 1000)
                         buffer.position(info.offset); buffer.limit(info.offset + info.size)
                         muxer.writeSampleData(track, buffer, info)
+                        encodedOutput?.sample(buffer, info, sourceStartNs)
                         if (lastPts < 0) onFirstFrame()
                         lastPts = info.presentationTimeUs
                     }

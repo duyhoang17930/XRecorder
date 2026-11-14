@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "check": "misspelled case rejected before device/fixture access",
+  "exitCode": 2
+}

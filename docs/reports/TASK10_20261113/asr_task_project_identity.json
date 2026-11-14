@@ -1,0 +1,26 @@
+[
+  {
+    "version": 1,
+    "id": "project_1794600055303550",
+    "title": "TASK10_ASR_E2E",
+    "updatedAt": 1794600238509,
+    "clips": [
+      {
+        "mediaId": "content://com.android.externalstorage.documents/tree/primary%3ADownload%2FTASK10_20261113/document/primary%3ADownload%2FTASK10_20261113%2FTASK10_asr_jfk_mpeg4.mp4",
+        "title": "TASK10_asr_jfk_mpeg4.mp4",
+        "inMs": 0,
+        "outMs": 11000,
+        "sourceDurationMs": 11000,
+        "rotation": 0,
+        "isImage": false,
+        "flipH": false,
+        "flipV": false,
+        "cropLeft": 0.0,
+        "cropTop": 0.0,
+        "cropRight": 1.0,
+        "cropBottom": 1.0
+      }
+    ],
+    "effects": {}
+  }
+]

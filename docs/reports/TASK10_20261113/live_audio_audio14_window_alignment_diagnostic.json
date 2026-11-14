@@ -1,0 +1,159 @@
+{
+  "scope": "Diagnostic only; original continuity gate unchanged",
+  "files": {
+    "local.mp4": [
+      {
+        "sourceSeconds": 0.0,
+        "correlation": 0.9998587991529733,
+        "offsetMs": 1004.7291666666666
+      },
+      {
+        "sourceSeconds": 0.5,
+        "correlation": 0.9999798470665774,
+        "offsetMs": 1004.7291666666666
+      },
+      {
+        "sourceSeconds": 1.0,
+        "correlation": 0.9999604656591119,
+        "offsetMs": 1004.7291666666666
+      },
+      {
+        "sourceSeconds": 1.5,
+        "correlation": 0.9999671360427351,
+        "offsetMs": 1004.7291666666666
+      },
+      {
+        "sourceSeconds": 2.0,
+        "correlation": 0.9997709071176232,
+        "offsetMs": 1004.7291666666666
+      },
+      {
+        "sourceSeconds": 2.5,
+        "correlation": 0.9994246945783583,
+        "offsetMs": 1004.7291666666666
+      },
+      {
+        "sourceSeconds": 3.0,
+        "correlation": 0.9999362121667856,
+        "offsetMs": 1004.7291666666666
+      },
+      {
+        "sourceSeconds": 3.5,
+        "correlation": 0.709253361842079,
+        "offsetMs": 1008.7291666666666
+      },
+      {
+        "sourceSeconds": 4.0,
+        "correlation": 0.9999467160907063,
+        "offsetMs": 1008.7083333333334
+      },
+      {
+        "sourceSeconds": 4.5,
+        "correlation": 0.9994961053637162,
+        "offsetMs": 1008.7083333333334
+      },
+      {
+        "sourceSeconds": 5.0,
+        "correlation": 0.9993801452946384,
+        "offsetMs": 1008.7083333333334
+      },
+      {
+        "sourceSeconds": 5.5,
+        "correlation": 0.9999632311592532,
+        "offsetMs": 1008.7083333333334
+      },
+      {
+        "sourceSeconds": 6.0,
+        "correlation": 0.9999400719872112,
+        "offsetMs": 1008.7083333333334
+      },
+      {
+        "sourceSeconds": 6.5,
+        "correlation": 0.9998688197790316,
+        "offsetMs": 1008.7083333333334
+      },
+      {
+        "sourceSeconds": 7.0,
+        "correlation": 0.9999459841736298,
+        "offsetMs": 1008.7083333333334
+      }
+    ],
+    "received.mp4": [
+      {
+        "sourceSeconds": 0.0,
+        "correlation": 0.9998587991529733,
+        "offsetMs": 279.3958333333333
+      },
+      {
+        "sourceSeconds": 0.5,
+        "correlation": 0.9999798470665774,
+        "offsetMs": 279.3958333333333
+      },
+      {
+        "sourceSeconds": 1.0,
+        "correlation": 0.9999604656591119,
+        "offsetMs": 279.3958333333333
+      },
+      {
+        "sourceSeconds": 1.5,
+        "correlation": 0.9999671360427351,
+        "offsetMs": 279.3958333333333
+      },
+      {
+        "sourceSeconds": 2.0,
+        "correlation": 0.9997709071176232,
+        "offsetMs": 279.3958333333333
+      },
+      {
+        "sourceSeconds": 2.5,
+        "correlation": 0.9994246945783583,
+        "offsetMs": 279.3958333333333
+      },
+      {
+        "sourceSeconds": 3.0,
+        "correlation": 0.9999362121667856,
+        "offsetMs": 279.3958333333333
+      },
+      {
+        "sourceSeconds": 3.5,
+        "correlation": 0.709253361842079,
+        "offsetMs": 283.3958333333333
+      },
+      {
+        "sourceSeconds": 4.0,
+        "correlation": 0.9999467160907063,
+        "offsetMs": 283.375
+      },
+      {
+        "sourceSeconds": 4.5,
+        "correlation": 0.9994961053637162,
+        "offsetMs": 283.375
+      },
+      {
+        "sourceSeconds": 5.0,
+        "correlation": 0.9993801452946384,
+        "offsetMs": 283.375
+      },
+      {
+        "sourceSeconds": 5.5,
+        "correlation": 0.9999632311592532,
+        "offsetMs": 283.375
+      },
+      {
+        "sourceSeconds": 6.0,
+        "correlation": 0.9999400719872112,
+        "offsetMs": 283.375
+      },
+      {
+        "sourceSeconds": 6.5,
+        "correlation": 0.9998688197790316,
+        "offsetMs": 283.375
+      },
+      {
+        "sourceSeconds": 7.0,
+        "correlation": 0.9999459841736298,
+        "offsetMs": 283.375
+      }
+    ]
+  }
+}

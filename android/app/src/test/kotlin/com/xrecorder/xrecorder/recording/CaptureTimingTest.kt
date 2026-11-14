@@ -4,6 +4,14 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class CaptureTimingTest {
+    @Test fun screenshotDelayIsBoundedAndKeepsLegacyDefault() {
+        assertEquals(3, CaptureTiming.screenshotDelay(null))
+        for (delay in listOf(1, 3, 5, 10)) assertEquals(delay, CaptureTiming.screenshotDelay(delay))
+        for (invalid in listOf(-1, 0, 2, 11, 1.5, Double.NaN, "5")) {
+            try { CaptureTiming.screenshotDelay(invalid); fail("Invalid delay accepted: $invalid") }
+            catch (_: IllegalArgumentException) { }
+        }
+    }
     @Test fun delayedCountdownUsesDeadlineRatherThanNumberOfCallbacks() {
         val deadline = 13000L
         assertEquals(3, CaptureTiming.countdownSeconds(deadline - 10000))

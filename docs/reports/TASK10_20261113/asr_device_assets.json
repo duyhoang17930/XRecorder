@@ -1,0 +1,37 @@
+[
+  {
+    "source": "docs\\reports\\TASK10_20261113\\TASK10_asr_jfk_mpeg4.mp4",
+    "remote": "/sdcard/Download/TASK10_20261113/TASK10_asr_jfk_mpeg4.mp4",
+    "bytes": 140525,
+    "sha256": "99226db5e4dab095797869a36faab9626e92fd111fa086363729af266b4c6a0d"
+  },
+  {
+    "source": "build\\verification\\task08\\fixture_stage_v1\\ggml-tiny.bin",
+    "remote": "/sdcard/Download/TASK10_20261113/ggml-tiny.bin",
+    "bytes": 77691713,
+    "sha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21"
+  },
+  {
+    "remote": "/sdcard/Download/TASK10_20261113/Subtitles_1794600775801.srt",
+    "source": "main-app Save SRT system picker",
+    "bytes": 172,
+    "evidence": "asr_e2e_validation.json"
+  },
+  {
+    "remote": "/sdcard/Download/TASK10_20261113/3H_40b47bfe_TASK10_ASR_burnin.mp4",
+    "uri": "content://com.android.externalstorage.documents/tree/primary%3ADownload%2FTASK10_20261113/document/primary%3ADownload%2FTASK10_20261113%2F3H_40b47bfe_TASK10_ASR_burnin.mp4",
+    "source": "main app verified SAF Copy of task export115",
+    "bytes": 582195,
+    "sha256": "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f",
+    "evidence": "p2_copy_preservation.json"
+  },
+  {
+    "source": "content://media/external/video/media/145",
+    "remote": "/sdcard/Download/TASK10_20261113/3H_28264ed6_Edited_5e429845-a734-463d-97b4-9bb067033c80.mp4",
+    "uri": "content://com.android.externalstorage.documents/tree/primary%3ADownload%2FTASK10_20261113/document/primary%3ADownload%2FTASK10_20261113%2F3H_28264ed6_Edited_5e429845-a734-463d-97b4-9bb067033c80.mp4",
+    "bytes": 470675,
+    "sha256": "4756aef4989b120279ca14b0dcb00e07d4abffe27d279c6e3c37a1dd2ebe6575",
+    "operation": "task-only move",
+    "evidence": "p2_move_validation.json"
+  }
+]

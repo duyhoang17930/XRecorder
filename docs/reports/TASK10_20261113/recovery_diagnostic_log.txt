@@ -1,0 +1,7 @@
+--------- beginning of main
+11-13 20:51:51.821 31144 31213 W CaptureRecovery: Finalized capture validation failed; inputs retained
+11-13 20:51:51.821 31144 31213 W CaptureRecovery: java.lang.IllegalArgumentException: Failed requirement.
+11-13 20:51:51.821 31144 31213 W CaptureRecovery: 	at com.xrecorder.xrecorder.recording.CaptureRecovery.recover(CaptureRecovery.kt:52)
+11-13 20:51:51.821 31144 31213 W CaptureRecovery: 	at com.xrecorder.xrecorder.recording.CaptureJournal.initialize$lambda$4(CaptureJournal.kt:53)
+11-13 20:51:51.821 31144 31213 W CaptureRecovery: 	at com.xrecorder.xrecorder.recording.CaptureJournal$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+11-13 20:51:51.821 31144 31213 W CaptureRecovery: 	at java.lang.Thread.run(Thread.java:1571)

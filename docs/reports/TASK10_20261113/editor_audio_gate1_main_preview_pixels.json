@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "scope": "paused initial preview after actual Trim and Duplicate, task solid-color source",
+  "checks": [
+    {
+      "screenshot": "editor_audio_gate1_trimmed_preview.png",
+      "previewRegion": [
+        88,
+        283,
+        904,
+        509
+      ],
+      "expectedSourceTime": 2.005,
+      "mae": 1.4806944444444445,
+      "meanPixelValue": 48.53655092592592,
+      "blackFrameRejected": true
+    },
+    {
+      "screenshot": "editor_audio_gate1_duplicated_clip.png",
+      "previewRegion": [
+        88,
+        283,
+        904,
+        509
+      ],
+      "expectedSourceTime": 2.005,
+      "mae": 1.4806944444444445,
+      "meanPixelValue": 48.53655092592592,
+      "blackFrameRejected": true
+    }
+  ]
+}

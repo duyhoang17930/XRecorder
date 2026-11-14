@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "screen": "real main.dart livestream",
+  "locale": "vi",
+  "widthDp": 320,
+  "fontScale": 2,
+  "explicitStartInvalidFormRejected": true,
+  "displaySettingsRestored": true,
+  "before": {
+    "density": "Physical density: 420\r\n",
+    "fontScale": "1.0"
+  },
+  "limitations": "Targeted form state; screenshots require visual inspection; not all responsive or accessibility states."
+}

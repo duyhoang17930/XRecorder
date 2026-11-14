@@ -1,0 +1,10 @@
+{
+  "sourceAudio": "build\\verification\\task08\\fixture_stage_v1\\p2_p3_jfk.wav",
+  "sourceSha256": "59dfb9a4acb36fe2a2affc14bacbee2920ff435cb13cc314a08c13f66ba7860e",
+  "video": "docs\\reports\\TASK10_20261113\\TASK10_asr_jfk_mpeg4.mp4",
+  "bytes": 140525,
+  "sha256": "99226db5e4dab095797869a36faab9626e92fd111fa086363729af266b4c6a0d",
+  "model": "build/verification/task08/fixture_stage_v1/ggml-tiny.bin",
+  "modelSha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "failedHostFixture": "TASK10_asr_jfk.mp4 (0B; existing LGPL FFmpeg has no libx264; retained)"
+}

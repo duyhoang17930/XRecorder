@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "outputs": [
+    {
+      "name": "shot5",
+      "bytes": 1389556,
+      "sha256": "90b23dc0be1adf9da15f9533ad412abde7adff0f9dff33b2e24f876a2fa8295c",
+      "dimensions": [
+        1080,
+        2400
+      ],
+      "decode": "PASS"
+    },
+    {
+      "name": "shot1",
+      "bytes": 1419211,
+      "sha256": "3885fcc8dbf2deb153cbab622c8bfadc15920957b20cc31e5c5b81fda2c6f7d0",
+      "dimensions": [
+        1080,
+        2400
+      ],
+      "decode": "PASS"
+    }
+  ],
+  "cancelEvidence": "shot10_cancel_direct_result.json (idle, no output)"
+}

@@ -1,0 +1,23 @@
+{
+  "status": "FAIL_REPRODUCED",
+  "sourceSha256": "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f",
+  "sourceSecondCueStartsMs": 5500,
+  "playerReportedPositionMs": 8795,
+  "samples": [
+    {
+      "expectedSourceSeconds": 6.5,
+      "captureSeconds": 10.147,
+      "brightPixels": 698,
+      "firstCueDice": 0.9003636363636364,
+      "secondCueDice": 0.3241042345276873
+    },
+    {
+      "expectedSourceSeconds": 8,
+      "captureSeconds": 11.647,
+      "brightPixels": 698,
+      "firstCueDice": 0.9003636363636364,
+      "secondCueDice": 0.3241042345276873
+    }
+  ],
+  "scope": "Actual recorder preserves the stale player picture; no attribution to the crop pipeline. Check VideoView playback/seek before altering capture engine."
+}

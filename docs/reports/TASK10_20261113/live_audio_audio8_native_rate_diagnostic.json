@@ -1,0 +1,16 @@
+{
+  "local.mp4": {
+    "nativeRateCorrelation": 0.6530430040315154,
+    "offsetSamples": 129762,
+    "offsetMs": 2703.375,
+    "thresholdUnchanged": 0.9,
+    "status": "FAIL"
+  },
+  "received.mp4": {
+    "nativeRateCorrelation": 0.35963420741382796,
+    "offsetSamples": 99892,
+    "offsetMs": 2081.0833333333335,
+    "thresholdUnchanged": 0.9,
+    "status": "FAIL"
+  }
+}

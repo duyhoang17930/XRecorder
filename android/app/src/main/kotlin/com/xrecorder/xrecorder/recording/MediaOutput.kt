@@ -31,11 +31,44 @@ class MediaOutput(private val context: Context, val name: String, val mime: Stri
         } else {
             val directory = File(context.getExternalFilesDir(null), "media").apply { mkdirs() }
             temporary = File(directory, "$name.pending")
+            check(!temporary!!.exists()) { "Output already exists" }
+            val reference = Uri.fromFile(temporary!!)
+            onPending?.invoke(reference)
+            if (journal) CaptureJournal.pending(reference)
             descriptor = ParcelFileDescriptor.open(temporary!!, ParcelFileDescriptor.MODE_CREATE or ParcelFileDescriptor.MODE_READ_WRITE or ParcelFileDescriptor.MODE_TRUNCATE)
         }
         return descriptor!!
     }
     val legacyPath: String? get() = temporary?.absolutePath
+    /** Reuse only this recovery job's still-pending output; never truncate published media. */
+    fun resumePending(reference: Uri): ParcelFileDescriptor {
+        check(descriptor == null && pendingUri == null && temporary == null)
+        if (Build.VERSION.SDK_INT >= 29) {
+            require(reference.scheme == "content" && reference.authority == "media")
+            context.contentResolver.query(reference, arrayOf(
+                MediaStore.MediaColumns.OWNER_PACKAGE_NAME, MediaStore.MediaColumns.IS_PENDING,
+                MediaStore.MediaColumns.DISPLAY_NAME
+            ), null, null, null)?.use {
+                require(it.moveToFirst() && it.getString(0) == context.packageName &&
+                    it.getInt(1) == 1 && it.getString(2) == name) { "Not this job's pending output" }
+            } ?: error("Pending output missing")
+            pendingUri = reference
+            descriptor = context.contentResolver.openFileDescriptor(reference, "rwt") ?: error("Cannot reopen pending output")
+        } else {
+            require(reference.scheme == "file")
+            val file = File(requireNotNull(reference.path)).canonicalFile
+            val expected = File(File(context.getExternalFilesDir(null), "media"), "$name.pending").canonicalFile
+            require(file == expected && file.isFile)
+            temporary = file
+            descriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_WRITE or ParcelFileDescriptor.MODE_TRUNCATE)
+        }
+        return descriptor!!
+    }
+    /** Unexpected failure retains data and its journal reference for recovery. */
+    fun retain() {
+        runCatching { descriptor?.close() }
+        descriptor = null
+    }
     fun commit(): Uri {
         require(!committed)
         val size = descriptor?.statSize ?: 0
@@ -53,7 +86,8 @@ class MediaOutput(private val context: Context, val name: String, val mime: Stri
             FileProvider.getUriForFile(context, "${context.packageName}.files", published)
         }
         committed = true
-        if (journal) CaptureJournal.cleared()
+        // CaptureState's completed journal transaction clears pending. Keeping
+        // it until then closes the process-death window after publication.
         return uri
     }
     fun abort() {

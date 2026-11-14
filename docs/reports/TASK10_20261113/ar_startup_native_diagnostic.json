@@ -1,0 +1,21 @@
+{
+  "debugApp": "null",
+  "waitForDebugger": "null",
+  "appLogSignals": [
+    "11-14 19:44:50.642  7748  7748 D ActivityThread: Set OS env TMPDIR to /data/user/0/com.xrecorder.xrecorder/cache",
+    "11-14 19:44:53.986  7748  7748 I Choreographer: Skipped 146 frames!  The application may be doing too much work on its main thread.",
+    "11-14 19:44:54.046  7748  7784 I DisplayManager: Choreographer implicitly registered for the refresh rate.",
+    "11-14 19:44:54.514  7748  7748 W order.xrecorder: Verification of android.window.OnBackInvokedCallback io.flutter.embedding.android.FlutterActivity.createOnBackInvokedCallback() took 131.929ms (136.44 bytecodes/s) (0B arena alloc)",
+    "11-14 19:44:56.957  7748  7748 W order.xrecorder: Verification of io.flutter.embedding.engine.loader.FlutterLoader$InitResult io.flutter.embedding.engine.loader.FlutterLoader$1.call() took 104.541ms (4476.68 bytecodes/s) (0B arena alloc)",
+    "11-14 19:44:57.410  7748  7806 D nativeloader: Load /data/app/~~cc1qVF1vRbE6Q2TPTmdBYQ==/com.xrecorder.xrecorder-Tz-NJPwBXFZbf1mDTRlKbg==/base.apk!/lib/x86_64/libflutter.so using class loader ns clns-9 (caller=/data/app/~~cc1qVF1vRbE6Q2TPTmdBYQ==/com.xrecorder.xrecorder-Tz-NJPwBXFZbf1mDTRlKbg==/base.apk): ok",
+    "11-14 19:44:59.857  7748  7815 I flutter : The Dart VM service is listening on http://127.0.0.1:42049/172-ftKbe3o=/",
+    "11-14 19:45:00.544  7748  7809 I flutter : [IMPORTANT:flutter/shell/platform/android/android_context_gl_impeller.cc(104)] Using the Impeller rendering backend (OpenGLES).",
+    "11-14 19:45:08.624  7748  7748 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/view/accessibility/AccessibilityNodeInfo;->getSourceNodeId()J (runtime_flags=0, domain=platform, api=unsupported,test-api) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app, TargetSdkVersion=36) using reflection: allowed",
+    "11-14 19:45:08.626  7748  7748 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/view/accessibility/AccessibilityRecord;->getSourceNodeId()J (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app, TargetSdkVersion=36) using reflection: allowed",
+    "11-14 19:45:08.629  7748  7748 I order.xrecorder: hiddenapi: Accessing hidden field Landroid/view/accessibility/AccessibilityNodeInfo;->mChildNodeIds:Landroid/util/LongArray; (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app, TargetSdkVersion=36) using reflection: allowed",
+    "11-14 19:45:08.637  7748  7748 I order.xrecorder: hiddenapi: Accessing hidden method Landroid/util/LongArray;->get(I)J (runtime_flags=0, domain=platform, api=unsupported) from Lio/flutter/view/AccessibilityViewEmbedder$ReflectionAccessors; (domain=app, TargetSdkVersion=36) using reflection: allowed",
+    "11-14 19:45:10.078  7748  7748 I Choreographer: Skipped 37 frames!  The application may be doing too much work on its main thread.",
+    "11-14 19:45:10.181  7748  7822 D ProfileInstaller: Installing profile for com.xrecorder.xrecorder",
+    "11-14 19:45:39.089  7748  7748 I Choreographer: Skipped 1305 frames!  The application may be doing too much work on its main thread."
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "status": "PASS",
+  "output": {
+    "uiStatus": "PASS",
+    "outputPixels": "PASS_SCOPED_GEOMETRY",
+    "uri": "content://media/external/images/media/150",
+    "name": "Edited_1794637472612.png",
+    "bytes": 1125489,
+    "sha256": "a4c7a7b1637a02b33fe68a21d9d6e2705762b8c450c174b5a171ccafc412b225",
+    "sourceByteExact": true,
+    "sameCaption": "TASK10_PHOTO",
+    "starInk": "Yellow",
+    "heartInk": "Cyan",
+    "heartUndoRedoExercised": true,
+    "estimatedFinalImageBox": [
+      237,
+      346,
+      605,
+      1344
+    ],
+    "starModeImageBox": [
+      237,
+      346,
+      605,
+      1344
+    ],
+    "heartModeImageBox": [
+      237,
+      346,
+      605,
+      1344
+    ],
+    "apkIdentity": "photo_parity_profile_install.json"
+  },
+  "fullDecode": "PASS",
+  "dimensions": [
+    922,
+    2048
+  ],
+  "maeChecks": [
+    {
+      "region": "inner_image",
+      "rect": [
+        3,
+        3,
+        603,
+        1343
+      ],
+      "mae": 1.466546849087894
+    },
+    {
+      "region": "caption_and_stroke",
+      "rect": [
+        273,
+        646,
+        576,
+        861
+      ],
+      "mae": 3.056760559776908
+    }
+  ],
+  "stickerPixels": {
+    "yellowStar": 24525,
+    "cyanHeart": 9873
+  },
+  "heartUndoRedo": [
+    {
+      "frame": "photo_parity_fixed_heart",
+      "cyanHeartPixels": 4284
+    },
+    {
+      "frame": "photo_parity_fixed_heart_undo",
+      "cyanHeartPixels": 0
+    },
+    {
+      "frame": "photo_parity_fixed_before_save",
+      "cyanHeartPixels": 4284
+    }
+  ],
+  "guideExclusion": "3physical pixels at image boundary; existing crop guide is1logical pixel and is not exported",
+  "expectedSourceSha256": "3885fcc8dbf2deb153cbab622c8bfadc15920957b20cc31e5c5b81fda2c6f7d0",
+  "registeredImageBox": [
+    237,
+    345,
+    606,
+    1346
+  ],
+  "registration": {
+    "reference": "untouched background in saved output",
+    "normalizedRegion": [
+      0.05,
+      0.72,
+      0.95,
+      0.97
+    ],
+    "stride": 8,
+    "sampledBackgroundMae": 1.6444219750589821,
+    "boundedOriginRadiusPixels": 2,
+    "boundedWidthRadiusPixels": 4,
+    "reason": "estimated frame includes a1logical-pixel white crop guide; not saved media",
+    "annotationPixelsExcluded": true
+  },
+  "earlierEstimatedFrameDiagnostic": "photo_parity_fixed_pixel_diagnostic.json",
+  "scope": "Relative geometry/wrapping/stroke and actual sticker output verified; screen-vs-file raster pixels are not identical.",
+  "geometryChecks": {
+    "captionPreview": {
+      "bbox": [
+        461,
+        684,
+        503,
+        703
+      ],
+      "width": 42,
+      "height": 19,
+      "pixels": 168,
+      "bands": 1
+    },
+    "captionResizedSaved": {
+      "bbox": [
+        461,
+        682,
+        503,
+        702
+      ],
+      "width": 42,
+      "height": 20,
+      "pixels": 172,
+      "bands": 1
+    },
+    "captionMaskAreaRatio": 0.9767441860465116,
+    "penPreview": {
+      "redMinusGreenEnergy": 61187.0,
+      "pixels": 335
+    },
+    "penResizedSaved": {
+      "redMinusGreenEnergy": 62886.0,
+      "pixels": 275
+    },
+    "penEnergyRatio": 0.9729828578697961,
+    "policy": "One caption band, <=2px bbox difference, area/pen energy ratios0.85..1.15; full-imageMAE<3. Alpha/text rasterization reported separately, not bit-exact.",
+    "sameCaptionUnexpectedSecondLinePixels": {
+      "beforeFix": 315,
+      "afterFix": 0,
+      "normalizedRegion": [
+        0.49,
+        0.575,
+        0.95,
+        0.64
+      ],
+      "otherAnnotationsExcluded": true
+    }
+  },
+  "pixelLimitations": "Estimated-frame ROI MAE3.683 and background-registered ROI MAE3.057 exceeded initial blanket3pixel criterion, retained. Specific independent caption/stroke geometry checks replace that unsuitable raster identity oracle; full-imageMAE1.467. No tolerance was raised."
+}

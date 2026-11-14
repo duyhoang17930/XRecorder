@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "originalDraftsByteExact": 8,
+  "allBeforeInstallMetadataByteExact": true,
+  "tinyModelSha256Unchanged": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "avdConfigByteExact": true,
+  "apks": [
+    {
+      "path": "build\\app\\outputs\\flutter-apk\\app-profile.apk",
+      "bytes": 60157175,
+      "sha256": "cc7baa0c25724b499b29017d323414b7510736ee240401c852f9a35d7906a519"
+    },
+    {
+      "path": "build\\app\\outputs\\apk\\androidTest\\debug\\app-debug-androidTest.apk",
+      "bytes": 135510,
+      "sha256": "0e751c499111edc99b835b70b2025482485bb044a0076fab55f5a8a958d316f3"
+    }
+  ],
+  "diskFreeBytes": {
+    "C:/": 15952474112,
+    "D:/": 24365428736
+  }
+}

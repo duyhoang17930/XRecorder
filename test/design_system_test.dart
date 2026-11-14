@@ -14,6 +14,10 @@ import 'package:xrecorder/features/media/media_library_screen.dart';
 import 'package:xrecorder/features/settings/settings_controller.dart';
 import 'package:xrecorder/features/settings/help_screen.dart';
 import 'package:xrecorder/features/settings/studio_identity.dart';
+import 'package:xrecorder/features/recording/region_capture_page.dart';
+import 'package:xrecorder/features/recording/recording_service.dart';
+import 'package:xrecorder/features/recording/livestream_page.dart';
+import 'package:xrecorder/l10n/localization.dart';
 
 import 'fixtures/catalog.dart';
 
@@ -203,12 +207,16 @@ void main() {
       find.descendant(of: modal, matching: find.text('Screenshot')),
       findsOneWidget,
     );
-    for (final name in ['Recording region', 'Livestream', 'AI subtitles']) {
+    for (final name in ['Recording region', 'AI subtitles']) {
       expect(
         find.descendant(of: modal, matching: find.text(name)),
         findsNothing,
       );
     }
+    expect(
+      find.descendant(of: modal, matching: find.text('Livestream')),
+      findsOneWidget,
+    );
     await tester.tap(
       find.descendant(of: modal, matching: find.byTooltip('Close')),
     );
@@ -217,23 +225,81 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('legacy capture menu retains unavailable backend safeguards', (
-    tester,
-  ) async {
-    await start(tester);
-    final host = tester.element(find.text('Video Library'));
-    final closed = openStudioCreate(host);
-    await tester.pumpAndSettle();
-    for (final name in ['Recording region', 'Livestream', 'AI subtitles']) {
-      expect(
-        tester.widget<BentoCard>(find.widgetWithText(BentoCard, name)).onTap,
-        isNull,
+  testWidgets(
+    'legacy tools open region, live setup and offline subtitles without starting capture',
+    (tester) async {
+      final messenger =
+          TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+      messenger.setMockMethodCallHandler(
+        AndroidRecordingService.commands,
+        (call) async => switch (call.method) {
+          'capabilities' => {'displayWidth': 1080, 'displayHeight': 2400},
+          'current' => {'id': '', 'state': 'idle'},
+          _ => null,
+        },
       );
-    }
-    await tester.tap(find.byTooltip('Close create menu'));
-    await tester.pumpAndSettle();
-    await closed;
-  });
+      addTearDown(
+        () => messenger.setMockMethodCallHandler(
+          AndroidRecordingService.commands,
+          null,
+        ),
+      );
+      await start(tester);
+      final host = tester.element(find.text('Video Library'));
+      final closed = openStudioCreate(host);
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widget<BentoCard>(find.widgetWithText(BentoCard, 'Livestream'))
+            .onTap,
+        isNotNull,
+      );
+      expect(
+        tester
+            .widget<BentoCard>(
+              find.widgetWithText(BentoCard, 'Offline automatic subtitles'),
+            )
+            .onTap,
+        isNotNull,
+      );
+      expect(
+        tester
+            .widget<BentoCard>(find.widgetWithText(BentoCard, 'Record region'))
+            .onTap,
+        isNotNull,
+      );
+      await tester.tap(find.widgetWithText(BentoCard, 'Record region'));
+      await tester.pumpAndSettle();
+      await closed;
+      expect(find.byType(RegionCapturePage), findsOneWidget);
+      await tester.tap(find.byTooltip('Close'));
+      await tester.pumpAndSettle();
+      expect(find.text('Video Library'), findsOneWidget);
+      final liveClosed = openStudioCreate(host);
+      await tester.pumpAndSettle();
+      final live = find.widgetWithText(BentoCard, 'Livestream');
+      await tester.ensureVisible(live);
+      await tester.tap(live);
+      await tester.pumpAndSettle();
+      await liveClosed;
+      expect(find.byType(LivestreamPage), findsOneWidget);
+      expect(find.byType(BottomSheet), findsNothing);
+      await tester.pageBack();
+      await tester.pumpAndSettle();
+      final subtitlesClosed = openStudioCreate(host);
+      await tester.pumpAndSettle();
+      final subtitles = find.widgetWithText(
+        BentoCard,
+        'Offline automatic subtitles',
+      );
+      await tester.ensureVisible(subtitles);
+      await tester.tap(subtitles);
+      await tester.pumpAndSettle();
+      await subtitlesClosed;
+      expect(find.text('Editing Studio'), findsOneWidget);
+      expect(find.byType(BottomSheet), findsNothing);
+    },
+  );
 
   testWidgets('large catalogs build only visible media rows', (tester) async {
     final catalog = TestCatalog();
@@ -449,12 +515,26 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         find.text(
-          helpTopics.singleWhere((topic) => topic.category == 'Privacy').answer,
+          tester
+              .element(find.byType(HelpScreen))
+              .message(
+                helpTopics
+                    .singleWhere((topic) => topic.category == 'Privacy')
+                    .answer,
+              ),
         ),
         findsOneWidget,
       );
       expect(
-        find.textContaining('transcription does not upload your media'),
+        find.textContaining('Transcription stays on your device.'),
+        findsOneWidget,
+      );
+      expect(
+        find.textContaining('Livestream sends your selected screen and audio'),
+        findsOneWidget,
+      );
+      expect(
+        find.textContaining('Sharing opens the Android chooser.'),
         findsOneWidget,
       );
       expect(tester.takeException(), isNull);

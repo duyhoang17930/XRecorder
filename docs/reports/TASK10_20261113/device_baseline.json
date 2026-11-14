@@ -1,0 +1,18 @@
+{
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "package": "com.xrecorder.xrecorder",
+  "identity": "package:com.xrecorder.xrecorder uid:10237\r\n",
+  "sdk": "37",
+  "fingerprint": "google/sdk_gphone16k_x86_64/emu64xa16k:17/CP31.260623.012/16064790:user/dev-keys",
+  "configuration": {
+    "user_rotation": "0",
+    "accelerometer_rotation": "1",
+    "font_scale": "1.0"
+  },
+  "wm_size": "Physical size: 1080x2400\r\n",
+  "wm_density": "Physical density: 420\r\n",
+  "private_sizes_kib": "40\tshared_prefs\r\n112\tfiles\r\n16\tno_backup\r\n",
+  "private_backup_sha256": "19e5107abb64c5a2bf2fe40eb949f459cf1f5acdbdb1928fd2ee4848fe0ba910",
+  "private_backup_bytes": 20992
+}

@@ -1,0 +1,28 @@
+{
+  "baselineFiles": 15,
+  "currentFiles": 18,
+  "missing": [],
+  "changed": [
+    "shared_prefs/capture_journal.xml",
+    "files/profileInstalled",
+    "files/export_jobs.json"
+  ],
+  "oldDraftFiles": [
+    "files/projects/project_1793872695793809.json",
+    "files/projects/project_1793872731095098.json",
+    "files/projects/project_1793873265519242.json",
+    "files/projects/project_1793873285734029.json",
+    "files/projects/project_1794303132745581.json",
+    "files/projects/project_1794303136702785.json",
+    "files/projects/project_1794303140310584.json",
+    "files/projects/project_1794303415721451.json"
+  ],
+  "oldDraftsByteExact": true,
+  "originalPreferencesByteExact": true,
+  "newPaths": [
+    "files/capture_recovery/1bc3aea1-6c04-4ccc-a9de-9f69cb920dab.json",
+    "files/capture_recovery/cf1507ee-8c55-4409-8557-b4ba02744189.json",
+    "files/projects/project_1794576708435609.json"
+  ],
+  "limitations": "Private state only; capture journal/export history legitimately changed by positively identified TASK10 sessions. MediaStore rows tracked separately, no claim of an initial full external-device hash census."
+}

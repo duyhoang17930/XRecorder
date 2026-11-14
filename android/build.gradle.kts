@@ -2,6 +2,10 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        // Transport only; do not pull RootEncoder's alternate capture engines.
+        maven("https://jitpack.io") {
+            content { includeGroup("com.github.pedroSG94.RootEncoder") }
+        }
     }
 }
 

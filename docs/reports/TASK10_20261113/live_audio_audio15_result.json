@@ -1,0 +1,778 @@
+{
+  "case": "live-capture-audio",
+  "sourcePlayer": "video",
+  "sessionId": "d070ecfe-9a07-4777-888a-71d8dfd56600",
+  "deniedScreenshot": true,
+  "deniedCapture": {
+    "id": "4e294910-1b58-4b81-bb95-4d7a010a7351",
+    "state": "idle",
+    "startedAt": 0,
+    "elapsedMs": 0,
+    "outputUri": null,
+    "error": null,
+    "screenshot": false,
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mixed",
+      "micGain": 0,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 3,
+      "durationSeconds": 0,
+      "orientation": "automatic",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "c2.android.avc.encoder",
+      "isRegion": false,
+      "cropX": null,
+      "cropY": null,
+      "cropWidth": null,
+      "cropHeight": null,
+      "floatingScale": 1,
+      "floatingOpacity": 1,
+      "floatingRatioX": -1,
+      "floatingRatioY": -1,
+      "shakeToStop": true,
+      "showTouches": false,
+      "audioDucking": false,
+      "regionSourceWidth": 0,
+      "regionSourceHeight": 0,
+      "liveRequested": true
+    },
+    "countdownRemaining": 3,
+    "live": {
+      "sessionId": "4e294910-1b58-4b81-bb95-4d7a010a7351",
+      "state": "cancelled"
+    }
+  },
+  "deniedConsentSessionId": "4e294910-1b58-4b81-bb95-4d7a010a7351",
+  "normalConsentDenialAndRetry": true,
+  "consentScreenshot": true,
+  "initialAudioTiming": {
+    "monotonicNs": 727753892700,
+    "captureElapsedMs": 158,
+    "micUnderrunSamples": 0,
+    "microphoneReadSamples": 28672,
+    "encodedSamples": 27648,
+    "internalReadSamples": 28672,
+    "internalQueuedBlocks": 0,
+    "encoderWorkerStack": [
+      "kotlin.ranges.RangesKt___RangesKt.coerceIn",
+      "com.xrecorder.xrecorder.recording.SessionAudio$Companion.mixSample",
+      "com.xrecorder.xrecorder.recording.SessionAudio$Companion.mixSample$default",
+      "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+      "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+      "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+      "java.lang.Thread.run"
+    ],
+    "mic": {
+      "timestampStatus": 0,
+      "sampleRate": 48000,
+      "channels": 1,
+      "encoding": 2,
+      "framePosition": 49344,
+      "frameTimeNs": 727746863000,
+      "bufferFrames": 96000
+    },
+    "internal": {
+      "timestampStatus": 0,
+      "sampleRate": 48000,
+      "channels": 1,
+      "encoding": 2,
+      "framePosition": 28672,
+      "frameTimeNs": 727737624000,
+      "bufferFrames": 3072
+    }
+  },
+  "initialPlayback": {
+    "positionMs": 1048,
+    "durationMs": 11036,
+    "playing": true
+  },
+  "playbackStartMonotonicNs": 732291547700,
+  "playbackStartCaptureMs": 4695,
+  "audioTimeline": [
+    {
+      "monotonicNs": 732329216800,
+      "captureElapsedMs": 4732,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 166912,
+      "encodedSamples": 165888,
+      "internalReadSamples": 198656,
+      "internalQueuedBlocks": 31,
+      "encoderWorkerStack": [
+        "android.media.MediaCodec.native_dequeueInputBuffer",
+        "android.media.MediaCodec.dequeueInputBuffer",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+        "java.lang.Thread.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 257789,
+        "frameTimeNs": 732324147600,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 201728,
+        "frameTimeNs": 732315317600,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 732834520400,
+      "captureElapsedMs": 5253,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 214016,
+      "encodedSamples": 214016,
+      "internalReadSamples": 224256,
+      "internalQueuedBlocks": 10,
+      "encoderWorkerStack": [
+        "android.media.MediaCodec.native_dequeueOutputBuffer",
+        "android.media.MediaCodec.dequeueOutputBuffer",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode$drain",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+        "java.lang.Thread.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 283073,
+        "frameTimeNs": 732850892500,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 227328,
+        "frameTimeNs": 732846676700,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 733372646200,
+      "captureElapsedMs": 5775,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 232448,
+      "encodedSamples": 232448,
+      "internalReadSamples": 248832,
+      "internalQueuedBlocks": 16,
+      "encoderWorkerStack": [
+        "android.media.MediaCodec.native_dequeueOutputBuffer",
+        "android.media.MediaCodec.dequeueOutputBuffer",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode$drain",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+        "java.lang.Thread.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 307835,
+        "frameTimeNs": 733366770600,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 251904,
+        "frameTimeNs": 733366943700,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 733877005000,
+      "captureElapsedMs": 6280,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 250880,
+      "encodedSamples": 249856,
+      "internalReadSamples": 273408,
+      "internalQueuedBlocks": 22,
+      "encoderWorkerStack": [
+        "android.media.MediaCodec.native_queueInputBuffer",
+        "android.media.MediaCodec.queueInputBuffer",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+        "java.lang.Thread.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 332233,
+        "frameTimeNs": 733875049900,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 273408,
+        "frameTimeNs": 733873105800,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 734379036700,
+      "captureElapsedMs": 6782,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 275456,
+      "encodedSamples": 274432,
+      "internalReadSamples": 296960,
+      "internalQueuedBlocks": 21,
+      "encoderWorkerStack": [
+        "android.media.MediaCodec.native_queueInputBuffer",
+        "android.media.MediaCodec.queueInputBuffer",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+        "java.lang.Thread.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 356367,
+        "frameTimeNs": 734377857000,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 300032,
+        "frameTimeNs": 734361713500,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 734882980200,
+      "captureElapsedMs": 7286,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 322560,
+      "encodedSamples": 321536,
+      "internalReadSamples": 321536,
+      "internalQueuedBlocks": 0,
+      "encoderWorkerStack": [
+        "kotlin.collections.ArrayDeque.getSize",
+        "kotlin.collections.AbstractMutableList.size",
+        "kotlin.collections.ArrayDeque.isEmpty",
+        "kotlin.collections.ArrayDeque.removeLastOrNull",
+        "com.pedro.common.BufferPool.acquire",
+        "com.pedro.common.base.BaseSender.sendMediaFrame",
+        "com.pedro.rtmp.rtmp.RtmpClient.sendAudio"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 379878,
+        "frameTimeNs": 734867667600,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 324608,
+        "frameTimeNs": 734873122100,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 735397860800,
+      "captureElapsedMs": 7801,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 347136,
+      "encodedSamples": 346112,
+      "internalReadSamples": 346112,
+      "internalQueuedBlocks": 0,
+      "encoderWorkerStack": [
+        "java.lang.Thread.sleep",
+        "java.lang.Thread.sleep0",
+        "java.lang.Thread.sleep",
+        "java.lang.Thread.sleep",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 405200,
+        "frameTimeNs": 735395210600,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 349184,
+        "frameTimeNs": 735386424500,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 735900912200,
+      "captureElapsedMs": 8306,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 370688,
+      "encodedSamples": 369664,
+      "internalReadSamples": 370688,
+      "internalQueuedBlocks": 0,
+      "encoderWorkerStack": [
+        "android.media.MediaCodec.native_queueInputBuffer",
+        "android.media.MediaCodec.queueInputBuffer",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+        "java.lang.Thread.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 429042,
+        "frameTimeNs": 735891905100,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 373760,
+        "frameTimeNs": 735898251900,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 736407057800,
+      "captureElapsedMs": 8810,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 395264,
+      "encodedSamples": 394240,
+      "internalReadSamples": 394240,
+      "internalQueuedBlocks": 0,
+      "encoderWorkerStack": [
+        "java.lang.Thread.sleep",
+        "java.lang.Thread.sleep0",
+        "java.lang.Thread.sleep",
+        "java.lang.Thread.sleep",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 453773,
+        "frameTimeNs": 736407132600,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 397312,
+        "frameTimeNs": 736389523700,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 736955373400,
+      "captureElapsedMs": 9358,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 419840,
+      "encodedSamples": 418816,
+      "internalReadSamples": 418816,
+      "internalQueuedBlocks": 0,
+      "encoderWorkerStack": [
+        "java.lang.Thread.sleep",
+        "java.lang.Thread.sleep0",
+        "java.lang.Thread.sleep",
+        "java.lang.Thread.sleep",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 479711,
+        "frameTimeNs": 736947506700,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 423936,
+        "frameTimeNs": 736942966900,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 737458576100,
+      "captureElapsedMs": 9861,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 443392,
+      "encodedSamples": 442368,
+      "internalReadSamples": 444416,
+      "internalQueuedBlocks": 1,
+      "encoderWorkerStack": [
+        "android.media.MediaCodec.native_queueInputBuffer",
+        "android.media.MediaCodec.queueInputBuffer",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+        "java.lang.Thread.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 503641,
+        "frameTimeNs": 737446059800,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 444416,
+        "frameTimeNs": 737432683200,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 737962123300,
+      "captureElapsedMs": 10365,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 468992,
+      "encodedSamples": 467968,
+      "internalReadSamples": 468992,
+      "internalQueuedBlocks": 0,
+      "encoderWorkerStack": [
+        "android.media.MediaCodec.native_queueInputBuffer",
+        "android.media.MediaCodec.queueInputBuffer",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+        "java.lang.Thread.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 528040,
+        "frameTimeNs": 737954376900,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 472064,
+        "frameTimeNs": 737945144900,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 738466431500,
+      "captureElapsedMs": 10871,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 491520,
+      "encodedSamples": 490496,
+      "internalReadSamples": 493568,
+      "internalQueuedBlocks": 2,
+      "encoderWorkerStack": [
+        "android.media.MediaCodec.native_dequeueInputBuffer",
+        "android.media.MediaCodec.dequeueInputBuffer",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+        "java.lang.Thread.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 552713,
+        "frameTimeNs": 738468380600,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 496640,
+        "frameTimeNs": 738459799100,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 738975148200,
+      "captureElapsedMs": 11378,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 518144,
+      "encodedSamples": 517120,
+      "internalReadSamples": 517120,
+      "internalQueuedBlocks": 0,
+      "encoderWorkerStack": [
+        "java.lang.Thread.sleep",
+        "java.lang.Thread.sleep0",
+        "java.lang.Thread.sleep",
+        "java.lang.Thread.sleep",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 576476,
+        "frameTimeNs": 738963462800,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 520192,
+        "frameTimeNs": 738949391100,
+        "bufferFrames": 3072
+      }
+    },
+    {
+      "monotonicNs": 739479235800,
+      "captureElapsedMs": 11882,
+      "micUnderrunSamples": 0,
+      "microphoneReadSamples": 541696,
+      "encodedSamples": 541696,
+      "internalReadSamples": 541696,
+      "internalQueuedBlocks": 0,
+      "encoderWorkerStack": [
+        "android.media.MediaCodec.native_dequeueOutputBuffer",
+        "android.media.MediaCodec.dequeueOutputBuffer",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode$drain",
+        "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+        "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0",
+        "com.xrecorder.xrecorder.recording.SessionAudio$$ExternalSyntheticLambda0.run",
+        "java.lang.Thread.run"
+      ],
+      "mic": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 600433,
+        "frameTimeNs": 739462561900,
+        "bufferFrames": 96000
+      },
+      "internal": {
+        "timestampStatus": 0,
+        "sampleRate": 48000,
+        "channels": 1,
+        "encoding": 2,
+        "framePosition": 544768,
+        "frameTimeNs": 739461344800,
+        "bufferFrames": 3072
+      }
+    }
+  ],
+  "playback": {
+    "positionMs": 8795,
+    "durationMs": 11036,
+    "playing": true
+  },
+  "liveBeforeEnd": {
+    "sessionId": "d070ecfe-9a07-4777-888a-71d8dfd56600",
+    "state": "live",
+    "bitrate": 191968,
+    "retries": 0,
+    "sentVideoFrames": 95,
+    "sentAudioFrames": 515,
+    "droppedVideoFrames": 0,
+    "droppedAudioFrames": 0,
+    "sentBytes": 533074,
+    "queuedBytes": 297
+  },
+  "playerScreenshot": true,
+  "status": "PASS",
+  "capture": {
+    "id": "d070ecfe-9a07-4777-888a-71d8dfd56600",
+    "state": "completed",
+    "startedAt": 1794661594984,
+    "elapsedMs": 16556,
+    "outputUri": "content://media/external/video/media/161",
+    "error": null,
+    "screenshot": false,
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mixed",
+      "micGain": 0,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 3,
+      "durationSeconds": 0,
+      "orientation": "automatic",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "c2.android.avc.encoder",
+      "isRegion": false,
+      "cropX": null,
+      "cropY": null,
+      "cropWidth": null,
+      "cropHeight": null,
+      "floatingScale": 1,
+      "floatingOpacity": 1,
+      "floatingRatioX": -1,
+      "floatingRatioY": -1,
+      "shakeToStop": true,
+      "showTouches": false,
+      "audioDucking": false,
+      "regionSourceWidth": 0,
+      "regionSourceHeight": 0,
+      "liveRequested": true
+    },
+    "countdownRemaining": 0,
+    "live": {
+      "sessionId": "d070ecfe-9a07-4777-888a-71d8dfd56600",
+      "state": "stopped",
+      "bitrate": 294315,
+      "retries": 0,
+      "sentVideoFrames": 134,
+      "sentAudioFrames": 709,
+      "droppedVideoFrames": 0,
+      "droppedAudioFrames": 0,
+      "sentBytes": 761789,
+      "queuedBytes": 0
+    }
+  },
+  "sourceByteExact": true,
+  "sourceUri": "content://media/external/video/media/115",
+  "scope": "Real Flutter Start/End + normal consent + video player integration; independent file/audio validation required",
+  "cleanupCapture": {
+    "id": "d070ecfe-9a07-4777-888a-71d8dfd56600",
+    "state": "completed",
+    "startedAt": 1794661594984,
+    "elapsedMs": 16556,
+    "outputUri": "content://media/external/video/media/161",
+    "error": null,
+    "screenshot": false,
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mixed",
+      "micGain": 0,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 3,
+      "durationSeconds": 0,
+      "orientation": "automatic",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "c2.android.avc.encoder",
+      "isRegion": false,
+      "cropX": null,
+      "cropY": null,
+      "cropWidth": null,
+      "cropHeight": null,
+      "floatingScale": 1,
+      "floatingOpacity": 1,
+      "floatingRatioX": -1,
+      "floatingRatioY": -1,
+      "shakeToStop": true,
+      "showTouches": false,
+      "audioDucking": false,
+      "regionSourceWidth": 0,
+      "regionSourceHeight": 0,
+      "liveRequested": true
+    },
+    "countdownRemaining": 0,
+    "live": {
+      "sessionId": "d070ecfe-9a07-4777-888a-71d8dfd56600",
+      "state": "stopped",
+      "bitrate": 294315,
+      "retries": 0,
+      "sentVideoFrames": 134,
+      "sentAudioFrames": 709,
+      "droppedVideoFrames": 0,
+      "droppedAudioFrames": 0,
+      "sentBytes": 761789,
+      "queuedBytes": 0
+    }
+  }
+}

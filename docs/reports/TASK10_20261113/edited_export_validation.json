@@ -1,0 +1,37 @@
+{
+  "uri": "content://media/external/video/media/49",
+  "bytes": 1540950,
+  "sha256": "db595883b79d770f20c9e2ee9d566e908e10a90de2a84f5e786e184dcc506629",
+  "duration": "11.016395",
+  "frames": "237",
+  "encodedSize": [
+    1280,
+    720
+  ],
+  "rotation": -90,
+  "displaySize": [
+    720,
+    1280
+  ],
+  "fullDecode": "PASS with demux timebase",
+  "grayscaleSamples": [
+    {
+      "seconds": "1",
+      "meanRgbChannelDifference": 0.0,
+      "meanIntensity": 190.68207465277777
+    },
+    {
+      "seconds": "5",
+      "meanRgbChannelDifference": 0.0,
+      "meanIntensity": 190.6826171875
+    },
+    {
+      "seconds": "9",
+      "meanRgbChannelDifference": 0.0,
+      "meanIntensity": 190.67730034722223
+    }
+  ],
+  "audio": "Media3 silent AAC track, decoded PCM peak0",
+  "workflow": "Real app recording -> MediaStore -> Library -> Editor -> Trim/Split/Grayscale -> actual MP4 export",
+  "timestamps": "All237packet PTS/DTS strictly increase; edited_export_timestamp_check.json"
+}

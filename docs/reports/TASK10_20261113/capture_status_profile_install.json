@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "apkSha256": "7a61f6c508090e4dbfacec54c2992bf8562165a21153c5b1e070447b23f9e60b",
+  "apkBytes": 60222711,
+  "metadataFilesByteExact": 54,
+  "originalDraftsByteExact": 8,
+  "tinyModelSha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "diskFreeBytes": {
+    "C:/": 16427397120,
+    "D:/": 24337141760
+  }
+}

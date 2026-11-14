@@ -1,0 +1,32 @@
+{
+  "scope": "AudioTimestamp-derived source origins; acoustic quality is not certified. Current mixer consumes matching array indices without compensating origin skew.",
+  "cases": {
+    "audio14": {
+      "micOriginLeadsInternalMs": {
+        "minimum": 377.916233328125,
+        "median": 379.47805,
+        "maximum": 445.2581
+      },
+      "sourcePlayer": "static",
+      "microphoneGain": 0
+    },
+    "audio15": {
+      "micOriginLeadsInternalMs": {
+        "minimum": 421.42766666662595,
+        "median": 1158.34215,
+        "maximum": 1223.576733333374
+      },
+      "sourcePlayer": "video",
+      "microphoneGain": 0
+    },
+    "audio16": {
+      "micOriginLeadsInternalMs": {
+        "minimum": 446.1931,
+        "median": 779.649450000122,
+        "maximum": 963.132166666504
+      },
+      "sourcePlayer": "video",
+      "microphoneGain": 0
+    }
+  }
+}

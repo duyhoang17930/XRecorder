@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "scope": "real main full-screen consent -> shared H264/AAC -> RTMP receiver -> End -> local publication",
+  "receiverVideoFrames": 167,
+  "localVideoFrames": 169,
+  "receiverBytes": 1701313,
+  "localBytes": 1734723,
+  "allVideoPacketsContiguousAndExact": true,
+  "allAudioPacketsContiguousAndExact": true,
+  "localVideoPrefixFramesBeforeConnection": 2,
+  "localAudioPrefixPacketsBeforeConnection": 12,
+  "videoOffsetSeconds": 0.03799999999999981,
+  "audioOffsetSeconds": 0.03810400000000014,
+  "relativeAvOffsetMs": 0.10400000000032605,
+  "pixelSamples": [
+    {
+      "receivedFrame": 0,
+      "localFrame": 2,
+      "rgbByteExact": true
+    },
+    {
+      "receivedFrame": 1,
+      "localFrame": 3,
+      "rgbByteExact": true
+    },
+    {
+      "receivedFrame": 40,
+      "localFrame": 42,
+      "rgbByteExact": true
+    },
+    {
+      "receivedFrame": 80,
+      "localFrame": 82,
+      "rgbByteExact": true
+    },
+    {
+      "receivedFrame": 140,
+      "localFrame": 142,
+      "rgbByteExact": true
+    },
+    {
+      "receivedFrame": 166,
+      "localFrame": 168,
+      "rgbByteExact": true
+    }
+  ],
+  "localUri": "content://media/external/video/media/118",
+  "journalContainsNoKey": true,
+  "note": "Mixed audio is emulated near-silence; audible internal playback and physical mic quality remain separate tests."
+}

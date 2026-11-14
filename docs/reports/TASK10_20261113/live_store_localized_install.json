@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "apkSha256": "0fc388a28a64f771f40192a75e1308bc2f8da7ffbf252eec90999c30dab10f6b",
+  "apkBytes": 60222711,
+  "allBoundedMetadataByteExact": true,
+  "metadataFiles": 49,
+  "modelExcludedFromArchive": true,
+  "purpose": "real main.dart localized livestream and key-background guard"
+}

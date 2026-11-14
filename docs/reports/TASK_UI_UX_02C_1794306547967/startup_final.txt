@@ -1,7 +1,0 @@
-Starting: Intent { cmp=com.xrecorder.xrecorder/.MainActivity }
-Status: ok
-LaunchState: COLD
-Activity: com.xrecorder.xrecorder/.MainActivity
-TotalTime: 10585
-WaitTime: 10636
-Complete

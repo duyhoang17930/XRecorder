@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "94fefc630823f08f43f35a4ec9aa7fa9a0b2c1a943f37f6884f6b808bee2f7c0",
+  "apkBytes": 102607510,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Scoped TextureView candidate; actual capture verification required",
+  "freeBytes": {
+    "C:/": 16145375232,
+    "D:/": 22281515008
+  }
+}

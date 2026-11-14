@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "4185f6be11e2db9556bbb414d25707481cc5552310b451d0e777228391b2ae08",
+  "apkBytes": 60288247,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Scoped fresh-player no-op seek candidate; actual cue and waveform verification follows",
+  "freeBytes": {
+    "C:/": 16189038592,
+    "D:/": 24269930496
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "127e21c6bc498431fcefd4b207123abccd551568cddc3172bf69e119d87fc238",
+  "apkBytes": 60288247,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 54,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Audio worker priority and input-start ordering repair",
+  "freeBytes": {
+    "C:/": 16626032640,
+    "D:/": 24295297024
+  }
+}

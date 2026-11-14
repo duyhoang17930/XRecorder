@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "apkSha256": "c4459edc562650936822922b037333034a7c072397ed4b2e3c814268df156e4b",
+  "apkBytes": 60222711,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 54,
+  "originalDraftsByteExact": 8,
+  "scope": "main.dart profile + RTL back fix; no data/cache clear"
+}

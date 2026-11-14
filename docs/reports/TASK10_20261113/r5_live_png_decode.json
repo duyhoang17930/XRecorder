@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "file": "docs\\reports\\TASK10_20261113\\r5_live_verified_media\\recording-png.png",
+  "bytes": 1161041,
+  "sha256": "3789f1c282a3731222dcacd7c2f668a86cbf3b790caba21b005dd1eb64bc8721",
+  "width": 2048,
+  "height": 922,
+  "fullDecode": "PASS",
+  "originalByteExact": true
+}

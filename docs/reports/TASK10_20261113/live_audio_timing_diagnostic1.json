@@ -1,0 +1,172 @@
+[
+  {
+    "file": "docs\\reports\\TASK10_20261113\\asr_burnin_media\\task10_asr_burnin.mp4",
+    "samples": 22072,
+    "halfSecondRms": [
+      0.0742,
+      0.2624,
+      0.1985,
+      0.1898,
+      0.0273,
+      0.0089,
+      0.0947,
+      0.1008,
+      0.0948,
+      0.0081,
+      0.0476,
+      0.1439,
+      0.1319,
+      0.0946,
+      0.1726,
+      0.0229,
+      0.1336,
+      0.0936,
+      0.0896,
+      0.1415,
+      0.0648,
+      0.019,
+      0.0001
+    ],
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "aac",
+          "sample_rate": "16000",
+          "start_time": "0.000000",
+          "duration": "11.036000",
+          "nb_frames": "174"
+        },
+        {
+          "index": 1,
+          "codec_name": "h264",
+          "start_time": "0.000000",
+          "duration": "11.000000",
+          "nb_frames": "264"
+        }
+      ],
+      "format": {
+        "duration": "11.036000"
+      }
+    }
+  },
+  {
+    "file": "docs\\reports\\TASK10_20261113\\live_audio_audio3_media\\local.mp4",
+    "samples": 36310,
+    "halfSecondRms": [
+      0.0001,
+      0.0001,
+      0.0516,
+      0.246,
+      0.1603,
+      0.0086,
+      0.0533,
+      0.0856,
+      0.0083,
+      0.0805,
+      0.1625,
+      0.0931,
+      0.091,
+      0.1709,
+      0.0115,
+      0.0838,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "start_time": "0.000000",
+          "duration": "22.725556",
+          "nb_frames": "290"
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "start_time": "0.002104",
+          "duration": "18.154667",
+          "nb_frames": "851"
+        }
+      ],
+      "format": {
+        "duration": "22.725556"
+      }
+    }
+  },
+  {
+    "file": "docs\\reports\\TASK10_20261113\\live_audio_audio4_media\\local.mp4",
+    "samples": 22912,
+    "halfSecondRms": [
+      0.0001,
+      0.0001,
+      0.1611,
+      0.2236,
+      0.0198,
+      0.0083,
+      0.1374,
+      0.0872,
+      0.0164,
+      0.0088,
+      0.1204,
+      0.1158,
+      0.0942,
+      0.1696,
+      0.1337,
+      0.098,
+      0.0757,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "programs": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "start_time": "0.000000",
+          "duration": "15.701800",
+          "nb_frames": "155"
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "start_time": "0.021104",
+          "duration": "11.456000",
+          "nb_frames": "537"
+        }
+      ],
+      "format": {
+        "duration": "15.701800"
+      }
+    }
+  }
+]

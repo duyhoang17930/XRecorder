@@ -38,6 +38,8 @@ typedef _PhotoSnapshot = ({
   bool flipV,
 });
 
+const _photoStickerTypes = ['Star', 'Heart'];
+
 Future<ui.Image> renderPhotoCopy(
   ui.Image source,
   List<PhotoMark> marks,
@@ -229,6 +231,8 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
 
   String get _selectedTool => panel != 'draw'
       ? panel
+      : _photoStickerTypes.contains(tool)
+      ? 'sticker'
       : ['Rectangle', 'Circle', 'Arrow'].contains(tool)
       ? 'shapes'
       : tool == 'Pen' || tool == 'Eraser'
@@ -364,6 +368,20 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
     _revealTool(_selectedTool);
   }
 
+  Future<void> _stickers() async {
+    final next = await choosePhotoTool(
+      context,
+      title: context.l10n.sticker,
+      icon: AppIcons.sticker,
+      tools: [
+        ('Star', context.l10n.stickerStar),
+        ('Heart', context.l10n.stickerHeart),
+      ],
+      selected: tool,
+    );
+    if (mounted && next != null) _tool(next);
+  }
+
   void _revealTool(String name) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
@@ -403,6 +421,8 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
           'Eraser',
         ])
           (value, context.message(value)),
+        ('Star', context.l10n.stickerStar),
+        ('Heart', context.l10n.stickerHeart),
         ('crop', context.l10n.editorCrop),
         ('transform', context.l10n.editorTransform),
       ],
@@ -501,6 +521,13 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                     panel == 'draw' && tool == 'Text',
                     () => _tool('Text'),
                     'photo-tool-text',
+                  ),
+                  button(
+                    context.l10n.sticker,
+                    AppIcons.sticker,
+                    panel == 'draw' && _photoStickerTypes.contains(tool),
+                    _stickers,
+                    'photo-tool-sticker',
                   ),
                   button(
                     context.l10n.editorTransform,
@@ -731,6 +758,8 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
               child: Text(context.l10n.editorApply),
             ),
           ),
+        ] else if (_photoStickerTypes.contains(tool)) ...[
+          Text(context.l10n.photoDragSticker),
         ] else ...[
           Wrap(
             alignment: WrapAlignment.spaceBetween,
@@ -1053,6 +1082,10 @@ class PhotoPainter extends CustomPainter {
   final Rect? crop;
   @override
   void paint(Canvas canvas, Size size) {
+    // Annotation dimensions are source-image pixels. A smaller preview must
+    // scale their minimums too; viewport-pixel minimums changed text wrapping
+    // and stroke thickness between preview and Save copy.
+    final imageScale = size.width / image.width;
     canvas.drawImageRect(
       image,
       Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
@@ -1067,7 +1100,7 @@ class PhotoPainter extends CustomPainter {
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round
         ..strokeJoin = StrokeJoin.round
-        ..strokeWidth = math.max(2, size.width * mark.width);
+        ..strokeWidth = math.max(2, image.width * mark.width) * imageScale;
       if (mark.tool == 'Text') {
         final text = TextPainter(
           text: TextSpan(
@@ -1075,7 +1108,7 @@ class PhotoPainter extends CustomPainter {
             style: TextStyle(
               fontFamily: AppFonts.family,
               color: mark.color,
-              fontSize: math.max(16, size.width * .045),
+              fontSize: math.max(16, image.width * .045) * imageScale,
             ),
           ),
           textDirection: TextDirection.ltr,
@@ -1084,10 +1117,45 @@ class PhotoPainter extends CustomPainter {
         text.dispose();
         continue;
       }
+      if (_photoStickerTypes.contains(mark.tool)) {
+        final rect = Rect.fromPoints(
+          at(mark.points.first),
+          at(mark.points.last),
+        );
+        if (rect.isEmpty) continue;
+        // Reuse the star/heart geometry used by native EditorLayers, scaling
+        // its bounds into the dragged photo box. Preview and Save share this painter.
+        final path = Path();
+        if (mark.tool == 'Star') {
+          for (var i = 0; i < 10; i++) {
+            final angle = -math.pi / 2 + i * math.pi / 5;
+            final radius = i.isEven ? 1.0 : .42;
+            final x = math.cos(angle) * radius, y = math.sin(angle) * radius;
+            if (i == 0) {
+              path.moveTo(x, y);
+            } else {
+              path.lineTo(x, y);
+            }
+          }
+        } else {
+          path.moveTo(0, 1);
+          path.cubicTo(-2, -.3, -1, -1.6, 0, -.6);
+          path.cubicTo(1, -1.6, 2, -.3, 0, 1);
+        }
+        path.close();
+        final bounds = path.getBounds();
+        canvas.save();
+        canvas.translate(rect.left, rect.top);
+        canvas.scale(rect.width / bounds.width, rect.height / bounds.height);
+        canvas.translate(-bounds.left, -bounds.top);
+        canvas.drawPath(path, Paint()..color = mark.color);
+        canvas.restore();
+        continue;
+      }
       if (mark.tool == 'Arrow') {
         final start = at(mark.points.first), end = at(mark.points.last);
         final angle = math.atan2(end.dy - start.dy, end.dx - start.dx);
-        final head = math.max(8.0, paint.strokeWidth * 4);
+        final head = math.max(8.0 * imageScale, paint.strokeWidth * 4);
         canvas.drawLine(start, end, paint);
         for (final offset in [-math.pi / 6, math.pi / 6]) {
           canvas.drawLine(

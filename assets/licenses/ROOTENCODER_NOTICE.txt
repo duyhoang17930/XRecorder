@@ -1,0 +1,12 @@
+RootEncoder RTMP transport 2.8.2
+Copyright (C) 2024 pedroSG94.
+https://github.com/pedroSG94/RootEncoder/tree/2.8.2
+
+Used under the Apache License, Version 2.0, bundled with this application.
+Only the RTMP/common transport modules are included. The application's
+existing screen capture and audio encoders remain in use.
+
+Modification: application build instrumentation suppresses Android Log
+calls in com.pedro.rtmp and com.pedro.common, in every build variant, to
+prevent protocol diagnostics from exposing stream keys. Transport messages
+are represented by application status codes without server-provided text.

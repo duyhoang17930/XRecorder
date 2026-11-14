@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "interruptedJobId": "speech_1794668778406681",
+  "interruptedPhase": "preparing edited audio",
+  "restoredState": "failed",
+  "restoredErrorCode": "interrupted",
+  "retryJobId": "speech_1794668877866772",
+  "retryState": "completed",
+  "retrySegments": 1,
+  "retryInferenceMs": 8372,
+  "taskDraftSha256Exact": true,
+  "tinySha256Exact": true,
+  "oldJobIdsPreserved": 6,
+  "scope": "Actual main ASR preparing-audio job -> Home/force-stop -> failed/interrupted UI -> explicit real Tiny retry completes. No inference-stage auto-resume claim; no Apply or export."
+}

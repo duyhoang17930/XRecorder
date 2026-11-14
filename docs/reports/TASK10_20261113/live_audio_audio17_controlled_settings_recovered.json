@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "preferencesByteExact": true,
+  "microphoneGainRestored": 100,
+  "captureWorkflow": "FAIL",
+  "note": "Initial harness finally raced Main Flutter readiness; normal UI restoration resumed without data edits"
+}

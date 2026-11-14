@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "transfer": {
+    "source": "content://media/external/video/media/115",
+    "move": false,
+    "state": "completed",
+    "name": "3H_40b47bfe_TASK10_ASR_burnin.mp4",
+    "destination": "content://com.android.externalstorage.documents/tree/primary%3ADownload%2FTASK10_20261113/document/primary%3ADownload%2FTASK10_20261113%2F3H_40b47bfe_TASK10_ASR_burnin.mp4",
+    "sha256": "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f",
+    "bytes": 582195,
+    "moved": false
+  },
+  "copyPath": "/sdcard/Download/TASK10_20261113/3H_40b47bfe_TASK10_ASR_burnin.mp4",
+  "sourceStillPresentAndExact": true,
+  "initialOracleCorrection": "Use actual unique 3H-prefixed destination from transfer journal; assumed basename did not exist."
+}

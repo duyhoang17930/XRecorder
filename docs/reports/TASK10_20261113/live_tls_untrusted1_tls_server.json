@@ -1,0 +1,20 @@
+{
+  "certificateSha256": "a03370a609bb32873249cda8191ef19dc4048ecff8b256df2c17cb746a33b577",
+  "certificateSan": "IP:10.0.2.2",
+  "androidTrustModified": false,
+  "handshakes": [
+    {
+      "accepted": false,
+      "reason": "SSLV3_ALERT_CERTIFICATE_UNKNOWN"
+    },
+    {
+      "accepted": false,
+      "reason": "SSLV3_ALERT_CERTIFICATE_UNKNOWN"
+    },
+    {
+      "accepted": false,
+      "reason": "SSLV3_ALERT_CERTIFICATE_UNKNOWN"
+    }
+  ],
+  "scope": "Untrusted CA rejection, not trusted RTMPS success or hostname mismatch acceptance"
+}

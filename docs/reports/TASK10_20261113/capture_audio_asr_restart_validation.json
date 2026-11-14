@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "projectId": "project_1794642438390083",
+  "filesByteExact": [
+    {
+      "path": "files/projects/project_1794642438390083.json",
+      "sha256": "0d3a6e8d695de72c816bdaab3ffc937ace8731e7b88e32c67107e5c526d7e67e"
+    },
+    {
+      "path": "files/transcription_jobs.json",
+      "sha256": "0d1f83f8cbe7cbcdff16263974e6375c8204e861d970f48c2242c7619f8c9fc9"
+    },
+    {
+      "path": "files/export_jobs.json",
+      "sha256": "990ec78ea6cc8ff21bfef4d1d928d5a8d4983018988c99511233ebd8ac4026d5"
+    },
+    {
+      "path": "shared_prefs/capture_journal.xml",
+      "sha256": "6e4f265c78bfb8c7c22343cf7d6749dd38046d234ff06c98b57672d896840028"
+    },
+    {
+      "path": "shared_prefs/app_settings.xml",
+      "sha256": "342830d848bfc032f53d8384d1d203b09daaa889804c6231f1188f8dc4eebdf5"
+    }
+  ],
+  "scope": "completed capture/new draft/subtitles/export/jobs and settings survive process restart; not active-job crash testing"
+}

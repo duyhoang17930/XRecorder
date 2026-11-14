@@ -1,0 +1,9 @@
+{
+  "originalTaskUri": "content://media/external/images/media/47",
+  "restoredUri": "content://media/external/images/media/51",
+  "bytes": 1388049,
+  "sha256": "028bd63b7c56bee37b280137d853ded09bc63c82efc967e43666905833ae6a6f",
+  "originalAndRestoredBytesEqual": true,
+  "preExistingTrash": "empty, verified before opening",
+  "noPermanentDelete": true
+}

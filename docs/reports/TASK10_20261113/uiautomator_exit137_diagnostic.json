@@ -1,0 +1,16 @@
+{
+  "memory": {
+    "MemTotal": "3042488 kB",
+    "MemFree": "328892 kB",
+    "MemAvailable": "1532812 kB",
+    "SwapTotal": "570460 kB",
+    "SwapFree": "99732 kB"
+  },
+  "qaProcesses": [
+    " 7748   470  67876 com.xrecorder.xrecorder"
+  ],
+  "lowMemorySignals": [
+    "11-14 19:44:40.066   689   715 I ActivityManager: Force stopping com.xrecorder.xrecorder appid=10237 user=0: from pid 7725",
+    "11-14 19:44:45.893   689   730 I ActivityManager: Start proc 7748:com.xrecorder.xrecorder/u0a237 for next-top-activity {com.xrecorder.xrecorder/com.xrecorder.xrecorder.MainActivity}"
+  ]
+}

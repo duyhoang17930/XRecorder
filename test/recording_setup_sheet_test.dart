@@ -17,16 +17,18 @@ class SetupRecorder extends TestRecorder {
   @override
   Future<RecordingCapabilities> capabilities() async => RecordingCapabilities(
     audioSources: sources,
-    configurations: advertised ?? [
-      for (final size in [
-        (1280, 720),
-        (1920, 1080),
-        (2560, 1440),
-        (3840, 2160),
-      ])
-        for (final fps in [24, 30, 60, 90, 120])
-          VideoConfiguration(width: size.$1, height: size.$2, fps: fps),
-    ],
+    configurations:
+        advertised ??
+        [
+          for (final size in [
+            (1280, 720),
+            (1920, 1080),
+            (2560, 1440),
+            (3840, 2160),
+          ])
+            for (final fps in [24, 30, 60, 90, 120])
+              VideoConfiguration(width: size.$1, height: size.$2, fps: fps),
+        ],
     noiseReduction: noiseSupported,
     hevc: true,
     facecam: true,
@@ -91,50 +93,63 @@ void main() {
       }
     },
   );
-  testWidgets('a stale selection is rejected until the user selects a supported tuple', (tester) async {
-    final service = SetupRecorder()
-      ..advertised = limitedCaps.configurations
-      ..sources = limitedCaps.audioSources;
-    final capture = CaptureController(service, onSaved: () {});
-    final settings = SettingsController();
-    try {
-      await tester.pumpWidget(SettingsScope(
-        controller: settings,
-        child: CaptureScope(controller: capture, child: MaterialApp(home: Scaffold(
-          body: Builder(builder: (context) => TextButton(
-            onPressed: () => openRecordingSetup(context), child: const Text('Open setup'),
-          )),
-        ))),
-      ));
-      await tester.tap(find.text('Open setup'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Start Recording'));
-      await tester.pumpAndSettle();
-      expect(service.starts, isEmpty);
-      expect(settings.resolution, '1080p FHD'); // No silent normalization.
-      final resolution = find.widgetWithText(ChoiceChip, '720p HD');
-      expect(tester.widget<ChoiceChip>(resolution).onSelected, isNotNull);
-      await tester.ensureVisible(resolution);
-      await tester.tap(resolution);
-      await tester.pumpAndSettle();
-      expect(settings.resolution, '720p HD');
-      expect(settings.fps, '30');
-      await tester.ensureVisible(find.text('Mute'));
-      await tester.tap(find.text('Mute'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Start Recording'));
-      await tester.pumpAndSettle();
-      expect(service.starts, hasLength(1));
-      expect(service.starts.single.width, 1280);
-      expect(service.starts.single.fps, 30);
-      expect(service.starts.single.audioSource, AudioSource.mute);
-    } finally {
-      await tester.pumpWidget(const SizedBox.shrink());
-      capture.dispose();
-      settings.dispose();
-      await service.events.close();
-    }
-  });
+  testWidgets(
+    'a stale selection is rejected until the user selects a supported tuple',
+    (tester) async {
+      final service = SetupRecorder()
+        ..advertised = limitedCaps.configurations
+        ..sources = limitedCaps.audioSources;
+      final capture = CaptureController(service, onSaved: () {});
+      final settings = SettingsController();
+      try {
+        await tester.pumpWidget(
+          SettingsScope(
+            controller: settings,
+            child: CaptureScope(
+              controller: capture,
+              child: MaterialApp(
+                home: Scaffold(
+                  body: Builder(
+                    builder: (context) => TextButton(
+                      onPressed: () => openRecordingSetup(context),
+                      child: const Text('Open setup'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        await tester.tap(find.text('Open setup'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Start Recording'));
+        await tester.pumpAndSettle();
+        expect(service.starts, isEmpty);
+        expect(settings.resolution, '1080p FHD'); // No silent normalization.
+        final resolution = find.widgetWithText(ChoiceChip, '720p HD');
+        expect(tester.widget<ChoiceChip>(resolution).onSelected, isNotNull);
+        await tester.ensureVisible(resolution);
+        await tester.tap(resolution);
+        await tester.pumpAndSettle();
+        expect(settings.resolution, '720p HD');
+        expect(settings.fps, '30');
+        await tester.ensureVisible(find.text('Mute'));
+        await tester.tap(find.text('Mute'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Start Recording'));
+        await tester.pumpAndSettle();
+        expect(service.starts, hasLength(1));
+        expect(service.starts.single.width, 1280);
+        expect(service.starts.single.fps, 30);
+        expect(service.starts.single.audioSource, AudioSource.mute);
+      } finally {
+        await tester.pumpWidget(const SizedBox.shrink());
+        capture.dispose();
+        settings.dispose();
+        await service.events.close();
+      }
+    },
+  );
   for (final width in [320.0, 360.0, 411.0]) {
     testWidgets('Setup pins actions and preserves controls at ${width}dp', (
       tester,
@@ -190,11 +205,13 @@ void main() {
         final handle = find.byWidgetPredicate(
           (widget) =>
               widget is Container &&
-              widget.constraints?.maxWidth == 36 &&
-              widget.constraints?.maxHeight == 4,
+              widget.constraints?.maxWidth ==
+                  AppTheme.dark.bottomSheetTheme.dragHandleSize!.width &&
+              widget.constraints?.maxHeight ==
+                  AppTheme.dark.bottomSheetTheme.dragHandleSize!.height,
         );
-        // Flutter reserves a 48dp handle target; P1 must add no top padding.
-        expect(headerRect.top - tester.getRect(handle).bottom, 22);
+        // Assert the 48dp handle target independently of decorative bar size.
+        expect(headerRect.top - tester.getRect(handle).center.dy, 24);
         expect(find.text('Recording mode'), findsNothing);
         expect(find.text('Bitrate'), findsNothing);
         expect(buttonRect.bottom, lessThanOrEqualTo(640 - 24));

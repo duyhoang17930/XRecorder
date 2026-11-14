@@ -1,0 +1,114 @@
+{
+  "audio3": [
+    {
+      "sourceSeconds": 0,
+      "bestCorrelation": 0.5577773624541289,
+      "captureSeconds": 1.024,
+      "offsetMs": 1024.0
+    },
+    {
+      "sourceSeconds": 0.5,
+      "bestCorrelation": 0.49623906657288025,
+      "captureSeconds": 4.8575,
+      "offsetMs": 4357.5
+    },
+    {
+      "sourceSeconds": 1,
+      "bestCorrelation": 0.6713127419884063,
+      "captureSeconds": 1.872,
+      "offsetMs": 872.0
+    },
+    {
+      "sourceSeconds": 2,
+      "bestCorrelation": 0.3290849363238615,
+      "captureSeconds": 7.7935,
+      "offsetMs": 5793.5
+    },
+    {
+      "sourceSeconds": 3,
+      "bestCorrelation": 0.5552906268043244,
+      "captureSeconds": 1.0775,
+      "offsetMs": -1922.5
+    },
+    {
+      "sourceSeconds": 4,
+      "bestCorrelation": 0.7804779054050627,
+      "captureSeconds": 3.406,
+      "offsetMs": -594.0
+    },
+    {
+      "sourceSeconds": 5,
+      "bestCorrelation": 0.9628424030639814,
+      "captureSeconds": 4.406,
+      "offsetMs": -594.0
+    },
+    {
+      "sourceSeconds": 6,
+      "bestCorrelation": 0.8292142463759005,
+      "captureSeconds": 5.406,
+      "offsetMs": -594.0
+    },
+    {
+      "sourceSeconds": 7,
+      "bestCorrelation": 0.8957500021814735,
+      "captureSeconds": 6.406,
+      "offsetMs": -594.0
+    }
+  ],
+  "audio4": [
+    {
+      "sourceSeconds": 0,
+      "bestCorrelation": 0.881671505738036,
+      "captureSeconds": 0.9835,
+      "offsetMs": 983.5
+    },
+    {
+      "sourceSeconds": 0.5,
+      "bestCorrelation": 0.7195430369179621,
+      "captureSeconds": 1.0995,
+      "offsetMs": 599.5
+    },
+    {
+      "sourceSeconds": 1,
+      "bestCorrelation": 0.8488905078590047,
+      "captureSeconds": 1.578,
+      "offsetMs": 578.0
+    },
+    {
+      "sourceSeconds": 2,
+      "bestCorrelation": 0.47327317628693955,
+      "captureSeconds": 8.3095,
+      "offsetMs": 6309.5
+    },
+    {
+      "sourceSeconds": 3,
+      "bestCorrelation": 0.9575488379278904,
+      "captureSeconds": 2.746,
+      "offsetMs": -254.0
+    },
+    {
+      "sourceSeconds": 4,
+      "bestCorrelation": 0.7219913972012081,
+      "captureSeconds": 3.746,
+      "offsetMs": -254.0
+    },
+    {
+      "sourceSeconds": 5,
+      "bestCorrelation": 0.9994472427375637,
+      "captureSeconds": 4.718,
+      "offsetMs": -282.0
+    },
+    {
+      "sourceSeconds": 6,
+      "bestCorrelation": 0.8520798678042868,
+      "captureSeconds": 5.526,
+      "offsetMs": -474.0
+    },
+    {
+      "sourceSeconds": 7,
+      "bestCorrelation": 0.5434714811523429,
+      "captureSeconds": 6.4735,
+      "offsetMs": -526.5
+    }
+  ]
+}

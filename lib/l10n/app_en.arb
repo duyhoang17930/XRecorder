@@ -1,32 +1,116 @@
 {
   "clipOptions": "Clip options",
+  "@clipOptions": {
+    "description": "Menu for actions on the selected video timeline clip."
+  },
   "homeScreenShortcuts": "Home screen shortcuts",
+  "@homeScreenShortcuts": {
+    "description": "Menu for adding editor shortcuts to the Android launcher."
+  },
   "captureScreenshot": "Screenshot",
+  "@captureScreenshot": {
+    "description": "Action taking a screenshot after normal Android screen capture consent."
+  },
   "clearText": "Clear text",
+  "@clearText": {
+    "description": "Accessible tooltip for clearing an input while keeping keyboard focus."
+  },
   "recordingSettings": "Recording settings",
+  "@recordingSettings": {
+    "description": "Navigation label for the recording preferences screen."
+  },
   "recordingSettingsSummary": "Video quality, audio & recording options",
+  "@recordingSettingsSummary": {
+    "description": "Summary explaining the options available before capture."
+  },
   "editorAllTools": "All tools",
+  "@editorAllTools": {
+    "description": "Video and photo editor control: all tools."
+  },
   "editorAudio": "Audio",
+  "@editorAudio": {
+    "description": "Video and photo editor control: audio."
+  },
   "editorOverlays": "Overlays",
+  "@editorOverlays": {
+    "description": "Video and photo editor control: overlays."
+  },
   "editorExportQuality": "Export quality",
+  "@editorExportQuality": {
+    "description": "Video and photo editor control: export quality."
+  },
   "editorShapes": "Shapes",
+  "@editorShapes": {
+    "description": "Video and photo editor control: shapes."
+  },
   "editorCrop": "Crop",
+  "@editorCrop": {
+    "description": "Video and photo editor control: crop."
+  },
   "editorTransform": "Transform",
+  "@editorTransform": {
+    "description": "Video and photo editor control: transform."
+  },
   "editorColor": "Color",
+  "@editorColor": {
+    "description": "Video and photo editor control: color."
+  },
   "photoDragToErase": "Drag near a mark to remove it.",
+  "@photoDragToErase": {
+    "description": "Photo eraser instructions for removing drawing marks."
+  },
   "photoEnterText": "Enter text before placing it on the photo.",
+  "@photoEnterText": {
+    "description": "Placeholder for text to add to a photo."
+  },
   "editorAdvancedAudio": "Voice & background music",
+  "@editorAdvancedAudio": {
+    "description": "Video and photo editor control: advanced audio."
+  },
   "editorSubtitleHint": "Style the subtitles added to your project.",
+  "@editorSubtitleHint": {
+    "description": "Video and photo editor control: subtitle hint."
+  },
   "editorApply": "Apply",
+  "@editorApply": {
+    "description": "Video and photo editor control: apply."
+  },
   "fileManagement": "File management",
+  "@fileManagement": {
+    "description": "Settings section for storage, media and Trash."
+  },
   "viewIntroduction": "View introduction",
+  "@viewIntroduction": {
+    "description": "Settings action to replay the introduction without resetting preferences."
+  },
   "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Action opening the privacy policy in an external browser."
+  },
   "termsOfUse": "Terms of Use",
+  "@termsOfUse": {
+    "description": "Action opening the terms of use in an external browser."
+  },
   "officialWebsite": "Official website",
+  "@officialWebsite": {
+    "description": "Action opening the official product website."
+  },
   "sendFeedbackEmail": "Send feedback by email",
+  "@sendFeedbackEmail": {
+    "description": "Action composing feedback in the user-selected email application."
+  },
   "copyEmailAddress": "Copy email address",
+  "@copyEmailAddress": {
+    "description": "Action copying the support email address to the clipboard."
+  },
   "emailAddressCopied": "Email address copied",
+  "@emailAddressCopied": {
+    "description": "Confirmation after the support email address is copied."
+  },
   "openExternalFailed": "Could not open an app. Check your browser or email app and try again.",
+  "@openExternalFailed": {
+    "description": "Error when Android cannot open an external web or email application."
+  },
   "@@locale": "en",
   "label1080pFhd": "1080p FHD",
   "@label1080pFhd": {
@@ -236,7 +320,7 @@
   "@cancelOperation": {
     "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
   },
-  "captureEditingDraftsAndExportsRunLocally": "Capture, editing, drafts, exports and offline subtitles run on your device. Speech models need a download or local import; transcription does not upload your media. Sharing opens an Android chooser; you decide the receiving app. A support report includes only your text, optional selected attachment and device details if you explicitly enable them.",
+  "captureEditingDraftsAndExportsRunLocally": "Media processing stays on your device. No analytics are enabled. Livestream sends your selected screen and audio to the destination you start. Sharing opens the Android chooser. Speech models can be downloaded or imported. Transcription stays on your device. Support reports include only your text, selected attachment and device details you enable.",
   "@captureEditingDraftsAndExportsRunLocally": {
     "description": "Localized P2/P3 help, sticker name or lossless subtitle export validation."
   },
@@ -960,7 +1044,7 @@
   "@mediaOperationFailed": {
     "description": "P2/P3 interface copy. Origin: lib/features/media/media_repository.dart. Keep product names, technical identifiers and units intact."
   },
-  "mediaProcessingStaysOnYourDeviceNo": "Media processing stays on your device. No analytics, AI upload or livestream is enabled. Only explicit sharing hands content to another app.",
+  "mediaProcessingStaysOnYourDeviceNo": "Media processing stays on your device. No analytics are enabled. Livestream sends your selected screen and audio to the destination you start. Sharing opens the Android chooser.",
   "@mediaProcessingStaysOnYourDeviceNo": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
   },
@@ -3013,7 +3097,7 @@
   "@speechInterrupted": {
     "description": "Offline speech job state, error or language metadata. No media upload or translation."
   },
-  "speechLowMemory": "Not enough memory. Choose Tiny or a shorter video.",
+  "speechLowMemory": "Not enough memory. Close other apps and try a shorter video.",
   "@speechLowMemory": {
     "description": "Offline speech job state, error or language metadata. No media upload or translation."
   },
@@ -3116,22 +3200,495 @@
     "description": "Real native speech-history persistence failure. Preserve existing data, never imply a successful save."
   },
   "onboardingRecordTitle": "Record Anything",
+  "@onboardingRecordTitle": {
+    "description": "Introduction flow: record title."
+  },
   "onboardingRecordDescription": "Capture your screen in high quality. Choose your audio settings and start recording in just a few taps.",
+  "@onboardingRecordDescription": {
+    "description": "Introduction flow: record description."
+  },
   "onboardingEditTitle": "Edit Your Way",
+  "@onboardingEditTitle": {
+    "description": "Introduction flow: edit title."
+  },
   "onboardingEditDescription": "Trim videos, add text and drawings, and fine-tune your recordings with powerful editing tools.",
+  "@onboardingEditDescription": {
+    "description": "Introduction flow: edit description."
+  },
   "onboardingSubtitlesTitle": "Smart Subtitles",
+  "@onboardingSubtitlesTitle": {
+    "description": "Introduction flow: subtitles title."
+  },
   "onboardingSubtitlesDescription": "Turn speech into subtitles directly on your device. Customize the text and make your videos easier to follow.",
+  "@onboardingSubtitlesDescription": {
+    "description": "Introduction flow: subtitles description."
+  },
   "onboardingSkip": "Skip",
+  "@onboardingSkip": {
+    "description": "Introduction flow: skip."
+  },
   "onboardingNext": "Next",
+  "@onboardingNext": {
+    "description": "Introduction flow: next."
+  },
   "onboardingBack": "Back",
+  "@onboardingBack": {
+    "description": "Introduction flow: back."
+  },
   "onboardingGetStarted": "Get Started",
+  "@onboardingGetStarted": {
+    "description": "Introduction flow: get started."
+  },
   "onboardingSaveFailed": "Couldn''t save your progress. Try again.",
+  "@onboardingSaveFailed": {
+    "description": "Introduction flow: save failed."
+  },
   "onboardingProgress": "Step {current} of {total}",
   "@onboardingProgress": {
     "description": "Accessible current onboarding page and total page count.",
     "placeholders": {
-      "current": { "type": "String" },
-      "total": { "type": "String" }
+      "current": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
     }
+  },
+  "regionCapture": "Record region",
+  "@regionCapture": {
+    "description": "Region recording selector: regionCapture."
+  },
+  "regionCaptureHint": "Adjust the highlighted area. After approval, the app minimizes and records that part of the screen. Rotation stops and saves the recording.",
+  "@regionCaptureHint": {
+    "description": "Region recording selector: regionCaptureHint."
+  },
+  "regionWidth": "Width",
+  "@regionWidth": {
+    "description": "Region recording selector: regionWidth."
+  },
+  "regionHeight": "Height",
+  "@regionHeight": {
+    "description": "Region recording selector: regionHeight."
+  },
+  "regionUnavailable": "Screen dimensions are unavailable. Go back and try again.",
+  "@regionUnavailable": {
+    "description": "Region recording selector: regionUnavailable."
+  },
+  "screenshotDelay": "Screenshot delay",
+  "@screenshotDelay": {
+    "description": "Screenshot delay preference or action label."
+  },
+  "screenshotDelaySummary": "Screenshot minimizes the app after approval · {seconds}s delay.",
+  "@screenshotDelaySummary": {
+    "description": "Screenshot delay preference or action label.",
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "screenshotWithDelay": "Screenshot · {seconds}s delay",
+  "@screenshotWithDelay": {
+    "description": "Screenshot delay preference or action label.",
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "captureRecordingMode": "Recording mode",
+  "@captureRecordingMode": {
+    "description": "Recording setup or native capture control: Recording mode."
+  },
+  "captureResolution": "Resolution",
+  "@captureResolution": {
+    "description": "Recording setup or native capture control: Resolution."
+  },
+  "captureTargetFps": "Target FPS",
+  "@captureTargetFps": {
+    "description": "Recording setup or native capture control: Target FPS."
+  },
+  "captureBitrate": "Bitrate",
+  "@captureBitrate": {
+    "description": "Recording setup or native capture control: Bitrate."
+  },
+  "captureVideoCodec": "Video codec",
+  "@captureVideoCodec": {
+    "description": "Recording setup or native capture control: Video codec."
+  },
+  "captureOrientation": "Orientation",
+  "@captureOrientation": {
+    "description": "Recording setup or native capture control: Orientation."
+  },
+  "captureAudioSource": "Audio source",
+  "@captureAudioSource": {
+    "description": "Recording setup or native capture control: Audio source."
+  },
+  "capturePreStartCountdown": "Pre-start countdown",
+  "@capturePreStartCountdown": {
+    "description": "Recording setup or native capture control: Pre-start countdown."
+  },
+  "captureFacecam": "Facecam",
+  "@captureFacecam": {
+    "description": "Recording setup or native capture control: Facecam."
+  },
+  "captureMicrophoneNoiseReduction": "Microphone noise reduction",
+  "@captureMicrophoneNoiseReduction": {
+    "description": "Recording setup or native capture control: Microphone noise reduction."
+  },
+  "captureInternalAudioVolume": "Internal audio volume",
+  "@captureInternalAudioVolume": {
+    "description": "Recording setup or native capture control: Internal audio volume."
+  },
+  "captureMicrophoneVolume": "Microphone volume",
+  "@captureMicrophoneVolume": {
+    "description": "Recording setup or native capture control: Microphone volume."
+  },
+  "captureAutoStop": "Auto-stop",
+  "@captureAutoStop": {
+    "description": "Recording setup or native capture control: Auto-stop."
+  },
+  "captureAutoStopDuration": "Auto-stop duration",
+  "@captureAutoStopDuration": {
+    "description": "Recording setup or native capture control: Auto-stop duration."
+  },
+  "captureSeconds": "Seconds",
+  "@captureSeconds": {
+    "description": "Recording setup or native capture control: Seconds."
+  },
+  "captureNoLimit": "No limit",
+  "@captureNoLimit": {
+    "description": "Recording setup or native capture control: No limit."
+  },
+  "captureBasic": "Basic",
+  "@captureBasic": {
+    "description": "Recording setup or native capture control: Basic."
+  },
+  "captureAdvanced": "Advanced",
+  "@captureAdvanced": {
+    "description": "Recording setup or native capture control: Advanced."
+  },
+  "captureResetDefaults": "Reset defaults",
+  "@captureResetDefaults": {
+    "description": "Recording setup or native capture control: Reset defaults."
+  },
+  "captureCloseSetup": "Close setup",
+  "@captureCloseSetup": {
+    "description": "Recording setup or native capture control: Close setup."
+  },
+  "captureSessionAlreadyActive": "Session already active",
+  "@captureSessionAlreadyActive": {
+    "description": "Recording setup or native capture control: Session already active."
+  },
+  "captureStartRecording": "Start Recording",
+  "@captureStartRecording": {
+    "description": "Recording setup or native capture control: Start Recording."
+  },
+  "captureNoFrontCameraAvailable": "No front camera available",
+  "@captureNoFrontCameraAvailable": {
+    "description": "Recording setup or native capture control: No front camera available."
+  },
+  "capturePause": "Pause",
+  "@capturePause": {
+    "description": "Recording setup or native capture control: Pause."
+  },
+  "captureResume": "Resume",
+  "@captureResume": {
+    "description": "Recording setup or native capture control: Resume."
+  },
+  "captureStop": "Stop",
+  "@captureStop": {
+    "description": "Recording setup or native capture control: Stop."
+  },
+  "capturePaused": "Paused",
+  "@capturePaused": {
+    "description": "Recording setup or native capture control: Paused."
+  },
+  "captureScreenshotSaved": "Screenshot saved",
+  "@captureScreenshotSaved": {
+    "description": "Recording setup or native capture control: Screenshot saved."
+  },
+  "captureVideoSaved": "Video saved",
+  "@captureVideoSaved": {
+    "description": "Recording setup or native capture control: Video saved."
+  },
+  "captureSaving": "Saving",
+  "@captureSaving": {
+    "description": "Recording setup or native capture control: Saving."
+  },
+  "captureDrawOnScreen": "Draw on screen",
+  "@captureDrawOnScreen": {
+    "description": "Recording setup or native capture control: Draw on screen."
+  },
+  "captureExitDrawing": "Exit drawing",
+  "@captureExitDrawing": {
+    "description": "Recording setup or native capture control: Exit drawing."
+  },
+  "captureUndoDrawing": "Undo drawing",
+  "@captureUndoDrawing": {
+    "description": "Recording setup or native capture control: Undo drawing."
+  },
+  "captureDrawingColorAndWidth": "Drawing color and width",
+  "@captureDrawingColorAndWidth": {
+    "description": "Recording setup or native capture control: Drawing color and width."
+  },
+  "captureFacecamOptions": "Facecam options",
+  "@captureFacecamOptions": {
+    "description": "Recording setup or native capture control: Facecam options."
+  },
+  "captureSwitchCamera": "Switch camera",
+  "@captureSwitchCamera": {
+    "description": "Recording setup or native capture control: Switch camera."
+  },
+  "captureShowControlsInVideo": "Show controls in video",
+  "@captureShowControlsInVideo": {
+    "description": "Recording setup or native capture control: Show controls in video."
+  },
+  "captureHideControls": "Hide controls",
+  "@captureHideControls": {
+    "description": "Recording setup or native capture control: Hide controls."
+  },
+  "captureSepia": "Sepia",
+  "@captureSepia": {
+    "description": "Recording setup or native capture control: Sepia."
+  },
+  "captureOrange": "Orange",
+  "@captureOrange": {
+    "description": "Recording setup or native capture control: Orange."
+  },
+  "liveTitle": "Livestream",
+  "@liveTitle": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveDisclosure": "Your selected screen and audio are sent to this destination. A local video is also saved. RTMP is unencrypted; use RTMPS when available.",
+  "@liveDisclosure": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveServerLabel": "Server URL",
+  "@liveServerLabel": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveKeyLabel": "Stream key",
+  "@liveKeyLabel": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveShowKey": "Show stream key",
+  "@liveShowKey": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveHideKey": "Hide stream key",
+  "@liveHideKey": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveServerInvalid": "Enter an RTMP or RTMPS server URL with an application path.",
+  "@liveServerInvalid": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveKeyInvalid": "Enter a stream key without spaces.",
+  "@liveKeyInvalid": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveDestinationName": "Destination name",
+  "@liveDestinationName": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveSaveInfo": "Saving stores the destination encrypted on this device. Nothing starts automatically.",
+  "@liveSaveInfo": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveSaveDestination": "Save destination",
+  "@liveSaveDestination": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveForgetDestination": "Forget destination",
+  "@liveForgetDestination": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveForgetTitle": "Forget saved destination?",
+  "@liveForgetTitle": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveForgetWarning": "This removes only the saved livestream destination and clears these fields. Your recordings and projects are kept.",
+  "@liveForgetWarning": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveNameInvalid": "Enter a destination name of up to 80 characters.",
+  "@liveNameInvalid": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveSaved": "Destination saved on this device.",
+  "@liveSaved": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveSaveFailed": "Could not save the destination. The previous saved destination was kept.",
+  "@liveSaveFailed": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveLoadFailed": "Could not load the saved destination. Retry, or forget it before saving a new one.",
+  "@liveLoadFailed": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveForgotten": "Saved destination removed.",
+  "@liveForgotten": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveForgetFailed": "Could not remove the saved destination. Try again.",
+  "@liveForgetFailed": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveWaitingPermission": "Waiting for screen sharing permission",
+  "@liveWaitingPermission": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveConnecting": "Connecting to livestream",
+  "@liveConnecting": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveConnected": "Live connected",
+  "@liveConnected": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveReconnecting": "Reconnecting to livestream",
+  "@liveReconnecting": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveConnectionFailed": "Connection failed. Check the destination and network.",
+  "@liveConnectionFailed": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveAuthenticationFailed": "Stream key rejected. Check the destination settings.",
+  "@liveAuthenticationFailed": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveConfigurationFailed": "Could not start the livestream. Check recording settings.",
+  "@liveConfigurationFailed": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveInterrupted": "Livestream interrupted. Enter the destination and start again.",
+  "@liveInterrupted": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveCancelled": "Livestream cancelled",
+  "@liveCancelled": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveEnded": "Livestream ended",
+  "@liveEnded": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveUnavailable": "Livestream status is unavailable. Try reopening this screen.",
+  "@liveUnavailable": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveReady": "Ready to livestream",
+  "@liveReady": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveNeedsAvc": "Choose H264 in recording settings before livestreaming.",
+  "@liveNeedsAvc": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "livePaused": "Recording paused. Viewers see the last frame until you resume.",
+  "@livePaused": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveEnd": "End livestream",
+  "@liveEnd": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveStarting": "Starting livestream",
+  "@liveStarting": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "liveStart": "Start livestream",
+  "@liveStart": {
+    "description": "Livestream destination, consent, transport status or encrypted local storage. Keep RTMP, RTMPS, H264 and URL intact. Linguistic review pending."
+  },
+  "captureReady": "Ready",
+  "@captureReady": {
+    "description": "Root recording status or countdown. No persisted settings values change."
+  },
+  "captureRecorderTitle": "Screen recorder",
+  "@captureRecorderTitle": {
+    "description": "Root recording status or countdown. No persisted settings values change."
+  },
+  "capturePreparing": "Preparing",
+  "@capturePreparing": {
+    "description": "Root recording status or countdown. No persisted settings values change."
+  },
+  "captureAllowScreen": "Allow screen capture",
+  "@captureAllowScreen": {
+    "description": "Root recording status or countdown. No persisted settings values change."
+  },
+  "captureStarting": "Starting",
+  "@captureStarting": {
+    "description": "Root recording status or countdown. No persisted settings values change."
+  },
+  "captureStopping": "Stopping",
+  "@captureStopping": {
+    "description": "Root recording status or countdown. No persisted settings values change."
+  },
+  "captureError": "Error",
+  "@captureError": {
+    "description": "Root recording status or countdown. No persisted settings values change."
+  },
+  "captureAllowScreenshot": "Allow screenshot",
+  "@captureAllowScreenshot": {
+    "description": "Root recording status or countdown. No persisted settings values change."
+  },
+  "captureSavingScreenshot": "Saving screenshot",
+  "@captureSavingScreenshot": {
+    "description": "Root recording status or countdown. No persisted settings values change."
+  },
+  "captureCapturingScreenshot": "Capturing screenshot",
+  "@captureCapturingScreenshot": {
+    "description": "Root recording status or countdown. No persisted settings values change."
+  },
+  "captureStartsIn": "Starting in {seconds}s",
+  "@captureStartsIn": {
+    "description": "Root recording status or countdown. No persisted settings values change.",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "captureScreenshotIn": "Screenshot in {seconds}s",
+  "@captureScreenshotIn": {
+    "description": "Root recording status or countdown. No persisted settings values change.",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "photoDragSticker": "Drag across the photo to size and place the sticker.",
+  "@photoDragSticker": {
+    "description": "Photo editor instruction for a colored vector sticker. Drag sets its bounds; source is unchanged."
+  },
+  "captureProtectedAudioNotice": "Protected audio may be silent. Android may ask for audio access.",
+  "captureUnsupportedDevice": "Not supported by this device",
+  "captureTouchGuidance": "Touch-indicator guidance",
+  "captureTouchGuidanceBody": "To show taps, enable Show taps manually in Android Developer options, if available. 3HRecorder cannot observe touches in other apps. The system indicator may appear in full-screen recordings. Turn it off afterward if you no longer need it.",
+  "captureDurationHint": "1–86400 seconds, or 0 for no limit.",
+  "captureDurationInvalid": "Enter 0–86400 seconds",
+  "@captureProtectedAudioNotice": {
+    "description": "Recording settings notice or bounded auto-stop validation. Presentation only."
+  },
+  "@captureUnsupportedDevice": {
+    "description": "Recording settings notice or bounded auto-stop validation. Presentation only."
+  },
+  "@captureTouchGuidance": {
+    "description": "Recording settings notice or bounded auto-stop validation. Presentation only."
+  },
+  "@captureTouchGuidanceBody": {
+    "description": "Recording settings notice or bounded auto-stop validation. Presentation only."
+  },
+  "@captureDurationHint": {
+    "description": "Recording settings notice or bounded auto-stop validation. Presentation only."
+  },
+  "@captureDurationInvalid": {
+    "description": "Recording settings notice or bounded auto-stop validation. Presentation only."
   }
 }

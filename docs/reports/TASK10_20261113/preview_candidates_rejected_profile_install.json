@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "13a15ca7f4b6be3e0de4597c3a0db7a784d8efc80c218622f3f84867b87ceb98",
+  "apkBytes": 62044127,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Original viewer retained after unhelpful candidates; verify4original navigation cases",
+  "freeBytes": {
+    "C:/": 16144011264,
+    "D:/": 22908465152
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "filesStatus": "PASS",
+  "images": [
+    {
+      "file": "photo_annotation_gate1.png",
+      "bytes": 1134035,
+      "fullDecode": "PASS",
+      "width": 922,
+      "height": 2048,
+      "redPenPixels": 3222,
+      "yellowShapeTextPixels": 8948
+    },
+    {
+      "file": "photo_annotation_gate1.jpg",
+      "bytes": 236076,
+      "fullDecode": "PASS",
+      "width": 922,
+      "height": 2048,
+      "redPenPixels": 3361,
+      "yellowShapeTextPixels": 7074
+    }
+  ],
+  "jpegAgainstPngPsnrDb": 40.1342550254209,
+  "sourceByteExact": true,
+  "undoRedoAndKeepEditingExercised": true,
+  "previewExportParity": "FAIL_REPRODUCED",
+  "annotationRoiBeforeFixMae": 15.014266666666666,
+  "cause": "Viewport pixel minimum16 text/2 stroke/8 arrow caused relative-size and wrapping differences; scoped repair under verification",
+  "nativeEvidence": [
+    "photo_annotation_gate1_before_save.png",
+    "photo_annotation_gate1.png"
+  ],
+  "scope": "real main PNG and JPEG copies; no linguistic/device/EXIF acceptance"
+}

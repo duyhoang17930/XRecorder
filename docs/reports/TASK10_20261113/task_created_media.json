@@ -1,0 +1,721 @@
+[
+  {
+    "uri": "content://media/external/video/media/46",
+    "sessionId": "85eff991-2db9-48c8-aada-647a45f12608",
+    "local": "task10_recording_mute.mp4",
+    "bytes": 1266397
+  },
+  {
+    "uri": "content://media/external/images/media/47",
+    "sessionId": "c7cccf4d-8f79-4e24-b5ae-79fbc884e539",
+    "local": "task10_screenshot.png",
+    "bytes": 1388049,
+    "restoredUri": "content://media/external/images/media/51",
+    "originalState": "task fixture trashed then restored to new URI"
+  },
+  {
+    "uri": "content://media/external/images/media/48",
+    "local": "task10_photo_rotated.png",
+    "bytes": 1161041,
+    "from": "content://media/external/images/media/47"
+  },
+  {
+    "uri": "content://media/external/video/media/49",
+    "local": "task10_edited_export.mp4",
+    "bytes": 1540950,
+    "projectId": "project_1794576708435609"
+  },
+  {
+    "uri": "content://media/external/video/media/50",
+    "sessionId": "cf1507ee-8c55-4409-8557-b4ba02744189",
+    "local": "task10_interrupted_input.mp4",
+    "bytes": 971,
+    "state": "pending/unpublished, intentionally retained for recovery"
+  },
+  {
+    "uri": "content://media/external/video/media/52",
+    "sessionId": "6642492a-01bf-4668-becb-d9f27540423d",
+    "local": "task10_recording_microphone.mp4",
+    "bytes": 1329391,
+    "nativeElapsedMs": 12127
+  },
+  {
+    "uri": "content://media/external/video/media/53",
+    "case": "recording-pending",
+    "sessionId": "b873d459-c017-4778-838d-4556961860b7",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_pending.json"
+  },
+  {
+    "uri": "content://media/external/video/media/54",
+    "case": "recording-partial",
+    "sessionId": "d8f95ec2-3e38-4a67-8681-7716bb91d767",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_partial.json"
+  },
+  {
+    "uri": "content://media/external/images/media/55",
+    "case": "recording-png",
+    "sessionId": "7edef883-150f-46c3-88d4-df89676bee4c",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_png.json"
+  },
+  {
+    "uri": "content://media/external/video/media/56",
+    "case": "recording-remux",
+    "sessionId": "f3a4657a-4514-4ec6-a89e-0193c386ef3d",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_remux.json"
+  },
+  {
+    "uri": "content://media/external/video/media/57",
+    "case": "recording-remux",
+    "sessionId": "f3a4657a-4514-4ec6-a89e-0193c386ef3d",
+    "source": "production recovered output",
+    "evidence": "r5_first_recording_remux.json"
+  },
+  {
+    "uri": "content://media/external/video/media/58",
+    "case": "recording-remux-retry",
+    "sessionId": "fdf4eb82-3a7d-498e-b6af-153d3c356d80",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_remux_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/59",
+    "case": "recording-remux-retry",
+    "sessionId": "fdf4eb82-3a7d-498e-b6af-153d3c356d80",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_remux_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/60",
+    "case": "recording-bad-audio",
+    "sessionId": "f987c9c3-5c52-4b40-bbd4-32a6da0bf5e6",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_bad_audio.json"
+  },
+  {
+    "uri": "content://media/external/video/media/61",
+    "case": "recording-wrong-session",
+    "sessionId": "bb846bd3-7747-4e1b-906a-a483890b6875",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_wrong_session.json"
+  },
+  {
+    "uri": "content://media/external/video/media/62",
+    "case": "recording-session-isolation",
+    "sessionId": "9c3b320c-2754-4e2d-9e87-161f1793e91c",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_session_isolation.json"
+  },
+  {
+    "uri": "content://media/external/video/media/63",
+    "case": "recording-published-retry",
+    "sessionId": "b6042f1a-5bea-4c13-8e96-a8b4b0c71225",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_published_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/64",
+    "case": "recording-published-retry",
+    "sessionId": "b6042f1a-5bea-4c13-8e96-a8b4b0c71225",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_first_recording_published_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/65",
+    "case": "region-red",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_first_region_red.json"
+  },
+  {
+    "uri": "content://media/external/video/media/66",
+    "case": "region-green",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_first_region_green.json"
+  },
+  {
+    "uri": "content://media/external/video/media/67",
+    "case": "region-blue",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_first_region_blue.json"
+  },
+  {
+    "uri": "content://media/external/video/media/68",
+    "case": "region-yellow",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_first_region_yellow.json"
+  },
+  {
+    "uri": "content://media/external/video/media/69",
+    "case": "region-portrait",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_first_region_portrait.json"
+  },
+  {
+    "uri": "content://media/external/video/media/70",
+    "case": "region-red",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_deferred_region_red.json"
+  },
+  {
+    "uri": "content://media/external/video/media/71",
+    "case": "region-red",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_no_repeat_region_red.json"
+  },
+  {
+    "uri": "content://media/external/video/media/72",
+    "case": "region-red",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_registered_region_red.json"
+  },
+  {
+    "uri": "content://media/external/video/media/73",
+    "case": "region-green",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_registered_region_green.json"
+  },
+  {
+    "uri": "content://media/external/video/media/74",
+    "case": "region-blue",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_registered_region_blue.json"
+  },
+  {
+    "uri": "content://media/external/video/media/75",
+    "case": "region-yellow",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_registered_region_yellow.json"
+  },
+  {
+    "uri": "content://media/external/video/media/76",
+    "case": "region-portrait",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_registered_region_portrait.json"
+  },
+  {
+    "uri": "content://media/external/video/media/77",
+    "case": "region-red",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_final_region_red.json"
+  },
+  {
+    "uri": "content://media/external/video/media/78",
+    "case": "region-green",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_final_region_green.json"
+  },
+  {
+    "uri": "content://media/external/video/media/79",
+    "case": "region-blue",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_final_region_blue.json"
+  },
+  {
+    "uri": "content://media/external/video/media/80",
+    "case": "region-yellow",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_final_region_yellow.json"
+  },
+  {
+    "uri": "content://media/external/video/media/81",
+    "case": "region-portrait",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_final_region_portrait.json"
+  },
+  {
+    "uri": "content://media/external/video/media/82",
+    "source": "real main region Mixed Stream recording",
+    "evidence": "r4_main_validation.json"
+  },
+  {
+    "uri": "content://media/external/video/media/83",
+    "source": "main Facecam capture before toolbar integration",
+    "evidence": "r6_initial_facecam_final.xml"
+  },
+  {
+    "uri": "content://media/external/video/media/84",
+    "source": "r4_rotation",
+    "evidence": "r4_rotation_foreground_journal.xml"
+  },
+  {
+    "uri": "content://media/external/video/media/85",
+    "source": "r6_clipped_toolbar",
+    "evidence": "r6_clipped_toolbar_final.xml"
+  },
+  {
+    "uri": "content://media/external/video/media/86",
+    "source": "floating drawing camera switch pause resume drag collapse expand stop; Clear/resize defects found",
+    "evidence": "r6_fixed_final_settled.xml"
+  },
+  {
+    "uri": "content://media/external/video/media/87",
+    "source": "final R6 main acceptance",
+    "evidence": "r6_final_journal.xml"
+  },
+  {
+    "uri": "content://media/external/video/media/88",
+    "source": "R6 main acceptance ready",
+    "evidence": "r6_ready_journal.xml"
+  },
+  {
+    "uri": "content://media/external/video/media/89",
+    "source": "R6 main acceptance labels",
+    "evidence": "r6_labels_journal.xml"
+  },
+  {
+    "uri": "content://media/external/images/media/90",
+    "source": "configured5s screenshot",
+    "evidence": "shot5_timeline.json"
+  },
+  {
+    "uri": "content://media/external/images/media/91",
+    "source": "configured1s screenshot",
+    "evidence": "shot1_timeline.json"
+  },
+  {
+    "uri": "content://media/external/images/media/92",
+    "source": "10s screenshot completed after UIAutomator idle timeout; cancellation not exercised",
+    "evidence": "shot10_cancel_observed_journal.xml"
+  },
+  {
+    "uri": "content://media/external/images/media/93",
+    "source": "10s screenshot; shade collapsed by consent/minimize transition before Cancel tap",
+    "evidence": "shot10_pixels_missed_journal.xml"
+  },
+  {
+    "uri": "content://media/external/images/media/94",
+    "source": "10s screenshot; notification cancellation not reached",
+    "evidence": "shot10_settled_missed_journal.xml"
+  },
+  {
+    "uri": "content://media/external/video/media/96",
+    "case": "recording-audio-lead",
+    "sessionId": "2d360d9e-983d-46cd-ae19-40cfd0818309",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_before_recording_audio_lead.json"
+  },
+  {
+    "uri": "content://media/external/video/media/97",
+    "case": "recording-audio-lead",
+    "sessionId": "150bd9b9-b802-44cd-bb52-d9b13e0ac6e0",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_audio_lead.json"
+  },
+  {
+    "uri": "content://media/external/video/media/98",
+    "case": "recording-audio-lead",
+    "sessionId": "150bd9b9-b802-44cd-bb52-d9b13e0ac6e0",
+    "source": "production recovery output",
+    "evidence": "r5_lead_after_recording_audio_lead.json"
+  },
+  {
+    "uri": "content://media/external/video/media/99",
+    "case": "recording-pending",
+    "sessionId": "6419aadc-a011-4a42-9071-ba94bdade9c3",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_pending.json"
+  },
+  {
+    "uri": "content://media/external/video/media/100",
+    "case": "recording-partial",
+    "sessionId": "0e2a83a5-7512-4218-b41f-0a1dab8c326b",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_partial.json"
+  },
+  {
+    "uri": "content://media/external/images/media/101",
+    "case": "recording-png",
+    "sessionId": "ac45a0f3-08b4-491c-8bc4-cc5efa1416ac",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_png.json"
+  },
+  {
+    "uri": "content://media/external/video/media/102",
+    "case": "recording-remux",
+    "sessionId": "744043ad-a379-4b54-ace8-0ec49d3671b1",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_remux.json"
+  },
+  {
+    "uri": "content://media/external/video/media/103",
+    "case": "recording-remux",
+    "sessionId": "744043ad-a379-4b54-ace8-0ec49d3671b1",
+    "source": "production recovery output",
+    "evidence": "r5_lead_after_recording_remux.json"
+  },
+  {
+    "uri": "content://media/external/video/media/104",
+    "case": "recording-remux-retry",
+    "sessionId": "9b82270e-ef86-4c94-bab2-cf39c22cd538",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_remux_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/105",
+    "case": "recording-remux-retry",
+    "sessionId": "9b82270e-ef86-4c94-bab2-cf39c22cd538",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_remux_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/106",
+    "case": "recording-bad-audio",
+    "sessionId": "4e1e2328-004b-4200-860b-04d0a47de8ef",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_bad_audio.json"
+  },
+  {
+    "uri": "content://media/external/video/media/107",
+    "case": "recording-wrong-session",
+    "sessionId": "04e78658-e5dc-4db0-8f48-6d7433791ce7",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_wrong_session.json"
+  },
+  {
+    "uri": "content://media/external/video/media/108",
+    "case": "recording-session-isolation",
+    "sessionId": "6fb906e7-6e16-43a5-9140-b6795db0d2cd",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_session_isolation.json"
+  },
+  {
+    "uri": "content://media/external/video/media/109",
+    "case": "recording-published-retry",
+    "sessionId": "daade024-864d-4e5a-acde-486d002a005b",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_published_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/110",
+    "case": "recording-published-retry",
+    "sessionId": "daade024-864d-4e5a-acde-486d002a005b",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_lead_after_recording_published_retry.json"
+  },
+  {
+    "uri": "content://media/external/images/media/95",
+    "source": "10s screenshot from first in-app Cancel automation while activity was still animating",
+    "evidence": "shot10_cancel_inapp_visible.png",
+    "metadata": "Row: 0 _display_name=Screenshot_1794597259478.png, _size=260009, owner_package_name=com.xrecorder.xrecorder, date_added=1794597259, width=1080, height=2400\r\n"
+  },
+  {
+    "uri": "content://media/external/video/media/115",
+    "source": "main app real Tiny ASR -> split cues -> MP4 burn-in export",
+    "projectId": "project_1794600055303550",
+    "evidence": "asr_burnin_export_jobs.json",
+    "bytes": 582195,
+    "sha256": "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f"
+  },
+  {
+    "uri": "content://media/external/video/media/117",
+    "source": "real main livestream receiver-timeout automatic local backup",
+    "sessionId": "fd490a74-60bd-47aa-b5e8-fa1bb68a1c14",
+    "bytes": 1796639,
+    "sha256": "225c4874a47ac330bca6e640d618a4dcac749b715853ae57a27de07dc28979b2",
+    "evidence": "live_main1_final_journal.xml"
+  },
+  {
+    "uri": "content://media/external/video/media/118",
+    "source": "real main screen livestream local backup",
+    "sessionId": "af331d9e-7051-49f1-adae-70a9a677a075",
+    "bytes": 1734723,
+    "sha256": "6ac885f5c1d566b5df71b9927abd8482b41447f4fe91c2df914f0b6779928943",
+    "evidence": "live_main3_final_journal.xml"
+  },
+  {
+    "uri": "content://media/external/video/media/119",
+    "case": "recording-audio-lead",
+    "sessionId": "edfccee0-94c3-402a-a09a-f870076d4068",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_audio_lead.json"
+  },
+  {
+    "uri": "content://media/external/video/media/120",
+    "case": "recording-audio-lead",
+    "sessionId": "edfccee0-94c3-402a-a09a-f870076d4068",
+    "source": "production recovery output",
+    "evidence": "r5_live_regression_recording_audio_lead.json"
+  },
+  {
+    "uri": "content://media/external/video/media/121",
+    "case": "recording-pending",
+    "sessionId": "b780f666-c0c5-48d6-910b-c25901ffc893",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_pending.json"
+  },
+  {
+    "uri": "content://media/external/video/media/122",
+    "case": "recording-partial",
+    "sessionId": "f017c23e-8e6b-40fc-8d8e-f5773467df91",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_partial.json"
+  },
+  {
+    "uri": "content://media/external/images/media/123",
+    "case": "recording-png",
+    "sessionId": "eba9a7d7-000b-419d-ae37-2fcc074a19d2",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_png.json"
+  },
+  {
+    "uri": "content://media/external/video/media/124",
+    "case": "recording-remux",
+    "sessionId": "2f5c01eb-ae1e-4673-b4fb-1782c44b3289",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_remux.json"
+  },
+  {
+    "uri": "content://media/external/video/media/125",
+    "case": "recording-remux",
+    "sessionId": "2f5c01eb-ae1e-4673-b4fb-1782c44b3289",
+    "source": "production recovery output",
+    "evidence": "r5_live_regression_recording_remux.json"
+  },
+  {
+    "uri": "content://media/external/video/media/126",
+    "case": "recording-retry",
+    "sessionId": "271e27dc-1d81-4a60-b890-30d6e34d04c8",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/127",
+    "case": "recording-bad-audio",
+    "sessionId": "efe64662-3529-446a-9e5d-4b12a848f1b5",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_bad_audio.json"
+  },
+  {
+    "uri": "content://media/external/video/media/128",
+    "case": "recording-wrong-session",
+    "sessionId": "549e592e-9286-4f68-9f72-8f8e6182311f",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_wrong_session.json"
+  },
+  {
+    "uri": "content://media/external/video/media/129",
+    "case": "recording-session-isolation",
+    "sessionId": "c1977aa2-521e-4321-82ab-88e5bcec9f01",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_session_isolation.json"
+  },
+  {
+    "uri": "content://media/external/video/media/130",
+    "case": "recording-published-retry",
+    "sessionId": "165ce6a0-01e7-4940-9ef6-586443ecfb7c",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_published_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/131",
+    "case": "recording-published-retry",
+    "sessionId": "165ce6a0-01e7-4940-9ef6-586443ecfb7c",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_regression_recording_published_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/132",
+    "case": "recording-remux-retry",
+    "sessionId": "d9923795-aea6-40a3-9a48-11f60e14839d",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_retry_verified_recording_remux_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/133",
+    "case": "recording-remux-retry",
+    "sessionId": "d9923795-aea6-40a3-9a48-11f60e14839d",
+    "source": "isolated native R5 fixture",
+    "evidence": "r5_live_retry_verified_recording_remux_retry.json"
+  },
+  {
+    "uri": "content://media/external/video/media/134",
+    "case": "region-red",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_live_regression_region_red.json"
+  },
+  {
+    "uri": "content://media/external/video/media/135",
+    "case": "region-green",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_live_regression_region_green.json"
+  },
+  {
+    "uri": "content://media/external/video/media/136",
+    "case": "region-blue",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_live_regression_region_blue.json"
+  },
+  {
+    "uri": "content://media/external/video/media/137",
+    "case": "region-yellow",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_live_regression_region_yellow.json"
+  },
+  {
+    "uri": "content://media/external/video/media/138",
+    "case": "region-portrait",
+    "sessionId": null,
+    "source": "production region output",
+    "evidence": "r4_live_regression_region_portrait.json"
+  },
+  {
+    "uri": "content://media/external/video/media/143",
+    "case": "editor_audio_baseline",
+    "sessionId": null,
+    "source": "TASK10 audio gate new fixture",
+    "evidence": "editor_audio_gate1_media_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/144",
+    "case": "editor_audio_eightTrackMix",
+    "sessionId": null,
+    "source": "TASK10 audio gate new fixture",
+    "evidence": "editor_audio_gate1_media_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/145",
+    "case": "main_editor_mp4",
+    "sessionId": null,
+    "source": "TASK10 trimmed duplicate eight-track copy",
+    "evidence": "editor_audio_gate1_ui_export_jobs.json",
+    "currentState": "moved_to_task_saf_folder",
+    "currentUri": "content://com.android.externalstorage.documents/tree/primary%3ADownload%2FTASK10_20261113/document/primary%3ADownload%2FTASK10_20261113%2F3H_28264ed6_Edited_5e429845-a734-463d-97b4-9bb067033c80.mp4",
+    "evidenceAfterMove": "p2_move_validation.json"
+  },
+  {
+    "uri": "content://media/external/images/media/146",
+    "case": "main_editor_gif",
+    "sessionId": null,
+    "source": "TASK10 trimmed duplicate eight-track copy",
+    "evidence": "editor_audio_gate1_ui_export_jobs.json"
+  },
+  {
+    "uri": "content://media/external/images/media/148",
+    "case": "photo_annotation_png",
+    "source": "task screenshot91, pen/rectangle/text",
+    "evidence": "photo_annotation_gate1_saved_png.xml"
+  },
+  {
+    "uri": "content://media/external/images/media/149",
+    "case": "photo_annotation_jpeg",
+    "source": "new task annotated PNG",
+    "evidence": "photo_annotation_gate1_saved_jpeg.xml"
+  },
+  {
+    "uri": "content://media/external/images/media/150",
+    "case": "photo_stickers_and_parity",
+    "source": "content://media/external/images/media/91",
+    "evidence": "photo_parity_fixed_ui_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/151",
+    "sessionId": "8f931e2e-ab31-45db-b1b8-cb33da34cebe",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio3_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/152",
+    "sessionId": "f9df4fc9-208a-4a94-a3ad-0b8e54026626",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio4_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/153",
+    "sessionId": "265d3839-d593-49ac-9640-80c2cb45c391",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio5_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/154",
+    "sessionId": "2b3e7fea-9e62-4011-b2ee-c885ffa8f06a",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio8_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/155",
+    "case": "recording_to_editor_asr_burnin_export",
+    "projectId": "project_1794642438390083",
+    "jobId": "e7c0283b-d7a9-48f0-9152-2d4b517ce5bf",
+    "bytes": 2313798,
+    "sha256": "8bed241688e7c75cc5c53de44c112ef8147c26751190d75c270b10b72c146516",
+    "sourceUri": "content://media/external/video/media/154",
+    "evidence": "capture_audio_asr_export_poll1.json"
+  },
+  {
+    "uri": "content://media/external/video/media/156",
+    "sessionId": "973599bb-325c-4e22-bcb4-2af85b3ae4c5",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio9_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/157",
+    "sessionId": "22566e0b-9c96-4552-a6e3-177a20e414f2",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio11_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/158",
+    "sessionId": "aa2090bd-0238-4e7f-b3e7-b04f1439afc5",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio12_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/159",
+    "sessionId": "cc0630a2-480d-405b-b3c4-dad6f7673599",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio13_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/160",
+    "sessionId": "ccb2f276-a760-4f8f-8e03-9f1c2b2cfd61",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio14_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/161",
+    "sessionId": "d070ecfe-9a07-4777-888a-71d8dfd56600",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio15_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/162",
+    "sessionId": "9eff7dd7-d750-434e-b590-3a857e4584bf",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio16_result.json"
+  }
+]

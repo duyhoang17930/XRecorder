@@ -397,7 +397,7 @@ void main() {
         );
         expect(
           find.descendant(of: modal, matching: find.text('Livestream')),
-          findsNothing,
+          findsOneWidget,
         );
         expect(
           find.descendant(of: modal, matching: find.text('Facecam')),

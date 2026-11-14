@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "case": "region-portrait",
+  "uri": "content://media/external/video/media/69",
+  "source": "/data/user/0/com.xrecorder.xrecorder/files/task10_r4_1794581348865_ace2c3f9-f1a2-47e3-984f-e5e0be830720/source.png",
+  "sourceWidth": 480,
+  "sourceHeight": 640,
+  "cropX": 24,
+  "cropY": 40,
+  "width": 200,
+  "height": 160,
+  "liveJournalUnchanged": true
+}

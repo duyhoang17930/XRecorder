@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "failedSessionInputsByteExact": 2,
+  "freeBytes": {
+    "C:/": 16131395584,
+    "D:/": 22893879296
+  },
+  "sourceByteExact": true,
+  "preferencesAndTerminalJournalByteExact": true,
+  "tinySha256Exact": true,
+  "scope": "Bounded monitored data after current navigation/AI QA, not full external media census"
+}

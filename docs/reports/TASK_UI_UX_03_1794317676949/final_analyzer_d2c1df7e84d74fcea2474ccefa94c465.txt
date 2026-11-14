@@ -1,4 +1,0 @@
-flutter analyze --no-pub
-Analyzing XRecorder...                                          
-No issues found! (ran in 3.7s)
-Exit=0

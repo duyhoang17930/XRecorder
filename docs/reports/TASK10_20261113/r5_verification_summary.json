@@ -1,0 +1,20 @@
+{
+  "nativeInstrumentationCases": 9,
+  "passed": 9,
+  "cases": [
+    "recording-bad-audio",
+    "recording-partial",
+    "recording-pending",
+    "recording-png",
+    "recording-published-retry",
+    "recording-remux",
+    "recording-remux-retry",
+    "recording-session-isolation",
+    "recording-wrong-session"
+  ],
+  "hostNativeTests": 144,
+  "liveJournalsUnchanged": true,
+  "sourceInputsUnchanged": true,
+  "realOutputValidation": "r5_real_output_validation.json",
+  "scope": "Production journal + pending publication + durable offset remux on API37 with isolated prefs. Missing-moov without complete checkpoints remains rejected; legacy24-28 OS runtime not yet run."
+}

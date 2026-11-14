@@ -1,0 +1,25 @@
+{
+  "case": "live-refused",
+  "transport": {
+    "state": "connection_failed",
+    "bitrate": 0,
+    "retries": 2,
+    "sentVideoFrames": 0,
+    "sentAudioFrames": 0,
+    "droppedVideoFrames": 0,
+    "droppedAudioFrames": 0,
+    "sentBytes": 0,
+    "queuedBytes": 0
+  },
+  "sourceUri": "content://media/external/video/media/115",
+  "status": "PASS",
+  "states": [
+    "connecting",
+    "connecting",
+    "reconnecting",
+    "reconnecting",
+    "reconnecting",
+    "reconnecting",
+    "connection_failed"
+  ]
+}

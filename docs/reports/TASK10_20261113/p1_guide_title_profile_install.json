@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "f952a5480044bf6feaafde9ad67302f2b8f6e33ea0dd8b244b1cb9b663456e74",
+  "apkBytes": 60288247,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Complete localized touch-guidance dialog title; same recording engine",
+  "freeBytes": {
+    "C:/": 6412578816,
+    "D:/": 24300519424
+  }
+}

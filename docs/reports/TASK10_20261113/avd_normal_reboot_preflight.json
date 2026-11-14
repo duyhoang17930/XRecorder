@@ -1,0 +1,16 @@
+{
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataArchiveSha256": "9fbbd5f59ceb5e535ec2f5cc1cd39398b842c42e71573902bb7f0f3c4e2a408a",
+  "retainedSessions": [
+    "23638af0-586c-44c9-9120-3f9004b58e73",
+    "27f0afcf-91fe-4b88-b3e6-ff6fc23a8a48",
+    "22e31a3a-2007-4f30-8d85-eb47f073bc83"
+  ],
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "diskFreeBytes": {
+    "C:/": 15619395584,
+    "D:/": 24294817792
+  },
+  "reason": "Separate increasing cold-start/UIAutomator instability from source behavior; normal Android reboot only"
+}

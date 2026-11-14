@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "e8537e3ad4bb11577eb2531fabdaaa9d057d2a18145bd452bedb2a042b8d77da",
+  "apkBytes": 60288247,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Dedicated PCM reader blocks on AudioRecord; timeout/Stop contracts retained",
+  "freeBytes": {
+    "C:/": 6393536512,
+    "D:/": 24252391424
+  }
+}

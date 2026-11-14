@@ -1,0 +1,22 @@
+{
+  "scope": "emulated camera source pixels only; physical lens quality and A/V sync not certified",
+  "sourceRectEncoded": [
+    478,
+    214,
+    150,
+    200
+  ],
+  "sampleTimes": [
+    0,
+    1,
+    5
+  ],
+  "cameraRegionMAE": [
+    8.748533333333333,
+    2.7815,
+    7.753466666666666
+  ],
+  "status": "PASS",
+  "fullDecodedFrames": 515,
+  "media": "r6_media/facecam_initial.mp4"
+}

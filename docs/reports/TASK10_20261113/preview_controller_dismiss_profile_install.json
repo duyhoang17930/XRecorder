@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "a66314ffaeec78852ed7db38b96bc42ada21678609b4b6ea025a384e8ff90425",
+  "apkBytes": 62044127,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Dismiss own floating controls before exit; original VideoView + predictive Back callback",
+  "freeBytes": {
+    "C:/": 16140296192,
+    "D:/": 22903095296
+  }
+}

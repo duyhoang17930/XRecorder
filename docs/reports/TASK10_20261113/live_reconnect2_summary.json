@@ -1,0 +1,38 @@
+{
+  "results": [
+    {
+      "case": "live-reconnect",
+      "submittedVideo": 576,
+      "submittedAudio": 375,
+      "transport": {
+        "state": "live",
+        "bitrate": 75254,
+        "retries": 1,
+        "sentVideoFrames": 481,
+        "sentAudioFrames": 313,
+        "droppedVideoFrames": 0,
+        "droppedAudioFrames": 0,
+        "sentBytes": 344735,
+        "queuedBytes": 0
+      },
+      "sourceUri": "content://media/external/video/media/115",
+      "status": "PASS",
+      "states": [
+        "connecting",
+        "connecting",
+        "live",
+        "reconnecting",
+        "reconnecting",
+        "live",
+        "stopped"
+      ]
+    }
+  ],
+  "sourceByteExact": true,
+  "liveJournalByteExact": true,
+  "syntheticKeyAbsentFromLogcat": true,
+  "sourceSha256": "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f",
+  "receiver": "D:\\FAU_App\\XRecorder\\docs\\reports\\TASK10_20261113\\live_reconnect2_media\\rtmp_received.mp4",
+  "untrustedTlsRejected": false,
+  "status": "PASS"
+}

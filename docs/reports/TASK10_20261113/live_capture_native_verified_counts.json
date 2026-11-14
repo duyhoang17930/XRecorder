@@ -1,0 +1,9 @@
+{
+  "tests": 153,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": 27,
+  "buildStatus": "PASS",
+  "buildLog": "live_capture_native_after_l10n_fix.txt"
+}

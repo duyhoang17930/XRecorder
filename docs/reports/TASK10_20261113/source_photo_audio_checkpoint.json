@@ -1,0 +1,489 @@
+{
+  "branch": "main",
+  "head": "4f2d645ff59bbf37daf26aeb988f34984aa6ce05",
+  "count": 96,
+  "files": [
+    {
+      "path": "android/app/build.gradle.kts",
+      "bytes": 5946,
+      "sha256": "5520630dfc708c60022f0eaedb3f41bad237dc6728f4789bc30e2f7e49ed50d9"
+    },
+    {
+      "path": "android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Task07AccessibilityInstrumentation.java",
+      "bytes": 12420,
+      "sha256": "29876dc5f05d27d6d75d035b2445d0ae589a2ba7176ed441b046f36e4c574f0c"
+    },
+    {
+      "path": "android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Task10LiveCaptureAudioInstrumentation.kt",
+      "bytes": 14868,
+      "sha256": "e4ef7589ba456910ffabce3add5cfc2be094c381a0efa5ef179f5dd47cd7d065"
+    },
+    {
+      "path": "android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Task10LiveInstrumentation.kt",
+      "bytes": 5940,
+      "sha256": "3208a67653ab163917cef1aa6985e74a99c8fa52c4381cb80b3312b96e14a526"
+    },
+    {
+      "path": "android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Task10LiveStoreInstrumentation.kt",
+      "bytes": 4310,
+      "sha256": "3e003225e27ff042a44e8e0d6fdebf4c27dc9d41521c640ae6b165b0207f09ef"
+    },
+    {
+      "path": "android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Task10RecordingInstrumentation.kt",
+      "bytes": 10425,
+      "sha256": "d295783e7f26127889ae01596bf3925fba603a511eb1f11ed55a32fbb38b2a86"
+    },
+    {
+      "path": "android/app/src/androidTest/java/com/xrecorder/xrecorder/qa/Task10RegionInstrumentation.kt",
+      "bytes": 5996,
+      "sha256": "408da8f9c2b88abad972d2e6269b860de602fd405a889c9d1f0fdda5dca7625d"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/live/LiveCapture.kt",
+      "bytes": 2816,
+      "sha256": "b80bc408dfd5d57abb7dd258d2a9d63a4478d0af45315fa8a47cd2665df83419"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/live/LiveCaptureState.kt",
+      "bytes": 2081,
+      "sha256": "bc4da3310249223fa9f5c59381e9251a346587c8d12bce6bb068a29efaf4219b"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/live/LiveDestinationStore.kt",
+      "bytes": 4745,
+      "sha256": "bce691279b6947aae36f5642dc8b339ae2b62510f80ea03194bb4b2d98fa44ac"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/live/RtmpEndpoint.kt",
+      "bytes": 1699,
+      "sha256": "bad9e8fd744e5e271709d986e0838bf90c9a6f04b612da07e48016e0755cef49"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/live/RtmpTransport.kt",
+      "bytes": 5255,
+      "sha256": "9c20740a80bec6022f1ce76b60e03b18cb7dbf176c80026fb86ea2b10205700b"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/media/P2Locale.kt",
+      "bytes": 2884,
+      "sha256": "08a42a065fffd0e7287fc06fe162e10ac87bd0dfde3a3e3d63387a69e1bb6a27"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureBridge.kt",
+      "bytes": 18593,
+      "sha256": "784af09a6521a66f198cff70e4dcab07748eecc123f5c8dee4cc1abf8638999a"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureConfig.kt",
+      "bytes": 17450,
+      "sha256": "7a41fe6eec391826f465c5faf8ad2884a5cec37a5290ce16fdc7ead114d66989"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt",
+      "bytes": 9652,
+      "sha256": "899d694fc2959e77e93ceb10fae73d7c0cab94381f12f03b4966b85c113d761f"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureRecovery.kt",
+      "bytes": 10150,
+      "sha256": "768b2322f4b417ad1de4101e12fa8374926c4174581c0b354bd45550a68bd749"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureService.kt",
+      "bytes": 39385,
+      "sha256": "62e525863439c48cd86a9eaf054b817469da7dd41e2b79d0fb86b87a5e5fa54a"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureState.kt",
+      "bytes": 2884,
+      "sha256": "45bc1a0c2028825df3df29e904eedeb283e2d867206f1072e4791050b0a31c14"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureText.kt",
+      "bytes": 2370,
+      "sha256": "cda90564e72bcd6229442e39e448878870d5541777a18dc7ec0b7a59a340ba50"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureTiming.kt",
+      "bytes": 1190,
+      "sha256": "c66955ab95d349ce6a8488b72ac171e461bd9e3c0c5cf0c48cc31f8f85fa9559"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/DrawingOverlay.kt",
+      "bytes": 8344,
+      "sha256": "564f946357aab0e39be0e6c6447dc2fd84e59db132b46f4be5cad0d0b1fc000d"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/EncodedOutput.kt",
+      "bytes": 443,
+      "sha256": "4c995ae29bac1566018c4b7068e8e2796a9c884e982beae786d3b9c1235dc1a9"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FacecamOverlay.kt",
+      "bytes": 15772,
+      "sha256": "c61aeef6083542921174b9304ac0847f11d87ff8bffffc9bba6e1b9ded5e5b8b"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FinalizedCapture.kt",
+      "bytes": 1311,
+      "sha256": "82ff7acf64956cf26cd2015f17216f1653c69907128220797b111a0273903c71"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/FloatingRecordingControls.kt",
+      "bytes": 18885,
+      "sha256": "dfb6c3c1d7584e182c2b3717ae5f6dd0c5279a9900374adf2eb6cf430df8ec95"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/MediaOutput.kt",
+      "bytes": 5743,
+      "sha256": "a3e2869194a554f55cb9bd940b3e2adae220be8256cc3f0ab02468b810206733"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/Mp4RecoveryEngine.kt",
+      "bytes": 12903,
+      "sha256": "05d99e1986f273d32810bba532589e1ed0363955e5a09e9ff905beb7dafb90db"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/RegionCaptureProcessor.kt",
+      "bytes": 3837,
+      "sha256": "f4bf5f514d1f13cf87b868d974142720f236606d9e00611aaff7b86b32e2cd85"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/SessionAudio.kt",
+      "bytes": 12243,
+      "sha256": "90963052e33494be186d71362a56ac0366101c9f47281ab50e6b5de49835b682"
+    },
+    {
+      "path": "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/VideoEncoder.kt",
+      "bytes": 7752,
+      "sha256": "d1633731f522c75f378f30d44c4f521e6cf350fa06f18426ed641b36e378c5a0"
+    },
+    {
+      "path": "android/app/src/main/res/values-ar/capture_strings.xml",
+      "bytes": 2525,
+      "sha256": "28ed30bd872ae39e6748512358491c8d1d5028c34d82e85d51e3e416ba23f0bf"
+    },
+    {
+      "path": "android/app/src/main/res/values-b+zh+Hans/capture_strings.xml",
+      "bytes": 2228,
+      "sha256": "d11c9cb3962155e912afc91de14e27f3fb1e7d724d423c4cb2cca7a0a619d0df"
+    },
+    {
+      "path": "android/app/src/main/res/values-de/capture_strings.xml",
+      "bytes": 2309,
+      "sha256": "7b14cb5f43d3806abe77baef80e86fa16102b5761b96cb23c2775fa634a47b8a"
+    },
+    {
+      "path": "android/app/src/main/res/values-es/capture_strings.xml",
+      "bytes": 2273,
+      "sha256": "f3e18e8bcfa1413d39715da1408d1bf8847f71583efb94d1832d990ef74ca299"
+    },
+    {
+      "path": "android/app/src/main/res/values-fr/capture_strings.xml",
+      "bytes": 2305,
+      "sha256": "70b4f8eb810f6adcc3431263f38328c01ced3fd3d1e2a6f5a3444bd362891ed7"
+    },
+    {
+      "path": "android/app/src/main/res/values-hi/capture_strings.xml",
+      "bytes": 2859,
+      "sha256": "33fd601caaacd677eab1a0af0cff9deeab4993ee5c3bde60c2d2a795a4b09497"
+    },
+    {
+      "path": "android/app/src/main/res/values-in/capture_strings.xml",
+      "bytes": 2260,
+      "sha256": "f0344942912ff12e469692b9e73a691261aeeeeb9f54bb1335c4ed74c7bb44f3"
+    },
+    {
+      "path": "android/app/src/main/res/values-ja/capture_strings.xml",
+      "bytes": 2396,
+      "sha256": "7660de933b60fe27b7e744d479782dd05291436e89731431e11b388acd8a8120"
+    },
+    {
+      "path": "android/app/src/main/res/values-ko/capture_strings.xml",
+      "bytes": 2339,
+      "sha256": "80388b25e683a5d7024190c6007e6387cb2bb0cd599405fc206af66226a44189"
+    },
+    {
+      "path": "android/app/src/main/res/values-pt-rBR/capture_strings.xml",
+      "bytes": 2248,
+      "sha256": "082ddd591ad1ccc1b36eb932f6445f5e5647ea553ecff57f48398735410452d3"
+    },
+    {
+      "path": "android/app/src/main/res/values-vi/capture_strings.xml",
+      "bytes": 2378,
+      "sha256": "c3a58aa5ad8e08b0e74eca37cd9e847514995180e4491476e4e01f368ca7b0bd"
+    },
+    {
+      "path": "android/app/src/main/res/values/capture_strings.xml",
+      "bytes": 2199,
+      "sha256": "e39fba60e450dd06042fa791643e0875480c338fa2dbe1c40e5b1e3a280bafba"
+    },
+    {
+      "path": "android/app/src/test/kotlin/com/xrecorder/xrecorder/live/LiveCaptureStateTest.kt",
+      "bytes": 2197,
+      "sha256": "1b1c623b0f45e754dc910be12d150bf2e92ead2b012459c154e772f8d9140aa3"
+    },
+    {
+      "path": "android/app/src/test/kotlin/com/xrecorder/xrecorder/live/RtmpEndpointTest.kt",
+      "bytes": 1741,
+      "sha256": "c67283e6de0d2ca9f2ade1ab1b212b936a0596722203fe132a7f9acd0fe541f7"
+    },
+    {
+      "path": "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/CaptureConfigRestoreTest.kt",
+      "bytes": 1210,
+      "sha256": "563e1a8a2f88a13b40353c4092d03c5b8032a5cf3206bc0eda9c3571a0b82023"
+    },
+    {
+      "path": "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/CaptureRecoveryTest.kt",
+      "bytes": 736,
+      "sha256": "35fb15a6c2523cd785af21dc56c1fcba314b6bd622d897850298c8d6537b3f20"
+    },
+    {
+      "path": "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/CaptureTimingTest.kt",
+      "bytes": 2565,
+      "sha256": "b1c8db68b469011d711039cdbee1de2f983aaafe699268a6e5f4b2f9a15c5544"
+    },
+    {
+      "path": "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/FinalizedCaptureTest.kt",
+      "bytes": 1658,
+      "sha256": "3b21c688bd155e23f235a4388b347a188161f9d74370ad049763577864f13d2c"
+    },
+    {
+      "path": "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/Mp4RecoveryEngineTest.kt",
+      "bytes": 9954,
+      "sha256": "46e71f65c789729399456a7f82c805c764d24756fda0e1c2f0d0e8cb36f6086f"
+    },
+    {
+      "path": "android/build.gradle.kts",
+      "bytes": 766,
+      "sha256": "350340802f1c4e65745fee4ecd27a5950141bf25f2c1390f0418eabae9adb1ed"
+    },
+    {
+      "path": "assets/licenses/ROOTENCODER_NOTICE.txt",
+      "bytes": 614,
+      "sha256": "0d5af83b16aea695df3d17b15e3a10b7a3f48fa906a93918ac9077f37ab2071b"
+    },
+    {
+      "path": "lib/core/constants/app_icons.dart",
+      "bytes": 3805,
+      "sha256": "6a64107725d57ae8a3241ab2cb63b5806d2674d4490b6ef8a45dbd8b7cbf38bb"
+    },
+    {
+      "path": "lib/core/domain/repositories.dart",
+      "bytes": 2722,
+      "sha256": "abeca71911da682092a3768b8d75d9fb623eb80075d00a4150ebf9e877470513"
+    },
+    {
+      "path": "lib/core/ui/theme/app_theme.dart",
+      "bytes": 10584,
+      "sha256": "c9d897aae8849d6a07c3e25e60f7eb72986b714694f287df6f6092a00da7bdd9"
+    },
+    {
+      "path": "lib/core/widgets/studio_create_sheet.dart",
+      "bytes": 8668,
+      "sha256": "0bfcac782918e23e619f105d4d4ed222aee3c47208ef18809acef97f54ed774b"
+    },
+    {
+      "path": "lib/core/widgets/studio_quick_create.dart",
+      "bytes": 5922,
+      "sha256": "fd90bb334dcdaf416ff07f64e4ffe1400938544be071313701585d3237c62522"
+    },
+    {
+      "path": "lib/features/editor/transcription_dialog.dart",
+      "bytes": 16892,
+      "sha256": "78ce54b96c366af72e2f6b58822f2c9b35ff5266d30b7e4d30937f5a2da5b73c"
+    },
+    {
+      "path": "lib/features/media/photo_tools_screen.dart",
+      "bytes": 40325,
+      "sha256": "38eb5cbfbb6153afa16fcd835dcdda6571dd8451830ad0074b48c83689608280"
+    },
+    {
+      "path": "lib/features/recording/livestream_page.dart",
+      "bytes": 19103,
+      "sha256": "4aca2a5495cd6e6bf4a84252f6d61115025a1a44fa38388c5848c327cd4d1f73"
+    },
+    {
+      "path": "lib/features/recording/recording_selection.dart",
+      "bytes": 1638,
+      "sha256": "3e992c57e941d2117cb969bb20e37e0486558def17e0c8e02ac4983ce528dd26"
+    },
+    {
+      "path": "lib/features/recording/recording_service.dart",
+      "bytes": 31819,
+      "sha256": "05c4126b1b0eed088f4e525bcd15b66ea1dc4d5a381a7478fac2d8327c870ee2"
+    },
+    {
+      "path": "lib/features/recording/recording_setup_sheet.dart",
+      "bytes": 6508,
+      "sha256": "09e1cc6415a5da8c761fa9af2fe5f8784a6b9e8292be8fc14a00a8b7d2edfc76"
+    },
+    {
+      "path": "lib/features/recording/region_capture_page.dart",
+      "bytes": 12572,
+      "sha256": "eb084f17e031c58d0f43cccc30a4c81c9bc2cc7f02562dbeb3a96ecd4e9f4541"
+    },
+    {
+      "path": "lib/features/settings/recording_settings_form.dart",
+      "bytes": 15777,
+      "sha256": "52cd59523fb8ac3dc44e05cfd27d8977de557024486164e7062b44775ed6a39c"
+    },
+    {
+      "path": "lib/features/settings/settings_controller.dart",
+      "bytes": 10562,
+      "sha256": "4c456dd7f92411fe27d53a597d64770b8abb3840eaa160de971fca96d369bef3"
+    },
+    {
+      "path": "lib/l10n/app_ar.arb",
+      "bytes": 61174,
+      "sha256": "8c5bcb9626ab47aff5b0a92db2f6e6f38d75c4403282249b36da5e004e065671"
+    },
+    {
+      "path": "lib/l10n/app_de.arb",
+      "bytes": 51513,
+      "sha256": "2e5587f3c102f0666396487cc44e0a847622662305e88cf420c0d0f08e981d55"
+    },
+    {
+      "path": "lib/l10n/app_en.arb",
+      "bytes": 196145,
+      "sha256": "acfdd8c96179609777c7d95cb83d2bf47ede0782722eb9880d02eed0a59be6ef"
+    },
+    {
+      "path": "lib/l10n/app_es.arb",
+      "bytes": 50839,
+      "sha256": "4db2d5ecf634838b31dd08160f8a347144ce0ba62cf9f306253e3c65e2c4bcd9"
+    },
+    {
+      "path": "lib/l10n/app_fr.arb",
+      "bytes": 52975,
+      "sha256": "fccc510ebadc1e1d7d360ab8233754b1aa330f881dfde40113345dd09227ba73"
+    },
+    {
+      "path": "lib/l10n/app_hi.arb",
+      "bytes": 87009,
+      "sha256": "bc5144c655963b48c755ddfd186e8804a990adc10b9b1990be4b9d28fe5e13e4"
+    },
+    {
+      "path": "lib/l10n/app_id.arb",
+      "bytes": 48299,
+      "sha256": "d164f08e888850c2770aa3d783f27815f28be1bfc6a252aeccbdfa9de5362c64"
+    },
+    {
+      "path": "lib/l10n/app_ja.arb",
+      "bytes": 59229,
+      "sha256": "3577a8f4c3253c8b8d540de62bc03ef466dd4decdbb2ac9fffd0e00d983efd86"
+    },
+    {
+      "path": "lib/l10n/app_ko.arb",
+      "bytes": 54059,
+      "sha256": "781c22e0345d5e73878f839908983946f93597c6e4fab4fe3d33446bb7cb8177"
+    },
+    {
+      "path": "lib/l10n/app_pt.arb",
+      "bytes": 50385,
+      "sha256": "19726208a79e1e4fddefebe782d87a19397aee5d371601c48981c4aa7553a837"
+    },
+    {
+      "path": "lib/l10n/app_pt_BR.arb",
+      "bytes": 50381,
+      "sha256": "e4a5c2261ecd5f9d58f0814050283a234949b11b2df4072b3d3b89db20131c01"
+    },
+    {
+      "path": "lib/l10n/app_vi.arb",
+      "bytes": 54956,
+      "sha256": "3eef24dd5a8cf62a33c48cd51f91f62793063ef99ee9d2a395f7eeb8231080b3"
+    },
+    {
+      "path": "lib/l10n/app_zh.arb",
+      "bytes": 44984,
+      "sha256": "aa630175426d1d70bd17e5bf76b25eedc6c09f826486991e16b52f5dfda55587"
+    },
+    {
+      "path": "lib/l10n/app_zh_Hans.arb",
+      "bytes": 44989,
+      "sha256": "e028dd3368da40346b8f1ce12aaf347183e835c5fee1c58bbab10de0df4d6970"
+    },
+    {
+      "path": "lib/l10n/message_catalog.dart",
+      "bytes": 38903,
+      "sha256": "f2c61ac9d6f63c840ea010ecec195cef41e64e4533a694dfde7e2e8625371b67"
+    },
+    {
+      "path": "lib/main.dart",
+      "bytes": 2545,
+      "sha256": "3a0cca3814c88bd6203ad47d97ad1a95f78c620ecedfe68213f72338e4aef202"
+    },
+    {
+      "path": "test/design_system_test.dart",
+      "bytes": 19542,
+      "sha256": "c22d0a78cd18ccf01721c903b4dc6a68ca2c1d8d43d8eca74d20b5be0d1d0a78"
+    },
+    {
+      "path": "test/editor_effects_ui_test.dart",
+      "bytes": 23486,
+      "sha256": "427c9dc0f7d21a0d243b86d92fa8c357b5db7c6e1e4aa4abe8ad87f177691cc8"
+    },
+    {
+      "path": "test/livestream_test.dart",
+      "bytes": 15095,
+      "sha256": "85dd6ecae29b34fed2c57f3468f501ba41a23c6adbf03c538e4080ab41a02544"
+    },
+    {
+      "path": "test/localization_test.dart",
+      "bytes": 13671,
+      "sha256": "a5f168b47083556cd7f97e3f5302186e3d797c0ccc6ef58daa45a240050c30b6"
+    },
+    {
+      "path": "test/photo_tools_test.dart",
+      "bytes": 11739,
+      "sha256": "13040bf9cee53078180dda96ef4d4f528560b889b3ab0380c486a6ed3573160a"
+    },
+    {
+      "path": "test/recording_setup_sheet_test.dart",
+      "bytes": 15665,
+      "sha256": "0b6a9d7e46dd20509f419f58f6b7f51766edaf3c718316608d0807cbd9409dae"
+    },
+    {
+      "path": "test/region_capture_test.dart",
+      "bytes": 4672,
+      "sha256": "d164068191a2c738e9d5dcc99b4563446fccb98a6a6139834ed530700b51f593"
+    },
+    {
+      "path": "test/screenshot_delay_test.dart",
+      "bytes": 2492,
+      "sha256": "bdb1d4cc2bfe7c06ebbf29e5bda3aec7d8fa2958d0f6acc668af5f4bdddf4279"
+    },
+    {
+      "path": "test/task10_recording_settings_test.dart",
+      "bytes": 7999,
+      "sha256": "8f7b6be31653e9a0a894707a98dd579565f7f8d49f99a9bc873493e7f20e538a"
+    },
+    {
+      "path": "test/ui_ux_06_workflows_test.dart",
+      "bytes": 22021,
+      "sha256": "116c93711ba5ffbaa1925b30d76d834a016895e141b1430eb29f7cc0587c3a60"
+    },
+    {
+      "path": "tool/check_l10n.py",
+      "bytes": 3295,
+      "sha256": "6ca086c40aee0ce7b7e179c4b8b494127699b46cc7193e9014307977f85c46af"
+    },
+    {
+      "path": "tool/sync_p2_native_l10n.py",
+      "bytes": 3855,
+      "sha256": "617cc57095682202344f67143c28a8b4f0a14574e46eed986e031588145488fd"
+    },
+    {
+      "path": "tool/tests/test_check_l10n.py",
+      "bytes": 1613,
+      "sha256": "48dc6d639776f2f4718b39dea3fb644726243108fe9dbc792505b586486a9f88"
+    },
+    {
+      "path": "tool/validate_p2_p3_outputs.py",
+      "bytes": 7987,
+      "sha256": "bc9896d268eca94d35317fe58d8dd359605f91825d3788921385eb07a6267620"
+    }
+  ],
+  "staged": [],
+  "conflicts": []
+}

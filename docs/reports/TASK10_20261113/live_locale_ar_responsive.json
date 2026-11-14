@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "locale": "ar",
+  "mainAppRtlScreen": true,
+  "portraitAndLandscapeFooterReachable": true,
+  "rotationSettingsRestored": true,
+  "initialRotation": {
+    "user_rotation": "0",
+    "accelerometer_rotation": "1"
+  },
+  "limitations": "Targeted live form; no TalkBack or linguistic approval."
+}

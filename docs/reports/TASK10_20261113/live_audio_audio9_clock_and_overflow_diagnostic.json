@@ -1,0 +1,36 @@
+{
+  "clocks": {
+    "mic": {
+      "hardwareSeconds": 7.212983,
+      "framesSeconds": 7.191645833333333,
+      "originShiftMs": 21.33716666796875
+    },
+    "internal": {
+      "hardwareSeconds": 7.2092182,
+      "framesSeconds": 7.210666666666667,
+      "originShiftMs": -1.44846666796875
+    }
+  },
+  "sampledMicUnderrunSamples": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "logcatFrom": "11-14 15:21:00.000",
+  "overflowOrUnderrunLines": [
+    "11-14 15:21:03.311   526 29499 W AudioFlinger: RecordThread: buffer overflow",
+    "11-14 15:21:03.919   526 29503 W AudioFlinger: RecordThread: buffer overflow"
+  ]
+}

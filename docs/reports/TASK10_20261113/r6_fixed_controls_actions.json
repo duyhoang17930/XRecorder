@@ -1,0 +1,16 @@
+{
+  "smallCameraBounds": [
+    759,
+    399,
+    1048,
+    785
+  ],
+  "finalFloatingBounds": [
+    428,
+    762,
+    1080,
+    1014
+  ],
+  "cameraSwitchInvoked": true,
+  "stopViaFloating": true
+}

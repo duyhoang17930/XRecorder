@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "sessions": [
+    "23638af0-586c-44c9-9120-3f9004b58e73",
+    "27f0afcf-91fe-4b88-b3e6-ff6fc23a8a48",
+    "22e31a3a-2007-4f30-8d85-eb47f073bc83"
+  ],
+  "failedInputsAndCheckpointsByteExact": true,
+  "terminalJournalByteExact": true,
+  "settingsByteExact": true,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "scope": "New active/paused injected failures and prior fixture across update/new session/process restart; not spontaneous power-loss or legacy-API recovery"
+}

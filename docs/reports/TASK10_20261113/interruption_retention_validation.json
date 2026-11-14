@@ -1,0 +1,11 @@
+{
+  "session": "cf1507ee-8c55-4409-8557-b4ba02744189",
+  "uri": "content://media/external/video/media/50",
+  "bytesRetained": 971,
+  "sha256BeforeAfterRestart": "b4f9f6d969279e9a7641b99c2abb56dbec8d6e8cf75ef27c6e777842d70c34ed",
+  "state": "failed",
+  "checkpointRetained": true,
+  "pendingReferenceUnchanged": true,
+  "publishedSuccess": false,
+  "method": "Force-stop only positively identified TASK10 active session; no clear/uninstall/delete"
+}

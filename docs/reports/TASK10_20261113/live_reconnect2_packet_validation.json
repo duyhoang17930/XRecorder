@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "scope": "Real reconnect2 receives intact source115 encoded media; corrected24s cyclic fixture, not screen-capture/network lifecycle",
+  "files": {
+    "rtmp_received.mp4": {
+      "sha256": "e1c29de17315903b780223ca2508b2e27d3f28805f648f6f97f3b73daf26c619",
+      "bytes": 35410,
+      "streams": {
+        "video": {
+          "packets": 48,
+          "allPacketHashesPresentInSource": true,
+          "strictlyIncreasingPts": true
+        },
+        "audio": {
+          "packets": 31,
+          "allPacketHashesPresentInSource": true,
+          "strictlyIncreasingPts": true
+        }
+      }
+    },
+    "rtmp_reconnected.mp4": {
+      "sha256": "8c6f00eed622e77ac8766cffa97b360aa5ae07f6ed5861c4d30e41126b1fd8bd",
+      "bytes": 344059,
+      "streams": {
+        "video": {
+          "packets": 480,
+          "allPacketHashesPresentInSource": true,
+          "strictlyIncreasingPts": true
+        },
+        "audio": {
+          "packets": 312,
+          "allPacketHashesPresentInSource": true,
+          "strictlyIncreasingPts": true
+        }
+      }
+    }
+  }
+}

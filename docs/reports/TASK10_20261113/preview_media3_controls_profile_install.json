@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "96a5c9773cab0ef09b24448435ab1781b523e0a739e160e7f83f3fb4d22d56d1",
+  "apkBytes": 60288247,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Media3 native controls avoid popup Back interception; runtime acceptance pending",
+  "freeBytes": {
+    "C:/": 16177152000,
+    "D:/": 24264179712
+  }
+}

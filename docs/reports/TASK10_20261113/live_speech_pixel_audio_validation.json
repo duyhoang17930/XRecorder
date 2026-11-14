@@ -1,0 +1,11 @@
+{
+  "videoByteExact": true,
+  "frames": 192,
+  "receivedBytes": 138423,
+  "sourceAudioSamples": 128000,
+  "receivedAudioSamples": 128000,
+  "audioBestCorrelation": 0.9999999999841491,
+  "audioLagMs": -28.0,
+  "receivedSha256": "322538b4290d5ff266c453faf62ae9186de4f7f7ec7be87a6947995ee90a0c85",
+  "scope": "native real H264/AAC transport, not live screen capture"
+}

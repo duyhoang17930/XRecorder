@@ -1,0 +1,25 @@
+{
+  "head": "4f2d645ff59bbf37daf26aeb988f34984aa6ce05",
+  "branch": "main",
+  "files": {
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureConfig.kt": "e80bdc6a46a5f6083581e9cca9947187fa935ca2367fcbce57f23607978a80f4",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureJournal.kt": "38c7592238fa27302d49c85ce3279662e49981f176e12b3df18cd0f48795432c",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/CaptureRecovery.kt": "5e292fa3d46e9477b2b4b1ee49087a17b4d099240e8ab7bcdbb5ea0c888ff0e6",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/MediaOutput.kt": "c52e394e75eff55b56667848569e0ac9c731285cd5a3a9f8da929ec087d646e3",
+    "android/app/src/main/kotlin/com/xrecorder/xrecorder/recording/Mp4RecoveryEngine.kt": "05d99e1986f273d32810bba532589e1ed0363955e5a09e9ff905beb7dafb90db",
+    "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/CaptureConfigRestoreTest.kt": "563e1a8a2f88a13b40353c4092d03c5b8032a5cf3206bc0eda9c3571a0b82023",
+    "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/CaptureRecoveryTest.kt": "35fb15a6c2523cd785af21dc56c1fcba314b6bd622d897850298c8d6537b3f20",
+    "android/app/src/test/kotlin/com/xrecorder/xrecorder/recording/Mp4RecoveryEngineTest.kt": "46e71f65c789729399456a7f82c805c764d24756fda0e1c2f0d0e8cb36f6086f",
+    "lib/features/recording/recording_selection.dart": "3e992c57e941d2117cb969bb20e37e0486558def17e0c8e02ac4983ce528dd26",
+    "lib/features/recording/recording_setup_sheet.dart": "a6645832daf0c6d099d4ce62346e1715e8e888d3887613d6bb514af798920f9e",
+    "lib/features/settings/recording_settings_form.dart": "a6a1f4ee33f417cf7605a486b363ea03c3c968cf98becf3c8928ffbeb2229139",
+    "lib/l10n/app_en.arb": "6ae8c9aa5bc72fc22b91a0631232f7dc3c6d589f3f84302238f56cb3387c09e2",
+    "test/recording_setup_sheet_test.dart": "0b6a9d7e46dd20509f419f58f6b7f51766edaf3c718316608d0807cbd9409dae",
+    "test/task10_recording_settings_test.dart": "ef0558ee1b20c468a4ee91b42f31cf4ce43dce4c7d98ca65e53a25b01df0b38f",
+    "tool/check_l10n.py": "6ca086c40aee0ce7b7e179c4b8b494127699b46cc7193e9014307977f85c46af",
+    "tool/tests/test_check_l10n.py": "48dc6d639776f2f4718b39dea3fb644726243108fe9dbc792505b586486a9f88"
+  },
+  "deleted": [],
+  "staged": [],
+  "conflicts": []
+}

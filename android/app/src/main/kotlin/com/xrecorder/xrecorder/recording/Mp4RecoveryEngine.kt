@@ -1,7 +1,8 @@
 package com.xrecorder.xrecorder.recording
 
 import java.io.File
-import java.io.RandomAccessFile
+import java.io.FileInputStream
+import java.io.DataInputStream
 import java.nio.charset.StandardCharsets
 
 /**
@@ -76,10 +77,17 @@ object Mp4RecoveryEngine {
      * Inspects the top-level ISO-BMFF box structure of an MP4 file.
      * Resilient against malformed, partial, or 0-byte files without throwing unhandled exceptions.
      */
-    fun inspect(file: File, checkpoint: SessionCheckpoint? = null): InspectionReport {
-        val size = if (file.exists()) file.length() else 0L
+    fun inspect(file: File, checkpoint: SessionCheckpoint? = null): InspectionReport =
+        inspectSource(file, checkpoint, null)
 
-        if (!file.exists() || size == 0L) {
+    /** Inspect a caller-owned seekable stream without reopening a scoped-storage path. */
+    fun inspect(input: FileInputStream, label: File, checkpoint: SessionCheckpoint? = null): InspectionReport =
+        inspectSource(label, checkpoint, input)
+
+    private fun inspectSource(file: File, checkpoint: SessionCheckpoint?, source: FileInputStream?): InspectionReport {
+        val size = source?.channel?.size() ?: if (file.exists()) file.length() else 0L
+
+        if ((source == null && !file.exists()) || size == 0L) {
             val decision = RecoveryDecision.Unrecoverable(
                 reason = "File is empty or does not exist.",
                 technicalConstraint = "Zero-byte file contains no compressed bitstream payload."
@@ -119,10 +127,12 @@ object Mp4RecoveryEngine {
         var readError = false
 
         try {
-            RandomAccessFile(file, "r").use { raf ->
+            val input = source ?: FileInputStream(file)
+            try {
+                val raf = DataInputStream(input)
                 var offset = 0L
                 while (offset + 8L <= size) {
-                    raf.seek(offset)
+                    input.channel.position(offset)
                     val rawSize = raf.readInt().toLong() and 0xFFFFFFFFL
                     val typeBytes = ByteArray(4)
                     val readType = raf.read(typeBytes)
@@ -158,6 +168,8 @@ object Mp4RecoveryEngine {
                     offset += actualSize
                     if (rawSize == 0L) break
                 }
+            } finally {
+                if (source == null) input.close()
             }
         } catch (_: Exception) {
             readError = true

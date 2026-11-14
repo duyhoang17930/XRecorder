@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../../core/domain/models.dart';
 import '../../core/widgets/studio_widgets.dart';
 import '../recording/recording_service.dart';
+import '../recording/recording_selection.dart';
 import 'settings_controller.dart';
+import '../../l10n/localization.dart';
 
 class RecordingSettingsForm extends StatefulWidget {
   const RecordingSettingsForm({super.key, this.advanced});
@@ -16,65 +18,11 @@ class RecordingSettingsForm extends StatefulWidget {
 
 class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
   Future<RecordingCapabilities>? _capabilities;
-  bool _selectionNormalized = false;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _capabilities ??= CaptureScope.of(context).service.capabilities()
-      ..then((capabilities) {
-        if (!mounted || _selectionNormalized) return;
-        _selectionNormalized = true;
-        _normalizeSelection(SettingsScope.of(context), capabilities);
-      });
-  }
-
-  void _normalizeSelection(
-    SettingsController settings,
-    RecordingCapabilities capabilities,
-  ) {
-    final portrait = switch (settings.orientation) {
-      'Portrait' => true,
-      'Landscape' => false,
-      _ =>
-        MediaQuery.sizeOf(context).height >= MediaQuery.sizeOf(context).width,
-    };
-    const sizes = {
-      '4K UHD': (3840, 2160),
-      '2K QHD': (2560, 1440),
-      '1080p FHD': (1920, 1080),
-      '720p HD': (1280, 720),
-    };
-    bool supported(String resolution, int fps, String codec) {
-      final size = sizes[resolution]!;
-      final expectedWidth = portrait ? size.$2 : size.$1;
-      final expectedHeight = portrait ? size.$1 : size.$2;
-      final targetCodec = codec == 'H.265 / HEVC'
-          ? VideoCodec.hevc
-          : VideoCodec.avc;
-      return capabilities.configurations.any(
-        (configuration) =>
-            configuration.width == expectedWidth &&
-            configuration.height == expectedHeight &&
-            configuration.fps == fps &&
-            configuration.codec == targetCodec,
-      );
-    }
-
-    final currentFps = int.tryParse(settings.fps) ?? 30;
-    if (supported(settings.resolution, currentFps, settings.codec)) return;
-    for (final resolution in sizes.keys) {
-      for (final fps in const [120, 90, 60, 30, 24]) {
-        if (supported(resolution, fps, 'H.264 / AVC')) {
-          settings.update(() {
-            settings.resolution = resolution;
-            settings.fps = '$fps';
-            settings.codec = 'H.264 / AVC';
-            settings.bitrate = 'Auto';
-          });
-          return;
-        }
-      }
-    }
+    // Loading capabilities must never write or normalize saved preferences.
+    _capabilities ??= CaptureScope.of(context).service.capabilities();
   }
 
   @override
@@ -94,22 +42,15 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
           if (s.mode == 'Performance' && fps > 30) return false;
           if (caps == null) return true;
           final size = resolutions[resolution]!;
-          final portrait = switch (s.orientation) {
-            'Portrait' => true,
-            'Landscape' => false,
-            _ =>
-              MediaQuery.sizeOf(context).height >=
-                  MediaQuery.sizeOf(context).width,
-          };
           final codec = (codecName ?? s.codec) == 'H.265 / HEVC'
               ? VideoCodec.hevc
               : VideoCodec.avc;
-          return caps.configurations.any(
-            (c) =>
-                c.width == (portrait ? size.$2 : size.$1) &&
-                c.height == (portrait ? size.$1 : size.$2) &&
-                c.fps == fps &&
-                c.codec == codec,
+          return supportsRecordingTuple(
+            caps,
+            width: size.$1,
+            height: size.$2,
+            fps: fps,
+            codec: codec,
           );
         }
 
@@ -117,12 +58,15 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (snapshot.hasError)
-              const Text(
-                'Device capabilities unavailable. Checked again before recording.',
+              Text(
+                context.message(
+                  'Device capabilities unavailable. Checked again before recording.',
+                ),
               ),
             if (widget.advanced != false) ...[
               ChoiceGroup(
-                label: 'Recording mode',
+                optionLabelBuilder: context.message,
+                label: context.message('Recording mode'),
                 options: const ['Normal', 'Performance'],
                 value: s.mode,
                 onChanged: (v) => s.update(() {
@@ -142,7 +86,8 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
             ],
             if (widget.advanced != true) ...[
               ChoiceGroup(
-                label: 'Resolution',
+                optionLabelBuilder: context.message,
+                label: context.message('Resolution'),
                 options: resolutions.keys.toList(),
                 value: s.resolution,
                 disabledOptions: resolutions.keys
@@ -166,7 +111,8 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
                 }),
               ),
               ChoiceGroup(
-                label: 'Target FPS',
+                optionLabelBuilder: context.message,
+                label: context.message('Target FPS'),
                 options: const ['24', '30', '60', '90', '120'],
                 value: s.fps,
                 disabledOptions: ['24', '30', '60', '90', '120']
@@ -181,7 +127,8 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
             ],
             if (widget.advanced != false) ...[
               ChoiceGroup(
-                label: 'Bitrate',
+                optionLabelBuilder: context.message,
+                label: context.message('Bitrate'),
                 options: const [
                   'Auto',
                   '8 Mbps',
@@ -196,7 +143,8 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
                 onChanged: (v) => s.update(() => s.bitrate = v),
               ),
               ChoiceGroup(
-                label: 'Video codec',
+                optionLabelBuilder: context.message,
+                label: context.message('Video codec'),
                 options: const ['H.264 / AVC', 'H.265 / HEVC'],
                 value: s.codec,
                 disabledOptions: caps?.hevc == false
@@ -211,7 +159,8 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
                 onChanged: (v) => s.update(() => s.codec = v),
               ),
               ChoiceGroup(
-                label: 'Orientation',
+                optionLabelBuilder: context.message,
+                label: context.message('Orientation'),
                 options: const ['Auto Sensor', 'Landscape', 'Portrait'],
                 value: s.orientation,
                 onChanged: (v) => s.update(() => s.orientation = v),
@@ -219,7 +168,8 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
             ],
             if (widget.advanced != true) ...[
               ChoiceGroup(
-                label: 'Audio source',
+                optionLabelBuilder: context.message,
+                label: context.message('Audio source'),
                 options: const [
                   'Mute',
                   'Microphone',
@@ -227,32 +177,30 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
                   'Mixed Stream',
                 ],
                 value: s.audio,
-                disabledOptions: widget.advanced == null
-                    ? (caps != null &&
-                              !caps.audioSources.contains(AudioSource.internal)
-                          ? {'Internal Audio', 'Mixed Stream'}
-                          : const {})
-                    : {
-                        for (final entry in const {
-                          'Mute': AudioSource.mute,
-                          'Microphone': AudioSource.microphone,
-                          'Internal Audio': AudioSource.internal,
-                          'Mixed Stream': AudioSource.mixed,
-                        }.entries)
-                          if (caps != null &&
-                              !caps.audioSources.contains(entry.value))
-                            entry.key,
-                      },
+                disabledOptions: {
+                  for (final entry in const {
+                    'Mute': AudioSource.mute,
+                    'Microphone': AudioSource.microphone,
+                    'Internal Audio': AudioSource.internal,
+                    'Mixed Stream': AudioSource.mixed,
+                  }.entries)
+                    if (caps != null &&
+                        !caps.audioSources.contains(entry.value))
+                      entry.key,
+                },
                 onChanged: (v) => s.update(() => s.audio = v),
               ),
             ],
             if (widget.advanced != false) ...[
               if (s.audio == 'Internal Audio' || s.audio == 'Mixed Stream') ...[
-                const Text(
-                  'Protected audio may be silent. Android may ask for audio access.',
+                Text(
+                  context.message(
+                    'Protected audio may be silent. Android may ask for audio access.',
+                  ),
                 ),
                 const SizedBox(height: 8),
                 _gain(
+                  context,
                   'Internal audio volume',
                   s.internalGain,
                   (v) => s.update(() => s.internalGain = v),
@@ -260,15 +208,16 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
               ],
               if (s.audio == 'Microphone' || s.audio == 'Mixed Stream') ...[
                 _gain(
+                  context,
                   'Microphone volume',
                   s.gain,
                   (v) => s.update(() => s.gain = v),
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('Microphone noise reduction'),
+                  title: Text(context.message('Microphone noise reduction')),
                   subtitle: caps?.noiseReduction == false
-                      ? const Text('Not supported by this device')
+                      ? Text(context.message('Not supported by this device'))
                       : null,
                   value: caps?.noiseReduction == false ? false : s.noise,
                   onChanged: caps?.noiseReduction == false
@@ -279,16 +228,17 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
             ],
             if (widget.advanced != true) ...[
               ChoiceGroup(
-                label: 'Pre-start countdown',
+                optionLabelBuilder: context.message,
+                label: context.message('Pre-start countdown'),
                 options: const ['Off', '3s', '5s', '10s'],
                 value: s.countdown,
                 onChanged: (v) => s.update(() => s.countdown = v),
               ),
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const Text('Facecam'),
+                title: Text(context.message('Facecam')),
                 subtitle: caps?.facecam == false
-                    ? const Text('No front camera available')
+                    ? Text(context.message('No front camera available'))
                     : null,
                 value: s.facecam,
                 onChanged: caps?.facecam != true && !s.facecam
@@ -302,42 +252,54 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
                   onPressed: () => showDialog<void>(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: const Text('Show touches'),
-                      content: const Text(
-                        'Android can draw touch indicators when Show taps is enabled in Developer options. Enable it manually in system Settings if available. 3HRecorder cannot observe arbitrary touches in other apps. The system indicator may appear in full-screen recordings; turn it off afterward if you do not want it.',
+                      title: Text(context.l10n.captureTouchGuidance),
+                      content: Text(
+                        context.message(
+                          'Android can draw touch indicators when Show taps is enabled in Developer options. Enable it manually in system Settings if available. 3HRecorder cannot observe arbitrary touches in other apps. The system indicator may appear in full-screen recordings; turn it off afterward if you do not want it.',
+                        ),
                       ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: const Text('Close'),
+                          child: Text(context.message('Close')),
                         ),
                       ],
                     ),
                   ),
-                  child: const Text('Touch-indicator guidance'),
+                  child: Text(context.message('Touch-indicator guidance')),
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('Auto-stop'),
+                  title: Text(context.message('Auto-stop')),
                   subtitle: Text(
                     s.durationSeconds == 0
-                        ? 'No limit'
-                        : '${s.durationSeconds} seconds',
+                        ? context.l10n.captureNoLimit
+                        : context.l10n.secondsValue(
+                            context.displayValue(s.durationSeconds),
+                          ),
                   ),
                   trailing: const Icon(AppIcons.countdown),
                   onTap: () => _duration(context, s),
                 ),
               ] else
-                _autoStop(s),
+                _autoStop(context, s),
             ],
             if (widget.advanced == null) const SizedBox(height: 16),
+            if (widget.advanced == null)
+              ChoiceGroup(
+                optionLabelBuilder: context.message,
+                label: context.l10n.screenshotDelay,
+                options: const ['1s', '3s', '5s', '10s'],
+                value: s.screenshotDelay,
+                onChanged: (value) => s.update(() => s.screenshotDelay = value),
+              ),
           ],
         );
       },
     );
   }
 
-  Widget _autoStop(SettingsController s) {
+  Widget _autoStop(BuildContext context, SettingsController s) {
     final durations = {
       '5m': 300,
       '10m': 600,
@@ -352,7 +314,7 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
       children: [
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
-          title: const Text('Auto-stop'),
+          title: Text(context.message('Auto-stop')),
           value: s.durationSeconds > 0,
           onChanged: (enabled) => s.update(() {
             s.durationSeconds = enabled
@@ -362,7 +324,8 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
         ),
         if (s.durationSeconds > 0)
           ChoiceGroup(
-            label: 'Duration',
+            optionLabelBuilder: context.message,
+            label: context.message('Duration'),
             options: durations.keys.toList(),
             value: durations.entries
                 .firstWhere((entry) => entry.value == s.durationSeconds)
@@ -374,25 +337,33 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
     );
   }
 
-  Widget _gain(String label, double value, ValueChanged<double> change) =>
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('$label: ${value.round()}%'),
-          Semantics(
-            label: label,
-            child: Slider(
-              value: value,
-              min: 0,
-              max: 200,
-              divisions: 40,
-              label: '${value.round()}%',
-              onChanged: change,
-              semanticFormatterCallback: (v) => '${v.round()} percent',
-            ),
+  Widget _gain(
+    BuildContext context,
+    String label,
+    double value,
+    ValueChanged<double> change,
+  ) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        '${context.message(label)}: ${context.l10n.percentValue(context.displayValue(value.round()))}',
+      ),
+      Semantics(
+        label: context.message(label),
+        child: Slider(
+          value: value,
+          min: 0,
+          max: 200,
+          divisions: 40,
+          label: context.l10n.percentValue(context.displayValue(value.round())),
+          onChanged: change,
+          semanticFormatterCallback: context.spokenValue(
+            (strings, value) => strings.accessibilityValue40(value),
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
   Future<void> _duration(BuildContext context, SettingsController s) async {
     var seconds = s.durationSeconds.toString();
     String? error;
@@ -400,17 +371,18 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
       context: context,
       builder: (dialog) => StatefulBuilder(
         builder: (context, update) => StudioDialog(
-          title: const Text('Auto-stop duration'),
+          title: Text(context.message('Auto-stop duration')),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('1–86400 seconds, or 0 for no limit.'),
+              Text(context.message('1–86400 seconds, or 0 for no limit.')),
+              const SizedBox(height: 24),
               TextFormField(
                 initialValue: seconds,
                 onChanged: (value) => seconds = value,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Seconds',
+                  labelText: context.message('Seconds'),
                   errorText: error,
                 ),
               ),
@@ -419,18 +391,18 @@ class _RecordingSettingsFormState extends State<RecordingSettingsForm> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialog),
-              child: const Text('Cancel'),
+              child: Text(context.message('Cancel')),
             ),
             TextButton(
               onPressed: () {
                 final value = int.tryParse(seconds);
                 if (value == null || value < 0 || value > 86400) {
-                  update(() => error = 'Enter 0–86400 seconds');
+                  update(() => error = context.l10n.captureDurationInvalid);
                   return;
                 }
                 Navigator.pop(dialog, value);
               },
-              child: const Text('Save'),
+              child: Text(context.message('Save')),
             ),
           ],
         ),

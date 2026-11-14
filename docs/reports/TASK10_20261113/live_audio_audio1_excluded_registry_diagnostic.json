@@ -1,0 +1,14 @@
+{
+  "status": "NO_NEW_CAPTURE",
+  "excludedMisclassifiedEntry": {
+    "uri": "content://media/external/video/media/118",
+    "sessionId": "af331d9e-7051-49f1-adae-70a9a677a075",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_audio1_result.json"
+  },
+  "oldCopiedFile": "live_audio_audio1_media/local.mp4",
+  "fileRetained": true,
+  "originalCorrectUri118RegistryEntryRetained": true,
+  "reason": "QA stopped before Start on duplicate non-actionable Create semantics; old terminal journal was not a new session. New runner requires a new exact session ID."
+}

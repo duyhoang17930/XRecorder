@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "explicitSaveEncrypted": true,
+  "cipherBytes": 148,
+  "cipherSha256": "40d28186094f537eff9bf9f32c8aaa16d3be1f36640e89559f588e1c7e120f97",
+  "processRestartLoadsExactFieldsAndKey": true,
+  "keyMaskedByDefaultAndAfterReveal": true,
+  "forgetCancelByteExact": true,
+  "explicitForgetRemovesOnlyDestination": true,
+  "noCaptureStarted": true,
+  "fixture": "no_backup/live_destination_v1.enc",
+  "finalFixtureState": "removed_by_explicit_task_UI_confirmation",
+  "earlierHarnessFailure": "ElementTree attribute indexing after restart; resumed with .get, no repeated Save"
+}

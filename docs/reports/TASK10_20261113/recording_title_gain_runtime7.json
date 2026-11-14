@@ -1,0 +1,15 @@
+{
+  "results": [
+    {
+      "locale": "ar",
+      "localizedTitle": true,
+      "gainSliders": 2,
+      "spokenUnitLocalized": true,
+      "backPreservesCanonicalSettings": true,
+      "noticeHelpChecked": false,
+      "invalidDurationChecked": false
+    }
+  ],
+  "preferencesByteExactAfterRestore": true,
+  "scope": "Real page/AX labels and Back; not TalkBack or linguistic acceptance"
+}

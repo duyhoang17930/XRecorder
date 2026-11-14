@@ -1,0 +1,62 @@
+{
+  "before": {
+    "document": {
+      "version": 2,
+      "values": {
+        "themeMode": "light",
+        "appLocale": "en",
+        "speechLanguage": "auto",
+        "resolution": "720p HD",
+        "fps": "30",
+        "bitrate": "8 Mbps",
+        "codec": "H.264 / AVC",
+        "orientation": "Auto Sensor",
+        "audio": "Mixed Stream",
+        "countdown": "3s",
+        "screenshotDelay": "10s",
+        "gain": 100.0,
+        "cfr": true,
+        "hardware": true,
+        "noise": false,
+        "facecam": false,
+        "shake": true,
+        "screenOff": false,
+        "touches": false,
+        "cache": true,
+        "internalGain": 100.0,
+        "durationSeconds": 0,
+        "mode": "Normal"
+      }
+    }
+  },
+  "after": {
+    "document": {
+      "version": 2,
+      "values": {
+        "themeMode": "light",
+        "appLocale": "en",
+        "speechLanguage": "auto",
+        "resolution": "720p HD",
+        "fps": "30",
+        "bitrate": "8 Mbps",
+        "codec": "H.264 / AVC",
+        "orientation": "Auto Sensor",
+        "audio": "Mixed Stream",
+        "countdown": "3s",
+        "screenshotDelay": "3s",
+        "gain": 100.0,
+        "cfr": true,
+        "hardware": true,
+        "noise": false,
+        "facecam": false,
+        "shake": true,
+        "screenOff": false,
+        "touches": false,
+        "cache": true,
+        "internalGain": 100.0,
+        "durationSeconds": 0,
+        "mode": "Normal"
+      }
+    }
+  }
+}

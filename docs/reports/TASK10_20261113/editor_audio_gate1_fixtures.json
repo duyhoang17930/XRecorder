@@ -1,0 +1,29 @@
+{
+  "stamp": "1794624056448",
+  "assets": [
+    {
+      "source": "build\\verification\\p2_p3\\audio\\p2_p3_audio_video.mp4",
+      "path": "/sdcard/Download/TASK10_20261113/audio_1794624056448/p2_p3_audio_video.mp4",
+      "bytes": 54058,
+      "sha256": "4e908289b95707e361439947f2300db9b13f18fd260432463349f5fa8c14fc38"
+    },
+    {
+      "source": "build\\verification\\p2_p3\\audio\\p2_p3_tone_440.wav",
+      "path": "/sdcard/Download/TASK10_20261113/audio_1794624056448/p2_p3_tone_440.wav",
+      "bytes": 384078,
+      "sha256": "07b5f002958089a8a88de7c9164a998aef10aedd75f13db377d70ef9dc637b9f"
+    },
+    {
+      "source": "build\\verification\\p2_p3\\audio\\p2_p3_tone_880.wav",
+      "path": "/sdcard/Download/TASK10_20261113/audio_1794624056448/p2_p3_tone_880.wav",
+      "bytes": 384078,
+      "sha256": "41ec8a99cb1c460d0d666490b5ec81dd1399969bfc287d4d37864a88c844e135"
+    }
+  ],
+  "projects": {
+    "audio_1794624056448_baseline": "32be10ee9daf8f17018c0c287533db5798ee3b8333793f276c4b57de079c2206",
+    "audio_1794624056448_eightTrackMix": "c26c89d5d1181ac4ccee67a4267e5a40dd3b9502dc414791d647461eaff0a62c"
+  },
+  "manifest": "task08_media_input_1794624056448.json",
+  "scope": "TASK10 new fixtures; reuse production native export/preview; main UI tested separately"
+}

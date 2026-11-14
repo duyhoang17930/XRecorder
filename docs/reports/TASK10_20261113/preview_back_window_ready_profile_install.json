@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "d492b9e975424064005f96bf7f47ced59d03d1c14e6a836efd2ff3ebcfdc3b2f",
+  "apkBytes": 62044127,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Register Back after own controller window attachment; same original decoder and safe immediate release",
+  "freeBytes": {
+    "C:/": 16133443584,
+    "D:/": 22895697920
+  }
+}

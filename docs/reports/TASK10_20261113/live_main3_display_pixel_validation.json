@@ -1,0 +1,15 @@
+{
+  "expectedFit": "1080x2400 selected display ->576x1280 content centered in720x1280 encoder canvas",
+  "sourceScreenshot": "live_main3_active.png",
+  "receivedFrame": 166,
+  "staticSourceCrop": [
+    72,
+    80,
+    576,
+    390
+  ],
+  "rgbMAE": 1.783670168566002,
+  "wrongStretchMAE": 9.832082443019942,
+  "status": "PASS",
+  "transient9sFrame": "Android foreground transition; final frame contains full live UI, no persistent blank capture"
+}

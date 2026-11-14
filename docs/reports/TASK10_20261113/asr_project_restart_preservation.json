@@ -1,0 +1,18 @@
+{
+  "projectId": "project_1794600055303550",
+  "beforeSha256": "f1ccb1bee458459d5a4dace360dfecac64f4a09c2b85a4444b2abf538b745a73",
+  "afterSha256": "f1ccb1bee458459d5a4dace360dfecac64f4a09c2b85a4444b2abf538b745a73",
+  "byteExact": true,
+  "cues": [
+    {
+      "startMs": 0,
+      "endMs": 5500,
+      "text": "And so my fellow Americans ask not what your country can"
+    },
+    {
+      "startMs": 5500,
+      "endMs": 11000,
+      "text": "do for you, ask what you can do for your country."
+    }
+  ]
+}

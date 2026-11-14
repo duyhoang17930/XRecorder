@@ -1,0 +1,69 @@
+{
+  "sourceSamples": 175104,
+  "outputSamples": 176576,
+  "unshiftedCorrelation": -0.0004384107557839799,
+  "coarseBest": [
+    0.9998943221368066,
+    448
+  ],
+  "best": [
+    0.9998911613225044,
+    448
+  ],
+  "bestOffsetMs": 28.0,
+  "sourceFirstPackets": [
+    {
+      "pts_time": "-0.064000",
+      "duration_time": "0.064000",
+      "data_hash": "SHA256:a01ad1df87ddd764649041e6a4c15f71d82ebd9c2b0776711a0be233626d5dda",
+      "side_data_list": [
+        {
+          "side_data_type": "Skip Samples",
+          "skip_samples": 1024,
+          "discard_padding": 0,
+          "skip_reason": 0,
+          "discard_reason": 0
+        }
+      ]
+    },
+    {
+      "pts_time": "0.000000",
+      "duration_time": "0.064000",
+      "data_hash": "SHA256:ec9926780564e06992a035ee1a9c92207a79dad7759d832003e2aec47267787b"
+    },
+    {
+      "pts_time": "0.064000",
+      "duration_time": "0.064000",
+      "data_hash": "SHA256:66b72b6b6a13d55732c7e48c92a410707bb390e035bd0ffb2846879be6bdcaff"
+    }
+  ],
+  "outputFirstPackets": [
+    {
+      "pts_time": "-0.100000",
+      "duration_time": "0.064000",
+      "data_hash": "SHA256:3afcda5274bdc0058fbd1c9e7062111b6338f64d79cb254aa27a144c48a2c881",
+      "side_data_list": [
+        {
+          "side_data_type": "Skip Samples",
+          "skip_samples": 1600,
+          "discard_padding": 0,
+          "skip_reason": 0,
+          "discard_reason": 0
+        }
+      ]
+    },
+    {
+      "pts_time": "-0.036000",
+      "duration_time": "0.064000",
+      "data_hash": "SHA256:778e6a530bf9f73e000fe2f805320c192005f5bb2c0858b78602d24145568b61"
+    },
+    {
+      "pts_time": "0.028000",
+      "duration_time": "0.064000",
+      "data_hash": "SHA256:817f8ba5d238bd5df85e4ef59352fe0cb184666eaff449809834548770b132f6"
+    }
+  ],
+  "sourcePacketCount": 172,
+  "outputPacketCount": 174,
+  "packetPayloadsEqual": false
+}

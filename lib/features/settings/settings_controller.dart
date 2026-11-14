@@ -116,6 +116,7 @@ class SettingsController extends ChangeNotifier {
       'orientation': orientation,
       'audio': audio,
       'countdown': countdown,
+      'screenshotDelay': screenshotDelay,
       'gain': gain,
       'cfr': cfr,
       'hardware': hardware,
@@ -174,6 +175,12 @@ class SettingsController extends ChangeNotifier {
       'Mute',
     ]);
     countdown = choice('countdown', countdown, ['Off', '3s', '5s', '10s']);
+    screenshotDelay = choice('screenshotDelay', screenshotDelay, [
+      '1s',
+      '3s',
+      '5s',
+      '10s',
+    ]);
     final savedGain = values['gain'];
     if (savedGain is num && savedGain.isFinite) {
       gain = savedGain.toDouble().clamp(0, 200);
@@ -205,6 +212,9 @@ class SettingsController extends ChangeNotifier {
   String orientation = 'Auto Sensor';
   String audio = 'Mixed Stream';
   String countdown = '3s';
+  String screenshotDelay = '3s';
+  Duration get screenshotDelayDuration =>
+      Duration(seconds: int.parse(screenshotDelay.replaceAll('s', '')));
   double gain = 100;
   double internalGain = 100;
   int durationSeconds = 0;
@@ -286,6 +296,7 @@ class SettingsController extends ChangeNotifier {
       orientation = 'Auto Sensor';
       audio = 'Mixed Stream';
       countdown = '3s';
+      screenshotDelay = '3s';
       gain = 100;
       internalGain = 100;
       durationSeconds = 0;

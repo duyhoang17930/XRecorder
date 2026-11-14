@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "visible-back",
+      "targetDp": 48,
+      "disposed": true
+    },
+    {
+      "case": "system-back",
+      "targetDp": 48,
+      "disposed": true
+    },
+    {
+      "case": "landscape-back",
+      "targetDp": 48,
+      "disposed": true
+    },
+    {
+      "case": "reopen-back",
+      "targetDp": 48,
+      "disposed": true
+    }
+  ],
+  "sourceHashExact": true,
+  "settingsByteExact": true,
+  "terminalJournalByteExact": true,
+  "sourceByteExact": true,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "scope": "4existing Back/rotation/reopen/release cases, not complete playback acceptance"
+}

@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "jobId": "model_1794601803967",
+  "state": "failed",
+  "errorCode": "model_install_failed",
+  "existingTinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "modelDirectory": "total 75876\r\n-rw------- 1 u0_a237 u0_a237 77691713 2026-11-14 03:06 ggml-tiny.bin\r\n"
+}

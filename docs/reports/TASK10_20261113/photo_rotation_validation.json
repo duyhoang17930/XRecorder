@@ -1,0 +1,14 @@
+{
+  "sourceSize": [
+    1080,
+    2400
+  ],
+  "outputSize": [
+    2048,
+    922
+  ],
+  "downscaledMeanPixelErrorVsClockwiseRotateAndResize": 0.03502155172413793,
+  "format": "PNG",
+  "decode": "PASS",
+  "originalUnchanged": "byte-compared on device"
+}

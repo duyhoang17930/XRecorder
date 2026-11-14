@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "uri": "content://media/external/video/media/115",
+  "sha256": "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f",
+  "metadata": "Row: 0 _display_name=TASK10_ASR_burnin.mp4, _size=582195, owner_package_name=com.xrecorder.xrecorder\r\n",
+  "invalidName": "rejected on submit; original name unchanged",
+  "share": "chooser opened then cancelled; nothing sent"
+}

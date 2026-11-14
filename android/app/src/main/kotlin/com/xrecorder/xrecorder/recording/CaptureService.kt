@@ -33,6 +33,9 @@ class CaptureService : Service() {
     private var projection: MediaProjection? = null
     private var display: VirtualDisplay? = null
     private var video: VideoEncoder? = null
+    private var liveCapture: com.xrecorder.xrecorder.live.LiveCapture? = null
+    private var regionProcessor: RegionCaptureProcessor? = null
+    private var completionNotice: String? = null
     private var audio: SessionAudio? = null
     private var imageReader: android.media.ImageReader? = null
     private var facecam: FacecamOverlay? = null
@@ -110,7 +113,10 @@ class CaptureService : Service() {
                     ending, CaptureState.busy, started
                 ) && !CaptureState.screenshot) {
                 controlsAcceptedInVideo = action == SHOW_CONTROLS && android.provider.Settings.canDrawOverlays(this)
-                if (!controlsAcceptedInVideo) { controls?.close(); controls = null }
+                if (!controlsAcceptedInVideo) {
+                    drawingOverlay?.setDrawingEnabled(false)
+                    controls?.close(); controls = null
+                }
                 updateControls()
                 getSystemService(NotificationManager::class.java).notify(NOTIFICATION, notification(true))
             }
@@ -146,6 +152,20 @@ class CaptureService : Service() {
                 if (Build.VERSION.SDK_INT >= 30 && config.facecam) types = types or ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA
                 startForeground(NOTIFICATION, notification, types)
             } else startForeground(NOTIFICATION, notification)
+            if (config.liveRequested) {
+                val endpoint = requireNotNull(com.xrecorder.xrecorder.live.LiveCaptureState.take(CaptureState.id)) {
+                    "The live session was interrupted. Enter the destination again."
+                }
+                liveCapture = com.xrecorder.xrecorder.live.LiveCapture(CaptureState.id, endpoint, config.hasAudio,
+                    requestKeyFrame = { handler.post { if (!ending) video?.requestKeyFrame() } },
+                    changed = { handler.post { if (sessionId == CaptureState.id) CaptureState.emit() } },
+                    failed = { handler.post {
+                        if (!ending && sessionId == CaptureState.id) {
+                            if (started) stopCapture("Live connection ended. The local video was saved.")
+                            else fail("Could not start the livestream. Check the destination and connection.")
+                        }
+                    } })
+            }
             if (StatFs(getExternalFilesDir(null)?.absolutePath ?: filesDir.absolutePath).availableBytes < 128L * 1024 * 1024) throw java.io.IOException("Low storage")
             val consent = if (Build.VERSION.SDK_INT >= 33) intent.getParcelableExtra("consent", Intent::class.java) else @Suppress("DEPRECATION") intent.getParcelableExtra<Intent>("consent")
             require(consent != null)
@@ -156,6 +176,13 @@ class CaptureService : Service() {
                     if (ending || sessionId != CaptureState.id || CaptureState.screenshot || width <= 0 || height <= 0) return
                     // Keep the existing encoder canvas/preset. Android fits captured content
                     // to its Surface without cropping; a different aspect ratio may letterbox.
+                    val region = regionProcessor
+                    if (region != null && (width != region.sourceWidth || height != region.sourceHeight)) {
+                        // A region is tied to a physical screen coordinate system. Preserve
+                        // the valid recording instead of silently capturing different pixels.
+                        stopCapture("Video saved. The screen size changed; select a new region to continue.")
+                        return
+                    }
                     try { display?.resize(width, height, resources.displayMetrics.densityDpi) }
                     catch (_: Exception) { fail("Could not resize the captured content.") }
                 }
@@ -182,6 +209,10 @@ class CaptureService : Service() {
     }
     private fun startEncoder() {
         if (ending || sessionId != CaptureState.id) return
+        if (config.isRegion && (resources.displayMetrics.widthPixels != config.regionSourceWidth ||
+                resources.displayMetrics.heightPixels != config.regionSourceHeight)) {
+            fail("The screen size changed. Select the capture region again."); return
+        }
         if (config.facecam && facecam?.ready != true) {
             if(cameraWaitStart==0L) cameraWaitStart=SystemClock.elapsedRealtime()
             if(SystemClock.elapsedRealtime()-cameraWaitStart>10000) { fail("No camera frames arrived. Disable facecam and retry."); return }
@@ -196,15 +227,33 @@ class CaptureService : Service() {
                 audioFile = File(cacheDir,"capture_${CaptureState.id}.m4a")
                 descriptor = ParcelFileDescriptor.open(videoFile!!,ParcelFileDescriptor.MODE_CREATE or ParcelFileDescriptor.MODE_READ_WRITE or ParcelFileDescriptor.MODE_TRUNCATE)
                 audio = SessionAudio(this,projection!!,config.audio,config.micGain,config.internalGain,config.noiseReduction,config.audioDucking,audioFile!!,
-                    onFailure = { handler.post { fail("Audio capture was interrupted. Try a different audio source or mute.") } })
+                    onFailure = { handler.post { fail("Audio capture was interrupted. Try a different audio source or mute.") } },
+                    encodedOutput = liveCapture?.audio)
                 audio!!.start()
             } else descriptor = output!!.open()
             video = VideoEncoder(descriptor!!,videoFile?.absolutePath ?: output!!.legacyPath,config.encoderName,config.width,config.height,config.bitrate,config.fps,config.mime,
                 onFirstFrame = { handler.post { markRecording() } },
-                onFailure = { handler.post { fail("The encoder failed. Choose a lower recording preset.") } })
-            display = projection!!.createVirtualDisplay("XRecorder",config.width,config.height,resources.displayMetrics.densityDpi,
-                DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,video!!.surface,null,handler)
-            started = true
+                onFailure = { handler.post { fail("The encoder failed. Choose a lower recording preset.") } },
+                encodedOutput = liveCapture?.video)
+            if (config.isRegion) {
+                val metrics = resources.displayMetrics
+                val sourceWidth = metrics.widthPixels
+                val sourceHeight = metrics.heightPixels
+                regionProcessor = RegionCaptureProcessor(this, config, sourceWidth, sourceHeight, video!!.surface,
+                    onReady = { surface ->
+                        if (!ending && sessionId == CaptureState.id) {
+                            try {
+                                display = projection!!.createVirtualDisplay("XRecorder region",sourceWidth,sourceHeight,metrics.densityDpi,
+                                    DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,surface,null,handler)
+                                started = true
+                            } catch (_: Exception) { fail("Could not capture the selected screen region.") }
+                        }
+                    }, onFailure = { message -> fail(message) })
+            } else {
+                display = projection!!.createVirtualDisplay("XRecorder",config.width,config.height,resources.displayMetrics.densityDpi,
+                    DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,video!!.surface,null,handler)
+                started = true
+            }
             handler.postDelayed({ if (!ending && CaptureState.state == "starting") fail("No capture frames arrived. Check the audio source and retry.") },15000)
         } catch (_: Exception) { fail("Could not start the selected video/audio configuration. Choose a lower preset or mute.") }
     }
@@ -256,8 +305,8 @@ class CaptureService : Service() {
                                     saved = output!!.commit().toString()
                                 } finally { bitmap.recycle() }
                             }
-                        } catch (_: Exception) { cleanupPartial() }
-                        catch (_: OutOfMemoryError) { cleanupPartial() }
+                        } catch (_: Exception) { retainPartial() }
+                        catch (_: OutOfMemoryError) { retainPartial() }
                         handler.post {
                             release()
                             if (saved == null) CaptureState.transition("failed","Screenshot could not be saved.")
@@ -267,12 +316,12 @@ class CaptureService : Service() {
                     },"screenshot-save").start()
                 } catch (_: Exception) {
                     runCatching { image.close() }
-                    cleanupPartial(); release()
+                    retainPartial(); release()
                     CaptureState.transition("failed", "Screenshot capture is unavailable.")
                     stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
                 } catch (_: OutOfMemoryError) {
                     runCatching { image.close() }
-                    cleanupPartial(); release()
+                    retainPartial(); release()
                     CaptureState.transition("failed", "Not enough memory for the screenshot.")
                     stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
                 }
@@ -313,8 +362,8 @@ class CaptureService : Service() {
             CaptureNotificationPolicy.IconType.VIDEO -> android.R.drawable.presence_video_online
         }
         builder.setSmallIcon(smallIcon)
-            .setContentTitle(spec.title)
-            .setContentText(spec.text)
+            .setContentTitle(CaptureText.text(this, spec.title))
+            .setContentText(CaptureText.text(this, spec.text))
             .setOngoing(spec.ongoing)
             .setContentIntent(open)
         if (spec.alertOnce) {
@@ -329,7 +378,7 @@ class CaptureService : Service() {
                     .putExtra("sessionId", CaptureState.id),
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
-            builder.addAction(Notification.Action.Builder(null, action.title, pendingIntent).build())
+            builder.addAction(Notification.Action.Builder(null, CaptureText.text(this, action.title), pendingIntent).build())
         }
         return builder.build()
     }
@@ -355,6 +404,8 @@ class CaptureService : Service() {
         if (CaptureState.screenshot || controlsUnavailable || !controlsAcceptedInVideo) return
         try {
             if (controls == null && CaptureState.state in listOf("recording", "paused")) {
+                // Attach ink first so the toolbar stays above its touch-consuming window.
+                if (drawingOverlay == null) drawingOverlay = DrawingOverlay(this, changed = { controls?.render(CaptureState.state, CaptureState.elapsedActiveMs) })
                 val sessionId = CaptureState.id
                 controls = FloatingRecordingControls(
                     context = this,
@@ -372,7 +423,13 @@ class CaptureService : Service() {
                     initialScale = CaptureState.config.floatingScale,
                     initialOpacity = CaptureState.config.floatingOpacity,
                     initialRatioX = CaptureState.config.floatingRatioX,
-                    initialRatioY = CaptureState.config.floatingRatioY
+                    initialRatioY = CaptureState.config.floatingRatioY,
+                    setDrawing = { enabled -> setDrawingEnabled(enabled) },
+                    drawingState = { drawingOverlay?.session?.snapshot() },
+                    undoDrawing = { undoDrawing() },
+                    clearDrawing = { clearDrawing() },
+                    setDrawingStyle = { color, width -> setDrawingStyle(color, width) },
+                    cameraOptions = if (facecam == null) null else { anchor -> showFacecamOptions(anchor) }
                 )
             }
             controls?.render(CaptureState.state, CaptureState.elapsedActiveMs)
@@ -391,9 +448,10 @@ class CaptureService : Service() {
         stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
         return true
     }
-    fun stopCapture() {
+    @JvmOverloads fun stopCapture(notice: String? = null) {
         if (!isEnding.compareAndSet(false, true)) return
         ending = true
+        completionNotice = notice
         handler.removeCallbacksAndMessages(null)
         if (!started) {
             release(); cleanupPartial(); CaptureState.transition("idle"); stopForeground(STOP_FOREGROUND_REMOVE); stopSelf(); return
@@ -409,16 +467,21 @@ class CaptureService : Service() {
         CaptureState.transition("finalizing")
         updateControls()
         if (!isFinalizing.compareAndSet(false, true)) return
+        val region = regionProcessor
+        regionProcessor = null
         Thread({
-            var saved: String? = null; var failed = false
+            var saved: String? = null; var failed = false; var recoveredFromFailure = false
             try {
+                region?.finish()
                 val encoder = video!!; encoder.finish()
                 val durationUs = encoder.durationUs; val videoStartNs = encoder.sourceStartNs
                 video = null; started = false
                 if (config.hasAudio) {
                     val input = audio!!; input.finish()
+                    val audioOffsetUs = (input.startTimeNs-videoStartNs)/1000
+                    CaptureJournal.finalizedStreams(durationUs, audioOffsetUs)
                     descriptor?.close(); descriptor = output!!.open()
-                    RecordingMuxer.combine(videoFile!!,audioFile!!,output!!,descriptor!!,(input.startTimeNs-videoStartNs)/1000,durationUs)
+                    RecordingMuxer.combine(videoFile!!,audioFile!!,output!!,descriptor!!,audioOffsetUs,durationUs)
                     audio = null
                 }
                 val metadata = MediaMetadataRetriever()
@@ -440,16 +503,33 @@ class CaptureService : Service() {
                         format.getInteger(MediaFormat.KEY_HEIGHT) == config.height) { "Output does not match the recording configuration" }
                 } finally { tracks.release() }
                 saved = output!!.commit().toString()
-            } catch (_: Exception) { video?.abort(); video = null; audio?.abort(); audio = null; cleanupPartial(); failed = true }
-            finally { videoFile?.delete(); audioFile?.delete() }
+            } catch (_: Exception) {
+                runCatching { region?.close() }
+                video?.abort(); video = null; audio?.abort(); audio = null
+                retainPartial()
+                saved = CaptureJournal.recoverCurrent(this)?.uri
+                recoveredFromFailure = saved != null
+                failed = saved == null
+            } finally {
+                liveCapture?.stop(); liveCapture = null
+                if (!failed && !recoveredFromFailure) { videoFile?.delete(); audioFile?.delete() }
+            }
             handler.post {
                 if(failed) CaptureState.transition("failed","Recording could not be finalized. No incomplete output was published.")
                 else { CaptureState.output = saved; CaptureState.transition("completed") }
                 controls?.close(); controls = null
-                android.widget.Toast.makeText(this, if (failed) "Recording could not be saved." else "Video saved", android.widget.Toast.LENGTH_SHORT).show()
+                android.widget.Toast.makeText(this, if (failed) "Recording could not be saved." else completionNotice ?: "Video saved",
+                    if (completionNotice != null) android.widget.Toast.LENGTH_LONG else android.widget.Toast.LENGTH_SHORT).show()
                 stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
             }
         },"recording-finalizer").start()
+    }
+    private fun retainPartial() {
+        output?.retain()
+        runCatching { descriptor?.close() }
+        descriptor = null
+        // Keep files and pending rows on unexpected failures. Explicit Cancel uses cleanupPartial.
+        runCatching { CaptureJournal.retainCurrent() }
     }
     private fun cleanupPartial() {
         try { output?.abort() } catch (_: Exception) { CaptureState.error = "A partial recording needs cleanup." }
@@ -465,7 +545,13 @@ class CaptureService : Service() {
         if (!isEnding.compareAndSet(false, true)) return
         ending = true
         handler.removeCallbacksAndMessages(null)
-        release(); cleanupPartial(); CaptureState.transition("failed",message)
+        // Freeze before releasing codecs/projection: terminal snapshots and
+        // recovery journals must keep active time, excluding cleanup latency.
+        val elapsedAtFailure = CaptureState.elapsedActiveMs
+        release()
+        CaptureState.elapsed = elapsedAtFailure
+        CaptureState.transition("failed",message)
+        retainPartial()
         if (!CaptureState.screenshot) {
             try { android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show() }
             catch (_: Exception) { }
@@ -473,7 +559,11 @@ class CaptureService : Service() {
         stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
     }
     private fun release() {
+        liveCapture?.stop(); liveCapture = null
         unregisterShakeSensor()
+        try { display?.release() } catch (_: Exception) { }; display = null
+        try { projection?.stop() } catch (_: Exception) { }; projection = null
+        try { regionProcessor?.close() } catch (_: Exception) { }; regionProcessor = null
         try { controls?.close() } catch (_: Exception) { }; controls = null
         try { drawingOverlay?.close() } catch (_: Exception) { }; drawingOverlay = null
         try { facecam?.close() } catch (_: Exception) { }; facecam = null
@@ -511,20 +601,26 @@ class CaptureService : Service() {
         controls?.applyCustomization(scale, opacity)
     }
     fun setDrawingEnabled(enabled: Boolean): Boolean {
-        if (CaptureState.screenshot || !android.provider.Settings.canDrawOverlays(this)) return false
+        if (ending || CaptureState.state !in listOf("recording", "paused") || CaptureState.screenshot ||
+            !controlsAcceptedInVideo || !android.provider.Settings.canDrawOverlays(this)) return false
         if (drawingOverlay == null && enabled) {
-            drawingOverlay = DrawingOverlay(this)
+            drawingOverlay = DrawingOverlay(this, changed = { controls?.render(CaptureState.state, CaptureState.elapsedActiveMs) })
         }
         return drawingOverlay?.setDrawingEnabled(enabled) ?: false
     }
     fun clearDrawing(): Boolean {
-        return (drawingOverlay?.clear() ?: 0) >= 0
+        val overlay = drawingOverlay ?: return false
+        if (ending) return false
+        overlay.clear()
+        return true
     }
     fun undoDrawing(): Boolean {
         return drawingOverlay?.undo() ?: false
     }
     fun setDrawingStyle(color: Int?, width: Float?): Boolean {
-        drawingOverlay?.setStyle(color, width)
+        val overlay = drawingOverlay ?: return false
+        if (ending) return false
+        overlay.setStyle(color, width)
         return true
     }
     fun getDrawingState(): Map<String, Any> {
@@ -537,10 +633,33 @@ class CaptureService : Service() {
             "width" to (snapshot?.currentWidth ?: DrawingStrokeEngine.DEFAULT_STROKE_WIDTH)
         )
     }
-    fun switchFacecamCamera(): Boolean = facecam?.switchCamera() ?: false
+    private fun showFacecamOptions(anchor: android.view.View) {
+        if (ending) return
+        val menu = android.widget.PopupMenu(this, anchor)
+        listOf("Switch camera", "Small camera", "Normal camera", "Large camera", "No camera effect", "Grayscale camera", "Sepia camera")
+            .forEachIndexed { index, title -> menu.menu.add(0, index, index, CaptureText.text(this, title)) }
+        menu.setOnMenuItemClickListener { item ->
+            val success = when (item.itemId) {
+                0 -> switchFacecamCamera()
+                1 -> setFacecamScale(.75f)
+                2 -> setFacecamScale(1f)
+                3 -> setFacecamScale(1.5f)
+                4 -> setFacecamEffect(FacecamGeometry.EFFECT_OFF)
+                5 -> setFacecamEffect(FacecamGeometry.EFFECT_MONO)
+                6 -> setFacecamEffect(FacecamGeometry.EFFECT_SEPIA)
+                else -> false
+            }
+            if (!success) android.widget.Toast.makeText(this, CaptureText.text(this, "Not supported by this device or the selected mode"), android.widget.Toast.LENGTH_SHORT).show()
+            true
+        }
+        menu.show()
+    }
+    fun switchFacecamCamera(): Boolean = runCatching { facecam?.switchCamera() ?: false }.getOrDefault(false)
     fun setFacecamEffect(effect: Int): Boolean = facecam?.setEffect(effect) ?: false
     fun setFacecamScale(scale: Float): Boolean {
-        facecam?.setScale(scale)
+        val camera = facecam ?: return false
+        if (ending) return false
+        camera.setScale(scale)
         return true
     }
     fun getFacecamState(): Map<String, Any> = mapOf(

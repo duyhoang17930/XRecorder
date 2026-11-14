@@ -8,10 +8,55 @@ import 'package:xrecorder/features/settings/settings_controller.dart';
 import 'package:xrecorder/l10n/app_languages.dart';
 import 'package:xrecorder/l10n/editor_numbers.dart';
 import 'package:xrecorder/l10n/localization.dart';
+import 'package:xrecorder/app/theme/app_theme.dart';
+import 'package:xrecorder/core/constants/app_icons.dart';
 
 import 'settings_persistence_test.dart' show MemoryStore;
 
 void main() {
+  for (final language in ['en', 'ar']) {
+    testWidgets('themed back direction and navigation follow $language', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.light,
+          locale: Locale(language),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: TextButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) =>
+                        Scaffold(appBar: AppBar(title: const Text('Detail'))),
+                  ),
+                ),
+                child: const Text('Open detail'),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Open detail'));
+      await tester.pumpAndSettle();
+      expect(
+        find.byIcon(language == 'ar' ? AppIcons.chevronRight : AppIcons.back),
+        findsOneWidget,
+      );
+      final context = tester.element(find.byType(BackButton));
+      await tester.tap(
+        find.byTooltip(MaterialLocalizations.of(context).backButtonTooltip),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Open detail'), findsOneWidget);
+      expect(find.text('Detail'), findsNothing);
+      expect(tester.takeException(), isNull);
+    });
+  }
+
   testWidgets('cached formats keep locale and precision independent', (
     tester,
   ) async {
@@ -147,6 +192,10 @@ void main() {
         'onboardingNext',
         'onboardingSaveFailed',
         'onboardingProgress',
+        'captureProtectedAudioNotice',
+        'captureUnsupportedDevice',
+        'captureTouchGuidanceBody',
+        'captureDurationInvalid',
       };
       final differences = {
         for (final key in keys)
@@ -162,6 +211,29 @@ void main() {
         expect(child['homeScreenShortcuts'], 'Atalhos da tela inicial');
         expect(parent['captureScreenshot'], 'Captura de ecrã');
         expect(child['captureScreenshot'], 'Captura de tela');
+        expect(parent['captureProtectedAudioNotice'], contains('pode pedir'));
+        expect(
+          child['captureProtectedAudioNotice'],
+          contains('pode solicitar'),
+        );
+        expect(
+          parent['captureUnsupportedDevice'],
+          'Não suportado por este dispositivo',
+        );
+        expect(
+          child['captureUnsupportedDevice'],
+          'Não é compatível com este dispositivo',
+        );
+        expect(parent['captureTouchGuidanceBody'], contains('ecrã inteiro'));
+        expect(child['captureTouchGuidanceBody'], contains('tela inteira'));
+        expect(
+          parent['captureDurationInvalid'],
+          'Introduza entre 0 e 86400 segundos',
+        );
+        expect(
+          child['captureDurationInvalid'],
+          'Digite entre 0 e 86400 segundos',
+        );
       }
       expect(
         {

@@ -1,0 +1,10 @@
+{
+  "tests": 152,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": 27,
+  "buildStatus": "FAIL_BEFORE_TEST",
+  "resultsAreFromPreviousGate": true,
+  "reason": "ICU apostrophe syntax failure during gen_localizations; latest added restoration test did not run"
+}

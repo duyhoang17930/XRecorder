@@ -1,0 +1,38 @@
+{
+  "source": "task10_recording_microphone.mp4",
+  "operation": "stream-copy only; no re-encoding",
+  "durationUs": 12359544,
+  "fixtures": {
+    "video": {
+      "path": "r5_fixture_video.mp4",
+      "bytes": 1126162,
+      "sha256": "e15419ff0fb0abf4ffec50bbf7bc33147a36fedb58581951a9a865a059b7927c"
+    },
+    "audio": {
+      "path": "r5_fixture_audio.m4a",
+      "bytes": 200071,
+      "sha256": "d18eac182e64406f5ce4a062e71d7d3776c8057960206bec7542aae4fde263ba"
+    },
+    "png": {
+      "path": "task10_photo_rotated.png",
+      "bytes": 1161041,
+      "sha256": "3789f1c282a3731222dcacd7c2f668a86cbf3b790caba21b005dd1eb64bc8721"
+    },
+    "combined": {
+      "path": "task10_recording_microphone.mp4",
+      "bytes": 1329391,
+      "sha256": "524cd2917d8f1dfd15b177067a56092976fc4963b27d9b2368820c18d3915c13"
+    },
+    "leadVideo": {
+      "path": "r5_leadVideo.mp4",
+      "sha256": "6d2e778f4f0ce8fdc5d29c51e26509e0056bc164429750c2693e70460b9b6019",
+      "bytes": 118857
+    },
+    "leadAudio": {
+      "path": "r5_leadAudio.m4a",
+      "sha256": "6d2ed71ff9cbd92bd63c4b81ebf757e93e1ca999e7ee7f8c0b8680f718e998f4",
+      "bytes": 20478
+    }
+  },
+  "leadDurationUs": 314933
+}

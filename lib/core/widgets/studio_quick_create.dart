@@ -3,6 +3,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/recording/recording_service.dart';
 import '../../features/recording/recording_setup_sheet.dart';
+import '../../features/recording/region_capture_page.dart';
+import '../../features/recording/livestream_page.dart';
+import '../../features/settings/settings_controller.dart';
+import '../domain/repositories.dart';
 import '../../l10n/localization.dart';
 import '../ui/components/bottom_sheets/studio_sheet_launch.dart';
 import 'studio_widgets.dart';
@@ -12,7 +16,9 @@ Future<void> requestLibraryScreenshot(BuildContext context) async {
   final capture = CaptureScope.of(context);
   if (capture.busy) return;
   try {
-    await capture.screenshot();
+    await capture.screenshot(
+      delay: SettingsScope.of(context).screenshotDelayDuration,
+    );
   } catch (error) {
     if (context.mounted) {
       showFailure(context, error, operation: UserOperation.screenshot);
@@ -74,7 +80,13 @@ Future<void> openQuickCreate(BuildContext host) => showStudioBottomSheet<void>(
                 subtitle: Text(
                   capture.busy
                       ? sheet.l10n.finishTheCurrentRecordingFirst
-                      : sheet.l10n.screenshotMinimizesTheAppAfterApproval3s,
+                      : sheet.l10n.screenshotDelaySummary(
+                          sheet.displayValue(
+                            SettingsScope.of(sheet)
+                                .screenshotDelayDuration
+                                .inSeconds,
+                          ),
+                        ),
                 ),
                 onTap: capture.busy
                     ? null
@@ -85,6 +97,17 @@ Future<void> openQuickCreate(BuildContext host) => showStudioBottomSheet<void>(
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
+            if (capture.service is RegionRecordingService)
+              ListTile(
+                leading: const Icon(AppIcons.region),
+                title: Text(sheet.l10n.regionCapture),
+                onTap: capture.busy
+                    ? null
+                    : () {
+                        dismiss();
+                        openRegionCapture(host);
+                      },
+              ),
             ListTile(
               leading: const Icon(AppIcons.videoSettings),
               title: Text(sheet.l10n.recordingSettings),
@@ -94,6 +117,18 @@ Future<void> openQuickCreate(BuildContext host) => showStudioBottomSheet<void>(
                 host.push('/settings/audio-video');
               },
             ),
+            if (capture.service is LivestreamRecordingService)
+              ListTile(
+                leading: const Icon(AppIcons.livestream),
+                title: Text(sheet.message('Livestream')),
+                subtitle: const Text('RTMP / RTMPS'),
+                onTap: capture.service is! LivestreamRecordingService
+                    ? null
+                    : () {
+                        dismiss();
+                        openLivestream(host);
+                      },
+              ),
             ListTile(
               leading: const Icon(AppIcons.edit),
               title: Text(sheet.l10n.editingStudio),

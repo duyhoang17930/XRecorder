@@ -1,0 +1,28 @@
+{
+  "crop": [
+    150,
+    1160,
+    600,
+    240
+  ],
+  "reason": "Body ROI below expanded floating toolbar; earlier ROI included the orange camera icon.",
+  "phases": {
+    "stroke": {
+      "inkPixels": 1502,
+      "time": 1794595093.362751
+    },
+    "undo": {
+      "inkPixels": 0,
+      "time": 1794595098.6513872
+    },
+    "clear": {
+      "inkPixels": 0,
+      "time": 1794595104.3993013
+    },
+    "pass_through": {
+      "inkPixels": 1950,
+      "time": 1794595110.2795641
+    }
+  },
+  "status": "PASS"
+}

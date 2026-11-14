@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import java.util.Locale
 
-/** P2 resources only: never changes application locales or recreates capture. */
+/** Native resource context only: never changes application locales or recreates capture. */
 internal object P2Locale {
     private val supported =
         setOf("en", "vi", "es", "pt-BR", "fr", "de", "id", "ja", "ko", "zh-Hans", "hi", "ar")

@@ -1,0 +1,19 @@
+{
+  "uri": "content://media/external/video/media/52",
+  "bytes": 1329391,
+  "sha256": "524cd2917d8f1dfd15b177067a56092976fc4963b27d9b2368820c18d3915c13",
+  "duration": "12.359544",
+  "videoFrames": "253",
+  "audioFrames": "577",
+  "resolution": [
+    720,
+    1280
+  ],
+  "tracks": [
+    "h264",
+    "aac"
+  ],
+  "sampleRate": "48000",
+  "fullDecode": "PASS",
+  "physicalMicrophoneQuality": "DEVICE-ONLY, not certified from emulator"
+}

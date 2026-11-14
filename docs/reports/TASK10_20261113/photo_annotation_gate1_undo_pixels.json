@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "scope": "actual pen -> Undo -> Redo, same canvas viewport and task input",
+  "roi": [
+    360,
+    600,
+    340,
+    350
+  ],
+  "checks": [
+    {
+      "file": "photo_annotation_gate1_pen.png",
+      "redPixelsInCanvasRoi": 1774,
+      "maeAgainstUneditedCanvas": 1.571126050420168
+    },
+    {
+      "file": "photo_annotation_gate1_undo.png",
+      "redPixelsInCanvasRoi": 0,
+      "maeAgainstUneditedCanvas": 0.0
+    },
+    {
+      "file": "photo_annotation_gate1_redo.png",
+      "redPixelsInCanvasRoi": 1774,
+      "maeAgainstUneditedCanvas": 1.571126050420168
+    }
+  ]
+}

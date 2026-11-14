@@ -1,0 +1,18 @@
+{
+  "file": "task10_recording_mute.mp4",
+  "bytes": 1266397,
+  "sha256": "7c12d2be6c920b35b61f3a249e4f23c541c57d5d6b44c4bd990abe79af9b76c6",
+  "fullDecodeExit": 0,
+  "frames": "343",
+  "durationSeconds": "18.154622",
+  "nativeActiveElapsedMs": 18124,
+  "resolution": [
+    720,
+    1280
+  ],
+  "tracks": [
+    "h264 video"
+  ],
+  "audioExpected": "mute/no audio",
+  "frameVisualReview": "Actual app UI visible in recording_mute_frame.png; letterboxed to configured encoder aspect ratio. No physical FPS claim."
+}

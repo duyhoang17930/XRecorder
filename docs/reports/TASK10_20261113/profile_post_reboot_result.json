@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "apk": {
+    "status": "PASS",
+    "apkSha256": "3e6a1cf5bc0e68535e3d6d971c21d114bcce62d46e05a8c0c74918d5ea72d2d6",
+    "apkBytes": 60288247,
+    "avd": "Pixel_7",
+    "serial": "emulator-5554",
+    "metadataFilesByteExact": 55,
+    "originalDraftsByteExact": 8,
+    "scope": "Installed main.dart profile identity verified; no data/cache clear"
+  },
+  "launches": [
+    {
+      "kind": "process_cold",
+      "index": 1,
+      "timesMs": {
+        "TotalTime": 2876,
+        "WaitTime": 2881
+      },
+      "raw": "Starting: Intent { cmp=com.xrecorder.xrecorder/.MainActivity }\r\nStatus: ok\r\nLaunchState: COLD\r\nActivity: com.xrecorder.xrecorder/.MainActivity\r\nTotalTime: 2876\r\nWaitTime: 2881\r\nComplete\r\n"
+    },
+    {
+      "kind": "process_cold",
+      "index": 2,
+      "timesMs": {
+        "TotalTime": 2951,
+        "WaitTime": 2965
+      },
+      "raw": "Starting: Intent { cmp=com.xrecorder.xrecorder/.MainActivity }\r\nStatus: ok\r\nLaunchState: COLD\r\nActivity: com.xrecorder.xrecorder/.MainActivity\r\nTotalTime: 2951\r\nWaitTime: 2965\r\nComplete\r\n"
+    },
+    {
+      "kind": "process_cold",
+      "index": 3,
+      "timesMs": {
+        "TotalTime": 2895,
+        "WaitTime": 2906
+      },
+      "raw": "Starting: Intent { cmp=com.xrecorder.xrecorder/.MainActivity }\r\nStatus: ok\r\nLaunchState: COLD\r\nActivity: com.xrecorder.xrecorder/.MainActivity\r\nTotalTime: 2895\r\nWaitTime: 2906\r\nComplete\r\n"
+    },
+    {
+      "kind": "warm_resume",
+      "index": 1,
+      "timesMs": {
+        "WaitTime": 133
+      },
+      "raw": "Starting: Intent { cmp=com.xrecorder.xrecorder/.MainActivity }\r\nWarning: Activity not started, its current task has been brought to the front\r\nStatus: ok\r\nLaunchState: UNKNOWN (0)\r\nActivity: com.xrecorder.xrecorder/.MainActivity\r\nWaitTime: 133\r\nComplete\r\n"
+    },
+    {
+      "kind": "warm_resume",
+      "index": 2,
+      "timesMs": {
+        "WaitTime": 108
+      },
+      "raw": "Starting: Intent { cmp=com.xrecorder.xrecorder/.MainActivity }\r\nWarning: Activity not started, its current task has been brought to the front\r\nStatus: ok\r\nLaunchState: UNKNOWN (0)\r\nActivity: com.xrecorder.xrecorder/.MainActivity\r\nWaitTime: 108\r\nComplete\r\n"
+    },
+    {
+      "kind": "warm_resume",
+      "index": 3,
+      "timesMs": {
+        "WaitTime": 85
+      },
+      "raw": "Starting: Intent { cmp=com.xrecorder.xrecorder/.MainActivity }\r\nWarning: Activity not started, its current task has been brought to the front\r\nStatus: ok\r\nLaunchState: UNKNOWN (0)\r\nActivity: com.xrecorder.xrecorder/.MainActivity\r\nWaitTime: 85\r\nComplete\r\n"
+    }
+  ],
+  "memoryKiB": {
+    "TOTAL PSS": 126498,
+    "TOTAL RSS": 243512,
+    "TOTAL SWAP PSS": 1
+  },
+  "deviceAwakeAndKeyguardAbsent": true,
+  "medianTotalTimeMs": {
+    "process_cold": 2895
+  },
+  "diskFreeBytes": {
+    "C:/": 16189054976,
+    "D:/": 24279896064
+  },
+  "limitations": "Pixel_7 AVD runtime3GiB; cached OS and task-enriched library. Android am start timing only; no Flutter frame, thermal, battery, leak or physical-device acceptance."
+}

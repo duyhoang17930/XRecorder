@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "projectDurationSeconds": 3.99,
+  "outputs": [
+    {
+      "file": "main_gif.gif",
+      "bytes": 2616881,
+      "frames": 40,
+      "duration": "3.990000"
+    },
+    {
+      "file": "main_mp4.mp4",
+      "bytes": 470675,
+      "frames": 118,
+      "duration": "4.020000"
+    }
+  ],
+  "pixelChecks": [
+    {
+      "file": "main_gif.gif",
+      "time": 0.2,
+      "quantizedMismatchFraction": 0.0,
+      "blackRejected": true
+    },
+    {
+      "file": "main_gif.gif",
+      "time": 1.0,
+      "quantizedMismatchFraction": 0.0,
+      "blackRejected": true
+    },
+    {
+      "file": "main_gif.gif",
+      "time": 2.2,
+      "quantizedMismatchFraction": 0.0,
+      "blackRejected": true
+    },
+    {
+      "file": "main_gif.gif",
+      "time": 3.5,
+      "quantizedMismatchFraction": 0.0,
+      "blackRejected": true
+    },
+    {
+      "file": "main_mp4.mp4",
+      "time": 0.2,
+      "mae": 1.0
+    },
+    {
+      "file": "main_mp4.mp4",
+      "time": 1.0,
+      "mae": 1.0
+    },
+    {
+      "file": "main_mp4.mp4",
+      "time": 2.2,
+      "mae": 1.0
+    },
+    {
+      "file": "main_mp4.mp4",
+      "time": 3.5,
+      "mae": 1.0
+    }
+  ],
+  "gifHasNoAudio": true,
+  "scope": "main UI duplicate draft -> trim2005..4000 -> duplicate clip -> MP4 and GIF; solid-color fixture only"
+}

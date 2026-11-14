@@ -1,0 +1,45 @@
+{
+  "status": "FAIL",
+  "casesPassed": [
+    {
+      "case": "visible-back",
+      "targetDp": 48,
+      "disposed": true,
+      "exitMs": 309
+    },
+    {
+      "case": "system-back",
+      "targetDp": 48,
+      "disposed": true,
+      "exitMs": 1259
+    },
+    {
+      "case": "landscape-back",
+      "targetDp": 48,
+      "disposed": true,
+      "exitMs": 132
+    },
+    {
+      "case": "reopen-back",
+      "targetDp": 48,
+      "disposed": true,
+      "exitMs": 612
+    }
+  ],
+  "failedCases": [
+    {
+      "case": "gesture-back",
+      "finishing": false,
+      "destroyed": false,
+      "sameInstance": true
+    }
+  ],
+  "passed": 4,
+  "failed": 1,
+  "navigationMode": 2,
+  "sourceByteExact": true,
+  "settingsByteExact": true,
+  "terminalJournalByteExact": true,
+  "tinySha256Exact": true,
+  "scope": "Original4cases pass; attempted normal edge gesture does not close player while controls visible. Gesture remains P2; do not label all navigation PASS."
+}

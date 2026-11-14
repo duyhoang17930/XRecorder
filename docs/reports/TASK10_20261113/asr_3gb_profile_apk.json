@@ -1,0 +1,9 @@
+{
+  "path": "build\\app\\outputs\\flutter-apk\\app-profile.apk",
+  "sha256": "2eb94634027d3652fb81e0ef24d4c0398dd136c16e9ca70678b9665dccd4e5a5",
+  "bytes": 60156675,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "ram_override_mib": 3072,
+  "system_memory": "MemTotal:        3042488 kB\r\nMemFree:          330960 kB\r\nMemAvailable:    1986808 kB\r\nBuffers:           19612 kB\r\nCached:          1749952 kB\r\nSwapCached:            0 kB\r\nActive:          1565032 kB\r\nInactive:         733800 kB\r\nActive(anon):     580624 kB\r\nInactive(anon):        0 kB\r\nActive(file):     984408 kB\r\nInactive(file):   733800 kB\r\nUnevictable:       47732 kB\r\nMlocked:           47732 kB\r\nSwapTotal:        570460 kB\r\nSwapFree:         570460 kB\r\nDirty:              8000 kB\r\nWriteback:             0 kB\r\nAnonPages:        577188 kB\r\nMapped:           684156 kB\r\nShmem:              4924 kB\r\nKReclaimable:      44124 kB\r\nSlab:             145544 kB\r\nSReclaimable:      44124 kB\r\nSUnreclaim:       101420 kB\r\nKernelStack:       18744 kB\r\nPageTables:        42496 kB\r\nSecPageTables:         0 kB\r\nNFS_Unstable:          0 kB\r\nBounce:                0 kB\r\nWritebackTmp:          0 kB\r\nCommitLimit:     2091704 kB\r\nCommitted_AS:   51235556 kB\r\nVmallocTotal:   34359738367 kB\r\nVmallocUsed:       54772 kB\r\nVmallocChunk:          0 kB\r\nPercpu:             6128 kB\r\nAnonHugePages:         0 kB\r\nShmemHugePages:        0 kB\r\nShmemPmdMapped:        0 kB\r\nFileHugePages:         0 kB\r\nFilePmdMapped:         0 kB\r\nCmaTotal:              0 kB\r\nCmaFree:               0 kB\r\nDirectMap4k:       59216 kB\r\nDirectMap2M:     2037760 kB\r\nDirectMap1G:     1048576 kB\r\n"
+}

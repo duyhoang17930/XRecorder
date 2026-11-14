@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "apkSha256": "686df3a9433173892c2f286a1be6a1f1d83e187d22354dbdd5218ff9b88c597c",
+  "apkBytes": 60288247,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 54,
+  "originalDraftsByteExact": 8,
+  "purpose": "Photo stickers and source-image-relative annotation parity repair",
+  "diskFreeBytes": {
+    "C:/": 16623362048,
+    "D:/": 24317243392
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "apkSha256": "e872a4e6b0c57863f36319bfac5e8b4bfcad19de585176f1af44de93a508046c",
+  "apkBytes": 62044127,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 55,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Release actual VideoView decoder before finish; predictive Back on controller own window",
+  "freeBytes": {
+    "C:/": 16137764864,
+    "D:/": 22899621888
+  }
+}

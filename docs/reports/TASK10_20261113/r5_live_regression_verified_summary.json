@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "uniqueValidCases": 10,
+  "results": [
+    {
+      "case": "recording-audio-lead",
+      "evidence": "r5_live_regression_recording_audio_lead.json",
+      "uri": "content://media/external/video/media/120"
+    },
+    {
+      "case": "recording-bad-audio",
+      "evidence": "r5_live_regression_recording_bad_audio.json",
+      "uri": null
+    },
+    {
+      "case": "recording-partial",
+      "evidence": "r5_live_regression_recording_partial.json",
+      "uri": null
+    },
+    {
+      "case": "recording-pending",
+      "evidence": "r5_live_regression_recording_pending.json",
+      "uri": "content://media/external/video/media/121"
+    },
+    {
+      "case": "recording-png",
+      "evidence": "r5_live_regression_recording_png.json",
+      "uri": "content://media/external/images/media/123"
+    },
+    {
+      "case": "recording-published-retry",
+      "evidence": "r5_live_regression_recording_published_retry.json",
+      "uri": "content://media/external/video/media/131"
+    },
+    {
+      "case": "recording-remux",
+      "evidence": "r5_live_regression_recording_remux.json",
+      "uri": "content://media/external/video/media/125"
+    },
+    {
+      "case": "recording-session-isolation",
+      "evidence": "r5_live_regression_recording_session_isolation.json",
+      "uri": null
+    },
+    {
+      "case": "recording-wrong-session",
+      "evidence": "r5_live_regression_recording_wrong_session.json",
+      "uri": null
+    },
+    {
+      "case": "recording-remux-retry",
+      "evidence": "r5_live_retry_verified_recording_remux_retry.json",
+      "uri": "content://media/external/video/media/133"
+    }
+  ],
+  "excluded": [
+    {
+      "file": "r5_live_regression_recording_retry.json",
+      "case": "recording-retry",
+      "reason": "Unrecognized misspelled case fell through to a negative fixture before strict guards; not acceptance evidence."
+    }
+  ],
+  "originalJournalAndInputsPreserved": true
+}

@@ -20,6 +20,44 @@ abstract interface class RecordingService {
   Future<void> cancel(String sessionId);
 }
 
+abstract interface class DelayedScreenshotService {
+  Future<RecordingSession> screenshotAfter(Duration delay);
+}
+
+/// Optional transport capability; the original recording API stays compatible.
+abstract interface class LivestreamRecordingService {
+  Future<RecordingSession> startLive(
+    RecordingSettings settings, {
+    required String serverUrl,
+    required String streamKey,
+  });
+  Future<Map<String, dynamic>> currentLive();
+  Stream<Map<String, dynamic>> get liveStates;
+}
+
+/// Optional credential storage, separate from capture and settings documents.
+abstract interface class LivestreamDestinationStore {
+  Future<Map<String, String>?> loadLiveDestination();
+  Future<void> saveLiveDestination({
+    required String name,
+    required String serverUrl,
+    required String streamKey,
+  });
+  Future<void> forgetLiveDestination();
+}
+
+/// Optional recording capability; existing recording adapters remain compatible.
+abstract interface class RegionRecordingService {
+  Future<({int width, int height})> captureDisplay();
+  Future<RecordingSession> startRegion(
+    RecordingSettings settings, {
+    required int cropX,
+    required int cropY,
+    required int cropWidth,
+    required int cropHeight,
+  });
+}
+
 abstract interface class EditProjectRepository {
   Future<EditProject?> find(String id);
   Future<void> save(EditProject project);

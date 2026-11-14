@@ -17,6 +17,7 @@ class VideoPreviewActivity:Activity() {
     override fun attachBaseContext(base: Context) { super.attachBaseContext(P2Locale.context(base)) }
     companion object { var instance:VideoPreviewActivity?=null }
     private lateinit var video:VideoView
+    private var playbackControls:MediaController?=null
     private var position=0
     override fun onCreate(state:Bundle?) {
         super.onCreate(state)
@@ -68,14 +69,52 @@ class VideoPreviewActivity:Activity() {
                 }
                 return super.dispatchKeyEvent(event)
             }
-        }.apply { setAnchorView(video) };video.setMediaController(controls)
-        video.setOnPreparedListener { video.seekTo(position);video.start();controls.show(3000) }
+        }.apply {
+            setAnchorView(video)
+            if(Build.VERSION.SDK_INT>=33) addOnAttachStateChangeListener(ControllerBackHandler { finish() })
+        };video.setMediaController(controls)
+        playbackControls=controls
+        video.setOnPreparedListener { if(!isFinishing && !isDestroyed) { video.seekTo(position);video.start();controls.show(3000) } }
         video.setOnErrorListener { _,_,_ -> Toast.makeText(this,getString(com.xrecorder.xrecorder.R.string.p2_preview_unavailable),Toast.LENGTH_LONG).show();finish();true }
         video.setVideoURI(uri)
     }
     private fun dp(value: Int): Int = (value * resources.displayMetrics.density + .5f).toInt()
-    override fun onPause() { if(::video.isInitialized) { position=video.currentPosition;video.pause() };super.onPause() }
+    override fun finish() { playbackControls?.hide();releasePlayback();super.finish() }
+    override fun onPause() { playbackControls?.hide();if(::video.isInitialized) { position=video.currentPosition;video.pause() };super.onPause() }
     override fun onSaveInstanceState(out:Bundle) { out.putInt("position",if(::video.isInitialized) video.currentPosition else position);super.onSaveInstanceState(out) }
     fun playbackState():Map<String,Any> = if(::video.isInitialized) mapOf("positionMs" to video.currentPosition,"durationMs" to video.duration,"playing" to video.isPlaying) else emptyMap()
-    override fun onDestroy() { if(instance===this) instance=null;if(::video.isInitialized) video.stopPlayback();super.onDestroy() }
+    private fun releasePlayback() {
+        // Finishing can precede Android's onDestroy by several seconds. Stop
+        // the actual decoder before dropping its live-owner reference.
+        if(::video.isInitialized) video.stopPlayback()
+        if(instance===this) instance=null
+    }
+    override fun onDestroy() { releasePlayback();super.onDestroy() }
+
+    // Keep API33 classes isolated from the API24-32 controller path.
+    @android.annotation.TargetApi(33)
+    private class ControllerBackHandler(close:()->Unit):android.view.View.OnAttachStateChangeListener {
+        private var dispatcher:android.window.OnBackInvokedDispatcher?=null
+        private val callback=android.window.OnBackInvokedCallback { close() }
+        private var attached:android.view.View?=null
+        private val register=Runnable {
+            val view=attached
+            if(view?.isAttachedToWindow==true) dispatcher=view.findOnBackInvokedDispatcher()?.also {
+                it.registerOnBackInvokedCallback(android.window.OnBackInvokedDispatcher.PRIORITY_OVERLAY,callback)
+            }
+        }
+        override fun onViewAttachedToWindow(view:android.view.View) {
+            // MediaController owns a floating window. Its dispatcher receives
+            // predictive Back before the Activity's legacy key-event path.
+            // Wait for ViewRoot attachment to expose that window dispatcher.
+            attached=view
+            view.post(register)
+        }
+        override fun onViewDetachedFromWindow(view:android.view.View) {
+            view.removeCallbacks(register)
+            dispatcher?.unregisterOnBackInvokedCallback(callback)
+            dispatcher=null
+            attached=null
+        }
+    }
 }

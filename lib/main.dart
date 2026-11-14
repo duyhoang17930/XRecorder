@@ -26,7 +26,14 @@ Future<void> main() async {
       'J2ObjC',
       'JSR305',
       'Error Prone',
+      'Ktor',
+      'Kotlin coroutines',
     ], await rootBundle.loadString('assets/licenses/Media3-APACHE-2.0.txt'));
+    yield LicenseEntryWithLineBreaks(
+      ['RootEncoder RTMP 2.8.2'],
+      '${await rootBundle.loadString('assets/licenses/ROOTENCODER_NOTICE.txt')}\n'
+      '${await rootBundle.loadString('assets/licenses/Media3-APACHE-2.0.txt')}',
+    );
     yield LicenseEntryWithLineBreaks(
       ['checker-qual (MIT annotations)'],
       await rootBundle.loadString(

@@ -20,6 +20,7 @@ import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.PopupMenu
 import kotlin.math.abs
 
 /** One service-owned window. No Activity reference, recorder, or private timer. */
@@ -31,6 +32,12 @@ internal class FloatingRecordingControls(
     initialOpacity: Float? = null,
     initialRatioX: Float? = null,
     initialRatioY: Float? = null,
+    private val setDrawing: (Boolean) -> Boolean = { false },
+    private val drawingState: () -> DrawingStrokeEngine.State? = { null },
+    private val undoDrawing: () -> Unit = {},
+    private val clearDrawing: () -> Unit = {},
+    private val setDrawingStyle: (Int?, Float?) -> Unit = { _, _ -> },
+    private val cameraOptions: ((View) -> Unit)? = null,
 ) {
     companion object {
         private const val PREFS_NAME = "3hrecorder_floating_ball"
@@ -62,6 +69,7 @@ internal class FloatingRecordingControls(
 
     private val timer = TextView(context).apply {
         setTextColor(Color.WHITE); textSize = 14f; typeface = Typeface.MONOSPACE
+        setSingleLine(true)
         gravity = Gravity.CENTER
         setPadding(dp(4), 0, dp(4), 0)
         setOnClickListener { collapsed = true; render(state, elapsed) }
@@ -72,12 +80,53 @@ internal class FloatingRecordingControls(
     }
     private val pause = button("Pause recording", android.R.drawable.ic_media_pause) { togglePause() }
     private val stopButton = button("Stop recording", android.R.drawable.ic_menu_close_clear_cancel) { stop() }
-    private val panel = LinearLayout(context).apply {
+    private val drawButton = button("Draw on screen", android.R.drawable.ic_menu_edit) {
+        setDrawing(drawingState()?.isDrawingMode != true)
+        render(state, elapsed)
+    }
+    private val undoButton = button("Undo drawing", android.R.drawable.ic_menu_revert) {
+        undoDrawing(); render(state, elapsed)
+    }
+    private val clearButton = button("Clear drawing", android.R.drawable.ic_menu_delete) {
+        clearDrawing(); render(state, elapsed)
+    }
+    private val styleButton = button("Drawing color and width", android.R.drawable.ic_menu_manage) {
+        val menu = PopupMenu(context, styleButtonAnchor())
+        val colors = listOf("Orange" to DrawingStrokeEngine.DEFAULT_COLOR, "Red" to Color.RED,
+            "White" to Color.WHITE, "Blue" to Color.BLUE)
+        colors.forEachIndexed { index, (label, _) -> menu.menu.add(0, index, index, CaptureText.text(context, label)) }
+        val widths = listOf(4f, 8f, 16f, 32f)
+        widths.forEachIndexed { index, width -> menu.menu.add(1, 10 + index, 10 + index, "Stroke width ${width.toInt()} px") }
+        menu.setOnMenuItemClickListener { item ->
+            if (item.groupId == 0) setDrawingStyle(colors[item.itemId].second, null)
+            else setDrawingStyle(null, widths[item.itemId - 10])
+            true
+        }
+        menu.show()
+    }
+    private fun styleButtonAnchor(): View = styleButton
+    private val cameraButton = button("Facecam options", android.R.drawable.ic_menu_camera) {
+        cameraOptions?.invoke(cameraButtonAnchor())
+    }
+    private fun cameraButtonAnchor(): View = cameraButton
+    private val drawingPanel = LinearLayout(context).apply {
+        orientation = LinearLayout.HORIZONTAL
+        gravity = Gravity.END
+        addView(undoButton); addView(clearButton); addView(styleButton)
+    }
+    private val recordingPanel = LinearLayout(context).apply {
         orientation = LinearLayout.HORIZONTAL
         gravity = Gravity.CENTER_VERTICAL
         addView(timer)
         addView(pause)
+        addView(drawButton)
         addView(stopButton)
+    }
+    private val panel = LinearLayout(context).apply {
+        orientation = LinearLayout.VERTICAL
+        addView(recordingPanel, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+        addView(drawingPanel, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+        if (cameraOptions != null) addView(cameraButton)
     }
     private var attached = false
     private var closed = false
@@ -124,7 +173,7 @@ internal class FloatingRecordingControls(
     }
 
     private fun applyCustomizationLayout() {
-        val bubbleSize = scaledDp(48)
+        val bubbleSize = maxOf(dp(48), scaledDp(48))
         val timerWidth = scaledDp(96)
         val corner = scaledDp(20).toFloat()
         val stopIconSize = scaledDp(16)
@@ -142,6 +191,11 @@ internal class FloatingRecordingControls(
 
         pause.layoutParams = LinearLayout.LayoutParams(bubbleSize, bubbleSize)
         stopButton.layoutParams = LinearLayout.LayoutParams(bubbleSize, bubbleSize)
+        drawButton.layoutParams = LinearLayout.LayoutParams(bubbleSize, bubbleSize)
+        undoButton.layoutParams = LinearLayout.LayoutParams(bubbleSize, bubbleSize)
+        clearButton.layoutParams = LinearLayout.LayoutParams(bubbleSize, bubbleSize)
+        styleButton.layoutParams = LinearLayout.LayoutParams(bubbleSize, bubbleSize)
+        cameraButton.layoutParams = LinearLayout.LayoutParams(bubbleSize, bubbleSize)
         stopButton.setImageDrawable(GradientDrawable().apply {
             setColor(accent)
             setSize(stopIconSize, stopIconSize)
@@ -198,8 +252,16 @@ internal class FloatingRecordingControls(
         } else "Saving…"
         timer.contentDescription = "${if (paused) "Paused" else if (active) "Recording" else "Saving"} ${FloatingControlGeometry.time(elapsedMs)}. Tap to collapse, drag to move controls"
         pause.setImageResource(if (paused) android.R.drawable.ic_media_play else android.R.drawable.ic_media_pause)
-        pause.contentDescription = if (paused) "Resume recording" else "Pause recording"
+        pause.contentDescription = CaptureText.text(context, if (paused) "Resume recording" else "Pause recording")
         pause.isEnabled = active; stopButton.isEnabled = active
+        val drawing = drawingState()
+        val drawingEnabled = drawing?.isDrawingMode == true
+        drawButton.contentDescription = CaptureText.text(context, if (drawingEnabled) "Exit drawing" else "Draw on screen")
+        drawButton.setImageResource(if (drawingEnabled) android.R.drawable.ic_menu_close_clear_cancel else android.R.drawable.ic_menu_edit)
+        drawButton.isEnabled = active
+        drawingPanel.visibility = if (drawingEnabled) View.VISIBLE else View.GONE
+        undoButton.isEnabled = active && drawing?.canUndo == true
+        clearButton.isEnabled = active && (drawing?.strokeCount ?: 0) > 0
         root.alpha = overlayState.alpha
         pause.alpha = overlayState.alpha; stopButton.alpha = overlayState.alpha
         root.setPadding(if (collapsed) 0 else dp(4), 0, if (collapsed) 0 else dp(4), 0)
@@ -247,12 +309,16 @@ internal class FloatingRecordingControls(
     }
 
     private fun dp(value: Int) = (value * context.resources.displayMetrics.density + .5f).toInt()
-    private fun scaledDp(value: Int) = FloatingControlGeometry.scaledDimension(dp(value), userScale)
+    private fun scaledDp(value: Int): Int {
+        // Expanded controls must fit narrow displays, even at the largest saved scale.
+        val maximum = (availableSize().first - dp(8)).toFloat() / dp(240)
+        return FloatingControlGeometry.scaledDimension(dp(value), minOf(userScale, maximum))
+    }
 
     private fun button(label: String, icon: Int, action: () -> Unit) = ImageButton(context).apply {
         layoutParams = LinearLayout.LayoutParams(scaledDp(48), scaledDp(48))
         setBackgroundColor(Color.TRANSPARENT); setImageResource(icon); setColorFilter(accent)
-        contentDescription = label; setOnClickListener { if (isEnabled) action() }
+        contentDescription = CaptureText.text(context, label); setOnClickListener { if (isEnabled) action() }
     }
 
     private fun availableSize(): Pair<Int, Int> {

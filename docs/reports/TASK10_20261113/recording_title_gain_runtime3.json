@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "locale": "vi",
+      "localizedTitle": true,
+      "gainSliders": 2,
+      "spokenUnitLocalized": true,
+      "backPreservesCanonicalSettings": true,
+      "noticeHelpAndInvalidDurationChecked": true
+    },
+    {
+      "locale": "ar",
+      "localizedTitle": true,
+      "gainSliders": 2,
+      "spokenUnitLocalized": true,
+      "backPreservesCanonicalSettings": true,
+      "noticeHelpAndInvalidDurationChecked": true
+    }
+  ],
+  "preferencesByteExactAfterRestore": true,
+  "scope": "Real page/AX labels and Back; not TalkBack or linguistic acceptance"
+}

@@ -1,0 +1,20 @@
+{
+  "case": "live-cancel",
+  "transport": {
+    "state": "stopped",
+    "bitrate": 0,
+    "retries": 0,
+    "sentVideoFrames": 0,
+    "sentAudioFrames": 0,
+    "droppedVideoFrames": 0,
+    "droppedAudioFrames": 0,
+    "sentBytes": 0,
+    "queuedBytes": 0
+  },
+  "sourceUri": "content://media/external/video/media/115",
+  "status": "PASS",
+  "states": [
+    "connecting",
+    "stopped"
+  ]
+}

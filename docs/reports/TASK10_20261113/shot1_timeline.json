@@ -1,0 +1,104 @@
+{
+  "status": "PASS",
+  "requestedDelay": 1,
+  "cancelled": false,
+  "session": {
+    "id": "03fb9ec8-206b-4341-bbfc-70b5608418bf",
+    "state": "completed",
+    "startedAt": 0,
+    "elapsedMs": 0,
+    "outputUri": "content://media/external/images/media/91",
+    "error": null,
+    "screenshot": true,
+    "width": 1080,
+    "height": 2400,
+    "fps": 30,
+    "bitrate": 8000000,
+    "config": {
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "bitrate": 8000000,
+      "codec": "avc",
+      "audio": "mute",
+      "micGain": 1,
+      "internalGain": 1,
+      "noiseReduction": false,
+      "countdown": 1,
+      "durationSeconds": 0,
+      "orientation": "automatic",
+      "mode": "normal",
+      "facecam": false,
+      "hardwareEncoding": true,
+      "encoderName": "",
+      "isRegion": false,
+      "cropX": null,
+      "cropY": null,
+      "cropWidth": null,
+      "cropHeight": null,
+      "floatingScale": 1,
+      "floatingOpacity": 1,
+      "floatingRatioX": -1,
+      "floatingRatioY": -1,
+      "shakeToStop": true,
+      "showTouches": false,
+      "audioDucking": false,
+      "regionSourceWidth": 0,
+      "regionSourceHeight": 0
+    },
+    "countdownRemaining": 0
+  },
+  "samples": [
+    {
+      "seconds": 0.125,
+      "state": "awaitingPermission",
+      "remaining": 1
+    },
+    {
+      "seconds": 0.625,
+      "state": "countdown",
+      "remaining": 1
+    },
+    {
+      "seconds": 0.9220000000059372,
+      "state": "countdown",
+      "remaining": 1
+    },
+    {
+      "seconds": 1.187000000005355,
+      "state": "countdown",
+      "remaining": 1
+    },
+    {
+      "seconds": 1.4690000000045984,
+      "state": "starting",
+      "remaining": 0
+    },
+    {
+      "seconds": 1.75,
+      "state": "finalizing",
+      "remaining": 0
+    },
+    {
+      "seconds": 2.0160000000032596,
+      "state": "finalizing",
+      "remaining": 0
+    },
+    {
+      "seconds": 2.2810000000026776,
+      "state": "finalizing",
+      "remaining": 0
+    },
+    {
+      "seconds": 2.5310000000026776,
+      "state": "finalizing",
+      "remaining": 0
+    },
+    {
+      "seconds": 2.7810000000026776,
+      "state": "completed",
+      "remaining": 0
+    }
+  ],
+  "otherPreferencesUnchanged": true
+}

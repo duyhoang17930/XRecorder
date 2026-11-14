@@ -42,7 +42,12 @@ for path in sorted(args.directory.iterdir()):
     frames = json.loads(subprocess.check_output([str(probe), '-v', 'error', '-select_streams', 'v:0', '-show_frames', '-show_entries', 'frame=best_effort_timestamp_time', '-of', 'json', str(path)]))['frames']
     times = [float(frame['best_effort_timestamp_time']) for frame in frames if 'best_effort_timestamp_time' in frame]
     assert times and all(b > a for a, b in zip(times, times[1:])), path
-    decoded = subprocess.run([str(ffmpeg), '-v', 'error', '-i', str(path), '-f', 'null', '-'], capture_output=True, timeout=90)
+    # Preserve demuxer timing for variable-frame-rate captures. The null muxer's
+    # inferred CFR time base can otherwise round distinct valid PTS to the same DTS.
+    # The independent, strictly increasing source-frame check above remains required.
+    decoded = subprocess.run([str(ffmpeg), '-v', 'error', '-xerror', '-i', str(path),
+                              '-fps_mode', 'passthrough', '-enc_time_base', '-1',
+                              '-f', 'null', '-'], capture_output=True, timeout=90)
     assert decoded.returncode == 0 and not decoded.stderr.strip(), decoded.stderr.decode(errors='replace')
     audio = next((s for s in info['streams'] if s['codec_type'] == 'audio'), None)
     rms = None

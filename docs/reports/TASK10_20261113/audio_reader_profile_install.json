@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "apkSha256": "cfc29f0c2b4084c3900a6669033e85a46d2d1ed3c5156af1a4e8be2bf7ca423f",
+  "apkBytes": 60288247,
+  "avd": "Pixel_7",
+  "serial": "emulator-5554",
+  "metadataFilesByteExact": 54,
+  "originalDraftsByteExact": 8,
+  "tinySha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+  "purpose": "Dedicated bounded playback PCM reader, existing AAC/muxer preserved",
+  "freeBytes": {
+    "C:/": 6398779392,
+    "D:/": 24286257152
+  },
+  "reserveBytes": {
+    "C:/": 5368709120,
+    "D:/": 10737418240
+  }
+}

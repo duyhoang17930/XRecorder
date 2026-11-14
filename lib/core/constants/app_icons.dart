@@ -13,6 +13,7 @@ abstract final class AppIcons {
   static const photoEdit = LucideIcons.pencilRuler;
   static const pen = LucideIcons.pencil;
   static const shapes = LucideIcons.shapes;
+  static const sticker = LucideIcons.sticker;
   static const text = LucideIcons.type;
   static const eraser = LucideIcons.eraser;
   static const palette = LucideIcons.palette;
@@ -71,6 +72,8 @@ abstract final class AppIcons {
   static const help = LucideIcons.circleHelp;
   static const feedback = LucideIcons.messageSquare;
   static const privacy = LucideIcons.shieldCheck;
+  static const showSecret = LucideIcons.eye;
+  static const hideSecret = LucideIcons.eyeOff;
   static const info = LucideIcons.info;
   static const attachment = LucideIcons.paperclip;
   static const selected = LucideIcons.circleCheck;

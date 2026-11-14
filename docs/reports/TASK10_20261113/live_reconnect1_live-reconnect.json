@@ -1,0 +1,27 @@
+{
+  "case": "live-reconnect",
+  "submittedVideo": 576,
+  "submittedAudio": 377,
+  "transport": {
+    "state": "live",
+    "bitrate": 75329,
+    "retries": 1,
+    "sentVideoFrames": 481,
+    "sentAudioFrames": 313,
+    "droppedVideoFrames": 0,
+    "droppedAudioFrames": 0,
+    "sentBytes": 344735,
+    "queuedBytes": 0
+  },
+  "sourceUri": "content://media/external/video/media/115",
+  "status": "PASS",
+  "states": [
+    "connecting",
+    "connecting",
+    "live",
+    "reconnecting",
+    "reconnecting",
+    "live",
+    "stopped"
+  ]
+}

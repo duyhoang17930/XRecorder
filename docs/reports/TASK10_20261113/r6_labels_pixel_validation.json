@@ -1,0 +1,54 @@
+{
+  "uri": "content://media/external/video/media/89",
+  "sourceCrop": [
+    150,
+    1160,
+    600,
+    240
+  ],
+  "encodedCrop": [
+    152,
+    618,
+    320,
+    128
+  ],
+  "phases": {
+    "stroke": {
+      "screenInkPixels": 2059,
+      "videoTimeEstimate": 16.89085602760315,
+      "videoInkPixels": [
+        539,
+        539,
+        539
+      ]
+    },
+    "undo": {
+      "screenInkPixels": 0,
+      "videoTimeEstimate": 21.73965048789978,
+      "videoInkPixels": [
+        0,
+        0,
+        0
+      ]
+    },
+    "clear": {
+      "screenInkPixels": 0,
+      "videoTimeEstimate": 27.567766904830933,
+      "videoInkPixels": [
+        0,
+        0,
+        0
+      ]
+    },
+    "pass_through": {
+      "screenInkPixels": 2059,
+      "videoTimeEstimate": 33.38259410858154,
+      "videoInkPixels": [
+        530,
+        530,
+        530
+      ]
+    }
+  },
+  "status": "PASS"
+}

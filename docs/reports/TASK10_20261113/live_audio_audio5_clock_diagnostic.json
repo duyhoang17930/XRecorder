@@ -1,0 +1,14 @@
+{
+  "mic": {
+    "bufferFrames": 96000,
+    "hardwareSeconds": 6.9599797,
+    "deliveredFramesSeconds": 6.447979166666666,
+    "originShiftMs": 512.0005333359375
+  },
+  "internal": {
+    "bufferFrames": 3072,
+    "hardwareSeconds": 6.9556763,
+    "deliveredFramesSeconds": 5.653333333333333,
+    "originShiftMs": 1302.3429666679688
+  }
+}

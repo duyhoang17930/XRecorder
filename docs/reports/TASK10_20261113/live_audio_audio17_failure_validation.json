@@ -1,0 +1,14 @@
+{
+  "status": "FAIL",
+  "sessionId": "5d60523a-b3eb-44ac-a2f1-23f12cc1fe54",
+  "outputUri": null,
+  "terminalDurationMs": 16598,
+  "queueBlocksAtFailure": 192,
+  "encodedSamples": 425984,
+  "internalReadSamples": 623616,
+  "error": "Audio encoder cannot keep up with capture",
+  "retainedInputs": "live_audio_audio17_failed_inputs.json",
+  "decodeEvidence": "live_audio_audio17_media/validation.json",
+  "preferenceRestoration": "live_audio_audio17_controlled_settings_recovered.json",
+  "scope": "SurfaceView candidate. Actual capture failed; two retained video files decode but do not establish successful saved output or audio continuity. Failure screenshot shows cue2 only after capture stopped; encoded tail still cue1. No playback fix accepted."
+}

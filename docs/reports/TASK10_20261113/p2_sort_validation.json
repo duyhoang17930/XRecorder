@@ -1,0 +1,144 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "kind": "Video",
+      "choice": "Newest",
+      "providerRows": 57,
+      "visibleLeadingTitles": [
+        "Edited_e7c0283b-d7a9-48f0-9152-2d4b517ce5bf.mp4",
+        "Recording_1794642100923.mp4"
+      ],
+      "expectedLeadingTitles": [
+        "Edited_e7c0283b-d7a9-48f0-9152-2d4b517ce5bf.mp4",
+        "Recording_1794642100923.mp4"
+      ],
+      "checkedVisibleItems": 2,
+      "status": "PASS"
+    },
+    {
+      "kind": "Video",
+      "choice": "Oldest",
+      "providerRows": 57,
+      "visibleLeadingTitles": [
+        "Recording_1794576414866.mp4",
+        "Edited_847fc532-b7f3-47af-b260-a6092467db23.mp4"
+      ],
+      "expectedLeadingTitles": [
+        "Recording_1794576414866.mp4",
+        "Edited_847fc532-b7f3-47af-b260-a6092467db23.mp4"
+      ],
+      "checkedVisibleItems": 2,
+      "status": "PASS"
+    },
+    {
+      "kind": "Video",
+      "choice": "Name",
+      "providerRows": 57,
+      "visibleLeadingTitles": [
+        "Edited_847fc532-b7f3-47af-b260-a6092467db23.mp4",
+        "Edited_e7c0283b-d7a9-48f0-9152-2d4b517ce5bf.mp4"
+      ],
+      "expectedLeadingTitles": [
+        "Edited_847fc532-b7f3-47af-b260-a6092467db23.mp4",
+        "Edited_e7c0283b-d7a9-48f0-9152-2d4b517ce5bf.mp4"
+      ],
+      "checkedVisibleItems": 2,
+      "status": "PASS"
+    },
+    {
+      "kind": "Video",
+      "choice": "Largest",
+      "providerRows": 57,
+      "visibleLeadingTitles": [
+        "Recording_1794584625482.mp4",
+        "Recording_1794583832599.mp4"
+      ],
+      "expectedLeadingTitles": [
+        "Recording_1794584625482.mp4",
+        "Recording_1794583832599.mp4"
+      ],
+      "checkedVisibleItems": 2,
+      "status": "PASS"
+    },
+    {
+      "kind": "Video",
+      "choice": "Longest",
+      "providerRows": 57,
+      "visibleLeadingTitles": [
+        "Recording_1794584625482.mp4",
+        "Recording_1794583832599.mp4"
+      ],
+      "expectedLeadingTitles": [
+        "Recording_1794584625482.mp4",
+        "Recording_1794583832599.mp4"
+      ],
+      "checkedVisibleItems": 2,
+      "status": "PASS"
+    },
+    {
+      "kind": "Photo",
+      "choice": "Newest",
+      "providerRows": 18,
+      "visibleLeadingTitles": [
+        "Edited_1794637472612.png",
+        "Edited_1794636170711.jpg"
+      ],
+      "expectedLeadingTitles": [
+        "Edited_1794637472612.png",
+        "Edited_1794636170711.jpg"
+      ],
+      "checkedVisibleItems": 2,
+      "status": "PASS"
+    },
+    {
+      "kind": "Photo",
+      "choice": "Oldest",
+      "providerRows": 18,
+      "visibleLeadingTitles": [
+        "Screenshot_1793882401610.png",
+        "Restored_1794303320706_Screenshot_1793927025566.png"
+      ],
+      "expectedLeadingTitles": [
+        "Screenshot_1793882401610.png",
+        "Restored_1794303320706_Screenshot_1793927025566.png"
+      ],
+      "checkedVisibleItems": 2,
+      "status": "PASS"
+    },
+    {
+      "kind": "Photo",
+      "choice": "Name",
+      "providerRows": 18,
+      "visibleLeadingTitles": [
+        "Edited_1794576652765.png",
+        "Edited_1794627191391.png"
+      ],
+      "expectedLeadingTitles": [
+        "Edited_1794576652765.png",
+        "Edited_1794627191391.png"
+      ],
+      "checkedVisibleItems": 2,
+      "status": "PASS"
+    },
+    {
+      "kind": "Photo",
+      "choice": "Largest",
+      "providerRows": 18,
+      "visibleLeadingTitles": [
+        "Edited_2563b426-2617-4cbf-b0af-b4640353e53f.gif",
+        "Screenshot_1794596140243.png"
+      ],
+      "expectedLeadingTitles": [
+        "Edited_2563b426-2617-4cbf-b0af-b4640353e53f.gif",
+        "Screenshot_1794596140243.png"
+      ],
+      "checkedVisibleItems": 2,
+      "status": "PASS"
+    }
+  ],
+  "uniqueSortKindCases": 9,
+  "preferencesByteExact": true,
+  "restoredSort": "Newest",
+  "scope": "visible leading titles and all menu choices; no exhaustive offscreen/tie-identity claim"
+}

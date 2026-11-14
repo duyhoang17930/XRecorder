@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "case": "region-blue",
+  "uri": "content://media/external/video/media/74",
+  "source": "/data/user/0/com.xrecorder.xrecorder/files/task10_r4_1794582186299_84ea5a6b-af76-4958-ae52-4f14ebddc547/source.png",
+  "sourceWidth": 640,
+  "sourceHeight": 480,
+  "cropX": 24,
+  "cropY": 280,
+  "width": 200,
+  "height": 160,
+  "liveJournalUnchanged": true
+}

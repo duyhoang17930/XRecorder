@@ -1,0 +1,20 @@
+{
+  "sampleRate": 48000,
+  "windowSeconds": [
+    1,
+    15
+  ],
+  "coarse2kHzPeak": {
+    "correlation": 0.7836381131597425,
+    "offsetMs": 12
+  },
+  "fineNativeRatePeak": {
+    "correlation": 0.9999382868372808,
+    "offsetSamples": 568,
+    "offsetMs": 11.833333333333334
+  },
+  "boundsSamples": [
+    556,
+    596
+  ]
+}

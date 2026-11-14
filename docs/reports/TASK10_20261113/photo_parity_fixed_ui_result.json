@@ -1,0 +1,32 @@
+{
+  "uiStatus": "PASS",
+  "outputPixels": "PASS_SCOPED_GEOMETRY",
+  "uri": "content://media/external/images/media/150",
+  "name": "Edited_1794637472612.png",
+  "bytes": 1125489,
+  "sha256": "a4c7a7b1637a02b33fe68a21d9d6e2705762b8c450c174b5a171ccafc412b225",
+  "sourceByteExact": true,
+  "sameCaption": "TASK10_PHOTO",
+  "starInk": "Yellow",
+  "heartInk": "Cyan",
+  "heartUndoRedoExercised": true,
+  "estimatedFinalImageBox": [
+    237,
+    346,
+    605,
+    1344
+  ],
+  "starModeImageBox": [
+    237,
+    346,
+    605,
+    1344
+  ],
+  "heartModeImageBox": [
+    237,
+    346,
+    605,
+    1344
+  ],
+  "apkIdentity": "photo_parity_profile_install.json"
+}

@@ -1,0 +1,136 @@
+{
+  "status": "PASS",
+  "samples": [
+    {
+      "t": 0.125,
+      "state": "awaitingPermission",
+      "remaining": 5
+    },
+    {
+      "t": 0.43800000000192085,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 0.7660000000032596,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 1.0469999999986612,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 1.3130000000019209,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 1.5630000000019209,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 1.8440000000045984,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 2.125,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 2.3590000000040163,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 2.6090000000040163,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 2.8590000000040163,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 3.1090000000040163,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 3.3590000000040163,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 3.6090000000040163,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 3.8590000000040163,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 4.094000000004598,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 4.344000000004598,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 4.594000000004598,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 4.844000000004598,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 5.094000000004598,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 5.328000000001339,
+      "state": "countdown",
+      "remaining": 5
+    },
+    {
+      "t": 5.609000000004016,
+      "state": "finalizing",
+      "remaining": 0
+    },
+    {
+      "t": 5.89100000000326,
+      "state": "finalizing",
+      "remaining": 0
+    },
+    {
+      "t": 6.14100000000326,
+      "state": "finalizing",
+      "remaining": 0
+    },
+    {
+      "t": 6.4060000000026776,
+      "state": "finalizing",
+      "remaining": 0
+    },
+    {
+      "t": 6.6560000000026776,
+      "state": "completed",
+      "remaining": 0
+    }
+  ],
+  "uri": "content://media/external/images/media/90"
+}

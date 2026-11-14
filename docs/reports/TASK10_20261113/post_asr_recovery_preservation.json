@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "originalDraftsByteExact": 8,
+  "existingSpeechRecordsExactExceptDocumentedRestoredPhase": 6,
+  "totalSpeechRecords": 8,
+  "tinySha256Exact": true,
+  "preferencesByteExact": true,
+  "freeBytes": {
+    "C:/": 16133693440,
+    "D:/": 22896877568
+  },
+  "scope": "Original8drafts,6old speech records, model and prefs; not a complete external-file census"
+}

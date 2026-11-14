@@ -183,7 +183,6 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
     setState(() {
       busy = true;
       error = null;
-      job = null;
     });
     try {
       String? id;
@@ -216,7 +215,14 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
         if (id != null) await service.cancel(id);
         return;
       }
-      setState(() => jobId = id);
+      if (id == null) throw PlatformException(code: 'speech_start_failed');
+      // Retain the terminal result until a replacement operation is accepted.
+      // A cancelled picker or failed request must not pair its old ID with a
+      // null snapshot, which would leave the dialog permanently active.
+      setState(() {
+        jobId = id;
+        job = null;
+      });
       timer?.cancel();
       timer = Timer.periodic(const Duration(milliseconds: 500), (_) => poll());
       await poll();
@@ -457,7 +463,8 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
           ),
           if (active)
             TextButton(
-              onPressed: jobId == null || job?.phase == 'saving job history'
+              onPressed:
+                  busy || jobId == null || job?.phase == 'saving job history'
                   ? null
                   : () async {
                       await service.cancel(jobId!);

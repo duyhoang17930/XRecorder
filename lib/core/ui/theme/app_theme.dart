@@ -75,7 +75,11 @@ abstract final class AppTheme {
       materialTapTargetSize: MaterialTapTargetSize.padded,
       iconTheme: IconThemeData(color: c.text, size: AppIconSize.large),
       actionIconTheme: ActionIconThemeData(
-        backButtonIconBuilder: (_) => const Icon(AppIcons.back),
+        backButtonIconBuilder: (context) => Icon(
+          Directionality.of(context) == TextDirection.rtl
+              ? AppIcons.chevronRight
+              : AppIcons.back,
+        ),
         closeButtonIconBuilder: (_) => const Icon(AppIcons.close),
       ),
       appBarTheme: AppBarTheme(

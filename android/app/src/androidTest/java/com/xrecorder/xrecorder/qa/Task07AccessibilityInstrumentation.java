@@ -23,6 +23,9 @@ import org.json.JSONObject;
 /** Real framework focus checks without suppressing the installed screen reader. */
 public final class Task07AccessibilityInstrumentation extends Instrumentation {
     private Bundle ui05bPlayerArguments;
+    private Bundle task10RecordingArguments;
+    private Bundle task10RegionArguments;
+    private Bundle task10LiveArguments;
     private static final String PACKAGE = "com.xrecorder.xrecorder";
     private boolean task08History;
     private boolean task08Corpus;
@@ -47,6 +50,12 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
 
     @Override public void onCreate(Bundle arguments) {
         super.onCreate(arguments);
+        if (arguments != null && arguments.getString("task10", "").startsWith("live-"))
+            task10LiveArguments = new Bundle(arguments);
+        if (arguments != null && arguments.getString("task10", "").startsWith("recording-"))
+            task10RecordingArguments = new Bundle(arguments);
+        if (arguments != null && arguments.getString("task10", "").startsWith("region-"))
+            task10RegionArguments = new Bundle(arguments);
         if (arguments != null && "player".equals(arguments.getString("ui05b")))
             ui05bPlayerArguments = new Bundle(arguments);
         task08History = arguments != null && "history".equals(arguments.getString("task08"));
@@ -96,6 +105,18 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
     }
 
     @Override public void onStart() {
+        if (task10LiveArguments != null) {
+            Task10LiveInstrumentation.run(this, task10LiveArguments);
+            return;
+        }
+        if (task10RegionArguments != null) {
+            Task10RegionInstrumentation.run(this, task10RegionArguments);
+            return;
+        }
+        if (task10RecordingArguments != null) {
+            Task10RecordingInstrumentation.run(this, task10RecordingArguments);
+            return;
+        }
         if (ui05bPlayerArguments != null) {
             Ui05BPlayerInstrumentation.run(this, ui05bPlayerArguments);
             return;

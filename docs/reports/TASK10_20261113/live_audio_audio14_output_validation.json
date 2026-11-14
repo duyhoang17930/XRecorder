@@ -1,0 +1,93 @@
+{
+  "mediaStatus": "FAIL",
+  "workflowStatus": "PASS",
+  "sourcePlayer": "static",
+  "scope": "Real Mixed capture while task115 plays; identified speech + full decodes + local/network packet and sampled pixel parity. Physical microphone quality is not tested.",
+  "sessionId": "ccb2f276-a760-4f8f-8e03-9f1c2b2cfd61",
+  "uri": "content://media/external/video/media/160",
+  "nativeEndWorkflowPassed": true,
+  "speech": {
+    "local.mp4": {
+      "offsetMs": 1004.7291666666666,
+      "first5sCorrelation": 0.7744921753392241,
+      "fixedOffsetWindowCorrelations": [
+        0.99997703727659,
+        0.999949382208054,
+        -0.6305085380219403
+      ],
+      "alignmentSampleRate": 48000,
+      "coarse2kHzDiagnostic": {
+        "offsetMs": 1004.5,
+        "first5sCorrelation": 0.48418354947809555,
+        "fixedOffsetWindowCorrelations": [
+          0.5753851235135218,
+          0.5542427099414065,
+          -0.6219558134112043
+        ]
+      },
+      "decodedSamplesAt2kHz": 25942,
+      "sha256": "db30574130231c9f0ddea2c962939974ba8c450f28a5ce3608382d21b86f20db"
+    },
+    "received.mp4": {
+      "offsetMs": 279.3958333333333,
+      "first5sCorrelation": 0.7744921753392241,
+      "fixedOffsetWindowCorrelations": [
+        0.99997703727659,
+        0.999949382208054,
+        -0.6305085380219403
+      ],
+      "alignmentSampleRate": 48000,
+      "coarse2kHzDiagnostic": {
+        "offsetMs": 279.5,
+        "first5sCorrelation": 0.8526919022298975,
+        "fixedOffsetWindowCorrelations": [
+          0.9058409044389787,
+          0.9012474909403069,
+          -0.5285525572465285
+        ]
+      },
+      "decodedSamplesAt2kHz": 24491,
+      "sha256": "6d40bb5fb69a1557be71182a7c55b31ea238675e27ebac57331b369c3f54e34e"
+    }
+  },
+  "signalGateStatus": "FAIL",
+  "signalFailures": [
+    "local.mp4",
+    "received.mp4"
+  ],
+  "packetAndSampledPixelParityStatus": "PASS",
+  "packetAlignment": {
+    "v:0": {
+      "localPackets": 159,
+      "receivedPackets": 155,
+      "contiguousStart": 4,
+      "everyPacketSha256Exact": true,
+      "medianTimestampOffsetSeconds": 0.14182199999999945,
+      "timestampOffsetRangeSeconds": [
+        0.14138899999999843,
+        0.142411
+      ]
+    },
+    "a:0": {
+      "localPackets": 608,
+      "receivedPackets": 574,
+      "contiguousStart": 34,
+      "everyPacketSha256Exact": true,
+      "medianTimestampOffsetSeconds": 0.14160400000000006,
+      "timestampOffsetRangeSeconds": [
+        0.14143700000000003,
+        0.1416050000000011
+      ]
+    }
+  },
+  "relativeAvOffsetMs": 0.21799999999938535,
+  "rgbByteExactReceivedFrameSamples": [
+    0,
+    1,
+    38,
+    77,
+    116,
+    154
+  ],
+  "decodeEvidence": "live_audio_audio14_media/validation.json"
+}

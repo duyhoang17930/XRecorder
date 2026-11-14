@@ -1,0 +1,258 @@
+[
+  {
+    "elapsedMs": 154,
+    "internalServerFrame": 26624,
+    "internalRead": 26624,
+    "internalGapFrames": 0,
+    "micServerFrame": 40947,
+    "micRead": 26624,
+    "micGapFrames": 14323,
+    "encoded": 25600,
+    "queue": 0,
+    "stack": [
+      "java.nio.DirectByteBuffer.putShort",
+      "com.xrecorder.xrecorder.recording.SessionAudio.encode",
+      "com.xrecorder.xrecorder.recording.SessionAudio.start$lambda$0"
+    ]
+  },
+  {
+    "elapsedMs": 5996,
+    "internalServerFrame": 271360,
+    "internalRead": 271360,
+    "internalGapFrames": 0,
+    "micServerFrame": 293864,
+    "micRead": 200704,
+    "micGapFrames": 93160,
+    "encoded": 199680,
+    "queue": 69,
+    "stack": [
+      "android.media.MediaCodec.native_dequeueInputBuffer",
+      "android.media.MediaCodec.dequeueInputBuffer",
+      "com.xrecorder.xrecorder.recording.SessionAudio.encode"
+    ]
+  },
+  {
+    "elapsedMs": 6509,
+    "internalServerFrame": 301056,
+    "internalRead": 297984,
+    "internalGapFrames": 3072,
+    "micServerFrame": 314580,
+    "micRead": 228352,
+    "micGapFrames": 86228,
+    "encoded": 227328,
+    "queue": 68,
+    "stack": [
+      "android.media.MediaCodec.native_queueInputBuffer",
+      "android.media.MediaCodec.queueInputBuffer",
+      "com.xrecorder.xrecorder.recording.SessionAudio.encode"
+    ]
+  },
+  {
+    "elapsedMs": 7021,
+    "internalServerFrame": 325632,
+    "internalRead": 322560,
+    "internalGapFrames": 3072,
+    "micServerFrame": 339207,
+    "micRead": 288768,
+    "micGapFrames": 50439,
+    "encoded": 288768,
+    "queue": 33,
+    "stack": [
+      "android.media.MediaCodec.releaseOutputBuffer",
+      "android.media.MediaCodec.releaseOutputBufferInternal",
+      "android.media.MediaCodec.releaseOutputBuffer"
+    ]
+  },
+  {
+    "elapsedMs": 7532,
+    "internalServerFrame": 350208,
+    "internalRead": 347136,
+    "internalGapFrames": 3072,
+    "micServerFrame": 363759,
+    "micRead": 348160,
+    "micGapFrames": 15599,
+    "encoded": 347136,
+    "queue": 0,
+    "stack": [
+      "java.lang.Thread.sleep",
+      "java.lang.Thread.sleep0",
+      "java.lang.Thread.sleep"
+    ]
+  },
+  {
+    "elapsedMs": 8035,
+    "internalServerFrame": 374784,
+    "internalRead": 371712,
+    "internalGapFrames": 3072,
+    "micServerFrame": 387504,
+    "micRead": 371712,
+    "micGapFrames": 15792,
+    "encoded": 370688,
+    "queue": 1,
+    "stack": [
+      "java.lang.Thread.sleep",
+      "java.lang.Thread.sleep0",
+      "java.lang.Thread.sleep"
+    ]
+  },
+  {
+    "elapsedMs": 8568,
+    "internalServerFrame": 398336,
+    "internalRead": 395264,
+    "internalGapFrames": 3072,
+    "micServerFrame": 412841,
+    "micRead": 396288,
+    "micGapFrames": 16553,
+    "encoded": 395264,
+    "queue": 0,
+    "stack": [
+      "android.media.MediaCodec.native_dequeueOutputBuffer",
+      "android.media.MediaCodec.dequeueOutputBuffer",
+      "com.xrecorder.xrecorder.recording.SessionAudio.encode$drain"
+    ]
+  },
+  {
+    "elapsedMs": 9073,
+    "internalServerFrame": 423936,
+    "internalRead": 420864,
+    "internalGapFrames": 3072,
+    "micServerFrame": 437430,
+    "micRead": 421888,
+    "micGapFrames": 15542,
+    "encoded": 420864,
+    "queue": 0,
+    "stack": [
+      "java.lang.Thread.sleep",
+      "java.lang.Thread.sleep0",
+      "java.lang.Thread.sleep"
+    ]
+  },
+  {
+    "elapsedMs": 9583,
+    "internalServerFrame": 447488,
+    "internalRead": 445440,
+    "internalGapFrames": 2048,
+    "micServerFrame": 462004,
+    "micRead": 444416,
+    "micGapFrames": 17588,
+    "encoded": 444416,
+    "queue": 1,
+    "stack": [
+      "android.media.MediaMuxer.nativeWriteSampleData",
+      "android.media.MediaMuxer.writeSampleData",
+      "com.xrecorder.xrecorder.recording.SessionAudio.encode$drain"
+    ]
+  },
+  {
+    "elapsedMs": 10085,
+    "internalServerFrame": 473088,
+    "internalRead": 470016,
+    "internalGapFrames": 3072,
+    "micServerFrame": 485944,
+    "micRead": 470016,
+    "micGapFrames": 15928,
+    "encoded": 468992,
+    "queue": 1,
+    "stack": [
+      "android.media.MediaCodec.native_dequeueOutputBuffer",
+      "android.media.MediaCodec.dequeueOutputBuffer",
+      "com.xrecorder.xrecorder.recording.SessionAudio.encode$drain"
+    ]
+  },
+  {
+    "elapsedMs": 10593,
+    "internalServerFrame": 495616,
+    "internalRead": 492544,
+    "internalGapFrames": 3072,
+    "micServerFrame": 508892,
+    "micRead": 493568,
+    "micGapFrames": 15324,
+    "encoded": 492544,
+    "queue": 0,
+    "stack": [
+      "java.lang.Thread.sleep",
+      "java.lang.Thread.sleep0",
+      "java.lang.Thread.sleep"
+    ]
+  },
+  {
+    "elapsedMs": 11097,
+    "internalServerFrame": 521216,
+    "internalRead": 518144,
+    "internalGapFrames": 3072,
+    "micServerFrame": 535098,
+    "micRead": 519168,
+    "micGapFrames": 15930,
+    "encoded": 518144,
+    "queue": 0,
+    "stack": [
+      "android.media.MediaCodec.releaseOutputBuffer",
+      "android.media.MediaCodec.releaseOutputBufferInternal",
+      "android.media.MediaCodec.releaseOutputBuffer"
+    ]
+  },
+  {
+    "elapsedMs": 11650,
+    "internalServerFrame": 542720,
+    "internalRead": 540672,
+    "internalGapFrames": 2048,
+    "micServerFrame": 560893,
+    "micRead": 540672,
+    "micGapFrames": 20221,
+    "encoded": 539648,
+    "queue": 0,
+    "stack": [
+      "android.media.MediaCodec.native_queueInputBuffer",
+      "android.media.MediaCodec.queueInputBuffer",
+      "com.xrecorder.xrecorder.recording.SessionAudio.encode"
+    ]
+  },
+  {
+    "elapsedMs": 12154,
+    "internalServerFrame": 572416,
+    "internalRead": 569344,
+    "internalGapFrames": 3072,
+    "micServerFrame": 585673,
+    "micRead": 569344,
+    "micGapFrames": 16329,
+    "encoded": 568320,
+    "queue": 0,
+    "stack": [
+      "android.media.MediaCodec.native_queueInputBuffer",
+      "android.media.MediaCodec.queueInputBuffer",
+      "com.xrecorder.xrecorder.recording.SessionAudio.encode"
+    ]
+  },
+  {
+    "elapsedMs": 12660,
+    "internalServerFrame": 596992,
+    "internalRead": 592896,
+    "internalGapFrames": 4096,
+    "micServerFrame": 610234,
+    "micRead": 590848,
+    "micGapFrames": 19386,
+    "encoded": 590848,
+    "queue": 3,
+    "stack": [
+      "android.media.MediaCodec.releaseOutputBuffer",
+      "android.media.MediaCodec.releaseOutputBufferInternal",
+      "android.media.MediaCodec.releaseOutputBuffer"
+    ]
+  },
+  {
+    "elapsedMs": 13166,
+    "internalServerFrame": 620544,
+    "internalRead": 617472,
+    "internalGapFrames": 3072,
+    "micServerFrame": 634074,
+    "micRead": 618496,
+    "micGapFrames": 15578,
+    "encoded": 617472,
+    "queue": 0,
+    "stack": [
+      "android.media.MediaCodec.releaseOutputBuffer",
+      "android.media.MediaCodec.releaseOutputBufferInternal",
+      "android.media.MediaCodec.releaseOutputBuffer"
+    ]
+  }
+]

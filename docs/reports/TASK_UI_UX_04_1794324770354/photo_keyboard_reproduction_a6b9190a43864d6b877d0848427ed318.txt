@@ -1,3 +1,0 @@
-00:00 +0: loading D:/FAU_App/XRecorder/test/editor_hci_test.dart
-00:00 +0: photo text remains editable with a landscape keyboard
-00:01 +1: All tests passed!

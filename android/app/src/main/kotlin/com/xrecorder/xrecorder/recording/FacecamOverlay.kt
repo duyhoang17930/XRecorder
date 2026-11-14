@@ -20,7 +20,7 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
     private val windows = context.getSystemService(WindowManager::class.java)
     private val cameras = context.getSystemService(CameraManager::class.java)
     private val displayManager = context.getSystemService(Context.DISPLAY_SERVICE) as? DisplayManager
-    private val texture = TextureView(context)
+    private val texture = TextureView(context).apply { contentDescription = "Facecam preview. Drag to move camera" }
 
     private val displayListener = object : DisplayManager.DisplayListener {
         override fun onDisplayAdded(displayId: Int) {}
@@ -51,6 +51,7 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
     private var sensorOrientation = 0
     private var previewWidth = 640
     private var previewHeight = 480
+    @Volatile private var supportedEffects = setOf(FacecamGeometry.EFFECT_OFF)
     private var baseWidth = dp(FacecamGeometry.DEFAULT_WIDTH_DP)
     private var baseHeight = dp(FacecamGeometry.DEFAULT_HEIGHT_DP)
     private var cornerRadius = dp(FacecamGeometry.DEFAULT_CORNER_RADIUS_DP).toFloat()
@@ -133,6 +134,8 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         }
 
         val info = cameras.getCameraCharacteristics(cameraId)
+        supportedEffects = (info.get(CameraCharacteristics.CONTROL_AVAILABLE_EFFECTS) ?: intArrayOf(0)).toSet()
+        if (currentEffect !in supportedEffects) currentEffect = FacecamGeometry.EFFECT_OFF
         sensorOrientation = info.get(CameraCharacteristics.SENSOR_ORIENTATION) ?: 0
         val map = info.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
         val sizes = map?.getOutputSizes(SurfaceTexture::class.java) ?: emptyArray()
@@ -229,8 +232,9 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
     }
 
     fun setEffect(effect: Int): Boolean {
-        if (closed) return false
+        if (closed || !ready) return false
         val validated = FacecamGeometry.validateEffect(effect)
+        if (validated != effect || effect !in supportedEffects) return false
         currentEffect = validated
         cameraHandler.post {
             applyRepeatingRequest()
@@ -245,7 +249,7 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         val (w, h) = FacecamGeometry.scaledDimensions(baseWidth, baseHeight, clamped)
         params.width = w
         params.height = h
-        reposition()
+        reposition(force = true)
         main.post { transform() }
     }
 
@@ -294,14 +298,14 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         texture.setTransform(matrix)
     }
 
-    fun reposition(snap: Boolean = false) {
+    @JvmOverloads fun reposition(snap: Boolean = false, force: Boolean = false) {
         if (closed) return
         val (screenWidth, screenHeight) = availableSize()
         val (clampedX, clampedY) = FacecamGeometry.clampPosition(
             params.x, params.y, screenWidth, screenHeight, params.width, params.height
         )
         val finalX = if (snap) FacecamGeometry.snapToEdge(clampedX, screenWidth, params.width) else clampedX
-        if (finalX != params.x || clampedY != params.y) {
+        if (force || finalX != params.x || clampedY != params.y) {
             params.x = finalX
             params.y = clampedY
             try { windows.updateViewLayout(texture, params) } catch (_: Exception) { }

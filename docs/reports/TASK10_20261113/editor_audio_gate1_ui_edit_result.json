@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "sourceDraftKept": "audio_1794624056448_eightTrackMix",
+  "copyProjectId": "project_1794624635547957",
+  "trimInMs": 2005,
+  "outMs": 4000,
+  "duplicateClips": 2,
+  "audioTracks": 8,
+  "sourceFileUntouched": true
+}

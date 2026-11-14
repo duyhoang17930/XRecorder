@@ -1,0 +1,19 @@
+[
+  {
+    "case": "region-red",
+    "uri": "content://media/external/video/media/71",
+    "fullDecode": "PASS",
+    "frames": 5,
+    "firstFrameError": 89.25,
+    "maximumFrameError": 89.25,
+    "minimumWrongOriginError": 87.768125,
+    "allFrameErrors": [
+      89.25,
+      2.136177083333333,
+      1.8542083333333332,
+      1.5147708333333334,
+      1.3154375
+    ],
+    "status": "FAIL"
+  }
+]

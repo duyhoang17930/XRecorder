@@ -208,4 +208,19 @@ class Mp4RecoveryEngineTest {
         assertEquals(56L, mdatBox.size)
         assertEquals(16, mdatBox.headerSize)
     }
+    @Test fun openStreamInspectionDoesNotReopenThePathOrCloseCallerStream() {
+        val file = tempFolder.newFile("stream_source.mp4")
+        FileOutputStream(file).use {
+            it.write(createBox("ftyp", ByteArray(8)))
+            it.write(createBox("mdat", ByteArray(64)))
+            it.write(createBox("moov", ByteArray(32)))
+        }
+        java.io.FileInputStream(file).use { input ->
+            val inaccessibleLabel = File(tempFolder.root, "not_a_reopenable_path.mp4")
+            assertFalse(inaccessibleLabel.exists())
+            assertEquals(Mp4RecoveryEngine.Mp4Status.VALID,
+                Mp4RecoveryEngine.inspect(input, inaccessibleLabel).status)
+            assertTrue(input.channel.isOpen)
+        }
+    }
 }
