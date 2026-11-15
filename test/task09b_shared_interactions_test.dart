@@ -98,7 +98,7 @@ void main() {
       XRecorderApp(settings: settings, mediaRepository: TestCatalog()),
     );
     await tester.pumpAndSettle();
-    router = GoRouter.of(tester.element(find.text('Video Library')));
+    router = GoRouter.of(tester.element(find.text('Video library')));
     router.go('/settings');
     await tester.pumpAndSettle();
   }
@@ -231,7 +231,7 @@ void main() {
           }
           return null;
         });
-        for (final title in ['Privacy Policy', 'Terms of Use']) {
+        for (final title in ['Privacy policy', 'Terms of Use']) {
           await tap(tester, find.text(title));
           expect(router.routeInformationProvider.value.uri.path, '/settings');
           expect(store.writes, 0);

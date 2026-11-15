@@ -28,4 +28,7 @@
     <string name="capture_label_25" formatted="false">흰색</string>
     <string name="capture_label_26" formatted="false">파란색</string>
     <string name="capture_label_27" formatted="false">이 장치 또는 선택한 모드에 의해 지원되지 않습니다.</string>
+    <string name="capture_label_28" formatted="false">플로팅 컨트롤 펼치기</string>
+    <string name="capture_label_29" formatted="false">탭하여 플로팅 컨트롤 접기</string>
+    <string name="capture_label_30" formatted="false">드래그하여 플로팅 컨트롤 이동</string>
 </resources>

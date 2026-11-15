@@ -196,6 +196,12 @@ void main() {
         'captureUnsupportedDevice',
         'captureTouchGuidanceBody',
         'captureDurationInvalid',
+        'floatingControlsPermissionRequired',
+        'floatingControlsPermissionGranted',
+        'floatingControlsOpenHint',
+        'floatingControlsSettingsError',
+        'floatingControlsMoveHint',
+        'photoLibrary',
       };
       final differences = {
         for (final key in keys)

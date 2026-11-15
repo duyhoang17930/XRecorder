@@ -18,6 +18,8 @@ CAPTURE_LABELS = (
     'Facecam options', 'Switch camera', 'Show controls in video', 'Hide controls',
     'Small', 'Normal', 'Large', 'None', 'Grayscale', 'Sepia', 'Orange', 'Red', 'White', 'Blue',
     'Not supported by this device or the selected mode',
+    'Expand floating controls', 'Tap to collapse floating controls',
+    'Drag floating controls to move',
 )
 
 

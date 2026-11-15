@@ -53,7 +53,7 @@ void main() {
     expect(tester.widget<Scaffold>(scaffold).extendBody, isFalse);
     final stop = find.descendant(
       of: find.byType(CaptureStatusBar),
-      matching: find.text('Stop'),
+      matching: find.byTooltip('Stop'),
     );
     expect(stop, findsOneWidget);
     expect(

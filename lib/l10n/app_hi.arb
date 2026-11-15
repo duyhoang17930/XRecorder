@@ -841,5 +841,13 @@
   "captureTouchGuidance": "टच संकेत दिखाने की जानकारी",
   "captureTouchGuidanceBody": "टच दिखाने के लिए Android के डेवलपर विकल्पों में टच दिखाएँ को खुद चालू करें, अगर यह उपलब्ध हो। 3HRecorder दूसरे ऐप्लिकेशन में किए गए टच नहीं देख सकता। सिस्टम का संकेत पूरी स्क्रीन की रिकॉर्डिंग में दिख सकता है। ज़रूरत खत्म होने पर इसे बंद कर दें।",
   "captureDurationHint": "1–86400 सेकंड, या कोई सीमा नहीं रखने के लिए 0।",
-  "captureDurationInvalid": "0–86400 सेकंड दर्ज करें"
+  "captureDurationInvalid": "0–86400 सेकंड दर्ज करें",
+  "floatingControlsTitle": "फ्लोटिंग नियंत्रण",
+  "floatingControlsPermissionRequired": "फ्लोटिंग रिकॉर्डिंग नियंत्रण इस्तेमाल करने के लिए अन्य ऐप्स के ऊपर दिखाने की अनुमति दें।",
+  "floatingControlsPermissionGranted": "अनुमति मिल गई। रिकॉर्डिंग के दौरान सूचना में वीडियो में नियंत्रण दिखाएं चुनें; नियंत्रण वीडियो में दिखाई दे सकते हैं।",
+  "floatingControlsOpenHint": "Android ओवरले सेटिंग खोलें।",
+  "floatingControlsSettingsError": "Android ओवरले सेटिंग नहीं खुल सकीं।",
+  "floatingControlsExpandHint": "फ्लोटिंग नियंत्रण फैलाएं",
+  "floatingControlsCollapseHint": "फ्लोटिंग नियंत्रण समेटने के लिए टैप करें",
+  "floatingControlsMoveHint": "फ्लोटिंग नियंत्रण खिसकाने के लिए खींचें"
 }

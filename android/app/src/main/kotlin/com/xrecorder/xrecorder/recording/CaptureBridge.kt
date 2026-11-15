@@ -18,8 +18,9 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
     private val main = Handler(Looper.getMainLooper())
     private val pendingCapabilities = mutableSetOf<MethodChannel.Result>()
     private var disposed = false
-    companion object { const val CONSENT = 702; const val NOTIFICATIONS = 703; const val AUDIO_PERMISSION = 704; const val CAMERA_PERMISSION = 705; const val OVERLAY_PERMISSION = 706; const val CONTROLS_OVERLAY_PERMISSION = 707 }
+    companion object { const val CONSENT = 702; const val NOTIFICATIONS = 703; const val AUDIO_PERMISSION = 704; const val CAMERA_PERMISSION = 705; const val OVERLAY_PERMISSION = 706; const val CONTROLS_OVERLAY_PERMISSION = 707; const val FLOATING_CONTROLS_PERMISSION = 708 }
     private var requestedSession: String? = CaptureState.id.takeIf { CaptureState.state == "awaitingPermission" }
+    private var floatingControlsSettingsPending = false
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         if (disposed) { result.error("cancelled", "Capture screen closed.", null); return }
         when (call.method) {
@@ -39,6 +40,21 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
                 }
             }
             "current" -> result.success(CaptureState.snapshot())
+            "overlayPermissionStatus" -> result.success(android.provider.Settings.canDrawOverlays(activity))
+            "openOverlayPermissionSettings" -> {
+                if (floatingControlsSettingsPending) { result.success(false); return }
+                try {
+                    val intent = Intent(
+                        android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        android.net.Uri.parse("package:${activity.packageName}")
+                    )
+                    activity.startActivityForResult(intent, FLOATING_CONTROLS_PERMISSION)
+                    floatingControlsSettingsPending = true
+                    result.success(true)
+                } catch (_: Exception) {
+                    result.error("overlay_settings_unavailable", "Android overlay settings could not be opened.", null)
+                }
+            }
             "liveStatus" -> result.success(com.xrecorder.xrecorder.live.LiveCaptureState.snapshotFor(CaptureState.id, CaptureState.config.liveRequested, CaptureState.state))
             "liveDestination", "saveLiveDestination", "forgetLiveDestination" -> {
                 // Reuse the serialized worker and engine-disposal result guard. Keystore/IO
@@ -243,6 +259,10 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
         return true
     }
     fun onActivityResult(request: Int, code: Int, data: Intent?): Boolean {
+        if (request == FLOATING_CONTROLS_PERMISSION) {
+            floatingControlsSettingsPending = false
+            return true
+        }
         if (request !in listOf(CONSENT, OVERLAY_PERMISSION, CONTROLS_OVERLAY_PERMISSION)) return false
         val sessionId = consumeResult(request) ?: return true
         if (disposed || sessionId != CaptureState.id || requestedSession != sessionId || CaptureState.state != "awaitingPermission") return true
@@ -275,5 +295,8 @@ class CaptureBridge(private val activity: Activity) : MethodChannel.MethodCallHa
             }
         } catch (_: Exception) { CaptureState.transition("failed", "Android did not allow the recording service to start.") }
         return true
+    }
+    fun onHostResume() {
+        floatingControlsSettingsPending = false
     }
 }

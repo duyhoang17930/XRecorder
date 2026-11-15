@@ -189,7 +189,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('UI component gallery'), findsNothing);
     expect(find.text('About & licenses'), findsOneWidget);
-    expect(find.text('Privacy Policy'), findsOneWidget);
+    expect(find.text('Privacy policy'), findsOneWidget);
     expect(find.text('Terms of Use'), findsOneWidget);
     await tester.pumpWidget(const SizedBox.shrink());
     settings.dispose();

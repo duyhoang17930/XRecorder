@@ -463,7 +463,7 @@
   "verticalPosition": "Posición vertical",
   "video": "Vídeo",
   "videoAudioEffects": "Efectos de vídeo y audio",
-  "videoLibrary": "Biblioteca de Video",
+  "videoLibrary": "Biblioteca de videos",
   "videoProject": "Proyecto Video",
   "videoQuality": "Calidad de vídeo",
   "videos": "Vídeos",
@@ -841,5 +841,13 @@
   "captureTouchGuidance": "Ayuda para mostrar toques",
   "captureTouchGuidanceBody": "Para mostrar los toques, activa manualmente Mostrar toques en las opciones para desarrolladores de Android, si está disponible. 3HRecorder no puede detectar toques en otras apps. El indicador del sistema puede aparecer en grabaciones de pantalla completa. Desactívalo después si ya no lo necesitas.",
   "captureDurationHint": "1–86400 segundos, o 0 para no limitar.",
-  "captureDurationInvalid": "Introduce entre 0 y 86400 segundos"
+  "captureDurationInvalid": "Introduce entre 0 y 86400 segundos",
+  "floatingControlsTitle": "Controles flotantes",
+  "floatingControlsPermissionRequired": "Permite mostrar controles sobre otras aplicaciones para usar los controles flotantes de grabación.",
+  "floatingControlsPermissionGranted": "Permiso concedido. Durante la grabación, selecciona «Mostrar controles en el vídeo» en la notificación; podrían aparecer en el vídeo.",
+  "floatingControlsOpenHint": "Abrir los ajustes de superposición de Android.",
+  "floatingControlsSettingsError": "No se pudieron abrir los ajustes de superposición de Android.",
+  "floatingControlsExpandHint": "Expandir los controles flotantes",
+  "floatingControlsCollapseHint": "Toca para contraer los controles flotantes",
+  "floatingControlsMoveHint": "Arrastra los controles flotantes para moverlos"
 }

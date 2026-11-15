@@ -28,4 +28,7 @@
     <string name="capture_label_25" formatted="false">الأبيض</string>
     <string name="capture_label_26" formatted="false">الزرقاء</string>
     <string name="capture_label_27" formatted="false">لا يدعم هذا الجهاز أو الوضع المحدد</string>
+    <string name="capture_label_28" formatted="false">توسيع عناصر التحكم العائمة</string>
+    <string name="capture_label_29" formatted="false">انقر لطي عناصر التحكم العائمة</string>
+    <string name="capture_label_30" formatted="false">اسحب عناصر التحكم العائمة لنقلها</string>
 </resources>

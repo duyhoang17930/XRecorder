@@ -325,7 +325,7 @@
   "performance": "実績",
   "permanentlyDelete": "永久削除?",
   "photo": "写真",
-  "photoLibrary": "写真図書館",
+  "photoLibrary": "写真ライブラリ",
   "photoEditor": "写真編集",
   "photoPreview": "写真プレビュー",
   "photos": "写真",
@@ -463,7 +463,7 @@
   "verticalPosition": "垂直位置",
   "video": "動画",
   "videoAudioEffects": "ビデオ&オーディオ効果",
-  "videoLibrary": "ビデオ図書館",
+  "videoLibrary": "動画ライブラリ",
   "videoProject": "ビデオプロジェクト",
   "videoQuality": "動画品質",
   "videos": "ビデオ",
@@ -841,5 +841,13 @@
   "captureTouchGuidance": "タップ表示のガイド",
   "captureTouchGuidanceBody": "タップを表示するには、Android の開発者向けオプションで「タップを表示」を手動で有効にしてください。利用できない場合もあります。3HRecorder は他のアプリでのタップを検出できません。システムの表示が全画面録画に映る場合があります。不要になったら無効にしてください。",
   "captureDurationHint": "1～86400秒、無制限にする場合は0。",
-  "captureDurationInvalid": "0～86400秒を入力してください"
+  "captureDurationInvalid": "0～86400秒を入力してください",
+  "floatingControlsTitle": "フローティング操作",
+  "floatingControlsPermissionRequired": "他のアプリの上に表示する権限を許可すると、フローティング録画コントロールを使用できます。",
+  "floatingControlsPermissionGranted": "権限は許可されています。録画通知で有効にすると、操作ボタンが動画に映ることがあります。",
+  "floatingControlsOpenHint": "Androidのオーバーレイ設定を開きます。",
+  "floatingControlsSettingsError": "Androidのオーバーレイ設定を開けませんでした。",
+  "floatingControlsExpandHint": "フローティングコントロールを展開",
+  "floatingControlsCollapseHint": "タップしてフローティングコントロールを折りたたむ",
+  "floatingControlsMoveHint": "ドラッグしてフローティングコントロールを移動"
 }

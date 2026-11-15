@@ -5,6 +5,7 @@ import 'package:lucide_flutter/lucide_flutter.dart';
 @staticIconProvider
 abstract final class AppIcons {
   static const video = LucideIcons.video;
+  static const pictureInPicture = LucideIcons.pictureInPicture2;
   static const videos = LucideIcons.clapperboard;
   static const photos = LucideIcons.images;
   static const image = LucideIcons.image;

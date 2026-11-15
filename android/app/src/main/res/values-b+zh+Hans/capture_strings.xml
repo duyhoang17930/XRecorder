@@ -28,4 +28,7 @@
     <string name="capture_label_25" formatted="false">白色</string>
     <string name="capture_label_26" formatted="false">蓝色</string>
     <string name="capture_label_27" formatted="false">不支持此设备或所选择模式</string>
+    <string name="capture_label_28" formatted="false">展开悬浮控制</string>
+    <string name="capture_label_29" formatted="false">点按以收起悬浮控制</string>
+    <string name="capture_label_30" formatted="false">拖动悬浮控制以移动</string>
 </resources>

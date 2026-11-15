@@ -28,4 +28,7 @@
     <string name="capture_label_25" formatted="false">Putih</string>
     <string name="capture_label_26" formatted="false">Biru</string>
     <string name="capture_label_27" formatted="false">Tidak didukung oleh perangkat ini atau mode yang dipilih</string>
+    <string name="capture_label_28" formatted="false">Perluas kontrol mengambang</string>
+    <string name="capture_label_29" formatted="false">Ketuk untuk menciutkan kontrol mengambang</string>
+    <string name="capture_label_30" formatted="false">Seret kontrol mengambang untuk memindahkannya</string>
 </resources>

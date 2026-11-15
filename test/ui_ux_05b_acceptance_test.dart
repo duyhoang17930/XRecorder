@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xrecorder/app/app.dart';
 import 'package:xrecorder/app/theme/app_theme.dart';
+import 'package:xrecorder/core/constants/app_icons.dart';
 import 'package:xrecorder/core/ui/components/bottom_sheets/studio_bottom_sheet.dart';
 import 'package:xrecorder/core/ui/components/bottom_sheets/studio_sheet_launch.dart';
 import 'package:xrecorder/core/ui/components/cards/studio_cards.dart';
@@ -87,13 +88,17 @@ void main() {
         XRecorderApp(settings: settings, mediaRepository: TestCatalog()),
       );
       await tester.pumpAndSettle();
-      final router = GoRouter.of(tester.element(find.text('Video Library')));
+      final router = GoRouter.of(tester.element(find.text('Video library')));
       for (final route in ['/videos', '/photos', '/editor', '/settings']) {
         router.go(route);
         await tester.pumpAndSettle();
         expect(find.byType(StudioRootHeader), findsOneWidget);
         expect(find.text('3HRECORDER'), findsOneWidget);
       }
+      expect(find.text('Floating controls'), findsOneWidget);
+      expect(find.byIcon(AppIcons.video), findsOneWidget);
+      expect(find.byIcon(AppIcons.pictureInPicture), findsOneWidget);
+      expect(find.byIcon(AppIcons.videoSettings), findsNothing);
       expect(find.text('Recording settings'), findsOneWidget);
       expect(find.text('Video quality'), findsNothing);
       expect(find.text('Audio, countdown & facecam'), findsNothing);

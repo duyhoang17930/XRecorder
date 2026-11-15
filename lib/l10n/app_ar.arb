@@ -841,5 +841,13 @@
   "captureTouchGuidance": "إرشادات إظهار اللمسات",
   "captureTouchGuidanceBody": "لإظهار اللمسات، فعّل خيار إظهار اللمسات يدويًا في خيارات المطوّر في Android إن كان متاحًا. لا يستطيع 3HRecorder رصد اللمسات في التطبيقات الأخرى. قد يظهر مؤشر النظام في تسجيلات الشاشة الكاملة. أوقفه بعد الانتهاء إذا لم تعد بحاجة إليه.",
   "captureDurationHint": "من 1 إلى 86400 ثانية، أو 0 بلا حد.",
-  "captureDurationInvalid": "أدخل مدة من 0 إلى 86400 ثانية"
+  "captureDurationInvalid": "أدخل مدة من 0 إلى 86400 ثانية",
+  "floatingControlsTitle": "عناصر التحكم العائمة",
+  "floatingControlsPermissionRequired": "اسمح بالظهور فوق التطبيقات الأخرى لاستخدام عناصر التحكم العائمة للتسجيل.",
+  "floatingControlsPermissionGranted": "تم منح الإذن. أثناء التسجيل، اختر إظهار عناصر التحكم في الفيديو من الإشعار؛ قد تظهر عناصر التحكم في الفيديو.",
+  "floatingControlsOpenHint": "افتح إعدادات النوافذ العائمة في Android.",
+  "floatingControlsSettingsError": "تعذر فتح إعدادات النوافذ العائمة في Android.",
+  "floatingControlsExpandHint": "توسيع عناصر التحكم العائمة",
+  "floatingControlsCollapseHint": "انقر لطي عناصر التحكم العائمة",
+  "floatingControlsMoveHint": "اسحب عناصر التحكم العائمة لنقلها"
 }

@@ -1,5 +1,14 @@
 # TASK10 bug register ? live
 
+## Prompt03 Floating Ball follow-up — 2026-11-15
+
+| ID/severity | Current verified result | Remaining |
+|---|---|---|
+| PROMPT03-FB-01 / P1 repaired | Reproduced a left-edge drag that snapped back to the old saved ratio when a root layout/insets callback ran. The first drag movement past touch slop now invalidates that stale ratio; release clamps, edge-snaps, and persists. Both edges verified on Pixel_7/API37. Details: `docs/reports/PROMPT03_FLOATING_BALL/FLOATING_BALL_BUGS_AND_FIXES.md`. | Cutout/IME and OEM placement. |
+| PROMPT03-FB-PERMISSION / repaired | Real Android Settings grant, denied return, in-session revoke and regrant verified. Revocation removes the overlay but does not stop capture; regrant restores one ball to the live session. | OEM-specific permission settings and physical device. |
+
+No reproduced P0/P1 Floating Ball defect remains. Overall Prompt03 is PARTIAL because accessibility/layout cases and the full Flutter regression rerun are incomplete; see the Prompt03 final handoff. Prompt01 recording-quality findings and Prompt02 Screenshot findings are unchanged.
+
 ## Recording stabilization continuation — 2026-11-15
 
 See [focused root cause](recording_stabilization/RECORDING_ROOT_CAUSE.md) and [quality results](recording_stabilization/RECORDING_QUALITY_RESULTS.md). Accepted positive PCM at Stop and a partial terminal block could be discarded; reader/consumer termination repaired with deterministic race and terminal-saturation tests. This does not close recurring AAC backlog, mixed clock-origin alignment or historical stale-source defects.

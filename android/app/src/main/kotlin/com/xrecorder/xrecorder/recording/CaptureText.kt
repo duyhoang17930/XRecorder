@@ -35,6 +35,9 @@ internal object CaptureText {
         "White" to R.string.capture_label_25,
         "Blue" to R.string.capture_label_26,
         "Not supported by this device or the selected mode" to R.string.capture_label_27,
+        "Expand floating controls" to R.string.capture_label_28,
+        "Tap to collapse floating controls" to R.string.capture_label_29,
+        "Drag floating controls to move" to R.string.capture_label_30,
     )
     private val aliases = mapOf(
         "Pause recording" to "Pause", "Resume recording" to "Resume", "Stop recording" to "Stop",

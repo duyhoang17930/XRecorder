@@ -325,7 +325,7 @@
   "performance": "prestasi",
   "permanentlyDelete": "Secara permanen menghapus?",
   "photo": "Foto",
-  "photoLibrary": "Perpustakaan Foto",
+  "photoLibrary": "Galeri foto",
   "photoEditor": "Foto editor",
   "photoPreview": "Foto Preview",
   "photos": "Foto-foto yang",
@@ -463,7 +463,7 @@
   "verticalPosition": "Posisi Vertikal",
   "video": "Video",
   "videoAudioEffects": "Video & Audio Efek",
-  "videoLibrary": "Perpustakaan Video",
+  "videoLibrary": "Galeri video",
   "videoProject": "Proyek Video",
   "videoQuality": "kualitas video",
   "videos": "Video yang",
@@ -841,5 +841,13 @@
   "captureTouchGuidance": "Panduan indikator sentuhan",
   "captureTouchGuidanceBody": "Untuk menampilkan sentuhan, aktifkan Tampilkan ketukan secara manual di Opsi developer Android, jika tersedia. 3HRecorder tidak dapat mendeteksi sentuhan di aplikasi lain. Indikator sistem dapat muncul dalam rekaman layar penuh. Nonaktifkan setelah selesai jika tidak diperlukan lagi.",
   "captureDurationHint": "1–86400 detik, atau 0 tanpa batas.",
-  "captureDurationInvalid": "Masukkan 0–86400 detik"
+  "captureDurationInvalid": "Masukkan 0–86400 detik",
+  "floatingControlsTitle": "Kontrol mengambang",
+  "floatingControlsPermissionRequired": "Izinkan tampilan di atas aplikasi lain untuk menggunakan kontrol rekaman mengambang.",
+  "floatingControlsPermissionGranted": "Izin diberikan. Kontrol dapat muncul di video jika diaktifkan dari notifikasi perekaman.",
+  "floatingControlsOpenHint": "Buka setelan overlay Android.",
+  "floatingControlsSettingsError": "Setelan overlay Android tidak dapat dibuka.",
+  "floatingControlsExpandHint": "Perluas kontrol mengambang",
+  "floatingControlsCollapseHint": "Ketuk untuk menciutkan kontrol mengambang",
+  "floatingControlsMoveHint": "Seret kontrol mengambang untuk memindahkannya"
 }

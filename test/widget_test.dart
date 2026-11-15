@@ -71,7 +71,7 @@ void main() {
     'Library search survives tab navigation and real IDs open details',
     (tester) async {
       await start(tester);
-      expect(find.text('Video Library'), findsOneWidget);
+      expect(find.text('Video library'), findsOneWidget);
       await tester.enterText(find.byType(TextField), 'Clip 0');
       await tester.pumpAndSettle();
       await tester.scrollUntilVisible(
@@ -210,7 +210,7 @@ void main() {
     tester.platformDispatcher.textScaleFactorTestValue = 1.3;
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
     await start(tester, size: const Size(360, 800));
-    final router = GoRouter.of(tester.element(find.text('Video Library')));
+    final router = GoRouter.of(tester.element(find.text('Video library')));
     for (final path in [
       '/photos',
       '/editor',

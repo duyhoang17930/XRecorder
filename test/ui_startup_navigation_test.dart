@@ -30,13 +30,13 @@ void main() {
     expect(find.byKey(const ValueKey('startup-initializing')), findsOneWidget);
     expect(find.byType(StartupSplash), findsNothing);
     expect(find.bySemanticsLabel('3HRecorder'), findsNothing);
-    expect(find.text('Video Library'), findsNothing);
+    expect(find.text('Video library'), findsNothing);
 
     startup.complete(OnboardingState.complete);
     await tester.pump();
     await tester.pumpAndSettle();
 
-    expect(find.text('Video Library'), findsOneWidget);
+    expect(find.text('Video library'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

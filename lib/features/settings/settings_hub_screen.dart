@@ -12,6 +12,7 @@ import '../../core/ui/theme/spacing.dart';
 import 'settings_controller.dart';
 import '../../l10n/app_languages.dart';
 import 'app_language_dialog.dart';
+import 'floating_controls_permission_row.dart';
 import 'studio_identity.dart';
 
 class SettingsHubScreen extends StatefulWidget {
@@ -106,17 +107,27 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
               ),
             ),
           ],
-          StudioSectionLabel(context.l10n.capture),
+          StudioSectionLabel(
+            context.l10n.capture,
+            padding: EdgeInsets.only(
+              top: settings.persistenceError == null
+                  ? AppSpacing.xxs
+                  : AppSpacing.md,
+              bottom: AppSpacing.xs,
+            ),
+          ),
           StudioCard(
             padding: EdgeInsets.zero,
             child: Column(
               children: [
                 SettingsRow(
                   context.l10n.recordingSettings,
-                  icon: AppIcons.videoSettings,
+                  icon: AppIcons.video,
                   subtitle: context.l10n.recordingSettingsSummary,
                   onTap: () => _open(context, '/settings/audio-video'),
                 ),
+                const Divider(height: 1, indent: 72),
+                const FloatingControlsPermissionRow(),
               ],
             ),
           ),

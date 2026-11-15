@@ -325,7 +325,7 @@
   "performance": "Leistung",
   "permanentlyDelete": "Dauerhaft gelöscht?",
   "photo": "Foto",
-  "photoLibrary": "Foto Bibliothek",
+  "photoLibrary": "Fotobibliothek",
   "photoEditor": "Foto-Editor",
   "photoPreview": "Foto Preview",
   "photos": "Fotos",
@@ -463,7 +463,7 @@
   "verticalPosition": "Vertikale Position",
   "video": "Video",
   "videoAudioEffects": "Video & Audio Effekte",
-  "videoLibrary": "Video Bibliothek",
+  "videoLibrary": "Videobibliothek",
   "videoProject": "Video Projekt",
   "videoQuality": "Videoqualität",
   "videos": "Videos",
@@ -841,5 +841,13 @@
   "captureTouchGuidance": "Hinweise zu Berührungsanzeigen",
   "captureTouchGuidanceBody": "Aktiviere Berührungen anzeigen bei Bedarf manuell in den Android-Entwickleroptionen, sofern verfügbar. 3HRecorder kann keine Berührungen in anderen Apps erfassen. Die Systemanzeige kann in Vollbildaufnahmen erscheinen. Schalte sie danach aus, wenn du sie nicht mehr benötigst.",
   "captureDurationHint": "1–86400 Sekunden oder 0 für unbegrenzt.",
-  "captureDurationInvalid": "Gib 0–86400 Sekunden ein"
+  "captureDurationInvalid": "Gib 0–86400 Sekunden ein",
+  "floatingControlsTitle": "Schwebende Steuerelemente",
+  "floatingControlsPermissionRequired": "Erlaube die Anzeige über anderen Apps, um die schwebenden Aufnahmesteuerungen zu verwenden.",
+  "floatingControlsPermissionGranted": "Berechtigung erteilt. Wähle während der Aufnahme in der Benachrichtigung „Steuerungen im Video anzeigen“; die Steuerungen können im Video erscheinen.",
+  "floatingControlsOpenHint": "Android-Einstellungen für die Anzeige über anderen Apps öffnen.",
+  "floatingControlsSettingsError": "Die Android-Einstellungen für die Anzeige über anderen Apps konnten nicht geöffnet werden.",
+  "floatingControlsExpandHint": "Schwebende Steuerelemente ausklappen",
+  "floatingControlsCollapseHint": "Tippe, um die schwebenden Steuerelemente einzuklappen",
+  "floatingControlsMoveHint": "Ziehe die schwebenden Steuerelemente zum Verschieben"
 }

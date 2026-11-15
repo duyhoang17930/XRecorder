@@ -325,7 +325,7 @@
   "performance": "表现",
   "permanentlyDelete": "永久删除?",
   "photo": "照片",
-  "photoLibrary": "图片图书馆",
+  "photoLibrary": "图片库",
   "photoEditor": "图片编辑",
   "photoPreview": "图片预览",
   "photos": "照片",
@@ -463,7 +463,7 @@
   "verticalPosition": "垂直位置",
   "video": "视频",
   "videoAudioEffects": "视频和音频效应",
-  "videoLibrary": "视频图书馆",
+  "videoLibrary": "视频库",
   "videoProject": "视频项目",
   "videoQuality": "视频质量",
   "videos": "视频",
@@ -841,5 +841,13 @@
   "captureTouchGuidance": "触摸指示器使用说明",
   "captureTouchGuidanceBody": "若要显示点按位置，请在 Android 开发者选项中手动开启“显示点按操作”（如有此选项）。3HRecorder 无法检测其他应用中的触摸操作。系统指示器可能出现在全屏录制中。不再需要时请将其关闭。",
   "captureDurationHint": "1–86400 秒，输入 0 表示不限时。",
-  "captureDurationInvalid": "请输入 0–86400 秒"
+  "captureDurationInvalid": "请输入 0–86400 秒",
+  "floatingControlsTitle": "悬浮控制",
+  "floatingControlsPermissionRequired": "允许显示在其他应用上方，以使用悬浮录屏控制。",
+  "floatingControlsPermissionGranted": "权限已授予。从录制通知中启用后，控制按钮可能会出现在视频中。",
+  "floatingControlsOpenHint": "打开 Android 悬浮窗设置。",
+  "floatingControlsSettingsError": "无法打开 Android 悬浮窗设置。",
+  "floatingControlsExpandHint": "展开悬浮控制",
+  "floatingControlsCollapseHint": "点按以收起悬浮控制",
+  "floatingControlsMoveHint": "拖动悬浮控制以移动"
 }

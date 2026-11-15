@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/recording/recording_service.dart';
 import '../constants/app_icons.dart';
-import '../domain/models.dart' show RecordingState;
 import '../ui/components/bottom_sheets/studio_sheet_launch.dart';
 import '../ui/theme/colors.dart';
 import '../ui/theme/motion.dart';
@@ -69,41 +68,39 @@ class _StudioShellState extends State<StudioShell> {
 
   @override
   Widget build(BuildContext context) {
-    final capture = CaptureScope.of(context);
-    final session = capture.session;
-    final reserveCaptureFooter =
-        capture.feedback != null ||
-        (session != null &&
-            session.state != RecordingState.idle &&
-            session.state != RecordingState.completed &&
-            capture.dismissedId != session.id);
-    return Scaffold(
-      // Reserve the original footer area whenever capture UI can be visible.
-      // CaptureStatusBar remains responsible for its content and actions.
-      extendBody: !reserveCaptureFooter,
-      body: SafeArea(
-        bottom: false,
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppBreakpoints.content),
-            child: Column(
-              children: [
-                Expanded(
-                  child: StudioTabScrollScope(
-                    controllers: controllers,
-                    child: widget.navigationShell,
+    final capture = CaptureScope.read(context);
+    return ValueListenableBuilder<bool>(
+      valueListenable: capture.footerVisible,
+      builder: (context, reserveCaptureFooter, _) => Scaffold(
+        // Reserve the original footer area whenever capture UI can be visible.
+        // CaptureStatusBar remains responsible for its content and actions.
+        extendBody: !reserveCaptureFooter,
+        body: SafeArea(
+          bottom: false,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: AppBreakpoints.content,
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: StudioTabScrollScope(
+                      controllers: controllers,
+                      child: widget.navigationShell,
+                    ),
                   ),
-                ),
-                const CaptureStatusBar(),
-              ],
+                  const CaptureStatusBar(),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: StudioBottomNavigation(
-        selected: widget.navigationShell.currentIndex,
-        onDestination: select,
-        onCreate: create,
+        bottomNavigationBar: StudioBottomNavigation(
+          selected: widget.navigationShell.currentIndex,
+          onDestination: select,
+          onCreate: create,
+        ),
       ),
     );
   }

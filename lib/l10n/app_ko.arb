@@ -325,7 +325,7 @@
   "performance": "성과",
   "permanentlyDelete": "영구적으로 삭제할 수 있나요?",
   "photo": "사진",
-  "photoLibrary": "사진 도서관",
+  "photoLibrary": "사진 라이브러리",
   "photoEditor": "사진 편집기",
   "photoPreview": "사진 프리뷰",
   "photos": "사진",
@@ -463,7 +463,7 @@
   "verticalPosition": "Vertical 위치",
   "video": "동영상",
   "videoAudioEffects": "비디오 & 오디오 효과",
-  "videoLibrary": "비디오 도서관",
+  "videoLibrary": "동영상 라이브러리",
   "videoProject": "비디오 프로젝트",
   "videoQuality": "비디오 품질",
   "videos": "비디오",
@@ -841,5 +841,13 @@
   "captureTouchGuidance": "탭 표시 안내",
   "captureTouchGuidanceBody": "탭을 표시하려면 Android 개발자 옵션에서 탭 표시를 직접 켜세요. 기기에 따라 제공되지 않을 수 있습니다. 3HRecorder는 다른 앱의 터치를 감지할 수 없습니다. 시스템 표시가 전체 화면 녹화에 포함될 수 있습니다. 더 이상 필요하지 않으면 꺼 주세요.",
   "captureDurationHint": "1~86400초 또는 제한 없음은 0입니다.",
-  "captureDurationInvalid": "0~86400초를 입력하세요"
+  "captureDurationInvalid": "0~86400초를 입력하세요",
+  "floatingControlsTitle": "플로팅 컨트롤",
+  "floatingControlsPermissionRequired": "다른 앱 위에 표시를 허용하면 플로팅 녹화 컨트롤을 사용할 수 있습니다.",
+  "floatingControlsPermissionGranted": "권한이 허용되었습니다. 녹화 알림에서 켜면 컨트롤이 동영상에 나타날 수 있습니다.",
+  "floatingControlsOpenHint": "Android 오버레이 설정을 엽니다.",
+  "floatingControlsSettingsError": "Android 오버레이 설정을 열 수 없습니다.",
+  "floatingControlsExpandHint": "플로팅 컨트롤 펼치기",
+  "floatingControlsCollapseHint": "탭하여 플로팅 컨트롤 접기",
+  "floatingControlsMoveHint": "드래그하여 플로팅 컨트롤 이동"
 }

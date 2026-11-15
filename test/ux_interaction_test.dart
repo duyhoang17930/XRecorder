@@ -69,7 +69,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    router = GoRouter.of(tester.element(find.text('Video Library')));
+    router = GoRouter.of(tester.element(find.text('Video library')));
   }
 
   Future<void> settleImage(WidgetTester tester) async {
@@ -111,7 +111,7 @@ void main() {
     'repeated Create opens one sheet and handoff to recording setup works',
     (tester) async {
       await start(tester);
-      final host = tester.element(find.text('Video Library'));
+      final host = tester.element(find.text('Video library'));
       final first = openStudioCreate(host), second = openStudioCreate(host);
       await tester.pumpAndSettle();
       expect(find.byTooltip('Close create menu'), findsOneWidget);
@@ -180,7 +180,7 @@ void main() {
       tester.view.viewInsets = const FakeViewPadding(bottom: 140);
       await tester.pump();
       final pending = pickEditorMedia(
-        tester.element(find.text('Video Library')),
+        tester.element(find.text('Video library')),
       );
       await tester.pumpAndSettle();
       expect(find.text('Cancel'), findsOneWidget);

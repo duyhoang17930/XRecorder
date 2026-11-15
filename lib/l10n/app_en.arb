@@ -83,7 +83,7 @@
   "@viewIntroduction": {
     "description": "Settings action to replay the introduction without resetting preferences."
   },
-  "privacyPolicy": "Privacy Policy",
+  "privacyPolicy": "Privacy policy",
   "@privacyPolicy": {
     "description": "Action opening the privacy policy in an external browser."
   },
@@ -148,7 +148,7 @@
   "@aDocumentProviderMovedFileOrRevoked": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
   },
-  "appearance": "APPEARANCE",
+  "appearance": "Appearance",
   "@appearance": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
   },
@@ -300,7 +300,7 @@
   "@blue": {
     "description": "P2/P3 interface copy. Origin: lib/features/editor/layers_editor.dart. Keep product names, technical identifiers and units intact."
   },
-  "capture": "CAPTURE",
+  "capture": "Capture",
   "@capture": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
   },
@@ -688,7 +688,7 @@
   "@editing": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
   },
-  "editingStudio": "Editing Studio",
+  "editingStudio": "Editing studio",
   "@editingStudio": {
     "description": "P2/P3 interface copy. Origin: lib/features/editor/editing_hub_screen.dart. Keep product names, technical identifiers and units intact."
   },
@@ -844,7 +844,7 @@
   "@h265Hevc": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_controller.dart. Keep product names, technical identifiers and units intact."
   },
-  "helpAbout": "HELP & ABOUT",
+  "helpAbout": "Help & about",
   "@helpAbout": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
   },
@@ -1304,7 +1304,7 @@
   "@photo": {
     "description": "P2/P3 interface copy. Origin: lib/core/widgets/studio_shell.dart. Keep product names, technical identifiers and units intact."
   },
-  "photoLibrary": "Photo Library",
+  "photoLibrary": "Photo library",
   "@photoLibrary": {
     "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
   },
@@ -1860,7 +1860,7 @@
   "@videoAudioEffects": {
     "description": "P2/P3 interface copy. Origin: lib/features/editor/project_effects.dart. Keep product names, technical identifiers and units intact."
   },
-  "videoLibrary": "Video Library",
+  "videoLibrary": "Video library",
   "@videoLibrary": {
     "description": "P2/P3 interface copy. Origin: lib/features/media/media_library_screen.dart. Keep product names, technical identifiers and units intact."
   },
@@ -1916,7 +1916,7 @@
   "@writeAReportBeforeSharing": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
   },
-  "yourWorkspace": "YOUR WORKSPACE",
+  "yourWorkspace": "Your workspace",
   "@yourWorkspace": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
   },
@@ -3690,5 +3690,37 @@
   },
   "@captureDurationInvalid": {
     "description": "Recording settings notice or bounded auto-stop validation. Presentation only."
+  },
+  "floatingControlsTitle": "Floating controls",
+  "@floatingControlsTitle": {
+    "description": "Settings row title for Android floating recording controls."
+  },
+  "floatingControlsPermissionRequired": "Allow display over other apps to use floating recording controls.",
+  "@floatingControlsPermissionRequired": {
+    "description": "Status and permission explanation shown when display-over-other-apps access is not granted."
+  },
+  "floatingControlsPermissionGranted": "Allowed. Controls may appear in video when enabled from a recording notification.",
+  "@floatingControlsPermissionGranted": {
+    "description": "Status and per-recording behavior shown when display-over-other-apps access is granted."
+  },
+  "floatingControlsOpenHint": "Open Android overlay settings.",
+  "@floatingControlsOpenHint": {
+    "description": "Screen-reader hint for opening Android overlay permission settings."
+  },
+  "floatingControlsSettingsError": "Android overlay settings could not be opened.",
+  "@floatingControlsSettingsError": {
+    "description": "Failure shown if Android overlay permission settings cannot be launched."
+  },
+  "floatingControlsExpandHint": "Expand floating controls",
+  "@floatingControlsExpandHint": {
+    "description": "Screen-reader label for the collapsed recording ball."
+  },
+  "floatingControlsCollapseHint": "Tap to collapse floating controls",
+  "@floatingControlsCollapseHint": {
+    "description": "Screen-reader hint for collapsing expanded recording controls."
+  },
+  "floatingControlsMoveHint": "Drag floating controls to move",
+  "@floatingControlsMoveHint": {
+    "description": "Screen-reader hint for dragging recording controls."
   }
 }

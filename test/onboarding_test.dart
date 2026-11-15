@@ -201,7 +201,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('Video Library'), findsOneWidget);
+    expect(find.text('Video library'), findsOneWidget);
     expect(find.text('Record Anything'), findsNothing);
     expect(settingsStore.writes, isEmpty);
   });
@@ -242,7 +242,7 @@ void main() {
 
       await tester.tap(find.text('Skip'));
       await tester.pumpAndSettle();
-      expect(find.text('Video Library'), findsOneWidget);
+      expect(find.text('Video library'), findsOneWidget);
       expect(settings.themeMode, ThemeMode.light);
       expect(settingsStore.writes, isEmpty);
     },

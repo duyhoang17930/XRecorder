@@ -200,7 +200,7 @@ void main() {
             service.emit(RecordingState.completed, output: uri);
             await tester.pumpAndSettle();
             expect(find.text('Screenshot saved'), findsOneWidget);
-            expect(find.text('Stop'), findsNothing);
+            expect(find.byTooltip('Stop'), findsNothing);
             final card = tester.getRect(find.byType(CaptureFeedbackCard));
             final nav = tester.getRect(find.text('Navigation'));
             expect(card.bottom, lessThanOrEqualTo(nav.top));
@@ -328,7 +328,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.textContaining('Free some storage'), findsOneWidget);
       expect(find.textContaining('PlatformException'), findsNothing);
-      expect(find.text('Stop'), findsNothing);
+      expect(find.byTooltip('Stop'), findsNothing);
       service.emit(RecordingState.awaitingPermission, id: 'second-shot');
       service.emit(RecordingState.completed, id: 'second-shot', output: uri);
       await tester.pumpAndSettle();

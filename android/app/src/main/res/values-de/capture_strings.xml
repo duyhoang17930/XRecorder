@@ -28,4 +28,7 @@
     <string name="capture_label_25" formatted="false">Weiß</string>
     <string name="capture_label_26" formatted="false">Blaue</string>
     <string name="capture_label_27" formatted="false">Nicht unterstützt von diesem Gerät oder dem ausgewählten Modus</string>
+    <string name="capture_label_28" formatted="false">Schwebende Steuerelemente ausklappen</string>
+    <string name="capture_label_29" formatted="false">Tippe, um die schwebenden Steuerelemente einzuklappen</string>
+    <string name="capture_label_30" formatted="false">Ziehe die schwebenden Steuerelemente zum Verschieben</string>
 </resources>

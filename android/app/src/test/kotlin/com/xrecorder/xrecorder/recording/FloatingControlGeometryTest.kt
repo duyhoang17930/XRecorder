@@ -28,6 +28,18 @@ class FloatingControlGeometryTest {
         assertEquals(0, FloatingControlGeometry.clamp(20, 100, 200))
     }
 
+    @Test fun insetAwarePositionsStayInsideSafeAreaAndKeepEdgeSnap() {
+        val inset = 32
+        val available = 320
+        val size = 200
+        assertEquals(inset, FloatingControlGeometry.clampInArea(-100, inset, available, size))
+        assertEquals(152, FloatingControlGeometry.clampInArea(999, inset, available, size))
+        assertEquals(inset, FloatingControlGeometry.snapInArea(40, inset, available, size))
+        assertEquals(152, FloatingControlGeometry.snapInArea(150, inset, available, size))
+        assertEquals(152, FloatingControlGeometry.fromNormalizedInArea(1f, inset, available, size))
+        assertEquals(1f, FloatingControlGeometry.toNormalizedInArea(152, inset, available, size), 0.001f)
+    }
+
     @Test fun resolveOverlayStateForRecordingShowsActiveTimer() {
         val state = FloatingControlGeometry.resolveOverlayState(
             state = "recording",

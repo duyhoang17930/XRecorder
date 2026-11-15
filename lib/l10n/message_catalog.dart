@@ -79,7 +79,7 @@ String localizedMessage(
   "8 Mbps" => l10n.label8Mbps,
   "A document provider, moved file or revoked permission can invalidate a saved URI. Select the folder again. Projects keep their original references and may require re-adding a moved clip." =>
     l10n.aDocumentProviderMovedFileOrRevoked,
-  "APPEARANCE" => l10n.appearance,
+  "Appearance" => l10n.appearance,
   "About & licenses" => l10n.aboutLicenses,
   "Access wasn't granted. Choose the file or folder again." =>
     l10n.accessWasnTGrantedChooseTheFile,
@@ -129,7 +129,7 @@ String localizedMessage(
   "Black" => l10n.black,
   "Black background / aspect ratio" => l10n.blackBackgroundAspectRatio,
   "Blue" => l10n.blue,
-  "CAPTURE" => l10n.capture,
+  "Capture" => l10n.capture,
   "Cache" => l10n.cache,
   "Cancel" => l10n.cancel,
   "Cancel export" => l10n.cancelExport,
@@ -316,7 +316,7 @@ String localizedMessage(
   "Guava" => l10n.guava,
   "H.264 / AVC" => l10n.h264Avc,
   "H.265 / HEVC" => l10n.h265Hevc,
-  "HELP & ABOUT" => l10n.helpAbout,
+  "Help & about" => l10n.helpAbout,
   "Help" => l10n.help,
   "Help & guides" => l10n.helpGuides,
   "Horizontal position" => l10n.horizontalPosition,
@@ -635,7 +635,7 @@ String localizedMessage(
   "Why is a video black or silent?" => l10n.whyIsAVideoBlackOrSilent,
   "Will editing change my originals?" => l10n.willEditingChangeMyOriginals,
   "Write a report before sharing." => l10n.writeAReportBeforeSharing,
-  "YOUR WORKSPACE" => l10n.yourWorkspace,
+  "Your workspace" => l10n.yourWorkspace,
   "Yellow" => l10n.yellow,
   "Your original photo is unchanged. Save a copy to keep these edits." =>
     l10n.yourOriginalPhotoIsUnchangedSaveA,

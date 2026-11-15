@@ -28,4 +28,7 @@
     <string name="capture_label_25" formatted="false">Blanc</string>
     <string name="capture_label_26" formatted="false">Bleu</string>
     <string name="capture_label_27" formatted="false">Non supporté par ce dispositif ou le mode sélectionné</string>
+    <string name="capture_label_28" formatted="false">Développer les commandes flottantes</string>
+    <string name="capture_label_29" formatted="false">Touchez pour réduire les commandes flottantes</string>
+    <string name="capture_label_30" formatted="false">Faites glisser les commandes flottantes pour les déplacer</string>
 </resources>

@@ -27,12 +27,14 @@ void main() {
   setUp(() {
     messenger.setMockMethodCallHandler(
       AndroidRecordingService.commands,
-      (call) async => call.method == 'current'
-          ? {'id': '', 'state': 'idle'}
-          : {
-              'presets': [],
-              'audioSources': ['mute'],
-            },
+      (call) async => switch (call.method) {
+        'current' => {'id': '', 'state': 'idle'},
+        'overlayPermissionStatus' => false,
+        _ => {
+          'presets': [],
+          'audioSources': ['mute'],
+        },
+      },
     );
     messenger.setMockMethodCallHandler(
       const MethodChannel('com.xrecorder/capture/events'),
@@ -64,7 +66,7 @@ void main() {
     );
     await tester.pumpWidget(XRecorderApp(mediaRepository: catalog));
     await tester.pumpAndSettle();
-    GoRouter.of(tester.element(find.text('Video Library')))
+    GoRouter.of(tester.element(find.text('Video library')))
         .push('/media/${Uri.encodeComponent(catalog.items.single.id)}');
     await tester.pumpAndSettle();
     final button = tester.widget<TextButton>(
@@ -150,7 +152,7 @@ void main() {
           );
           await tester.pumpAndSettle();
           final router = GoRouter.of(
-            tester.element(find.text('Video Library')),
+            tester.element(find.text('Video library')),
           );
           for (final tab in ['videos', 'photos', 'editor', 'settings']) {
             router.go('/$tab');

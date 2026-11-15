@@ -162,7 +162,7 @@ void main() {
         expect(tester.takeException(), isNull);
         expect(
           find.text(
-            path.startsWith('editor') ? 'Editing Studio' : 'Photo Library',
+            path.startsWith('editor') ? 'Editing studio' : 'Photo library',
           ),
           findsOneWidget,
         );
@@ -188,7 +188,7 @@ void main() {
       await tester.tap(find.text('Choose destination'));
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
-      expect(find.text('Video Library'), findsOneWidget);
+      expect(find.text('Video library'), findsOneWidget);
     } finally {
       await tester.pumpWidget(const SizedBox());
     }

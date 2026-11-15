@@ -841,5 +841,13 @@
   "captureTouchGuidance": "Hướng dẫn hiển thị thao tác chạm",
   "captureTouchGuidanceBody": "Để hiển thị thao tác chạm, hãy tự bật Hiển thị thao tác chạm trong Tùy chọn nhà phát triển của Android, nếu có. 3HRecorder không thể theo dõi thao tác chạm trong ứng dụng khác. Chỉ báo của hệ thống có thể xuất hiện trong bản quay toàn màn hình. Hãy tắt sau khi không còn cần dùng.",
   "captureDurationHint": "1–86400 giây, hoặc 0 để không giới hạn.",
-  "captureDurationInvalid": "Nhập từ 0 đến 86400 giây"
+  "captureDurationInvalid": "Nhập từ 0 đến 86400 giây",
+  "floatingControlsTitle": "Điều khiển nổi",
+  "floatingControlsPermissionRequired": "Cho phép hiển thị trên ứng dụng khác để dùng điều khiển nổi khi quay màn hình.",
+  "floatingControlsPermissionGranted": "Đã cấp quyền. Điều khiển có thể xuất hiện trong video nếu được bật từ thông báo ghi hình.",
+  "floatingControlsOpenHint": "Mở phần cài đặt quyền hiển thị trên ứng dụng khác của Android.",
+  "floatingControlsSettingsError": "Không thể mở phần cài đặt quyền hiển thị trên ứng dụng khác của Android.",
+  "floatingControlsExpandHint": "Mở rộng điều khiển nổi",
+  "floatingControlsCollapseHint": "Chạm để thu gọn điều khiển nổi",
+  "floatingControlsMoveHint": "Kéo điều khiển nổi để di chuyển"
 }

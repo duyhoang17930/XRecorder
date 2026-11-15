@@ -111,6 +111,10 @@ class MainActivity : FlutterActivity() {
         preferencesWorker.shutdown()
         super.onDestroy()
     }
+    override fun onResume() {
+        super.onResume()
+        captureBridge?.onHostResume()
+    }
     override fun onPause() { com.xrecorder.xrecorder.editor.EditorPreview.pauseAll();super.onPause() }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

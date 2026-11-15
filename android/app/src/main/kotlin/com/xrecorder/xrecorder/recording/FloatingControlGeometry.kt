@@ -39,10 +39,17 @@ internal object FloatingControlGeometry {
 
     fun clamp(position: Int, available: Int, size: Int): Int = position.coerceIn(0, (available - size).coerceAtLeast(0))
 
+    /** Coordinates include the system inset at the start of the safe area. */
+    fun clampInArea(position: Int, inset: Int, available: Int, size: Int): Int =
+        inset + clamp(position - inset, available, size)
+
     fun snap(x: Int, available: Int, size: Int): Int {
         val end = (available - size).coerceAtLeast(0)
         return if (clamp(x, available, size) < end / 2) 0 else end
     }
+
+    fun snapInArea(x: Int, inset: Int, available: Int, size: Int): Int =
+        inset + snap(x - inset, available, size)
 
     fun clampScale(scale: Float?): Float {
         if (scale == null || scale.isNaN() || scale <= 0f) return DEFAULT_SCALE
@@ -72,6 +79,9 @@ internal object FloatingControlGeometry {
         return (clamp(x, availableWidth, viewWidth).toFloat() / maxX).coerceIn(0f, 1f)
     }
 
+    fun toNormalizedInArea(position: Int, inset: Int, available: Int, size: Int): Float =
+        toNormalizedX(position - inset, available, size)
+
     fun toNormalizedY(y: Int, availableHeight: Int, viewHeight: Int): Float {
         val maxY = (availableHeight - viewHeight).coerceAtLeast(0)
         if (maxY == 0) return 0f
@@ -84,6 +94,9 @@ internal object FloatingControlGeometry {
         val safeRatio = if (ratio.isNaN()) 0f else ratio.coerceIn(0f, 1f)
         return (safeRatio * maxX + 0.5f).toInt().coerceIn(0, maxX)
     }
+
+    fun fromNormalizedInArea(ratio: Float, inset: Int, available: Int, size: Int): Int =
+        inset + fromNormalizedX(ratio, available, size)
 
     fun fromNormalizedY(ratio: Float, availableHeight: Int, viewHeight: Int): Int {
         val maxY = (availableHeight - viewHeight).coerceAtLeast(0)

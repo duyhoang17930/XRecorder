@@ -3,6 +3,7 @@ import 'capture_status_presentation.dart';
 
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -296,6 +297,30 @@ class AndroidRecordingService
     return res ?? false;
   }
 
+  Future<bool> overlayPermissionGranted() async {
+    try {
+      return await commands.invokeMethod<bool>('overlayPermissionStatus') ??
+          false;
+    } on MissingPluginException {
+      return false;
+    } on PlatformException {
+      return false;
+    }
+  }
+
+  Future<bool> openOverlayPermissionSettings() async {
+    try {
+      return await commands.invokeMethod<bool>(
+            'openOverlayPermissionSettings',
+          ) ??
+          false;
+    } on MissingPluginException {
+      return false;
+    } on PlatformException {
+      return false;
+    }
+  }
+
   Future<bool> setDrawingEnabled(bool enabled) async {
     final res = await commands.invokeMethod<bool>('setDrawingEnabled', {
       'enabled': enabled,
@@ -397,6 +422,7 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
   String? dismissedId;
   bool _disposed = false;
   bool _requesting = false;
+  bool _commandInFlight = false;
   bool _receivedSession = false;
   bool _foreground = true;
   Timer? _feedbackTimer;
@@ -404,6 +430,8 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
   String? _terminalId;
   final _presentationChanges = ChangeNotifier();
   Listenable get presentationChanges => _presentationChanges;
+  final _footerVisible = ValueNotifier<bool>(false);
+  ValueListenable<bool> get footerVisible => _footerVisible;
   Object? _lastPresentation;
   bool get busy =>
       _requesting ||
@@ -413,6 +441,7 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
             RecordingState.completed,
             RecordingState.failed,
           ].contains(session!.state));
+  bool get commandInFlight => _commandInFlight;
   void _notify() {
     if (_disposed) return;
     // Keep every native snapshot/raw listener; only repaint when visible values change.
@@ -423,11 +452,24 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
       session?.elapsedActive.inSeconds,
       session?.countdownRemaining.inSeconds,
       busy,
+      _commandInFlight,
       error,
       dismissedId,
       feedback,
     );
     notifyListeners();
+    final currentSession = session;
+    final footerVisible =
+        feedback != null ||
+        (currentSession != null &&
+            dismissedId != currentSession.id &&
+            (currentSession.screenshot
+                ? currentSession.state == RecordingState.countdown
+                : currentSession.state != RecordingState.idle &&
+                      currentSession.state != RecordingState.completed));
+    if (_footerVisible.value != footerVisible) {
+      _footerVisible.value = footerVisible;
+    }
     if (!_disposed && presentation != _lastPresentation) {
       _lastPresentation = presentation;
       _presentationChanges.notifyListeners();
@@ -617,12 +659,24 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
 
   Future<void> stop() async {
     final value = session;
-    if (value == null) return;
+    if (value == null ||
+        _commandInFlight ||
+        value.state == RecordingState.idle ||
+        value.state == RecordingState.completed ||
+        value.state == RecordingState.stopping ||
+        value.state == RecordingState.finalizing) {
+      return;
+    }
+    _commandInFlight = true;
+    _notify();
     try {
       await service.stop(value.id);
       await refresh();
     } catch (e) {
       error = e.toString();
+      _notify();
+    } finally {
+      _commandInFlight = false;
       _notify();
     }
   }
@@ -686,7 +740,13 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
 
   Future<void> togglePause() async {
     final value = session;
-    if (value == null) return;
+    if (value == null || _commandInFlight) return;
+    if (value.state != RecordingState.recording &&
+        value.state != RecordingState.paused) {
+      return;
+    }
+    _commandInFlight = true;
+    _notify();
     try {
       if (value.state == RecordingState.paused) {
         await service.resume(value.id);
@@ -696,6 +756,9 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
       await refresh();
     } catch (e) {
       error = e.toString();
+      _notify();
+    } finally {
+      _commandInFlight = false;
       _notify();
     }
   }
@@ -724,6 +787,7 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
     subscription.cancel();
     _presentationChanges.dispose();
+    _footerVisible.dispose();
     super.dispose();
   }
 }
@@ -747,6 +811,10 @@ class CaptureScope extends InheritedNotifier<Listenable> {
   final CaptureController controller;
   static CaptureController of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<CaptureScope>()!.controller;
+  static CaptureController read(BuildContext context) =>
+      (context.getElementForInheritedWidgetOfExactType<CaptureScope>()!.widget
+              as CaptureScope)
+          .controller;
 }
 
 class CaptureStatusBar extends StatelessWidget {
@@ -798,106 +866,149 @@ class CaptureStatusBar extends StatelessWidget {
       return const SizedBox.shrink();
     }
     final active = controller.busy;
+    final canPause =
+        session.state == RecordingState.recording ||
+        session.state == RecordingState.paused;
+    final canStop =
+        active &&
+        session.state != RecordingState.stopping &&
+        session.state != RecordingState.finalizing;
     final status = CaptureStatusPresentation.from(
       session,
       error: controller.error,
     );
     final failure = controller.error ?? session.error?.message;
-    return Material(
-      color: context.studioColors.surface,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: AppSpacing.xs,
+    final recording = session.state == RecordingState.recording;
+    final hasTimer = canPause;
+    final statusColor =
+        failure != null || session.state == RecordingState.failed
+        ? context.studioColors.warning
+        : recording
+        ? context.studioColors.recording
+        : context.studioColors.primary;
+    final statusAndTime = Row(
+      children: [
+        Expanded(
+          child: Semantics(
+            liveRegion: true,
+            child: RecordingStatusIndicator(
+              label: context.message(status.label),
+              icon: status.icon,
+              color: statusColor,
+              active: recording,
+            ),
+          ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
+        if (hasTimer) ...[
+          const SizedBox(width: AppSpacing.xs),
+          Text(
+            '${session.elapsedActive.inMinutes.toString().padLeft(2, '0')}:${(session.elapsedActive.inSeconds % 60).toString().padLeft(2, '0')}',
+            style: AppTypography.timecode,
+            semanticsLabel:
+                '${session.elapsedActive.inSeconds} seconds elapsed',
+          ),
+        ],
+      ],
+    );
+    final controls = Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (canPause)
+          IconButton(
+            tooltip: context.message(
+              session.state == RecordingState.paused ? 'Resume' : 'Pause',
+            ),
+            onPressed: controller.commandInFlight
+                ? null
+                : controller.togglePause,
+            icon: Icon(
+              session.state == RecordingState.paused
+                  ? AppIcons.play
+                  : AppIcons.pause,
+            ),
+          ),
+        if (canStop)
+          IconButton(
+            tooltip: context.message('Stop'),
+            onPressed: controller.commandInFlight ? null : controller.stop,
+            style: IconButton.styleFrom(
+              foregroundColor: context.studioColors.warning,
+            ),
+            icon: const Icon(AppIcons.stop),
+          ),
+        if (!active)
+          IconButton(
+            tooltip: context.message('Dismiss recording status'),
+            onPressed: controller.dismiss,
+            icon: const Icon(AppIcons.close),
+          ),
+      ],
+    );
+    final failureDetails = failure == null
+        ? null
+        : Padding(
+            padding: const EdgeInsets.only(top: AppSpacing.xxs),
+            child: Row(
               children: [
                 Expanded(
-                  child: Semantics(
-                    liveRegion: true,
-                    child: RecordingStatusIndicator(
-                      label: context.message(status.label),
-                      icon: status.icon,
-                      color:
-                          failure != null ||
-                              session.state == RecordingState.failed
-                          ? context.studioColors.warning
-                          : ![
-                              RecordingState.recording,
-                              RecordingState.paused,
-                            ].contains(session.state)
-                          ? context.studioColors.primary
-                          : null,
-                      active: active,
-                    ),
+                  child: Text(
+                    UserMessages.failure(
+                      failure,
+                      operation: session.screenshot
+                          ? UserOperation.screenshot
+                          : UserOperation.recording,
+                    ).text,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                if (active)
-                  Text(
-                    '${session.elapsedActive.inMinutes.toString().padLeft(2, '0')}:${(session.elapsedActive.inSeconds % 60).toString().padLeft(2, '0')}',
-                    style: AppTypography.timecode,
-                    semanticsLabel:
-                        '${session.elapsedActive.inSeconds} seconds elapsed',
+                if (UserMessages.failure(
+                      failure,
+                      operation: UserOperation.recording,
+                    ).helpTopic
+                    case final String topic)
+                  TextButton(
+                    onPressed: () => context.push('/help?topic=$topic'),
+                    child: Text(context.l10n.help),
                   ),
               ],
             ),
-            if (failure != null) ...[
-              Text(
-                UserMessages.failure(
-                  failure,
-                  operation: session.screenshot
-                      ? UserOperation.screenshot
-                      : UserOperation.recording,
-                ).text,
-              ),
-              if (UserMessages.failure(
-                    failure,
-                    operation: UserOperation.recording,
-                  ).helpTopic
-                  case final String topic)
-                TextButton(
-                  onPressed: () => context.push('/help?topic=$topic'),
-                  child: const Text('Help'),
-                ),
-            ],
-            Wrap(
-              alignment: WrapAlignment.end,
-              spacing: AppSpacing.xs,
-              children: [
-                if (session.state == RecordingState.recording ||
-                    session.state == RecordingState.paused)
-                  TextButton.icon(
-                    onPressed: controller.togglePause,
-                    icon: Icon(
-                      session.state == RecordingState.paused
-                          ? AppIcons.play
-                          : AppIcons.pause,
+          );
+    return Material(
+      color: context.studioColors.surface,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide(color: context.studioColors.border)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.sm,
+            vertical: AppSpacing.xxs,
+          ),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final compact =
+                  constraints.maxWidth < 360 ||
+                  MediaQuery.textScalerOf(context).scale(14) > 20;
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (compact) ...[
+                    statusAndTime,
+                    controls,
+                  ] else
+                    Row(
+                      children: [
+                        Expanded(child: statusAndTime),
+                        controls,
+                      ],
                     ),
-                    label: Text(
-                      session.state == RecordingState.paused
-                          ? context.message('Resume')
-                          : context.message('Pause'),
-                    ),
-                  ),
-                if (active)
-                  TextButton.icon(
-                    onPressed: controller.stop,
-                    icon: const Icon(AppIcons.stop),
-                    label: const Text('Stop'),
-                  ),
-                if (!active)
-                  IconButton(
-                    tooltip: 'Dismiss recording status',
-                    onPressed: controller.dismiss,
-                    icon: const Icon(AppIcons.close),
-                  ),
-              ],
-            ),
-          ],
+                  if (failureDetails case final Widget details) details,
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

@@ -166,7 +166,7 @@ void main() {
     settings.setThemeMode(ThemeMode.light);
     await tester.pumpAndSettle();
     expect(
-      Theme.of(tester.element(find.text('Video Library'))).brightness,
+      Theme.of(tester.element(find.text('Video library'))).brightness,
       Brightness.light,
     );
     expect(
@@ -178,13 +178,13 @@ void main() {
     addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
     await tester.pumpAndSettle();
     expect(
-      Theme.of(tester.element(find.text('Video Library'))).brightness,
+      Theme.of(tester.element(find.text('Video library'))).brightness,
       Brightness.dark,
     );
     tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
     await tester.pumpAndSettle();
     expect(
-      Theme.of(tester.element(find.text('Video Library'))).brightness,
+      Theme.of(tester.element(find.text('Video library'))).brightness,
       Brightness.light,
     );
     expect(tester.takeException(), isNull);
@@ -194,7 +194,7 @@ void main() {
     tester,
   ) async {
     await start(tester);
-    final router = GoRouter.of(tester.element(find.text('Video Library')));
+    final router = GoRouter.of(tester.element(find.text('Video library')));
     await tester.tap(find.byTooltip('Create'));
     await tester.pumpAndSettle();
     expect(router.routeInformationProvider.value.uri.path, '/videos');
@@ -221,7 +221,7 @@ void main() {
       find.descendant(of: modal, matching: find.byTooltip('Close')),
     );
     await tester.pumpAndSettle();
-    expect(find.text('Video Library'), findsOneWidget);
+    expect(find.text('Video library'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 
@@ -245,7 +245,7 @@ void main() {
         ),
       );
       await start(tester);
-      final host = tester.element(find.text('Video Library'));
+      final host = tester.element(find.text('Video library'));
       final closed = openStudioCreate(host);
       await tester.pumpAndSettle();
       expect(
@@ -274,7 +274,7 @@ void main() {
       expect(find.byType(RegionCapturePage), findsOneWidget);
       await tester.tap(find.byTooltip('Close'));
       await tester.pumpAndSettle();
-      expect(find.text('Video Library'), findsOneWidget);
+      expect(find.text('Video library'), findsOneWidget);
       final liveClosed = openStudioCreate(host);
       await tester.pumpAndSettle();
       final live = find.widgetWithText(BentoCard, 'Livestream');
@@ -296,7 +296,7 @@ void main() {
       await tester.tap(subtitles);
       await tester.pumpAndSettle();
       await subtitlesClosed;
-      expect(find.text('Editing Studio'), findsOneWidget);
+      expect(find.text('Editing studio'), findsOneWidget);
       expect(find.byType(BottomSheet), findsNothing);
     },
   );
@@ -347,7 +347,7 @@ void main() {
         ) async {
           await start(tester, size: Size(width, 900), scale: scale, mode: mode);
           final router = GoRouter.of(
-            tester.element(find.text('Video Library')),
+            tester.element(find.text('Video library')),
           );
           for (final path in [
             '/photos',
@@ -459,7 +459,7 @@ void main() {
     'concise settings disclose the complete storage and privacy information',
     (tester) async {
       await start(tester, size: const Size(320, 640));
-      final router = GoRouter.of(tester.element(find.text('Video Library')));
+      final router = GoRouter.of(tester.element(find.text('Video library')));
       router.go('/settings');
       await tester.pumpAndSettle();
       for (final sample in [('Media storage', 'Movies/XRecorder')]) {
@@ -491,16 +491,16 @@ void main() {
         () => messenger.setMockMethodCallHandler(StudioIdentity.channel, null),
       );
       await tester.scrollUntilVisible(
-        find.text('Privacy Policy'),
+        find.text('Privacy policy'),
         180,
         scrollable: find.byType(Scrollable).first,
       );
       await Scrollable.ensureVisible(
-        tester.element(find.text('Privacy Policy')),
+        tester.element(find.text('Privacy policy')),
         alignment: .3,
       );
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Privacy Policy'));
+      await tester.tap(find.text('Privacy policy'));
       await tester.pumpAndSettle();
       expect(opened, [StudioIdentity.privacy]);
       expect(router.routeInformationProvider.value.uri.path, '/settings');

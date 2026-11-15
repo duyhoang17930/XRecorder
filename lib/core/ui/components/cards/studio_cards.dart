@@ -139,7 +139,11 @@ class StudioRootHeader extends StatelessWidget {
       SectionTitle(
         title,
         trailing: trailing,
-        minimumHeight: AppSize.touchTarget,
+        alignTitleToTop: true,
+        padding: const EdgeInsets.only(
+          top: AppSpacing.xxs,
+          bottom: AppSpacing.xxs,
+        ),
       ),
     ],
   );
@@ -151,16 +155,22 @@ class SectionTitle extends StatelessWidget {
     super.key,
     this.trailing,
     this.minimumHeight = 0,
+    this.padding,
+    this.alignTitleToTop = false,
   });
   final String title;
   final Widget? trailing;
   final double minimumHeight;
+  final EdgeInsetsGeometry? padding;
+  final bool alignTitleToTop;
   @override
   Widget build(BuildContext context) {
     final heading = ConstrainedBox(
       constraints: BoxConstraints(minHeight: minimumHeight),
       child: Align(
-        alignment: AlignmentDirectional.centerStart,
+        alignment: alignTitleToTop
+            ? AlignmentDirectional.topStart
+            : AlignmentDirectional.centerStart,
         heightFactor: 1,
         child: Semantics(
           header: true,
@@ -173,7 +183,7 @@ class SectionTitle extends StatelessWidget {
     final stacked =
         trailing != null && MediaQuery.textScalerOf(context).scale(14) > 20;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+      padding: padding ?? const EdgeInsets.symmetric(vertical: AppSpacing.md),
       child: stacked
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,6 +197,9 @@ class SectionTitle extends StatelessWidget {
               ],
             )
           : Row(
+              crossAxisAlignment: alignTitleToTop
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.center,
               children: [
                 Expanded(child: heading),
                 ?trailing,

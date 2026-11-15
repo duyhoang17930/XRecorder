@@ -325,7 +325,7 @@
   "performance": "Performance",
   "permanentlyDelete": "Eliminar permanentemente?",
   "photo": "Foto",
-  "photoLibrary": "Biblioteca Fotográfica",
+  "photoLibrary": "Biblioteca de fotos",
   "photoEditor": "Fotografia Editor",
   "photoPreview": "Fotografia Previsão",
   "photos": "Fotos",
@@ -841,5 +841,13 @@
   "captureTouchGuidance": "Ajuda para mostrar toques",
   "captureTouchGuidanceBody": "Para mostrar os toques, ative manualmente Mostrar toques nas opções do desenvolvedor do Android, se disponível. O 3HRecorder não consegue detectar toques em outros apps. O indicador do sistema pode aparecer em gravações de tela inteira. Desative-o quando não precisar mais dele.",
   "captureDurationHint": "1–86400 segundos, ou 0 sem limite.",
-  "captureDurationInvalid": "Digite entre 0 e 86400 segundos"
+  "captureDurationInvalid": "Digite entre 0 e 86400 segundos",
+  "floatingControlsTitle": "Controles flutuantes",
+  "floatingControlsPermissionRequired": "Permita a exibição sobre outros apps para usar os controles flutuantes de gravação.",
+  "floatingControlsPermissionGranted": "Permissão concedida. Os controles podem aparecer no vídeo quando ativados na notificação da gravação.",
+  "floatingControlsOpenHint": "Abrir as configurações de sobreposição do Android.",
+  "floatingControlsSettingsError": "Não foi possível abrir as configurações de sobreposição do Android.",
+  "floatingControlsExpandHint": "Expandir controles flutuantes",
+  "floatingControlsCollapseHint": "Toque para recolher os controles flutuantes",
+  "floatingControlsMoveHint": "Arraste os controles flutuantes para movê-los"
 }

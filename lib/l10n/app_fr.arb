@@ -841,5 +841,13 @@
   "captureTouchGuidance": "Aide pour afficher les appuis",
   "captureTouchGuidanceBody": "Pour afficher les appuis, activez manuellement Afficher les appuis dans les options pour les développeurs Android, si disponible. 3HRecorder ne peut pas détecter les appuis dans d’autres applications. L’indicateur système peut apparaître dans les enregistrements en plein écran. Désactivez-le ensuite si vous n’en avez plus besoin.",
   "captureDurationHint": "1–86400 secondes, ou 0 sans limite.",
-  "captureDurationInvalid": "Saisissez entre 0 et 86400 secondes"
+  "captureDurationInvalid": "Saisissez entre 0 et 86400 secondes",
+  "floatingControlsTitle": "Commandes flottantes",
+  "floatingControlsPermissionRequired": "Autorisez l’affichage par-dessus les autres applications pour utiliser les commandes flottantes d’enregistrement.",
+  "floatingControlsPermissionGranted": "Autorisation accordée. Pendant l’enregistrement, sélectionnez « Afficher les commandes dans la vidéo » dans la notification ; elles peuvent apparaître dans la vidéo.",
+  "floatingControlsOpenHint": "Ouvrir les paramètres de superposition Android.",
+  "floatingControlsSettingsError": "Impossible d’ouvrir les paramètres de superposition Android.",
+  "floatingControlsExpandHint": "Développer les commandes flottantes",
+  "floatingControlsCollapseHint": "Touchez pour réduire les commandes flottantes",
+  "floatingControlsMoveHint": "Faites glisser les commandes flottantes pour les déplacer"
 }

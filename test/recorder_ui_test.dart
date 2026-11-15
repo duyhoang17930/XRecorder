@@ -39,16 +39,16 @@ void main() {
         expect(find.text('Recording'), findsOneWidget);
         await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
         await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
-        await tester.tap(find.text('Pause'));
+        await tester.tap(find.byTooltip('Pause'));
         await tester.pumpAndSettle();
         expect(service.pauseCalls, 1);
         expect(find.text('Paused'), findsOneWidget);
         expect(find.byIcon(AppIcons.play), findsOneWidget);
-        await tester.tap(find.text('Resume'));
+        await tester.tap(find.byTooltip('Resume'));
         await tester.pumpAndSettle();
         expect(service.resumeCalls, 1);
         expect(find.text('Recording'), findsOneWidget);
-        await tester.tap(find.text('Stop'));
+        await tester.tap(find.byTooltip('Stop'));
         await tester.pumpAndSettle();
         expect(service.stopCalls, 1);
         expect(find.text('Processing'), findsOneWidget);
@@ -61,7 +61,7 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.text('Video saved'), findsOneWidget);
         expect(find.text('View'), findsOneWidget);
-        expect(find.text('Pause'), findsNothing);
+        expect(find.byTooltip('Pause'), findsNothing);
         await tester.tap(find.byTooltip('Dismiss capture notification'));
         await tester.pumpAndSettle();
         expect(find.text('Video saved'), findsNothing);
@@ -92,6 +92,37 @@ void main() {
   );
 
   testWidgets(
+    'timer updates repaint status without changing footer reservation',
+    (tester) async {
+      final service = TestRecorder();
+      service.current = service.make(RecordingState.recording);
+      final controller = CaptureController(service, onSaved: () {});
+      var footerChanges = 0;
+      controller.footerVisible.addListener(() => footerChanges++);
+      try {
+        await start(tester, controller);
+        expect(controller.footerVisible.value, isTrue);
+        footerChanges = 0;
+        service.events.add(
+          RecordingSession(
+            id: 'test',
+            state: RecordingState.recording,
+            configSnapshot: const RecordingSettings(),
+            elapsedActive: const Duration(seconds: 12),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(find.text('00:12'), findsOneWidget);
+        expect(footerChanges, 0);
+      } finally {
+        await tester.pumpWidget(const SizedBox.shrink());
+        controller.dispose();
+        await service.events.close();
+      }
+    },
+  );
+
+  testWidgets(
     'failed Stop stays actionable and exposes error rather than claiming Saved',
     (tester) async {
       final service = TestRecorder()..stopFails = true;
@@ -99,7 +130,7 @@ void main() {
       final controller = CaptureController(service, onSaved: () {});
       try {
         await start(tester, controller);
-        await tester.tap(find.text('Stop'));
+        await tester.tap(find.byTooltip('Stop'));
         await tester.pumpAndSettle();
         expect(find.text('Error'), findsOneWidget);
         expect(
@@ -109,7 +140,7 @@ void main() {
         expect(find.byIcon(AppIcons.error), findsOneWidget);
         expect(find.text('Saved'), findsNothing);
         expect(controller.session!.state, RecordingState.recording);
-        expect(find.text('Stop'), findsOneWidget);
+        expect(find.byTooltip('Stop'), findsOneWidget);
         expect(tester.takeException(), isNull);
       } finally {
         await tester.pumpWidget(const SizedBox.shrink());

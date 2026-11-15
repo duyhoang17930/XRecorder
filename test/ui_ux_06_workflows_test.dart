@@ -334,7 +334,7 @@ void main() {
     final catalog = _Catalog();
     await tester.pumpWidget(XRecorderApp(mediaRepository: catalog));
     await tester.pumpAndSettle();
-    GoRouter.of(tester.element(find.text('Video Library'))).go('/editor');
+    GoRouter.of(tester.element(find.text('Video library'))).go('/editor');
     await tester.pumpAndSettle();
     await tester.tap(find.text('New video project'));
     await tester.pumpAndSettle();
@@ -413,7 +413,7 @@ void main() {
           find.descendant(of: modal, matching: find.byTooltip('Close')),
         );
         await tester.pumpAndSettle();
-        expect(find.text('Video Library'), findsOneWidget);
+        expect(find.text('Video library'), findsOneWidget);
         expect(tester.takeException(), isNull);
         await tester.pumpWidget(const SizedBox.shrink());
       });

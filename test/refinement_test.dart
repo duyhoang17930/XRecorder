@@ -92,7 +92,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    return GoRouter.of(tester.element(find.text('Video Library')));
+    return GoRouter.of(tester.element(find.text('Video library')));
   }
 
   testWidgets(
@@ -123,7 +123,7 @@ void main() {
         XRecorderApp(mediaRepository: VisualCatalog(image)),
       );
       await tester.pumpAndSettle();
-      GoRouter.of(tester.element(find.text('Video Library'))).go('/editor');
+      GoRouter.of(tester.element(find.text('Video library'))).go('/editor');
       await tester.pumpAndSettle();
       await tester.tap(find.text('New video project'));
       await tester.pumpAndSettle();
@@ -677,7 +677,7 @@ void main() {
   testWidgets('capture Help opens the related expanded guide', (tester) async {
     final router = await start(tester);
     showFailure(
-      tester.element(find.text('Video Library')),
+      tester.element(find.text('Video library')),
       'Recording interrupted unexpectedly',
       operation: UserOperation.recording,
     );
@@ -704,7 +704,7 @@ void main() {
         reported = details;
       };
       showFailure(
-        tester.element(find.text('Video Library')),
+        tester.element(find.text('Video library')),
         FlutterError('setState regression marker'),
         operation: UserOperation.createDraft,
       );
@@ -733,7 +733,7 @@ void main() {
           });
       unawaited(
         editProjectEffects(
-          tester.element(find.text('Video Library')),
+          tester.element(find.text('Video library')),
           {},
           durationMs: 5000,
         ),

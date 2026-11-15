@@ -43,6 +43,7 @@ class CaptureService : Service() {
     private var controlsUnavailable = false
     // Permission alone is not acceptance that controls may be included in MP4.
     private var controlsAcceptedInVideo = false
+    private var lastOverlayPermissionGranted: Boolean? = null
     private var drawingOverlay: DrawingOverlay? = null
     private var output: MediaOutput? = null
     private var descriptor: ParcelFileDescriptor? = null
@@ -102,6 +103,7 @@ class CaptureService : Service() {
     override fun onBind(intent: Intent?) = null
     override fun onCreate() {
         super.onCreate(); instance = this
+        lastOverlayPermissionGranted = android.provider.Settings.canDrawOverlays(this)
         if (Build.VERSION.SDK_INT >= 26) getSystemService(NotificationManager::class.java).createNotificationChannel(NotificationChannel(CHANNEL, "Screen recording", NotificationManager.IMPORTANCE_LOW))
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -112,7 +114,9 @@ class CaptureService : Service() {
                     action, commandSessionId, CaptureState.id, CaptureState.state,
                     ending, CaptureState.busy, started
                 ) && !CaptureState.screenshot) {
-                controlsAcceptedInVideo = action == SHOW_CONTROLS && android.provider.Settings.canDrawOverlays(this)
+                val overlayAllowed = android.provider.Settings.canDrawOverlays(this)
+                controlsAcceptedInVideo = action == SHOW_CONTROLS && overlayAllowed
+                if (controlsAcceptedInVideo) controlsUnavailable = false
                 if (!controlsAcceptedInVideo) {
                     drawingOverlay?.setDrawingEnabled(false)
                     controls?.close(); controls = null
@@ -401,7 +405,28 @@ class CaptureService : Service() {
         getSystemService(NotificationManager::class.java).notify(NOTIFICATION,notification(true))
     }
     private fun updateControls() {
-        if (CaptureState.screenshot || controlsUnavailable || !controlsAcceptedInVideo) return
+        val overlayAllowed = android.provider.Settings.canDrawOverlays(this)
+        if (lastOverlayPermissionGranted != overlayAllowed) {
+            lastOverlayPermissionGranted = overlayAllowed
+            if (!CaptureState.screenshot && CaptureState.state in listOf("recording", "paused")) {
+                getSystemService(NotificationManager::class.java).notify(NOTIFICATION, notification(true))
+            }
+        }
+        if (CaptureState.screenshot) return
+        if (!overlayAllowed) {
+            controls?.close(); controls = null
+            drawingOverlay?.close(); drawingOverlay = null
+            return
+        }
+        if (controls?.windowFailure == true) {
+            controls?.close(); controls = null
+            controlsAcceptedInVideo = false
+            controlsUnavailable = true
+            getSystemService(NotificationManager::class.java).notify(NOTIFICATION, notification(true))
+            return
+        }
+        if (controls?.isClosed == true) controls = null
+        if (controlsUnavailable || !controlsAcceptedInVideo) return
         try {
             if (controls == null && CaptureState.state in listOf("recording", "paused")) {
                 // Attach ink first so the toolbar stays above its touch-consuming window.
@@ -433,8 +458,17 @@ class CaptureService : Service() {
                 )
             }
             controls?.render(CaptureState.state, CaptureState.elapsedActiveMs)
+            if (controls?.windowFailure == true) {
+                controls?.close(); controls = null
+                controlsAcceptedInVideo = false
+                controlsUnavailable = true
+                getSystemService(NotificationManager::class.java).notify(NOTIFICATION, notification(true))
+            }
         }
-        catch (_: RuntimeException) { controls?.close(); controls = null; controlsUnavailable = true }
+        catch (_: RuntimeException) {
+            controls?.close(); controls = null; controlsUnavailable = true; controlsAcceptedInVideo = false
+            getSystemService(NotificationManager::class.java).notify(NOTIFICATION, notification(true))
+        }
     }
     // Called on the main looper, like stopCapture and the screenshot listener.
     // Once a finalizer owns the output, cancellation must not race its commit.
