@@ -886,6 +886,84 @@ class CaptureStatusBar extends StatelessWidget {
         : recording
         ? context.studioColors.recording
         : context.studioColors.primary;
+    if (failure != null && !active) {
+      final notice = UserMessages.failure(
+        failure,
+        operation: session.screenshot
+            ? UserOperation.screenshot
+            : UserOperation.recording,
+      );
+      return Material(
+        color: context.studioColors.surface.withValues(alpha: .96),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border(top: BorderSide(color: context.studioColors.border)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.sm,
+              vertical: AppSpacing.xs,
+            ),
+            child: Semantics(
+              liveRegion: true,
+              child: Row(
+                children: [
+                  Icon(
+                    status.icon,
+                    size: AppIconSize.medium,
+                    color: statusColor,
+                  ),
+                  const SizedBox(width: AppSpacing.xs),
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '${context.message(status.label)} · ',
+                            style: AppTypography.caption.copyWith(
+                              color: statusColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          TextSpan(
+                            text: context.message(notice.text),
+                            style: AppTypography.bodySmall.copyWith(
+                              color: context.studioColors.text,
+                            ),
+                          ),
+                        ],
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  if (notice.helpTopic case final String topic)
+                    TextButton(
+                      onPressed: () => context.push('/help?topic=$topic'),
+                      style: TextButton.styleFrom(
+                        minimumSize: const Size(0, 40),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: Text(context.l10n.help),
+                    ),
+                  IconButton(
+                    tooltip: context.message('Dismiss recording status'),
+                    onPressed: controller.dismiss,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints.tightFor(
+                      width: AppSize.touchTarget,
+                      height: AppSize.touchTarget,
+                    ),
+                    icon: const Icon(AppIcons.close, size: AppIconSize.medium),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
     final statusAndTime = Row(
       children: [
         Expanded(

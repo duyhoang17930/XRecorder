@@ -1,5 +1,12 @@
 # TASK10 feature/action matrix ? live
 
+## Prompt04 Facecam/Drawing follow-up — 2026-11-15
+
+- Pixel_7 AVD alias / emulator-5554 / API 37: Facecam and Drawing pixels were independently verified in decoded MediaStore MP4s; front/back virtual-camera switching changed the decoded scene. Facecam and two strokes coexisted in one output. Full native suite passed 162/162 across 28 suites, including Facecam geometry and Drawing stroke-engine tests; candidate APK built and installed in place.
+- Final Facecam sensor-orientation formula was covered by geometry tests after the MP4 sessions, so no rotated post-change MP4 was recorded. Flutter widget/full-suite CLI attempts stalled. See `docs/reports/PROMPT04_FACECAM_DRAWING/`.
+- Floating control exclusion remains OPEN/FAIL: normal MediaProjection output includes controls. A `FLAG_SECURE` trial created a black patch over changing screen pixels and was reverted. Do not close the requirement based on that trial.
+- Owner-requested terminal Error spacing and floating-panel inner padding were fixed and visually checked on the AVD. Overall Facecam/Drawing coverage remains PARTIAL.
+
 ## Prompt03 Floating Ball follow-up — 2026-11-15
 
 - Pixel_7 / Android 17 (API 37), `emulator-5554`: real overlay permission grant/deny/revoke/regrant, Home and Clock visibility, both edge drags, expand/collapse, floating Pause/Resume/Stop, Drawing entry/exit, and overlay cleanup were exercised. Three task recordings finalized and fully decoded. See `docs/reports/PROMPT03_FLOATING_BALL/FLOATING_BALL_TEST_MATRIX.md` and `FLOATING_BALL_FINAL_HANDOFF.md`.

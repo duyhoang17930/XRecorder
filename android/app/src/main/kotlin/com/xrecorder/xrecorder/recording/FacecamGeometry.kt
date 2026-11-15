@@ -43,13 +43,20 @@ internal object FacecamGeometry {
         val y: Int
     )
 
-    fun calculateRotation(displayRotationDegrees: Int, isFrontCamera: Boolean = true): Int {
-        val normalizedDisplay = ((displayRotationDegrees % 360) + 360) % 360
-        return (360 - normalizedDisplay) % 360
-    }
+    /** Uses the typical phone sensor orientation for callers without camera metadata. */
+    fun calculateRotation(displayRotationDegrees: Int, isFrontCamera: Boolean = true): Int =
+        calculateRotation(
+            sensorOrientation = if (isFrontCamera) 270 else 90,
+            displayRotationDegrees = displayRotationDegrees,
+            isFrontCamera = isFrontCamera
+        )
 
     fun calculateRotation(sensorOrientation: Int, displayRotationDegrees: Int, isFrontCamera: Boolean = true): Int {
-        return calculateRotation(displayRotationDegrees, isFrontCamera)
+        val sensor = ((sensorOrientation % 360) + 360) % 360
+        val display = ((displayRotationDegrees % 360) + 360) % 360
+        // Camera2 buffers need opposite display compensation by facing.
+        val displayDirection = if (isFrontCamera) 1 else -1
+        return ((sensor - display * displayDirection) % 360 + 360) % 360
     }
 
     fun calculateTransform(
@@ -61,7 +68,7 @@ internal object FacecamGeometry {
         previewHeight: Int = 480,
         isFrontCamera: Boolean = true
     ): TransformResult {
-        val rotation = calculateRotation(displayRotationDegrees, isFrontCamera)
+        val rotation = calculateRotation(sensorOrientation, displayRotationDegrees, isFrontCamera)
 
         if (viewWidth <= 0f || viewHeight <= 0f) {
             return TransformResult(

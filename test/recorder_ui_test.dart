@@ -149,4 +149,41 @@ void main() {
       }
     },
   );
+
+  testWidgets('terminal errors use a compact status footer', (tester) async {
+    final service = TestRecorder()
+      ..current = RecordingSession(
+        id: 'failed',
+        state: RecordingState.failed,
+        configSnapshot: const RecordingSettings(),
+        elapsedActive: Duration.zero,
+        error: const DomainFailure(
+          FailureCode.io,
+          'Android interrupted the previous recording.',
+        ),
+      );
+    final controller = CaptureController(service, onSaved: () {});
+    try {
+      await start(tester, controller);
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is Text &&
+              widget.textSpan?.toPlainText().startsWith('Error · ') == true,
+        ),
+        findsOneWidget,
+      );
+      expect(find.text('Help'), findsOneWidget);
+      expect(find.byTooltip('Dismiss recording status'), findsOneWidget);
+      expect(
+        tester.getSize(find.byType(CaptureStatusBar)).height,
+        lessThan(96),
+      );
+      expect(tester.takeException(), isNull);
+    } finally {
+      await tester.pumpWidget(const SizedBox.shrink());
+      controller.dispose();
+      await service.events.close();
+    }
+  });
 }

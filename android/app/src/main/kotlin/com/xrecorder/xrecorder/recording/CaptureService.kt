@@ -36,6 +36,7 @@ class CaptureService : Service() {
     private var liveCapture: com.xrecorder.xrecorder.live.LiveCapture? = null
     private var regionProcessor: RegionCaptureProcessor? = null
     private var completionNotice: String? = null
+    private var facecamUnavailable = false
     private var audio: SessionAudio? = null
     private var imageReader: android.media.ImageReader? = null
     private var facecam: FacecamOverlay? = null
@@ -192,7 +193,7 @@ class CaptureService : Service() {
                 }
             }, handler)
             if(config.facecam) {
-                facecam = FacecamOverlay(this) { fail("Front camera unavailable or in use. Disable facecam and retry.") }
+                facecam = FacecamOverlay(this) { onFacecamUnavailable() }
                 facecam!!.show()
             }
             if (config.countdown > 0) {
@@ -367,7 +368,10 @@ class CaptureService : Service() {
         }
         builder.setSmallIcon(smallIcon)
             .setContentTitle(CaptureText.text(this, spec.title))
-            .setContentText(CaptureText.text(this, spec.text))
+            .setContentText(
+                if (facecamUnavailable) "Facecam unavailable. Recording continues without it."
+                else CaptureText.text(this, spec.text)
+            )
             .setOngoing(spec.ongoing)
             .setContentIntent(open)
         if (spec.alertOnce) {
@@ -467,6 +471,24 @@ class CaptureService : Service() {
         }
         catch (_: RuntimeException) {
             controls?.close(); controls = null; controlsUnavailable = true; controlsAcceptedInVideo = false
+            getSystemService(NotificationManager::class.java).notify(NOTIFICATION, notification(true))
+        }
+    }
+    private fun onFacecamUnavailable() {
+        if (ending) return
+        val failedCamera = facecam ?: return
+        facecam = null
+        failedCamera.close()
+        controls?.setCameraOptions(null)
+        facecamUnavailable = true
+        runCatching {
+            android.widget.Toast.makeText(
+                this,
+                "Facecam unavailable. Screen recording continues without it.",
+                android.widget.Toast.LENGTH_LONG
+            ).show()
+        }
+        if (CaptureState.state in listOf("countdown", "starting", "recording", "paused")) {
             getSystemService(NotificationManager::class.java).notify(NOTIFICATION, notification(true))
         }
     }
@@ -669,20 +691,25 @@ class CaptureService : Service() {
     }
     private fun showFacecamOptions(anchor: android.view.View) {
         if (ending) return
+        val camera = facecam ?: return
         val menu = android.widget.PopupMenu(this, anchor)
-        listOf("Switch camera", "Small camera", "Normal camera", "Large camera", "No camera effect", "Grayscale camera", "Sepia camera")
-            .forEachIndexed { index, title -> menu.menu.add(0, index, index, CaptureText.text(this, title)) }
+        val options = mutableListOf<Pair<String, () -> Boolean>>()
+        options += "Switch camera" to { switchFacecamCamera() }
+        options += "Small camera" to { setFacecamScale(.75f) }
+        options += "Normal camera" to { setFacecamScale(1f) }
+        options += "Large camera" to { setFacecamScale(1.5f) }
+        options += "No camera effect" to { setFacecamEffect(FacecamGeometry.EFFECT_OFF) }
+        if (camera.supportsEffect(FacecamGeometry.EFFECT_MONO)) {
+            options += "Grayscale camera" to { setFacecamEffect(FacecamGeometry.EFFECT_MONO) }
+        }
+        if (camera.supportsEffect(FacecamGeometry.EFFECT_SEPIA)) {
+            options += "Sepia camera" to { setFacecamEffect(FacecamGeometry.EFFECT_SEPIA) }
+        }
+        options.forEachIndexed { index, option ->
+            menu.menu.add(0, index, index, CaptureText.text(this, option.first))
+        }
         menu.setOnMenuItemClickListener { item ->
-            val success = when (item.itemId) {
-                0 -> switchFacecamCamera()
-                1 -> setFacecamScale(.75f)
-                2 -> setFacecamScale(1f)
-                3 -> setFacecamScale(1.5f)
-                4 -> setFacecamEffect(FacecamGeometry.EFFECT_OFF)
-                5 -> setFacecamEffect(FacecamGeometry.EFFECT_MONO)
-                6 -> setFacecamEffect(FacecamGeometry.EFFECT_SEPIA)
-                else -> false
-            }
+            val success = options.getOrNull(item.itemId)?.second?.invoke() ?: false
             if (!success) android.widget.Toast.makeText(this, CaptureText.text(this, "Not supported by this device or the selected mode"), android.widget.Toast.LENGTH_SHORT).show()
             true
         }

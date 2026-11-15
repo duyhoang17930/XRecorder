@@ -38,6 +38,9 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
     private var currentSurfaceTexture: SurfaceTexture? = null
 
     @Volatile private var closed = false
+    @Volatile private var failureReported = false
+    @Volatile private var streamingConfigured = false
+    @Volatile private var minimumFrameTimestampNs = Long.MIN_VALUE
     @Volatile var ready = false
         private set
 
@@ -72,7 +75,17 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         title = "3HRecorder Facecam Overlay"
     }
 
-    private fun failure() { if (!closed) main.post { if (!closed) failed() } }
+    private fun failure() {
+        if (closed || failureReported) return
+        main.post {
+            if (!closed && !failureReported) {
+                failureReported = true
+                ready = false
+                streamingConfigured = false
+                failed()
+            }
+        }
+    }
 
     private fun dp(value: Int) = (value * context.resources.displayMetrics.density + .5f).toInt()
 
@@ -101,11 +114,11 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
                 return true
             }
             override fun onSurfaceTextureUpdated(value: SurfaceTexture) {
-                if (!ready) {
+                if (!ready && streamingConfigured && value.timestamp > minimumFrameTimestampNs) {
                     ready = true
                     // First valid camera frame rendered: reveal facecam smoothly
                     main.post {
-                        if (!closed) texture.alpha = 1f
+                        if (!closed && ready) texture.alpha = 1f
                     }
                 }
             }
@@ -120,6 +133,7 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
     }
 
     private fun openSelectedCamera() {
+        streamingConfigured = false
         val targetFacing = if (currentLensFacing == FacecamGeometry.LENS_FACING_FRONT) {
             CameraCharacteristics.LENS_FACING_FRONT
         } else {
@@ -199,6 +213,7 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
                 }
             }.build()
             sess.setRepeatingRequest(request, null, cameraHandler)
+            streamingConfigured = true
         } catch (_: Exception) { failure() }
     }
 
@@ -217,12 +232,19 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
 
         currentLensFacing = newFacing
         ready = false
+        streamingConfigured = false
+        minimumFrameTimestampNs = currentSurfaceTexture?.timestamp ?: Long.MIN_VALUE
+        main.post {
+            if (!closed) {
+                texture.alpha = 0f
+                transform()
+            }
+        }
         cameraHandler.post {
-            try {
-                session?.close()
-                device?.close()
-                surface?.release()
-            } catch (_: Exception) { }
+            runCatching { session?.stopRepeating() }
+            runCatching { session?.close() }
+            runCatching { device?.close() }
+            runCatching { surface?.release() }
             session = null
             device = null
             surface = null
@@ -241,6 +263,8 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         }
         return true
     }
+
+    fun supportsEffect(effect: Int): Boolean = effect in supportedEffects
 
     fun setScale(scale: Float) {
         if (closed) return
@@ -367,6 +391,8 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
 
     fun close() {
         closed = true
+        ready = false
+        streamingConfigured = false
         try { displayManager?.unregisterDisplayListener(displayListener) } catch (_: Exception) { }
         try { windows.removeView(texture) } catch (_: Exception) { }
         cameraHandler.post {

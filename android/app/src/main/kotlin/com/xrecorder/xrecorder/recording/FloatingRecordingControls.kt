@@ -37,7 +37,7 @@ internal class FloatingRecordingControls(
     private val undoDrawing: () -> Unit = {},
     private val clearDrawing: () -> Unit = {},
     private val setDrawingStyle: (Int?, Float?) -> Unit = { _, _ -> },
-    private val cameraOptions: ((View) -> Unit)? = null,
+    cameraOptions: ((View) -> Unit)? = null,
 ) {
     companion object {
         private const val PREFS_NAME = "3hrecorder_floating_ball"
@@ -58,6 +58,7 @@ internal class FloatingRecordingControls(
     private var lastStopCommandMs = 0L
     private var lastAnnouncedState: String? = null
     private var displayedCollapsed: Boolean? = null
+    private var currentCameraOptions: ((View) -> Unit)? = cameraOptions
 
     private val root = LinearLayout(context).apply {
         orientation = LinearLayout.VERTICAL
@@ -139,7 +140,7 @@ internal class FloatingRecordingControls(
     }
     private fun styleButtonAnchor(): View = styleButton
     private val cameraButton = button("Facecam options", R.drawable.ic_lucide_camera) {
-        cameraOptions?.invoke(cameraButtonAnchor())
+        currentCameraOptions?.invoke(cameraButtonAnchor())
     }
     private fun cameraButtonAnchor(): View = cameraButton
     private val drawingPanel = LinearLayout(context).apply {
@@ -149,7 +150,7 @@ internal class FloatingRecordingControls(
         addView(undoButton)
         addView(clearButton)
         addView(styleButton)
-        if (cameraOptions != null) addView(cameraButton)
+        if (currentCameraOptions != null) addView(cameraButton)
     }
     private val recordingPanel = LinearLayout(context).apply {
         orientation = LinearLayout.HORIZONTAL
@@ -232,7 +233,7 @@ internal class FloatingRecordingControls(
             cornerRadius = corner
             setStroke(dp(1), Color.argb(72, 255, 255, 255))
         }
-        panel.setPadding(dp(4), dp(2), dp(4), dp(2))
+        panel.setPadding(dp(8), dp(6), dp(8), dp(6))
 
         bubble.layoutParams = LinearLayout.LayoutParams(bubbleSize, bubbleSize)
         timer.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, bubbleSize).apply {
@@ -247,11 +248,13 @@ internal class FloatingRecordingControls(
         val fontScale = context.resources.configuration.fontScale.coerceAtLeast(1f)
         // The fixed status/timer area must still fit beside Pause, Stop, and
         // Collapse at 200% text. The drawing row separately has five buttons.
-        val fixedRowWidth = dp(8 + (84f * fontScale).toInt())
+        val panelHorizontalPadding = dp(16)
+        val fixedRowWidth = panelHorizontalPadding + dp((84f * fontScale).toInt())
         val recordingRowScale =
             (availableWidth - fixedRowWidth).toFloat() / (dp(48) * 3)
+        val drawingButtonCount = if (currentCameraOptions == null) 4 else 5
         val drawingRowScale =
-            (availableWidth - dp(8)).toFloat() / (dp(48) * 5)
+            (availableWidth - panelHorizontalPadding).toFloat() / (dp(48) * drawingButtonCount)
         val controlScale = minOf(userScale, recordingRowScale, drawingRowScale)
         val buttonSize = maxOf(
             dp(48),
@@ -368,7 +371,7 @@ internal class FloatingRecordingControls(
             cornerRadius = dp(14).toFloat()
         } else android.graphics.drawable.ColorDrawable(Color.TRANSPARENT)
         styleButton.isEnabled = active
-        cameraButton.isEnabled = active
+        cameraButton.isEnabled = active && currentCameraOptions != null
         root.alpha = overlayState.alpha
         pause.alpha = overlayState.alpha; stopButton.alpha = overlayState.alpha
         collapseButton.alpha = overlayState.alpha
@@ -387,6 +390,21 @@ internal class FloatingRecordingControls(
     var windowFailure: Boolean = false
         private set
     val isClosed: Boolean get() = closed
+
+    fun setCameraOptions(options: ((View) -> Unit)?) {
+        if (closed || currentCameraOptions === options) return
+        currentCameraOptions = options
+        if (options == null) {
+            if (cameraButton.parent === drawingPanel) drawingPanel.removeView(cameraButton)
+        } else if (cameraButton.parent == null) {
+            drawingPanel.addView(cameraButton)
+        }
+        cameraButton.isEnabled = options != null && state in listOf("recording", "paused")
+        applyCustomizationLayout()
+        drawingPanel.requestLayout()
+        root.requestLayout()
+        if (attached) reposition(force = true)
+    }
 
     private fun dispatchControlCommand(isPause: Boolean, action: () -> Unit) {
         val now = SystemClock.elapsedRealtime()

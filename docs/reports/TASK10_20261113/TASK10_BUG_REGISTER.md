@@ -1,5 +1,16 @@
 # TASK10 bug register ? live
 
+## Prompt04 Facecam/Drawing follow-up — 2026-11-15
+
+| ID/severity | Current verified result | Remaining |
+|---|---|---|
+| P04-FC-01 / P2 corrected | Rotation now uses sensor orientation and facing-specific display compensation; 14 geometry cases pass. | Rotated final-build camera preview/MP4, physical optics and permission retry. |
+| P04-UI-01 / P2 repaired | Terminal recording error is one compact Error/message row; owner screenshot red outlines are annotations, not app UI. | Larger text and localization/accessibility pass. |
+| P04-FB-01 / P2 repaired | Floating panel interior padding increased; dynamic action count sizes the row. AVD visual check passed. | Cutout, rotation and large-font runtime cases. |
+| P04-OV-01 / P1 OPEN | Normal MediaProjection records Floating Ball. `FLAG_SECURE` removes the control pixels but masks underlying pixels black; experiment reverted. | Clean public-API control exclusion with preserved pixels; keep acceptance open. |
+
+See `docs/reports/PROMPT04_FACECAM_DRAWING/`. Overall Prompt04 remains PARTIAL; Prompt01 recording cadence/audio findings remain separate and unchanged.
+
 ## Prompt03 Floating Ball follow-up — 2026-11-15
 
 | ID/severity | Current verified result | Remaining |
