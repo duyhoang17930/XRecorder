@@ -1,0 +1,224 @@
+[
+  {
+    "captureSeconds": 4.768,
+    "originDeltaMs": -21.284833333251953,
+    "originFromFirstMs": -21.284833333251953,
+    "maxReadMs": 72.7745
+  },
+  {
+    "captureSeconds": 6.83,
+    "originDeltaMs": 26.325566666503907,
+    "originFromFirstMs": 5.0407333332519535,
+    "maxReadMs": 72.7745
+  },
+  {
+    "captureSeconds": 8.857,
+    "originDeltaMs": -26.09493333325195,
+    "originFromFirstMs": -21.0542,
+    "maxReadMs": 72.7745
+  },
+  {
+    "captureSeconds": 29.332,
+    "originDeltaMs": -10.055066666748047,
+    "originFromFirstMs": -21.665566666748045,
+    "maxReadMs": 72.7745
+  },
+  {
+    "captureSeconds": 58.153,
+    "originDeltaMs": 25.266866666503905,
+    "originFromFirstMs": 7.822233333251953,
+    "maxReadMs": 72.7745
+  },
+  {
+    "captureSeconds": 60.215,
+    "originDeltaMs": -21.1262,
+    "originFromFirstMs": -13.303966666748046,
+    "maxReadMs": 72.7745
+  },
+  {
+    "captureSeconds": 62.277,
+    "originDeltaMs": -18.9835,
+    "originFromFirstMs": -32.287466666748045,
+    "maxReadMs": 72.7745
+  },
+  {
+    "captureSeconds": 64.303,
+    "originDeltaMs": 11.939433333496094,
+    "originFromFirstMs": -20.34803333325195,
+    "maxReadMs": 72.7745
+  },
+  {
+    "captureSeconds": 74.571,
+    "originDeltaMs": 21.468133333496095,
+    "originFromFirstMs": 0.6155666667480468,
+    "maxReadMs": 92.0923
+  },
+  {
+    "captureSeconds": 76.607,
+    "originDeltaMs": -19.785466666748047,
+    "originFromFirstMs": -19.1699,
+    "maxReadMs": 92.0923
+  },
+  {
+    "captureSeconds": 78.658,
+    "originDeltaMs": 19.808866666748045,
+    "originFromFirstMs": 0.6389666667480469,
+    "maxReadMs": 92.0923
+  },
+  {
+    "captureSeconds": 80.7,
+    "originDeltaMs": -18.645166666748047,
+    "originFromFirstMs": -18.0062,
+    "maxReadMs": 92.0923
+  },
+  {
+    "captureSeconds": 82.722,
+    "originDeltaMs": 146.44393333325195,
+    "originFromFirstMs": 128.43773333325194,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 86.811,
+    "originDeltaMs": -16.8277,
+    "originFromFirstMs": 111.59353333325195,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 88.847,
+    "originDeltaMs": 16.7201,
+    "originFromFirstMs": 128.31363333325194,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 95.007,
+    "originDeltaMs": 23.509366666748047,
+    "originFromFirstMs": 151.63096666674804,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 97.072,
+    "originDeltaMs": -15.049766666748047,
+    "originFromFirstMs": 136.5812,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 101.156,
+    "originDeltaMs": -11.556266666748046,
+    "originFromFirstMs": 129.95863333325195,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 138.103,
+    "originDeltaMs": 25.670033333251954,
+    "originFromFirstMs": 155.21373333325195,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 140.16,
+    "originDeltaMs": -26.631766666503907,
+    "originFromFirstMs": 128.58196666674806,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 158.671,
+    "originDeltaMs": 22.164466666748048,
+    "originFromFirstMs": 151.1347,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 160.723,
+    "originDeltaMs": -19.620566666748047,
+    "originFromFirstMs": 131.51413333325195,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 168.873,
+    "originDeltaMs": 19.84706666674805,
+    "originFromFirstMs": 149.44346666674804,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 170.952,
+    "originDeltaMs": -20.7112,
+    "originFromFirstMs": 128.73226666674805,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 191.488,
+    "originDeltaMs": 19.2512,
+    "originFromFirstMs": 149.60976666674804,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 193.54,
+    "originDeltaMs": -20.473,
+    "originFromFirstMs": 129.13676666674806,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 216.306,
+    "originDeltaMs": 11.3564,
+    "originFromFirstMs": 140.1392,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 218.337,
+    "originDeltaMs": -11.478066666748047,
+    "originFromFirstMs": 128.66113333325194,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 232.744,
+    "originDeltaMs": 21.023266666748047,
+    "originFromFirstMs": 150.22536666674804,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 234.769,
+    "originDeltaMs": -21.263,
+    "originFromFirstMs": 128.96236666674804,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 236.797,
+    "originDeltaMs": 21.241533333251954,
+    "originFromFirstMs": 150.2039,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 238.84,
+    "originDeltaMs": -19.412433333251954,
+    "originFromFirstMs": 130.79146666674805,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 269.829,
+    "originDeltaMs": 20.856566666748048,
+    "originFromFirstMs": 150.71516666674805,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 271.888,
+    "originDeltaMs": -22.465433333496094,
+    "originFromFirstMs": 128.24973333325195,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 296.49,
+    "originDeltaMs": -15.5256,
+    "originFromFirstMs": 112.9421,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 298.512,
+    "originDeltaMs": 39.10006666674805,
+    "originFromFirstMs": 152.04216666674805,
+    "maxReadMs": 343.9022
+  },
+  {
+    "captureSeconds": 300.585,
+    "originDeltaMs": -23.197166666748046,
+    "originFromFirstMs": 128.845,
+    "maxReadMs": 343.9022
+  }
+]

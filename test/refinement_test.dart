@@ -245,6 +245,53 @@ void main() {
   );
 
   testWidgets(
+    'Create screenshot action is localized and uses its delay after dismissal',
+    (tester) async {
+      Object? arguments;
+      var screenshots = 0;
+      var starts = 0;
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(AndroidRecordingService.commands, (
+            call,
+          ) async {
+            if (call.method == 'screenshot') {
+              screenshots++;
+              arguments = call.arguments;
+              return {
+                'id': 'create-shot',
+                'state': 'awaitingPermission',
+                'screenshot': true,
+              };
+            }
+            if (call.method == 'start') starts++;
+            return {'id': '', 'state': 'idle'};
+          });
+      final settings = SettingsController()..screenshotDelay = '5s';
+      await start(tester, settings: settings);
+      settings.setAppLocale(const Locale('vi'));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip('Tạo'));
+      await tester.pumpAndSettle();
+      final sheet = find.byType(BottomSheet);
+      expect(
+        find.descendant(of: sheet, matching: find.text('Chụp màn hình')),
+        findsOneWidget,
+      );
+      await tester.tap(
+        find.descendant(of: sheet, matching: find.text('Chụp màn hình')),
+      );
+      await tester.pumpAndSettle();
+
+      expect(screenshots, 1);
+      expect(starts, 0);
+      expect(arguments, {'countdown': 5});
+      expect(find.byType(BottomSheet), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
     'media events retain search, sort, position and thumbnail state',
     (tester) async {
       final catalog = RefreshCatalog();

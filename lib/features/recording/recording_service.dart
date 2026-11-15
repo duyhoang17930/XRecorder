@@ -770,6 +770,7 @@ class CaptureStatusBar extends StatelessWidget {
       if (session.state != RecordingState.countdown) {
         return const SizedBox.shrink();
       }
+      final seconds = session.countdownRemaining.inSeconds;
       return Padding(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         child: StudioCard(
@@ -777,18 +778,16 @@ class CaptureStatusBar extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                '${session.countdownRemaining.inSeconds}',
+                '$seconds',
                 style: AppTypography.headline.copyWith(
                   color: context.studioColors.primary,
                 ),
-                semanticsLabel:
-                    'Screenshot in ${session.countdownRemaining.inSeconds} seconds',
+                semanticsLabel: context.l10n.captureScreenshotIn(seconds),
               ),
-              const SizedBox(width: 12),
-              const Expanded(child: Text('Switch to the screen you want')),
+              const Spacer(),
               TextButton(
                 onPressed: controller.cancelScreenshot,
-                child: const Text('Cancel'),
+                child: Text(context.l10n.cancel),
               ),
             ],
           ),

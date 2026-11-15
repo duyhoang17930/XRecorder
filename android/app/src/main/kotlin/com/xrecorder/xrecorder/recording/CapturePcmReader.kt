@@ -25,6 +25,12 @@ internal class CapturePcmReader(
         private set
     @Volatile var capturedSamples = 0L
         private set
+    @Volatile var completed = false
+        private set
+    @Volatile var highWaterBlocks = 0
+        private set
+    @Volatile var maxReadNs = 0L
+        private set
     val queuedBlocks: Int get() = blocks.size
     var lastBlockReadyNs = 0L
         private set
@@ -33,14 +39,18 @@ internal class CapturePcmReader(
     fun start() {
         check(worker == null)
         worker = Thread({
+            var block = ShortArray(1024)
+            var count = 0
             try {
                 prepareThread()
-                var block = ShortArray(1024)
-                var count = 0
                 var lastReadNs = System.nanoTime()
                 while (!stopping) {
+                    val readStartNs = System.nanoTime()
                     val size = read(block, count, block.size - count)
-                    if (stopping) break
+                    maxReadNs = maxOf(maxReadNs, System.nanoTime() - readStartNs)
+                    // AudioRecord.stop can unblock a successful partial read.
+                    // Account for those accepted samples before observing stop.
+                    if (stopping && size <= 0) break
                     if (size < 0 || size > block.size - count) throw IOException("Internal audio capture was interrupted")
                     if (size == 0) {
                         if (System.nanoTime() - lastReadNs > 3_000_000_000L)
@@ -59,15 +69,21 @@ internal class CapturePcmReader(
                     }
                     if (count == block.size) {
                         if (!blocks.offer(Block(block, System.nanoTime()))) throw IOException("Audio encoder cannot keep up with capture")
+                        highWaterBlocks = maxOf(highWaterBlocks, blocks.size)
                         block = ShortArray(1024)
                         count = 0
                     }
                 }
-            } catch (error: Exception) {
-                if (!stopping) {
-                    failure = error
-                    failed(error)
+                if (count > 0 && !discard()) {
+                    if (!blocks.offer(Block(block.copyOf(count), System.nanoTime())))
+                        throw IOException("Audio encoder cannot keep up with capture")
+                    highWaterBlocks = maxOf(highWaterBlocks, blocks.size)
                 }
+            } catch (error: Exception) {
+                failure = error
+                failed(error)
+            } finally {
+                completed = true
             }
         }, "playback-pcm").apply { start() }
     }

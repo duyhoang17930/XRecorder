@@ -11,17 +11,23 @@ import subprocess
 import sys
 import time
 import xml.etree.ElementTree as ET
+from pathlib import Path
 import device_qa as q
 
 q.identity()
 parser = argparse.ArgumentParser()
 parser.add_argument('--attempt', default='audio9')
+parser.add_argument('--source', default='content://media/external/video/media/115')
+parser.add_argument('--fixture-dir', type=Path)
+parser.add_argument('--observe-ms', type=int, default=7500)
+parser.add_argument('--repeat-source', action='store_true')
 parser.add_argument('--player', choices=['video', 'static'], default='video')
 parser.add_argument('--deny-first-consent', action='store_true')
 args = parser.parse_args()
 assert re.fullmatch('[a-z0-9_]+', args.attempt)
 stem = 'live_audio_' + args.attempt
-original = (q.ROOT / 'mixed_zero_mic_settings_before.xml').read_bytes()
+fixtures = args.fixture_dir or q.ROOT
+original = (fixtures / 'mixed_zero_mic_settings_before.xml').read_bytes()
 
 
 def preferences():
@@ -50,7 +56,7 @@ try:
     adjusted = preferences()
     expected = values(original).copy(); expected['gain'] = 0
     assert values(adjusted) == expected
-    active_path = q.ROOT / 'mixed_zero_mic_settings_active.xml'
+    active_path = fixtures / 'mixed_zero_mic_settings_active.xml'
     if active_path.exists():
         assert active_path.read_bytes() == adjusted  # Reuse identical fixture state.
     else:
@@ -61,9 +67,10 @@ try:
     q.click('Back')
     with (q.ROOT / (stem + '_host.txt')).open('xb') as log:
         process = subprocess.run([sys.executable, str(q.ROOT / 'live_capture_audio_gate.py'),
-            '--attempt', args.attempt, '--player', args.player] +
+            '--attempt', args.attempt, '--player', args.player, '--source', args.source,
+            '--observe-ms', str(args.observe_ms)] + (['--repeat-source'] if args.repeat_source else []) +
             (['--deny-first-consent'] if args.deny_first_consent else []),
-            stdout=log, stderr=subprocess.STDOUT, timeout=240)
+            stdout=log, stderr=subprocess.STDOUT, timeout=args.observe_ms // 1000 + 240)
 finally:
     if changed:
         assert '.recording.CaptureService' not in q.adb('shell', 'dumpsys', 'activity', 'services', q.PACKAGE).decode(), 'Own session still active; inspect before restarting'
@@ -81,7 +88,7 @@ finally:
         q.adb('shell', 'input', 'swipe', '550', '1800', '550', '850', '400')
         microphone(100)
         restored = preferences()
-        restored_path = q.ROOT / 'mixed_zero_mic_settings_restored.xml'
+        restored_path = fixtures / 'mixed_zero_mic_settings_restored.xml'
         if restored_path.exists():
             assert restored_path.read_bytes() == restored
         else:

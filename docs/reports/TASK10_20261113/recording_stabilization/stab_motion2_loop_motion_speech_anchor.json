@@ -1,0 +1,163 @@
+{
+  "scope": "Loop source only; fixed-offset waveform and monotonic visual frame IDs",
+  "threshold": 0.98,
+  "audio": {
+    "local.mp4": {
+      "offsetSamples": 43938,
+      "offsetMs": 915.375,
+      "decodedSamples": 828416,
+      "referenceLoopSamples": 529728,
+      "windows": [
+        {
+          "sourceSeconds": 0.0,
+          "correlation": -0.03914479871414394
+        },
+        {
+          "sourceSeconds": 1.0,
+          "correlation": -0.014042090228608329
+        },
+        {
+          "sourceSeconds": 2.0,
+          "correlation": 0.9997304842388208
+        },
+        {
+          "sourceSeconds": 3.0,
+          "correlation": 0.9999477580770356
+        },
+        {
+          "sourceSeconds": 4.0,
+          "correlation": 0.9999583080160198
+        },
+        {
+          "sourceSeconds": 5.0,
+          "correlation": 0.9999214044703468
+        },
+        {
+          "sourceSeconds": 6.0,
+          "correlation": 0.9998985086626913
+        },
+        {
+          "sourceSeconds": 7.0,
+          "correlation": 0.9999488917658188
+        },
+        {
+          "sourceSeconds": 8.0,
+          "correlation": 0.9999394996803893
+        },
+        {
+          "sourceSeconds": 9.0,
+          "correlation": 0.9998984216968244
+        },
+        {
+          "sourceSeconds": 10.0,
+          "correlation": 0.9998740710139739
+        },
+        {
+          "sourceSeconds": 11.0,
+          "correlation": 0.999931295569312
+        },
+        {
+          "sourceSeconds": 12.0,
+          "correlation": 0.9999708036731388
+        },
+        {
+          "sourceSeconds": 13.0,
+          "correlation": 0.9999370727833655
+        },
+        {
+          "sourceSeconds": 14.0,
+          "correlation": 0.9999419635878714
+        },
+        {
+          "sourceSeconds": 15.0,
+          "correlation": 0.9999584361974342
+        }
+      ],
+      "minimumCorrelation": -0.03914479871414394,
+      "status": "FAIL"
+    },
+    "received.mp4": {
+      "offsetSamples": 20386,
+      "offsetMs": 424.7083333333333,
+      "decodedSamples": 804864,
+      "referenceLoopSamples": 529728,
+      "windows": [
+        {
+          "sourceSeconds": 0.0,
+          "correlation": -0.03914479871414394
+        },
+        {
+          "sourceSeconds": 1.0,
+          "correlation": -0.014042090228608329
+        },
+        {
+          "sourceSeconds": 2.0,
+          "correlation": 0.9997304842388208
+        },
+        {
+          "sourceSeconds": 3.0,
+          "correlation": 0.9999477580770356
+        },
+        {
+          "sourceSeconds": 4.0,
+          "correlation": 0.9999583080160198
+        },
+        {
+          "sourceSeconds": 5.0,
+          "correlation": 0.9999214044703468
+        },
+        {
+          "sourceSeconds": 6.0,
+          "correlation": 0.9998985086626913
+        },
+        {
+          "sourceSeconds": 7.0,
+          "correlation": 0.9999488917658188
+        },
+        {
+          "sourceSeconds": 8.0,
+          "correlation": 0.9999394996803893
+        },
+        {
+          "sourceSeconds": 9.0,
+          "correlation": 0.9998984216968244
+        },
+        {
+          "sourceSeconds": 10.0,
+          "correlation": 0.9998740710139739
+        },
+        {
+          "sourceSeconds": 11.0,
+          "correlation": 0.999931295569312
+        },
+        {
+          "sourceSeconds": 12.0,
+          "correlation": 0.9999708036731388
+        },
+        {
+          "sourceSeconds": 13.0,
+          "correlation": 0.9999370727833655
+        },
+        {
+          "sourceSeconds": 14.0,
+          "correlation": 0.9999419635878714
+        },
+        {
+          "sourceSeconds": 15.0,
+          "correlation": 0.9999584361974342
+        }
+      ],
+      "minimumCorrelation": -0.03914479871414394,
+      "status": "FAIL"
+    }
+  },
+  "video": {
+    "checkedFrames": 152,
+    "uniqueIds": 51,
+    "mismatches": [],
+    "mask": 65479,
+    "status": "PASS",
+    "scope": "Known 720x1280 canvas, 1080x2400 display; no source ID older than 1s; not an FPS certificate"
+  },
+  "status": "FAIL"
+}

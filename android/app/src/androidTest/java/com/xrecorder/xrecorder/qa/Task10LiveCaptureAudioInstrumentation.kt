@@ -120,6 +120,10 @@ object Task10LiveCaptureAudioInstrumentation {
         var staticSamples: ShortArray? = null
         var controls: Controls? = null
         var captureAudio: Any? = null
+        var visualView: android.view.View? = null
+        val visualDrawCount = java.util.concurrent.atomic.AtomicLong()
+        val visualFirstDrawNs = java.util.concurrent.atomic.AtomicLong()
+        val visualLastDrawNs = java.util.concurrent.atomic.AtomicLong()
         val context = runner.targetContext
         fun state(): Map<String, Any?> {
             var value: Map<String, Any?> = emptyMap()
@@ -144,6 +148,19 @@ object Task10LiveCaptureAudioInstrumentation {
         }
         fun audioTiming(): JSONObject {
             val value = JSONObject().put("monotonicNs", System.nanoTime()).put("captureElapsedMs", state()["elapsedMs"])
+            value.put("appPssKiB", android.os.Debug.getPss())
+                .put("appCpuMs", android.os.Process.getElapsedCpuTime())
+                .put("visualDrawCount", visualDrawCount.get())
+                .put("visualFirstDrawNs", visualFirstDrawNs.get())
+                .put("visualLastDrawNs", visualLastDrawNs.get())
+            sourceTrack?.let { track ->
+                val timestamp = android.media.AudioTimestamp()
+                value.put("sourceTrack", JSONObject().put("playbackFrames", track.playbackHeadPosition.toLong())
+                    .put("underruns", track.underrunCount).put("timestampValid", track.getTimestamp(timestamp))
+                    .put("timestampFrames", timestamp.framePosition).put("timestampNs", timestamp.nanoTime))
+            }
+            val live = LiveCaptureState.snapshot()
+            value.put("sentVideoFrames", live["sentVideoFrames"]).put("sentAudioFrames", live["sentAudioFrames"])
             CaptureService.instance?.let { service ->
                 val field = CaptureService::class.java.getDeclaredField("video").apply { isAccessible = true }
                 val video = field.get(service) as? com.xrecorder.xrecorder.recording.VideoEncoder
@@ -154,6 +171,9 @@ object Task10LiveCaptureAudioInstrumentation {
                 captureAudio = audioField.get(service)
             }
             val audio = captureAudio ?: return value.put("audioReleased", true)
+            for (counter in listOf("maxQueueInputNs", "maxDequeueOutputNs", "maxWriteOutputNs", "bufferSize")) {
+                value.put(counter, audio.javaClass.getDeclaredField(counter).apply { isAccessible = true }.get(audio))
+            }
             value.put("micUnderrunSamples", audio.javaClass.getDeclaredField("micUnderrunSamples")
                 .apply { isAccessible = true }.getLong(audio))
             for (counter in listOf("microphoneReadSamples", "encodedSamples"))
@@ -161,6 +181,9 @@ object Task10LiveCaptureAudioInstrumentation {
             val reader = audio.javaClass.getDeclaredField("internalReader").apply { isAccessible = true }.get(audio)
             if (reader != null) {
                 value.put("internalReadSamples", reader.javaClass.getDeclaredField("capturedSamples").apply { isAccessible = true }.getLong(reader))
+                for (counter in listOf("highWaterBlocks", "maxReadNs", "completed")) {
+                    value.put(counter, reader.javaClass.getDeclaredField(counter).apply { isAccessible = true }.get(reader))
+                }
                 val queue = reader.javaClass.getDeclaredField("blocks").apply { isAccessible = true }.get(reader) as java.util.concurrent.ArrayBlockingQueue<*>
                 value.put("internalQueuedBlocks", queue.size)
             }
@@ -185,7 +208,9 @@ object Task10LiveCaptureAudioInstrumentation {
             val attempt = checkNotNull(arguments.getString("attempt"))
             require(attempt.matches(Regex("[a-z0-9_]+")))
             val source = Uri.parse(checkNotNull(arguments.getString("source")))
-            require(source.toString() == "content://media/external/video/media/115")
+            // Reimported task fixture may receive a different MediaStore ID.
+            // Its immutable content hash below remains the identity gate.
+            require(source.toString().matches(Regex("content://media/external/video/media/[0-9]+")))
             val expected = "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f"
             check(sourceHash(source) == expected)
             val sourcePlayer = arguments.getString("player") ?: "video"
@@ -208,7 +233,7 @@ object Task10LiveCaptureAudioInstrumentation {
                         .joinToString("") { "%02x".format(it.toInt() and 255) })
             }
             check(!File(context.noBackupFilesDir, "live_destination_v1.enc").exists())
-            runner.startActivitySync(Intent().setClassName(context.packageName, "${context.packageName}.MainActivity")
+            val hostActivity = runner.startActivitySync(Intent().setClassName(context.packageName, "${context.packageName}.MainActivity")
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             check(!CaptureState.busy && CaptureService.instance == null)
             val ui = Controls(runner)
@@ -269,6 +294,46 @@ object Task10LiveCaptureAudioInstrumentation {
                     .setTransferMode(android.media.AudioTrack.MODE_STATIC)
                     .setBufferSizeInBytes(samples.size * 2).build()
                 check(sourceTrack!!.write(samples, 0, samples.size) == samples.size)
+                if (arguments.getString("repeatSource") == "true") {
+                    check(sourceTrack!!.setLoopPoints(0, samples.size, -1) == android.media.AudioTrack.SUCCESS)
+                    report.put("sourceLoops", true)
+                    val visualOriginNs = System.nanoTime()
+                    report.put("visualSourceOriginNs", visualOriginNs)
+                    runner.runOnMainSync {
+                        check(!hostActivity.isDestroyed)
+                        hostActivity.startActivity(Intent().setClassName(context.packageName, "${context.packageName}.MainActivity")
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+                        visualView = object : android.view.View(hostActivity) {
+                            private val paint = android.graphics.Paint()
+                            override fun onDraw(canvas: android.graphics.Canvas) {
+                                val now = System.nanoTime()
+                                visualFirstDrawNs.compareAndSet(0L, now)
+                                visualLastDrawNs.set(now)
+                                visualDrawCount.incrementAndGet()
+                                val frame = (now - visualOriginNs) * 30 / 1_000_000_000L
+                                canvas.drawColor(intArrayOf(android.graphics.Color.RED, android.graphics.Color.GREEN,
+                                    android.graphics.Color.BLUE, android.graphics.Color.YELLOW)[((frame / 30) % 4).toInt()])
+                                for (bit in 0 until 16) {
+                                    paint.color = if (frame and (1L shl bit) != 0L) android.graphics.Color.WHITE else android.graphics.Color.BLACK
+                                    val x = (bit % 8) * 64f
+                                    val y = (bit / 8) * 64f
+                                    canvas.drawRect(x, y, x + 64, y + 64, paint)
+                                }
+                                postInvalidateOnAnimation()
+                            }
+                        }.also { hostActivity.addContentView(it, android.widget.FrameLayout.LayoutParams(512, 256).apply { topMargin = 200 }) }
+                        report.put("visualSourceTopPixels", 200)
+                    }
+                    waitFor("Visual host did not regain focus", 10000) {
+                        var focused = false
+                        runner.runOnMainSync { focused = hostActivity.hasWindowFocus() }
+                        focused
+                    }
+                    // Separate known source start from activity/view setup load.
+                    // Keep cold-transition failures as separate evidence.
+                    SystemClock.sleep(1000)
+                    report.put("sourceWarmupMs", 1000)
+                }
                 sourceTrack!!.play()
             }
             var playback: Map<String, Any> = emptyMap()
@@ -290,11 +355,13 @@ object Task10LiveCaptureAudioInstrumentation {
             report.put("playbackStartCaptureMs", state()["elapsedMs"])
             val audioTimeline = org.json.JSONArray()
             report.put("audioTimeline", audioTimeline)
-            val playbackDeadline = SystemClock.elapsedRealtime() + 7500
+            val observeMs = arguments.getString("observeMs")?.toLong() ?: 7500L
+            require(observeMs in 7500L..300000L)
+            val playbackDeadline = SystemClock.elapsedRealtime() + observeMs
             while (SystemClock.elapsedRealtime() < playbackDeadline) {
                 audioTimeline.put(audioTiming())
                 check(CaptureState.id == session && CaptureState.busy) { "Capture ended during playback: ${audioTiming()}" }
-                SystemClock.sleep(500)
+                SystemClock.sleep(if (observeMs > 60000L) 2000 else 500)
             }
             report.put("audioTimeline", audioTimeline)
             playback = currentPlayback()
@@ -382,6 +449,7 @@ object Task10LiveCaptureAudioInstrumentation {
             if (session != null && CaptureState.id == session && CaptureState.state == "awaitingPermission")
                 controls?.automation?.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK)
             runner.runOnMainSync {
+                visualView?.let { (it.parent as? android.view.ViewGroup)?.removeView(it) }
                 player?.finish()
                 if (session != null && CaptureState.id == session && CaptureState.busy) CaptureService.instance?.stopCapture()
             }

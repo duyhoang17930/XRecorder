@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <string name="document">{&quot;version&quot;:2,&quot;values&quot;:{&quot;themeMode&quot;:&quot;light&quot;,&quot;appLocale&quot;:&quot;en&quot;,&quot;speechLanguage&quot;:&quot;auto&quot;,&quot;resolution&quot;:&quot;720p HD&quot;,&quot;fps&quot;:&quot;30&quot;,&quot;bitrate&quot;:&quot;8 Mbps&quot;,&quot;codec&quot;:&quot;H.264 / AVC&quot;,&quot;orientation&quot;:&quot;Auto Sensor&quot;,&quot;audio&quot;:&quot;Mixed Stream&quot;,&quot;countdown&quot;:&quot;3s&quot;,&quot;screenshotDelay&quot;:&quot;3s&quot;,&quot;gain&quot;:100.0,&quot;cfr&quot;:true,&quot;hardware&quot;:true,&quot;noise&quot;:false,&quot;facecam&quot;:false,&quot;shake&quot;:true,&quot;screenOff&quot;:false,&quot;touches&quot;:false,&quot;cache&quot;:true,&quot;internalGain&quot;:100.0,&quot;durationSeconds&quot;:0,&quot;mode&quot;:&quot;Normal&quot;}}</string>
+</map>

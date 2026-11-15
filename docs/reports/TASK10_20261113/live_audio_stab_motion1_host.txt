@@ -1,0 +1,22 @@
+Performing Streamed Install
+Success
+
+Traceback (most recent call last):
+  File "D:\FAU_App\XRecorder\docs\reports\TASK10_20261113\live_capture_audio_gate.py", line 60, in <module>
+    raw = q.adb('shell', 'am', 'instrument', '-w', '-e', 'task10', 'live-capture-audio',
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\FAU_App\XRecorder\docs\reports\TASK10_20261113\device_qa.py", line 21, in adb
+    return subprocess.check_output(ADB + list(args), timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dangh\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dangh\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dangh\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dangh\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1630, in _communicate
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['C:\\Users\\dangh\\AppData\\Local\\Android\\sdk\\platform-tools\\adb.exe', '-s', 'emulator-5554', 'shell', 'am', 'instrument', '-w', '-e', 'task10', 'live-capture-audio', '-e', 'source', 'content://media/external/video/media/47', '-e', 'attempt', 'stab_motion1', '-e', 'player', 'static', '-e', 'observeMs', '15000', '-e', 'repeatSource', 'true', '-e', 'failAfterPlayback', 'false', '-e', 'pauseBeforeFailure', 'false', '-e', 'denyFirstConsent', 'false', 'com.xrecorder.xrecorder.test/com.xrecorder.xrecorder.qa.Task07AccessibilityInstrumentation']' timed out after 195 seconds

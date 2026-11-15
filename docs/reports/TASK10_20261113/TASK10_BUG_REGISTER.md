@@ -1,5 +1,13 @@
 # TASK10 bug register ? live
 
+## Recording stabilization continuation — 2026-11-15
+
+See [focused root cause](recording_stabilization/RECORDING_ROOT_CAUSE.md) and [quality results](recording_stabilization/RECORDING_QUALITY_RESULTS.md). Accepted positive PCM at Stop and a partial terminal block could be discarded; reader/consumer termination repaired with deterministic race and terminal-saturation tests. This does not close recurring AAC backlog, mixed clock-origin alignment or historical stale-source defects.
+
+Same-source/profile short comparison: SwiftShader `stab4` fully decodes and passes packet/cue checks but strict waveform FAIL; NVIDIA host-GPU `stab_gpu1` strict waveform PASS (5s correlation .999965), both local/network decode and sampled cue/pixel parity PASS. FIFO observed high water44 vs11; maximum read1717ms vs116ms, write1454ms vs79ms. Environment contribution supported; historical defects not globally closed. Full stress and controls remain open. Eight original drafts match; current AVD lacks historical Tiny/later recovery state, unrelated to a verified archive-deletion action.
+
+Final5minute baseline `stab_stress1` completes305960ms/URI52;2full decodes and2745video/14307AAC received-packet identity pass. FIFO22/192, maxPSS197315KiB. Source-clock origin shifts~128ms around capture82.7s, matching a~137.5ms waveform alignment change near source79s and344ms reader/342ms queueInput maxima. Accepted source/read deltas remain within a2–4block outstanding range; pre-read/platform loss remains possible. About9fps received at30fps configured; final short fixture draws48.91Hz but sends9.44fps. No additional long run; G1FAIL, G2/G5/G6PARTIAL. Current13original files/8drafts/settings final byte checks pass; historical model/recovery-state preservation unverified. See focused final handoff.
+
 ## Latest continuation: audio14, TLS and failed-session duration
 
 - **T10-FAILURE-DURATION / P2:** normal-consent capture followed by injected failure of only the task-created session reproduces `9740 -> 0 ms` on installed ccafa485. Cause: fail leaves `recording` without preserving its current active-time accumulator. The scoped CaptureService fix freezes time before codec cleanup, publishes the terminal state, then retains its matching checkpoint. Native active failure9569 ->9572ms and paused failure9772 ->9772ms PASS;1.2s pause excluded. Both terminal journals/checkpoints keep exactly the frozen duration;3owned recovery inputs/checkpoints,8old drafts/settings/Tiny remain byte-exact through update/new session/process restart (failure_duration_restart_preservation.json). Before-fix raw FAIL and retained1,220,016B video/167,075B audio hashes remain in failure_duration_inputs_before_update.json.

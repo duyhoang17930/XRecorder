@@ -1,0 +1,8 @@
+{
+  "preferencesByteExact": true,
+  "microphoneGainDuringTest": 0,
+  "internalGainDuringTest": 100,
+  "restoredMicrophoneGain": 100,
+  "nativeRunnerExit": 1,
+  "scope": "Controlled Mixed contribution; waveform validation is separate"
+}

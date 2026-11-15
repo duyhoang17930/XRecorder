@@ -16,12 +16,16 @@ import device_qa as q
 
 p = argparse.ArgumentParser()
 p.add_argument('--attempt', required=True)
+p.add_argument('--source', default='content://media/external/video/media/115')
+p.add_argument('--observe-ms', type=int, default=7500)
+p.add_argument('--repeat-source', action='store_true')
 p.add_argument('--player', choices=['video', 'static'], default='video')
 p.add_argument('--fail-after-playback', action='store_true')
 p.add_argument('--pause-before-failure', action='store_true')
 p.add_argument('--deny-first-consent', action='store_true')
 args = p.parse_args()
 assert not args.pause_before_failure or args.fail_after_playback
+assert 7500 <= args.observe_ms <= 300000
 assert re.fullmatch('[a-z0-9_]+', args.attempt)
 q.identity()
 assert shutil.disk_usage('D:/').free > 10 * 1024**3
@@ -29,7 +33,8 @@ assert shutil.disk_usage('D:/').free > 10 * 1024**3
 # D: retains the owner's strict10GiB reserve. No builds/downloads are run here.
 assert shutil.disk_usage('C:/').free > 5 * 1024**3
 assert '.recording.CaptureService' not in q.adb('shell', 'dumpsys', 'activity', 'services', q.PACKAGE).decode()
-source = 'content://media/external/video/media/115'
+source = args.source
+assert re.fullmatch(r'content://media/external/video/media/[0-9]+', source)
 registry = json.loads((q.ROOT / 'task_created_media.json').read_text())
 assert any(x['uri'] == source for x in registry)
 assert hashlib.sha256(q.adb('exec-out', 'content', 'read', '--uri', source)).hexdigest() == '8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f'
@@ -49,16 +54,17 @@ try:
     with (q.ROOT / (stem + '_receiver.log')).open('xb') as log:
         receiver = subprocess.Popen(['build/task03/ffmpeg/ffmpeg.exe', '-hide_banner', '-nostdin', '-n',
             '-listen', '1', '-timeout', '120', '-i', 'rtmp://127.0.0.1:19350/live/' + key,
-            '-t', '90', '-c', 'copy', '-movflags', '+faststart', str(target / 'received.mp4')],
+            '-t', str(args.observe_ms // 1000 + 90), '-c', 'copy', '-movflags', '+faststart', str(target / 'received.mp4')],
             stdout=log, stderr=subprocess.STDOUT, creationflags=subprocess.CREATE_NO_WINDOW)
         q.adb('shell', 'am', 'force-stop', q.PACKAGE)
         raw = q.adb('shell', 'am', 'instrument', '-w', '-e', 'task10', 'live-capture-audio',
             '-e', 'source', source, '-e', 'attempt', args.attempt,
             '-e', 'player', args.player,
+            '-e', 'observeMs', str(args.observe_ms), '-e', 'repeatSource', str(args.repeat_source).lower(),
             '-e', 'failAfterPlayback', str(args.fail_after_playback).lower(),
             '-e', 'pauseBeforeFailure', str(args.pause_before_failure).lower(),
             '-e', 'denyFirstConsent', str(args.deny_first_consent).lower(),
-            'com.xrecorder.xrecorder.test/com.xrecorder.xrecorder.qa.Task07AccessibilityInstrumentation', timeout=180)
+            'com.xrecorder.xrecorder.test/com.xrecorder.xrecorder.qa.Task07AccessibilityInstrumentation', timeout=args.observe_ms // 1000 + 180)
         with (q.ROOT / (stem + '_runtime.txt')).open('xb') as out:
             out.write(raw)
         match = re.search(rb'TASK10_LIVE_RESULT:(\{[^\r\n]+\})', raw)

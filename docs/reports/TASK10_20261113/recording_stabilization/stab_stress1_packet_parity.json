@@ -1,0 +1,31 @@
+{
+  "scope": "All received packets; local startup prefix/tail reported, not hidden",
+  "streams": {
+    "v:0": {
+      "localPackets": 2748,
+      "receivedPackets": 2745,
+      "localPrefixNotReceived": 3,
+      "localTailNotReceived": 0,
+      "everyReceivedPacketSha256Exact": true,
+      "medianOffsetSeconds": 0.07381100000003471,
+      "offsetRangeSeconds": [
+        0.07332199999999034,
+        0.07432200000000933
+      ]
+    },
+    "a:0": {
+      "localPackets": 14329,
+      "receivedPackets": 14307,
+      "localPrefixNotReceived": 22,
+      "localTailNotReceived": 0,
+      "everyReceivedPacketSha256Exact": true,
+      "medianOffsetSeconds": 0.07372900000000016,
+      "offsetRangeSeconds": [
+        0.07372899999995752,
+        0.07373000000001184
+      ]
+    }
+  },
+  "relativeAvOffsetMs": 0.08200000003455443,
+  "status": "PASS"
+}

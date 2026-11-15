@@ -1,5 +1,18 @@
 # TASK10 feature/action matrix ? live
 
+## Prompt02 Screenshot follow-up — 2026-11-15
+
+- Create-sheet Screenshot labels now use the existing localized ARB key. The selected delay is captured before dismissing the sheet; the in-app countdown uses translated accessibility text and Cancel.
+- Host validation after the change: focused Screenshot/Create/localization group **94 PASS**; full Flutter suite **554 PASS**; `flutter analyze --no-pub` clean. Full native unit suite **161 PASS / 28 suites**, including ScreenshotPixels and CaptureTiming (10 focused cases).
+- Continuation QA on `Pixel_7` / Android API 37 / serial `emulator-5554` installed current profile APK SHA-256 `C0BE5E78E1C3F7E17675C051BC2C7CA9EAE9BD6FC2C85059ACF651B418CD4307` with `adb install -r`. Fifteen Screenshot PNGs and one Photo Editor copy were independently decoded and checked against their MediaStore URIs; 15/16 Android cases PASS, with FLAG_SECURE behavior PARTIAL because this AVD has no safe secure-window fixture. Details are in `docs/reports/PROMPT02_SCREENSHOT/`.
+- The prior ADB-unavailable result above is historical. This continuation changed no Screenshot native pipeline, MediaProjection contract, Recording code, or pre-existing media. The current Screenshot acceptance remains PARTIAL only for the unexercised protected-content case; Prompt01 recording findings remain unchanged.
+
+## Recording stabilization continuation — 2026-11-15
+
+Stop-tail PCM preservation implemented; final native host suite includes exact accepted-tail and full-terminal-queue regressions. Short real normal-consent profile capture `stab_gpu1` on NVIDIA host GPU passes unchanged strict waveform, full2file decode, packet parity and2known new-cue samples. SwiftShader `stab4` waveform FAIL is retained. These are bounded results, not G1–G6 completion. See [current recording matrix](recording_stabilization/RECORDING_TEST_MATRIX.md); remaining controls, full motion, mixed acoustic alignment and5minute stress require current evidence. Current AVD state differs from the historical55file/Tiny checkpoint;8original drafts are byte-exact.
+
+Final sustained update:5minute baseline completed with full local/received decode and all received-packet identity PASS, FIFO peak22, PSS peak197315KiB. Audio source-clock step/strict continuity FAIL and effective~9fps remain. Source draw/transport counters now distinguish generated callbacks from encoded cadence, without claiming a proven projection/codec cause. Host553Flutter/161native/19Python PASS, analyzer clean; overall runtime automation FAIL. See [final scoped handoff](recording_stabilization/RECORDING_FINAL_HANDOFF.md). Prompt01PARTIAL; no Prompt02 work started.
+
 ## Current continuation results (2026-11-14)
 
 | Action/state | Latest proof | Status and next action |

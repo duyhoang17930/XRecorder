@@ -148,7 +148,7 @@ class StudioQuickTools extends StatelessWidget {
     }
 
     final screenshot = BentoCard(
-      title: 'Screenshot',
+      title: context.l10n.captureScreenshot,
       description: context.l10n.screenshotDelaySummary(
         context.displayValue(
           SettingsScope.of(context).screenshotDelayDuration.inSeconds,
@@ -160,11 +160,10 @@ class StudioQuickTools extends StatelessWidget {
       onTap: capture.busy
           ? null
           : () async {
+              final delay = SettingsScope.of(context).screenshotDelayDuration;
               onDismiss?.call();
               try {
-                await capture.screenshot(
-                  delay: SettingsScope.of(context).screenshotDelayDuration,
-                );
+                await capture.screenshot(delay: delay);
               } catch (error) {
                 if (target.mounted) {
                   showFailure(
@@ -200,7 +199,7 @@ class StudioQuickTools extends StatelessWidget {
       children: compact
           ? [
               QuickActionTile(
-                title: 'Screenshot',
+                title: context.l10n.captureScreenshot,
                 icon: AppIcons.screenshot,
                 onTap: screenshot.onTap,
               ),

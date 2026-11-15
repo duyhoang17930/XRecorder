@@ -1,0 +1,159 @@
+{
+  "scope": "Diagnostic only; original continuity gate unchanged",
+  "files": {
+    "local.mp4": [
+      {
+        "sourceSeconds": 0.0,
+        "correlation": 0.06874317713467669,
+        "offsetMs": 4304.375
+      },
+      {
+        "sourceSeconds": 0.5,
+        "correlation": 0.1232010237759962,
+        "offsetMs": 4380.25
+      },
+      {
+        "sourceSeconds": 1.0,
+        "correlation": 0.16712328852758962,
+        "offsetMs": 4352.375
+      },
+      {
+        "sourceSeconds": 1.5,
+        "correlation": 0.2905007934528501,
+        "offsetMs": 4277.895833333333
+      },
+      {
+        "sourceSeconds": 2.0,
+        "correlation": 0.9997967986286189,
+        "offsetMs": 4351.395833333333
+      },
+      {
+        "sourceSeconds": 2.5,
+        "correlation": 0.9994784159241437,
+        "offsetMs": 4358.041666666667
+      },
+      {
+        "sourceSeconds": 3.0,
+        "correlation": 0.999923461920796,
+        "offsetMs": 4358.041666666667
+      },
+      {
+        "sourceSeconds": 3.5,
+        "correlation": 0.9999496324547456,
+        "offsetMs": 4358.041666666667
+      },
+      {
+        "sourceSeconds": 4.0,
+        "correlation": 0.9946068314217239,
+        "offsetMs": 4379.375
+      },
+      {
+        "sourceSeconds": 4.5,
+        "correlation": 0.41163042566044794,
+        "offsetMs": 4422.041666666667
+      },
+      {
+        "sourceSeconds": 5.0,
+        "correlation": 0.9404194242558155,
+        "offsetMs": 4381.833333333333
+      },
+      {
+        "sourceSeconds": 5.5,
+        "correlation": 0.9999600662223673,
+        "offsetMs": 4381.833333333333
+      },
+      {
+        "sourceSeconds": 6.0,
+        "correlation": 0.9998663983359233,
+        "offsetMs": 4381.833333333333
+      },
+      {
+        "sourceSeconds": 6.5,
+        "correlation": 0.9999113083381224,
+        "offsetMs": 4381.833333333333
+      },
+      {
+        "sourceSeconds": 7.0,
+        "correlation": 0.9999665149956865,
+        "offsetMs": 4381.833333333333
+      }
+    ],
+    "received.mp4": [
+      {
+        "sourceSeconds": 0.0,
+        "correlation": 0.06874317713467669,
+        "offsetMs": 3472.375
+      },
+      {
+        "sourceSeconds": 0.5,
+        "correlation": 0.1232010237759962,
+        "offsetMs": 3548.25
+      },
+      {
+        "sourceSeconds": 1.0,
+        "correlation": 0.16712328852758962,
+        "offsetMs": 3520.375
+      },
+      {
+        "sourceSeconds": 1.5,
+        "correlation": 0.2905007934528501,
+        "offsetMs": 3445.8958333333335
+      },
+      {
+        "sourceSeconds": 2.0,
+        "correlation": 0.9997967986286189,
+        "offsetMs": 3519.3958333333335
+      },
+      {
+        "sourceSeconds": 2.5,
+        "correlation": 0.9994784159241437,
+        "offsetMs": 3526.0416666666665
+      },
+      {
+        "sourceSeconds": 3.0,
+        "correlation": 0.999923461920796,
+        "offsetMs": 3526.0416666666665
+      },
+      {
+        "sourceSeconds": 3.5,
+        "correlation": 0.9999496324547456,
+        "offsetMs": 3526.0416666666665
+      },
+      {
+        "sourceSeconds": 4.0,
+        "correlation": 0.9946068314217239,
+        "offsetMs": 3547.375
+      },
+      {
+        "sourceSeconds": 4.5,
+        "correlation": 0.41163042566044794,
+        "offsetMs": 3590.0416666666665
+      },
+      {
+        "sourceSeconds": 5.0,
+        "correlation": 0.9404194242558155,
+        "offsetMs": 3549.8333333333335
+      },
+      {
+        "sourceSeconds": 5.5,
+        "correlation": 0.9999600662223673,
+        "offsetMs": 3549.8333333333335
+      },
+      {
+        "sourceSeconds": 6.0,
+        "correlation": 0.9998663983359233,
+        "offsetMs": 3549.8333333333335
+      },
+      {
+        "sourceSeconds": 6.5,
+        "correlation": 0.9999113083381224,
+        "offsetMs": 3549.8333333333335
+      },
+      {
+        "sourceSeconds": 7.0,
+        "correlation": 0.9999665149956865,
+        "offsetMs": 3549.8333333333335
+      }
+    ]
+  }
+}

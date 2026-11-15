@@ -17,6 +17,27 @@ import java.util.Collections
 /** Existing task-owned encoded media -> real local RTMP receiver; no capture token. */
 object Task10LiveInstrumentation {
     @JvmStatic fun run(instrumentation: Instrumentation, arguments: Bundle) {
+        if (arguments.getString("task10") == "live-seed-source") {
+            val report = JSONObject()
+            try {
+                val context = instrumentation.targetContext
+                val bytes = java.io.File(context.getExternalFilesDir(null), "task01_controlled_source.mp4").readBytes()
+                val sha = java.security.MessageDigest.getInstance("SHA-256").digest(bytes)
+                    .joinToString("") { "%02x".format(it.toInt() and 255) }
+                check(sha == "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f")
+                val output = com.xrecorder.xrecorder.recording.MediaOutput(context, "TASK01_source_${System.currentTimeMillis()}.mp4")
+                val descriptor = output.open()
+                android.os.ParcelFileDescriptor.AutoCloseOutputStream(android.os.ParcelFileDescriptor.dup(descriptor.fileDescriptor)).use {
+                    it.write(bytes)
+                }
+                report.put("status", "PASS").put("uri", output.commit().toString()).put("sha256", sha)
+            } catch (error: Exception) {
+                report.put("status", "FAIL").put("error", error.toString())
+            }
+            val result = Bundle().apply { putString("stream", "TASK01_SOURCE:" + report.toString()) }
+            instrumentation.finish(android.app.Activity.RESULT_OK, result)
+            return
+        }
         if (arguments.getString("task10") == "live-capture-audio") {
             Task10LiveCaptureAudioInstrumentation.run(instrumentation, arguments)
             return

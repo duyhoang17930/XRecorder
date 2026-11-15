@@ -1,0 +1,137 @@
+INFO         | Android emulator version 36.1.9.0 (build_id 13823996) (CL:N/A)
+INFO         | Graphics backend: gfxstream
+INFO         | Found systemPath C:\Users\dangh\AppData\Local\Android\sdk\system-images\android-37.1\google_apis_playstore_ps16k\x86_64\
+WARNING      | Please update the emulator to one that supports the feature(s): QemuCameraSensorOrientation, VulkanVirtualQueue
+INFO         | IPv4 server found: 192.168.1.1
+INFO         | Ignore IPv6 address: 10e9:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: 10e9:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: 10e9:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: 28ef:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: 28ef:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: 28ef:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: 40f5:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: 40f5:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: 90ff:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: 90ff:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: 90ff:3ae0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: b005:3be0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: b005:3be0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: b005:3be0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: a00b:3be0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: a00b:3be0:a801:0:10e9:3ae0:a801:0
+INFO         | Ignore IPv6 address: a00b:3be0:a801:0:10e9:3ae0:a801:0
+INFO         | Guest GLES Driver: Auto (ext controls)
+library_mode host gpu mode host
+INFO         | emuglConfig_get_vulkan_hardware_gpu_support_info: Found physical GPU 'NVIDIA GeForce RTX 3050 Ti Laptop GPU', type: VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU, apiVersion: 1.3.242, driverVersion: 537.70
+
+INFO         | emuglConfig_get_vulkan_hardware_gpu_support_info: Found physical GPU 'AMD RadeonT 660M', type: VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU, apiVersion: 1.3.287, driverVersion: 2.0.310
+
+INFO         | GPU device local memory = 3976MB
+INFO         | Checking system compatibility:
+INFO         |   Checking: hasCompatibleHypervisor
+INFO         |      Ok: Hypervisor compatibility to run avd: `Pixel_7` are met
+INFO         |   Checking: hasSufficientSystem
+INFO         |      Ok: System requirements to run avd: `Pixel_7` are met
+INFO         |   Checking: hasSufficientHwGpu
+INFO         |      Ok: Hardware GPU requirements to run avd: `Pixel_7` are passed
+INFO         |   Checking: hasSufficientDiskSpace
+INFO         |      Ok: Disk space requirements to run avd: `Pixel_7` are met
+INFO         | Critical: Failed to load opengl32sw (The specified module could not be found.) (:0, )
+INFO         | Warning: Software OpenGL failed. Falling back to system OpenGL. (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_btn_xr_environment_living_room_day_clicked() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_btn_xr_environment_living_room_night_clicked() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_new_posture_requested(int) (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_posture_selection_dialog() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_new_resizable_requested(PresetEmulatorSizeType) (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_resizable_dialog() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_xr_environment_mode_changed(int) (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_xr_environment_mode_dialog() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_xr_input_mode_changed(int) (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_xr_input_mode_dialog() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_sleep_timer_done() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_unfold_timer_done() (:0, )
+INFO         | Storing crashdata in: C:\Users\dangh\AppData\Local\Temp\\AndroidEmulator\emu-crash-36.1.9.db, detection is enabled for process: 30984
+  module_list[0].crashpad_annotations["ro.build.fingerprint"] (type = 1) = ??
+  module_list[0].crashpad_annotations["free_ram"] (type = 1) = 1231
+  module_list[0].crashpad_annotations["cpu_cores"] (type = 1) = 12
+  module_list[0].crashpad_annotations["PlayStore.enabled"] (type = 1) = true
+  module_list[0].crashpad_annotations["hw.lcd.width"] (type = 1) = 1080
+  module_list[0].crashpad_annotations["hw.ramSize"] (type = 1) = 2048
+  module_list[0].crashpad_annotations["hw.lcd.height"] (type = 1) = 2400
+  module_list[0].crashpad_annotations["hw.gpu.mode"] (type = 1) = auto
+  module_list[0].crashpad_annotations["hw.sensor.hinge"] (type = 1) = ?
+  module_list[0].crashpad_annotations["disk.dataPartition.size"] (type = 1) = 6G
+  module_list[0].crashpad_annotations["avd_space"] (type = 1) = 0
+  module_list[0].crashpad_annotations["hw.cpu.ncore"] (type = 1) = 4
+  module_list[0].crashpad_annotations["hw.gpu.enabled"] (type = 1) = yes
+  module_list[0].crashpad_annotations["AVD_FLAVOR"] (type = 1) = AVD_OTHER
+  module_list[0].crashpad_annotations["internal-msg"] (type = 1) = gpu found. vendor id 10de device id 0x25a0
+emuglConfig_init: blacklisted=0 has_guest_renderer=0, mode: auto, option: (null)
+emuglConfig_init: auto-selected host based on conditions and UI preference 0
+emuglConfig_init: GPU emulation enabled using 'host' mode
+Deciding if GLDirectMem/Vulkan should be enabled. Selected renderer: 1 API level: 1000 host GPU on the denylist? 0
+Host GPU selected, enabling Vulkan.
+Enabling GLDirectMemEnabling Vulkan
+INFO         | No consent for crashreport 2f586c36-b0dc-4e23-9853-41aa06fd23ec, deleting.
+INFO         | Initializing hardware OpenGLES emulation support
+INFO         | HealthMonitor disabled.
+INFO         | SharedLibrary::open for [vulkan-1.dll]
+INFO         | SharedLibrary::open for [vulkan-1.dll]: not found in map, open for the first time
+INFO         | SharedLibrary::open for [vulkan-1.dll] (win32): call LoadLibrary
+INFO         | SharedLibrary::open succeeded for [vulkan-1.dll]. File name: [C:\WINDOWS\SYSTEM32\vulkan-1.dll]
+INFO         | Added library: vulkan-1.dll
+INFO         | Selecting Vulkan device: NVIDIA GeForce RTX 3050 Ti Laptop GPU, Version: 1.3.242
+INFO         | Disabling sparse binding feature support
+INFO         | SharedLibrary::open for [opengl32.dll]: not found in map, open for the first time
+INFO         | SharedLibrary::open for [opengl32.dll] (win32): call LoadLibrary
+INFO         | SharedLibrary::open succeeded for [opengl32.dll]. File name: [C:\WINDOWS\SYSTEM32\opengl32.DLL]
+INFO         | SharedLibrary::open for [libshadertranslator.dll]: not found in map, open for the first time
+INFO         | SharedLibrary::open for [libshadertranslator.dll] (win32): call LoadLibrary
+INFO         | SharedLibrary::open succeeded for [libshadertranslator.dll]. File name: [C:\Users\dangh\AppData\Local\Android\sdk\emulator\lib64\libshadertranslator.dll]
+INFO         | Initializing VkEmulation features:
+INFO         |     glInteropSupported: true
+INFO         |     useDeferredCommands: true
+INFO         |     createResourceWithRequirements: true
+INFO         |     useVulkanComposition: false
+INFO         |     useVulkanNativeSwapchain: false
+INFO         |     enable guestRenderDoc: false
+INFO         |     ASTC LDR emulation mode: Gpu
+INFO         |     enable ETC2 emulation: true
+INFO         |     enable Ycbcr emulation: false
+INFO         |     guestVulkanOnly: false
+INFO         |     useDedicatedAllocations: false
+INFO         | Graphics Adapter Vendor Google (NVIDIA Corporation)
+INFO         | Graphics Adapter Android Emulator OpenGL ES Translator (NVIDIA GeForce RTX 3050 Ti Laptop GPU/PCIe/SSE2)
+INFO         | Graphics API Version OpenGL ES 3.0 (4.5.0 NVIDIA 537.70)
+INFO         | Graphics API Extensions GL_OES_EGL_sync GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_depth24 GL_OES_depth32 GL_OES_element_index_uint GL_OES_texture_float GL_OES_texture_float_linear GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth_texture GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_packed_depth_stencil GL_OES_vertex_half_float GL_OES_texture_npot GL_OES_rgb8_rgba8 GL_OVR_multiview2 GL_EXT_multiview_texture_multisample GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_texture_format_BGRA8888 GL_APPLE_texture_format_BGRA8888 GL_EXT_texture_buffer 
+INFO         | Graphics Device Extensions N/A
+INFO         | Sending adb public key [QAAAAKHM6v2f6BnGBhywDFdYw6DNdSDwcRiGreTPK+65q4Sd+oWhCMppEP1LmzTeQUeaMr/QNAktowM5dnC+r31s7NV8y7qgps3zivjyrJuiYqDIm1nc2Y0V4qYcJA3EXu9ljCispwVbAOqMG6fGDrDk1EEi9gkMjuPQBTQwwjBeGM856tSIDmgFXvP/VVe6yqlmyVvyTibvzUBw81FT73tYjGr6/8xxyQWy/zBZZeclH8YuoHKUzZdRJmWLS9V7KpfHYjk4BS/XKOax5LDUCNJNfErJp/4ze4HnELsOna78BXNTgGjyk6BW1jfKi8U04/pr/4Xo/rmqxrFuqYIbadn0NSSvaJqjuhypYMVXL/nFVpx4PNUBCsOflHSZtLaeNzRYRmesxgQ1CyUFWmMQ+WJ7y784f3PibCRR1tSl9jfguQ7RBUctTfRd+IXVZ/D4J8V5iwDGCYZrSdovXe4sJ9dCLmGlgzqTkM0d9DjYxc3XC1VF8QPhugIRBpL3YfTOpQGp0NOTA2ZMXcfS4LHRKaP9qEv0daEckMhS8r3oUr4PycAHY+1LtZXad7rRkttK9PhD0MvUC9T/4YPrO6RZ13YGZgBXOPlqOsLbmFkBbKcY2mUzMZE/jnJ0M9iWaSExPGz16rkdJNBQ6ZCnpu7dhGXJ/zpQ3D7uvqmoSXQm0cWW/g7XCTgcfwEAAQA= @unknown]
+WHPX on Windows 10.0.26200 detected.
+Windows Hypervisor Platform accelerator is operational
+INFO         | Monitoring duration of emulator setup.
+INFO         | Setting display: 0 configuration to: 1080x2400, dpi: 420x420 
+INFO         | setDisplayActiveConfig 0
+INFO         | Checking system compatibility:
+INFO         |   Checking: hasCompatibleHypervisor
+INFO         |      Ok: Hypervisor compatibility to run avd: `Pixel_7` are met
+INFO         |   Checking: hasSufficientSystem
+INFO         |      Ok: System requirements to run avd: `Pixel_7` are met
+INFO         |   Checking: hasSufficientHwGpu
+INFO         |      Ok: Hardware GPU requirements to run avd: `Pixel_7` are passed
+INFO         |   Checking: hasSufficientDiskSpace
+INFO         |      Ok: Disk space requirements to run avd: `Pixel_7` are met
+INFO         | Loading snapshot 'default_boot'...
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Unknown XR viewport mode requested: 0, ignored.
+
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Error -1 while loading VM state
+
+WARNING      | Failed to load snapshot 'default_boot'
+WARNING      | adb command 'C:\Users\dangh\AppData\Local\Android\sdk\platform-tools\adb.exe -s emulator-5554 shell am start-foreground-service -e meter on com.android.emulator.radio.config/.MeterService ' failed: 'adb.exe: device offline'

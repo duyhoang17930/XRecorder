@@ -1,0 +1,2579 @@
+{
+  "scope": "Loop source only; fixed-offset waveform and monotonic visual frame IDs",
+  "threshold": 0.98,
+  "audio": {
+    "local.mp4": {
+      "offsetSamples": 124450,
+      "offsetMs": 2592.7083333333335,
+      "decodedSamples": 14672896,
+      "referenceLoopSamples": 529728,
+      "windows": [
+        {
+          "sourceSeconds": 0.0,
+          "correlation": -0.026628293046590205
+        },
+        {
+          "sourceSeconds": 1.0,
+          "correlation": -0.21525173757594016
+        },
+        {
+          "sourceSeconds": 2.0,
+          "correlation": 0.999704725604788
+        },
+        {
+          "sourceSeconds": 3.0,
+          "correlation": 0.9999498763744402
+        },
+        {
+          "sourceSeconds": 4.0,
+          "correlation": 0.9999538832399117
+        },
+        {
+          "sourceSeconds": 5.0,
+          "correlation": 0.9998906009571612
+        },
+        {
+          "sourceSeconds": 6.0,
+          "correlation": 0.9998748985494845
+        },
+        {
+          "sourceSeconds": 7.0,
+          "correlation": 0.9999599568512597
+        },
+        {
+          "sourceSeconds": 8.0,
+          "correlation": 0.9999389020232827
+        },
+        {
+          "sourceSeconds": 9.0,
+          "correlation": 0.9999047731224137
+        },
+        {
+          "sourceSeconds": 10.0,
+          "correlation": 0.9998516586560888
+        },
+        {
+          "sourceSeconds": 11.0,
+          "correlation": 0.9998669422573515
+        },
+        {
+          "sourceSeconds": 12.0,
+          "correlation": 0.9999736712040949
+        },
+        {
+          "sourceSeconds": 13.0,
+          "correlation": 0.9999367801112181
+        },
+        {
+          "sourceSeconds": 14.0,
+          "correlation": 0.9999282151468544
+        },
+        {
+          "sourceSeconds": 15.0,
+          "correlation": 0.9999604162224578
+        },
+        {
+          "sourceSeconds": 16.0,
+          "correlation": 0.9998306747633147
+        },
+        {
+          "sourceSeconds": 17.0,
+          "correlation": 0.999923222294289
+        },
+        {
+          "sourceSeconds": 18.0,
+          "correlation": 0.9999384721235974
+        },
+        {
+          "sourceSeconds": 19.0,
+          "correlation": 0.9999404184145482
+        },
+        {
+          "sourceSeconds": 20.0,
+          "correlation": 0.9999030028124244
+        },
+        {
+          "sourceSeconds": 21.0,
+          "correlation": 0.9999180925708279
+        },
+        {
+          "sourceSeconds": 22.0,
+          "correlation": 0.9998329599338764
+        },
+        {
+          "sourceSeconds": 23.0,
+          "correlation": 0.9999711763434694
+        },
+        {
+          "sourceSeconds": 24.0,
+          "correlation": 0.99994478198754
+        },
+        {
+          "sourceSeconds": 25.0,
+          "correlation": 0.9999342186156666
+        },
+        {
+          "sourceSeconds": 26.0,
+          "correlation": 0.9999402242152503
+        },
+        {
+          "sourceSeconds": 27.0,
+          "correlation": 0.9995593577944796
+        },
+        {
+          "sourceSeconds": 28.0,
+          "correlation": 0.9998060055264488
+        },
+        {
+          "sourceSeconds": 29.0,
+          "correlation": 0.9999490412562155
+        },
+        {
+          "sourceSeconds": 30.0,
+          "correlation": 0.999941706348926
+        },
+        {
+          "sourceSeconds": 31.0,
+          "correlation": 0.9999060880543759
+        },
+        {
+          "sourceSeconds": 32.0,
+          "correlation": 0.999945691144907
+        },
+        {
+          "sourceSeconds": 33.0,
+          "correlation": 0.9997107213782798
+        },
+        {
+          "sourceSeconds": 34.0,
+          "correlation": 0.9999745249568367
+        },
+        {
+          "sourceSeconds": 35.0,
+          "correlation": 0.9999489210357971
+        },
+        {
+          "sourceSeconds": 36.0,
+          "correlation": 0.9999228313472667
+        },
+        {
+          "sourceSeconds": 37.0,
+          "correlation": 0.9999603300597752
+        },
+        {
+          "sourceSeconds": 38.0,
+          "correlation": 0.999390243718353
+        },
+        {
+          "sourceSeconds": 39.0,
+          "correlation": 0.9997866066071172
+        },
+        {
+          "sourceSeconds": 40.0,
+          "correlation": 0.9999584989573149
+        },
+        {
+          "sourceSeconds": 41.0,
+          "correlation": 0.9999379836138811
+        },
+        {
+          "sourceSeconds": 42.0,
+          "correlation": 0.9999018804514231
+        },
+        {
+          "sourceSeconds": 43.0,
+          "correlation": 0.9999483339280448
+        },
+        {
+          "sourceSeconds": 44.0,
+          "correlation": 0.9994807978065546
+        },
+        {
+          "sourceSeconds": 45.0,
+          "correlation": 0.9999764380309947
+        },
+        {
+          "sourceSeconds": 46.0,
+          "correlation": 0.9999552814502463
+        },
+        {
+          "sourceSeconds": 47.0,
+          "correlation": 0.9998236593983625
+        },
+        {
+          "sourceSeconds": 48.0,
+          "correlation": 0.999957514544633
+        },
+        {
+          "sourceSeconds": 49.0,
+          "correlation": 0.9994409144219543
+        },
+        {
+          "sourceSeconds": 50.0,
+          "correlation": 0.999907502547042
+        },
+        {
+          "sourceSeconds": 51.0,
+          "correlation": 0.9999428894253565
+        },
+        {
+          "sourceSeconds": 52.0,
+          "correlation": 0.9999318356173933
+        },
+        {
+          "sourceSeconds": 53.0,
+          "correlation": 0.9999042089914106
+        },
+        {
+          "sourceSeconds": 54.0,
+          "correlation": 0.99995297227361
+        },
+        {
+          "sourceSeconds": 55.0,
+          "correlation": 0.9994471955751871
+        },
+        {
+          "sourceSeconds": 56.0,
+          "correlation": 0.9999757623067634
+        },
+        {
+          "sourceSeconds": 57.0,
+          "correlation": 0.9999593794353786
+        },
+        {
+          "sourceSeconds": 58.0,
+          "correlation": 0.9993618740889669
+        },
+        {
+          "sourceSeconds": 59.0,
+          "correlation": 0.9999603868717214
+        },
+        {
+          "sourceSeconds": 60.0,
+          "correlation": 0.9994621834943525
+        },
+        {
+          "sourceSeconds": 61.0,
+          "correlation": 0.9999499700848712
+        },
+        {
+          "sourceSeconds": 62.0,
+          "correlation": 0.9999356285870494
+        },
+        {
+          "sourceSeconds": 63.0,
+          "correlation": 0.9999213465410971
+        },
+        {
+          "sourceSeconds": 64.0,
+          "correlation": 0.9999051481474757
+        },
+        {
+          "sourceSeconds": 65.0,
+          "correlation": 0.9999223125300067
+        },
+        {
+          "sourceSeconds": 66.0,
+          "correlation": 0.9993765723784843
+        },
+        {
+          "sourceSeconds": 67.0,
+          "correlation": 0.9999781722604617
+        },
+        {
+          "sourceSeconds": 68.0,
+          "correlation": 0.9999623465010896
+        },
+        {
+          "sourceSeconds": 69.0,
+          "correlation": 0.9994888610071557
+        },
+        {
+          "sourceSeconds": 70.0,
+          "correlation": 0.9999649110698334
+        },
+        {
+          "sourceSeconds": 71.0,
+          "correlation": 0.9993897708953448
+        },
+        {
+          "sourceSeconds": 72.0,
+          "correlation": 0.9998666852891148
+        },
+        {
+          "sourceSeconds": 73.0,
+          "correlation": 0.9999498683295839
+        },
+        {
+          "sourceSeconds": 74.0,
+          "correlation": 0.9999013227566149
+        },
+        {
+          "sourceSeconds": 75.0,
+          "correlation": 0.9999061819046887
+        },
+        {
+          "sourceSeconds": 76.0,
+          "correlation": 0.9999232862942302
+        },
+        {
+          "sourceSeconds": 77.0,
+          "correlation": 0.9992732051958264
+        },
+        {
+          "sourceSeconds": 78.0,
+          "correlation": 0.9999804715341096
+        },
+        {
+          "sourceSeconds": 79.0,
+          "correlation": 0.024314842886566976
+        },
+        {
+          "sourceSeconds": 80.0,
+          "correlation": 0.008859003077212926
+        },
+        {
+          "sourceSeconds": 81.0,
+          "correlation": -0.008498040954079413
+        },
+        {
+          "sourceSeconds": 82.0,
+          "correlation": 0.08359605317812253
+        },
+        {
+          "sourceSeconds": 83.0,
+          "correlation": -0.001638179168512485
+        },
+        {
+          "sourceSeconds": 84.0,
+          "correlation": 0.04406608283390147
+        },
+        {
+          "sourceSeconds": 85.0,
+          "correlation": 0.03287480885791415
+        },
+        {
+          "sourceSeconds": 86.0,
+          "correlation": -0.006773370207791953
+        },
+        {
+          "sourceSeconds": 87.0,
+          "correlation": 0.00555487070457461
+        },
+        {
+          "sourceSeconds": 88.0,
+          "correlation": -0.047553921352512823
+        },
+        {
+          "sourceSeconds": 89.0,
+          "correlation": 0.07210460681566759
+        },
+        {
+          "sourceSeconds": 90.0,
+          "correlation": -0.02282973027789025
+        },
+        {
+          "sourceSeconds": 91.0,
+          "correlation": 0.008891881021739663
+        },
+        {
+          "sourceSeconds": 92.0,
+          "correlation": -0.01073202102587426
+        },
+        {
+          "sourceSeconds": 93.0,
+          "correlation": 0.05669355231644349
+        },
+        {
+          "sourceSeconds": 94.0,
+          "correlation": 0.0017720717138265713
+        },
+        {
+          "sourceSeconds": 95.0,
+          "correlation": 0.01807368709691319
+        },
+        {
+          "sourceSeconds": 96.0,
+          "correlation": -0.01817956794372592
+        },
+        {
+          "sourceSeconds": 97.0,
+          "correlation": -0.0027696833220952418
+        },
+        {
+          "sourceSeconds": 98.0,
+          "correlation": 0.005235510063351842
+        },
+        {
+          "sourceSeconds": 99.0,
+          "correlation": -0.03895757227768638
+        },
+        {
+          "sourceSeconds": 100.0,
+          "correlation": 0.069752739877106
+        },
+        {
+          "sourceSeconds": 101.0,
+          "correlation": 0.021673159404206513
+        },
+        {
+          "sourceSeconds": 102.0,
+          "correlation": -0.0640349706346199
+        },
+        {
+          "sourceSeconds": 103.0,
+          "correlation": -0.013167057378680808
+        },
+        {
+          "sourceSeconds": 104.0,
+          "correlation": 0.048156859218388005
+        },
+        {
+          "sourceSeconds": 105.0,
+          "correlation": -0.0015023583913220486
+        },
+        {
+          "sourceSeconds": 106.0,
+          "correlation": 0.011904991775777257
+        },
+        {
+          "sourceSeconds": 107.0,
+          "correlation": -0.025571863226530236
+        },
+        {
+          "sourceSeconds": 108.0,
+          "correlation": -0.006281154632460166
+        },
+        {
+          "sourceSeconds": 109.0,
+          "correlation": 0.004666335704910764
+        },
+        {
+          "sourceSeconds": 110.0,
+          "correlation": -0.03407145035620983
+        },
+        {
+          "sourceSeconds": 111.0,
+          "correlation": 0.06867005727262483
+        },
+        {
+          "sourceSeconds": 112.0,
+          "correlation": 0.014547382709793074
+        },
+        {
+          "sourceSeconds": 113.0,
+          "correlation": -0.08100661127926444
+        },
+        {
+          "sourceSeconds": 114.0,
+          "correlation": 0.008223376819127055
+        },
+        {
+          "sourceSeconds": 115.0,
+          "correlation": 0.05342031322008718
+        },
+        {
+          "sourceSeconds": 116.0,
+          "correlation": 0.0019787165701529415
+        },
+        {
+          "sourceSeconds": 117.0,
+          "correlation": 0.010716784259281105
+        },
+        {
+          "sourceSeconds": 118.0,
+          "correlation": -0.02851537886977493
+        },
+        {
+          "sourceSeconds": 119.0,
+          "correlation": -0.0024970396202849483
+        },
+        {
+          "sourceSeconds": 120.0,
+          "correlation": 0.0069739947984655696
+        },
+        {
+          "sourceSeconds": 121.0,
+          "correlation": -0.028119369227748464
+        },
+        {
+          "sourceSeconds": 122.0,
+          "correlation": 0.07386328904998975
+        },
+        {
+          "sourceSeconds": 123.0,
+          "correlation": 0.013996515268635072
+        },
+        {
+          "sourceSeconds": 124.0,
+          "correlation": -0.11662733918732282
+        },
+        {
+          "sourceSeconds": 125.0,
+          "correlation": 0.027475354691445388
+        },
+        {
+          "sourceSeconds": 126.0,
+          "correlation": 0.0308061369932889
+        },
+        {
+          "sourceSeconds": 127.0,
+          "correlation": -0.0009677135946575866
+        },
+        {
+          "sourceSeconds": 128.0,
+          "correlation": 0.026451203492424732
+        },
+        {
+          "sourceSeconds": 129.0,
+          "correlation": -0.12065694649252552
+        },
+        {
+          "sourceSeconds": 130.0,
+          "correlation": -0.00604979615438062
+        },
+        {
+          "sourceSeconds": 131.0,
+          "correlation": 0.011144591497852107
+        },
+        {
+          "sourceSeconds": 132.0,
+          "correlation": -0.02271920827870909
+        },
+        {
+          "sourceSeconds": 133.0,
+          "correlation": 0.07439308410632153
+        },
+        {
+          "sourceSeconds": 134.0,
+          "correlation": 0.0029075358583285802
+        },
+        {
+          "sourceSeconds": 135.0,
+          "correlation": -0.12490428394103097
+        },
+        {
+          "sourceSeconds": 136.0,
+          "correlation": -2.999608147108583e-05
+        },
+        {
+          "sourceSeconds": 137.0,
+          "correlation": 0.01783458621881298
+        },
+        {
+          "sourceSeconds": 138.0,
+          "correlation": 0.0006413675370419454
+        },
+        {
+          "sourceSeconds": 139.0,
+          "correlation": 0.022227909251088425
+        },
+        {
+          "sourceSeconds": 140.0,
+          "correlation": -0.18305977817998156
+        },
+        {
+          "sourceSeconds": 141.0,
+          "correlation": 0.0028146812959976243
+        },
+        {
+          "sourceSeconds": 142.0,
+          "correlation": 0.010894572202677878
+        },
+        {
+          "sourceSeconds": 143.0,
+          "correlation": -0.021907981908942487
+        },
+        {
+          "sourceSeconds": 144.0,
+          "correlation": 0.0770171810985092
+        },
+        {
+          "sourceSeconds": 145.0,
+          "correlation": 0.005338696704586027
+        },
+        {
+          "sourceSeconds": 146.0,
+          "correlation": -0.14176974207330614
+        },
+        {
+          "sourceSeconds": 147.0,
+          "correlation": 0.0054356104416146
+        },
+        {
+          "sourceSeconds": 148.0,
+          "correlation": 0.02046559075845648
+        },
+        {
+          "sourceSeconds": 149.0,
+          "correlation": 0.005171908410618898
+        },
+        {
+          "sourceSeconds": 150.0,
+          "correlation": 0.012441142443034476
+        },
+        {
+          "sourceSeconds": 151.0,
+          "correlation": -0.1260354998311175
+        },
+        {
+          "sourceSeconds": 152.0,
+          "correlation": 0.0014683259848697295
+        },
+        {
+          "sourceSeconds": 153.0,
+          "correlation": 0.01777066739546236
+        },
+        {
+          "sourceSeconds": 154.0,
+          "correlation": -0.02119270762951597
+        },
+        {
+          "sourceSeconds": 155.0,
+          "correlation": 0.08076310330420981
+        },
+        {
+          "sourceSeconds": 156.0,
+          "correlation": 0.005188685679251812
+        },
+        {
+          "sourceSeconds": 157.0,
+          "correlation": -0.17013892085002538
+        },
+        {
+          "sourceSeconds": 158.0,
+          "correlation": 0.0012318180193106193
+        },
+        {
+          "sourceSeconds": 159.0,
+          "correlation": 0.012619571838469689
+        },
+        {
+          "sourceSeconds": 160.0,
+          "correlation": 0.006545132509545228
+        },
+        {
+          "sourceSeconds": 161.0,
+          "correlation": 0.013068282052186672
+        },
+        {
+          "sourceSeconds": 162.0,
+          "correlation": -0.06771192275671616
+        },
+        {
+          "sourceSeconds": 163.0,
+          "correlation": 0.006004713054830963
+        },
+        {
+          "sourceSeconds": 164.0,
+          "correlation": 0.023110634421680487
+        },
+        {
+          "sourceSeconds": 165.0,
+          "correlation": -0.021015477146580055
+        },
+        {
+          "sourceSeconds": 166.0,
+          "correlation": 0.08476397129311604
+        },
+        {
+          "sourceSeconds": 167.0,
+          "correlation": 0.007255309930955387
+        },
+        {
+          "sourceSeconds": 168.0,
+          "correlation": -0.1913292082874894
+        },
+        {
+          "sourceSeconds": 169.0,
+          "correlation": 0.02892040900302086
+        },
+        {
+          "sourceSeconds": 170.0,
+          "correlation": 0.0016665922293631061
+        },
+        {
+          "sourceSeconds": 171.0,
+          "correlation": 0.0070877547147290805
+        },
+        {
+          "sourceSeconds": 172.0,
+          "correlation": 0.013091776629331238
+        },
+        {
+          "sourceSeconds": 173.0,
+          "correlation": -0.0468316572193048
+        },
+        {
+          "sourceSeconds": 174.0,
+          "correlation": 0.00308870319540733
+        },
+        {
+          "sourceSeconds": 175.0,
+          "correlation": 0.009970880164190121
+        },
+        {
+          "sourceSeconds": 176.0,
+          "correlation": -0.01909775467535611
+        },
+        {
+          "sourceSeconds": 177.0,
+          "correlation": 0.08578254312066665
+        },
+        {
+          "sourceSeconds": 178.0,
+          "correlation": -0.0012469878461460484
+        },
+        {
+          "sourceSeconds": 179.0,
+          "correlation": -0.20589881835524346
+        },
+        {
+          "sourceSeconds": 180.0,
+          "correlation": 0.004908409657158339
+        },
+        {
+          "sourceSeconds": 181.0,
+          "correlation": 0.04595030593467984
+        },
+        {
+          "sourceSeconds": 182.0,
+          "correlation": 0.007986949599015093
+        },
+        {
+          "sourceSeconds": 183.0,
+          "correlation": 0.000934645493475879
+        },
+        {
+          "sourceSeconds": 184.0,
+          "correlation": -0.08079100486208282
+        },
+        {
+          "sourceSeconds": 185.0,
+          "correlation": 0.0015768836281545829
+        },
+        {
+          "sourceSeconds": 186.0,
+          "correlation": 0.015080682975038565
+        },
+        {
+          "sourceSeconds": 187.0,
+          "correlation": -0.02130839612544158
+        },
+        {
+          "sourceSeconds": 188.0,
+          "correlation": 0.10225485604814116
+        },
+        {
+          "sourceSeconds": 189.0,
+          "correlation": 0.0004973835003259272
+        },
+        {
+          "sourceSeconds": 190.0,
+          "correlation": -0.2166823804602423
+        },
+        {
+          "sourceSeconds": 191.0,
+          "correlation": 0.00981385623487298
+        },
+        {
+          "sourceSeconds": 192.0,
+          "correlation": 0.029093388487563477
+        },
+        {
+          "sourceSeconds": 193.0,
+          "correlation": 0.009923736672143985
+        },
+        {
+          "sourceSeconds": 194.0,
+          "correlation": 0.04714324154278982
+        },
+        {
+          "sourceSeconds": 195.0,
+          "correlation": -0.06311734582522176
+        },
+        {
+          "sourceSeconds": 196.0,
+          "correlation": -0.011229113749896751
+        },
+        {
+          "sourceSeconds": 197.0,
+          "correlation": -0.024978740431254094
+        },
+        {
+          "sourceSeconds": 198.0,
+          "correlation": 0.0900083749847242
+        },
+        {
+          "sourceSeconds": 199.0,
+          "correlation": -0.10812617633210138
+        },
+        {
+          "sourceSeconds": 200.0,
+          "correlation": 0.015139149647898253
+        },
+        {
+          "sourceSeconds": 201.0,
+          "correlation": 0.29494367205838434
+        },
+        {
+          "sourceSeconds": 202.0,
+          "correlation": 0.03909223729508139
+        },
+        {
+          "sourceSeconds": 203.0,
+          "correlation": 0.17388480416147423
+        },
+        {
+          "sourceSeconds": 204.0,
+          "correlation": 0.00020586432958112196
+        },
+        {
+          "sourceSeconds": 205.0,
+          "correlation": 0.044529328620963156
+        },
+        {
+          "sourceSeconds": 206.0,
+          "correlation": -0.03286914724690422
+        },
+        {
+          "sourceSeconds": 207.0,
+          "correlation": -0.015972450973494975
+        },
+        {
+          "sourceSeconds": 208.0,
+          "correlation": -0.028090722300283803
+        },
+        {
+          "sourceSeconds": 209.0,
+          "correlation": 0.09198057351120938
+        },
+        {
+          "sourceSeconds": 210.0,
+          "correlation": -0.1255919625053712
+        },
+        {
+          "sourceSeconds": 211.0,
+          "correlation": 0.0361808693215393
+        },
+        {
+          "sourceSeconds": 212.0,
+          "correlation": 0.2689675689684855
+        },
+        {
+          "sourceSeconds": 213.0,
+          "correlation": 0.020970832466223444
+        },
+        {
+          "sourceSeconds": 214.0,
+          "correlation": 0.13620854297034687
+        },
+        {
+          "sourceSeconds": 215.0,
+          "correlation": -0.0017464183279805175
+        },
+        {
+          "sourceSeconds": 216.0,
+          "correlation": 0.009598291739379948
+        },
+        {
+          "sourceSeconds": 217.0,
+          "correlation": 0.020355881962201144
+        },
+        {
+          "sourceSeconds": 218.0,
+          "correlation": -0.0006086951478446767
+        },
+        {
+          "sourceSeconds": 219.0,
+          "correlation": -0.04166067893533904
+        },
+        {
+          "sourceSeconds": 220.0,
+          "correlation": 0.10313784461925567
+        },
+        {
+          "sourceSeconds": 221.0,
+          "correlation": -0.05421285292446666
+        },
+        {
+          "sourceSeconds": 222.0,
+          "correlation": 0.031914516199928716
+        },
+        {
+          "sourceSeconds": 223.0,
+          "correlation": 0.25901255563497266
+        },
+        {
+          "sourceSeconds": 224.0,
+          "correlation": 0.01993962650138546
+        },
+        {
+          "sourceSeconds": 225.0,
+          "correlation": 0.013849581761127876
+        },
+        {
+          "sourceSeconds": 226.0,
+          "correlation": -0.0006083713987624936
+        },
+        {
+          "sourceSeconds": 227.0,
+          "correlation": -0.012668227854221519
+        },
+        {
+          "sourceSeconds": 228.0,
+          "correlation": 0.014228175572061526
+        },
+        {
+          "sourceSeconds": 229.0,
+          "correlation": -0.05435612349977817
+        },
+        {
+          "sourceSeconds": 230.0,
+          "correlation": -0.036877175163752274
+        },
+        {
+          "sourceSeconds": 231.0,
+          "correlation": 0.12056615815018379
+        },
+        {
+          "sourceSeconds": 232.0,
+          "correlation": -0.10812600040918205
+        },
+        {
+          "sourceSeconds": 233.0,
+          "correlation": 0.02809945334050437
+        },
+        {
+          "sourceSeconds": 234.0,
+          "correlation": 0.2410127273920501
+        },
+        {
+          "sourceSeconds": 235.0,
+          "correlation": 0.019347443124651056
+        },
+        {
+          "sourceSeconds": 236.0,
+          "correlation": -0.02211177660165628
+        },
+        {
+          "sourceSeconds": 237.0,
+          "correlation": -0.002217965829075996
+        },
+        {
+          "sourceSeconds": 238.0,
+          "correlation": -0.004211707425841482
+        },
+        {
+          "sourceSeconds": 239.0,
+          "correlation": -0.09465697582036696
+        },
+        {
+          "sourceSeconds": 240.0,
+          "correlation": -0.03249316181563674
+        },
+        {
+          "sourceSeconds": 241.0,
+          "correlation": -0.02322243644368925
+        },
+        {
+          "sourceSeconds": 242.0,
+          "correlation": 0.1111641730712017
+        },
+        {
+          "sourceSeconds": 243.0,
+          "correlation": -0.004630896650127122
+        },
+        {
+          "sourceSeconds": 244.0,
+          "correlation": 0.024021306567227032
+        },
+        {
+          "sourceSeconds": 245.0,
+          "correlation": 0.2486681812963353
+        },
+        {
+          "sourceSeconds": 246.0,
+          "correlation": 0.018816661024609983
+        },
+        {
+          "sourceSeconds": 247.0,
+          "correlation": -0.057201672967354164
+        },
+        {
+          "sourceSeconds": 248.0,
+          "correlation": 0.0035560852936061225
+        },
+        {
+          "sourceSeconds": 249.0,
+          "correlation": -0.0061714052976808275
+        },
+        {
+          "sourceSeconds": 250.0,
+          "correlation": -0.02999467590975069
+        },
+        {
+          "sourceSeconds": 251.0,
+          "correlation": -0.03344010116514294
+        },
+        {
+          "sourceSeconds": 252.0,
+          "correlation": -0.020000439553283303
+        },
+        {
+          "sourceSeconds": 253.0,
+          "correlation": 0.12040510825200904
+        },
+        {
+          "sourceSeconds": 254.0,
+          "correlation": -0.004938745172948352
+        },
+        {
+          "sourceSeconds": 255.0,
+          "correlation": 0.0026403813392608
+        },
+        {
+          "sourceSeconds": 256.0,
+          "correlation": 0.2378439420661166
+        },
+        {
+          "sourceSeconds": 257.0,
+          "correlation": 0.019266093389069743
+        },
+        {
+          "sourceSeconds": 258.0,
+          "correlation": -0.11194989263250003
+        },
+        {
+          "sourceSeconds": 259.0,
+          "correlation": -0.0017993120202824252
+        },
+        {
+          "sourceSeconds": 260.0,
+          "correlation": -0.003770968657163091
+        },
+        {
+          "sourceSeconds": 261.0,
+          "correlation": -0.021721654100244386
+        },
+        {
+          "sourceSeconds": 262.0,
+          "correlation": -0.03161154935781802
+        },
+        {
+          "sourceSeconds": 263.0,
+          "correlation": -0.013805390253472234
+        },
+        {
+          "sourceSeconds": 264.0,
+          "correlation": 0.05361576565075207
+        },
+        {
+          "sourceSeconds": 265.0,
+          "correlation": -0.004887652237696618
+        },
+        {
+          "sourceSeconds": 266.0,
+          "correlation": -0.010830392546976873
+        },
+        {
+          "sourceSeconds": 267.0,
+          "correlation": 0.23102792841263642
+        },
+        {
+          "sourceSeconds": 268.0,
+          "correlation": 0.019940352345365512
+        },
+        {
+          "sourceSeconds": 269.0,
+          "correlation": -0.10133619582827996
+        },
+        {
+          "sourceSeconds": 270.0,
+          "correlation": 0.0016923145764176015
+        },
+        {
+          "sourceSeconds": 271.0,
+          "correlation": -0.0007577222975952302
+        },
+        {
+          "sourceSeconds": 272.0,
+          "correlation": -0.015331283855101269
+        },
+        {
+          "sourceSeconds": 273.0,
+          "correlation": -0.029616096388409306
+        },
+        {
+          "sourceSeconds": 274.0,
+          "correlation": -0.008532376649622581
+        },
+        {
+          "sourceSeconds": 275.0,
+          "correlation": -0.014885171142323727
+        },
+        {
+          "sourceSeconds": 276.0,
+          "correlation": -0.007105597589672544
+        },
+        {
+          "sourceSeconds": 277.0,
+          "correlation": 0.011628292392205253
+        },
+        {
+          "sourceSeconds": 278.0,
+          "correlation": 0.1162287967935651
+        },
+        {
+          "sourceSeconds": 279.0,
+          "correlation": 0.02150889032928817
+        },
+        {
+          "sourceSeconds": 280.0,
+          "correlation": -0.12519894136818532
+        },
+        {
+          "sourceSeconds": 281.0,
+          "correlation": -0.00200741182090706
+        },
+        {
+          "sourceSeconds": 282.0,
+          "correlation": -0.0017581067802788953
+        },
+        {
+          "sourceSeconds": 283.0,
+          "correlation": -0.01754050899061905
+        },
+        {
+          "sourceSeconds": 284.0,
+          "correlation": -0.03129872836102671
+        },
+        {
+          "sourceSeconds": 285.0,
+          "correlation": -0.019012939605418798
+        },
+        {
+          "sourceSeconds": 286.0,
+          "correlation": -0.019558738313076862
+        },
+        {
+          "sourceSeconds": 287.0,
+          "correlation": -0.0062908753142548336
+        },
+        {
+          "sourceSeconds": 288.0,
+          "correlation": 0.00921169479544903
+        },
+        {
+          "sourceSeconds": 289.0,
+          "correlation": 0.10179181623853703
+        },
+        {
+          "sourceSeconds": 290.0,
+          "correlation": 0.025350522612311657
+        },
+        {
+          "sourceSeconds": 291.0,
+          "correlation": -0.10689043363263796
+        },
+        {
+          "sourceSeconds": 292.0,
+          "correlation": -0.0031944137301045963
+        },
+        {
+          "sourceSeconds": 293.0,
+          "correlation": 0.00018303217524902449
+        },
+        {
+          "sourceSeconds": 294.0,
+          "correlation": -0.021301203274978597
+        },
+        {
+          "sourceSeconds": 295.0,
+          "correlation": -0.033281673513450905
+        },
+        {
+          "sourceSeconds": 296.0,
+          "correlation": -0.013761594408522414
+        },
+        {
+          "sourceSeconds": 297.0,
+          "correlation": -0.02827718460067778
+        },
+        {
+          "sourceSeconds": 298.0,
+          "correlation": -0.005722705972754996
+        },
+        {
+          "sourceSeconds": 299.0,
+          "correlation": 0.011086830238546161
+        },
+        {
+          "sourceSeconds": 300.0,
+          "correlation": 0.12618021011572292
+        },
+        {
+          "sourceSeconds": 301.0,
+          "correlation": 0.020717738486827446
+        },
+        {
+          "sourceSeconds": 302.0,
+          "correlation": -0.08696304771562378
+        }
+      ],
+      "minimumCorrelation": -0.2166823804602423,
+      "status": "FAIL",
+      "driftDiagnosticOnly": [
+        {
+          "sourceSeconds": 2,
+          "bestCorrelation": 0.9997098938628838,
+          "deltaFromFixedMs": 0.0
+        },
+        {
+          "sourceSeconds": 75,
+          "bestCorrelation": 0.796531232194104,
+          "deltaFromFixedMs": 4.083333333333333
+        },
+        {
+          "sourceSeconds": 78,
+          "bestCorrelation": 0.7400185260610859,
+          "deltaFromFixedMs": 3.2916666666666665
+        },
+        {
+          "sourceSeconds": 79,
+          "bestCorrelation": 0.9835979595208701,
+          "deltaFromFixedMs": -149.33333333333334
+        },
+        {
+          "sourceSeconds": 80,
+          "bestCorrelation": 0.999508350664362,
+          "deltaFromFixedMs": -137.54166666666666
+        },
+        {
+          "sourceSeconds": 120,
+          "bestCorrelation": 0.9999381417723652,
+          "deltaFromFixedMs": -137.54166666666666
+        },
+        {
+          "sourceSeconds": 180,
+          "bestCorrelation": 0.7250752534609907,
+          "deltaFromFixedMs": -141.10416666666666
+        },
+        {
+          "sourceSeconds": 240,
+          "bestCorrelation": 0.9999399373074659,
+          "deltaFromFixedMs": -116.20833333333333
+        },
+        {
+          "sourceSeconds": 299,
+          "bestCorrelation": 0.999963590246744,
+          "deltaFromFixedMs": -116.20833333333333
+        }
+      ]
+    },
+    "received.mp4": {
+      "offsetSamples": 101922,
+      "offsetMs": 2123.375,
+      "decodedSamples": 14650368,
+      "referenceLoopSamples": 529728,
+      "windows": [
+        {
+          "sourceSeconds": 0.0,
+          "correlation": -0.026628293046590205
+        },
+        {
+          "sourceSeconds": 1.0,
+          "correlation": -0.21525173757594016
+        },
+        {
+          "sourceSeconds": 2.0,
+          "correlation": 0.999704725604788
+        },
+        {
+          "sourceSeconds": 3.0,
+          "correlation": 0.9999498763744402
+        },
+        {
+          "sourceSeconds": 4.0,
+          "correlation": 0.9999538832399117
+        },
+        {
+          "sourceSeconds": 5.0,
+          "correlation": 0.9998906009571612
+        },
+        {
+          "sourceSeconds": 6.0,
+          "correlation": 0.9998748985494845
+        },
+        {
+          "sourceSeconds": 7.0,
+          "correlation": 0.9999599568512597
+        },
+        {
+          "sourceSeconds": 8.0,
+          "correlation": 0.9999389020232827
+        },
+        {
+          "sourceSeconds": 9.0,
+          "correlation": 0.9999047731224137
+        },
+        {
+          "sourceSeconds": 10.0,
+          "correlation": 0.9998516586560888
+        },
+        {
+          "sourceSeconds": 11.0,
+          "correlation": 0.9998669422573515
+        },
+        {
+          "sourceSeconds": 12.0,
+          "correlation": 0.9999736712040949
+        },
+        {
+          "sourceSeconds": 13.0,
+          "correlation": 0.9999367801112181
+        },
+        {
+          "sourceSeconds": 14.0,
+          "correlation": 0.9999282151468544
+        },
+        {
+          "sourceSeconds": 15.0,
+          "correlation": 0.9999604162224578
+        },
+        {
+          "sourceSeconds": 16.0,
+          "correlation": 0.9998306747633147
+        },
+        {
+          "sourceSeconds": 17.0,
+          "correlation": 0.999923222294289
+        },
+        {
+          "sourceSeconds": 18.0,
+          "correlation": 0.9999384721235974
+        },
+        {
+          "sourceSeconds": 19.0,
+          "correlation": 0.9999404184145482
+        },
+        {
+          "sourceSeconds": 20.0,
+          "correlation": 0.9999030028124244
+        },
+        {
+          "sourceSeconds": 21.0,
+          "correlation": 0.9999180925708279
+        },
+        {
+          "sourceSeconds": 22.0,
+          "correlation": 0.9998329599338764
+        },
+        {
+          "sourceSeconds": 23.0,
+          "correlation": 0.9999711763434694
+        },
+        {
+          "sourceSeconds": 24.0,
+          "correlation": 0.99994478198754
+        },
+        {
+          "sourceSeconds": 25.0,
+          "correlation": 0.9999342186156666
+        },
+        {
+          "sourceSeconds": 26.0,
+          "correlation": 0.9999402242152503
+        },
+        {
+          "sourceSeconds": 27.0,
+          "correlation": 0.9995593577944796
+        },
+        {
+          "sourceSeconds": 28.0,
+          "correlation": 0.9998060055264488
+        },
+        {
+          "sourceSeconds": 29.0,
+          "correlation": 0.9999490412562155
+        },
+        {
+          "sourceSeconds": 30.0,
+          "correlation": 0.999941706348926
+        },
+        {
+          "sourceSeconds": 31.0,
+          "correlation": 0.9999060880543759
+        },
+        {
+          "sourceSeconds": 32.0,
+          "correlation": 0.999945691144907
+        },
+        {
+          "sourceSeconds": 33.0,
+          "correlation": 0.9997107213782798
+        },
+        {
+          "sourceSeconds": 34.0,
+          "correlation": 0.9999745249568367
+        },
+        {
+          "sourceSeconds": 35.0,
+          "correlation": 0.9999489210357971
+        },
+        {
+          "sourceSeconds": 36.0,
+          "correlation": 0.9999228313472667
+        },
+        {
+          "sourceSeconds": 37.0,
+          "correlation": 0.9999603300597752
+        },
+        {
+          "sourceSeconds": 38.0,
+          "correlation": 0.999390243718353
+        },
+        {
+          "sourceSeconds": 39.0,
+          "correlation": 0.9997866066071172
+        },
+        {
+          "sourceSeconds": 40.0,
+          "correlation": 0.9999584989573149
+        },
+        {
+          "sourceSeconds": 41.0,
+          "correlation": 0.9999379836138811
+        },
+        {
+          "sourceSeconds": 42.0,
+          "correlation": 0.9999018804514231
+        },
+        {
+          "sourceSeconds": 43.0,
+          "correlation": 0.9999483339280448
+        },
+        {
+          "sourceSeconds": 44.0,
+          "correlation": 0.9994807978065546
+        },
+        {
+          "sourceSeconds": 45.0,
+          "correlation": 0.9999764380309947
+        },
+        {
+          "sourceSeconds": 46.0,
+          "correlation": 0.9999552814502463
+        },
+        {
+          "sourceSeconds": 47.0,
+          "correlation": 0.9998236593983625
+        },
+        {
+          "sourceSeconds": 48.0,
+          "correlation": 0.999957514544633
+        },
+        {
+          "sourceSeconds": 49.0,
+          "correlation": 0.9994409144219543
+        },
+        {
+          "sourceSeconds": 50.0,
+          "correlation": 0.999907502547042
+        },
+        {
+          "sourceSeconds": 51.0,
+          "correlation": 0.9999428894253565
+        },
+        {
+          "sourceSeconds": 52.0,
+          "correlation": 0.9999318356173933
+        },
+        {
+          "sourceSeconds": 53.0,
+          "correlation": 0.9999042089914106
+        },
+        {
+          "sourceSeconds": 54.0,
+          "correlation": 0.99995297227361
+        },
+        {
+          "sourceSeconds": 55.0,
+          "correlation": 0.9994471955751871
+        },
+        {
+          "sourceSeconds": 56.0,
+          "correlation": 0.9999757623067634
+        },
+        {
+          "sourceSeconds": 57.0,
+          "correlation": 0.9999593794353786
+        },
+        {
+          "sourceSeconds": 58.0,
+          "correlation": 0.9993618740889669
+        },
+        {
+          "sourceSeconds": 59.0,
+          "correlation": 0.9999603868717214
+        },
+        {
+          "sourceSeconds": 60.0,
+          "correlation": 0.9994621834943525
+        },
+        {
+          "sourceSeconds": 61.0,
+          "correlation": 0.9999499700848712
+        },
+        {
+          "sourceSeconds": 62.0,
+          "correlation": 0.9999356285870494
+        },
+        {
+          "sourceSeconds": 63.0,
+          "correlation": 0.9999213465410971
+        },
+        {
+          "sourceSeconds": 64.0,
+          "correlation": 0.9999051481474757
+        },
+        {
+          "sourceSeconds": 65.0,
+          "correlation": 0.9999223125300067
+        },
+        {
+          "sourceSeconds": 66.0,
+          "correlation": 0.9993765723784843
+        },
+        {
+          "sourceSeconds": 67.0,
+          "correlation": 0.9999781722604617
+        },
+        {
+          "sourceSeconds": 68.0,
+          "correlation": 0.9999623465010896
+        },
+        {
+          "sourceSeconds": 69.0,
+          "correlation": 0.9994888610071557
+        },
+        {
+          "sourceSeconds": 70.0,
+          "correlation": 0.9999649110698334
+        },
+        {
+          "sourceSeconds": 71.0,
+          "correlation": 0.9993897708953448
+        },
+        {
+          "sourceSeconds": 72.0,
+          "correlation": 0.9998666852891148
+        },
+        {
+          "sourceSeconds": 73.0,
+          "correlation": 0.9999498683295839
+        },
+        {
+          "sourceSeconds": 74.0,
+          "correlation": 0.9999013227566149
+        },
+        {
+          "sourceSeconds": 75.0,
+          "correlation": 0.9999061819046887
+        },
+        {
+          "sourceSeconds": 76.0,
+          "correlation": 0.9999232862942302
+        },
+        {
+          "sourceSeconds": 77.0,
+          "correlation": 0.9992732051958264
+        },
+        {
+          "sourceSeconds": 78.0,
+          "correlation": 0.9999804715341096
+        },
+        {
+          "sourceSeconds": 79.0,
+          "correlation": 0.024314842886566976
+        },
+        {
+          "sourceSeconds": 80.0,
+          "correlation": 0.008859003077212926
+        },
+        {
+          "sourceSeconds": 81.0,
+          "correlation": -0.008498040954079413
+        },
+        {
+          "sourceSeconds": 82.0,
+          "correlation": 0.08359605317812253
+        },
+        {
+          "sourceSeconds": 83.0,
+          "correlation": -0.001638179168512485
+        },
+        {
+          "sourceSeconds": 84.0,
+          "correlation": 0.04406608283390147
+        },
+        {
+          "sourceSeconds": 85.0,
+          "correlation": 0.03287480885791415
+        },
+        {
+          "sourceSeconds": 86.0,
+          "correlation": -0.006773370207791953
+        },
+        {
+          "sourceSeconds": 87.0,
+          "correlation": 0.00555487070457461
+        },
+        {
+          "sourceSeconds": 88.0,
+          "correlation": -0.047553921352512823
+        },
+        {
+          "sourceSeconds": 89.0,
+          "correlation": 0.07210460681566759
+        },
+        {
+          "sourceSeconds": 90.0,
+          "correlation": -0.02282973027789025
+        },
+        {
+          "sourceSeconds": 91.0,
+          "correlation": 0.008891881021739663
+        },
+        {
+          "sourceSeconds": 92.0,
+          "correlation": -0.01073202102587426
+        },
+        {
+          "sourceSeconds": 93.0,
+          "correlation": 0.05669355231644349
+        },
+        {
+          "sourceSeconds": 94.0,
+          "correlation": 0.0017720717138265713
+        },
+        {
+          "sourceSeconds": 95.0,
+          "correlation": 0.01807368709691319
+        },
+        {
+          "sourceSeconds": 96.0,
+          "correlation": -0.01817956794372592
+        },
+        {
+          "sourceSeconds": 97.0,
+          "correlation": -0.0027696833220952418
+        },
+        {
+          "sourceSeconds": 98.0,
+          "correlation": 0.005235510063351842
+        },
+        {
+          "sourceSeconds": 99.0,
+          "correlation": -0.03895757227768638
+        },
+        {
+          "sourceSeconds": 100.0,
+          "correlation": 0.069752739877106
+        },
+        {
+          "sourceSeconds": 101.0,
+          "correlation": 0.021673159404206513
+        },
+        {
+          "sourceSeconds": 102.0,
+          "correlation": -0.0640349706346199
+        },
+        {
+          "sourceSeconds": 103.0,
+          "correlation": -0.013167057378680808
+        },
+        {
+          "sourceSeconds": 104.0,
+          "correlation": 0.048156859218388005
+        },
+        {
+          "sourceSeconds": 105.0,
+          "correlation": -0.0015023583913220486
+        },
+        {
+          "sourceSeconds": 106.0,
+          "correlation": 0.011904991775777257
+        },
+        {
+          "sourceSeconds": 107.0,
+          "correlation": -0.025571863226530236
+        },
+        {
+          "sourceSeconds": 108.0,
+          "correlation": -0.006281154632460166
+        },
+        {
+          "sourceSeconds": 109.0,
+          "correlation": 0.004666335704910764
+        },
+        {
+          "sourceSeconds": 110.0,
+          "correlation": -0.03407145035620983
+        },
+        {
+          "sourceSeconds": 111.0,
+          "correlation": 0.06867005727262483
+        },
+        {
+          "sourceSeconds": 112.0,
+          "correlation": 0.014547382709793074
+        },
+        {
+          "sourceSeconds": 113.0,
+          "correlation": -0.08100661127926444
+        },
+        {
+          "sourceSeconds": 114.0,
+          "correlation": 0.008223376819127055
+        },
+        {
+          "sourceSeconds": 115.0,
+          "correlation": 0.05342031322008718
+        },
+        {
+          "sourceSeconds": 116.0,
+          "correlation": 0.0019787165701529415
+        },
+        {
+          "sourceSeconds": 117.0,
+          "correlation": 0.010716784259281105
+        },
+        {
+          "sourceSeconds": 118.0,
+          "correlation": -0.02851537886977493
+        },
+        {
+          "sourceSeconds": 119.0,
+          "correlation": -0.0024970396202849483
+        },
+        {
+          "sourceSeconds": 120.0,
+          "correlation": 0.0069739947984655696
+        },
+        {
+          "sourceSeconds": 121.0,
+          "correlation": -0.028119369227748464
+        },
+        {
+          "sourceSeconds": 122.0,
+          "correlation": 0.07386328904998975
+        },
+        {
+          "sourceSeconds": 123.0,
+          "correlation": 0.013996515268635072
+        },
+        {
+          "sourceSeconds": 124.0,
+          "correlation": -0.11662733918732282
+        },
+        {
+          "sourceSeconds": 125.0,
+          "correlation": 0.027475354691445388
+        },
+        {
+          "sourceSeconds": 126.0,
+          "correlation": 0.0308061369932889
+        },
+        {
+          "sourceSeconds": 127.0,
+          "correlation": -0.0009677135946575866
+        },
+        {
+          "sourceSeconds": 128.0,
+          "correlation": 0.026451203492424732
+        },
+        {
+          "sourceSeconds": 129.0,
+          "correlation": -0.12065694649252552
+        },
+        {
+          "sourceSeconds": 130.0,
+          "correlation": -0.00604979615438062
+        },
+        {
+          "sourceSeconds": 131.0,
+          "correlation": 0.011144591497852107
+        },
+        {
+          "sourceSeconds": 132.0,
+          "correlation": -0.02271920827870909
+        },
+        {
+          "sourceSeconds": 133.0,
+          "correlation": 0.07439308410632153
+        },
+        {
+          "sourceSeconds": 134.0,
+          "correlation": 0.0029075358583285802
+        },
+        {
+          "sourceSeconds": 135.0,
+          "correlation": -0.12490428394103097
+        },
+        {
+          "sourceSeconds": 136.0,
+          "correlation": -2.999608147108583e-05
+        },
+        {
+          "sourceSeconds": 137.0,
+          "correlation": 0.01783458621881298
+        },
+        {
+          "sourceSeconds": 138.0,
+          "correlation": 0.0006413675370419454
+        },
+        {
+          "sourceSeconds": 139.0,
+          "correlation": 0.022227909251088425
+        },
+        {
+          "sourceSeconds": 140.0,
+          "correlation": -0.18305977817998156
+        },
+        {
+          "sourceSeconds": 141.0,
+          "correlation": 0.0028146812959976243
+        },
+        {
+          "sourceSeconds": 142.0,
+          "correlation": 0.010894572202677878
+        },
+        {
+          "sourceSeconds": 143.0,
+          "correlation": -0.021907981908942487
+        },
+        {
+          "sourceSeconds": 144.0,
+          "correlation": 0.0770171810985092
+        },
+        {
+          "sourceSeconds": 145.0,
+          "correlation": 0.005338696704586027
+        },
+        {
+          "sourceSeconds": 146.0,
+          "correlation": -0.14176974207330614
+        },
+        {
+          "sourceSeconds": 147.0,
+          "correlation": 0.0054356104416146
+        },
+        {
+          "sourceSeconds": 148.0,
+          "correlation": 0.02046559075845648
+        },
+        {
+          "sourceSeconds": 149.0,
+          "correlation": 0.005171908410618898
+        },
+        {
+          "sourceSeconds": 150.0,
+          "correlation": 0.012441142443034476
+        },
+        {
+          "sourceSeconds": 151.0,
+          "correlation": -0.1260354998311175
+        },
+        {
+          "sourceSeconds": 152.0,
+          "correlation": 0.0014683259848697295
+        },
+        {
+          "sourceSeconds": 153.0,
+          "correlation": 0.01777066739546236
+        },
+        {
+          "sourceSeconds": 154.0,
+          "correlation": -0.02119270762951597
+        },
+        {
+          "sourceSeconds": 155.0,
+          "correlation": 0.08076310330420981
+        },
+        {
+          "sourceSeconds": 156.0,
+          "correlation": 0.005188685679251812
+        },
+        {
+          "sourceSeconds": 157.0,
+          "correlation": -0.17013892085002538
+        },
+        {
+          "sourceSeconds": 158.0,
+          "correlation": 0.0012318180193106193
+        },
+        {
+          "sourceSeconds": 159.0,
+          "correlation": 0.012619571838469689
+        },
+        {
+          "sourceSeconds": 160.0,
+          "correlation": 0.006545132509545228
+        },
+        {
+          "sourceSeconds": 161.0,
+          "correlation": 0.013068282052186672
+        },
+        {
+          "sourceSeconds": 162.0,
+          "correlation": -0.06771192275671616
+        },
+        {
+          "sourceSeconds": 163.0,
+          "correlation": 0.006004713054830963
+        },
+        {
+          "sourceSeconds": 164.0,
+          "correlation": 0.023110634421680487
+        },
+        {
+          "sourceSeconds": 165.0,
+          "correlation": -0.021015477146580055
+        },
+        {
+          "sourceSeconds": 166.0,
+          "correlation": 0.08476397129311604
+        },
+        {
+          "sourceSeconds": 167.0,
+          "correlation": 0.007255309930955387
+        },
+        {
+          "sourceSeconds": 168.0,
+          "correlation": -0.1913292082874894
+        },
+        {
+          "sourceSeconds": 169.0,
+          "correlation": 0.02892040900302086
+        },
+        {
+          "sourceSeconds": 170.0,
+          "correlation": 0.0016665922293631061
+        },
+        {
+          "sourceSeconds": 171.0,
+          "correlation": 0.0070877547147290805
+        },
+        {
+          "sourceSeconds": 172.0,
+          "correlation": 0.013091776629331238
+        },
+        {
+          "sourceSeconds": 173.0,
+          "correlation": -0.0468316572193048
+        },
+        {
+          "sourceSeconds": 174.0,
+          "correlation": 0.00308870319540733
+        },
+        {
+          "sourceSeconds": 175.0,
+          "correlation": 0.009970880164190121
+        },
+        {
+          "sourceSeconds": 176.0,
+          "correlation": -0.01909775467535611
+        },
+        {
+          "sourceSeconds": 177.0,
+          "correlation": 0.08578254312066665
+        },
+        {
+          "sourceSeconds": 178.0,
+          "correlation": -0.0012469878461460484
+        },
+        {
+          "sourceSeconds": 179.0,
+          "correlation": -0.20589881835524346
+        },
+        {
+          "sourceSeconds": 180.0,
+          "correlation": 0.004908409657158339
+        },
+        {
+          "sourceSeconds": 181.0,
+          "correlation": 0.04595030593467984
+        },
+        {
+          "sourceSeconds": 182.0,
+          "correlation": 0.007986949599015093
+        },
+        {
+          "sourceSeconds": 183.0,
+          "correlation": 0.000934645493475879
+        },
+        {
+          "sourceSeconds": 184.0,
+          "correlation": -0.08079100486208282
+        },
+        {
+          "sourceSeconds": 185.0,
+          "correlation": 0.0015768836281545829
+        },
+        {
+          "sourceSeconds": 186.0,
+          "correlation": 0.015080682975038565
+        },
+        {
+          "sourceSeconds": 187.0,
+          "correlation": -0.02130839612544158
+        },
+        {
+          "sourceSeconds": 188.0,
+          "correlation": 0.10225485604814116
+        },
+        {
+          "sourceSeconds": 189.0,
+          "correlation": 0.0004973835003259272
+        },
+        {
+          "sourceSeconds": 190.0,
+          "correlation": -0.2166823804602423
+        },
+        {
+          "sourceSeconds": 191.0,
+          "correlation": 0.00981385623487298
+        },
+        {
+          "sourceSeconds": 192.0,
+          "correlation": 0.029093388487563477
+        },
+        {
+          "sourceSeconds": 193.0,
+          "correlation": 0.009923736672143985
+        },
+        {
+          "sourceSeconds": 194.0,
+          "correlation": 0.04714324154278982
+        },
+        {
+          "sourceSeconds": 195.0,
+          "correlation": -0.06311734582522176
+        },
+        {
+          "sourceSeconds": 196.0,
+          "correlation": -0.011229113749896751
+        },
+        {
+          "sourceSeconds": 197.0,
+          "correlation": -0.024978740431254094
+        },
+        {
+          "sourceSeconds": 198.0,
+          "correlation": 0.0900083749847242
+        },
+        {
+          "sourceSeconds": 199.0,
+          "correlation": -0.10812617633210138
+        },
+        {
+          "sourceSeconds": 200.0,
+          "correlation": 0.015139149647898253
+        },
+        {
+          "sourceSeconds": 201.0,
+          "correlation": 0.29494367205838434
+        },
+        {
+          "sourceSeconds": 202.0,
+          "correlation": 0.03909223729508139
+        },
+        {
+          "sourceSeconds": 203.0,
+          "correlation": 0.17388480416147423
+        },
+        {
+          "sourceSeconds": 204.0,
+          "correlation": 0.00020586432958112196
+        },
+        {
+          "sourceSeconds": 205.0,
+          "correlation": 0.044529328620963156
+        },
+        {
+          "sourceSeconds": 206.0,
+          "correlation": -0.03286914724690422
+        },
+        {
+          "sourceSeconds": 207.0,
+          "correlation": -0.015972450973494975
+        },
+        {
+          "sourceSeconds": 208.0,
+          "correlation": -0.028090722300283803
+        },
+        {
+          "sourceSeconds": 209.0,
+          "correlation": 0.09198057351120938
+        },
+        {
+          "sourceSeconds": 210.0,
+          "correlation": -0.1255919625053712
+        },
+        {
+          "sourceSeconds": 211.0,
+          "correlation": 0.0361808693215393
+        },
+        {
+          "sourceSeconds": 212.0,
+          "correlation": 0.2689675689684855
+        },
+        {
+          "sourceSeconds": 213.0,
+          "correlation": 0.020970832466223444
+        },
+        {
+          "sourceSeconds": 214.0,
+          "correlation": 0.13620854297034687
+        },
+        {
+          "sourceSeconds": 215.0,
+          "correlation": -0.0017464183279805175
+        },
+        {
+          "sourceSeconds": 216.0,
+          "correlation": 0.009598291739379948
+        },
+        {
+          "sourceSeconds": 217.0,
+          "correlation": 0.020355881962201144
+        },
+        {
+          "sourceSeconds": 218.0,
+          "correlation": -0.0006086951478446767
+        },
+        {
+          "sourceSeconds": 219.0,
+          "correlation": -0.04166067893533904
+        },
+        {
+          "sourceSeconds": 220.0,
+          "correlation": 0.10313784461925567
+        },
+        {
+          "sourceSeconds": 221.0,
+          "correlation": -0.05421285292446666
+        },
+        {
+          "sourceSeconds": 222.0,
+          "correlation": 0.031914516199928716
+        },
+        {
+          "sourceSeconds": 223.0,
+          "correlation": 0.25901255563497266
+        },
+        {
+          "sourceSeconds": 224.0,
+          "correlation": 0.01993962650138546
+        },
+        {
+          "sourceSeconds": 225.0,
+          "correlation": 0.013849581761127876
+        },
+        {
+          "sourceSeconds": 226.0,
+          "correlation": -0.0006083713987624936
+        },
+        {
+          "sourceSeconds": 227.0,
+          "correlation": -0.012668227854221519
+        },
+        {
+          "sourceSeconds": 228.0,
+          "correlation": 0.014228175572061526
+        },
+        {
+          "sourceSeconds": 229.0,
+          "correlation": -0.05435612349977817
+        },
+        {
+          "sourceSeconds": 230.0,
+          "correlation": -0.036877175163752274
+        },
+        {
+          "sourceSeconds": 231.0,
+          "correlation": 0.12056615815018379
+        },
+        {
+          "sourceSeconds": 232.0,
+          "correlation": -0.10812600040918205
+        },
+        {
+          "sourceSeconds": 233.0,
+          "correlation": 0.02809945334050437
+        },
+        {
+          "sourceSeconds": 234.0,
+          "correlation": 0.2410127273920501
+        },
+        {
+          "sourceSeconds": 235.0,
+          "correlation": 0.019347443124651056
+        },
+        {
+          "sourceSeconds": 236.0,
+          "correlation": -0.02211177660165628
+        },
+        {
+          "sourceSeconds": 237.0,
+          "correlation": -0.002217965829075996
+        },
+        {
+          "sourceSeconds": 238.0,
+          "correlation": -0.004211707425841482
+        },
+        {
+          "sourceSeconds": 239.0,
+          "correlation": -0.09465697582036696
+        },
+        {
+          "sourceSeconds": 240.0,
+          "correlation": -0.03249316181563674
+        },
+        {
+          "sourceSeconds": 241.0,
+          "correlation": -0.02322243644368925
+        },
+        {
+          "sourceSeconds": 242.0,
+          "correlation": 0.1111641730712017
+        },
+        {
+          "sourceSeconds": 243.0,
+          "correlation": -0.004630896650127122
+        },
+        {
+          "sourceSeconds": 244.0,
+          "correlation": 0.024021306567227032
+        },
+        {
+          "sourceSeconds": 245.0,
+          "correlation": 0.2486681812963353
+        },
+        {
+          "sourceSeconds": 246.0,
+          "correlation": 0.018816661024609983
+        },
+        {
+          "sourceSeconds": 247.0,
+          "correlation": -0.057201672967354164
+        },
+        {
+          "sourceSeconds": 248.0,
+          "correlation": 0.0035560852936061225
+        },
+        {
+          "sourceSeconds": 249.0,
+          "correlation": -0.0061714052976808275
+        },
+        {
+          "sourceSeconds": 250.0,
+          "correlation": -0.02999467590975069
+        },
+        {
+          "sourceSeconds": 251.0,
+          "correlation": -0.03344010116514294
+        },
+        {
+          "sourceSeconds": 252.0,
+          "correlation": -0.020000439553283303
+        },
+        {
+          "sourceSeconds": 253.0,
+          "correlation": 0.12040510825200904
+        },
+        {
+          "sourceSeconds": 254.0,
+          "correlation": -0.004938745172948352
+        },
+        {
+          "sourceSeconds": 255.0,
+          "correlation": 0.0026403813392608
+        },
+        {
+          "sourceSeconds": 256.0,
+          "correlation": 0.2378439420661166
+        },
+        {
+          "sourceSeconds": 257.0,
+          "correlation": 0.019266093389069743
+        },
+        {
+          "sourceSeconds": 258.0,
+          "correlation": -0.11194989263250003
+        },
+        {
+          "sourceSeconds": 259.0,
+          "correlation": -0.0017993120202824252
+        },
+        {
+          "sourceSeconds": 260.0,
+          "correlation": -0.003770968657163091
+        },
+        {
+          "sourceSeconds": 261.0,
+          "correlation": -0.021721654100244386
+        },
+        {
+          "sourceSeconds": 262.0,
+          "correlation": -0.03161154935781802
+        },
+        {
+          "sourceSeconds": 263.0,
+          "correlation": -0.013805390253472234
+        },
+        {
+          "sourceSeconds": 264.0,
+          "correlation": 0.05361576565075207
+        },
+        {
+          "sourceSeconds": 265.0,
+          "correlation": -0.004887652237696618
+        },
+        {
+          "sourceSeconds": 266.0,
+          "correlation": -0.010830392546976873
+        },
+        {
+          "sourceSeconds": 267.0,
+          "correlation": 0.23102792841263642
+        },
+        {
+          "sourceSeconds": 268.0,
+          "correlation": 0.019940352345365512
+        },
+        {
+          "sourceSeconds": 269.0,
+          "correlation": -0.10133619582827996
+        },
+        {
+          "sourceSeconds": 270.0,
+          "correlation": 0.0016923145764176015
+        },
+        {
+          "sourceSeconds": 271.0,
+          "correlation": -0.0007577222975952302
+        },
+        {
+          "sourceSeconds": 272.0,
+          "correlation": -0.015331283855101269
+        },
+        {
+          "sourceSeconds": 273.0,
+          "correlation": -0.029616096388409306
+        },
+        {
+          "sourceSeconds": 274.0,
+          "correlation": -0.008532376649622581
+        },
+        {
+          "sourceSeconds": 275.0,
+          "correlation": -0.014885171142323727
+        },
+        {
+          "sourceSeconds": 276.0,
+          "correlation": -0.007105597589672544
+        },
+        {
+          "sourceSeconds": 277.0,
+          "correlation": 0.011628292392205253
+        },
+        {
+          "sourceSeconds": 278.0,
+          "correlation": 0.1162287967935651
+        },
+        {
+          "sourceSeconds": 279.0,
+          "correlation": 0.02150889032928817
+        },
+        {
+          "sourceSeconds": 280.0,
+          "correlation": -0.12519894136818532
+        },
+        {
+          "sourceSeconds": 281.0,
+          "correlation": -0.00200741182090706
+        },
+        {
+          "sourceSeconds": 282.0,
+          "correlation": -0.0017581067802788953
+        },
+        {
+          "sourceSeconds": 283.0,
+          "correlation": -0.01754050899061905
+        },
+        {
+          "sourceSeconds": 284.0,
+          "correlation": -0.03129872836102671
+        },
+        {
+          "sourceSeconds": 285.0,
+          "correlation": -0.019012939605418798
+        },
+        {
+          "sourceSeconds": 286.0,
+          "correlation": -0.019558738313076862
+        },
+        {
+          "sourceSeconds": 287.0,
+          "correlation": -0.0062908753142548336
+        },
+        {
+          "sourceSeconds": 288.0,
+          "correlation": 0.00921169479544903
+        },
+        {
+          "sourceSeconds": 289.0,
+          "correlation": 0.10179181623853703
+        },
+        {
+          "sourceSeconds": 290.0,
+          "correlation": 0.025350522612311657
+        },
+        {
+          "sourceSeconds": 291.0,
+          "correlation": -0.10689043363263796
+        },
+        {
+          "sourceSeconds": 292.0,
+          "correlation": -0.0031944137301045963
+        },
+        {
+          "sourceSeconds": 293.0,
+          "correlation": 0.00018303217524902449
+        },
+        {
+          "sourceSeconds": 294.0,
+          "correlation": -0.021301203274978597
+        },
+        {
+          "sourceSeconds": 295.0,
+          "correlation": -0.033281673513450905
+        },
+        {
+          "sourceSeconds": 296.0,
+          "correlation": -0.013761594408522414
+        },
+        {
+          "sourceSeconds": 297.0,
+          "correlation": -0.02827718460067778
+        },
+        {
+          "sourceSeconds": 298.0,
+          "correlation": -0.005722705972754996
+        },
+        {
+          "sourceSeconds": 299.0,
+          "correlation": 0.011086830238546161
+        },
+        {
+          "sourceSeconds": 300.0,
+          "correlation": 0.12618021011572292
+        },
+        {
+          "sourceSeconds": 301.0,
+          "correlation": 0.020717738486827446
+        },
+        {
+          "sourceSeconds": 302.0,
+          "correlation": -0.08696304771562378
+        }
+      ],
+      "minimumCorrelation": -0.2166823804602423,
+      "status": "FAIL",
+      "driftDiagnosticOnly": [
+        {
+          "sourceSeconds": 2,
+          "bestCorrelation": 0.9997098938628838,
+          "deltaFromFixedMs": 0.0
+        },
+        {
+          "sourceSeconds": 75,
+          "bestCorrelation": 0.9999157721578817,
+          "deltaFromFixedMs": 0.0
+        },
+        {
+          "sourceSeconds": 78,
+          "bestCorrelation": 0.9999823949900155,
+          "deltaFromFixedMs": 0.0
+        },
+        {
+          "sourceSeconds": 79,
+          "bestCorrelation": 0.9835979595208701,
+          "deltaFromFixedMs": -149.33333333333334
+        },
+        {
+          "sourceSeconds": 80,
+          "bestCorrelation": 0.999508350664362,
+          "deltaFromFixedMs": -137.54166666666666
+        },
+        {
+          "sourceSeconds": 120,
+          "bestCorrelation": 0.9999381417723652,
+          "deltaFromFixedMs": -137.54166666666666
+        },
+        {
+          "sourceSeconds": 180,
+          "bestCorrelation": 0.7306129026208671,
+          "deltaFromFixedMs": -133.97916666666666
+        },
+        {
+          "sourceSeconds": 240,
+          "bestCorrelation": 0.9999399373074659,
+          "deltaFromFixedMs": -116.20833333333333
+        },
+        {
+          "sourceSeconds": 299,
+          "bestCorrelation": 0.879141087330581,
+          "deltaFromFixedMs": -119.875
+        }
+      ]
+    }
+  },
+  "video": {
+    "checkedFrames": 2694,
+    "uniqueIds": 2611,
+    "mismatches": [
+      {
+        "pts": 1.361022,
+        "decodedIdMasked": 65535,
+        "expectedId": 20
+      },
+      {
+        "pts": 1.415933,
+        "decodedIdMasked": 65535,
+        "expectedId": 22
+      },
+      {
+        "pts": 1.704733,
+        "decodedIdMasked": 2307,
+        "expectedId": 31
+      },
+      {
+        "pts": 1.857244,
+        "decodedIdMasked": 65535,
+        "expectedId": 35
+      }
+    ],
+    "mask": 65535,
+    "status": "FAIL",
+    "scope": "Known 720x1280 canvas, 1080x2400 display; no source ID older than 1s; not an FPS certificate",
+    "frameAgeMs": {
+      "min": 11.911300000007031,
+      "median": 55.944299999994655,
+      "max": 348.51096666666854
+    }
+  },
+  "status": "FAIL"
+}

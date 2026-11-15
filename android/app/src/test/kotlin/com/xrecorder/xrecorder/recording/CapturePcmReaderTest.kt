@@ -8,6 +8,53 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class CapturePcmReaderTest {
+    @Test fun terminalTailCannotSilentlyDisappearWhenQueueIsFull() {
+        val entered = CountDownLatch(1)
+        val release = CountDownLatch(1)
+        var calls = 0
+        val reader = CapturePcmReader(read = { _, _, size ->
+            if (calls++ == 0) size else {
+                entered.countDown()
+                check(release.await(2, TimeUnit.SECONDS))
+                137
+            }
+        }, origin = { 1L }, capacity = 1)
+        reader.start()
+        assertTrue(entered.await(2, TimeUnit.SECONDS))
+        reader.requestStop()
+        release.countDown()
+        assertThrows(IOException::class.java) { reader.finish() }
+        assertTrue(reader.completed)
+        assertEquals(1161L, reader.capturedSamples)
+    }
+
+    @Test fun stopDuringBlockingReadPreservesAcceptedTailAfterQueuedBlocks() {
+        val entered = CountDownLatch(1)
+        val release = CountDownLatch(1)
+        var calls = 0
+        val reader = CapturePcmReader(read = { data, offset, size ->
+            if (calls++ == 0) {
+                data.fill(7, offset, offset + size)
+                size
+            } else {
+                entered.countDown()
+                check(release.await(2, TimeUnit.SECONDS))
+                for (i in 0 until 137) data[offset + i] = i.toShort()
+                137
+            }
+        }, origin = { 1L })
+        reader.start()
+        assertTrue(entered.await(2, TimeUnit.SECONDS))
+        reader.requestStop()
+        release.countDown()
+        reader.finish()
+        assertTrue(reader.completed)
+        assertEquals(1161L, reader.capturedSamples)
+        assertArrayEquals(ShortArray(1024) { 7 }, reader.poll())
+        assertArrayEquals(ShortArray(137) { it.toShort() }, reader.poll())
+        assertNull(reader.poll())
+    }
+
     @Test fun codecStallWithinThreeSecondGracePreservesAllPcmUntilConsumerResumes() {
         var position = 0
         val supplied = CountDownLatch(1)

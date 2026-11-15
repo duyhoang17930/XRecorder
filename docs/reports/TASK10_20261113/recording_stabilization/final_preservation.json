@@ -1,0 +1,30 @@
+{
+  "currentAvd": "Pixel_7",
+  "currentSettingsByteExactToSessionEntry": true,
+  "originalDraftsByteExact": 8,
+  "monitoredFiles": {
+    "shared_prefs/app_settings.xml": true,
+    "shared_prefs/onboarding_state.xml": true,
+    "shared_prefs/p2_locale.xml": true,
+    "files/projects/project_1793872695793809.json": true,
+    "files/projects/project_1793872731095098.json": true,
+    "files/projects/project_1793873265519242.json": true,
+    "files/projects/project_1793873285734029.json": true,
+    "files/projects/project_1794303132745581.json": true,
+    "files/projects/project_1794303136702785.json": true,
+    "files/projects/project_1794303140310584.json": true,
+    "files/projects/project_1794303415721451.json": true,
+    "files/export_jobs.json": true,
+    "files/media_transfer.json": true
+  },
+  "allMonitoredFilesByteExact": true,
+  "currentModelDirectoryListing": "",
+  "historicalTinyModelPreservationVerified": false,
+  "historicalRecoveryCheckpointStateReproduced": false,
+  "expectedChanges": [
+    "task-created media and fixture files",
+    "actual capture journal",
+    "platform install marker"
+  ],
+  "noUserMediaModelDraftDeletionRequested": true
+}

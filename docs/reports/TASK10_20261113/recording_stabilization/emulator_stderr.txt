@@ -1,0 +1,65 @@
+I1114 23:27:44.729161   39796 opengles.cpp:291] android_startOpenglesRenderer: gpu info
+I1114 23:27:44.729997   39796 opengles.cpp:292] GPU #1
+  Make: 10de
+  Model: NVIDIA GeForce RTX 3050 Ti Laptop GPU
+  Device ID: 25a0
+
+I1114 23:27:45.140842   39796 userspace-boot-properties.cpp:766] Userspace boot properties:
+I1114 23:27:45.141551   39796 userspace-boot-properties.cpp:770]   androidboot.boot_devices=pci0000:00/0000:00:03.0 pci0000:00/0000:00:06.0
+I1114 23:27:45.142101   39796 userspace-boot-properties.cpp:770]   androidboot.dalvik.vm.heapsize=512m
+I1114 23:27:45.142616   39796 userspace-boot-properties.cpp:770]   androidboot.debug.hwui.renderer=skiagl
+I1114 23:27:45.143140   39796 userspace-boot-properties.cpp:770]   androidboot.hardware=ranchu
+I1114 23:27:45.143537   39796 userspace-boot-properties.cpp:770]   androidboot.hardware.gltransport=pipe
+I1114 23:27:45.143720   39796 userspace-boot-properties.cpp:770]   androidboot.hardware.vulkan=ranchu
+I1114 23:27:45.143929   39796 userspace-boot-properties.cpp:770]   androidboot.logcat=*:V
+I1114 23:27:45.144118   39796 userspace-boot-properties.cpp:770]   androidboot.opengles.version=196609
+I1114 23:27:45.144311   39796 userspace-boot-properties.cpp:770]   androidboot.qemu=1
+I1114 23:27:45.144501   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.adb.pubkey=QAAAAKHM6v2f6BnGBhywDFdYw6DNdSDwcRiGreTPK+65q4Sd+oWhCMppEP1LmzTeQUeaMr/QNAktowM5dnC+r31s7NV8y7qgps3zivjyrJuiYqDIm1nc2Y0V4qYcJA3EXu9ljCispwVbAOqMG6fGDrDk1EEi9gkMjuPQBTQwwjBeGM856tSIDmgFXvP/VVe6yqlmyVvyTibvzUBw81FT73tYjGr6/8xxyQWy/zBZZeclH8YuoHKUzZdRJmWLS9V7KpfHYjk4BS/XKOax5LDUCNJNfErJp/4ze4HnELsOna78BXNTgGjyk6BW1jfKi8U04/pr/4Xo/rmqxrFuqYIbadn0NSSvaJqjuhypYMVXL/nFVpx4PNUBCsOflHSZtLaeNzRYRmesxgQ1CyUFWmMQ+WJ7y784f3PibCRR1tSl9jfguQ7RBUctTfRd+IXVZ/D4J8V5iwDGCYZrSdovXe4sJ9dCLmGlgzqTkM0d9DjYxc3XC1VF8QPhugIRBpL3YfTOpQGp0NOTA2ZMXcfS4LHRKaP9qEv0daEckMhS8r3oUr4PycAHY+1LtZXad7rRkttK9PhD0MvUC9T/4YPrO6RZ13YGZgBXOPlqOsLbmFkBbKcY2mUzMZE/jnJ0M9iWaSExPGz16rkdJNBQ6ZCnpu7dhGXJ/zpQ3D7uvqmoSXQm0cWW/g7XCTgcfwEAAQA= @unknown
+I1114 23:27:45.144666   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.avd_name=Pixel_7
+I1114 23:27:45.144886   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.camera_hq_edge_processing=0
+I1114 23:27:45.145078   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.camera_protocol_ver=1
+I1114 23:27:45.145295   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.cpuvulkan.version=4202496
+I1114 23:27:45.145438   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.gltransport.drawFlushInterval=800
+I1114 23:27:45.145620   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.gltransport.name=pipe
+I1114 23:27:45.145773   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.hwcodec.avcdec=2
+I1114 23:27:45.145941   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.hwcodec.hevcdec=2
+I1114 23:27:45.146103   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.hwcodec.vpxdec=2
+I1114 23:27:45.146288   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.settings.system.screen_off_timeout=2147483647
+I1114 23:27:45.146406   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.virtiowifi=1
+I1114 23:27:45.146542   39796 userspace-boot-properties.cpp:770]   androidboot.qemu.vsync=60
+I1114 23:27:45.146664   39796 userspace-boot-properties.cpp:770]   androidboot.serialno=EMULATOR36X1X9X0
+I1114 23:27:45.146799   39796 userspace-boot-properties.cpp:770]   androidboot.vbmeta.digest=f424461a0a397fda72fd179bc94e871022314ef1502d4ea1133175a87b4746ed
+I1114 23:27:45.146935   39796 userspace-boot-properties.cpp:770]   androidboot.vbmeta.hash_alg=sha256
+I1114 23:27:45.147048   39796 userspace-boot-properties.cpp:770]   androidboot.vbmeta.size=6720
+I1114 23:27:45.147172   39796 userspace-boot-properties.cpp:770]   androidboot.veritymode=enforcing
+netsimd I 11-14 16:27:45.181 daemon\src\rust_main.rs:100 - netsim artifacts path: "C:\\Users\\dangh\\AppData\\Local\\Temp\\netsimd"
+netsimd I 11-14 16:27:45.182 daemon\src\rust_main.rs:103 - NetsimdArgs {
+    fd_startup_str: None,
+    no_cli_ui: true,
+    no_web_ui: true,
+    pcap: false,
+    disable_address_reuse: false,
+    hci_port: None,
+    connector_instance: None,
+    instance: None,
+    logtostderr: false,
+    dev: false,
+    forward_host_mdns: false,
+    vsock: None,
+    config: None,
+    host_dns: Some(
+        "192.168.1.1",
+    ),
+    http_proxy: None,
+    wifi_tap: None,
+    wifi: None,
+    test_beacons: false,
+    no_test_beacons: false,
+    no_shutdown: false,
+    verbose: false,
+    version: false,
+    rssi: None,
+}
+C:\Users\dangh\AppData\Local\Android\sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe: VQ 0 size 0x10 Guest index 0x0 inconsistent with Host index 0x8a: delta 0xff76
+C:\Users\dangh\AppData\Local\Android\sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe: Failed to load virtio-snd:virtio
+C:\Users\dangh\AppData\Local\Android\sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe: error while loading state for instance 0x0 of device '0000:00:02.0/virtio-snd'

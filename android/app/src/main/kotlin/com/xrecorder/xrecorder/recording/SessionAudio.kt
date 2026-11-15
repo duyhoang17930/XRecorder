@@ -53,6 +53,12 @@ class SessionAudio @JvmOverloads constructor(
         private set
     @Volatile var encodedSamples = 0L
         private set
+    @Volatile var maxQueueInputNs = 0L
+        private set
+    @Volatile var maxDequeueOutputNs = 0L
+        private set
+    @Volatile var maxWriteOutputNs = 0L
+        private set
     private var worker: Thread? = null
     init {
         try {
@@ -126,7 +132,9 @@ class SessionAudio @JvmOverloads constructor(
             val info = MediaCodec.BufferInfo()
             fun drain(wait: Boolean): Boolean {
                 while (true) {
+                    val dequeueStartNs = System.nanoTime()
                     val index = encoder.dequeueOutputBuffer(info, if (wait) 10000 else 0)
+                    maxDequeueOutputNs = maxOf(maxDequeueOutputNs, System.nanoTime() - dequeueStartNs)
                     if (index == MediaCodec.INFO_TRY_AGAIN_LATER) return false
                     if (index == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
                         check(!muxing); track = output.addTrack(encoder.outputFormat); output.start(); muxing = true
@@ -136,8 +144,10 @@ class SessionAudio @JvmOverloads constructor(
                             check(muxing)
                             val bytes = encoder.getOutputBuffer(index)!!
                             bytes.position(info.offset); bytes.limit(info.offset + info.size)
+                            val writeStartNs = System.nanoTime()
                             output.writeSampleData(track, bytes, info)
                             encodedOutput?.sample(bytes, info, startTimeNs)
+                            maxWriteOutputNs = maxOf(maxWriteOutputNs, System.nanoTime() - writeStartNs)
                         }
                         val end = info.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0
                         encoder.releaseOutputBuffer(index, false)
@@ -162,11 +172,19 @@ class SessionAudio @JvmOverloads constructor(
                     // an existing backlog must drain without64ms per-block waits.
                     micDeadlineNs = internalReader!!.lastBlockReadyNs + 64_000_000L
                 }
-                if (stopping && internalRead == 0 && internalCount == 0) break
                 if (micRead < 0 && !stopping) throw IOException("Audio capture was interrupted")
                 micCount += micRead.coerceAtLeast(0); internalCount += internalRead
                 microphoneReadSamples += micRead.coerceAtLeast(0)
                 if (micRead > 0) lastMicInputNs = System.nanoTime()
+                if (stopping && internalRead == 0 && internalCount == 0) {
+                    val reader = internalReader
+                    if (reader != null && (!reader.completed || reader.queuedBlocks > 0)) {
+                        drain(false)
+                        Thread.sleep(2)
+                        continue
+                    }
+                    if (reader != null || micCount == 0) break
+                }
                 if (stopping && internalCount > micCount) {
                     micPcm.fill(0, micCount, internalCount)
                     micCount = internalCount
@@ -193,11 +211,13 @@ class SessionAudio @JvmOverloads constructor(
                         micCount = 1024
                     }
                 }
-                if ((mic != null && micCount < 1024) || (internal != null && internalCount < 1024)) {
+                val count = if (stopping) {
+                    if (internal != null) internalCount else micCount
+                } else 1024
+                if ((mic != null && micCount < count) || (internal != null && internalCount < count)) {
                     if (System.nanoTime() - lastInputNs > 3000000000L) throw IOException("An audio source stopped supplying PCM")
                     drain(false); Thread.sleep(2); continue
                 }
-                val count = 1024
                 lastInputNs = System.nanoTime()
                 if (startTimeNs == 0L) {
                     val timestamp = AudioTimestamp()
@@ -228,7 +248,10 @@ class SessionAudio @JvmOverloads constructor(
                     }
                     input.putShort(mixed)
                 }
-                encoder.queueInputBuffer(index,0,count*2,samples*1000000L/rate,0); samples += count
+                val queueStartNs = System.nanoTime()
+                encoder.queueInputBuffer(index,0,count*2,samples*1000000L/rate,0)
+                maxQueueInputNs = maxOf(maxQueueInputNs, System.nanoTime() - queueStartNs)
+                samples += count
                 encodedSamples = samples
                 micCount = 0; internalCount = 0
                 micDeadlineNs = 0

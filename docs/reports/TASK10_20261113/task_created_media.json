@@ -717,5 +717,58 @@
     "case": "live_capture_speech",
     "source": "real production capture + task115 playback",
     "evidence": "live_audio_audio16_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/45",
+    "case": "recording_stabilization_controlled_source",
+    "sha256": "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f",
+    "bytes": 582195
+  },
+  {
+    "status": "PASS",
+    "uri": "content://media/external/video/media/47",
+    "sha256": "8925ac2f0764e8bcdbcf1b70f5f28b373b4653f7a7aa0c8b163ebfa00001c34f",
+    "case": "recording_stabilization_app_owned_source"
+  },
+  {
+    "uri": "content://media/external/video/media/48",
+    "sessionId": "80344f60-4f64-4304-babc-30d0ba9e8bdd",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_stab4_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/49",
+    "sessionId": "6584d65d-0c21-4214-9bbf-1d063ffd282c",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_stab_gpu1_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/50",
+    "sessionId": "6d4bd1ff-2c0e-4552-b095-d3c8ca3d0298",
+    "case": "owned_motion_fixture_timeout",
+    "notStressAcceptance": true
+  },
+  {
+    "uri": "content://media/external/video/media/51",
+    "sessionId": "01f7a9f6-dbc1-455f-bec9-fa5cb5c0abea",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_stab_motion2_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/52",
+    "sessionId": "36b62636-e309-4a81-bc96-ad7132e3dfa7",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_stab_stress1_result.json"
+  },
+  {
+    "uri": "content://media/external/video/media/53",
+    "sessionId": "dbef8efe-40e0-40fc-940d-70beb70ddbca",
+    "case": "live_capture_speech",
+    "source": "real production capture + task115 playback",
+    "evidence": "live_audio_stab_source_diag_result.json"
   }
 ]

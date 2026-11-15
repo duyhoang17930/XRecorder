@@ -335,3 +335,7 @@ INFO         | Ignore IPv6 address: b062:8039:d901:0:2040:8039:d901:0
 WARNING      | ClipboardPipe: the clipboard is too large (38120), ignoring.
 INFO         | Warning: Retrying to obtain clipboard. (:0, )
 WARNING      | ClipboardPipe: the clipboard is too large (45474), ignoring.
+INFO         | Wait for emulator (pid 26140) 20 seconds to shutdown gracefully before kill;you can set environment variable ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL(in seconds) to change the default value (20 seconds)
+
+WARNING      | Not saving state: RAM not mapped as shared
+INFO         | Saving snapshot 'default_boot' using 4 ms
