@@ -52,7 +52,7 @@ const helpTopics = <({String category, String question, String answer})>[
   (
     category: 'Storage',
     question: 'How does Trash work?',
-    answer: 'Only app-owned media can be moved to private Trash. Restore creates a new file after verifying its backup. Items become eligible for permanent cleanup after 24 hours when Trash is opened. Permanent deletion cannot be undone. External selected media stays read-only.',
+    answer: 'Only app-created media can be moved to private Trash. Restore verifies its backup and creates a new library item. Items stay in Trash until you restore or permanently delete them. Selected external media stays read-only.',
   ),
   (
     category: 'Storage',

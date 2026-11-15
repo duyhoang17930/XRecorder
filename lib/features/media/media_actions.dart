@@ -49,9 +49,6 @@ class AndroidMediaActions implements TrashRepository {
     deletedAt: DateTime.fromMillisecondsSinceEpoch(
       (row['deletedAt'] as num).toInt(),
     ),
-    expiresAt: DateTime.fromMillisecondsSinceEpoch(
-      (row['expiresAt'] as num).toInt(),
-    ),
     mode: DeletionMode.appManaged,
   );
   @override

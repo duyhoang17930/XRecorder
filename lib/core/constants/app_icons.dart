@@ -66,6 +66,11 @@ abstract final class AppIcons {
   static const reset = LucideIcons.rotateCcw;
   static const refresh = LucideIcons.refreshCw;
   static const sort = LucideIcons.listFilter;
+  static const sortNewest = LucideIcons.calendarArrowDown;
+  static const sortOldest = LucideIcons.calendarArrowUp;
+  static const sortName = LucideIcons.arrowDownAZ;
+  static const sortSize = LucideIcons.arrowDownWideNarrow;
+  static const sortDuration = LucideIcons.clockArrowDown;
   static const storage = LucideIcons.hardDrive;
   static const folder = LucideIcons.folder;
   static const folderOpen = LucideIcons.folderOpen;
@@ -78,5 +83,6 @@ abstract final class AppIcons {
   static const info = LucideIcons.info;
   static const attachment = LucideIcons.paperclip;
   static const selected = LucideIcons.circleCheck;
+  static const check = LucideIcons.check;
   static const unselected = LucideIcons.circle;
 }

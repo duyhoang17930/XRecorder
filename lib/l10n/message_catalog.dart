@@ -107,8 +107,8 @@ String localizedMessage(
   "App media" => l10n.appMedia,
   "App version, Android API, manufacturer, model and ABI only. No logs, media paths or identifiers." =>
     l10n.appVersionAndroidApiManufacturerModelAnd,
-  "App-owned media only. Items become eligible for permanent cleanup after 24 hours; cleanup runs when Trash is opened. Restoring creates a new item with a unique name." =>
-    l10n.appOwnedMediaOnlyItemsBecomeEligible,
+  "Only app-created media appears here. Items stay in Trash until you restore them or delete them permanently." =>
+    l10n.appOwnedTrashManualPolicy,
   "App-owned media only. Selected external folders are excluded." =>
     l10n.appOwnedMediaOnlySelectedExternalFolders,
   "Apply subtitles" => l10n.applySubtitles,
@@ -154,8 +154,7 @@ String localizedMessage(
   "Choose the same media type with enough duration for this clip." =>
     l10n.chooseTheSameMediaTypeWithEnough,
   "Circle" => l10n.circle,
-  "Cleanup on opening Trash after 24 hours" =>
-    l10n.cleanupOnOpeningTrashAfter24Hours,
+  "Restore or permanently delete items in Trash" => l10n.manageTrashItems,
   "Clear drawing" => l10n.clearDrawing,
   "Clear search" => l10n.clearSearch,
   "Clip" => l10n.clip,
@@ -420,8 +419,8 @@ String localizedMessage(
   "On Android 10 and later, videos go to Movies/XRecorder and images to Pictures/XRecorder through MediaStore. Older versions use app-specific external storage, which Android may remove on uninstall. Drafts and trash are private app data." =>
     l10n.onAndroid10AndLaterVideosGo,
   "On-device processing" => l10n.onDeviceProcessing,
-  "Only app-owned media can be moved to private Trash. Restore creates a new file after verifying its backup. Items become eligible for permanent cleanup after 24 hours when Trash is opened. Permanent deletion cannot be undone. External selected media stays read-only." =>
-    l10n.onlyAppOwnedMediaCanBeMoved,
+  "Only app-created media can be moved to private Trash. Restore verifies its backup and creates a new library item. Items stay in Trash until you restore or permanently delete them. Selected external media stays read-only." =>
+    l10n.trashPolicyAndActions,
   "Only files in this folder are shown." => l10n.onlyFilesInThisFolderAreShown,
   "Open GitHub issues in browser" => l10n.openGithubIssuesInBrowser,
   "Open details" => l10n.openDetails,

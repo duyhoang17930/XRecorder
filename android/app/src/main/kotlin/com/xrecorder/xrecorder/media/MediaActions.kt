@@ -134,6 +134,18 @@ class MediaActions(private val context: Context) {
 
     private fun payload(id: String) = File(directory, "$id.bin")
 
+    private fun trashId(fileName: String): String? {
+        val id = when {
+            fileName.endsWith(".json.bak") -> fileName.removeSuffix(".json.bak")
+            fileName.endsWith(".json.new") -> fileName.removeSuffix(".json.new")
+            fileName.endsWith(".json") -> fileName.removeSuffix(".json")
+            fileName.endsWith(".bin") -> fileName.removeSuffix(".bin")
+            fileName.endsWith(".part") -> fileName.removeSuffix(".part")
+            else -> return null
+        }
+        return id.takeIf { managedTrashId.matches(it) }
+    }
+
     private fun write(id: String, data: JSONObject) {
         val atomic = AtomicFile(metadata(id))
         val stream = atomic.startWrite()
@@ -200,7 +212,6 @@ class MediaActions(private val context: Context) {
                     .put("id", id)
                     .put("originalMetadata", JSONObject(original))
                     .put("deletedAt", now)
-                    .put("expiresAt", now + 86400000L)
                     .put("sha256", hash(file))
             write(id, data)
             journaled = true
@@ -218,38 +229,19 @@ class MediaActions(private val context: Context) {
     }
 
     fun listTrash(): List<Map<String, Any?>> {
-        val stale = System.currentTimeMillis() - 86400000L
-        directory
-            .listFiles()
-            ?.filter { file ->
-                managedTrashId.matches(file.nameWithoutExtension) &&
-                    file.lastModified() < stale &&
-                    (file.extension == "part" ||
-                        (file.extension == "bin" &&
-                            listOf(".json", ".json.bak", ".json.new").none {
-                                File(directory, file.nameWithoutExtension + it).exists()
-                            }))
-            }
-            ?.forEach { it.delete() }
-        val entries = mutableListOf<Map<String, Any?>>()
-        directory
-            .listFiles()
-            ?.filter { it.name.endsWith(".json") || it.name.endsWith(".json.bak") }
-            ?.map { it.name.removeSuffix(".bak").removeSuffix(".json") }
-            ?.filter { managedTrashId.matches(it) }
-            ?.distinct()
-            ?.forEach { id ->
+        val ids = directory.listFiles()?.mapNotNull { trashId(it.name) }?.distinct().orEmpty()
+        return ids
+            .map { id ->
                 try {
                     val data = read(id)
-                    if (!payload(id).isFile) entries.add(mapOf("id" to id, "unreadable" to true))
-                    else if (data.getLong("expiresAt") <= System.currentTimeMillis())
-                        permanentlyDelete(id)
-                    else entries.add(map(data))
+                    check(data.getString("id") == id)
+                    if (!payload(id).isFile) mapOf("id" to id, "unreadable" to true)
+                    else map(data)
                 } catch (_: Exception) {
-                    entries.add(mapOf("id" to id, "unreadable" to true))
+                    mapOf("id" to id, "unreadable" to true)
                 }
             }
-        return entries.sortedByDescending { it["deletedAt"] as? Long ?: 0L }
+            .sortedByDescending { it["deletedAt"] as? Long ?: 0L }
     }
 
     fun restore(id: String): String {

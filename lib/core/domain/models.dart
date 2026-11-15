@@ -365,7 +365,6 @@ class TrashEntry {
     required this.id,
     required this.originalMetadata,
     required this.deletedAt,
-    required this.expiresAt,
     required this.mode,
     this.trashUri,
   });
@@ -373,7 +372,7 @@ class TrashEntry {
   final MediaItem originalMetadata;
   Uri get originalUri => originalMetadata.uri;
   final Uri? trashUri;
-  final DateTime deletedAt, expiresAt;
+  final DateTime deletedAt;
   final DeletionMode mode;
 }
 

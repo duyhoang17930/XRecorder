@@ -14,6 +14,14 @@ import 'media_repository.dart';
 import 'media_sort.dart';
 import 'media_actions.dart';
 
+const _mediaSortIcons = <MediaSort, IconData>{
+  MediaSort.newest: AppIcons.sortNewest,
+  MediaSort.oldest: AppIcons.sortOldest,
+  MediaSort.name: AppIcons.sortName,
+  MediaSort.size: AppIcons.sortSize,
+  MediaSort.duration: AppIcons.sortDuration,
+};
+
 class MediaLibraryScreen extends StatefulWidget {
   const MediaLibraryScreen({super.key, required this.kind});
   final MediaKind kind;
@@ -27,6 +35,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
   List<MediaItem> _items = [];
   Uri? _folder;
   Uri? _displayedFolder;
+  int _folderRevision = 0;
   bool _hasResult = false;
   bool _loading = true;
   MediaSort _sort = MediaSort.newest;
@@ -45,8 +54,27 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
       _subscription?.cancel();
       _repository = repository;
       _subscription = repository.changes.listen((_) => _load());
-      _load();
+      unawaited(_restoreSavedFolder(repository));
     }
+  }
+
+  Future<void> _restoreSavedFolder(CatalogRepository repository) async {
+    final revision = _folderRevision;
+    Uri? folder;
+    try {
+      folder = await repository.savedFolder();
+    } catch (_) {
+      // App-owned media remains available if a provider cannot restore its
+      // saved folder preference. A saved but revoked grant is reported by
+      // the normal list operation below.
+    }
+    if (!mounted || repository != _repository) return;
+    if (revision != _folderRevision) {
+      await _load();
+      return;
+    }
+    if (_folder != folder) setState(() => _folder = folder);
+    await _load();
   }
 
   Future<void> _load() {
@@ -144,6 +172,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
 
   Future<void> _pickFolder() async {
     if (_pickingFolder) return;
+    _folderRevision++;
     setState(() => _pickingFolder = true);
     try {
       final folder = await _repository!.selectFolder();
@@ -164,6 +193,7 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
   Future<void> _disconnectFolder() async {
     if (_pickingFolder || _folder == null) return;
     final folder = _folder!;
+    _folderRevision++;
     setState(() => _pickingFolder = true);
     try {
       final confirmed = await showStudioDialog<bool>(
@@ -204,24 +234,34 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
     final result = await showStudioBottomSheet<MediaSort>(
       context: context,
       builder: (sheet) => SafeArea(
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-              child: StudioSheetHeader(title: context.l10n.sortMedia),
-            ),
-            for (final value in MediaSort.values)
-              if (value != MediaSort.duration || widget.kind == MediaKind.video)
-                ListTile(
-                  title: Text(context.message(value.label)),
-                  selected: value == _sort,
-                  leading: Icon(
-                    value == _sort ? AppIcons.selected : AppIcons.unselected,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.md,
+            0,
+            AppSpacing.md,
+            AppSpacing.sm,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              StudioSheetHeader(
+                title: context.l10n.sortMedia,
+                icon: AppIcons.sort,
+              ),
+              for (final value in MediaSort.values)
+                if (value != MediaSort.duration ||
+                    widget.kind == MediaKind.video) ...[
+                  _MediaSortOption(
+                    value: value,
+                    selected: value == _sort,
+                    onTap: () => Navigator.pop(sheet, value),
                   ),
-                  onTap: () => Navigator.pop(sheet, value),
-                ),
-          ],
+                  if (value != MediaSort.duration)
+                    const SizedBox(height: AppSpacing.xs),
+                ],
+            ],
+          ),
         ),
       ),
     );
@@ -619,6 +659,107 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
   String _day(DateTime value) => value.millisecondsSinceEpoch == 0
       ? context.l10n.dateUnavailable
       : context.calendarDate(value);
+}
+
+class _MediaSortOption extends StatelessWidget {
+  const _MediaSortOption({
+    required this.value,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final MediaSort value;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.studioColors;
+    final accent = colors.primary;
+    final background = selected
+        ? accent.withValues(
+            alpha: Theme.of(context).brightness == Brightness.dark ? .16 : .08,
+          )
+        : colors.card;
+
+    return Semantics(
+      key: ValueKey('media-sort-${value.name}'),
+      button: true,
+      selected: selected,
+      label: context.message(value.label),
+      child: SizedBox(
+        width: double.infinity,
+        child: Material(
+          color: background,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.control),
+            side: BorderSide(
+              color: selected ? accent : colors.border,
+              width: selected ? 1.5 : AppBorder.subtle,
+            ),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xs,
+              ),
+              child: Row(
+                children: [
+                  StudioIconTile(
+                    icon: _mediaSortIcons[value]!,
+                    size: AppSize.touchTarget,
+                    iconSize: AppIconSize.medium,
+                    color: selected ? accent : colors.muted,
+                    backgroundColor: selected
+                        ? accent.withValues(alpha: .13)
+                        : colors.elevated,
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: Text(
+                      context.message(value.label),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypography.bodyEmphasis.copyWith(
+                        color: selected ? accent : colors.text,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.xs),
+                  SizedBox(
+                    width: 36,
+                    child: Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: selected
+                          ? Container(
+                              width: 32,
+                              height: 32,
+                              decoration: BoxDecoration(
+                                color: accent,
+                                borderRadius: BorderRadius.circular(
+                                  AppRadius.icon,
+                                ),
+                              ),
+                              child: Icon(
+                                AppIcons.check,
+                                color: colors.primaryForeground,
+                                size: AppIconSize.small,
+                              ),
+                            )
+                          : const SizedBox.square(dimension: 32),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class MediaThumbnail extends StatefulWidget {

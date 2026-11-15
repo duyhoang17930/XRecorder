@@ -228,9 +228,9 @@
   "@appVersionAndroidApiManufacturerModelAnd": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/support_screen.dart. Keep product names, technical identifiers and units intact."
   },
-  "appOwnedMediaOnlyItemsBecomeEligible": "App-owned media only. Items become eligible for permanent cleanup after 24 hours; cleanup runs when Trash is opened. Restoring creates a new item with a unique name.",
-  "@appOwnedMediaOnlyItemsBecomeEligible": {
-    "description": "P2/P3 interface copy. Origin: lib/features/media/trash_screen.dart. Keep product names, technical identifiers and units intact."
+  "appOwnedTrashManualPolicy": "Only app-created media appears here. Items stay in Trash until you restore them or delete them permanently.",
+  "@appOwnedTrashManualPolicy": {
+    "description": "Trash policy summary. Only app-created media appears here; entries remain until the user restores or permanently deletes them."
   },
   "appOwnedMediaOnlySelectedExternalFolders": "App-owned media only. Selected external folders are excluded.",
   "@appOwnedMediaOnlySelectedExternalFolders": {
@@ -368,9 +368,9 @@
   "@circle": {
     "description": "P2/P3 interface copy. Origin: lib/features/media/photo_tools_screen.dart. Keep product names, technical identifiers and units intact."
   },
-  "cleanupOnOpeningTrashAfter24Hours": "Cleanup on opening Trash after 24 hours",
-  "@cleanupOnOpeningTrashAfter24Hours": {
-    "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
+  "manageTrashItems": "Restore or permanently delete items in Trash",
+  "@manageTrashItems": {
+    "description": "Settings link to the Trash screen, where items can be restored or permanently deleted."
   },
   "clearDrawing": "Clear drawing",
   "@clearDrawing": {
@@ -1216,9 +1216,9 @@
   "@onDeviceProcessing": {
     "description": "P2/P3 interface copy. Origin: lib/features/settings/settings_hub_screen.dart. Keep product names, technical identifiers and units intact."
   },
-  "onlyAppOwnedMediaCanBeMoved": "Only app-owned media can be moved to private Trash. Restore creates a new file after verifying its backup. Items become eligible for permanent cleanup after 24 hours when Trash is opened. Permanent deletion cannot be undone. External selected media stays read-only.",
-  "@onlyAppOwnedMediaCanBeMoved": {
-    "description": "P2/P3 interface copy. Origin: lib/features/settings/help_screen.dart. Keep product names, technical identifiers and units intact."
+  "trashPolicyAndActions": "Only app-created media can be moved to private Trash. Restore verifies its backup and creates a new library item. Items stay in Trash until you restore or permanently delete them. Selected external media stays read-only.",
+  "@trashPolicyAndActions": {
+    "description": "Explains which media can be moved to Trash, how restore works, and how long items remain there."
   },
   "onlyFilesInThisFolderAreShown": "Only files in this folder are shown.",
   "@onlyFilesInThisFolderAreShown": {
@@ -2540,9 +2540,9 @@
       }
     }
   },
-  "trashEntryExpiry": "{value1} · Expires {value2}",
-  "@trashEntryExpiry": {
-    "description": "P2/P3 display message from lib/features/media/trash_screen.dart. Preserve placeholders; do not translate user content.",
+  "trashEntryMovedAt": "{value1} · In Trash since {value2}",
+  "@trashEntryMovedAt": {
+    "description": "Trash item size and the date it was moved to Trash. Preserve placeholders; do not translate user content.",
     "placeholders": {
       "value1": {
         "type": "String",
@@ -2556,7 +2556,7 @@
       }
     }
   },
-  "moveMediaToTrashName": "{value1} will be copied to private trash, then removed from the library. It becomes eligible for permanent cleanup after 24 hours.",
+  "moveMediaToTrashName": "{value1} will be copied to the private 3HRecorder Trash and removed from the library. You can restore it or permanently delete it from Trash.",
   "@moveMediaToTrashName": {
     "description": "P2/P3 display message from lib/features/media/video_details_screen.dart. Preserve placeholders; do not translate user content.",
     "placeholders": {

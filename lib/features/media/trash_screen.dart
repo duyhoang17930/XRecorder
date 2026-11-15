@@ -86,9 +86,9 @@ class _TrashScreenState extends State<TrashScreen> {
     body: CustomScrollView(
       slivers: [
         SliverPadding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           sliver: SliverToBoxAdapter(
-            child: Text(context.l10n.appOwnedMediaOnlyItemsBecomeEligible),
+            child: Text(context.l10n.appOwnedTrashManualPolicy),
           ),
         ),
         if (busy) const SliverToBoxAdapter(child: LinearProgressIndicator()),
@@ -152,11 +152,11 @@ class _TrashScreenState extends State<TrashScreen> {
                     return ListTile(
                       title: Text(entry.originalMetadata.displayName),
                       subtitle: Text(
-                        context.l10n.trashEntryExpiry(
+                        context.l10n.trashEntryMovedAt(
                           context.displayValue(
                             context.fileSize(entry.originalMetadata.sizeBytes),
                           ),
-                          context.displayValue(entry.expiresAt.toLocal()),
+                          context.displayValue(entry.deletedAt.toLocal()),
                         ),
                       ),
                       trailing: Wrap(

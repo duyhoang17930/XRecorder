@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xrecorder/app/app.dart';
+import 'package:xrecorder/core/constants/app_icons.dart';
 import 'package:xrecorder/core/domain/models.dart';
 import 'package:xrecorder/features/media/media_library_screen.dart';
 import 'package:xrecorder/features/editor/project_repository.dart';
@@ -87,6 +90,177 @@ void main() {
     await tester.tap(find.text('Cancel'));
     await tester.pumpAndSettle();
   });
+  testWidgets(
+    'Trash shows when an item was moved and describes manual actions',
+    (tester) async {
+      final deletedAt = DateTime(2026, 1, 2, 3, 4).millisecondsSinceEpoch;
+      messenger.setMockMethodCallHandler(
+        const MethodChannel('com.xrecorder/media'),
+        (call) async => call.method == 'listTrash'
+            ? <Object?>[
+                {
+                  'id': '00000000-0000-0000-0000-000000000009',
+                  'originalMetadata': {
+                    'id': 'content://media/external/images/media/999999',
+                    'uri': 'content://media/external/images/media/999999',
+                    'name': 'prompt05_expired_fixture.png',
+                    'mime': 'image/png',
+                    'size': 64,
+                    'created': deletedAt,
+                    'modified': deletedAt,
+                    'source': 'recording',
+                    'owned': true,
+                  },
+                  'deletedAt': deletedAt,
+                  'expiresAt': deletedAt,
+                },
+              ]
+            : null,
+      );
+      await tester.pumpWidget(XRecorderApp(mediaRepository: TestCatalog()));
+      await tester.pumpAndSettle();
+      GoRouter.of(tester.element(find.text('Video library'))).push('/trash');
+      await tester.pumpAndSettle();
+
+      expect(find.text('prompt05_expired_fixture.png'), findsOneWidget);
+      expect(find.textContaining('In Trash since'), findsOneWidget);
+      expect(
+        find.textContaining('Items stay in Trash until you restore them'),
+        findsOneWidget,
+      );
+      expect(find.textContaining('Expires'), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
+  testWidgets('sort sheet shows custom choices and applies selection', (
+    tester,
+  ) async {
+    await tester.pumpWidget(XRecorderApp(mediaRepository: TestCatalog()));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.widgetWithText(ActionChip, 'Newest'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Sort media'), findsOneWidget);
+    for (final sort in ['newest', 'oldest', 'name', 'size', 'duration']) {
+      expect(find.byKey(ValueKey('media-sort-$sort')), findsOneWidget);
+    }
+    expect(find.byIcon(AppIcons.sortNewest), findsOneWidget);
+    expect(find.byIcon(AppIcons.sortOldest), findsOneWidget);
+    expect(find.byIcon(AppIcons.sortName), findsOneWidget);
+    expect(find.byIcon(AppIcons.sortSize), findsOneWidget);
+    expect(find.byIcon(AppIcons.sortDuration), findsOneWidget);
+    expect(
+      tester
+          .widget<Semantics>(find.byKey(const ValueKey('media-sort-newest')))
+          .properties
+          .selected,
+      isTrue,
+    );
+    expect(
+      find.descendant(
+        of: find.byKey(const ValueKey('media-sort-newest')),
+        matching: find.byIcon(AppIcons.check),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: find.byKey(const ValueKey('media-sort-oldest')),
+        matching: find.byIcon(AppIcons.chevronRight),
+      ),
+      findsNothing,
+    );
+    for (final sort in ['newest', 'oldest', 'name', 'size', 'duration']) {
+      expect(
+        tester.getSize(find.byKey(ValueKey('media-sort-$sort'))).height,
+        greaterThanOrEqualTo(48),
+      );
+    }
+
+    final durationOption = find.byKey(const ValueKey('media-sort-duration'));
+    await tester.ensureVisible(durationOption);
+    await tester.pumpAndSettle();
+    await tester.tap(durationOption);
+    await tester.pumpAndSettle();
+    expect(find.widgetWithText(ActionChip, 'Longest'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+  testWidgets('restores a persisted SAF folder when Library opens', (
+    tester,
+  ) async {
+    final folder = Uri.parse(
+      'content://com.android.externalstorage.documents/tree/qa_folder',
+    );
+    final catalog = TestCatalog()
+      ..selection = folder
+      ..items.clear();
+
+    await tester.pumpWidget(XRecorderApp(mediaRepository: catalog));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.widgetWithText(TextButton, 'Disconnect folder'),
+      findsOneWidget,
+    );
+    expect(find.text('No videos in this folder'), findsOneWidget);
+    expect(catalog.listedFolders, contains(folder));
+    expect(tester.takeException(), isNull);
+  });
+  testWidgets('picker cancellation does not strand initial folder restore', (
+    tester,
+  ) async {
+    final savedFolder = Completer<Uri?>();
+    final catalog = TestCatalog()
+      ..savedFolderRequest = savedFolder.future
+      ..cancelled = true;
+
+    await tester.pumpWidget(XRecorderApp(mediaRepository: catalog));
+    await tester.pump();
+    await tester.tap(find.widgetWithText(ChoiceChip, 'Choose folder'));
+    await tester.pump();
+    savedFolder.complete(Uri.parse('content://provider/tree/qa'));
+    await tester.pumpAndSettle();
+
+    expect(catalog.listedFolders, contains(null));
+    expect(find.widgetWithText(TextButton, 'Disconnect folder'), findsNothing);
+    expect(find.text('15 items'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+  for (final width in [320.0, 411.0]) {
+    for (final theme in [ThemeMode.light, ThemeMode.dark]) {
+      testWidgets('sort sheet fits $width dp in ${theme.name} at 200%', (
+        tester,
+      ) async {
+        tester.view.physicalSize = Size(width, 900);
+        tester.view.devicePixelRatio = 1;
+        tester.platformDispatcher.textScaleFactorTestValue = 2;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+          tester.platformDispatcher.clearTextScaleFactorTestValue();
+        });
+        await tester.pumpWidget(
+          XRecorderApp(
+            settings: SettingsController()..setThemeMode(theme),
+            mediaRepository: TestCatalog(),
+          ),
+        );
+        await tester.pumpAndSettle();
+        final sortChip = find.widgetWithText(ActionChip, 'Newest');
+        await tester.ensureVisible(sortChip);
+        await tester.pumpAndSettle();
+        await tester.tap(sortChip);
+        await tester.pumpAndSettle();
+        expect(find.byKey(const ValueKey('media-sort-newest')), findsOneWidget);
+        expect(
+          find.byKey(const ValueKey('media-sort-duration')),
+          findsOneWidget,
+        );
+        expect(tester.takeException(), isNull);
+      });
+    }
+  }
   testWidgets('1000 items stay lazy, search survives saved-event refresh', (
     tester,
   ) async {

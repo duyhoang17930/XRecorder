@@ -189,7 +189,7 @@ class _SettingsHubScreenState extends State<SettingsHubScreen> {
                 SettingsRow(
                   context.l10n.trashRestore,
                   icon: AppIcons.trash,
-                  subtitle: context.l10n.cleanupOnOpeningTrashAfter24Hours,
+                  subtitle: context.l10n.manageTrashItems,
                   onTap: () => _open(context, '/trash'),
                 ),
                 const Divider(height: 1, indent: 72),

@@ -8,7 +8,9 @@ class TestCatalog implements CatalogRepository {
   final events = StreamController<void>.broadcast();
   Object? failure;
   Uri? selection;
+  Future<Uri?>? savedFolderRequest;
   bool cancelled = false;
+  final listedFolders = <Uri?>[];
   final items = List.generate(
     15,
     (i) => MediaItem(
@@ -27,6 +29,7 @@ class TestCatalog implements CatalogRepository {
   Stream<void> get changes => events.stream;
   @override
   Future<List<MediaItem>> list({required MediaKind kind, Uri? folder}) async {
+    listedFolders.add(folder);
     if (failure != null) throw failure!;
     return kind == MediaKind.video ? items : [];
   }
@@ -35,7 +38,7 @@ class TestCatalog implements CatalogRepository {
   Future<MediaItem?> find(String id) async =>
       items.where((i) => i.id == id).firstOrNull;
   @override
-  Future<Uri?> savedFolder() async => selection;
+  Future<Uri?> savedFolder() => savedFolderRequest ?? Future.value(selection);
   @override
   Future<Uri?> selectFolder() async => cancelled ? null : selection;
   @override

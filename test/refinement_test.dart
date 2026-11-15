@@ -305,8 +305,9 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(sortControl);
       await tester.pumpAndSettle();
-      expect(find.widgetWithText(ListTile, 'Oldest'), findsOneWidget);
-      await tester.tap(find.widgetWithText(ListTile, 'Oldest'));
+      final oldestOption = find.byKey(const ValueKey('media-sort-oldest'));
+      expect(oldestOption, findsOneWidget);
+      await tester.tap(oldestOption);
       await tester.pumpAndSettle();
       await tester.drag(find.byType(Scrollable).first, const Offset(0, -450));
       await tester.pumpAndSettle();
@@ -387,7 +388,10 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(newest);
         await tester.pumpAndSettle();
-        await tester.tap(find.widgetWithText(ListTile, 'Oldest'));
+        final oldestOption = find.byKey(const ValueKey('media-sort-oldest'));
+        await tester.ensureVisible(oldestOption);
+        await tester.pumpAndSettle();
+        await tester.tap(oldestOption);
         await tester.pumpAndSettle();
         expect(find.text('Oldest'), findsOneWidget);
         expect(tester.takeException(), isNull);
