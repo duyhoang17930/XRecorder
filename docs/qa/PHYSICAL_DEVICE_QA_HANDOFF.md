@@ -27,3 +27,15 @@ Run these cases on a physical ARM64 device after the emulator phase. Record devi
 | PDH-ASR-06 | Background/foreground and process lifecycle under the device OEM's restrictions | The app reports foreground-only behavior honestly; interrupted work is not misreported as active and can be retried safely. | NOT RUN |
 | PDH-ASR-07 | Large-model load and repeated ASR/export jobs | Model/native resources are released between jobs; no crash, locked model or steadily increasing memory use. | NOT RUN |
 
+## Import and project persistence hardware follow-up
+
+Run on at least one OEM device with removable/external storage where available. Record device/OEM, Android/API, provider name, selected URI type, grant behavior and direct evidence. Emulator results do not count as hardware PASS.
+
+| ID | What must be tested | Expected behavior | Status |
+|---|---|---|---|
+| PDH-IMP-01 | Import video, photo and audio from OEM Files, cloud-backed document providers and USB storage | Supported media metadata is correct; sources open from content URIs; unavailable providers return a clear recoverable error. | NOT RUN |
+| PDH-IMP-02 | SAF read grant across process death, reboot and in-place app update; revoke it in a controlled task project | Grants persist when offered; revoked access preserves the draft and offers relink without clearing edits. | NOT RUN |
+| PDH-IMP-03 | Remove and reinsert an SD card while a task-owned project references its media | Missing media is reported without losing project state; the same card/source can reopen or be relinked after reinsertion. | NOT RUN |
+| PDH-IMP-04 | Import photos/videos from multiple real camera models with EXIF orientation, rotation, HDR and unusual timestamps | Preview and dimensions/orientation match the source; no unnecessary full-resolution decode or source mutation. | NOT RUN |
+| PDH-IMP-05 | Open a large task-owned project, then trigger low-memory process recreation with referenced media on internal/external storage | Loading remains responsive; saved project/cues/tracks survive; inaccessible sources remain recoverable after restart. | NOT RUN |
+
