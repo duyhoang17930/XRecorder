@@ -129,7 +129,12 @@ class _TrashScreenState extends State<TrashScreen> {
             if (items.isEmpty && actions.unreadableTrashCount == 0) {
               return SliverFillRemaining(
                 hasScrollBody: false,
-                child: Center(child: Text(context.l10n.trashIsEmpty)),
+                child: Center(
+                  child: StudioEmptyState(
+                    title: context.l10n.trashIsEmpty,
+                    icon: AppIcons.trash,
+                  ),
+                ),
               );
             }
             return SliverMainAxisGroup(
@@ -149,31 +154,46 @@ class _TrashScreenState extends State<TrashScreen> {
                   itemCount: items.length,
                   itemBuilder: (context, index) {
                     final entry = items[index];
-                    return ListTile(
-                      title: Text(entry.originalMetadata.displayName),
-                      subtitle: Text(
-                        context.l10n.trashEntryMovedAt(
-                          context.displayValue(
-                            context.fileSize(entry.originalMetadata.sizeBytes),
-                          ),
-                          context.displayValue(entry.deletedAt.toLocal()),
-                        ),
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        AppSpacing.md,
+                        0,
+                        AppSpacing.md,
+                        AppSpacing.xs,
                       ),
-                      trailing: Wrap(
-                        children: [
-                          IconButton(
-                            tooltip: context.l10n.restore,
-                            onPressed: busy ? null : () => operate(entry, true),
-                            icon: const Icon(AppIcons.restore),
+                      child: StudioCard(
+                        padding: EdgeInsets.zero,
+                        child: ListTile(
+                          title: Text(entry.originalMetadata.displayName),
+                          subtitle: Text(
+                            context.l10n.trashEntryMovedAt(
+                              context.displayValue(
+                                context.fileSize(
+                                  entry.originalMetadata.sizeBytes,
+                                ),
+                              ),
+                              context.displayValue(entry.deletedAt.toLocal()),
+                            ),
                           ),
-                          IconButton(
-                            tooltip: context.l10n.deletePermanently,
-                            onPressed: busy
-                                ? null
-                                : () => operate(entry, false),
-                            icon: const Icon(AppIcons.deleteForever),
+                          trailing: Wrap(
+                            children: [
+                              IconButton(
+                                tooltip: context.l10n.restore,
+                                onPressed: busy
+                                    ? null
+                                    : () => operate(entry, true),
+                                icon: const Icon(AppIcons.restore),
+                              ),
+                              IconButton(
+                                tooltip: context.l10n.deletePermanently,
+                                onPressed: busy
+                                    ? null
+                                    : () => operate(entry, false),
+                                icon: const Icon(AppIcons.deleteForever),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     );
                   },

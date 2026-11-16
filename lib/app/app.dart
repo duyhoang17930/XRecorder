@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/ui/components/layout/studio_background.dart';
+import '../core/ui/theme/colors.dart';
 import '../core/ui/theme/motion.dart';
 import '../core/ui/theme/app_theme.dart';
 
@@ -111,9 +113,11 @@ class _XRecorderAppState extends State<XRecorderApp>
                 final app = AnnotatedRegion<SystemUiOverlayStyle>(
                   value: AppTheme.overlayStyle(
                     Theme.of(context).brightness,
-                    Theme.of(context).scaffoldBackgroundColor,
+                    context.studioColors.background,
                   ),
-                  child: NativeLocaleSync(child: child!),
+                  child: NativeLocaleSync(
+                    child: StudioBackground(child: child!),
+                  ),
                 );
                 final startup = widget.startupFuture;
                 if (startup == null) return app;

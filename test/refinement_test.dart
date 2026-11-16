@@ -16,7 +16,7 @@ import 'package:xrecorder/features/editor/project_effects.dart';
 import 'package:xrecorder/features/media/media_repository.dart';
 import 'package:xrecorder/features/media/media_library_screen.dart';
 import 'package:xrecorder/core/widgets/studio_widgets.dart';
-import 'package:lucide_flutter/lucide_flutter.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 import 'fixtures/catalog.dart';
 import 'fixtures/visual_catalog.dart';
@@ -231,7 +231,7 @@ void main() {
             return {'id': '', 'state': 'idle'};
           });
       await start(tester);
-      expect(AppIcons.screenshot, LucideIcons.camera);
+      expect(AppIcons.screenshot, Iconsax.camera_copy);
       await tester.tap(find.text('Screenshot'));
       await tester.pumpAndSettle();
       expect(screenshots, 1);
@@ -443,7 +443,7 @@ void main() {
         Theme.of(tester.element(find.text('Add your first clip'))).brightness,
         mode == ThemeMode.dark ? Brightness.dark : Brightness.light,
       );
-      expect(AppIcons.back, LucideIcons.chevronLeft);
+      expect(AppIcons.back, Iconsax.arrow_left_2_copy);
       expect(find.byIcon(AppIcons.back), findsOneWidget);
       settings.setThemeMode(ThemeMode.dark);
       await tester.pumpAndSettle();

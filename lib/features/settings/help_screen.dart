@@ -119,64 +119,71 @@ class _HelpScreenState extends State<HelpScreen> {
               padding: EdgeInsets.all(24),
               child: Text(context.l10n.noMatchingGuides),
             ),
+          const SizedBox(height: AppSpacing.sm),
           for (final topic in matches)
-            ExpansionTile(
-              key: ValueKey(topic.question),
-              initiallyExpanded: expanded.contains(topic.question),
-              tilePadding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.xs,
-                vertical: AppSpacing.xs,
-              ),
-              childrenPadding: const EdgeInsets.fromLTRB(
-                AppSpacing.md,
-                0,
-                AppSpacing.md,
-                AppSpacing.lg,
-              ),
-              iconColor: context.studioColors.primary,
-              collapsedIconColor: context.studioColors.muted,
-              expansionAnimationStyle: AnimationStyle(
-                duration: context.motion(AppMotion.standard),
-              ),
-              trailing: Icon(
-                expanded.contains(topic.question)
-                    ? AppIcons.chevronUp
-                    : AppIcons.chevronDown,
-              ),
-              onExpansionChanged: (value) => setState(() {
-                if (value) {
-                  expanded.add(topic.question);
-                } else {
-                  expanded.remove(topic.question);
-                }
-              }),
-              title: Text(
-                context.message(topic.question),
-                style: AppTypography.title.copyWith(
-                  color: context.studioColors.text,
-                ),
-              ),
-              subtitle: Padding(
-                padding: const EdgeInsets.only(top: AppSpacing.xxs),
-                child: Text(
-                  context.message(topic.category),
-                  style: AppTypography.caption.copyWith(
-                    color: context.studioColors.muted,
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+              child: StudioCard(
+                padding: EdgeInsets.zero,
+                child: ExpansionTile(
+                  key: ValueKey(topic.question),
+                  initiallyExpanded: expanded.contains(topic.question),
+                  tilePadding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md,
+                    vertical: AppSpacing.xxs,
                   ),
-                ),
-              ),
-              children: [
-                Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Text(
-                    context.message(topic.answer),
-                    style: AppTypography.body.copyWith(
-                      color: context.studioColors.muted,
-                      height: 1.6,
+                  childrenPadding: const EdgeInsets.fromLTRB(
+                    AppSpacing.md,
+                    0,
+                    AppSpacing.md,
+                    AppSpacing.lg,
+                  ),
+                  iconColor: context.studioColors.primary,
+                  collapsedIconColor: context.studioColors.muted,
+                  expansionAnimationStyle: AnimationStyle(
+                    duration: context.motion(AppMotion.standard),
+                  ),
+                  trailing: Icon(
+                    expanded.contains(topic.question)
+                        ? AppIcons.chevronUp
+                        : AppIcons.chevronDown,
+                  ),
+                  onExpansionChanged: (value) => setState(() {
+                    if (value) {
+                      expanded.add(topic.question);
+                    } else {
+                      expanded.remove(topic.question);
+                    }
+                  }),
+                  title: Text(
+                    context.message(topic.question),
+                    style: AppTypography.title.copyWith(
+                      color: context.studioColors.text,
                     ),
                   ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top: AppSpacing.xxs),
+                    child: Text(
+                      context.message(topic.category),
+                      style: AppTypography.caption.copyWith(
+                        color: context.studioColors.muted,
+                      ),
+                    ),
+                  ),
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        context.message(topic.answer),
+                        style: AppTypography.body.copyWith(
+                          color: context.studioColors.muted,
+                          height: 1.6,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
         ],
       ),

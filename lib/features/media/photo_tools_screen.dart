@@ -1033,10 +1033,13 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
   Widget _preview(ui.Image source) => RepaintBoundary(
     key: const ValueKey('photo-preview-frame'),
     child: DecoratedBox(
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: context.studioColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(color: context.studioColors.border),
+        shape: studioFadeBorder(
+          outline: context.studioColors.outline,
+          dark: Theme.of(context).brightness == Brightness.dark,
+          borderRadius: BorderRadius.circular(AppRadius.card),
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.xs),

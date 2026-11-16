@@ -304,12 +304,16 @@ class EditorTool extends StatelessWidget {
       message: label,
       child: Material(
         color: selected
-            ? context.studioColors.primary.withValues(alpha: .12)
+            ? context.studioColors.primary.withValues(
+                alpha: Theme.of(context).brightness == Brightness.dark
+                    ? .18
+                    : .12,
+              )
             : Colors.transparent,
-        borderRadius: BorderRadius.circular(AppRadius.control),
+        borderRadius: BorderRadius.circular(AppRadius.card),
         child: InkWell(
           onTap: onPressed,
-          borderRadius: BorderRadius.circular(AppRadius.control),
+          borderRadius: BorderRadius.circular(AppRadius.card),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Column(
@@ -338,8 +342,16 @@ class EditorToolStrip extends StatelessWidget {
   const EditorToolStrip({super.key, required this.children});
   final List<Widget> children;
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-    scrollDirection: Axis.horizontal,
-    child: Row(children: children),
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: AppSpacing.xxs),
+    // Docked like the app's navigation bar: soft surface, fading edge.
+    child: StudioFadeBorder(
+      radius: AppRadius.feature,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.all(AppSpacing.xxs),
+        child: Row(children: children),
+      ),
+    ),
   );
 }

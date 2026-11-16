@@ -351,15 +351,15 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
+                        _HeaderAction(
                           tooltip: context.l10n.trash,
+                          icon: AppIcons.trash,
                           onPressed: () => context.push('/trash'),
-                          icon: const Icon(AppIcons.trash),
                         ),
-                        IconButton(
+                        _HeaderAction(
                           tooltip: context.l10n.storage,
+                          icon: AppIcons.storage,
                           onPressed: _storage,
-                          icon: const Icon(AppIcons.storage),
                         ),
                       ],
                     ),
@@ -370,50 +370,66 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                   ],
                   const StudioLibraryQuickActions(),
                   const SizedBox(height: AppSpacing.md),
-                  ...[
-                    StudioSearchField(
-                      controller: _search,
-                      hintText: video
-                          ? context.l10n.searchVideos
-                          : context.l10n.searchPhotos,
-                      onChanged: (value) => setState(() => _query = value),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                  ],
+                  StudioSearchField(
+                    controller: _search,
+                    hintText: video
+                        ? context.l10n.searchVideos
+                        : context.l10n.searchPhotos,
+                    onChanged: (value) => setState(() => _query = value),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
                   Wrap(
-                    spacing: AppSpacing.xxs,
-                    runSpacing: AppSpacing.xxs,
+                    spacing: AppSpacing.xs,
+                    runSpacing: AppSpacing.xs,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      ChoiceChip(
-                        label: Text(context.l10n.appMedia),
-                        selected: _folder == null,
-                        onSelected: (_) {
-                          if (_folder == null) return;
-                          setState(() => _folder = null);
-                          _load();
-                        },
+                      _FilterTrack(
+                        children: [
+                          ChoiceChip(
+                            label: Text(context.l10n.appMedia),
+                            selected: _folder == null,
+                            onSelected: (_) {
+                              if (_folder == null) return;
+                              setState(() => _folder = null);
+                              _load();
+                            },
+                          ),
+                          ChoiceChip(
+                            label: Text(context.l10n.chooseFolder),
+                            avatar: Icon(
+                              AppIcons.folderOpen,
+                              color: _folder != null
+                                  ? c.primaryForeground
+                                  : c.muted,
+                            ),
+                            selected: _folder != null,
+                            onSelected: _pickingFolder
+                                ? null
+                                : (_) => _pickFolder(),
+                          ),
+                        ],
                       ),
-                      ChoiceChip(
-                        label: Text(context.l10n.chooseFolder),
-                        avatar: const Icon(AppIcons.folderOpen),
-                        selected: _folder != null,
-                        onSelected: _pickingFolder
-                            ? null
-                            : (_) => _pickFolder(),
+                      _FilterTrack(
+                        children: [
+                          Tooltip(
+                            message: context.l10n.sortMedia,
+                            child: ActionChip(
+                              label: Text(context.message(_sort.label)),
+                              avatar: const Icon(AppIcons.sort),
+                              onPressed: _chooseSort,
+                            ),
+                          ),
+                        ],
                       ),
                       if (_folder != null)
                         TextButton(
+                          style: TextButton.styleFrom(
+                            foregroundColor: c.warning,
+                            shape: const StadiumBorder(),
+                          ),
                           onPressed: _pickingFolder ? null : _disconnectFolder,
                           child: Text(context.l10n.disconnectFolder),
                         ),
-                      Tooltip(
-                        message: context.l10n.sortMedia,
-                        child: ActionChip(
-                          label: Text(context.message(_sort.label)),
-                          avatar: const Icon(AppIcons.sort),
-                          onPressed: _chooseSort,
-                        ),
-                      ),
                     ],
                   ),
                   SectionTitle(
@@ -422,9 +438,25 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                         : video
                         ? context.l10n.recentVideos
                         : context.l10n.yourPhotos,
-                    trailing: Text(
-                      context.l10n.itemCount(items.length),
-                      style: TextStyle(color: c.muted),
+                    padding: const EdgeInsets.only(
+                      top: AppSpacing.md,
+                      bottom: AppSpacing.sm,
+                    ),
+                    trailing: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: c.elevated,
+                        borderRadius: BorderRadius.circular(AppRadius.pill),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.sm,
+                          vertical: AppSpacing.xxs,
+                        ),
+                        child: Text(
+                          context.l10n.itemCount(items.length),
+                          style: AppTypography.caption.copyWith(color: c.muted),
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -513,126 +545,13 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                           padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                         ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                        child: StudioCard(
-                          padding: EdgeInsets.zero,
-                          // Content is inset and thumbnails clip themselves. Bound
-                          // ink at the source rather than clipping every scroll frame.
-                          clipBehavior: Clip.none,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(AppRadius.card),
-                            onTap: () => details(item),
-                            child: Padding(
-                              padding: const EdgeInsets.all(AppSpacing.sm),
-                              child: Row(
-                                children: [
-                                  ExcludeSemantics(
-                                    child: ClipRRect(
-                                      clipBehavior: Clip.hardEdge,
-                                      borderRadius: BorderRadius.circular(
-                                        AppRadius.icon,
-                                      ),
-                                      child: SizedBox(
-                                        width: AppSize.thumbnailWidth,
-                                        height: AppSize.thumbnailHeight,
-                                        child: Stack(
-                                          fit: StackFit.expand,
-                                          children: [
-                                            ColoredBox(
-                                              color: c.elevated,
-                                              child: RepaintBoundary(
-                                                key: ValueKey(
-                                                  'library-thumbnail-${item.id}',
-                                                ),
-                                                child: MediaThumbnail(
-                                                  key: ValueKey(
-                                                    '${item.id}-${item.modifiedAt.millisecondsSinceEpoch}-${item.sizeBytes}-${item.revision}',
-                                                  ),
-                                                  item: item,
-                                                ),
-                                              ),
-                                            ),
-                                            if (item.duration != null)
-                                              Positioned(
-                                                bottom: AppSpacing.xxs,
-                                                right: AppSpacing.xxs,
-                                                child: DecoratedBox(
-                                                  decoration: BoxDecoration(
-                                                    color: AppColors.mediaScrim,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          AppRadius.icon / 2,
-                                                        ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.symmetric(
-                                                          horizontal:
-                                                              AppSpacing.xxs,
-                                                        ),
-                                                    child: Text(
-                                                      _duration(item.duration!),
-                                                      style: AppTypography.micro
-                                                          .copyWith(
-                                                            color: AppColors
-                                                                .onMedia,
-                                                          ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: AppSpacing.sm),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          item.displayName,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: AppTypography.bodyEmphasis,
-                                        ),
-                                        const SizedBox(height: AppSpacing.xxs),
-                                        Text(
-                                          context.l10n.mediaSizeDuration(
-                                            context.displayValue(
-                                              context.fileSize(item.sizeBytes),
-                                            ),
-                                            context.displayValue(
-                                              item.duration == null
-                                                  ? ''
-                                                  : ' · ${_duration(item.duration!)}',
-                                            ),
-                                          ),
-                                          style: AppTypography.bodySmall
-                                              .copyWith(color: c.muted),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  PopupMenuButton<String>(
-                                    tooltip: context.l10n.mediaActionsFor(
-                                      context.displayValue(item.displayName),
-                                    ),
-                                    onSelected: (_) => details(item),
-                                    itemBuilder: (_) => [
-                                      PopupMenuItem(
-                                        value: 'details',
-                                        child: Text(context.l10n.openDetails),
-                                      ),
-                                    ],
-                                    icon: const Icon(AppIcons.more),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                        padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+                        child: _MediaTile(
+                          item: item,
+                          duration: item.duration == null
+                              ? null
+                              : _duration(item.duration!),
+                          onTap: () => details(item),
                         ),
                       ),
                     ],
@@ -659,6 +578,231 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
   String _day(DateTime value) => value.millisecondsSinceEpoch == 0
       ? context.l10n.dateUnavailable
       : context.calendarDate(value);
+}
+
+class _HeaderAction extends StatelessWidget {
+  const _HeaderAction({
+    required this.tooltip,
+    required this.icon,
+    required this.onPressed,
+  });
+  final String tooltip;
+  final IconData icon;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.studioColors;
+    return IconButton(
+      tooltip: tooltip,
+      onPressed: onPressed,
+      style: IconButton.styleFrom(
+        backgroundColor: c.card,
+        foregroundColor: c.text,
+        shape: CircleBorder(side: BorderSide(color: c.border)),
+      ),
+      icon: Icon(icon, size: AppIconSize.medium),
+    );
+  }
+}
+
+/// Groups related filter chips; the chips themselves carry all styling.
+class _FilterTrack extends StatelessWidget {
+  const _FilterTrack({required this.children});
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) =>
+      Wrap(spacing: AppSpacing.xxs, children: children);
+}
+
+class _MediaTile extends StatelessWidget {
+  const _MediaTile({
+    required this.item,
+    required this.duration,
+    required this.onTap,
+  });
+  final MediaItem item;
+  final String? duration;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.studioColors;
+    final radius = BorderRadius.circular(AppRadius.card - AppBorder.subtle);
+    return StudioFadeBorder(
+      // Content is inset and thumbnails clip themselves. Bound ink at the
+      // source rather than clipping every scroll frame.
+      clipBehavior: Clip.none,
+      child: InkWell(
+        borderRadius: radius,
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.xs),
+          child: Row(
+            children: [
+              ExcludeSemantics(
+                child: ClipRRect(
+                  clipBehavior: Clip.hardEdge,
+                  borderRadius: BorderRadius.circular(AppRadius.control),
+                  child: SizedBox(
+                    width: AppSize.thumbnailWidth,
+                    height: AppSize.thumbnailHeight,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        ColoredBox(
+                          color: c.elevated,
+                          child: RepaintBoundary(
+                            key: ValueKey('library-thumbnail-${item.id}'),
+                            child: MediaThumbnail(
+                              key: ValueKey(
+                                '${item.id}-${item.modifiedAt.millisecondsSinceEpoch}-${item.sizeBytes}-${item.revision}',
+                              ),
+                              item: item,
+                            ),
+                          ),
+                        ),
+                        if (duration != null)
+                          Positioned(
+                            bottom: AppSpacing.xxs + 2,
+                            right: AppSpacing.xxs + 2,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: AppColors.mediaScrim,
+                                borderRadius: BorderRadius.circular(
+                                  AppRadius.pill,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSpacing.xs - 2,
+                                ),
+                                child: Text(
+                                  duration!,
+                                  style: AppTypography.micro.copyWith(
+                                    color: AppColors.onMedia,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.displayName,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypography.bodyEmphasis,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      context.l10n.mediaSizeDuration(
+                        context.displayValue(context.fileSize(item.sizeBytes)),
+                        context.displayValue(
+                          duration == null ? '' : ' · $duration',
+                        ),
+                      ),
+                      style: AppTypography.bodySmall.copyWith(color: c.muted),
+                    ),
+                  ],
+                ),
+              ),
+              _MediaActionsMenu(item: item, onOpen: onTap),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MediaActionsMenu extends StatelessWidget {
+  const _MediaActionsMenu({required this.item, required this.onOpen});
+  final MediaItem item;
+  final VoidCallback onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.studioColors;
+    return PopupMenuButton<String>(
+      tooltip: context.l10n.mediaActionsFor(
+        context.displayValue(item.displayName),
+      ),
+      onSelected: (_) => onOpen(),
+      position: PopupMenuPosition.under,
+      offset: const Offset(0, AppSpacing.xxs),
+      color: c.surface,
+      elevation: AppElevation.dialog,
+      shadowColor: Colors.black.withValues(alpha: .18),
+      constraints: const BoxConstraints(minWidth: 220, maxWidth: 280),
+      menuPadding: const EdgeInsets.all(AppSpacing.xxs + 2),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppRadius.menu + 2),
+        side: BorderSide(color: c.border),
+      ),
+      itemBuilder: (_) => [
+        PopupMenuItem<String>(
+          enabled: false,
+          height: 0,
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.sm,
+            AppSpacing.xs,
+            AppSpacing.sm,
+            AppSpacing.xs,
+          ),
+          child: Text(
+            item.displayName,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppTypography.caption.copyWith(color: c.muted),
+          ),
+        ),
+        const PopupMenuDivider(height: AppSpacing.xxs),
+        PopupMenuItem<String>(
+          value: 'details',
+          padding: EdgeInsets.zero,
+          child: Container(
+            margin: const EdgeInsets.only(top: AppSpacing.xxs),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+            child: Row(
+              children: [
+                StudioIconTile(
+                  icon: AppIcons.info,
+                  size: 32,
+                  iconSize: AppIconSize.small,
+                  radius: AppRadius.pill,
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: Text(
+                    context.l10n.openDetails,
+                    style: AppTypography.bodyEmphasis.copyWith(color: c.text),
+                  ),
+                ),
+                Icon(
+                  AppIcons.chevronRight,
+                  size: AppIconSize.small,
+                  color: c.muted,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+      style: IconButton.styleFrom(foregroundColor: c.muted),
+      icon: const Icon(AppIcons.more),
+    );
+  }
 }
 
 class _MediaSortOption extends StatelessWidget {

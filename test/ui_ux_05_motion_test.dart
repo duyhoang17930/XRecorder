@@ -39,8 +39,8 @@ void main() {
                 .then(ByteData.sublistView),
           ))
         .load();
-    await (FontLoader('packages/lucide_flutter/LucideIcons')..addFont(
-          rootBundle.load('packages/lucide_flutter/assets/lucide.ttf'),
+    await (FontLoader('packages/iconsax_flutter/FlutterIconsax')..addFont(
+          rootBundle.load('packages/iconsax_flutter/fonts/FlutterIconsax.ttf'),
         ))
         .load();
   });
@@ -224,7 +224,7 @@ void main() {
           find.byType(BackdropFilter),
         );
         final glass =
-            ((filter.child! as DecoratedBox).decoration as BoxDecoration)
+            ((filter.child! as DecoratedBox).decoration as ShapeDecoration)
                 .color!;
         final indicator = tester.widget<DecoratedBox>(
           find.byKey(const ValueKey('navigation-selected-indicator')),
@@ -281,7 +281,9 @@ void main() {
       final filter = tester.widget<BackdropFilter>(find.byType(BackdropFilter));
       expect(filter.enabled, isFalse);
       expect(
-        ((filter.child! as DecoratedBox).decoration as BoxDecoration).color!.a,
+        ((filter.child! as DecoratedBox).decoration as ShapeDecoration)
+            .color!
+            .a,
         1,
       );
       for (final next in [3, 0, 2, 1, 3]) {

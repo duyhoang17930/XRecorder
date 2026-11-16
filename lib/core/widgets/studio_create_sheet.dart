@@ -20,6 +20,7 @@ import '../ui/components/feedback/studio_feedback.dart';
 import '../ui/theme/colors.dart';
 import '../ui/theme/radius.dart';
 import '../ui/theme/spacing.dart';
+import '../ui/theme/typography.dart';
 
 Future<void> openStudioCreate(BuildContext context) =>
     showStudioBottomSheet<void>(
@@ -73,50 +74,143 @@ class StudioRecordHero extends StatelessWidget {
       videoBusy || failed ? capture.session : null,
       error: failed ? capture.error : null,
     );
+    final dark = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
       width: double.infinity,
-      child: StudioCard(
+      child: StudioFadeBorder(
         radius: AppRadius.feature,
-        color: Color.alphaBlend(c.primary.withValues(alpha: .03), c.card),
-        borderColor: c.border,
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        borderColor: c.primary,
+        child: Stack(
           children: [
-            RecordingStatusIndicator(
-              label: context.message(status.label),
-              icon: status.icon,
-              color: failed
-                  ? c.warning
-                  : videoBusy &&
-                        ![
-                          RecordingState.recording,
-                          RecordingState.paused,
-                        ].contains(capture.session?.state)
-                  ? c.primary
-                  : null,
-              active: videoBusy,
+            // A single soft accent glow replaces heavier card chrome.
+            Positioned(
+              top: -96,
+              right: -72,
+              child: IgnorePointer(
+                child: Container(
+                  width: 240,
+                  height: 240,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(
+                      colors: [
+                        c.primary.withValues(alpha: dark ? .22 : .12),
+                        c.primary.withValues(alpha: 0),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
-            if (!videoBusy) ...[
-              const SizedBox(height: AppSpacing.md),
-              Text(
-                context.l10n.captureRecorderTitle,
-                style: Theme.of(context).textTheme.displayLarge,
+            Padding(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _HeroStatusPill(
+                    child: RecordingStatusIndicator(
+                      label: context.message(status.label),
+                      icon: status.icon,
+                      color: failed
+                          ? c.warning
+                          : videoBusy &&
+                                ![
+                                  RecordingState.recording,
+                                  RecordingState.paused,
+                                ].contains(capture.session?.state)
+                          ? c.primary
+                          : null,
+                      active: videoBusy,
+                    ),
+                  ),
+                  if (!videoBusy) ...[
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      context.l10n.captureRecorderTitle,
+                      style: Theme.of(context).textTheme.displayLarge,
+                    ),
+                    const SizedBox(height: AppSpacing.xs),
+                    Wrap(
+                      spacing: AppSpacing.xs,
+                      runSpacing: AppSpacing.xs,
+                      children: [
+                        _HeroSpec(context.message(settings.resolution)),
+                        _HeroSpec('${settings.fps} FPS'),
+                        _HeroSpec(context.message(settings.audio)),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Theme(
+                        data: Theme.of(context).copyWith(
+                          filledButtonTheme: FilledButtonThemeData(
+                            style: FilledButton.styleFrom(
+                              minimumSize: const Size.fromHeight(
+                                AppSize.button,
+                              ),
+                              shape: const StadiumBorder(),
+                              elevation: 0,
+                            ),
+                          ),
+                        ),
+                        child: RecordActionButton(
+                          label: context.l10n.recordScreen,
+                          onPressed: capture.busy
+                              ? null
+                              : () => openRecordingSetup(context),
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
               ),
-              const SizedBox(height: AppSpacing.xs),
-              Text(
-                '${context.message(settings.resolution)} · ${settings.fps} FPS · ${context.message(settings.audio)}',
-                style: TextStyle(color: c.muted),
-              ),
-              const SizedBox(height: AppSpacing.lg),
-              RecordActionButton(
-                label: context.l10n.recordScreen,
-                onPressed: capture.busy
-                    ? null
-                    : () => openRecordingSetup(context),
-              ),
-            ],
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _HeroStatusPill extends StatelessWidget {
+  const _HeroStatusPill({required this.child});
+  final Widget child;
+  @override
+  Widget build(BuildContext context) => DecoratedBox(
+    decoration: BoxDecoration(
+      color: context.studioColors.elevated.withValues(alpha: .6),
+      borderRadius: BorderRadius.circular(AppRadius.pill),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.xxs,
+      ),
+      child: child,
+    ),
+  );
+}
+
+class _HeroSpec extends StatelessWidget {
+  const _HeroSpec(this.label);
+  final String label;
+  @override
+  Widget build(BuildContext context) {
+    final c = context.studioColors;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppRadius.pill),
+        border: Border.all(color: c.border),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.sm,
+          vertical: 2,
+        ),
+        child: Text(
+          label,
+          style: AppTypography.caption.copyWith(color: c.muted),
         ),
       ),
     );

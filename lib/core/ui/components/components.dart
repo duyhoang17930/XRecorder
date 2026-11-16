@@ -5,6 +5,7 @@ export 'dialogs/studio_dialog.dart';
 export 'feedback/studio_feedback.dart';
 export 'inputs/studio_fields.dart';
 export 'lists/studio_list.dart';
+export 'layout/studio_background.dart';
 export 'layout/studio_layout.dart';
 export 'menus/studio_menus.dart';
 export 'navigation/studio_navigation.dart';

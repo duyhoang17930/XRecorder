@@ -208,49 +208,57 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 120.0,
                 220.0,
               ),
-              child: MediaThumbnail(item: item),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(AppRadius.feature),
+                child: ColoredBox(
+                  color: context.studioColors.elevated,
+                  child: MediaThumbnail(item: item),
+                ),
+              ),
             ),
             SectionTitle(item.displayName),
             if (busy && (ModalRoute.of(context)?.isCurrent ?? true))
               const LinearProgressIndicator(),
             SectionTitle(context.l10n.preview),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                FilledButton.icon(
-                  onPressed: busy
-                      ? null
-                      : () => run(() async {
-                          if (item.kind == MediaKind.video) {
-                            await actions.preview(item.uri);
-                          } else {
-                            context.push(
-                              '/photo-preview/${Uri.encodeComponent(item.id)}',
-                            );
-                          }
-                        }),
-                  icon: const Icon(AppIcons.play),
-                  label: Text(context.l10n.preview),
-                ),
-                TextButton.icon(
-                  onPressed: busy
-                      ? null
-                      : () => run(() async {
-                          await actions.share(item.uri);
-                        }, purpose: UserOperation.share),
-                  icon: const Icon(AppIcons.share),
-                  label: Text(context.l10n.share),
-                ),
-                if (item.kind == MediaKind.video &&
-                    item.duration != null &&
-                    item.duration! >= const Duration(milliseconds: 200))
-                  OutlinedButton.icon(
-                    onPressed: busy ? null : () => run(() => editVideo(item)),
-                    icon: const Icon(AppIcons.edit),
-                    label: Text(context.l10n.editVideo),
+            StudioCard(
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  FilledButton.icon(
+                    onPressed: busy
+                        ? null
+                        : () => run(() async {
+                            if (item.kind == MediaKind.video) {
+                              await actions.preview(item.uri);
+                            } else {
+                              context.push(
+                                '/photo-preview/${Uri.encodeComponent(item.id)}',
+                              );
+                            }
+                          }),
+                    icon: const Icon(AppIcons.play),
+                    label: Text(context.l10n.preview),
                   ),
-              ],
+                  TextButton.icon(
+                    onPressed: busy
+                        ? null
+                        : () => run(() async {
+                            await actions.share(item.uri);
+                          }, purpose: UserOperation.share),
+                    icon: const Icon(AppIcons.share),
+                    label: Text(context.l10n.share),
+                  ),
+                  if (item.kind == MediaKind.video &&
+                      item.duration != null &&
+                      item.duration! >= const Duration(milliseconds: 200))
+                    OutlinedButton.icon(
+                      onPressed: busy ? null : () => run(() => editVideo(item)),
+                      icon: const Icon(AppIcons.edit),
+                      label: Text(context.l10n.editVideo),
+                    ),
+                ],
+              ),
             ),
             if (item.kind == MediaKind.image) ...[
               SectionTitle(context.l10n.edit),
@@ -270,36 +278,38 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                     item.duration! < const Duration(milliseconds: 200)))
               Text(context.l10n.chooseAPlayableVideoOfAtLeast),
             SectionTitle(context.l10n.fileManagement),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                if (item.owned)
+            StudioCard(
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  if (item.owned)
+                    TextButton.icon(
+                      onPressed: busy
+                          ? null
+                          : () => run(
+                              () => rename(item),
+                              purpose: UserOperation.rename,
+                            ),
+                      icon: const Icon(AppIcons.rename),
+                      label: Text(context.l10n.rename),
+                    ),
                   TextButton.icon(
                     onPressed: busy
                         ? null
-                        : () => run(
-                            () => rename(item),
-                            purpose: UserOperation.rename,
-                          ),
-                    icon: const Icon(AppIcons.rename),
-                    label: Text(context.l10n.rename),
+                        : () => run(() => transfer(item, false)),
+                    icon: const Icon(AppIcons.folder),
+                    label: Text(context.l10n.copyToFolder),
                   ),
-                TextButton.icon(
-                  onPressed: busy
-                      ? null
-                      : () => run(() => transfer(item, false)),
-                  icon: const Icon(AppIcons.folder),
-                  label: Text(context.l10n.copyToFolder),
-                ),
-                TextButton.icon(
-                  onPressed: busy
-                      ? null
-                      : () => run(() => transfer(item, true)),
-                  icon: const Icon(AppIcons.folderOpen),
-                  label: Text(context.l10n.moveToFolder),
-                ),
-              ],
+                  TextButton.icon(
+                    onPressed: busy
+                        ? null
+                        : () => run(() => transfer(item, true)),
+                    icon: const Icon(AppIcons.folderOpen),
+                    label: Text(context.l10n.moveToFolder),
+                  ),
+                ],
+              ),
             ),
             if (!item.owned)
               Text(context.l10n.externalFilesCanBeCopiedMovingRequires),
@@ -322,33 +332,41 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 ),
               ),
             ],
-            ListTile(
-              title: Text(context.l10n.size),
-              subtitle: Text(context.fileSize(item.sizeBytes)),
-            ),
-            ListTile(
-              title: Text(context.l10n.format),
-              subtitle: Text(item.mimeType),
-            ),
-            if (item.duration != null)
-              ListTile(
-                title: Text(context.l10n.duration),
-                subtitle: Text(
-                  context.l10n.secondsValue(
-                    context.displayValue(item.duration!.inSeconds),
+            const SizedBox(height: AppSpacing.md),
+            StudioCard(
+              padding: const EdgeInsets.symmetric(vertical: AppSpacing.xxs),
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(context.l10n.size),
+                    subtitle: Text(context.fileSize(item.sizeBytes)),
                   ),
-                ),
-              ),
-            if (item.width != null)
-              ListTile(
-                title: Text(context.l10n.dimensions),
-                subtitle: Text(
-                  context.l10n.dimensionsValue(
-                    context.displayValue(item.width),
-                    context.displayValue(item.height),
+                  ListTile(
+                    title: Text(context.l10n.format),
+                    subtitle: Text(item.mimeType),
                   ),
-                ),
+                  if (item.duration != null)
+                    ListTile(
+                      title: Text(context.l10n.duration),
+                      subtitle: Text(
+                        context.l10n.secondsValue(
+                          context.displayValue(item.duration!.inSeconds),
+                        ),
+                      ),
+                    ),
+                  if (item.width != null)
+                    ListTile(
+                      title: Text(context.l10n.dimensions),
+                      subtitle: Text(
+                        context.l10n.dimensionsValue(
+                          context.displayValue(item.width),
+                          context.displayValue(item.height),
+                        ),
+                      ),
+                    ),
+                ],
               ),
+            ),
           ],
         );
       },
