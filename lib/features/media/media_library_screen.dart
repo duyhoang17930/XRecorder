@@ -378,63 +378,59 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                     onChanged: (value) => setState(() => _query = value),
                   ),
                   const SizedBox(height: AppSpacing.sm),
-                  _FilterChipTheme(
-                    child: Wrap(
-                      spacing: AppSpacing.xs,
-                      runSpacing: AppSpacing.xs,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        _FilterTrack(
-                          children: [
-                            ChoiceChip(
-                              label: Text(context.l10n.appMedia),
-                              selected: _folder == null,
-                              onSelected: (_) {
-                                if (_folder == null) return;
-                                setState(() => _folder = null);
-                                _load();
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(context.l10n.chooseFolder),
-                              avatar: Icon(
-                                AppIcons.folderOpen,
-                                color: _folder != null
-                                    ? c.primaryForeground
-                                    : c.muted,
-                              ),
-                              selected: _folder != null,
-                              onSelected: _pickingFolder
-                                  ? null
-                                  : (_) => _pickFolder(),
-                            ),
-                          ],
-                        ),
-                        _FilterTrack(
-                          children: [
-                            Tooltip(
-                              message: context.l10n.sortMedia,
-                              child: ActionChip(
-                                label: Text(context.message(_sort.label)),
-                                avatar: const Icon(AppIcons.sort),
-                                onPressed: _chooseSort,
-                              ),
-                            ),
-                          ],
-                        ),
-                        if (_folder != null)
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: c.warning,
-                              shape: const StadiumBorder(),
-                            ),
-                            onPressed: _pickingFolder
-                                ? null
-                                : _disconnectFolder,
-                            child: Text(context.l10n.disconnectFolder),
+                  Wrap(
+                    spacing: AppSpacing.xs,
+                    runSpacing: AppSpacing.xs,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      _FilterTrack(
+                        children: [
+                          ChoiceChip(
+                            label: Text(context.l10n.appMedia),
+                            selected: _folder == null,
+                            onSelected: (_) {
+                              if (_folder == null) return;
+                              setState(() => _folder = null);
+                              _load();
+                            },
                           ),
-                      ],
-                    ),
+                          ChoiceChip(
+                            label: Text(context.l10n.chooseFolder),
+                            avatar: Icon(
+                              AppIcons.folderOpen,
+                              color: _folder != null
+                                  ? c.primaryForeground
+                                  : c.muted,
+                            ),
+                            selected: _folder != null,
+                            onSelected: _pickingFolder
+                                ? null
+                                : (_) => _pickFolder(),
+                          ),
+                        ],
+                      ),
+                      _FilterTrack(
+                        children: [
+                          Tooltip(
+                            message: context.l10n.sortMedia,
+                            child: ActionChip(
+                              label: Text(context.message(_sort.label)),
+                              avatar: const Icon(AppIcons.sort),
+                              onPressed: _chooseSort,
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (_folder != null)
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            foregroundColor: c.warning,
+                            shape: const StadiumBorder(),
+                          ),
+                          onPressed: _pickingFolder ? null : _disconnectFolder,
+                          child: Text(context.l10n.disconnectFolder),
+                        ),
+                    ],
                   ),
                   SectionTitle(
                     _query.isNotEmpty
@@ -606,56 +602,6 @@ class _HeaderAction extends StatelessWidget {
         shape: CircleBorder(side: BorderSide(color: c.border)),
       ),
       icon: Icon(icon, size: AppIconSize.medium),
-    );
-  }
-}
-
-/// Segmented-control styling: chips sit in a soft track and the selected one
-/// lifts out as a raised pill.
-class _FilterChipTheme extends StatelessWidget {
-  const _FilterChipTheme({required this.child});
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = context.studioColors;
-    final dark = Theme.of(context).brightness == Brightness.dark;
-    final theme = Theme.of(context).chipTheme;
-    return ChipTheme(
-      data: theme.copyWith(
-        backgroundColor: Colors.transparent,
-        selectedColor: c.primary,
-        disabledColor: Colors.transparent,
-        side: WidgetStateBorderSide.resolveWith(
-          (states) => BorderSide(color: Colors.transparent),
-        ),
-        shape: const StadiumBorder(),
-        // Only the selected segment casts a shadow, so it lifts off the track.
-        elevation: 1.5,
-        pressElevation: 1.5,
-        shadowColor: Colors.transparent,
-        selectedShadowColor: c.primary.withValues(alpha: dark ? .45 : .35),
-        surfaceTintColor: Colors.transparent,
-        labelStyle: Theme.of(context).textTheme.labelMedium!.copyWith(
-          color: WidgetStateColor.resolveWith(
-            (states) => states.contains(WidgetState.selected)
-                ? c.primaryForeground
-                : states.contains(WidgetState.disabled)
-                ? c.disabled
-                : c.muted,
-          ),
-        ),
-        // Selected chips read secondaryLabelStyle; keep it legible on the fill.
-        secondaryLabelStyle: Theme.of(context).textTheme.labelMedium!
-            .copyWith(color: c.primaryForeground),
-        checkmarkColor: c.primaryForeground,
-        iconTheme: IconThemeData(color: c.muted, size: AppIconSize.small),
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.xxs,
-          vertical: 6,
-        ),
-      ),
-      child: child,
     );
   }
 }
