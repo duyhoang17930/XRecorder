@@ -632,6 +632,7 @@ void main() {
     (tester) async {
       final catalog = TestCatalog()..items.clear();
       catalog.selection = Uri.parse('content://test/tree/empty');
+      catalog.savedFolderRequest = Future.value(null);
       final router = await start(tester, catalog: catalog);
       expect(find.text('No recordings yet'), findsOneWidget);
       expect(find.text('Your videos will appear here.'), findsOneWidget);

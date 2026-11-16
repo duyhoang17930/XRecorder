@@ -31,6 +31,7 @@ class _EditorScreenState extends State<EditorScreen> {
   String? error;
   int selected = 0;
   Duration position = Duration.zero;
+  bool previewPlaying = false;
   final playhead = ValueNotifier(Duration.zero);
   final timelineScroll = ScrollController();
   String? panel;
@@ -352,11 +353,10 @@ class _EditorScreenState extends State<EditorScreen> {
                   onPressed: renameProject,
                   icon: const Icon(AppIcons.rename),
                 ),
-                FilledButton(
-                  onPressed: exporting || project.clips.isEmpty ? null : export,
-                  child: Text(
-                    exporting ? context.l10n.starting : context.l10n.export,
-                  ),
+                EditorExportAction(
+                  enabled: !exporting && project.clips.isNotEmpty,
+                  exporting: exporting,
+                  onPressed: export,
                 ),
               ],
             ),
@@ -366,6 +366,11 @@ class _EditorScreenState extends State<EditorScreen> {
                       key: preview,
                       fitViewport: true,
                       project: project,
+                      onPlaying: (value) {
+                        if (mounted && previewPlaying != value) {
+                          setState(() => previewPlaying = value);
+                        }
+                      },
                       onPosition: (value) {
                         if (!mounted) return;
                         position = value;
@@ -414,54 +419,20 @@ class _EditorScreenState extends State<EditorScreen> {
                     ),
                 ],
               ),
-              transport: ValueListenableBuilder<Duration>(
-                valueListenable: playhead,
-                builder: (context, current, _) => Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      context.l10n.playheadTime(
-                        context.displayValue(
-                          context.decimal(
-                            current.inMilliseconds / 1000,
-                            digits: 1,
-                          ),
-                        ),
-                        context.displayValue(
-                          context.decimal(
-                            project.duration.inMilliseconds / 1000,
-                            digits: 1,
-                          ),
-                        ),
+              transport: project.clips.isEmpty
+                  ? const SizedBox.shrink()
+                  : EditorPlaybackControls(
+                      position: playhead,
+                      duration: project.duration,
+                      playing: previewPlaying,
+                      onToggle: () => preview.currentState?.command(
+                        previewPlaying ? 'pause' : 'play',
+                      ),
+                      onSeek: (value) => preview.currentState?.command(
+                        'seek',
+                        value.inMilliseconds,
                       ),
                     ),
-                    if (project.duration > Duration.zero)
-                      Semantics(
-                        label: context.l10n.previewPosition,
-                        child: Directionality(
-                          textDirection: TextDirection.ltr,
-                          child: Slider(
-                            key: const ValueKey('editor-playhead'),
-                            value: current.inMilliseconds.toDouble().clamp(
-                              0,
-                              project.duration.inMilliseconds.toDouble(),
-                            ),
-                            max: project.duration.inMilliseconds.toDouble(),
-                            onChanged: (v) => preview.currentState?.command(
-                              'seek',
-                              v.round(),
-                            ),
-                            semanticFormatterCallback: context.spokenValue(
-                              (strings, value) => strings.secondsValue(value),
-                              multiplier: .001,
-                              digits: 1,
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
               timeline: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

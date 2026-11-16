@@ -309,4 +309,71 @@ void main() {
       source.dispose();
     },
   );
+
+  test(
+    'eraser detects sparse strokes between vertices and preserves the source',
+    () async {
+      final recorder = ui.PictureRecorder();
+      Canvas(recorder).drawColor(Colors.black, BlendMode.src);
+      final picture = recorder.endRecording();
+      final source = await picture.toImage(200, 100);
+      picture.dispose();
+      final mark = PhotoMark('Pen', Colors.red, [
+        const Offset(.1, .5),
+        const Offset(.9, .5),
+      ], width: .02);
+      final sourceMarks = [mark];
+      final untouched = erasePhotoMarks(
+        sourceMarks,
+        const Offset(.5, .1),
+        const Offset(.5, .2),
+        imageSize: const Size(200, 100),
+        radius: 12,
+      );
+      expect(identical(untouched, sourceMarks), isTrue);
+
+      final marks = erasePhotoMarks(
+        sourceMarks,
+        const Offset(.5, .3),
+        const Offset(.5, .7),
+        imageSize: const Size(200, 100),
+        radius: 12,
+      );
+      expect(marks, isEmpty);
+
+      final output = await renderPhotoCopy(
+        source,
+        marks,
+        const Rect.fromLTWH(0, 0, 200, 100),
+      );
+      final bytes = (await output.toByteData(
+        format: ui.ImageByteFormat.rawRgba,
+      ))!.buffer.asUint8List();
+      Color pixel(int x, int y) {
+        final offset = (y * output.width + x) * 4;
+        return Color.fromARGB(
+          bytes[offset + 3],
+          bytes[offset],
+          bytes[offset + 1],
+          bytes[offset + 2],
+        );
+      }
+
+      expect(pixel(40, 50), Colors.black);
+      expect(pixel(100, 50), Colors.black);
+      expect(pixel(160, 50), Colors.black);
+      final original = (await source.toByteData(
+        format: ui.ImageByteFormat.rawRgba,
+      ))!.buffer.asUint8List();
+      final originalCenter = (50 * 200 + 100) * 4;
+      expect(original.sublist(originalCenter, originalCenter + 4), [
+        0,
+        0,
+        0,
+        255,
+      ]);
+      output.dispose();
+      source.dispose();
+    },
+  );
 }

@@ -29,6 +29,200 @@ class PhotoMark {
   final String text;
 }
 
+/// Removes annotation marks crossed by an eraser swipe. Pen strokes are hit
+/// tested as line segments, so a sparse stroke remains erasable between points.
+List<PhotoMark> erasePhotoMarks(
+  List<PhotoMark> marks,
+  Offset from,
+  Offset to, {
+  required Size imageSize,
+  required double radius,
+}) {
+  if (imageSize.width <= 0 || imageSize.height <= 0 || radius <= 0) {
+    return marks;
+  }
+  final start = Offset(from.dx * imageSize.width, from.dy * imageSize.height);
+  final end = Offset(to.dx * imageSize.width, to.dy * imageSize.height);
+  final result = <PhotoMark>[];
+  var changed = false;
+  for (final mark in marks) {
+    if (_photoMarkHitByEraser(mark, start, end, imageSize, radius)) {
+      changed = true;
+    } else {
+      result.add(mark);
+    }
+  }
+  return changed ? result : marks;
+}
+
+bool _photoMarkHitByEraser(
+  PhotoMark mark,
+  Offset eraserStart,
+  Offset eraserEnd,
+  Size imageSize,
+  double radius,
+) {
+  if (mark.points.isEmpty) return false;
+  Offset pixels(Offset point) =>
+      Offset(point.dx * imageSize.width, point.dy * imageSize.height);
+  final points = mark.points.map(pixels).toList();
+  final strokeRadius = math.max(2.0, imageSize.width * mark.width) / 2;
+  final hitRadius = radius + strokeRadius;
+  bool hitsSegment(Offset a, Offset b) =>
+      _segmentsWithinRadius(eraserStart, eraserEnd, a, b, hitRadius);
+
+  if (mark.tool == 'Pen') {
+    if (points.length == 1) {
+      return _pointSegmentDistanceSquared(
+            points.single,
+            eraserStart,
+            eraserEnd,
+          ) <=
+          hitRadius * hitRadius;
+    }
+    for (var index = 0; index < points.length - 1; index++) {
+      if (hitsSegment(points[index], points[index + 1])) return true;
+    }
+    return false;
+  }
+
+  final bounds = _photoMarkBounds(mark, imageSize);
+  if (mark.tool == 'Text' || _photoStickerTypes.contains(mark.tool)) {
+    return _segmentIntersectsRect(
+      eraserStart,
+      eraserEnd,
+      bounds.inflate(hitRadius),
+    );
+  }
+
+  final first = points.first, last = points.last;
+  if (mark.tool == 'Circle') {
+    final rect = Rect.fromPoints(first, last);
+    final center = rect.center;
+    final radiusX = rect.width / 2, radiusY = rect.height / 2;
+    var previous = Offset(center.dx + radiusX, center.dy);
+    for (var index = 1; index <= 64; index++) {
+      final angle = index * math.pi / 32;
+      final next = Offset(
+        center.dx + math.cos(angle) * radiusX,
+        center.dy + math.sin(angle) * radiusY,
+      );
+      if (hitsSegment(previous, next)) return true;
+      previous = next;
+    }
+    return false;
+  }
+  if (mark.tool == 'Arrow') {
+    if (hitsSegment(first, last)) return true;
+    final angle = math.atan2(last.dy - first.dy, last.dx - first.dx);
+    final head = math.max(8.0, strokeRadius * 8);
+    for (final offset in [-math.pi / 6, math.pi / 6]) {
+      final headEnd =
+          last -
+          Offset(
+            math.cos(angle + offset) * head,
+            math.sin(angle + offset) * head,
+          );
+      if (hitsSegment(last, headEnd)) return true;
+    }
+    return false;
+  }
+
+  final rect = Rect.fromPoints(first, last);
+  final topLeft = rect.topLeft,
+      topRight = rect.topRight,
+      bottomRight = rect.bottomRight,
+      bottomLeft = rect.bottomLeft;
+  return hitsSegment(topLeft, topRight) ||
+      hitsSegment(topRight, bottomRight) ||
+      hitsSegment(bottomRight, bottomLeft) ||
+      hitsSegment(bottomLeft, topLeft);
+}
+
+double _pointSegmentDistanceSquared(Offset point, Offset start, Offset end) {
+  final dx = end.dx - start.dx, dy = end.dy - start.dy;
+  final lengthSquared = dx * dx + dy * dy;
+  if (lengthSquared <= 1e-12) {
+    final px = point.dx - start.dx, py = point.dy - start.dy;
+    return px * px + py * py;
+  }
+  final projection =
+      (((point.dx - start.dx) * dx + (point.dy - start.dy) * dy) /
+              lengthSquared)
+          .clamp(0.0, 1.0);
+  final px = point.dx - (start.dx + dx * projection),
+      py = point.dy - (start.dy + dy * projection);
+  return px * px + py * py;
+}
+
+bool _segmentsWithinRadius(
+  Offset a,
+  Offset b,
+  Offset c,
+  Offset d,
+  double radius,
+) {
+  final ab = b - a, cd = d - c;
+  final denominator = ab.dx * cd.dy - ab.dy * cd.dx;
+  if (denominator.abs() > 1e-12) {
+    final difference = c - a;
+    final alongAb =
+        (difference.dx * cd.dy - difference.dy * cd.dx) / denominator;
+    final alongCd =
+        (difference.dx * ab.dy - difference.dy * ab.dx) / denominator;
+    if (alongAb >= 0 && alongAb <= 1 && alongCd >= 0 && alongCd <= 1) {
+      return true;
+    }
+  }
+  final radiusSquared = radius * radius;
+  return _pointSegmentDistanceSquared(a, c, d) <= radiusSquared ||
+      _pointSegmentDistanceSquared(b, c, d) <= radiusSquared ||
+      _pointSegmentDistanceSquared(c, a, b) <= radiusSquared ||
+      _pointSegmentDistanceSquared(d, a, b) <= radiusSquared;
+}
+
+Rect _photoMarkBounds(PhotoMark mark, Size imageSize) {
+  Offset pixels(Offset point) =>
+      Offset(point.dx * imageSize.width, point.dy * imageSize.height);
+  if (mark.tool == 'Text') {
+    final origin = pixels(mark.points.first);
+    final painter = TextPainter(
+      text: TextSpan(
+        text: mark.text,
+        style: TextStyle(
+          fontFamily: AppFonts.family,
+          fontSize: math.max(16.0, imageSize.width * .045),
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout(maxWidth: math.max(1.0, imageSize.width - origin.dx));
+    final bounds = Rect.fromLTWH(
+      origin.dx,
+      origin.dy,
+      painter.width,
+      painter.height,
+    );
+    painter.dispose();
+    return bounds;
+  }
+  final points = mark.points.map(pixels).toList();
+  final first = points.first;
+  final last = points.last;
+  return Rect.fromPoints(first, last);
+}
+
+bool _segmentIntersectsRect(Offset start, Offset end, Rect rect) {
+  if (rect.contains(start) || rect.contains(end)) return true;
+  final topLeft = rect.topLeft,
+      topRight = rect.topRight,
+      bottomRight = rect.bottomRight,
+      bottomLeft = rect.bottomLeft;
+  return _segmentsWithinRadius(start, end, topLeft, topRight, 0) ||
+      _segmentsWithinRadius(start, end, topRight, bottomRight, 0) ||
+      _segmentsWithinRadius(start, end, bottomRight, bottomLeft, 0) ||
+      _segmentsWithinRadius(start, end, bottomLeft, topLeft, 0);
+}
+
 typedef _PhotoSnapshot = ({
   List<PhotoMark> marks,
   RangeValues horizontal,
@@ -137,6 +331,8 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
   double strokeWidth = .006;
   String panel = 'draw';
   PhotoMark? _activeMark;
+  Offset? _lastEraserPoint;
+  bool _eraserChanged = false;
   final _canvasRevision = ValueNotifier<int>(0);
   final _toolAnchors = <String, GlobalKey>{};
   final label = TextEditingController();
@@ -362,6 +558,8 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
   void _tool(String next) {
     setState(() {
       _activeMark = null;
+      _lastEraserPoint = null;
+      _eraserChanged = false;
       panel = 'draw';
       tool = next;
     });
@@ -399,9 +597,36 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
   void _selectPanel(String name) {
     setState(() {
       _activeMark = null;
+      _lastEraserPoint = null;
+      _eraserChanged = false;
       panel = name;
     });
     _revealTool(name);
+  }
+
+  void _erase(Offset from, Offset to, ui.Image source, double radius) {
+    final next = erasePhotoMarks(
+      marks,
+      from,
+      to,
+      imageSize: Size(source.width.toDouble(), source.height.toDouble()),
+      radius: radius,
+    );
+    if (identical(next, marks)) return;
+    if (!_eraserChanged) {
+      setState(() {
+        remember();
+        marks
+          ..clear()
+          ..addAll(next);
+        _eraserChanged = true;
+      });
+    } else {
+      marks
+        ..clear()
+        ..addAll(next);
+      _canvasRevision.value++;
+    }
   }
 
   Future<void> _allTools() async {
@@ -853,20 +1078,21 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                                     );
                                     return;
                                   }
-                                  setState(() {
-                                    final p = point(d.localPosition);
-                                    _activeMark = null;
-                                    if (tool == 'Eraser') {
-                                      final index = marks.lastIndexWhere(
-                                        (m) => m.points.any(
-                                          (v) => (v - p).distance < .06,
-                                        ),
-                                      );
-                                      if (index >= 0) {
-                                        remember();
-                                        marks.removeAt(index);
-                                      }
-                                    } else {
+                                  final p = point(d.localPosition);
+                                  _activeMark = null;
+                                  if (tool == 'Eraser') {
+                                    _lastEraserPoint = p;
+                                    _eraserChanged = false;
+                                    _erase(
+                                      p,
+                                      p,
+                                      source,
+                                      18 *
+                                          source.width /
+                                          math.max(1, canvas.maxWidth),
+                                    );
+                                  } else {
+                                    setState(() {
                                       remember();
                                       _activeMark = PhotoMark(
                                         tool,
@@ -876,12 +1102,27 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                                         text: label.text.trim(),
                                       );
                                       marks.add(_activeMark!);
-                                    }
-                                  });
+                                    });
+                                  }
                                 },
                           onPanUpdate: saving || panel != 'draw'
                               ? null
                               : (d) {
+                                  if (tool == 'Eraser') {
+                                    final current = point(d.localPosition);
+                                    final previous =
+                                        _lastEraserPoint ?? current;
+                                    _lastEraserPoint = current;
+                                    _erase(
+                                      previous,
+                                      current,
+                                      source,
+                                      18 *
+                                          source.width /
+                                          math.max(1, canvas.maxWidth),
+                                    );
+                                    return;
+                                  }
                                   final mark = _activeMark;
                                   if (mark != null) {
                                     mark.points.add(point(d.localPosition));
@@ -889,8 +1130,16 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                                     _canvasRevision.value++;
                                   }
                                 },
-                          onPanEnd: (_) => _activeMark = null,
-                          onPanCancel: () => _activeMark = null,
+                          onPanEnd: (_) {
+                            _activeMark = null;
+                            _lastEraserPoint = null;
+                            _eraserChanged = false;
+                          },
+                          onPanCancel: () {
+                            _activeMark = null;
+                            _lastEraserPoint = null;
+                            _eraserChanged = false;
+                          },
                           child: Directionality(
                             textDirection: TextDirection.ltr,
                             child: CustomPaint(

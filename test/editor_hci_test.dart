@@ -210,6 +210,53 @@ void main() {
     },
   );
 
+  testWidgets('photo eraser follows a swipe and undo restores marks', (
+    tester,
+  ) async {
+    await photo(tester);
+    var surface = tester.getRect(getCanvas());
+    Future<void> stroke(double y) async {
+      final gesture = await tester.startGesture(
+        surface.topLeft + Offset(surface.width * .1, surface.height * y),
+      );
+      await gesture.moveTo(
+        surface.topLeft + Offset(surface.width * .9, surface.height * y),
+      );
+      await gesture.up();
+      await tester.pumpAndSettle();
+    }
+
+    await stroke(.35);
+    await stroke(.65);
+    final original = painter(tester).marks
+        .map((mark) => List<Offset>.of(mark.points))
+        .toList();
+    expect(original, hasLength(2));
+    expect(original.every((points) => points.length == 2), isTrue);
+
+    await tool(tester, 'eraser');
+    surface = tester.getRect(getCanvas());
+    final eraser = await tester.startGesture(
+      surface.topLeft + Offset(surface.width * .5, surface.height * .15),
+    );
+    await eraser.moveTo(
+      surface.topLeft + Offset(surface.width * .5, surface.height * .85),
+    );
+    await eraser.up();
+    await tester.pumpAndSettle();
+
+    final erased = painter(tester).marks;
+    expect(erased, isEmpty);
+
+    await tester.tap(find.byTooltip('Undo photo edit'));
+    await tester.pumpAndSettle();
+    expect(painter(tester).marks.map((mark) => mark.points).toList(), original);
+    await tester.tap(find.byTooltip('Redo photo edit'));
+    await tester.pumpAndSettle();
+    expect(painter(tester).marks, isEmpty);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
     'tool pickers preserve edits on Back and agree on selected shape',
     (tester) async {

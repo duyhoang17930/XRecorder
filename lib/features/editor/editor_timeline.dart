@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../core/domain/models.dart';
 import '../../core/widgets/studio_widgets.dart';
 import '../../l10n/localization.dart';
+import 'editor_workspace.dart';
 
 class EditorTimeline extends StatelessWidget {
   const EditorTimeline({
@@ -180,25 +181,28 @@ class _TimelineTrimState extends State<_TimelineTrim> {
     height: 48,
     child: Semantics(
       label: context.l10n.trimClip,
-      child: RangeSlider(
-        values: values,
-        max: widget.clip.sourceDuration.inMilliseconds.toDouble(),
-        onChangeStart: (_) => dragging = true,
-        onChanged: (next) {
-          if (next.start.isFinite &&
-              next.end.isFinite &&
-              next.end - next.start >= 200) {
-            setState(() => values = next);
-          }
-        },
-        onChangeEnd: (_) {
-          dragging = false;
-          widget.onCommit(values);
-        },
-        semanticFormatterCallback: context.spokenValue(
-          (strings, value) => strings.secondsValue(value),
-          multiplier: .001,
-          digits: 1,
+      child: SliderTheme(
+        data: editorSliderTheme(context),
+        child: RangeSlider(
+          values: values,
+          max: widget.clip.sourceDuration.inMilliseconds.toDouble(),
+          onChangeStart: (_) => dragging = true,
+          onChanged: (next) {
+            if (next.start.isFinite &&
+                next.end.isFinite &&
+                next.end - next.start >= 200) {
+              setState(() => values = next);
+            }
+          },
+          onChangeEnd: (_) {
+            dragging = false;
+            widget.onCommit(values);
+          },
+          semanticFormatterCallback: context.spokenValue(
+            (strings, value) => strings.secondsValue(value),
+            multiplier: .001,
+            digits: 1,
+          ),
         ),
       ),
     ),

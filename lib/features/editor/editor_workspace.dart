@@ -1,6 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/widgets/studio_widgets.dart';
+import '../../l10n/localization.dart';
+
+String formatEditorTimestamp(Duration value) {
+  final totalSeconds = value.inSeconds;
+  final hours = totalSeconds ~/ 3600;
+  final minutes = (totalSeconds % 3600) ~/ 60;
+  final seconds = totalSeconds % 60;
+  String twoDigits(int part) => part.toString().padLeft(2, '0');
+  return '${twoDigits(hours)}:${twoDigits(minutes)}:${twoDigits(seconds)}';
+}
 
 /// Presentation slots keep the native preview/controller independent of panels.
 class VideoEditorWorkspace extends StatelessWidget {
@@ -28,7 +39,12 @@ class VideoEditorWorkspace extends StatelessWidget {
   Widget build(BuildContext context) => SafeArea(
     bottom: true,
     child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.sm,
+        AppSpacing.xs,
+        AppSpacing.sm,
+        0,
+      ),
       child: LayoutBuilder(
         builder: (context, box) {
           final landscape = box.maxWidth >= 600 && box.maxWidth > box.maxHeight;
@@ -101,6 +117,167 @@ class VideoEditorWorkspace extends StatelessWidget {
           );
         },
       ),
+    ),
+  );
+}
+
+class EditorExportAction extends StatelessWidget {
+  const EditorExportAction({
+    super.key,
+    required this.enabled,
+    required this.exporting,
+    required this.onPressed,
+  });
+
+  final bool enabled;
+  final bool exporting;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final label = exporting ? context.l10n.starting : context.l10n.export;
+    final action = MediaQuery.sizeOf(context).width <= 380
+        ? IconButton.filledTonal(
+            key: const ValueKey('editor-export-compact'),
+            tooltip: label,
+            onPressed: enabled ? onPressed : null,
+            style: IconButton.styleFrom(
+              minimumSize: const Size.square(48),
+              foregroundColor: context.studioColors.primary,
+              backgroundColor: context.studioColors.primary.withValues(
+                alpha: .12,
+              ),
+            ),
+            icon: const Icon(AppIcons.export),
+          )
+        : FilledButton.icon(
+            key: const ValueKey('editor-export-labeled'),
+            onPressed: enabled ? onPressed : null,
+            icon: const Icon(AppIcons.export, size: 18),
+            label: Text(label),
+            style: FilledButton.styleFrom(
+              minimumSize: const Size(0, 40),
+              tapTargetSize: MaterialTapTargetSize.padded,
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+            ),
+          );
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(end: AppSpacing.xs),
+      child: action,
+    );
+  }
+}
+
+class EditorPlaybackControls extends StatelessWidget {
+  const EditorPlaybackControls({
+    super.key,
+    required this.position,
+    required this.duration,
+    required this.playing,
+    required this.onToggle,
+    required this.onSeek,
+  });
+
+  final ValueListenable<Duration> position;
+  final Duration duration;
+  final bool playing;
+  final VoidCallback onToggle;
+  final ValueChanged<Duration> onSeek;
+
+  @override
+  Widget build(BuildContext context) => ValueListenableBuilder<Duration>(
+    valueListenable: position,
+    builder: (context, current, _) => Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: AppSpacing.xxs),
+          child: Row(
+            children: [
+              IconButton.filledTonal(
+                tooltip: playing
+                    ? context.l10n.pausePreview
+                    : context.l10n.playPreview,
+                onPressed: onToggle,
+                style: IconButton.styleFrom(
+                  minimumSize: const Size.square(48),
+                  foregroundColor: context.studioColors.primary,
+                  backgroundColor: context.studioColors.primary.withValues(
+                    alpha: .12,
+                  ),
+                ),
+                icon: Icon(playing ? AppIcons.pause : AppIcons.play),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: Semantics(
+                  label:
+                      '${context.l10n.previewPosition}: ${formatEditorTimestamp(current)} / ${formatEditorTimestamp(duration)}',
+                  child: ExcludeSemantics(
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: Text(
+                        '${formatEditorTimestamp(current)} / ${formatEditorTimestamp(duration)}',
+                        style: Theme.of(context).textTheme.labelLarge,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (duration > Duration.zero)
+          Semantics(
+            label: context.l10n.previewPosition,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: SliderTheme(
+                data: editorSliderTheme(context),
+                child: Slider(
+                  key: const ValueKey('editor-playhead'),
+                  value: current.inMilliseconds.toDouble().clamp(
+                    0,
+                    duration.inMilliseconds.toDouble(),
+                  ),
+                  max: duration.inMilliseconds.toDouble(),
+                  onChanged: (value) =>
+                      onSeek(Duration(milliseconds: value.round())),
+                  semanticFormatterCallback: context.spokenValue(
+                    (strings, value) => strings.secondsValue(value),
+                    multiplier: .001,
+                    digits: 1,
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
+    ),
+  );
+}
+
+SliderThemeData editorSliderTheme(BuildContext context) {
+  final colors = context.studioColors;
+  return SliderThemeData(
+    trackHeight: 4,
+    activeTrackColor: colors.primary,
+    inactiveTrackColor: colors.border,
+    disabledActiveTrackColor: colors.disabled,
+    disabledInactiveTrackColor: colors.border,
+    thumbColor: colors.primary,
+    overlayColor: colors.primary.withValues(alpha: .12),
+    thumbShape: const RoundSliderThumbShape(
+      enabledThumbRadius: 7,
+      disabledThumbRadius: 7,
+    ),
+    overlayShape: const RoundSliderOverlayShape(overlayRadius: 16),
+    rangeTrackShape: const RoundedRectRangeSliderTrackShape(),
+    rangeThumbShape: const RoundRangeSliderThumbShape(
+      enabledThumbRadius: 8,
+      disabledThumbRadius: 8,
     ),
   );
 }

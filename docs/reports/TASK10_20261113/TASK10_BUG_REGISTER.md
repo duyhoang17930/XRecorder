@@ -162,3 +162,24 @@ VideoPreviewActivity.kt was clean. Inspected MediaCatalog/manifest/Ui05BPlayerIn
 - **T10-MIXED-CLOCK / P1 investigation:** audio14/15/16 AudioTimestamp-derived median mic origins lead internal379.478/1158.342/779.649ms; current mixer pairs matching frame indices without origin compensation (mixed_source_clock_origin_diagnostic.json). Need aligned-source test/producer lifecycle review before a scoped repair. These micGain0 measurements do not certify default Mixed acoustic quality.
 - **T10-AR-RECORDING / P2 repaired selected labels:** automatic orientation/mixed/mute/off had incorrect existing Arabic wording. Four ARB values corrected, canonical settings unchanged;553FlutterPASS/analyzer/checker clean and actual Arabic page/prefs restoration PASS (recording_ar_core_labels_verified.json). Human linguistic acceptance remains PARTIAL.
 - **T10-STARTUP-DEGRADATION / P2 unresolved cause:**13-45s observed process-cold startup before normal Android reboot; same3e6APK afterward2876/2951/2895ms.55metadata/8drafts/3owned failed-session inputs/Tiny preserved. Environment/state contribution supported, no app-code/root-cause closure claim. Next: sustained/current-candidate profile and lifecycle traces.
+
+## Prompt06/07 owner-decision and evidence continuation — 2026-11-16
+
+| ID/severity | Current verified result | Remaining |
+|---|---|---|
+| P04-OV-01 / requirement withdrawn by owner | The historical test correctly observed Floating Ball controls in saved MediaProjection output, including the `FLAG_SECURE` black patch experiment. The owner has accepted that controls may appear in saved MP4s for the current product. Their exclusion is not a blocker; no further exclusion experiment or capture-composition change is authorized by this requirement. | None for current product acceptance. Retain the old technical observation as history. |
+| P07-PHOTO-ERASER / P2 repaired | Reproduced: only the pan-start point was checked and later swipe segments never erased marks. Source-image segment hit testing now removes every crossed annotation mark in a swipe with one Undo snapshot. Widget swipe/Undo/Redo and sparse-pen raster/source-preservation tests pass. | Current Android gesture/export rerun is blocked by Pixel_7 `/data` at 558 MiB. See `docs/reports/PROMPT07_PHOTO_EDITOR/`. |
+
+Prompt06 had no Video-specific reproduced defect or source change. The editor reports preserve Task10 historical output conclusions and distinguish them from the current AVD storage block.
+
+## Prompt06+07A — New editor evidence and owner-reported UI fix (2026-11-16)
+
+| ID | Result | Evidence / remaining |
+|---|---|---|
+| VIDEO-UI-NARROW-EXPORT / P2 fixed | Owner screenshot reproduced a crowded Export action at 320 dp. Export now uses an icon-only Lucide action with tooltip and 48 dp target at narrow widths; wider layouts retain a labeled action with trailing spacing. | Focused responsive test covers 320/411 dp; final installed AVD capture is in `build/verification/prompt06_20261116_005147/`. |
+| VIDEO-UI-TRANSPORT / P2 fixed | Removed visible “Play preview”; aligned tonal play/pause glyph and `hh:mm:ss` timecode; restyled playhead/trim rails. | Focused suite 27/27 PASS, analyzer/build/install PASS. No codec/timeline model changed. |
+| VIDEO-PREVIEW-ACTIVE-CONTROLS / open observation | One active-playback AVD capture shows video frames while the app bar and transport are absent; paused capture shows both. No source branch intentionally hides them. | Exact compositor-versus-screenshot cause remains unconfirmed. TextureView experiment was rejected after a task-owned draft showed a preview error; final SurfaceView source was restored, rebuilt and reinstalled. Keep Video preview PARTIAL. |
+| VIDEO-EDITOR-RUNTIME / evidence update | One short trim/split MP4 was published and fully decoded; source video hash unchanged. | Reorder, transforms, speed, added audio, layers, GIF and cancellation/retry remain open; see Prompt06 matrix. |
+| PHOTO-EDITOR-RUNTIME / evidence update | Eraser swipe Undo/Redo passed on AVD; one PNG and JPEG Save copy fully decoded, Library refreshed and source hash remained unchanged. | Text, large/corrupt inputs and exact transform-pixel mapping remain open; see Prompt07 matrix. |
+
+APK final identity and project/preferences/media hash checks are recorded in `docs/reports/MEDIA_EDITORS_06_07_SUMMARY.md`. These additions do not revise Task10’s capture/audio findings or historical APK-scoped conclusions.

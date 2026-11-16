@@ -18,10 +18,12 @@ class EditorPreview extends StatefulWidget {
     super.key,
     required this.project,
     required this.onPosition,
+    this.onPlaying,
     this.fitViewport = false,
   });
   final EditProject project;
   final ValueChanged<Duration> onPosition;
+  final ValueChanged<bool>? onPlaying;
   final bool fitViewport;
   @override
   State<EditorPreview> createState() => EditorPreviewState();
@@ -182,11 +184,13 @@ class EditorPreviewState extends State<EditorPreview>
         }
         final nextPlaying = state['playing'] == true;
         final nextError = state['error'] as String? ?? error;
-        if (playing != nextPlaying || error != nextError) {
+        final playingChanged = playing != nextPlaying;
+        if (playingChanged || error != nextError) {
           setState(() {
             playing = nextPlaying;
             error = nextError;
           });
+          if (playingChanged) widget.onPlaying?.call(nextPlaying);
         }
       }
     } catch (e) {
@@ -277,13 +281,6 @@ class EditorPreviewState extends State<EditorPreview>
             ),
             style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
-        TextButton.icon(
-          onPressed: () => command(playing ? 'pause' : 'play'),
-          icon: Icon(playing ? AppIcons.pause : AppIcons.play),
-          label: Text(
-            playing ? context.l10n.pausePreview : context.l10n.playPreview,
-          ),
-        ),
       ],
     );
   }

@@ -189,3 +189,21 @@ Current main profiled492b9e975424064005f96bf7f47ced59d03d1c14e6a836efd2ff3ebcfdc
 | Recording Settings Arabic automatic/mixed/mute/off | Existing4ARB labels, canonical persistence unchanged | Actual page4labels correct and prefs restored; full553host pass | PASS selected labels; linguistic PARTIAL/P2 | recording_ar_core_labels_verified.json; remaining native/locale contexts and human review |
 | Cold/warm startup after normal reboot | Existing profile runner, Awake/no keyguard | Same3e6APK3cold2876/2951/2895ms,3warm133/108/85ms | PARTIAL/P2 | profile_post_reboot_result.json; earlier degradation retained, sustained/current-player candidate profiling remains |
 
+
+## Prompt06/07 continuation — 2026-11-16
+
+- Owner decision: Floating Ball controls MAY appear in saved MP4s in the current product version. The historical Prompt04/Task10 observation that controls are captured remains an accurate measurement, but their exclusion is no longer an acceptance requirement or release blocker. Do not retry `FLAG_SECURE` or rebuild capture composition for exclusion.
+- Prompt06/07 audit: Video Editor source was inspected; no Video-specific source fix was justified. Pixel_7 `/data` remained 558 MiB, so no current APK install/editor export was attempted. Historical decoded MP4/GIF outputs remain scoped to their original Task10 evidence.
+- Photo Editor continuation: reproduced and repaired Eraser swipe hit testing. A host widget test verifies two strokes erased by one swipe with Undo/Redo; a raster test verifies sparse-segment hit testing and unchanged source pixels. Full Flutter 567/567, Kotlin/JVM 162/162, analyzer and x86_64 debug APK compilation passed. Current Android editor/save cases remain blocked by storage. See `docs/reports/PROMPT06_VIDEO_EDITOR/` and `docs/reports/PROMPT07_PHOTO_EDITOR/`.
+
+## Prompt06+07A — Focused editor runtime evidence (2026-11-16)
+
+This is an evidence addendum; previous Task10 rows and verdicts remain scoped to their recorded APKs.
+
+| Feature group | New focused evidence | Remaining scope |
+|---|---|---|
+| Video Editor | Current installed APK opened an existing source through Library, played/seeks, trimmed, split, saved/reopened a task-owned draft, and exported a distinct MP4. FFprobe and FFmpeg decoded the MP4; source SHA-256 was unchanged. Paused draft capture shows the final toolbar/transport. | One active-playback AVD capture omitted toolbar/transport; cause not confirmed. Reorder/duplicate/merge, transforms, speed, added-track audio, layers, relink, GIF, cancellation/retry and broader synchronization remain unverified. |
+| Photo Editor | Existing PNG opened, one Eraser swipe crossed multiple annotations with one Undo/Redo action, and new PNG/JPEG copies fully decoded and appeared in Library. Original SHA-256 was unchanged. | Exact transform-coordinate comparison, text, large/corrupt images and nonimplemented adjustments/filters remain unverified. |
+| Preservation | Nine baseline project hashes, six preference hashes and SAF grant match after final in-place update; one task-owned project added. Original video/photo hashes match. | No destructive recovery/storage case was induced. |
+
+Final installed APK: `4FCE6533182FE1792CF7B42D0C660E2C74EA60A3F95378A85236C5F2569CA794` (workspace build hash matches); Pixel_7/Android 17/API 37, `/data` 649,856 KiB free at final check. Focused evidence and independent partial verdicts are in the Prompt06 and Prompt07 handoffs.
