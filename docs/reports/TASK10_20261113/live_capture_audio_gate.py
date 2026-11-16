@@ -7,9 +7,11 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import secrets
 import shutil
 import socket
 import subprocess
+from urllib.parse import urlunsplit
 import xml.etree.ElementTree as ET
 
 import device_qa as q
@@ -48,27 +50,35 @@ test = Path('build/app/outputs/apk/androidTest/debug/app-debug-androidTest.apk')
 print(q.adb('install', '-r', str(test), timeout=60).decode(), flush=True)
 with socket.socket() as port:
     port.bind(('127.0.0.1', 19350))
-key = 'task10_capture_audio_' + args.attempt
+key = secrets.token_hex(24)
+receiver_url = urlunsplit(('rtmp', '127.0.0.1:19350', '/live/' + key, '', ''))
+server_url = urlunsplit(('rtmp', '10.0.2.2:19350', '/live', '', ''))
 receiver = None
 try:
     with (q.ROOT / (stem + '_receiver.log')).open('xb') as log:
-        receiver = subprocess.Popen(['build/task03/ffmpeg/ffmpeg.exe', '-hide_banner', '-nostdin', '-n',
-            '-listen', '1', '-timeout', '120', '-i', 'rtmp://127.0.0.1:19350/live/' + key,
+        receiver = subprocess.Popen(['build/task03/ffmpeg/ffmpeg.exe', '-loglevel', 'quiet', '-hide_banner', '-nostdin', '-n',
+            '-listen', '1', '-timeout', '120', '-i', receiver_url,
             '-t', str(args.observe_ms // 1000 + 90), '-c', 'copy', '-movflags', '+faststart', str(target / 'received.mp4')],
-            stdout=log, stderr=subprocess.STDOUT, creationflags=subprocess.CREATE_NO_WINDOW)
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=subprocess.CREATE_NO_WINDOW)
         q.adb('shell', 'am', 'force-stop', q.PACKAGE)
-        raw = q.adb('shell', 'am', 'instrument', '-w', '-e', 'task10', 'live-capture-audio',
-            '-e', 'source', source, '-e', 'attempt', args.attempt,
-            '-e', 'player', args.player,
-            '-e', 'observeMs', str(args.observe_ms), '-e', 'repeatSource', str(args.repeat_source).lower(),
-            '-e', 'failAfterPlayback', str(args.fail_after_playback).lower(),
-            '-e', 'pauseBeforeFailure', str(args.pause_before_failure).lower(),
-            '-e', 'denyFirstConsent', str(args.deny_first_consent).lower(),
-            'com.xrecorder.xrecorder.test/com.xrecorder.xrecorder.qa.Task07AccessibilityInstrumentation', timeout=args.observe_ms // 1000 + 180)
+        try:
+            raw = q.adb('shell', 'am', 'instrument', '-w', '-e', 'task10', 'live-capture-audio',
+                '-e', 'source', source, '-e', 'attempt', args.attempt,
+                '-e', 'serverUrl', server_url, '-e', 'streamKey', key,
+                '-e', 'player', args.player,
+                '-e', 'observeMs', str(args.observe_ms), '-e', 'repeatSource', str(args.repeat_source).lower(),
+                '-e', 'failAfterPlayback', str(args.fail_after_playback).lower(),
+                '-e', 'pauseBeforeFailure', str(args.pause_before_failure).lower(),
+                '-e', 'denyFirstConsent', str(args.deny_first_consent).lower(),
+                'com.xrecorder.xrecorder.test/com.xrecorder.xrecorder.qa.Task07AccessibilityInstrumentation', timeout=args.observe_ms // 1000 + 180)
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
+            raise RuntimeError('Livestream instrumentation failed or timed out; destination values withheld.') from None
+        raw = raw.replace(server_url.encode(), b'[redacted]').replace(key.encode(), b'[redacted]')
         with (q.ROOT / (stem + '_runtime.txt')).open('xb') as out:
             out.write(raw)
         match = re.search(rb'TASK10_LIVE_RESULT:(\{[^\r\n]+\})', raw)
-        assert match, raw.decode(errors='replace')
+        if not match:
+            raise RuntimeError('Livestream instrumentation returned no structured result; output withheld to protect destination values.')
         result = json.loads(match.group(1))
         with (q.ROOT / (stem + '_result.json')).open('x') as out:
             json.dump(result, out, indent=2)
@@ -91,11 +101,6 @@ try:
             (q.ROOT / 'task_created_media.json').write_text(json.dumps(registry, indent=2))
             with (target / 'local.mp4').open('xb') as out:
                 out.write(q.adb('exec-out', 'content', 'read', '--uri', uri))
-        for kind in ['denied', 'consent', 'player', 'failure']:
-            name = 'task10_audio_' + args.attempt + '_' + kind + '.png'
-            if result.get(kind + 'Screenshot'):
-                with (q.ROOT / (stem + '_' + kind + '.png')).open('xb') as out:
-                    out.write(q.adb('exec-out', 'run-as', q.PACKAGE, 'cat', 'files/' + name))
         assert result['status'] == 'PASS', result
         receiver.wait(timeout=20)
         assert (target / 'received.mp4').stat().st_size > 10000
