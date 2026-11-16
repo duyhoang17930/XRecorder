@@ -74,3 +74,6 @@ stitch_screenflow_mobile_app_ui_system/
 /docs/reports/TASK_UI_UX_*/before_*.dart.txt
 /docs/reports/TASK_UI_UX_*/before_*.kt.txt
 archives
+
+# Local Pixel 8 QA evidence; the review Markdown is kept separately.
+/docs/reports/PIXEL8_MANUAL_20261116/
