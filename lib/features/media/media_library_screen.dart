@@ -397,7 +397,12 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                             ),
                             ChoiceChip(
                               label: Text(context.l10n.chooseFolder),
-                              avatar: const Icon(AppIcons.folderOpen),
+                              avatar: Icon(
+                                AppIcons.folderOpen,
+                                color: _folder != null
+                                    ? c.primaryForeground
+                                    : c.muted,
+                              ),
                               selected: _folder != null,
                               onSelected: _pickingFolder
                                   ? null
@@ -619,31 +624,31 @@ class _FilterChipTheme extends StatelessWidget {
     return ChipTheme(
       data: theme.copyWith(
         backgroundColor: Colors.transparent,
-        selectedColor: dark ? c.overlay : c.surface,
+        selectedColor: c.primary,
         disabledColor: Colors.transparent,
         side: WidgetStateBorderSide.resolveWith(
-          (states) => BorderSide(
-            color: states.contains(WidgetState.selected)
-                ? c.border.withValues(alpha: dark ? .6 : 1)
-                : Colors.transparent,
-          ),
+          (states) => BorderSide(color: Colors.transparent),
         ),
         shape: const StadiumBorder(),
         // Only the selected segment casts a shadow, so it lifts off the track.
         elevation: 1.5,
         pressElevation: 1.5,
         shadowColor: Colors.transparent,
-        selectedShadowColor: Colors.black.withValues(alpha: dark ? .4 : .14),
+        selectedShadowColor: c.primary.withValues(alpha: dark ? .45 : .35),
         surfaceTintColor: Colors.transparent,
         labelStyle: Theme.of(context).textTheme.labelMedium!.copyWith(
           color: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)
-                ? c.primary
+                ? c.primaryForeground
                 : states.contains(WidgetState.disabled)
                 ? c.disabled
                 : c.muted,
           ),
         ),
+        // Selected chips read secondaryLabelStyle; keep it legible on the fill.
+        secondaryLabelStyle: Theme.of(context).textTheme.labelMedium!
+            .copyWith(color: c.primaryForeground),
+        checkmarkColor: c.primaryForeground,
         iconTheme: IconThemeData(color: c.muted, size: AppIconSize.small),
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.xxs,
@@ -655,50 +660,14 @@ class _FilterChipTheme extends StatelessWidget {
   }
 }
 
+/// Groups related filter chips; the chips themselves carry all styling.
 class _FilterTrack extends StatelessWidget {
   const _FilterTrack({required this.children});
   final List<Widget> children;
 
   @override
-  Widget build(BuildContext context) {
-    final c = context.studioColors;
-    final dark = Theme.of(context).brightness == Brightness.dark;
-    const radius = AppRadius.search + 6;
-    // Hairline edge fades bottom-to-top, matching StudioFadeBorder cards.
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius),
-        gradient: LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [
-            c.outline.withValues(alpha: dark ? .45 : .35),
-            c.outline.withValues(alpha: dark ? .08 : .05),
-          ],
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppBorder.subtle),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius - AppBorder.subtle),
-            gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              colors: [
-                c.elevated.withValues(alpha: dark ? .9 : 1),
-                c.elevated.withValues(alpha: dark ? .55 : .6),
-              ],
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxs),
-            child: Wrap(spacing: 2, children: children),
-          ),
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) =>
+      Wrap(spacing: AppSpacing.xxs, children: children);
 }
 
 class _MediaTile extends StatelessWidget {
