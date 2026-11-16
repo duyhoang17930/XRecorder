@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../constants/app_icons.dart';
 import 'colors.dart';
+import 'fade_border.dart';
 import 'motion.dart';
 import 'radius.dart';
 import 'shadows.dart';
@@ -25,6 +26,9 @@ abstract final class AppTheme {
           onPrimaryContainer: c.text,
           secondary: c.cyan,
           onSecondary: c.background,
+          // Material's chip defaults colour a selected chip's icon with this;
+          // it must read on the solid primary selected pill.
+          onSecondaryContainer: c.primaryForeground,
           surface: c.surface,
           onSurface: c.text,
           onSurfaceVariant: c.muted,
@@ -38,9 +42,19 @@ abstract final class AppTheme {
           error: c.warning,
           onError: c.background,
         );
+    final dark = brightness == Brightness.dark;
     final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppRadius.control),
     );
+    // Home-page language: pill controls and hairlines that fade bottom-to-top.
+    const pill = StadiumBorder();
+    FadeBorder fade(BorderRadiusGeometry radius, {double strength = 1}) =>
+        studioFadeBorder(
+          outline: c.outline,
+          dark: dark,
+          borderRadius: radius,
+          strength: strength,
+        );
     final text =
         const TextTheme(
           displayLarge: AppTypography.display,
@@ -67,7 +81,9 @@ abstract final class AppTheme {
       extensions: [c],
       fontFamily: AppFonts.family,
       textTheme: text,
-      scaffoldBackgroundColor: c.background,
+      // Pages are transparent; XRecorderApp paints StudioBackground behind the
+      // navigator so every screen shares one ambient backdrop.
+      scaffoldBackgroundColor: Colors.transparent,
       canvasColor: c.surface,
       disabledColor: c.disabled,
       dividerColor: c.border,
@@ -83,7 +99,12 @@ abstract final class AppTheme {
         closeButtonIconBuilder: (_) => const Icon(AppIcons.close),
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: c.background,
+        backgroundColor: WidgetStateColor.resolveWith(
+          (states) => states.contains(WidgetState.scrolledUnder)
+              ? c.background.withValues(alpha: .94)
+              : Colors.transparent,
+        ),
+        scrolledUnderElevation: AppElevation.flat,
         foregroundColor: c.text,
         surfaceTintColor: Colors.transparent,
         elevation: AppElevation.flat,
@@ -94,10 +115,7 @@ abstract final class AppTheme {
         color: c.card,
         elevation: AppElevation.flat,
         margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.card),
-          side: BorderSide(color: c.border),
-        ),
+        shape: fade(BorderRadius.circular(AppRadius.card)),
       ),
       listTileTheme: ListTileThemeData(
         iconColor: c.muted,
@@ -110,8 +128,9 @@ abstract final class AppTheme {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           minimumSize: const Size(AppSize.touchTarget, AppSize.button),
-          shape: shape,
-          textStyle: AppTypography.button,
+          shape: pill,
+          elevation: AppElevation.flat,
+          textStyle: text.labelLarge,
           animationDuration: AppMotion.fast,
         ),
       ),
@@ -119,9 +138,9 @@ abstract final class AppTheme {
         style: OutlinedButton.styleFrom(
           minimumSize: const Size(AppSize.touchTarget, AppSize.touchTarget),
           foregroundColor: c.text,
-          side: BorderSide(color: c.outline),
-          shape: shape,
-          textStyle: AppTypography.bodyEmphasis,
+          side: BorderSide(color: c.border),
+          shape: pill,
+          textStyle: text.titleSmall,
           animationDuration: AppMotion.fast,
         ),
       ),
@@ -129,8 +148,8 @@ abstract final class AppTheme {
         style: TextButton.styleFrom(
           foregroundColor: c.primary,
           minimumSize: const Size(AppSize.touchTarget, AppSize.touchTarget),
-          shape: shape,
-          textStyle: AppTypography.bodyEmphasis,
+          shape: pill,
+          textStyle: text.titleSmall,
           animationDuration: AppMotion.fast,
         ),
       ),
@@ -142,16 +161,31 @@ abstract final class AppTheme {
           animationDuration: AppMotion.fast,
         ),
       ),
+      // Soft unselected pills; the selected chip is a solid brand pill.
       chipTheme: ChipThemeData(
-        backgroundColor: c.surface,
-        selectedColor: c.primary.withValues(alpha: .14),
-        disabledColor: c.elevated,
-        side: BorderSide(color: c.outline),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.pill),
+        backgroundColor: c.elevated.withValues(alpha: dark ? .7 : 1),
+        selectedColor: c.primary,
+        disabledColor: c.elevated.withValues(alpha: .5),
+        side: const BorderSide(color: Colors.transparent),
+        shape: pill,
+        elevation: 0,
+        pressElevation: 0,
+        shadowColor: Colors.transparent,
+        selectedShadowColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        labelStyle: text.labelMedium?.copyWith(
+          color: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? c.primaryForeground
+                : states.contains(WidgetState.disabled)
+                ? c.disabled
+                : c.text,
+          ),
         ),
-        labelStyle: text.bodySmall,
-        secondaryLabelStyle: text.bodySmall?.copyWith(color: c.primary),
+        secondaryLabelStyle: text.labelMedium?.copyWith(
+          color: c.primaryForeground,
+        ),
+        checkmarkColor: c.primaryForeground,
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
         showCheckmark: false,
       ),
@@ -169,7 +203,7 @@ abstract final class AppTheme {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.control),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: c.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.control),
@@ -181,13 +215,10 @@ abstract final class AppTheme {
         ),
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: c.elevated,
+        backgroundColor: c.card,
         surfaceTintColor: Colors.transparent,
         elevation: AppElevation.dialog,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.dialog),
-          side: BorderSide(color: c.border),
-        ),
+        shape: fade(BorderRadius.circular(AppRadius.feature)),
         titleTextStyle: text.titleLarge,
         contentTextStyle: text.bodyMedium?.copyWith(color: c.muted),
       ),
@@ -198,25 +229,21 @@ abstract final class AppTheme {
         surfaceTintColor: Colors.transparent,
         elevation: AppElevation.floating,
         showDragHandle: true,
-        dragHandleColor: c.muted,
-        dragHandleSize: const Size(40, 3),
-        shape: RoundedRectangleBorder(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(AppRadius.feature),
-          ),
-          side: BorderSide(color: c.border),
+        dragHandleColor: c.outline.withValues(alpha: .6),
+        dragHandleSize: const Size(36, 4),
+        shape: fade(
+          const BorderRadius.vertical(top: Radius.circular(AppRadius.feature)),
+          strength: .8,
         ),
       ),
       popupMenuTheme: PopupMenuThemeData(
-        color: c.elevated,
+        color: dark ? c.elevated : c.surface,
         surfaceTintColor: Colors.transparent,
         elevation: AppElevation.dialog,
-        shadowColor: Colors.black.withValues(alpha: .2),
-        menuPadding: const EdgeInsets.symmetric(vertical: AppSpacing.xxs),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.menu),
-          side: BorderSide(color: c.border),
-        ),
+        shadowColor: Colors.black.withValues(alpha: dark ? .35 : .16),
+        position: PopupMenuPosition.under,
+        menuPadding: const EdgeInsets.all(AppSpacing.xxs + 2),
+        shape: fade(BorderRadius.circular(AppRadius.menu + 2)),
         textStyle: text.bodyMedium,
       ),
       sliderTheme: SliderThemeData(
@@ -234,15 +261,46 @@ abstract final class AppTheme {
         backgroundColor: c.elevated,
         contentTextStyle: text.bodyMedium,
         actionTextColor: c.primary,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.control),
-          side: BorderSide(color: c.outline),
+        shape: fade(BorderRadius.circular(AppRadius.menu)),
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected)
+              ? c.primaryForeground
+              : c.outline,
+        ),
+        trackColor: WidgetStateProperty.resolveWith(
+          (states) =>
+              states.contains(WidgetState.selected) ? c.primary : c.elevated,
+        ),
+        trackOutlineColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected)
+              ? Colors.transparent
+              : c.border,
+        ),
+      ),
+      expansionTileTheme: ExpansionTileThemeData(
+        shape: const Border(),
+        collapsedShape: const Border(),
+        iconColor: c.muted,
+        collapsedIconColor: c.muted,
+      ),
+      tooltipTheme: TooltipThemeData(
+        decoration: BoxDecoration(
+          color: dark ? c.overlay : c.text,
+          borderRadius: BorderRadius.circular(AppRadius.pill),
+        ),
+        textStyle: text.labelMedium?.copyWith(color: dark ? c.text : c.surface),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.sm,
+          vertical: AppSpacing.xxs + 2,
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: c.primary,
         foregroundColor: c.primaryForeground,
         elevation: AppElevation.flat,
+        shape: pill,
       ),
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: {
