@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../constants/app_icons.dart';
 import '../../theme/colors.dart';
 import '../../theme/radius.dart';
-import '../../theme/shadows.dart';
+import '../../theme/fade_border.dart';
 import '../../theme/spacing.dart';
 import '../../theme/typography.dart';
 
+/// The app's standard surface: a filled rounded card with the signature
+/// bottom-to-top fading hairline (see [FadeBorder]) and no drop shadow.
 class StudioCard extends StatelessWidget {
   const StudioCard({
     super.key,
@@ -20,27 +22,18 @@ class StudioCard extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;
   final Color? color;
+
+  /// Tints the fading edge, e.g. an accent for a highlighted card.
   final Color? borderColor;
   final double radius;
   final Clip clipBehavior;
   @override
-  Widget build(BuildContext context) => DecoratedBox(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(radius),
-      boxShadow: AppShadows.card(context),
-    ),
-    child: Material(
-      color: color ?? context.studioColors.card,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(radius),
-        side: BorderSide(
-          color: borderColor ?? context.studioColors.border,
-          width: AppBorder.subtle,
-        ),
-      ),
-      clipBehavior: clipBehavior,
-      child: Padding(padding: padding, child: child),
-    ),
+  Widget build(BuildContext context) => StudioFadeBorder(
+    color: color,
+    borderColor: borderColor,
+    radius: radius,
+    clipBehavior: clipBehavior,
+    child: Padding(padding: padding, child: child),
   );
 }
 
@@ -53,44 +46,26 @@ class StudioFadeBorder extends StatelessWidget {
     this.color,
     this.borderColor,
     this.radius = AppRadius.card,
-    this.width = AppBorder.subtle,
     this.clipBehavior = Clip.antiAlias,
   });
   final Widget child;
   final Color? color;
   final Color? borderColor;
   final double radius;
-  final double width;
   final Clip clipBehavior;
 
   @override
   Widget build(BuildContext context) {
     final c = context.studioColors;
-    final dark = Theme.of(context).brightness == Brightness.dark;
-    final edge = borderColor ?? c.outline;
-    return DecoratedBox(
-      decoration: BoxDecoration(
+    return Material(
+      color: color ?? c.card,
+      shape: studioFadeBorder(
+        outline: borderColor ?? c.outline,
+        dark: Theme.of(context).brightness == Brightness.dark,
         borderRadius: BorderRadius.circular(radius),
-        gradient: LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [
-            edge.withValues(alpha: dark ? .55 : .45),
-            edge.withValues(alpha: dark ? .12 : .08),
-          ],
-        ),
       ),
-      child: Padding(
-        padding: EdgeInsets.all(width),
-        child: Material(
-          color: color ?? c.card,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius - width),
-          ),
-          clipBehavior: clipBehavior,
-          child: child,
-        ),
-      ),
+      clipBehavior: clipBehavior,
+      child: child,
     );
   }
 }
@@ -125,7 +100,7 @@ class StudioIconTile extends StatelessWidget {
     this.backgroundColor,
     this.size = AppSize.touchTarget,
     this.iconSize = AppIconSize.large,
-    this.radius = AppRadius.icon,
+    this.radius = AppRadius.pill,
   });
   final IconData icon;
   final Color? color;

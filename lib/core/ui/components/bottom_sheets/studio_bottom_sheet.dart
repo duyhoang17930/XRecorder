@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/colors.dart';
+import '../../theme/fade_border.dart';
+import '../cards/studio_cards.dart' show StudioIconTile;
 import '../../theme/motion.dart';
 import '../../theme/radius.dart';
 import '../../theme/spacing.dart';
@@ -39,7 +41,9 @@ Future<T?> showStudioBottomSheet<T>({
       useSafeArea: useSafeArea,
       enableDrag: enableDrag,
       isDismissible: isDismissible,
-      backgroundColor: context.studioColors.surface,
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? context.studioColors.card
+          : context.studioColors.surface,
       barrierColor: AppColors.mediaScrim,
       elevation: 0,
       clipBehavior: Clip.antiAlias,
@@ -47,11 +51,13 @@ Future<T?> showStudioBottomSheet<T>({
         duration: context.motion(AppMotion.slow),
         reverseDuration: context.motion(AppMotion.standard),
       ),
-      shape: RoundedRectangleBorder(
+      shape: studioFadeBorder(
+        outline: context.studioColors.outline,
+        dark: Theme.of(context).brightness == Brightness.dark,
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(AppRadius.feature),
         ),
-        side: BorderSide(color: context.studioColors.border),
+        strength: .8,
       ),
     );
   } finally {
@@ -84,12 +90,12 @@ class StudioSheetHeader extends StatelessWidget {
         Row(
           children: [
             if (icon != null) ...[
-              Icon(
-                icon,
-                color: context.studioColors.primary,
-                size: AppIconSize.large,
+              StudioIconTile(
+                icon: icon!,
+                size: 40,
+                iconSize: AppIconSize.medium,
               ),
-              const SizedBox(width: AppSpacing.xs),
+              const SizedBox(width: AppSpacing.sm),
             ],
             Expanded(
               child: Text(title, style: Theme.of(context).textTheme.titleLarge),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/colors.dart';
+import '../cards/studio_cards.dart' show StudioIconTile;
 import '../../theme/motion.dart';
 import '../../theme/spacing.dart';
 import '../../theme/typography.dart';
@@ -72,12 +73,12 @@ class StudioDialog extends StatelessWidget {
         : Row(
             children: [
               if (icon != null) ...[
-                Icon(
-                  icon,
-                  color: context.studioColors.primary,
-                  size: AppIconSize.large,
+                StudioIconTile(
+                  icon: icon!,
+                  size: 40,
+                  iconSize: AppIconSize.medium,
                 ),
-                const SizedBox(width: AppSpacing.xs),
+                const SizedBox(width: AppSpacing.sm),
               ],
               if (title != null) Expanded(child: title!),
             ],
