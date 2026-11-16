@@ -27,6 +27,13 @@ abstract final class AppIcons {
   static const flipVertical = Iconsax.arrow_swap_copy;
   static const newProject = Iconsax.additem_copy;
   static const settings = Iconsax.setting_4_copy;
+
+  // Bold glyphs mark the selected navigation tab.
+  static const videosActive = Iconsax.video_play;
+  static const photosActive = Iconsax.gallery;
+  static const editActive = Iconsax.magicpen;
+  static const settingsActive = Iconsax.setting_4;
+
   static const videoSettings = Iconsax.setting_2_copy;
   static const create = Iconsax.add_copy;
   static const close = Iconsax.close_circle_copy;

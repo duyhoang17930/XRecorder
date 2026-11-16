@@ -7,8 +7,8 @@ import 'package:go_router/go_router.dart';
 import '../../features/recording/recording_service.dart';
 import '../constants/app_icons.dart';
 import '../ui/components/bottom_sheets/studio_sheet_launch.dart';
-import '../ui/components/layout/studio_background.dart';
 import '../ui/theme/colors.dart';
+import '../ui/theme/fade_border.dart';
 import '../ui/theme/motion.dart';
 import '../ui/theme/radius.dart';
 import '../ui/theme/spacing.dart';
@@ -76,25 +76,23 @@ class _StudioShellState extends State<StudioShell> {
         // Reserve the original footer area whenever capture UI can be visible.
         // CaptureStatusBar remains responsible for its content and actions.
         extendBody: !reserveCaptureFooter,
-        body: StudioBackground(
-          child: SafeArea(
-            bottom: false,
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: AppBreakpoints.content,
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: StudioTabScrollScope(
-                        controllers: controllers,
-                        child: widget.navigationShell,
-                      ),
+        body: SafeArea(
+          bottom: false,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: AppBreakpoints.content,
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: StudioTabScrollScope(
+                      controllers: controllers,
+                      child: widget.navigationShell,
                     ),
-                    const CaptureStatusBar(),
-                  ],
-                ),
+                  ),
+                  const CaptureStatusBar(),
+                ],
               ),
             ),
           ),
@@ -166,13 +164,14 @@ class StudioBottomNavigation extends StatelessWidget {
                         enabled: !highContrast,
                         filter: _glassFilter,
                         child: DecoratedBox(
-                          decoration: BoxDecoration(
+                          decoration: ShapeDecoration(
                             color: c.surface.withValues(
                               alpha: highContrast ? 1 : (dark ? .90 : .92),
                             ),
-                            borderRadius: radius,
-                            border: Border.all(
-                              color: c.border.withValues(alpha: .58),
+                            shape: studioFadeBorder(
+                              outline: c.outline,
+                              dark: dark,
+                              borderRadius: radius,
                             ),
                           ),
                           child: Padding(
@@ -212,6 +211,7 @@ class StudioBottomNavigation extends StatelessWidget {
                                           context,
                                           context.l10n.video,
                                           AppIcons.videos,
+                                          AppIcons.videosActive,
                                           0,
                                           tabDuration,
                                         ),
@@ -219,6 +219,7 @@ class StudioBottomNavigation extends StatelessWidget {
                                           context,
                                           context.l10n.photo,
                                           AppIcons.photos,
+                                          AppIcons.photosActive,
                                           1,
                                           tabDuration,
                                         ),
@@ -226,6 +227,7 @@ class StudioBottomNavigation extends StatelessWidget {
                                           context,
                                           context.l10n.edit,
                                           AppIcons.edit,
+                                          AppIcons.editActive,
                                           2,
                                           tabDuration,
                                         ),
@@ -233,6 +235,7 @@ class StudioBottomNavigation extends StatelessWidget {
                                           context,
                                           context.l10n.settings,
                                           AppIcons.settings,
+                                          AppIcons.settingsActive,
                                           3,
                                           tabDuration,
                                         ),
@@ -284,6 +287,7 @@ class StudioBottomNavigation extends StatelessWidget {
     BuildContext context,
     String label,
     IconData icon,
+    IconData activeIcon,
     int index,
     Duration duration,
   ) {
@@ -314,8 +318,11 @@ class StudioBottomNavigation extends StatelessWidget {
                     tween: ColorTween(end: active ? c.primary : c.muted),
                     duration: duration,
                     curve: AppMotion.emphasized,
-                    builder: (context, color, child) =>
-                        Icon(icon, color: color, size: AppIconSize.large),
+                    builder: (context, color, child) => Icon(
+                      active ? activeIcon : icon,
+                      color: color,
+                      size: AppIconSize.large,
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.xxs),
                   MediaQuery.withClampedTextScaling(
