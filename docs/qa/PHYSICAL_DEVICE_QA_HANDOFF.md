@@ -39,3 +39,16 @@ Run on at least one OEM device with removable/external storage where available. 
 | PDH-IMP-04 | Import photos/videos from multiple real camera models with EXIF orientation, rotation, HDR and unusual timestamps | Preview and dimensions/orientation match the source; no unnecessary full-resolution decode or source mutation. | NOT RUN |
 | PDH-IMP-05 | Open a large task-owned project, then trigger low-memory process recreation with referenced media on internal/external storage | Loading remains responsive; saved project/cues/tracks survive; inaccessible sources remain recoverable after restart. | NOT RUN |
 
+## Export hardware follow-up
+
+Run these export-specific cases on an ARM64 physical device after emulator QA. Record device/OEM, Android/API, APK SHA, source/output hashes, elapsed time, output metadata, codec and storage before/after. Emulator results do not count as hardware PASS. Keep each source short unless storage and runtime are safely bounded.
+
+| ID | What must be tested | Expected behavior | Status |
+|---|---|---|---|
+| PDH-EXP-01 | H.264/AAC export across hardware encoder implementations and supported source codecs | Export reports actual codec and dimensions; completed output decodes fully; unsupported codecs fail clearly and can be retried without a partial published item. | NOT RUN |
+| PDH-EXP-02 | Sustained multi-clip export under thermal load | App remains responsive, progress stays truthful, thermal throttling is recorded, and output order/duration/audio remain correct. | NOT RUN |
+| PDH-EXP-03 | Bounded long export and memory pressure | Record elapsed time, output size, memory/resource observations and decoder completion; no OOM, stale running job or lost temp file. | NOT RUN |
+| PDH-EXP-04 | Low-storage OEM preflight and allocation error | Preflight/error UI is accurate; simulated or naturally occurring write failure leaves no corrupt completed MediaStore row and retry is safe. Do not deliberately fill device storage. | NOT RUN |
+| PDH-EXP-05 | Background/foreground and OEM process restrictions during export | UI explains keep-open/foreground-only semantics; interruption is not shown as success and persisted jobs can be retried safely. | NOT RUN |
+| PDH-EXP-06 | Audio/subtitle composition on ARM64 | Added audio offset/mix and saved subtitle pixels/timing are checked against reference timestamps, including trim/split/reorder/speed cases; output audio/video fully decodes without material drift. | NOT RUN |
+

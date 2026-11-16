@@ -45,8 +45,11 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
     private boolean task09SourceRecovery;
     private String task09SourceUri;
     private boolean task09bExportHistory;
+    private boolean task09bExportIntegration;
     private String task09bExportProcess;
     private String task09bExportRoot;
+    private String task09bProjectId;
+    private String task09bRetryJobId;
 
     @Override public void onCreate(Bundle arguments) {
         super.onCreate(arguments);
@@ -76,8 +79,11 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
         task09SourceRecovery = arguments != null && "source-recovery".equals(arguments.getString("task09"));
         task09SourceUri = arguments == null ? null : arguments.getString("sourceUri");
         task09bExportHistory = arguments != null && "export-history".equals(arguments.getString("task09b"));
+        task09bExportIntegration = arguments != null && "export-integration".equals(arguments.getString("task09b"));
         task09bExportProcess = arguments == null ? null : arguments.getString("task09b");
         task09bExportRoot = arguments == null ? null : arguments.getString("exportRoot");
+        task09bProjectId = arguments == null ? null : arguments.getString("projectId");
+        task09bRetryJobId = arguments == null ? null : arguments.getString("retryJobId");
         start();
     }
 
@@ -127,6 +133,14 @@ public final class Task07AccessibilityInstrumentation extends Instrumentation {
         }
         if ("export-process-start".equals(task09bExportProcess) || "export-process-recover".equals(task09bExportProcess)) {
             Task09BExportProcessInstrumentation.run(this, task09bExportProcess, task09bExportRoot);
+            return;
+        }
+        if (task09bExportIntegration) {
+            Task09BExportIntegrationInstrumentation.run(this, task09bProjectId);
+            return;
+        }
+        if (task09bRetryJobId != null) {
+            Task09BExportIntegrationInstrumentation.retryFailed(this, task09bRetryJobId);
             return;
         }
         if (task09bExportHistory) {

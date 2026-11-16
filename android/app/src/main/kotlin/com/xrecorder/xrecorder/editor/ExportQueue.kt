@@ -138,7 +138,14 @@ class ExportQueue(private val context: Context) {
     private fun temporary(job: JSONObject): File {
         val id = job.getString("id")
         require(id.matches(Regex("[a-zA-Z0-9_-]{1,80}"))) { "Invalid export job identity." }
-        return File(context.cacheDir, "export_$id.mp4")
+        // Android may purge cache files while the process is backgrounded. An
+        // active encoder must keep its output until publication or recovery.
+        val directory = File(context.filesDir, "export_work")
+        if (!directory.exists() && !directory.mkdirs())
+            throw java.io.IOException("Could not prepare export workspace.")
+        if (!directory.isDirectory)
+            throw java.io.IOException("Export workspace is unavailable.")
+        return File(directory, "export_$id.mp4")
     }
 
     @Synchronized
