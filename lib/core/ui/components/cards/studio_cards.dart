@@ -44,6 +44,57 @@ class StudioCard extends StatelessWidget {
   );
 }
 
+/// A filled surface whose hairline border is strongest at the bottom edge and
+/// fades out toward the top, giving cards a soft lit-from-below edge.
+class StudioFadeBorder extends StatelessWidget {
+  const StudioFadeBorder({
+    super.key,
+    required this.child,
+    this.color,
+    this.borderColor,
+    this.radius = AppRadius.card,
+    this.width = AppBorder.subtle,
+    this.clipBehavior = Clip.antiAlias,
+  });
+  final Widget child;
+  final Color? color;
+  final Color? borderColor;
+  final double radius;
+  final double width;
+  final Clip clipBehavior;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.studioColors;
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final edge = borderColor ?? c.outline;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(radius),
+        gradient: LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [
+            edge.withValues(alpha: dark ? .55 : .45),
+            edge.withValues(alpha: dark ? .12 : .08),
+          ],
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(width),
+        child: Material(
+          color: color ?? c.card,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radius - width),
+          ),
+          clipBehavior: clipBehavior,
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
 class StudioInset extends StatelessWidget {
   const StudioInset({
     super.key,
@@ -130,11 +181,27 @@ class StudioRootHeader extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
-        '3HRECORDER',
-        style: AppTypography.section.copyWith(
-          color: context.studioColors.primary,
-        ),
+      Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: context.studioColors.primary,
+              shape: BoxShape.circle,
+            ),
+            child: const SizedBox.square(dimension: 6),
+          ),
+          const SizedBox(width: AppSpacing.xs),
+          Flexible(
+            child: Text(
+              '3HRECORDER',
+              style: AppTypography.section.copyWith(
+                color: context.studioColors.muted,
+                letterSpacing: 1.6,
+              ),
+            ),
+          ),
+        ],
       ),
       SectionTitle(
         title,
@@ -241,26 +308,51 @@ class QuickActionTile extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onTap;
   @override
-  Widget build(BuildContext context) => Semantics(
-    button: true,
-    enabled: onTap != null,
-    child: StudioCard(
-      padding: EdgeInsets.zero,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.md),
-          child: Row(
-            children: [
-              Icon(icon, color: context.studioColors.primary),
-              const SizedBox(width: AppSpacing.sm),
-              Expanded(child: Text(title, style: AppTypography.bodyEmphasis)),
-            ],
+  Widget build(BuildContext context) {
+    final c = context.studioColors;
+    final enabled = onTap != null;
+    final ink = enabled ? c.primary : c.disabled;
+    return Semantics(
+      button: true,
+      enabled: enabled,
+      child: StudioFadeBorder(
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.sm,
+              vertical: AppSpacing.xs,
+            ),
+            child: Row(
+              children: [
+                StudioIconTile(
+                  icon: icon,
+                  color: ink,
+                  size: 40,
+                  iconSize: AppIconSize.medium,
+                  radius: AppRadius.pill,
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: AppTypography.bodyEmphasis.copyWith(
+                      color: enabled ? c.text : c.muted,
+                    ),
+                  ),
+                ),
+                Icon(
+                  AppIcons.chevronRight,
+                  size: AppIconSize.small,
+                  color: c.muted,
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class BentoCard extends StatelessWidget {

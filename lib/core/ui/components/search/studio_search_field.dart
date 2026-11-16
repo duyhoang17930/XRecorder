@@ -2,6 +2,7 @@ import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/app_icons.dart';
+import '../cards/studio_cards.dart';
 import '../../theme/colors.dart';
 import '../../theme/radius.dart';
 import '../../theme/shadows.dart';
@@ -70,54 +71,63 @@ class _StudioSearchFieldState extends State<StudioSearchField> {
   @override
   Widget build(BuildContext context) {
     final colors = context.studioColors;
-    return Container(
-      constraints: const BoxConstraints(minHeight: AppSize.touchTarget),
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+    return DecoratedBox(
       decoration: BoxDecoration(
-        color: colors.surface,
-        border: Border.all(color: colors.border),
         borderRadius: BorderRadius.circular(AppRadius.search),
         boxShadow: AppShadows.search(context),
       ),
-      child: Row(
-        children: [
-          Icon(AppIcons.search, size: AppIconSize.small, color: colors.muted),
-          const SizedBox(width: AppSpacing.sm),
-          Expanded(
-            child: TextField(
-              controller: _controller,
-              focusNode: widget.focusNode,
-              autofocus: widget.autofocus,
-              textInputAction: TextInputAction.search,
-              onChanged: widget.onChanged,
-              onSubmitted: widget.onSubmitted,
-              textAlignVertical: TextAlignVertical.center,
-              style: AppTypography.body.copyWith(color: colors.text),
-              decoration: InputDecoration(
-                hintText: context.message(widget.hintText),
-                filled: false,
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                // Give the editable semantics node the full Android tap target,
-                // not just the height of its text line.
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: AppSpacing.md,
+      child: StudioFadeBorder(
+        color: colors.surface,
+        radius: AppRadius.search,
+        clipBehavior: Clip.none,
+        child: Container(
+          constraints: const BoxConstraints(minHeight: AppSize.touchTarget),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+          child: Row(
+            children: [
+              Icon(
+                AppIcons.search,
+                size: AppIconSize.small,
+                color: colors.muted,
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  focusNode: widget.focusNode,
+                  autofocus: widget.autofocus,
+                  textInputAction: TextInputAction.search,
+                  onChanged: widget.onChanged,
+                  onSubmitted: widget.onSubmitted,
+                  textAlignVertical: TextAlignVertical.center,
+                  style: AppTypography.body.copyWith(color: colors.text),
+                  decoration: InputDecoration(
+                    hintText: context.message(widget.hintText),
+                    filled: false,
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    // Give the editable semantics node the full Android tap target,
+                    // not just the height of its text line.
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: AppSpacing.md,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              if (_controller.text.isNotEmpty)
+                IconButton(
+                  tooltip: context.l10n.clearSearch,
+                  onPressed: () {
+                    _controller.clear();
+                    widget.onChanged?.call('');
+                    widget.focusNode?.requestFocus();
+                  },
+                  icon: const Icon(AppIcons.close, size: AppIconSize.medium),
+                ),
+            ],
           ),
-          if (_controller.text.isNotEmpty)
-            IconButton(
-              tooltip: context.l10n.clearSearch,
-              onPressed: () {
-                _controller.clear();
-                widget.onChanged?.call('');
-                widget.focusNode?.requestFocus();
-              },
-              icon: const Icon(AppIcons.close, size: AppIconSize.medium),
-            ),
-        ],
+        ),
       ),
     );
   }
