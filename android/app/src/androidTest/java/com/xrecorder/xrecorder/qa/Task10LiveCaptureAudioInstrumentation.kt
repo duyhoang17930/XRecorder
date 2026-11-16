@@ -90,7 +90,7 @@ object Task10LiveCaptureAudioInstrumentation {
                 SystemClock.sleep(50)
             }
         }
-        fun diagnostic(): JSONObject {
+        fun diagnostic(serverUrl: String, streamKey: String): JSONObject {
             val all = nodes().filter { it.isVisibleToUser }
             val fields = org.json.JSONArray()
             all.filter { it.isEditable }.forEach { fields.put(JSONObject()
@@ -99,16 +99,8 @@ object Task10LiveCaptureAudioInstrumentation {
             val labels = org.json.JSONArray()
             all.filter { !it.isEditable && !it.isPassword }.mapNotNull {
                 (it.contentDescription ?: it.text)?.toString()
-            }.filter { !it.contains("task10_capture_audio_") }.distinct().forEach { labels.put(it) }
+            }.filter { !it.contains(serverUrl) && !it.contains(streamKey) }.distinct().forEach { labels.put(it) }
             return JSONObject().put("fields", fields).put("visibleLabels", labels)
-        }
-        fun screenshot(path: File): Boolean {
-            val bitmap = automation.takeScreenshot() ?: return false
-            try {
-                check(path.createNewFile())
-                path.outputStream().use { check(bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, it)) }
-            } finally { bitmap.recycle() }
-            return true
         }
     }
 
@@ -125,6 +117,9 @@ object Task10LiveCaptureAudioInstrumentation {
         val visualFirstDrawNs = java.util.concurrent.atomic.AtomicLong()
         val visualLastDrawNs = java.util.concurrent.atomic.AtomicLong()
         val context = runner.targetContext
+        val serverUrl = checkNotNull(arguments.getString("serverUrl"))
+        val streamKey = checkNotNull(arguments.getString("streamKey"))
+        require(serverUrl.isNotBlank() && streamKey.isNotBlank())
         fun state(): Map<String, Any?> {
             var value: Map<String, Any?> = emptyMap()
             runner.runOnMainSync { value = CaptureState.snapshot() }
@@ -240,16 +235,14 @@ object Task10LiveCaptureAudioInstrumentation {
             controls = ui
             ui.click("Create")
             ui.click("Livestream")
-            ui.enter("Server URL", "rtmp://10.0.2.2:19350/live")
-            // Even the synthetic key is generated in-app, never in adb arguments.
-            ui.enter("Stream key", "task10_capture_audio_$attempt")
+            ui.enter("Server URL", serverUrl)
+            ui.enter("Stream key", streamKey)
             ui.click("Start livestream")
             waitFor("Capture consent was not requested", 10000) { state()["state"] == "awaitingPermission" }
             session = state()["id"] as String
             report.put("sessionId", session)
             if (arguments.getString("denyFirstConsent") == "true") {
                 val deniedId = session
-                report.put("deniedScreenshot", ui.screenshot(File(context.filesDir, "task10_audio_${attempt}_denied.png")))
                 ui.click("Cancel") // Normal Android MediaProjection denial.
                 waitFor("Denied consent did not return to idle") { state()["state"] == "idle" }
                 check(state()["outputUri"] == null && CaptureService.instance == null)
@@ -266,7 +259,6 @@ object Task10LiveCaptureAudioInstrumentation {
                 ui.click("Share entire screen")
             }
             check(ui.find("Share screen") != null) { "Normal system capture consent required" }
-            report.put("consentScreenshot", ui.screenshot(File(context.filesDir, "task10_audio_${attempt}_consent.png")))
             ui.click("Share screen")
             waitFor("Recording did not start") { state()["state"] == "recording" }
             check(CaptureState.config.audio == "mixed") { "Preserve preferences; Mixed Stream fixture required" }
@@ -367,7 +359,6 @@ object Task10LiveCaptureAudioInstrumentation {
             playback = currentPlayback()
             check((playback["positionMs"] as Number).toLong() >= 6000 && playback["playing"] == true)
             report.put("playback", JSONObject(playback)).put("liveBeforeEnd", JSONObject(LiveCaptureState.snapshot()))
-            report.put("playerScreenshot", ui.screenshot(File(context.filesDir, "task10_audio_${attempt}_player.png")))
             sourceTrack?.pause()
             if (arguments.getString("failAfterPlayback") == "true") {
                 if (arguments.getString("pauseBeforeFailure") == "true") {
@@ -439,9 +430,7 @@ object Task10LiveCaptureAudioInstrumentation {
                 .put("error", error.message ?: "Native capture test failed").put("captureAtFailure", JSONObject(state()))
             report.put("audioAtFailure", audioTiming())
             controls?.let {
-                report.put("uiDiagnostic", it.diagnostic())
-                val attempt = arguments.getString("attempt") ?: "unknown"
-                report.put("failureScreenshot", it.screenshot(File(context.filesDir, "task10_audio_${attempt}_failure.png")))
+                report.put("uiDiagnostic", it.diagnostic(serverUrl, streamKey))
             }
         } finally {
             runCatching { sourceTrack?.stop() }

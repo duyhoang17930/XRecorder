@@ -52,3 +52,16 @@ Run these export-specific cases on an ARM64 physical device after emulator QA. R
 | PDH-EXP-05 | Background/foreground and OEM process restrictions during export | UI explains keep-open/foreground-only semantics; interruption is not shown as success and persisted jobs can be retried safely. | NOT RUN |
 | PDH-EXP-06 | Audio/subtitle composition on ARM64 | Added audio offset/mix and saved subtitle pixels/timing are checked against reference timestamps, including trim/split/reorder/speed cases; output audio/video fully decodes without material drift. | NOT RUN |
 
+## Livestream hardware follow-up
+
+Run after current-source private receiver QA passes on an emulator. Record device model/OEM, Android/API, app/APK SHA, receiver/player and network type. Keep endpoints private and redact credentials. Emulator results do not count as hardware PASS.
+
+| ID | What must be tested | Expected behavior | Status |
+|---|---|---|---|
+| PDH-LIVE-01 | ARM64 hardware H.264/AAC encoder selection and sustained 30/60 fps where supported | Receiver decodes the actual measured cadence and audio; record encoder identity, output FPS/bitrate and drops rather than assuming requested settings were achieved. | NOT RUN |
+| PDH-LIVE-02 | Wi-Fi to cellular handoff and recovery on a private receiver | Transport failure/retry remains bounded, UI follows actual connection state, and Stop cancels retry without stale capture or duplicate sessions. | NOT RUN |
+| PDH-LIVE-03 | Sustained livestream thermal, CPU/memory and battery behavior | Record throttling, temperature trend, battery use, queue growth and frame/audio continuity over an agreed bounded session; no uncontrolled resource growth. | NOT RUN |
+| PDH-LIVE-04 | OEM background restrictions, screen lock and audio routing | OEM policy and projection termination are reported truthfully; selected microphone/playback route remains understandable and is released after Stop/system termination. | NOT RUN |
+| PDH-LIVE-05 | Optional Facecam/Drawing overlay under live encode pressure | Shared overlays remain responsive and output remains decodable at measured cadence; failure to sustain the optional overlay does not leave a zombie stream. | NOT RUN |
+| PDH-LIVE-06 | Real end-to-end streaming latency across network conditions | Use a controlled visible/timed stimulus and receiver-side timestamps; report observed latency/jitter and network conditions without treating connection time as media latency. | NOT RUN |
+
