@@ -356,6 +356,7 @@
   "removeAttachment": "添付を取り除く",
   "removeClipFromProject": "プロジェクトからクリップを削除する",
   "removeDownloadedModel": "ダウンロードモデル削除",
+  "confirmRemoveSpeechModel": "この音声モデルを3HRecorderから削除しますか？後で再度インポートできます。",
   "removeMusic": "音楽削除",
   "rename": "名称",
   "renameMedia": "メディア名",

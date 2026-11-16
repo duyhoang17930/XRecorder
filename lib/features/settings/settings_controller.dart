@@ -10,6 +10,8 @@ import '../editor/speech_languages.dart';
 
 /// Preferences for future capture sessions; not a claim of device capability.
 class SettingsController extends ChangeNotifier {
+  static const _speechModels = {'tiny', 'base', 'small-q5_1'};
+
   SettingsController({this.store});
   final SettingsStore? store;
   Future<void> _pending = Future.value();
@@ -25,10 +27,17 @@ class SettingsController extends ChangeNotifier {
   Locale? get appLocale => _appLocale.value;
   ValueListenable<Locale?> get appLocaleListenable => _appLocale;
   String preferredSpeechLanguage = 'auto';
+  String preferredSpeechModel = 'base';
 
   void setSpeechLanguage(String code) {
     if (SpeechLanguages.supports(code) && code != preferredSpeechLanguage) {
       update(() => preferredSpeechLanguage = code);
+    }
+  }
+
+  void setSpeechModel(String model) {
+    if (_speechModels.contains(model) && model != preferredSpeechModel) {
+      update(() => preferredSpeechModel = model);
     }
   }
 
@@ -109,6 +118,7 @@ class SettingsController extends ChangeNotifier {
       'themeMode': themeMode.name,
       'appLocale': appLocale?.toLanguageTag() ?? 'system',
       'speechLanguage': preferredSpeechLanguage,
+      'speechModel': preferredSpeechModel,
       'resolution': resolution,
       'fps': fps,
       'bitrate': bitrate,
@@ -140,6 +150,11 @@ class SettingsController extends ChangeNotifier {
             SpeechLanguages.supports(savedSpeechLanguage)
         ? savedSpeechLanguage
         : 'auto';
+    final savedSpeechModel = values['speechModel'];
+    preferredSpeechModel =
+        savedSpeechModel is String && _speechModels.contains(savedSpeechModel)
+        ? savedSpeechModel
+        : 'base';
     _themeMode.value = ThemeMode.values.firstWhere(
       (mode) => mode.name == values['themeMode'],
       orElse: () => ThemeMode.dark,
@@ -289,6 +304,7 @@ class SettingsController extends ChangeNotifier {
       _themeMode.value = ThemeMode.dark;
       _appLocale.value = null;
       preferredSpeechLanguage = 'auto';
+      preferredSpeechModel = 'base';
       resolution = '1080p FHD';
       fps = '60';
       bitrate = '16 Mbps';

@@ -356,6 +356,7 @@
   "removeAttachment": "첨부 파일 삭제",
   "removeClipFromProject": "프로젝트에서 클립 제거",
   "removeDownloadedModel": "다운로드된 모델 삭제",
+  "confirmRemoveSpeechModel": "3HRecorder에서 이 음성 모델을 삭제할까요? 나중에 다시 가져올 수 있습니다.",
   "removeMusic": "음악 삭제",
   "rename": "이름 : Rename",
   "renameMedia": "미디어 이름",

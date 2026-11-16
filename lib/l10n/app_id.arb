@@ -356,6 +356,7 @@
   "removeAttachment": "Menghapus attachment",
   "removeClipFromProject": "Menghapus klip dari proyek",
   "removeDownloadedModel": "Menghapus model yang diunduh",
+  "confirmRemoveSpeechModel": "Hapus model ucapan ini dari 3HRecorder? Anda dapat mengimpornya lagi nanti.",
   "removeMusic": "Menghapus musik",
   "rename": "Nama",
   "renameMedia": "Nama Media",

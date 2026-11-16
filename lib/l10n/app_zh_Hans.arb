@@ -356,6 +356,7 @@
   "removeAttachment": "取消附件",
   "removeClipFromProject": "从项目中删除剪辑",
   "removeDownloadedModel": "下载模型删除",
+  "confirmRemoveSpeechModel": "要从 3HRecorder 中移除此语音模型吗？之后可以再次导入。",
   "removeMusic": "删除音乐",
   "rename": "名称",
   "renameMedia": "媒體名稱",

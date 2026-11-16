@@ -356,6 +356,7 @@
   "removeAttachment": "Remova o apêndice",
   "removeClipFromProject": "Remover clips do projeto",
   "removeDownloadedModel": "Remova o modelo descarregado",
+  "confirmRemoveSpeechModel": "Remover este modelo de fala do 3HRecorder? Pode importá-lo novamente mais tarde.",
   "removeMusic": "Remover música",
   "rename": "renome",
   "renameMedia": "Renascimento de mídia",

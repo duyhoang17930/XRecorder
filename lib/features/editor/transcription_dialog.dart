@@ -121,8 +121,9 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!_preferencesRead) {
-      language =
-          SettingsScope.maybeOf(context)?.preferredSpeechLanguage ?? 'auto';
+      final preferences = SettingsScope.maybeOf(context);
+      language = preferences?.preferredSpeechLanguage ?? 'auto';
+      model = preferences?.preferredSpeechModel ?? 'base';
       _preferencesRead = true;
     }
   }
@@ -162,6 +163,24 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
 
   Future<void> removeModel() async {
     if (active) return;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(context.l10n.removeDownloadedModel),
+        content: Text(context.l10n.confirmRemoveSpeechModel),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(context.l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(context.l10n.removeDownloadedModel),
+          ),
+        ],
+      ),
+    );
+    if (!mounted || confirmed != true || active) return;
     setState(() => busy = true);
     try {
       await AndroidTranscriptionService.channel.invokeMethod<void>(
@@ -343,10 +362,14 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
                 ],
                 onChanged: active
                     ? null
-                    : (v) => setState(() {
-                        model = v!;
-                        _modelChosen = true;
-                      }),
+                    : (v) {
+                        if (v == null) return;
+                        setState(() {
+                          model = v;
+                          _modelChosen = true;
+                        });
+                        SettingsScope.maybeOf(context)?.setSpeechModel(v);
+                      },
               ),
               ListTile(
                 title: Text(context.l10n.speechLanguage),

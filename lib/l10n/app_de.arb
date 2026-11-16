@@ -356,6 +356,7 @@
   "removeAttachment": "Entfernen von attachment",
   "removeClipFromProject": "Clip aus dem Projekt entfernen",
   "removeDownloadedModel": "Entfernen des heruntergeladenen Modells",
+  "confirmRemoveSpeechModel": "Dieses Sprachmodell aus 3HRecorder entfernen? Du kannst es später erneut importieren.",
   "removeMusic": "Musik entfernen",
   "rename": "Rename",
   "renameMedia": "Rename Medien",
