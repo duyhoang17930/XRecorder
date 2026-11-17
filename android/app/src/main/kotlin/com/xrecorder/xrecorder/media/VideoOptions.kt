@@ -18,7 +18,10 @@ internal class VideoOptions(
     private val edit: (Uri) -> Unit,
     private val changed: (Uri, Boolean) -> Unit = { _, _ -> },
     private val dismissed: () -> Unit = {},
+    /** The app's current theme; the player always passes true. */
+    private val dark: Boolean = true,
 ) {
+    private val palette = StudioPalette.of(dark)
     private var uri = Uri.EMPTY
     private var item: Map<*, *> = emptyMap<Any, Any>()
     private var busy = false
@@ -31,12 +34,10 @@ internal class VideoOptions(
             busy = false
             item = result as? Map<*, *> ?: run { dismissed(); return@call }
             val options = videoOptionKeys(item["owned"] == true, (item["duration"] as? Number)?.toLong())
-            var selected = false
-            AlertDialog.Builder(activity)
-                .setTitle(item["name"] as? String)
-                .setItems(options.map { label(it) }.toTypedArray()) { _, index ->
-                    selected = true
-                    when (options[index]) {
+            val sheet = StudioSheet(activity, palette).header(item["name"] as? String ?: "", summary())
+            for (key in options) {
+                sheet.row(StudioSheetRow(icon(key), label(key), destructive = key == "trash") {
+                    when (key) {
                         "rename" -> rename()
                         "edit" -> edit(uri)
                         "info" -> info()
@@ -47,10 +48,32 @@ internal class VideoOptions(
                             call("trash") { changed(uri, true); dismissed() }
                         }
                     }
-                }
-                .setOnDismissListener { if (!selected) dismissed() }
-                .show()
+                })
+            }
+            // A row click detaches the sheet's dismiss listener, so only a
+            // plain dismiss (back, outside tap) reports back here.
+            sheet.show(dismissed)
         }
+    }
+
+    private fun summary(): String {
+        val size = Formatter.formatShortFileSize(activity, (item["size"] as? Number)?.toLong() ?: 0)
+        val duration = (item["duration"] as? Number)?.toLong() ?: return size
+        val seconds = duration / 1000
+        val time = if (seconds >= 3600)
+            String.format(java.util.Locale.getDefault(), "%d:%02d:%02d", seconds / 3600, seconds / 60 % 60, seconds % 60)
+        else String.format(java.util.Locale.getDefault(), "%02d:%02d", seconds / 60, seconds % 60)
+        return "$size · $time"
+    }
+
+    private fun icon(key: String): Int = when (key) {
+        "rename" -> R.drawable.ic_lucide_pencil
+        "edit" -> R.drawable.ic_lucide_scissors
+        "info" -> R.drawable.ic_lucide_info
+        "share" -> R.drawable.ic_lucide_share
+        "copy" -> R.drawable.ic_lucide_folder
+        "move" -> R.drawable.ic_lucide_folder_move
+        else -> R.drawable.ic_lucide_trash_2
     }
 
     private fun label(key: String): String = text(when (key) {
@@ -69,30 +92,37 @@ internal class VideoOptions(
         val duration = (item["duration"] as? Number)?.toLong() ?: 0
         val seconds = duration / 1000
         val time = String.format(java.util.Locale.getDefault(), "%d:%02d:%02d.%03d", seconds / 3600, seconds / 60 % 60, seconds % 60, duration % 1000)
-        val details = listOf(
-            "${text(R.string.p2_filename)}: ${item["name"]}",
-            "${text(R.string.p2_size)}: $size",
-            "${text(R.string.p2_format)}: ${item["mime"]}",
-            "${text(R.string.p2_duration)}: $time",
-            "${text(R.string.p2_dimensions)}: ${item["width"] ?: "—"} × ${item["height"] ?: "—"}",
-        ).joinToString("\n\n")
-        AlertDialog.Builder(activity).setTitle(text(R.string.p2_info)).setMessage(details)
-            .setPositiveButton(android.R.string.ok, null).setOnDismissListener { dismissed() }.show()
+        StudioSheet(activity, palette).header(text(R.string.p2_info), null)
+            .detail(text(R.string.p2_filename), item["name"] as? String ?: "—")
+            .detail(text(R.string.p2_size), size)
+            .detail(text(R.string.p2_format), item["mime"] as? String ?: "—")
+            .detail(text(R.string.p2_duration), time)
+            .detail(text(R.string.p2_dimensions), "${item["width"] ?: "—"} × ${item["height"] ?: "—"}")
+            .show(dismissed)
     }
 
     private fun rename() {
         val input = EditText(activity).apply {
+            setTextColor(palette.text)
+            setHintTextColor(palette.muted)
+            typeface = StudioType.of(activity, 500)
+            backgroundTintList = android.content.res.ColorStateList.valueOf(palette.primary)
             setSingleLine(true)
             filters = arrayOf(InputFilter.LengthFilter(120))
             hint = text(R.string.p2_filename)
             setText(item["name"] as? String ?: "")
             selectAll()
         }
-        val dialog = AlertDialog.Builder(activity).setTitle(text(R.string.p2_rename))
-            .setView(input).setNegativeButton(R.string.p2_cancel, null)
+        val frame = android.widget.FrameLayout(activity).apply {
+            setPadding(activity.dp(24), activity.dp(8), activity.dp(24), 0)
+            addView(input)
+        }
+        val dialog = AlertDialog.Builder(activity, studioDialogTheme(dark)).setTitle(text(R.string.p2_rename))
+            .setView(frame).setNegativeButton(R.string.p2_cancel, null)
             .setPositiveButton(R.string.p2_rename, null)
             .setOnDismissListener { dismissed() }.create()
-        dialog.setOnShowListener {
+        styleStudio(dialog, palette)
+        dialog.onShown {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 if (busy) return@setOnClickListener
                 val name = input.text.toString().trim()
@@ -119,10 +149,10 @@ internal class VideoOptions(
 
     private fun confirm(title: Int, message: String, accepted: () -> Unit) {
         var confirmed = false
-        AlertDialog.Builder(activity).setTitle(text(title)).setMessage(message)
+        AlertDialog.Builder(activity, studioDialogTheme(dark)).setTitle(text(title)).setMessage(message)
             .setNegativeButton(R.string.p2_cancel, null)
             .setPositiveButton(android.R.string.ok) { _, _ -> confirmed = true; accepted() }
-            .setOnDismissListener { if (!confirmed) dismissed() }.show()
+            .setOnDismissListener { if (!confirmed) dismissed() }.showStudio(palette)
     }
 
     private fun transfer(move: Boolean) {

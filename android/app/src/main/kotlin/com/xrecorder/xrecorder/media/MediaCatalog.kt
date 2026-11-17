@@ -175,7 +175,12 @@ class MediaCatalog(private val activity: Activity) :
                         optionsOpen = false
                         result.success(editUri)
                     }
-                    VideoOptions(activity, this, edit = { complete(it.toString()) }, dismissed = { complete(null) }).show(uri)
+                    // Flutter passes the in-app theme; fall back to the system's.
+                    val dark = call.argument<Boolean>("dark")
+                        ?: (activity.resources.configuration.uiMode and
+                            android.content.res.Configuration.UI_MODE_NIGHT_MASK ==
+                            android.content.res.Configuration.UI_MODE_NIGHT_YES)
+                    VideoOptions(activity, this, edit = { complete(it.toString()) }, dismissed = { complete(null) }, dark = dark).show(uri)
                 }
             } catch (_: Exception) {
                 videoResult = null
