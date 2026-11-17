@@ -44,6 +44,7 @@ class _AppLanguageDialogState extends State<_AppLanguageDialog> {
   Widget _options(Locale? selected, {bool compact = false}) => ListView(
     shrinkWrap: compact,
     physics: compact ? const NeverScrollableScrollPhysics() : null,
+    padding: const EdgeInsets.only(top: AppSpacing.xs),
     children: [
       if (query.isEmpty ||
           context.l10n.followSystem.toLowerCase().contains(query))
@@ -84,9 +85,10 @@ class _AppLanguageDialogState extends State<_AppLanguageDialog> {
             width: 420,
             height: (availableHeight - 16).clamp(0, 300),
             child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.xs),
+              padding: const EdgeInsets.all(AppSpacing.sm),
               child: SingleChildScrollView(
                 child: Column(
+                  spacing: AppSpacing.xxs,
                   children: [
                     Row(
                       children: [
@@ -120,6 +122,7 @@ class _AppLanguageDialogState extends State<_AppLanguageDialog> {
         child: Column(
           children: [
             _searchField(context),
+            const SizedBox(height: AppSpacing.xs),
             Expanded(child: _options(selected)),
           ],
         ),
@@ -139,14 +142,25 @@ class _AppLanguageDialogState extends State<_AppLanguageDialog> {
     bool selected, {
     bool compact = false,
   }) => ListTile(
-    minTileHeight: compact ? AppSize.touchTarget : null,
+    // Rows have a highlighted background, so they keep their own inset
+    // instead of the flush dialog default.
+    contentPadding: const EdgeInsetsDirectional.only(
+      start: AppSpacing.md,
+      end: AppSpacing.sm,
+    ),
+    minTileHeight: compact ? AppSize.touchTarget : 52,
     selectedTileColor: context.studioColors.primary.withValues(alpha: .10),
     selectedColor: context.studioColors.text,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppRadius.control),
     ),
-    title: Text(name),
-    trailing: selected ? const Icon(AppIcons.ready) : null,
+    title: Text(
+      name,
+      style: selected ? AppTypography.bodyEmphasis : AppTypography.body,
+    ),
+    trailing: selected
+        ? Icon(AppIcons.ready, color: context.studioColors.primary)
+        : null,
     selected: selected,
     onTap: () {
       widget.settings.setAppLocale(locale);
