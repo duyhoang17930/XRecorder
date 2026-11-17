@@ -36,9 +36,14 @@ class SessionAudio @JvmOverloads constructor(
     private var internalReader: CapturePcmReader? = null
     private var suppression: NoiseSuppressor? = null
     @Volatile private var isPaused = false
+    // Paused time is excluded from the AAC timeline, like the video encoder's pause ranges.
+    @Volatile private var pauseStartNs = 0L
+    @Volatile private var pausedNs = 0L
     var paused: Boolean
         get() = isPaused
         set(value) {
+            if (value && !isPaused) pauseStartNs = System.nanoTime()
+            else if (!value && isPaused && pauseStartNs != 0L) { pausedNs += System.nanoTime() - pauseStartNs; pauseStartNs = 0L }
             isPaused = value
             if (value) internalReader?.discardQueued()
         }
@@ -48,6 +53,9 @@ class SessionAudio @JvmOverloads constructor(
     @Volatile var startTimeNs = 0L
         private set
     @Volatile var micUnderrunSamples = 0L
+        private set
+    /** Silence inserted where the platform delivered fewer PCM frames than capture time elapsed. */
+    @Volatile var gapFilledSamples = 0L
         private set
     @Volatile var microphoneReadSamples = 0L
         private set
@@ -155,15 +163,49 @@ class SessionAudio @JvmOverloads constructor(
                     }
                 }
             }
+            // AAC PTS are derived from the sample count. If the source delivers fewer
+            // frames than real time (overruns, a starved thread, a stalled/throttled
+            // HAL), the track would end early and drift against the video. Once the
+            // consumer has drained the source, pad the missing interval with silence
+            // so the audio timeline follows the capture clock.
+            fun fillCaptureGap() {
+                if (startTimeNs == 0L || paused || stopping) return
+                val activeNs = System.nanoTime() - startTimeNs - pausedNs
+                // Allow normal HAL->client latency before treating frames as lost.
+                val missing = activeNs * rate / 1_000_000_000L - samples - rate / 20
+                if (missing < rate / 5) return
+                var remaining = missing
+                while (remaining > 0 && !aborted) {
+                    var index = encoder.dequeueInputBuffer(10000)
+                    val inputDeadline = System.nanoTime() + 3000000000L
+                    while (index < 0 && !aborted) {
+                        if (System.nanoTime() >= inputDeadline) throw IOException("Audio encoder stopped accepting PCM")
+                        drain(false); index = encoder.dequeueInputBuffer(10000)
+                    }
+                    if (index < 0) return
+                    val frames = minOf(remaining, 2048L).toInt()
+                    val input = encoder.getInputBuffer(index)!!.apply { clear() }
+                    repeat(frames * 2) { input.put(0) }
+                    encoder.queueInputBuffer(index, 0, frames * 2, samples * 1000000L / rate, 0)
+                    samples += frames; remaining -= frames
+                    gapFilledSamples += frames
+                    encodedSamples = samples
+                    drain(false)
+                }
+            }
             val micPcm = ShortArray(1024); val internalPcm = ShortArray(1024)
             var micCount = 0; var internalCount = 0
             var lastInputNs = System.nanoTime()
             var lastMicInputNs = lastInputNs
             var micDeadlineNs = 0L
+            var micDrained = false
             while (true) {
                 // Accumulate partial reads independently. Never discard the longer source
                 // or block forever waiting for a silent/unavailable second source.
-                val micRead = if (!stopping && mic != null && micCount < 1024) mic!!.read(micPcm, micCount, 1024 - micCount, AudioRecord.READ_NON_BLOCKING) else 0
+                val micRequest = if (!stopping && mic != null && micCount < 1024) 1024 - micCount else 0
+                val micRead = if (micRequest > 0) mic!!.read(micPcm, micCount, micRequest, AudioRecord.READ_NON_BLOCKING) else 0
+                // A short non-blocking read means the platform FIFO was empty: no backlog.
+                if (micRequest > 0 && micRead in 0 until micRequest) micDrained = true
                 val captured = if (internalCount == 0) internalReader?.poll() else null
                 val internalRead = captured?.size ?: 0
                 if (captured != null) {
@@ -256,6 +298,10 @@ class SessionAudio @JvmOverloads constructor(
                 micCount = 0; internalCount = 0
                 micDeadlineNs = 0
                 drain(false)
+                // Only judge a deficit when no captured PCM is still waiting to be read.
+                val caughtUp = if (internal != null) internalReader?.queuedBlocks == 0 else micDrained
+                micDrained = false
+                if (caughtUp) fillCaptureGap()
             }
             if (aborted) throw java.io.IOException("Audio cancelled")
             val deadline = System.nanoTime() + 5000000000L
