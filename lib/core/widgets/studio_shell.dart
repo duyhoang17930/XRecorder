@@ -140,10 +140,11 @@ class StudioBottomNavigation extends StatelessWidget {
               horizontal: AppSpacing.xs,
               vertical: AppSpacing.xxs,
             ),
-            child: Row(
-              textDirection: TextDirection.ltr,
+            child: Stack(
+              clipBehavior: Clip.none,
               children: [
-                Expanded(
+                Padding(
+                  padding: const EdgeInsets.only(top: AppSpacing.xs),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: radius,
@@ -176,7 +177,10 @@ class StudioBottomNavigation extends StatelessWidget {
                             padding: const EdgeInsets.all(AppSpacing.xxs),
                             child: LayoutBuilder(
                               builder: (context, constraints) {
-                                final segmentWidth = constraints.maxWidth / 4;
+                                const createGap =
+                                    AppSize.create + AppSpacing.xxs * 2;
+                                final segmentWidth =
+                                    (constraints.maxWidth - createGap) / 4;
                                 final indicatorInset = AppSpacing.xxs;
                                 return Stack(
                                   clipBehavior: Clip.hardEdge,
@@ -186,6 +190,9 @@ class StudioBottomNavigation extends StatelessWidget {
                                       curve: AppMotion.emphasized,
                                       start:
                                           (selected.clamp(0, 3) * segmentWidth +
+                                                  (selected >= 2
+                                                      ? createGap
+                                                      : 0) +
                                                   indicatorInset)
                                               .toDouble(),
                                       top: indicatorInset,
@@ -219,6 +226,7 @@ class StudioBottomNavigation extends StatelessWidget {
                                           1,
                                           tabDuration,
                                         ),
+                                        const SizedBox(width: createGap),
                                         _destination(
                                           context,
                                           context.l10n.edit,
@@ -245,25 +253,31 @@ class StudioBottomNavigation extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.xxs),
-                SizedBox.square(
-                  dimension: AppSize.create,
-                  child: Tooltip(
-                    message: context.l10n.create,
-                    child: Builder(
-                      builder: (buttonContext) => FilledButton(
-                        onPressed: () =>
-                            runStudioSheetLaunch(buttonContext, onCreate),
-                        style: FilledButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          minimumSize: const Size.square(AppSize.create),
-                          tapTargetSize: MaterialTapTargetSize.padded,
-                          shape: const CircleBorder(),
-                        ),
-                        child: Icon(
-                          AppIcons.create,
-                          semanticLabel: context.l10n.create,
-                          size: AppIconSize.primary,
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: SizedBox.square(
+                      dimension: AppSize.create,
+                      child: Tooltip(
+                        message: context.l10n.create,
+                        child: Builder(
+                          builder: (buttonContext) => FilledButton(
+                            onPressed: () =>
+                                runStudioSheetLaunch(buttonContext, onCreate),
+                            style: FilledButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              minimumSize: const Size.square(AppSize.create),
+                              tapTargetSize: MaterialTapTargetSize.padded,
+                              shape: const CircleBorder(),
+                            ),
+                            child: Icon(
+                              AppIcons.create,
+                              semanticLabel: context.l10n.create,
+                              size: AppIconSize.primary,
+                            ),
+                          ),
                         ),
                       ),
                     ),

@@ -4,4 +4,19 @@
     <string name="p2_edit_photo" formatted="false">Chỉnh sửa ảnh</string>
     <string name="p2_preview_unavailable" formatted="false">Không phát được video này hoặc quyền truy cập đã bị thu hồi.</string>
     <string name="p2_back" formatted="false">Quay lại</string>
+    <string name="p2_rename" formatted="false">Đổi tên</string>
+    <string name="p2_share" formatted="false">Chia sẻ</string>
+    <string name="p2_info" formatted="false">Thông tin tệp</string>
+    <string name="p2_copy" formatted="false">Sao chép vào thư mục</string>
+    <string name="p2_move" formatted="false">Chuyển vào thư mục</string>
+    <string name="p2_trash" formatted="false">Chuyển vào Thùng rác</string>
+    <string name="p2_cancel" formatted="false">Hủy</string>
+    <string name="p2_filename" formatted="false">Tên tệp</string>
+    <string name="p2_move_confirm" formatted="false">Chuyển sang thư mục khác?</string>
+    <string name="p2_move_explanation" formatted="false">Bản sao được xác minh trước. Chỉ xóa bản gốc khi Android cho phép. Nếu chưa được cấp quyền, cả hai bản được giữ lại.</string>
+    <string name="p2_trash_confirm" formatted="false">Chuyển vào Thùng rác?</string>
+    <string name="p2_size" formatted="false">Dung lượng</string>
+    <string name="p2_format" formatted="false">Định dạng</string>
+    <string name="p2_duration" formatted="false">Thời gian</string>
+    <string name="p2_dimensions" formatted="false">Kích thước</string>
 </resources>

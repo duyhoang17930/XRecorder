@@ -8,6 +8,7 @@ import '../../core/ui/components/dialogs/studio_name_dialog.dart';
 import 'media_repository.dart';
 import 'media_library_screen.dart';
 import 'media_actions.dart';
+import 'video_entry.dart';
 import '../editor/editor_entry.dart';
 import '../editor/project_repository.dart';
 
@@ -223,7 +224,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                       ? null
                       : () => run(() async {
                           if (item.kind == MediaKind.video) {
-                            await actions.preview(item.uri);
+                            await openVideo(context, item);
                           } else {
                             context.push(
                               '/photo-preview/${Uri.encodeComponent(item.id)}',

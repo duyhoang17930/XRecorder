@@ -4,4 +4,19 @@
     <string name="p2_edit_photo" formatted="false">Edit foto</string>
     <string name="p2_preview_unavailable" formatted="false">Video ini tidak dapat dimainkan atau akses telah dibatalkan.</string>
     <string name="p2_back" formatted="false">Kembali</string>
+    <string name="p2_rename" formatted="false">Nama</string>
+    <string name="p2_share" formatted="false">Berbagi</string>
+    <string name="p2_info" formatted="false">Informasi Media</string>
+    <string name="p2_copy" formatted="false">Kopi ke folder</string>
+    <string name="p2_move" formatted="false">Bergerak ke folder</string>
+    <string name="p2_trash" formatted="false">Bergerak untuk menghancurkan</string>
+    <string name="p2_cancel" formatted="false">Batal</string>
+    <string name="p2_filename" formatted="false">Nama Filem</string>
+    <string name="p2_move_confirm" formatted="false">Beralih ke folder lain?</string>
+    <string name="p2_move_explanation" formatted="false">Kopi akan diperiksa terlebih dahulu.Original hanya dihapus ketika Android membenarkannya.Jika izin tidak tersedia, keduanya disimpan.</string>
+    <string name="p2_trash_confirm" formatted="false">Bergerak untuk menghancurkan?</string>
+    <string name="p2_size" formatted="false">Ukuran</string>
+    <string name="p2_format" formatted="false">Format</string>
+    <string name="p2_duration" formatted="false">Durasi</string>
+    <string name="p2_dimensions" formatted="false">Dimensi</string>
 </resources>

@@ -4,4 +4,19 @@
     <string name="p2_edit_photo" formatted="false">संपादित फोटो</string>
     <string name="p2_preview_unavailable" formatted="false">इस वीडियो को नहीं खेला जा सकता है या पहुंच रद्द कर दी गई है।</string>
     <string name="p2_back" formatted="false">वापस</string>
+    <string name="p2_rename" formatted="false">नाम</string>
+    <string name="p2_share" formatted="false">साझा करें</string>
+    <string name="p2_info" formatted="false">मीडिया विवरण</string>
+    <string name="p2_copy" formatted="false">फ़ोल्डर को कॉपी करें</string>
+    <string name="p2_move" formatted="false">फ़ोल्डर में स्थानांतरित करें</string>
+    <string name="p2_trash" formatted="false">ट्रैश करने के लिए जानें</string>
+    <string name="p2_cancel" formatted="false">रद्द करें</string>
+    <string name="p2_filename" formatted="false">फ़ाइल नाम</string>
+    <string name="p2_move_confirm" formatted="false">एक और फ़ोल्डर में जाने के लिए?</string>
+    <string name="p2_move_explanation" formatted="false">कॉपी पहले सत्यापित की जाएगी. मूल को केवल जब एंड्रॉइड अनुमति देता है तो हटा दिया जाता है. यदि अनुमति उपलब्ध नहीं है, तो दोनों कॉपी बनाए रखा जाता है.</string>
+    <string name="p2_trash_confirm" formatted="false">चले जाने के लिए?</string>
+    <string name="p2_size" formatted="false">आकार</string>
+    <string name="p2_format" formatted="false">फॉर्मेट</string>
+    <string name="p2_duration" formatted="false">लंबाई</string>
+    <string name="p2_dimensions" formatted="false">आयामों</string>
 </resources>

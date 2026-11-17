@@ -36,6 +36,7 @@ class MediaCatalog(private val activity: Activity) :
         private const val PICK_MODEL = 1703
         private const val CREATE_SRT = 1704
         private const val PICK_DESTINATION = 1705
+        private const val OPEN_VIDEO = 1706
     }
 
     private val resolver = activity.contentResolver
@@ -44,6 +45,8 @@ class MediaCatalog(private val activity: Activity) :
     private val worker = Executors.newSingleThreadExecutor()
     private val preferences = activity.getSharedPreferences("media_catalog", Context.MODE_PRIVATE)
     private var picker: MethodChannel.Result? = null
+    private var videoResult: MethodChannel.Result? = null
+    private var optionsOpen = false
     private var subtitleBytes: ByteArray? = null
     private val handler = Handler(Looper.getMainLooper())
     private var eventSink: EventChannel.EventSink? = null
@@ -149,6 +152,38 @@ class MediaCatalog(private val activity: Activity) :
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        if (call.method == "openVideo" || call.method == "videoOptions") {
+            if (videoResult != null || optionsOpen) {
+                result.error("busy", "A video action is already open", null)
+                return
+            }
+            val uri = Uri.parse(call.argument<String>("uri") ?: "")
+            if (uri.scheme != "content") {
+                result.error("invalid", "Expected a content URI", null)
+                return
+            }
+            try {
+                if (call.method == "openVideo") {
+                    videoResult = result
+                    activity.startActivityForResult(Intent(activity, VideoPreviewActivity::class.java).setData(uri), OPEN_VIDEO)
+                } else {
+                    optionsOpen = true
+                    var completed = false
+                    fun complete(editUri: String?) {
+                        if (completed) return
+                        completed = true
+                        optionsOpen = false
+                        result.success(editUri)
+                    }
+                    VideoOptions(activity, this, edit = { complete(it.toString()) }, dismissed = { complete(null) }).show(uri)
+                }
+            } catch (_: Exception) {
+                videoResult = null
+                optionsOpen = false
+                result.error("unavailable", "Could not open video actions", null)
+            }
+            return
+        }
         if (call.method == "setAppLocale") {
             try {
                 P2Locale.save(activity, call.arguments as String)
@@ -575,6 +610,11 @@ class MediaCatalog(private val activity: Activity) :
     }
 
     fun onActivityResult(request: Int, code: Int, data: Intent?): Boolean {
+        if (request == OPEN_VIDEO) {
+            videoResult?.success(if (code == Activity.RESULT_OK) data?.getStringExtra("editUri") else null)
+            videoResult = null
+            return true
+        }
         if (
             request != PICK_FOLDER &&
                 request != PICK_AUDIO &&
@@ -1023,6 +1063,8 @@ class MediaCatalog(private val activity: Activity) :
         onCancel(null)
         picker?.error("cancelled", "Folder selection interrupted", null)
         picker = null
+        videoResult?.success(null)
+        videoResult = null
         worker.shutdown()
     }
 }

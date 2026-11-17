@@ -4,4 +4,19 @@
     <string name="p2_edit_photo" formatted="false">Edit photo</string>
     <string name="p2_preview_unavailable" formatted="false">Cette vidéo ne peut pas être jouée ou l\'accès a été annulé.</string>
     <string name="p2_back" formatted="false">Retour</string>
+    <string name="p2_rename" formatted="false">Nom de renom</string>
+    <string name="p2_share" formatted="false">partage</string>
+    <string name="p2_info" formatted="false">Médias détails</string>
+    <string name="p2_copy" formatted="false">Copier dans le dossier</string>
+    <string name="p2_move" formatted="false">Mouvez-vous vers le dossier</string>
+    <string name="p2_trash" formatted="false">Mouvez-vous à Trash</string>
+    <string name="p2_cancel" formatted="false">Annuler</string>
+    <string name="p2_filename" formatted="false">Nom de filet</string>
+    <string name="p2_move_confirm" formatted="false">Mettre à un autre dossier ?</string>
+    <string name="p2_move_explanation" formatted="false">La copie sera vérifiée d\'abord.L\'original ne sera supprimé que lorsque Android le permet.Si la permission n\'est pas disponible, les deux copies seront conservées.</string>
+    <string name="p2_trash_confirm" formatted="false">Se déplacer à Trash ?</string>
+    <string name="p2_size" formatted="false">taille</string>
+    <string name="p2_format" formatted="false">Formats</string>
+    <string name="p2_duration" formatted="false">Durée</string>
+    <string name="p2_dimensions" formatted="false">Dimensions</string>
 </resources>

@@ -4,4 +4,19 @@
     <string name="p2_edit_photo" formatted="false">Edit foto</string>
     <string name="p2_preview_unavailable" formatted="false">Este video no se puede reproducir o el acceso ha sido revocado.</string>
     <string name="p2_back" formatted="false">Atrás</string>
+    <string name="p2_rename" formatted="false">Renombre</string>
+    <string name="p2_share" formatted="false">Compartir</string>
+    <string name="p2_info" formatted="false">Detalles de los medios</string>
+    <string name="p2_copy" formatted="false">Copia a la cartera</string>
+    <string name="p2_move" formatted="false">Moverse a la cartera</string>
+    <string name="p2_trash" formatted="false">Moverse a la trama</string>
+    <string name="p2_cancel" formatted="false">Cancelar</string>
+    <string name="p2_filename" formatted="false">Filename</string>
+    <string name="p2_move_confirm" formatted="false">¿Vuelve a otra cartera?</string>
+    <string name="p2_move_explanation" formatted="false">La copia se verifica primero.El original sólo se elimina cuando Android lo permite.Si la autorización no está disponible, ambas copias se mantienen.</string>
+    <string name="p2_trash_confirm" formatted="false">¿Movir a la trampa?</string>
+    <string name="p2_size" formatted="false">El tamaño</string>
+    <string name="p2_format" formatted="false">Formato</string>
+    <string name="p2_duration" formatted="false">Duración</string>
+    <string name="p2_dimensions" formatted="false">Dimensiones</string>
 </resources>

@@ -4,4 +4,19 @@
     <string name="p2_edit_photo" formatted="false">写真編集</string>
     <string name="p2_preview_unavailable" formatted="false">このビデオは再生できず、アクセスがキャンセルされました。</string>
     <string name="p2_back" formatted="false">戻る</string>
+    <string name="p2_rename" formatted="false">名称</string>
+    <string name="p2_share" formatted="false">共有</string>
+    <string name="p2_info" formatted="false">メディア詳細</string>
+    <string name="p2_copy" formatted="false">フォルダーへのコピー</string>
+    <string name="p2_move" formatted="false">フォルダーへ移動</string>
+    <string name="p2_trash" formatted="false">トラッシュへ移動</string>
+    <string name="p2_cancel" formatted="false">キャンセル</string>
+    <string name="p2_filename" formatted="false">フィルネーム</string>
+    <string name="p2_move_confirm" formatted="false">別のフォルダーに移動する?</string>
+    <string name="p2_move_explanation" formatted="false">コピーは最初に確認されます. オリジナルはAndroidが許可する場合にのみ削除されます. 許可が利用できない場合は、両方のコピーが保存されます。</string>
+    <string name="p2_trash_confirm" formatted="false">トラッシュに移動する?</string>
+    <string name="p2_size" formatted="false">サイズ</string>
+    <string name="p2_format" formatted="false">フォーマット</string>
+    <string name="p2_duration" formatted="false">長さ</string>
+    <string name="p2_dimensions" formatted="false">サイズ</string>
 </resources>

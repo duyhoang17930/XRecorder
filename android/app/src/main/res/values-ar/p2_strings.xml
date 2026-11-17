@@ -4,4 +4,19 @@
     <string name="p2_edit_photo" formatted="false">Edit الصورة</string>
     <string name="p2_preview_unavailable" formatted="false">لم يتم تشغيل هذا الفيديو أو تم إلغاء الوصول إليه.</string>
     <string name="p2_back" formatted="false">رجوع</string>
+    <string name="p2_rename" formatted="false">الاسم</string>
+    <string name="p2_share" formatted="false">مشاركة</string>
+    <string name="p2_info" formatted="false">تفاصيل وسائل الإعلام</string>
+    <string name="p2_copy" formatted="false">نسخ إلى المجلد</string>
+    <string name="p2_move" formatted="false">انتقل إلى المجلد</string>
+    <string name="p2_trash" formatted="false">انتقل إلى تريش</string>
+    <string name="p2_cancel" formatted="false">إلغاء</string>
+    <string name="p2_filename" formatted="false">اسم الفيل</string>
+    <string name="p2_move_confirm" formatted="false">انتقل إلى مجلد آخر؟</string>
+    <string name="p2_move_explanation" formatted="false">سيتم التحقق من النسخة أولاً.يتم إزالة النسخة الأصلية فقط عندما يسمح Android بذلك.إذا لم تكن الإذن متاحة، يتم الاحتفاظ كلا النسختين.</string>
+    <string name="p2_trash_confirm" formatted="false">هل تتحرك إلى التجاعيد؟</string>
+    <string name="p2_size" formatted="false">حجم</string>
+    <string name="p2_format" formatted="false">تنسيق</string>
+    <string name="p2_duration" formatted="false">مدة</string>
+    <string name="p2_dimensions" formatted="false">الأبعاد</string>
 </resources>

@@ -13,6 +13,7 @@ import '../../core/widgets/studio_quick_create.dart';
 import 'media_repository.dart';
 import 'media_sort.dart';
 import 'media_actions.dart';
+import 'video_entry.dart';
 
 const _mediaSortIcons = <MediaSort, IconData>{
   MediaSort.newest: AppIcons.sortNewest,
@@ -521,7 +522,9 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                           clipBehavior: Clip.none,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(AppRadius.card),
-                            onTap: () => details(item),
+                            onTap: () => video
+                                ? openVideo(context, item)
+                                : details(item),
                             child: Padding(
                               padding: const EdgeInsets.all(AppSpacing.sm),
                               child: Row(
@@ -616,19 +619,29 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> {
                                       ],
                                     ),
                                   ),
-                                  PopupMenuButton<String>(
-                                    tooltip: context.l10n.mediaActionsFor(
-                                      context.displayValue(item.displayName),
-                                    ),
-                                    onSelected: (_) => details(item),
-                                    itemBuilder: (_) => [
-                                      PopupMenuItem(
-                                        value: 'details',
-                                        child: Text(context.l10n.openDetails),
+                                  if (video)
+                                    IconButton(
+                                      tooltip: context.l10n.mediaActionsFor(
+                                        context.displayValue(item.displayName),
                                       ),
-                                    ],
-                                    icon: const Icon(AppIcons.more),
-                                  ),
+                                      onPressed: () =>
+                                          openVideo(context, item, play: false),
+                                      icon: const Icon(AppIcons.more),
+                                    )
+                                  else
+                                    PopupMenuButton<String>(
+                                      tooltip: context.l10n.mediaActionsFor(
+                                        context.displayValue(item.displayName),
+                                      ),
+                                      onSelected: (_) => details(item),
+                                      itemBuilder: (_) => [
+                                        PopupMenuItem(
+                                          value: 'details',
+                                          child: Text(context.l10n.openDetails),
+                                        ),
+                                      ],
+                                      icon: const Icon(AppIcons.more),
+                                    ),
                                 ],
                               ),
                             ),

@@ -4,4 +4,19 @@
     <string name="p2_edit_photo" formatted="false">编辑图片</string>
     <string name="p2_preview_unavailable" formatted="false">此视频无法播放或访问已被取消。</string>
     <string name="p2_back" formatted="false">返回</string>
+    <string name="p2_rename" formatted="false">名称</string>
+    <string name="p2_share" formatted="false">分享</string>
+    <string name="p2_info" formatted="false">媒體細節</string>
+    <string name="p2_copy" formatted="false">复制到文件夹</string>
+    <string name="p2_move" formatted="false">移动到文件夹</string>
+    <string name="p2_trash" formatted="false">移动到 Trash</string>
+    <string name="p2_cancel" formatted="false">取消</string>
+    <string name="p2_filename" formatted="false">菲律宾</string>
+    <string name="p2_move_confirm" formatted="false">转到另一个文件夹?</string>
+    <string name="p2_move_explanation" formatted="false">原件仅在Android允许时删除,如果许可不可,则保留两份副本。</string>
+    <string name="p2_trash_confirm" formatted="false">移动到特拉斯?</string>
+    <string name="p2_size" formatted="false">尺寸</string>
+    <string name="p2_format" formatted="false">格式</string>
+    <string name="p2_duration" formatted="false">长度</string>
+    <string name="p2_dimensions" formatted="false">尺寸</string>
 </resources>

@@ -7,6 +7,7 @@ import '../../l10n/localization.dart';
 import '../../core/ui/components/layout/studio_layout.dart';
 
 import '../../core/ui/components/navigation/studio_navigation.dart';
+import '../../core/widgets/studio_tab_transition.dart';
 import '../../core/ui/showcase/component_gallery.dart';
 import '../../features/home/video_home_screen.dart';
 import '../../features/media/photo_library_screen.dart';
@@ -28,8 +29,10 @@ GoRouter createRouter() => GoRouter(
   initialLocation: '/videos',
   routes: [
     GoRoute(path: '/', redirect: (_, _) => '/videos'),
-    StatefulShellRoute.indexedStack(
+    StatefulShellRoute(
       builder: (context, state, shell) => StudioShell(navigationShell: shell),
+      navigatorContainerBuilder: (context, shell, children) =>
+          StudioTabTransition(index: shell.currentIndex, children: children),
       branches: [
         StatefulShellBranch(
           routes: [

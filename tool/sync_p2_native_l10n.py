@@ -10,7 +10,16 @@ LOCALES = {"en": "values", "vi": "values-vi", "es": "values-es",
            "zh_Hans": "values-b+zh+Hans", "hi": "values-hi", "ar": "values-ar"}
 KEYS = {"p2_edit_video": "editVideo", "p2_edit_photo": "editPhoto",
         "p2_preview_unavailable": "thisVideoCannotBePlayedOrAccess",
-        "p2_back": "onboardingBack"}
+        "p2_back": "onboardingBack",
+        "p2_rename": "rename", "p2_share": "share",
+        "p2_info": "mediaDetails", "p2_copy": "copyToFolder",
+        "p2_move": "moveToFolder", "p2_trash": "moveToTrash",
+        "p2_cancel": "cancel", "p2_filename": "filename",
+        "p2_move_confirm": "moveToAnotherFolder",
+        "p2_move_explanation": "theCopyWillBeVerifiedFirstThe",
+        "p2_trash_confirm": "moveToTrash756188",
+        "p2_size": "size", "p2_format": "format",
+        "p2_duration": "duration", "p2_dimensions": "dimensions"}
 
 CAPTURE_LABELS = (
     'Recording', 'Paused', 'Saving', 'Pause', 'Resume', 'Stop', 'Screenshot saved', 'Video saved',

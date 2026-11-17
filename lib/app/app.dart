@@ -39,6 +39,7 @@ class _XRecorderAppState extends State<XRecorderApp>
   final thumbnails = ThumbnailCache();
   StreamSubscription<void>? _thumbnailInvalidation;
   bool _onboardingCompleted = false;
+  bool? _mainPortrait;
   final _onboardingNavigator = GlobalKey<NavigatorState>(
     debugLabel: 'first-run-onboarding-navigator',
   );
@@ -53,7 +54,28 @@ class _XRecorderAppState extends State<XRecorderApp>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    router.routeInformationProvider.addListener(_updateMainOrientation);
+    _updateMainOrientation();
     _thumbnailInvalidation = media.changes.listen((_) => thumbnails.clear());
+  }
+
+  void _updateMainOrientation() {
+    final path = router.routeInformationProvider.value.uri.path;
+    // Create is a sheet on these tabs, so it keeps their portrait lock.
+    final portrait = const {
+      '/videos',
+      '/videos/empty',
+      '/photos',
+      '/editor',
+      '/settings',
+    }.contains(path);
+    if (_mainPortrait == portrait) return;
+    _mainPortrait = portrait;
+    unawaited(
+      SystemChrome.setPreferredOrientations(
+        portrait ? const [DeviceOrientation.portraitUp] : const [],
+      ),
+    );
   }
 
   @override
@@ -70,6 +92,10 @@ class _XRecorderAppState extends State<XRecorderApp>
     WidgetsBinding.instance.removeObserver(this);
     _thumbnailInvalidation?.cancel();
     thumbnails.clear();
+    router.routeInformationProvider.removeListener(_updateMainOrientation);
+    if (_mainPortrait == true) {
+      unawaited(SystemChrome.setPreferredOrientations(const []));
+    }
     router.dispose();
     capture.dispose();
     media.dispose();

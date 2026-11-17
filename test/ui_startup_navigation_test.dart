@@ -178,7 +178,15 @@ void main() {
           }
           final create = tester.getRect(find.byType(FilledButton));
           expect(create.shortestSide, 52);
-          expect(create.left, greaterThan(capsule.right));
+          expect(create.center.dx, closeTo(capsule.center.dx, .01));
+          expect(create.top, lessThan(capsule.top));
+          expect(create.overlaps(capsule), isTrue);
+          for (var index = 0; index < destinations.evaluate().length; index++) {
+            expect(
+              create.overlaps(tester.getRect(destinations.at(index))),
+              isFalse,
+            );
+          }
           expect(tester.takeException(), isNull);
         }
       }

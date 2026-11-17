@@ -1,0 +1,95 @@
+{
+  "back": {
+    "back_hidden_with_controls": true,
+    "back_visible_on_video_tap": true,
+    "back_returns_to_details": true,
+    "library_item_preserved": true
+  },
+  "legacy_playback": {
+    "uri": "content://media/external/video/media/1342",
+    "read_access": "temporary per-file intent grant; owner_package_name was NULL",
+    "view_hierarchy": [
+      "android.widget.VideoView{90731da VFE...... .F....I. 0,251-1268,2505 aid=1073741824}",
+      "android.widget.ImageButton{62db551 VFED..C.. ........ 26,182-182,338 #7f090081 app:id/p2_player_back}"
+    ]
+  },
+  "portrait_five_choices": {
+    "Video": {
+      "rotation": 0,
+      "expected_screen_present": true
+    },
+    "Photo": {
+      "rotation": 0,
+      "expected_screen_present": true
+    },
+    "Edit": {
+      "rotation": 0,
+      "expected_screen_present": true
+    },
+    "Settings": {
+      "rotation": 0,
+      "expected_screen_present": true
+    },
+    "restored_system_rotation": {
+      "accelerometer_rotation": "0",
+      "user_rotation": "0"
+    }
+  },
+  "navigation_bounds": {
+    "Video": [
+      39,
+      2496,
+      288,
+      2678
+    ],
+    "Photo": [
+      288,
+      2496,
+      537,
+      2678
+    ],
+    "Create": [
+      550,
+      2457,
+      719,
+      2626
+    ],
+    "Edit": [
+      732,
+      2496,
+      980,
+      2678
+    ],
+    "Settings": [
+      980,
+      2496,
+      1229,
+      2678
+    ]
+  },
+  "tab_slide_device": {
+    "Photo": {
+      "destination_visible": true
+    },
+    "Video": {
+      "destination_visible": true
+    }
+  },
+  "latest_ui_tests": {
+    "passed": 23,
+    "analyze": "No issues found",
+    "build": "debug APK built and installed",
+    "known_baseline_failure": "Arabic light navigation text scale 2.0 contrast 1.30; reproduced unchanged baseline 3567cb9"
+  },
+  "limitations": [
+    "Latest all-five device retest interrupted at Create by user interaction with Media Details; prior device pass and final widget tests pass.",
+    "Landscape new capture, no-facecam capture, screenshot, audible AV sync and Back during recording not verified on latest APK."
+  ],
+  "final_debug_apk_sha256": "e2d6d453516c220ba2479f4545cb0567eec9efeda3a8a0b428e9c0c68d211757",
+  "cleanup": {
+    "projection": "null",
+    "camera_watch": "stopped",
+    "stay_on_while_plugged_in": "0",
+    "system_rotation": "lock 0"
+  }
+}

@@ -19,15 +19,19 @@ class VideoPreviewActivity:Activity() {
     private lateinit var video:VideoView
     private var playbackControls:MediaController?=null
     private var position=0
+    private lateinit var catalog: MediaCatalog
+    private var optionsOpen = false
     override fun onCreate(state:Bundle?) {
         super.onCreate(state)
         instance=this
+        catalog = MediaCatalog(this)
         position=state?.getInt("position") ?: 0
         val uri=intent.data
         if(uri?.scheme!="content") { finish();return }
         video=VideoView(this).apply { layoutDirection = android.view.View.LAYOUT_DIRECTION_LTR }
         val root=FrameLayout(this).apply { setBackgroundColor(Color.BLACK);addView(video,FrameLayout.LayoutParams(-1,-1,android.view.Gravity.CENTER)) }
         val back = ImageButton(this).apply {
+            visibility = android.view.View.GONE
             id = R.id.p2_player_back
             contentDescription = getString(R.string.p2_back)
             setImageResource(R.drawable.p2_chevron_back)
@@ -40,18 +44,55 @@ class VideoPreviewActivity:Activity() {
             setOnClickListener { finish() }
         }
         root.addView(back, FrameLayout.LayoutParams(dp(48), dp(48), Gravity.TOP or Gravity.LEFT))
+        val more = ImageButton(this).apply {
+            id = R.id.p2_player_more
+            visibility = android.view.View.GONE
+            contentDescription = getString(R.string.p2_info)
+            setImageResource(R.drawable.p2_more)
+            setPadding(dp(12), dp(12), dp(12), dp(12))
+            background = back.background.constantState?.newDrawable()?.mutate()
+            setOnClickListener {
+                if (optionsOpen) return@setOnClickListener
+                optionsOpen = true
+                playbackControls?.hide()
+                VideoOptions(this@VideoPreviewActivity, catalog,
+                    edit = {
+                        setResult(RESULT_OK, android.content.Intent().putExtra("editUri", it.toString()))
+                        finish()
+                    },
+                    changed = { next, removed ->
+                        if (removed) finish()
+                        else if (next != intent.data) {
+                            position = video.currentPosition
+                            intent.data = next
+                            video.setVideoURI(next)
+                        }
+                    },
+                    dismissed = { optionsOpen = false },
+                ).show(intent.data!!)
+            }
+        }
+        root.addView(more, FrameLayout.LayoutParams(dp(48), dp(48), Gravity.TOP or Gravity.RIGHT))
         root.setOnApplyWindowInsetsListener { _, insets ->
             val top: Int
             val left: Int
+            val right: Int
             if (Build.VERSION.SDK_INT >= 30) {
                 val safe = insets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout())
                 top = safe.top
                 left = safe.left
+                right = safe.right
             } else {
                 @Suppress("DEPRECATION")
                 top = maxOf(insets.systemWindowInsetTop, if (Build.VERSION.SDK_INT >= 28) insets.displayCutout?.safeInsetTop ?: 0 else 0)
                 @Suppress("DEPRECATION")
                 left = maxOf(insets.systemWindowInsetLeft, if (Build.VERSION.SDK_INT >= 28) insets.displayCutout?.safeInsetLeft ?: 0 else 0)
+                @Suppress("DEPRECATION")
+                right = maxOf(insets.systemWindowInsetRight, if (Build.VERSION.SDK_INT >= 28) insets.displayCutout?.safeInsetRight ?: 0 else 0)
+            }
+            more.layoutParams = (more.layoutParams as FrameLayout.LayoutParams).apply {
+                topMargin = top + dp(8)
+                rightMargin = right + dp(8)
             }
             back.layoutParams = (back.layoutParams as FrameLayout.LayoutParams).apply {
                 topMargin = top + dp(8)
@@ -62,6 +103,18 @@ class VideoPreviewActivity:Activity() {
         setContentView(root)
         root.requestApplyInsets()
         val controls=object : MediaController(this) {
+            override fun show(timeout: Int) {
+                super.show(timeout)
+                if (!optionsOpen) {
+                    back.visibility = android.view.View.VISIBLE
+                    more.visibility = android.view.View.VISIBLE
+                }
+            }
+            override fun hide() {
+                super.hide()
+                back.visibility = android.view.View.GONE
+                more.visibility = android.view.View.GONE
+            }
             override fun dispatchKeyEvent(event: KeyEvent): Boolean {
                 if (event.keyCode == KeyEvent.KEYCODE_BACK) {
                     if (event.action == KeyEvent.ACTION_UP) finish()
@@ -89,7 +142,10 @@ class VideoPreviewActivity:Activity() {
         if(::video.isInitialized) video.stopPlayback()
         if(instance===this) instance=null
     }
-    override fun onDestroy() { releasePlayback();super.onDestroy() }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: android.content.Intent?) {
+        if (!catalog.onActivityResult(requestCode, resultCode, data)) super.onActivityResult(requestCode, resultCode, data)
+    }
+    override fun onDestroy() { releasePlayback();if (::catalog.isInitialized) catalog.dispose();super.onDestroy() }
 
     // Keep API33 classes isolated from the API24-32 controller path.
     @android.annotation.TargetApi(33)

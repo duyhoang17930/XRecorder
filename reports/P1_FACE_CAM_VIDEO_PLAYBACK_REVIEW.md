@@ -1,6 +1,6 @@
 # P1 Facecam và video playback — 2026-11-17
 
-Baseline: `main`, `9f5dcc9`. Thiết bị QA được cho phép: 2602DPT53G, Android 16/API 36, màn hình 1268×2756. Giữ nguyên tài liệu có sẵn trong `docs/reports/RECORDING_PLAYBACK_REVIEW_20261117/`. Không sửa Flutter UI, theme, router, settings, P2, VideoEncoder hay Floating Controls. Người dùng cấp quyền commit sau khi đánh giá Facecam; không push.
+Baseline: `main`, `9f5dcc9`. Thiết bị QA được cho phép: 2602DPT53G, Android 16/API 36, màn hình 1268×2756. Giữ nguyên tài liệu có sẵn trong `docs/reports/RECORDING_PLAYBACK_REVIEW_20261117/`. P1 đã commit `3567cb9` theo yêu cầu sau khi đánh giá Facecam. Sau đó người dùng cho phép sửa thêm: Back theo playback controls, khóa dọc 5 lựa chọn, nút + giữa thanh và hiệu ứng chuyển tab. Chỉ sửa các component này; không đổi theme, Recording Settings, VideoEncoder hay Floating Controls. Phần UI bổ sung đang ở working tree; không push.
 
 ## BUG-02 — Video thu nhỏ: nguyên nhân capture đã xác minh
 
@@ -51,15 +51,43 @@ Tham khảo kỹ thuật: [Android Camera2 preview](https://developer.android.co
 - PASS: flutter analyze --no-pub, không có issue.
 - PASS: 56 Flutter tests liên quan Facecam/recording/region/screenshot/consent/route identity.
 - PASS: 168 Android JUnit tests, 0 failure/error; build debug APK thành công.
-- PASS trên APK cuối: Start → Pause (journal paused) → Resume (recording) → background/foreground giữ session → Stop; finalize content://media/external/video/media/1514; projection được giải phóng; Library hiện video mới Recording_1794904491559.mp4.
+- PASS trên APK checkpoint P1: Start → Pause (journal paused) → Resume (recording) → background/foreground giữ session → Stop; finalize content://media/external/video/media/1514; projection được giải phóng; Library hiện video mới Recording_1794904491559.mp4.
 - PASS: hai MP4 sau sửa (16,52s và 137,48s) decode toàn bộ sạch, AVC 1080×1920; bbox [98,0,981,1920], giữ đủ tỷ lệ nguồn.
 - PASS trên máy QA theo người dùng: Facecam dọc đúng chiều, chuyển động trái/phải đúng, không còn giật rõ.
 - Audio mixed có track trong mẫu; đồng bộ nghe/nhìn: NOT VERIFIED, duration track không chứng minh sync.
-- Playback cũ/mới, landscape, xoay giữa phiên, không Facecam, screenshot trên APK cuối: đang kiểm tra tiếp; chưa đánh dấu PASS.
+- PASS runtime: playback mới URI 1514 và playback cũ URI 1342, VideoView bounds [0,251,1268,2505] = tỷ lệ 9:16; frame decode được giữ đầy đủ. MP4 cũ có owner_package_name=NULL, cần URI grant chỉ đọc tạm một file theo luồng mở từ Files; không cấp quyền toàn thư viện.
+- NOT VERIFIED trên APK cuối: quay ngang mới, xoay giữa phiên, không Facecam, screenshot và Back khi đang recording. Không lấy unit tests thay cho các phép thử này.
 - Livestream/region và thiết bị khác: chưa kiểm thử runtime trong task; không thay logic hiện có.
 
-## BUG-03 — P2 integration request
+## BUG-03 — Viewer Back, được người dùng cấp quyền sửa P2
 
-`VideoPreviewActivity.kt` đã có p2_player_back, 48dp, top-left, margin theo system bars/cutout và finish() riêng player. `video_details_screen.dart` có AppBar Back. Không thêm nút trùng. P2 cần kiểm tra runtime visibility/z-order khi MediaController mở, thư viện giữ state, Back không dừng recording và không sửa/xóa video. Nếu APK cũ thiếu block này, tích hợp đúng block hiện có; chỉ sửa z-order khi tái hiện bị che. Không tự sửa code P2.
+Nút Back hiện có vẫn giữ 48dp, vị trí top-left, SafeArea và hành vi finish riêng player. Theo yêu cầu mới, nút chỉ hiển thị khi MediaController hiện; hide() của controls cũng ẩn nút. Không thêm nút trùng, không đổi timeline/player layout.
+
+PASS trên máy: controls tự ẩn → Back ẩn; chạm video → controls và Back hiện; chạm Back → Details → Library, giữ media. Bounds Back [26,182,182,338], 156px ở density 3,25 tương ứng 48dp. File video được giữ nguyên. Back khi đang recording: chưa đo runtime; source finish không gọi CaptureService.
+
+## Yêu cầu UI bổ sung đã thực hiện
+
+- Video, Photo, Edit hub, Settings và menu + giữ portraitUp. Rời các tab vào viewer/trình chỉnh sửa thực tế trả lại orientation mặc định. Không ép landscape editor hay đổi preference hệ thống lâu dài.
+- Thanh dưới theo thứ tự Video–Photo–+–Edit–Settings. + ở giữa, nhô lên và chồng khung; khoảng trống giữa thanh tách khỏi touch targets Photo/Edit. Giữ icon/màu/font hiện có.
+- Chuyển tab trượt ngang theo vị trí tab; giữ các Navigator mounted, scroll position và trạng thái từng nhánh. Outgoing branch không nhận touch/semantics. Menu + giữ bottom sheet từ dưới lên. Reduce Motion chuyển tức thì.
+
+| File bổ sung | Khối thay đổi / ảnh hưởng |
+|---|---|
+| media/VideoPreviewActivity.kt | show/hide của MediaController đồng bộ visibility nút Back; không đổi decoder |
+| lib/app/app.dart | Listener áp portrait cho 4 tab chính; + là sheet nên kế thừa khóa; gỡ khóa ngoài các tab |
+| lib/core/widgets/studio_shell.dart | Chỉ StudioBottomNavigation: gap giữa, Stack đặt + và offset indicator |
+| lib/core/widgets/studio_tab_transition.dart | Container render chuyển tab, giữ child Navigators và trạng thái |
+| lib/app/router/app_router.dart | Dùng container chuyển động trên cùng StatefulShellRoute; giữ nguyên paths/branches |
+| test/home_orientation_test.dart | Kiểm tra các tab, +, viewer/editor và trả lại orientation |
+| test/studio_tab_transition_test.dart | Hai chiều, đảo tab nhanh, scroll state và Reduce Motion |
+| test/ui_startup_navigation_test.dart | Kiểm tra + giữa/nhô cao/không đè touch target ở compact/RTL/chữ lớn |
+
+PASS: 23 tests cuối liên quan animation/navigation/orientation/route/modal/footer; analyze sạch; build debug thành công. Test native 168 PASS sau thay đổi Player. Trước đó 32 test UI PASS, 1 FAIL tương phản Arabic/light/text scale 2: 1,30 < 4,5. Đã chạy lại test này với component tại commit 3567cb9, cùng tỷ lệ 1,30 và cùng màu; lỗi baseline, không sửa màu/theme trong task.
+
+PASS thiết bị trước khi thêm animation: cả 5 lựa chọn vẫn rotation=0 khi hệ thống yêu cầu landscape. Bounds nút + [550,2457,719,2626]; Photo kết thúc x=537, Edit bắt đầu x=732: không giao vùng chạm; + cao hơn các tab 39px. Sau thêm animation: Video↔Photo runtime PASS; kiểm tra lại Video/Photo/Edit/Settings PASS, bước + bị gián đoạn khi người dùng đang mở Media Details, không coi là lỗi sản phẩm hoặc PASS toàn bộ lượt này. Bộ test Flutter đủ 5 lựa chọn PASS.
+
+## P2 integration còn lại / trường hợp chưa kiểm chứng
+
+Không còn yêu cầu thêm nút Back mới. Với media cũ không còn owner, P2 cần giữ luồng Files/SAF cấp URI grant cụ thể trước khi preview; deep link không có quyền không chứng minh lỗi decoder. Không tự thêm quyền storage rộng hoặc sửa MediaCatalog. Cần kiểm thử thêm rotation metadata của mẫu có display matrix, video ngang mới, A/V sync nghe nhìn và thiết bị khác.
 
 Floating Controls thiếu Stop ngoài app: **WAITING FOR TEAM DECISION**; giữ nguyên toàn bộ overlay/timer/permission/notification controls.
