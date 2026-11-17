@@ -55,9 +55,21 @@ class _LayersEditorState extends State<_LayersEditor> {
       width: 480,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: AppSpacing.xs,
         children: [
           for (var i = 0; i < layers.length; i++)
             ListTile(
+              tileColor: context.studioColors.surface,
+              contentPadding: const EdgeInsetsDirectional.only(
+                start: AppSpacing.sm,
+                end: AppSpacing.xxs,
+              ),
+              leading: StudioIconTile(
+                icon: _layerIcon(layers[i]['kind']),
+                size: 40,
+                iconSize: AppIconSize.medium,
+              ),
               title: Text(
                 context.l10n.sequenceLabel(
                   context.displayValue(i + 1),
@@ -71,7 +83,8 @@ class _LayersEditorState extends State<_LayersEditor> {
                 ),
               ),
               onTap: () => edit(i, layers[i]['kind'] as String),
-              trailing: Wrap(
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
                     tooltip: context.l10n.moveLayerForward,
@@ -93,15 +106,26 @@ class _LayersEditorState extends State<_LayersEditor> {
                 ],
               ),
             ),
-          Text(context.l10n.laterLayersAppearInFrontPositionAnd),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.xxs),
+            child: Text(
+              context.l10n.laterLayersAppearInFrontPositionAnd,
+              style: AppTypography.bodySmall.copyWith(
+                color: context.studioColors.muted,
+              ),
+            ),
+          ),
           Wrap(
+            spacing: AppSpacing.xs,
+            runSpacing: AppSpacing.xs,
             children: [
               for (final kind in ['text', 'sticker', 'drawing'])
-                TextButton(
+                OutlinedButton.icon(
                   onPressed: layers.length >= 40
                       ? null
                       : () => edit(null, kind),
-                  child: Text(
+                  icon: Icon(_layerIcon(kind), size: AppIconSize.medium),
+                  label: Text(
                     context.l10n.addLayerKind(context.effectValue(kind)),
                   ),
                 ),
@@ -115,13 +139,19 @@ class _LayersEditorState extends State<_LayersEditor> {
         onPressed: () => Navigator.pop(context),
         child: Text(context.l10n.cancel),
       ),
-      TextButton(
+      FilledButton(
         onPressed: () => Navigator.pop(context, layers),
         child: Text(context.l10n.useLayers),
       ),
     ],
   );
 }
+
+IconData _layerIcon(Object? kind) => switch (kind) {
+  'text' => AppIcons.text,
+  'sticker' => AppIcons.sticker,
+  _ => AppIcons.pen,
+};
 
 class _LayerDialog extends StatefulWidget {
   const _LayerDialog({required this.value, required this.durationMs});
@@ -162,11 +192,15 @@ class _LayerDialogState extends State<_LayerDialog> {
     final v = (value[key] as num).toDouble();
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
           context.l10n.controlValue(
             context.displayValue(label),
             context.displayValue(context.decimal(v, digits: 2)),
+          ),
+          style: AppTypography.bodySmall.copyWith(
+            color: context.studioColors.text,
           ),
         ),
         Directionality(
@@ -216,6 +250,8 @@ class _LayerDialogState extends State<_LayerDialog> {
       width: 440,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: AppSpacing.md,
         children: [
           if (value['kind'] == 'text')
             TextField(
@@ -270,34 +306,60 @@ class _LayerDialogState extends State<_LayerDialog> {
                     }),
                     child: Directionality(
                       textDirection: TextDirection.ltr,
-                      child: CustomPaint(
-                        painter: _DrawingPainter(
-                          List.of(points),
-                          Color(value['color'] as int),
+                      // A visible canvas so people can see where to draw.
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: context.studioColors.background,
+                          borderRadius: BorderRadius.circular(
+                            AppRadius.control,
+                          ),
+                          border: Border.all(
+                            color: context.studioColors.border,
+                          ),
                         ),
-                        child: const SizedBox.expand(),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                            AppRadius.control,
+                          ),
+                          child: CustomPaint(
+                            painter: _DrawingPainter(
+                              List.of(points),
+                              Color(value['color'] as int),
+                            ),
+                            child: const SizedBox.expand(),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () => setState(points.clear),
-              child: Text(context.l10n.clearDrawing),
-            ),
-            TextButton(
-              onPressed: () => setState(
-                () => points.addAll([
-                  null,
-                  [.2, .5],
-                  [.8, .5],
-                ]),
-              ),
-              child: Text(context.l10n.addStraightLine),
+            Wrap(
+              spacing: AppSpacing.xs,
+              runSpacing: AppSpacing.xs,
+              children: [
+                OutlinedButton.icon(
+                  onPressed: () => setState(points.clear),
+                  icon: const Icon(AppIcons.eraser, size: AppIconSize.medium),
+                  label: Text(context.l10n.clearDrawing),
+                ),
+                OutlinedButton.icon(
+                  onPressed: () => setState(
+                    () => points.addAll([
+                      null,
+                      [.2, .5],
+                      [.8, .5],
+                    ]),
+                  ),
+                  icon: const Icon(AppIcons.pen, size: AppIconSize.medium),
+                  label: Text(context.l10n.addStraightLine),
+                ),
+              ],
             ),
           ],
           Wrap(
+            spacing: AppSpacing.xs,
             children: [
               for (final color in [
                 0xFFFFFFFF,
@@ -316,21 +378,52 @@ class _LayerDialogState extends State<_LayerDialog> {
                       0xFF42A5F5: context.l10n.blue,
                       0xFF000000: context.l10n.black,
                     }[color],
-                    icon: Icon(AppIcons.selected, color: Color(color)),
+                    icon: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Color(color),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: value['color'] == color
+                              ? context.studioColors.primary
+                              : context.studioColors.outline,
+                          width: value['color'] == color ? 3 : 1,
+                        ),
+                      ),
+                      child: const SizedBox.square(dimension: 28),
+                    ),
                     onPressed: () => setState(() => value['color'] = color),
                   ),
                 ),
             ],
           ),
-          TextField(
-            controller: start,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: InputDecoration(labelText: context.l10n.startSeconds),
-          ),
-          TextField(
-            controller: end,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: InputDecoration(labelText: context.l10n.endSeconds),
+          Row(
+            spacing: AppSpacing.sm,
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: start,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
+                  textDirection: TextDirection.ltr,
+                  decoration: InputDecoration(
+                    labelText: context.l10n.startSeconds,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: TextField(
+                  controller: end,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
+                  textDirection: TextDirection.ltr,
+                  decoration: InputDecoration(
+                    labelText: context.l10n.endSeconds,
+                  ),
+                ),
+              ),
+            ],
           ),
           slider('x', context.l10n.horizontalPosition, 0, 1),
           slider('y', context.l10n.verticalPosition, 0, 1),
@@ -349,7 +442,7 @@ class _LayerDialogState extends State<_LayerDialog> {
         onPressed: () => Navigator.pop(context),
         child: Text(context.l10n.cancel),
       ),
-      TextButton(onPressed: save, child: Text(context.l10n.useLayer)),
+      FilledButton(onPressed: save, child: Text(context.l10n.useLayer)),
     ],
   );
 }

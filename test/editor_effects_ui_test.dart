@@ -102,21 +102,23 @@ void main() {
         await tester.pumpAndSettle();
         expect(
           tester
-              .widget<TextButton>(find.widgetWithText(TextButton, 'Close'))
+              .widget<ButtonStyleButton>(
+                find.widgetWithText(TextButton, 'Close'),
+              )
               .onPressed,
           isNotNull,
         );
         expect(
           tester
-              .widget<TextButton>(
-                find.widgetWithText(TextButton, 'Import downloaded .bin'),
+              .widget<ButtonStyleButton>(
+                buttonWithText('Import downloaded .bin'),
               )
               .onPressed,
           isNotNull,
         );
         expect(find.text('Cancel operation'), findsNothing);
         expect(imports, outcome == 'import failure' ? 1 : 0);
-        final review = find.widgetWithText(TextButton, 'Review subtitles');
+        final review = buttonWithText('Review subtitles');
         await tester.ensureVisible(review);
         await tester.tap(review);
         await tester.pumpAndSettle();
@@ -225,10 +227,8 @@ void main() {
         find.textContaining('Speech history could not be saved.'),
         findsNothing,
       );
-      await tester.ensureVisible(
-        find.widgetWithText(TextButton, 'Review subtitles'),
-      );
-      await tester.tap(find.widgetWithText(TextButton, 'Review subtitles'));
+      await tester.ensureVisible(buttonWithText('Review subtitles'));
+      await tester.tap(buttonWithText('Review subtitles'));
       await tester.pumpAndSettle();
       expect(reviewed?.cues.single.text, 'Unit-test retained cue 👩🏽‍💻');
       expect(project.effects, isEmpty);
@@ -346,11 +346,8 @@ void main() {
       await tester.tap(find.text('Open'));
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('Recognize edited audio'));
-      final button = tester.widget<TextButton>(
-        find.ancestor(
-          of: find.text('Recognize edited audio'),
-          matching: find.byType(TextButton),
-        ),
+      final button = tester.widget<ButtonStyleButton>(
+        buttonWithText('Recognize edited audio'),
       );
       expect(button.onPressed, isNotNull);
       await tester.tap(find.text('Close'));
@@ -663,3 +660,10 @@ void main() {
     });
   }
 }
+
+/// Any Material button (Text/Filled/Outlined, including `.icon` variants)
+/// whose label contains [text]; tests should not depend on button emphasis.
+Finder buttonWithText(String text) => find.ancestor(
+  of: find.text(text),
+  matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
+);

@@ -146,11 +146,20 @@ class _MediaPickerState extends State<_MediaPicker> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg,
+          AppSpacing.md,
+          AppSpacing.lg,
+          AppSpacing.md,
+        ),
         child: Column(
           children: [
             StudioSheetHeader(title: context.l10n.chooseMedia),
-            if (busy) const LinearProgressIndicator(),
+            if (busy)
+              const LinearProgressIndicator(
+                minHeight: 4,
+                borderRadius: BorderRadius.all(Radius.circular(2)),
+              ),
             Expanded(
               child: FutureBuilder<List<MediaItem>>(
                 future: items,
@@ -159,43 +168,72 @@ class _MediaPickerState extends State<_MediaPicker> {
                   return CustomScrollView(
                     slivers: [
                       SliverToBoxAdapter(
-                        child: Wrap(
-                          spacing: 8,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: AppSpacing.xs,
                           children: [
-                            for (final type
-                                in widget.photoOnly
-                                    ? [MediaKind.image]
-                                    : [MediaKind.video, MediaKind.image])
-                              ChoiceChip(
-                                label: Text(
-                                  type == MediaKind.video
-                                      ? context.l10n.videos
-                                      : context.l10n.photos,
+                            // Media type and source are separate choices;
+                            // keep them on their own rows so two selected
+                            // pills never read as one group.
+                            Wrap(
+                              spacing: AppSpacing.xs,
+                              runSpacing: AppSpacing.xs,
+                              children: [
+                                for (final type
+                                    in widget.photoOnly
+                                        ? [MediaKind.image]
+                                        : [MediaKind.video, MediaKind.image])
+                                  ChoiceChip(
+                                    label: Text(
+                                      type == MediaKind.video
+                                          ? context.l10n.videos
+                                          : context.l10n.photos,
+                                    ),
+                                    selected: kind == type,
+                                    onSelected: busy
+                                        ? null
+                                        : (_) {
+                                            kind = type;
+                                            loadMedia(folder: selectedFolder);
+                                          },
+                                  ),
+                              ],
+                            ),
+                            Wrap(
+                              spacing: AppSpacing.xs,
+                              runSpacing: AppSpacing.xs,
+                              children: [
+                                _SourceChip(
+                                  icon: AppIcons.storage,
+                                  label: context.l10n.appMedia,
+                                  selected: selectedFolder == null,
+                                  onTap: busy ? null : () => loadMedia(),
                                 ),
-                                selected: kind == type,
-                                onSelected: busy
-                                    ? null
-                                    : (_) {
-                                        kind = type;
-                                        loadMedia(folder: selectedFolder);
-                                      },
-                              ),
-                            ChoiceChip(
-                              label: Text(context.l10n.appMedia),
-                              selected: selectedFolder == null,
-                              onSelected: busy ? null : (_) => loadMedia(),
+                                _SourceChip(
+                                  icon: AppIcons.folder,
+                                  label: context.l10n.chooseFolder,
+                                  selected: selectedFolder != null,
+                                  onTap: busy ? null : chooseFolder,
+                                ),
+                              ],
                             ),
-                            ChoiceChip(
-                              label: Text(context.l10n.chooseFolder),
-                              selected: selectedFolder != null,
-                              onSelected: busy ? null : (_) => chooseFolder(),
-                            ),
+                            const SizedBox(height: AppSpacing.xxs),
                           ],
                         ),
                       ),
                       if (error != null)
                         SliverToBoxAdapter(
-                          child: Text(context.message(error!)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: AppSpacing.xs,
+                            ),
+                            child: Text(
+                              context.message(error!),
+                              style: TextStyle(
+                                color: context.studioColors.warning,
+                              ),
+                            ),
+                          ),
                         ),
                       if (snapshot.connectionState != ConnectionState.done)
                         SliverFillRemaining(
@@ -244,12 +282,25 @@ class _MediaPickerState extends State<_MediaPicker> {
                               selected: selected.containsKey(item.id),
                               selectedTileColor: context.studioColors.primary
                                   .withValues(alpha: .10),
-                              leading: SizedBox(
-                                width: 48,
-                                height: 48,
-                                child: MediaThumbnail(item: item),
+                              contentPadding: const EdgeInsetsDirectional.only(
+                                start: AppSpacing.xs,
+                                end: AppSpacing.xxs,
                               ),
-                              title: Text(item.displayName),
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                  AppRadius.control,
+                                ),
+                                child: SizedBox(
+                                  width: 56,
+                                  height: 56,
+                                  child: MediaThumbnail(item: item),
+                                ),
+                              ),
+                              title: Text(
+                                item.displayName,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                               subtitle: Text(context.fileSize(item.sizeBytes)),
                               trailing: widget.multiple
                                   ? Icon(
@@ -267,23 +318,69 @@ class _MediaPickerState extends State<_MediaPicker> {
                 },
               ),
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(context.l10n.cancel),
-              ),
-            ),
-            if (widget.multiple)
-              FilledButton(
-                onPressed: busy || selected.isEmpty ? null : completeSelection,
-                child: Text(
-                  '${context.l10n.addClip} · ${context.l10n.clipCount(selected.length)}',
+            const SizedBox(height: AppSpacing.sm),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              spacing: AppSpacing.xs,
+              children: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(context.l10n.cancel),
                 ),
-              ),
+                if (widget.multiple)
+                  Expanded(
+                    child: FilledButton(
+                      onPressed: busy || selected.isEmpty
+                          ? null
+                          : completeSelection,
+                      child: Text(
+                        '${context.l10n.addClip} · ${context.l10n.clipCount(selected.length)}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ],
         ),
       ),
     ),
   );
+}
+
+class _SourceChip extends StatelessWidget {
+  const _SourceChip({
+    required this.icon,
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+  final IconData icon;
+  final String label;
+  final bool selected;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.studioColors;
+    // Outlined so the source choice reads differently from the filled
+    // media-type pills above it.
+    return Semantics(
+      selected: selected,
+      button: true,
+      child: OutlinedButton.icon(
+        onPressed: onTap,
+        style: OutlinedButton.styleFrom(
+          minimumSize: const Size(0, 40),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+          foregroundColor: selected ? c.primary : c.text,
+          backgroundColor: selected ? c.primary.withValues(alpha: .10) : null,
+          side: BorderSide(color: selected ? c.primary : c.border),
+        ),
+        icon: Icon(icon, size: AppIconSize.small),
+        label: Text(label),
+      ),
+    );
+  }
 }

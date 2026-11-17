@@ -336,9 +336,16 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
           width: 480,
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: AppSpacing.sm,
             children: [
               Text(context.l10n.audioStaysOnThisDeviceTheFirst),
-              if (_restoring) const LinearProgressIndicator(),
+              if (_restoring)
+                const LinearProgressIndicator(
+                  minHeight: 6,
+                  borderRadius: BorderRadius.all(Radius.circular(3)),
+                ),
+              const SizedBox(height: AppSpacing.xxs),
               DropdownButtonFormField<String>(
                 isExpanded: true,
                 itemHeight: null,
@@ -372,6 +379,11 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
                       },
               ),
               ListTile(
+                tileColor: context.studioColors.surface,
+                contentPadding: const EdgeInsetsDirectional.only(
+                  start: AppSpacing.md,
+                  end: AppSpacing.sm,
+                ),
                 title: Text(context.l10n.speechLanguage),
                 subtitle: Text(
                   SpeechLanguages.find(language)!.displayName(context.l10n),
@@ -391,32 +403,55 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
                         preferences?.setSpeechLanguage(selected.code);
                       },
               ),
-              Text(
-                installed
-                    ? context.l10n.modelInstalledAndVerified
-                    : context.l10n.modelNotInstalled,
+              Row(
+                spacing: AppSpacing.xs,
+                children: [
+                  Icon(
+                    installed ? AppIcons.ready : AppIcons.info,
+                    size: AppIconSize.small,
+                    color: installed
+                        ? context.studioColors.cyan
+                        : context.studioColors.muted,
+                  ),
+                  Expanded(
+                    child: Text(
+                      installed
+                          ? context.l10n.modelInstalledAndVerified
+                          : context.l10n.modelNotInstalled,
+                      style: AppTypography.bodySmall.copyWith(
+                        color: context.studioColors.text,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               if (installed)
-                TextButton(
+                OutlinedButton.icon(
                   onPressed: active ? null : removeModel,
-                  child: Text(context.l10n.removeDownloadedModel),
+                  icon: const Icon(AppIcons.trash, size: AppIconSize.medium),
+                  label: Text(context.l10n.removeDownloadedModel),
                 ),
               if (!installed)
                 Wrap(
+                  spacing: AppSpacing.xs,
+                  runSpacing: AppSpacing.xs,
                   children: [
-                    TextButton(
+                    FilledButton.tonal(
                       onPressed: active ? null : () => run(true),
                       child: Text(context.l10n.downloadModel),
                     ),
-                    TextButton(
+                    OutlinedButton(
                       onPressed: active ? null : () => run(true, import: true),
                       child: Text(context.l10n.importDownloadedBin),
                     ),
                   ],
                 ),
               if (job != null) ...[
+                const SizedBox(height: AppSpacing.xxs),
                 LinearProgressIndicator(
                   value: job!.progress,
+                  minHeight: 6,
+                  borderRadius: const BorderRadius.all(Radius.circular(3)),
                   semanticsLabel: context.l10n.speechOperationProgress,
                 ),
                 Text(
@@ -496,14 +531,14 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
               child: Text(context.l10n.cancelOperation),
             ),
           if (!active && installed)
-            TextButton(
+            FilledButton(
               onPressed: () => run(false),
               child: Text(context.l10n.recognizeEditedAudio),
             ),
           if (!active &&
               job?.state == TranscriptionState.completed &&
               job!.cues.isNotEmpty)
-            TextButton(
+            FilledButton(
               onPressed: () => Navigator.pop(
                 context,
                 SubtitleTrack(

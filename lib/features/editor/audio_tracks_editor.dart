@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/widgets/studio_widgets.dart';
+import 'editor_workspace.dart';
 import 'timeline_effects.dart';
 
 Future<List<Map<String, Object>>?> editAudioTracks(
@@ -78,10 +79,22 @@ class _TracksEditorState extends State<_TracksEditor> {
       width: 480,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: AppSpacing.xs,
         children: [
           Text(context.l10n.trimAndAlignUpTo8Tracks),
           for (var i = 0; i < tracks.length; i++)
             ListTile(
+              leading: const StudioIconTile(
+                icon: AppIcons.microphone,
+                size: 40,
+                iconSize: AppIconSize.medium,
+              ),
+              tileColor: context.studioColors.surface,
+              contentPadding: const EdgeInsetsDirectional.only(
+                start: AppSpacing.sm,
+                end: AppSpacing.xxs,
+              ),
               title: Text(
                 context.l10n.trackNumber(context.displayValue(i + 1)),
               ),
@@ -119,9 +132,10 @@ class _TracksEditorState extends State<_TracksEditor> {
               context.message(error!),
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
-          TextButton(
+          OutlinedButton.icon(
             onPressed: busy || tracks.length >= 8 ? null : add,
-            child: Text(
+            icon: const Icon(AppIcons.create, size: AppIconSize.medium),
+            label: Text(
               busy ? context.l10n.openingAudio : context.l10n.addAudioFile,
             ),
           ),
@@ -133,7 +147,7 @@ class _TracksEditorState extends State<_TracksEditor> {
         onPressed: busy ? null : () => Navigator.pop(context),
         child: Text(context.l10n.cancel),
       ),
-      TextButton(
+      FilledButton(
         onPressed: busy ? null : () => Navigator.pop(context, tracks),
         child: Text(context.l10n.useTracks),
       ),
@@ -223,11 +237,16 @@ class _TrackDialogState extends State<_TrackDialog> {
       width: 420,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: AppSpacing.md,
         children: [
           Text(
             context.l10n.audioVideoLength(
               context.displayValue(widget.track.sourceDurationMs / 1000),
               context.displayValue(widget.durationMs / 1000),
+            ),
+            style: AppTypography.bodySmall.copyWith(
+              color: context.studioColors.muted,
             ),
           ),
           for (final entry in fields.entries)
@@ -236,28 +255,53 @@ class _TrackDialogState extends State<_TrackDialog> {
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
+              textDirection: TextDirection.ltr,
               decoration: InputDecoration(
                 labelText: context.message(entry.key),
               ),
             ),
-          Text(
-            context.l10n.volumePercent(
-              context.displayValue((volume * 100).round()),
+          StudioInset(
+            color: context.studioColors.surface,
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.md,
+              AppSpacing.sm,
+              AppSpacing.xs,
+              AppSpacing.xxs,
             ),
-          ),
-          Semantics(
-            label: context.l10n.audioTrackVolume,
-            child: Slider(
-              value: volume,
-              min: 0,
-              max: 2,
-              divisions: 40,
-              semanticFormatterCallback: context.spokenValue((strings, value) => strings.accessibilityValue40(value), multiplier: 100),
-              onChanged: (v) => setState(() => volume = v),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  context.l10n.volumePercent(
+                    context.displayValue((volume * 100).round()),
+                  ),
+                  style: AppTypography.bodyEmphasis.copyWith(
+                    color: context.studioColors.text,
+                  ),
+                ),
+                Semantics(
+                  label: context.l10n.audioTrackVolume,
+                  child: SliderTheme(
+                    data: editorSliderTheme(context),
+                    child: Slider(
+                      value: volume,
+                      min: 0,
+                      max: 2,
+                      divisions: 40,
+                      semanticFormatterCallback: context.spokenValue(
+                        (strings, value) => strings.accessibilityValue40(value),
+                        multiplier: 100,
+                      ),
+                      onChanged: (v) => setState(() => volume = v),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           DropdownButtonFormField<String>(
             isExpanded: true,
+            icon: const Icon(AppIcons.chevronDown),
             initialValue: voice,
             decoration: InputDecoration(labelText: context.l10n.voiceEffect),
             items: ['none', 'deep', 'bright', 'robot']
@@ -289,7 +333,7 @@ class _TrackDialogState extends State<_TrackDialog> {
         onPressed: () => Navigator.pop(context),
         child: Text(context.l10n.cancel),
       ),
-      TextButton(onPressed: save, child: Text(context.l10n.useAudio)),
+      FilledButton(onPressed: save, child: Text(context.l10n.useAudio)),
     ],
   );
 }

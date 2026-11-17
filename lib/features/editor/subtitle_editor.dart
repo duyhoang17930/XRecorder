@@ -63,10 +63,13 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
       width: 480,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: AppSpacing.sm,
         children: [
           Text(context.l10n.editTimedSubtitlesOnThisDeviceAutomatic),
           if (widget.project != null)
-            TextButton(
+            OutlinedButton.icon(
+              icon: const Icon(AppIcons.captions, size: AppIconSize.medium),
               onPressed: () async {
                 final generated = await generateSubtitles(
                   context,
@@ -79,11 +82,23 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                   });
                 }
               },
-              child: Text(context.l10n.generateOfflineSubtitles),
+              label: Text(context.l10n.generateOfflineSubtitles),
             ),
           for (var i = 0; i < cues.length; i++)
             ListTile(
-              title: Text(cues[i].text),
+              tileColor: context.studioColors.surface,
+              selectedTileColor: context.studioColors.primary.withValues(
+                alpha: .12,
+              ),
+              contentPadding: const EdgeInsetsDirectional.only(
+                start: AppSpacing.md,
+                end: AppSpacing.xxs,
+              ),
+              title: Text(
+                cues[i].text,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
               subtitle: Text(
                 context.l10n.timeRangeSeconds(
                   context.displayValue(cues[i].startMs / 1000),
@@ -106,22 +121,42 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                 }),
               ),
             ),
+          const SizedBox(height: AppSpacing.xxs),
           TextField(
             controller: text,
-            maxLines: 6,
+            minLines: 2,
+            maxLines: 4,
             decoration: InputDecoration(labelText: context.l10n.subtitleText),
           ),
-          TextField(
-            controller: start,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            textDirection: TextDirection.ltr,
-            decoration: InputDecoration(labelText: context.l10n.startSeconds),
-          ),
-          TextField(
-            controller: end,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            textDirection: TextDirection.ltr,
-            decoration: InputDecoration(labelText: context.l10n.endSeconds),
+          const SizedBox(height: AppSpacing.xxs),
+          Row(
+            spacing: AppSpacing.sm,
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: start,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
+                  textDirection: TextDirection.ltr,
+                  decoration: InputDecoration(
+                    labelText: context.l10n.startSeconds,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: TextField(
+                  controller: end,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
+                  textDirection: TextDirection.ltr,
+                  decoration: InputDecoration(
+                    labelText: context.l10n.endSeconds,
+                  ),
+                ),
+              ),
+            ],
           ),
           if (error != null)
             Text(
@@ -129,8 +164,10 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           Wrap(
+            spacing: AppSpacing.xs,
+            runSpacing: AppSpacing.xs,
             children: [
-              TextButton(
+              OutlinedButton(
                 onPressed: cues.isEmpty
                     ? null
                     : () async {
@@ -190,7 +227,7 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                       },
                 child: Text(context.l10n.saveSrtFile),
               ),
-              TextButton(
+              FilledButton.tonal(
                 onPressed: () => apply(() {
                   final a = parseEditorDecimal(start.text),
                       b = parseEditorDecimal(end.text);
@@ -232,7 +269,7 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                       : context.l10n.updateSubtitle,
                 ),
               ),
-              TextButton(
+              OutlinedButton(
                 onPressed: selected == null
                     ? null
                     : () => apply(() {
@@ -241,7 +278,7 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                       }),
                 child: Text(context.l10n.split),
               ),
-              TextButton(
+              OutlinedButton(
                 onPressed: selected == null || selected! >= cues.length - 1
                     ? null
                     : () => apply(() {
@@ -250,7 +287,7 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
                       }),
                 child: Text(context.l10n.mergeNext),
               ),
-              TextButton(
+              OutlinedButton(
                 onPressed: cues.isEmpty
                     ? null
                     : () => apply(() {
@@ -268,7 +305,7 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
         onPressed: () => Navigator.pop(context),
         child: Text(context.l10n.cancel),
       ),
-      TextButton(
+      FilledButton(
         onPressed: () => apply(() => Navigator.pop(context, track)),
         child: Text(context.l10n.applySubtitles),
       ),
