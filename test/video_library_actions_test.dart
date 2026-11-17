@@ -87,7 +87,8 @@ void main() {
       await tester.tap(find.byTooltip('Actions for Clip 0.mp4'));
       await tester.pumpAndSettle();
       expect(calls.last.method, 'videoOptions');
-      expect(calls.last.arguments, {'uri': 'content://test/0'});
+      // The native sheet follows the in-app theme.
+      expect(calls.last.arguments, {'uri': 'content://test/0', 'dark': true});
       expect(scroll.position.pixels, offset);
       expect(find.text('Media details'), findsNothing);
       expect(saved, isNull);

@@ -16,7 +16,11 @@ Future<void> openVideo(
 }) async {
   final repository = MediaScope.of(context);
   try {
-    final editUri = await AndroidMediaActions().videoMenu(item.uri, play: play);
+    final editUri = await AndroidMediaActions().videoMenu(
+      item.uri,
+      play: play,
+      dark: Theme.of(context).brightness == Brightness.dark,
+    );
     repository.refresh();
     if (editUri == null || !context.mounted) return;
     // Rename on API 24–28 can change the URI; resolve the current metadata.

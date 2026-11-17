@@ -28,10 +28,14 @@ class AndroidMediaActions implements TrashRepository {
 
   Future<void> preview(Uri uri) =>
       call<void>('preview', {'uri': uri.toString()});
-  Future<String?> videoMenu(Uri uri, {bool play = false}) => call<String>(
-    play ? 'openVideo' : 'videoOptions',
-    {'uri': uri.toString()},
-  );
+  /// Opens the native player, or the shared options sheet the player also
+  /// uses, so the Library "…" and the player always offer the same actions.
+  /// [dark] follows the in-app theme, which may differ from the system's.
+  Future<String?> videoMenu(Uri uri, {bool play = false, bool? dark}) =>
+      call<String>(play ? 'openVideo' : 'videoOptions', {
+        'uri': uri.toString(),
+        if (!play && dark != null) 'dark': dark,
+      });
   Future<void> share(Uri uri) => call<void>('share', {'uri': uri.toString()});
   Future<String> rename(Uri uri, String name) async =>
       (await call<String>('rename', {'uri': uri.toString(), 'name': name}))!;

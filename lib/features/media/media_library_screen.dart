@@ -737,6 +737,17 @@ class _MediaActionsMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.studioColors;
+    if (item.kind == MediaKind.video) {
+      // Same bottom sheet and actions as the player's "…" button.
+      return IconButton(
+        tooltip: context.l10n.mediaActionsFor(
+          context.displayValue(item.displayName),
+        ),
+        style: IconButton.styleFrom(foregroundColor: c.muted),
+        onPressed: () => openVideo(context, item, play: false),
+        icon: const Icon(AppIcons.more),
+      );
+    }
     return PopupMenuButton<String>(
       tooltip: context.l10n.mediaActionsFor(
         context.displayValue(item.displayName),
