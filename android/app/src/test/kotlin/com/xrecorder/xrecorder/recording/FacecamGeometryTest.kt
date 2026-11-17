@@ -7,7 +7,7 @@ class FacecamGeometryTest {
 
     @Test
     fun calculateRotationNormalizesDegreesProperly() {
-        // Portrait (0 deg display): no rotation needed on TextureView
+        // Raw sensor/display math; TextureView handles sensor orientation separately.
         assertEquals(270, FacecamGeometry.calculateRotation(0))
         assertEquals(270, FacecamGeometry.calculateRotation(270, 0))
         assertEquals(90, FacecamGeometry.calculateRotation(90, 0))
@@ -26,7 +26,7 @@ class FacecamGeometryTest {
         assertEquals(270, FacecamGeometry.calculateRotation(90, 180))
 
         // Landscape Right (270 deg display):
-        // Rotation follows the Camera2 sensor/display formula.
+        // Only display rotation remains for the TextureView matrix.
         assertEquals(0, FacecamGeometry.calculateRotation(270, isFrontCamera = true))
         assertEquals(0, FacecamGeometry.calculateRotation(270, 270, isFrontCamera = true))
         assertEquals(180, FacecamGeometry.calculateRotation(90, 270, isFrontCamera = true))
@@ -56,16 +56,16 @@ class FacecamGeometryTest {
             previewHeight = 480,
             isFrontCamera = true
         )
-        // Rotation follows the Camera2 sensor/display formula.
-        assertEquals(180, front90.rotation)
+        // Only display rotation remains for the TextureView matrix.
+        assertEquals(270, front90.rotation)
         assertTrue(front90.isMirrored)
-        assertTrue(front90.scaleX < 0)
-        // Effective on-screen aspect ratio must be 110.25 / 147 = 0.75 (matching 480/640)
-        val onScreenWidth90 = 110f * kotlin.math.abs(front90.scaleX)
-        val onScreenHeight90 = 147f * front90.scaleY
-        assertEquals(110.25f, onScreenWidth90, 0.1f)
+        assertTrue(front90.scaleX > 0)
+        // Display rotation swaps the already sensor-oriented buffer to landscape.
+        val onScreenWidth90 = 147f * kotlin.math.abs(front90.scaleX)
+        val onScreenHeight90 = 110f * front90.scaleY
+        assertEquals(196f, onScreenWidth90, 0.1f)
         assertEquals(147.0f, onScreenHeight90, 0.1f)
-        assertEquals(0.75f, onScreenWidth90 / onScreenHeight90, 0.001f)
+        assertEquals(4f / 3f, onScreenWidth90 / onScreenHeight90, 0.001f)
 
         // Display rotation 270° - Front Camera:
         val front270 = FacecamGeometry.calculateTransform(
@@ -77,14 +77,14 @@ class FacecamGeometryTest {
             previewHeight = 480,
             isFrontCamera = true
         )
-        assertEquals(0, front270.rotation)
+        assertEquals(90, front270.rotation)
         assertTrue(front270.isMirrored)
-        assertTrue(front270.scaleX < 0)
-        val onScreenWidth270 = 110f * kotlin.math.abs(front270.scaleX)
-        val onScreenHeight270 = 147f * front270.scaleY
-        assertEquals(110.25f, onScreenWidth270, 0.1f)
+        assertTrue(front270.scaleX > 0)
+        val onScreenWidth270 = 147f * kotlin.math.abs(front270.scaleX)
+        val onScreenHeight270 = 110f * front270.scaleY
+        assertEquals(196f, onScreenWidth270, 0.1f)
         assertEquals(147.0f, onScreenHeight270, 0.1f)
-        assertEquals(0.75f, onScreenWidth270 / onScreenHeight270, 0.001f)
+        assertEquals(4f / 3f, onScreenWidth270 / onScreenHeight270, 0.001f)
     }
 
     @Test
@@ -104,39 +104,39 @@ class FacecamGeometryTest {
     fun testRequired12MatrixAndOrientationCombinations() {
         // 1. Sensor 90°, display 0° (Back camera portrait)
         val s90d0 = FacecamGeometry.calculateTransform(sensorOrientation = 90, displayRotationDegrees = 0, viewWidth = 110f, viewHeight = 147f, isFrontCamera = false)
-        assertEquals(90, s90d0.rotation)
+        assertEquals(0, s90d0.rotation)
         assertFalse(s90d0.isMirrored)
         assertTrue(s90d0.scaleX > 0)
 
         // 2. Sensor 90°, display 90° (Back camera Landscape Left)
         val s90d90 = FacecamGeometry.calculateTransform(sensorOrientation = 90, displayRotationDegrees = 90, viewWidth = 110f, viewHeight = 147f, isFrontCamera = false)
-        assertEquals(180, s90d90.rotation)
+        assertEquals(270, s90d90.rotation)
         assertFalse(s90d90.isMirrored)
         assertTrue(s90d90.scaleX > 0)
 
         // 3. Sensor 90°, display 270° (Back camera Landscape Right)
         val s90d270 = FacecamGeometry.calculateTransform(sensorOrientation = 90, displayRotationDegrees = 270, viewWidth = 110f, viewHeight = 147f, isFrontCamera = false)
-        assertEquals(0, s90d270.rotation)
+        assertEquals(90, s90d270.rotation)
         assertFalse(s90d270.isMirrored)
         assertTrue(s90d270.scaleX > 0)
 
         // 4. Sensor 270°, display 0° (Front camera portrait)
         val s270d0 = FacecamGeometry.calculateTransform(sensorOrientation = 270, displayRotationDegrees = 0, viewWidth = 110f, viewHeight = 147f, isFrontCamera = true)
-        assertEquals(270, s270d0.rotation)
+        assertEquals(0, s270d0.rotation)
         assertTrue(s270d0.isMirrored)
-        assertTrue(s270d0.scaleX < 0)
+        assertTrue(s270d0.scaleX > 0)
 
         // 5. Sensor 270°, display 90° (Front camera Landscape Left)
         val s270d90 = FacecamGeometry.calculateTransform(sensorOrientation = 270, displayRotationDegrees = 90, viewWidth = 110f, viewHeight = 147f, isFrontCamera = true)
-        assertEquals(180, s270d90.rotation)
+        assertEquals(270, s270d90.rotation)
         assertTrue(s270d90.isMirrored)
-        assertTrue(s270d90.scaleX < 0)
+        assertTrue(s270d90.scaleX > 0)
 
         // 6. Sensor 270°, display 270° (Front camera Landscape Right)
         val s270d270 = FacecamGeometry.calculateTransform(sensorOrientation = 270, displayRotationDegrees = 270, viewWidth = 110f, viewHeight = 147f, isFrontCamera = true)
-        assertEquals(0, s270d270.rotation)
+        assertEquals(90, s270d270.rotation)
         assertTrue(s270d270.isMirrored)
-        assertTrue(s270d270.scaleX < 0)
+        assertTrue(s270d270.scaleX > 0)
 
         // 7. Portrait -> Landscape Right -> Portrait
         assertEquals(270, FacecamGeometry.calculateRotation(0))
@@ -161,24 +161,24 @@ class FacecamGeometryTest {
         // 11. Mirroring independent from rotation
         val frontTrans = FacecamGeometry.calculateTransform(sensorOrientation = 270, displayRotationDegrees = 90, viewWidth = 110f, viewHeight = 147f, isFrontCamera = true)
         val backTrans = FacecamGeometry.calculateTransform(sensorOrientation = 90, displayRotationDegrees = 90, viewWidth = 110f, viewHeight = 147f, isFrontCamera = false)
-        assertEquals(180, frontTrans.rotation)
-        assertEquals(180, backTrans.rotation)
-        assertTrue(frontTrans.scaleX < 0)
+        assertEquals(270, frontTrans.rotation)
+        assertEquals(270, backTrans.rotation)
+        assertTrue(frontTrans.scaleX > 0)
         assertTrue(backTrans.scaleX > 0)
         assertEquals(kotlin.math.abs(frontTrans.scaleX), backTrans.scaleX, 0.001f)
 
-        // 12. Aspect ratio preservation: natural 0.75 ratio on screen in both portrait and landscape
-        val portraitRatio = (147f * kotlin.math.abs(s270d0.scaleX)) / (110f * s270d0.scaleY)
-        val landscapeRatio = (110f * kotlin.math.abs(s270d90.scaleX)) / (147f * s270d90.scaleY)
+        // 12. Natural 3:4 portrait and 4:3 landscape content, with no stretch.
+        val portraitRatio = (110f * kotlin.math.abs(s270d0.scaleX)) / (147f * s270d0.scaleY)
+        val landscapeRatio = (147f * kotlin.math.abs(s270d90.scaleX)) / (110f * s270d90.scaleY)
         assertEquals(0.75f, portraitRatio, 0.005f)
-        assertEquals(0.75f, landscapeRatio, 0.005f)
+        assertEquals(4f / 3f, landscapeRatio, 0.005f)
     }
 
     @Test
     fun calculateTransformPortraitFrontAndBackCamera() {
         // Front camera at 0 degree display rotation (Portrait):
-        // Rotation follows sensor metadata and display orientation.
-        // Front camera MUST be mirrored (scaleX negative)
+        // TextureView has already compensated sensor orientation.
+        // Front mirror is provided by the camera producer, not a second matrix flip.
         val frontPortrait = FacecamGeometry.calculateTransform(
             sensorOrientation = 270,
             displayRotationDegrees = 0,
@@ -188,15 +188,15 @@ class FacecamGeometryTest {
             previewHeight = 480,
             isFrontCamera = true
         )
-        assertEquals(270, frontPortrait.rotation)
+        assertEquals(0, frontPortrait.rotation)
         assertTrue(frontPortrait.isMirrored)
         // Rotation-aware center crop preserves the camera stream's natural aspect ratio.
-        assertTrue(frontPortrait.scaleX < 0)
-        assertEquals(-0.75f, frontPortrait.scaleX, 0.005f)
-        assertEquals(1.33636f, frontPortrait.scaleY, 0.005f)
+        assertTrue(frontPortrait.scaleX > 0)
+        assertEquals(1.0022727f, frontPortrait.scaleX, 0.005f)
+        assertEquals(1f, frontPortrait.scaleY, 0.005f)
 
         // Back camera at 0 degree display rotation (Portrait):
-        // Rotation follows sensor metadata; back camera is not mirrored.
+        // TextureView has already compensated sensor orientation; back is not mirrored.
         val backPortrait = FacecamGeometry.calculateTransform(
             sensorOrientation = 90,
             displayRotationDegrees = 0,
@@ -206,17 +206,17 @@ class FacecamGeometryTest {
             previewHeight = 480,
             isFrontCamera = false
         )
-        assertEquals(90, backPortrait.rotation)
+        assertEquals(0, backPortrait.rotation)
         assertFalse(backPortrait.isMirrored)
         assertTrue(backPortrait.scaleX > 0)
-        assertEquals(0.75f, backPortrait.scaleX, 0.005f)
-        assertEquals(1.33636f, backPortrait.scaleY, 0.005f)
+        assertEquals(1.0022727f, backPortrait.scaleX, 0.005f)
+        assertEquals(1f, backPortrait.scaleY, 0.005f)
     }
 
     @Test
     fun calculateTransformLandscapeAndUpsideDown() {
         // Front camera at 90 deg display rotation (Landscape Left):
-        // Rotation follows the Camera2 sensor/display formula.
+        // Only display rotation remains for the TextureView matrix.
         val front90 = FacecamGeometry.calculateTransform(
             sensorOrientation = 270,
             displayRotationDegrees = 90,
@@ -226,9 +226,9 @@ class FacecamGeometryTest {
             previewHeight = 480,
             isFrontCamera = true
         )
-        assertEquals(180, front90.rotation)
+        assertEquals(270, front90.rotation)
         assertTrue(front90.isMirrored)
-        assertTrue(front90.scaleX < 0)
+        assertTrue(front90.scaleX > 0)
 
         // Back camera at 90 deg display rotation (Landscape Left)
         val back90 = FacecamGeometry.calculateTransform(
@@ -240,12 +240,12 @@ class FacecamGeometryTest {
             previewHeight = 480,
             isFrontCamera = false
         )
-        assertEquals(180, back90.rotation)
+        assertEquals(270, back90.rotation)
         assertFalse(back90.isMirrored)
         assertTrue(back90.scaleX > 0)
 
         // Front camera at 270 deg display rotation (Landscape Right):
-        // Rotation follows the Camera2 sensor/display formula.
+        // Only display rotation remains for the TextureView matrix.
         val front270 = FacecamGeometry.calculateTransform(
             sensorOrientation = 270,
             displayRotationDegrees = 270,
@@ -255,9 +255,9 @@ class FacecamGeometryTest {
             previewHeight = 480,
             isFrontCamera = true
         )
-        assertEquals(0, front270.rotation)
+        assertEquals(90, front270.rotation)
         assertTrue(front270.isMirrored)
-        assertTrue(front270.scaleX < 0)
+        assertTrue(front270.scaleX > 0)
 
         // Back camera at 270 deg display rotation (Landscape Right)
         val back270 = FacecamGeometry.calculateTransform(
@@ -269,7 +269,7 @@ class FacecamGeometryTest {
             previewHeight = 480,
             isFrontCamera = false
         )
-        assertEquals(0, back270.rotation)
+        assertEquals(90, back270.rotation)
         assertFalse(back270.isMirrored)
         assertTrue(back270.scaleX > 0)
 
@@ -283,8 +283,42 @@ class FacecamGeometryTest {
             previewHeight = 480,
             isFrontCamera = true
         )
-        assertEquals(90, front180.rotation)
+        assertEquals(180, front180.rotation)
         assertTrue(front180.isMirrored)
+    }
+
+    @Test
+    fun textureTransformPreservesCameraAspectAndCoversTheUnchangedFrame() {
+        for (sensor in listOf(0, 90, 180, 270)) for (display in listOf(0, 90, 180, 270)) {
+            for ((pw, ph) in listOf(640 to 480, 1280 to 720, 480 to 640)) {
+                for (front in listOf(false, true)) {
+                    val w = 110f; val h = 147f
+                    val t = FacecamGeometry.calculateTransform(sensor, display, w, h, pw, ph, front)
+                    val swapsAxes = t.rotation % 180 != 0
+                    val renderedWidth = (if (swapsAxes) h else w) * kotlin.math.abs(t.scaleX)
+                    val renderedHeight = (if (swapsAxes) w else h) * t.scaleY
+                    val swapsBuffer = (sensor - display) % 180 != 0
+                    val expectedAspect = if (swapsBuffer) ph.toFloat() / pw else pw.toFloat() / ph
+                    assertEquals(expectedAspect, renderedWidth / renderedHeight, 0.0001f)
+                    assertTrue(renderedWidth >= w - 0.001f)
+                    assertTrue(renderedHeight >= h - 0.001f)
+                    assertTrue(kotlin.math.abs(renderedWidth - w) < 0.001f ||
+                        kotlin.math.abs(renderedHeight - h) < 0.001f)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun textureViewAppliesSensorAndMirrorBeforeDisplayCompensation() {
+        for (sensor in listOf(0, 90, 180, 270)) for (front in listOf(false, true)) {
+            for ((display, expected) in listOf(0 to 0, 90 to 270, 180 to 180, 270 to 90, 0 to 0)) {
+                val t = FacecamGeometry.calculateTransform(sensor, display, 110f, 147f, isFrontCamera = front)
+                assertEquals(expected, t.rotation)
+                assertEquals(front, t.isMirrored)
+                assertTrue(t.scaleX > 0)
+            }
+        }
     }
 
     @Test
@@ -296,7 +330,7 @@ class FacecamGeometryTest {
             isFrontCamera = true
         )
         assertEquals(0, zeroView.rotation)
-        assertEquals(-1.0f, zeroView.scaleX, 0.001f)
+        assertEquals(1.0f, zeroView.scaleX, 0.001f)
         assertEquals(1.0f, zeroView.scaleY, 0.001f)
 
         // Zero preview dimensions should safely fallback to default 640x480

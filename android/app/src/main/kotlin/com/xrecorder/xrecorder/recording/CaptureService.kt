@@ -223,6 +223,20 @@ class CaptureService : Service() {
             if(SystemClock.elapsedRealtime()-cameraWaitStart>10000) { fail("No camera frames arrived. Disable facecam and retry."); return }
             handler.postDelayed({startEncoder()},100); return
         }
+        if (!CaptureState.screenshot) {
+            val metrics = resources.displayMetrics
+            val oriented = config.atDisplayOrientation(metrics.widthPixels, metrics.heightPixels)
+            try {
+                // Validate the transposed size against the encoder before opening any output.
+                CaptureState.config = if (oriented.width != config.width || oriented.height != config.height) {
+                    CaptureConfig.from(this, oriented.map())
+                } else oriented
+                CaptureState.width = config.width
+                CaptureState.height = config.height
+            } catch (_: Exception) {
+                fail("This device cannot encode the screen orientation. Choose a lower recording preset."); return
+            }
+        }
         CaptureState.transition("starting")
         if (CaptureState.screenshot) { captureImage(); return }
         try {

@@ -68,68 +68,28 @@ internal object FacecamGeometry {
         previewHeight: Int = 480,
         isFrontCamera: Boolean = true
     ): TransformResult {
-        val rotation = calculateRotation(sensorOrientation, displayRotationDegrees, isFrontCamera)
-
+        // TextureView already compensates sensor orientation and front-camera mirroring.
+        // Apply only display compensation; repeating either transform reverses the preview.
+        val rotation = ((-displayRotationDegrees % 360) + 360) % 360
         if (viewWidth <= 0f || viewHeight <= 0f) {
-            return TransformResult(
-                rotation = rotation,
-                scaleX = if (isFrontCamera) -1.0f else 1.0f,
-                scaleY = 1.0f,
-                isMirrored = isFrontCamera
-            )
+            return TransformResult(rotation, 1f, 1f, isFrontCamera)
         }
-
-        val pw = if (previewWidth > 0) previewWidth else 640
-        val ph = if (previewHeight > 0) previewHeight else 480
-        val pLong = kotlin.math.max(pw, ph).toFloat()
-        val pShort = kotlin.math.min(pw, ph).toFloat()
-
-        var sx = 1.0f
-        var sy = 1.0f
-
-        if (rotation == 0 || rotation == 180) {
-            // Portrait orientation: content aspect is pShort / pLong (e.g. 480 / 640 = 0.75)
-            val contentAspect = pShort / pLong
-            val viewAspect = viewWidth / viewHeight
-            if (viewAspect > contentAspect) {
-                // View is wider than camera stream: fit width, center crop height
-                sx = 1.0f
-                sy = (viewWidth * pLong) / (viewHeight * pShort)
-            } else {
-                // View is taller than camera stream: fit height, center crop width
-                sx = (viewHeight * pShort) / (viewWidth * pLong)
-                sy = 1.0f
-            }
-        } else {
-            // Landscape orientation (90 or 270):
-            // After rotating by 90/270, the stream axes are swapped relative to the view.
-            // Content aspect in buffer is pShort / pLong.
-            // On screen, the rotated buffer spans: width = viewHeight * (pShort / pLong), height = viewWidth * (pLong / pShort).
-            // To ensure 1:1 natural aspect ratio (no stretch or squash) and full fill (Center-Crop):
-            val contentAspect = pShort / pLong
-            val viewAspect = viewWidth / viewHeight
-            if (viewAspect > contentAspect) {
-                sx = viewWidth / viewHeight
-                sy = pLong / pShort
-            } else {
-                sx = pShort / pLong
-                sy = viewHeight / viewWidth
-            }
-        }
-
-        if (sx.isNaN() || sx.isInfinite()) sx = 1.0f
-        if (sy.isNaN() || sy.isInfinite()) sy = 1.0f
-
-        if (isFrontCamera) {
-            sx = -sx
-        }
-
-        return TransformResult(
-            rotation = rotation,
-            scaleX = sx,
-            scaleY = sy,
-            isMirrored = isFrontCamera
-        )
+        val pw = if (previewWidth > 0) previewWidth.toFloat() else 640f
+        val ph = if (previewHeight > 0) previewHeight.toFloat() else 480f
+        val sensorSwapsAxes = sensorOrientation % 180 != 0
+        val naturalWidth = if (sensorSwapsAxes) ph else pw
+        val naturalHeight = if (sensorSwapsAxes) pw else ph
+        val swapsAxes = rotation % 180 != 0
+        val contentWidth = if (swapsAxes) naturalHeight else naturalWidth
+        val contentHeight = if (swapsAxes) naturalWidth else naturalHeight
+        val fill = maxOf(viewWidth / contentWidth, viewHeight / contentHeight)
+        // postRotate precedes postScale in FacecamOverlay: undo TextureView's
+        // stretch using the rotated view axes, preserving the existing center crop.
+        val rotatedWidth = if (swapsAxes) viewHeight else viewWidth
+        val rotatedHeight = if (swapsAxes) viewWidth else viewHeight
+        val sx = contentWidth * fill / rotatedWidth
+        val sy = contentHeight * fill / rotatedHeight
+        return TransformResult(rotation, sx, sy, isFrontCamera)
     }
 
     fun clampScale(scale: Float?): Float {

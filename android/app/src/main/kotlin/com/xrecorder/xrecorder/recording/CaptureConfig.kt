@@ -32,6 +32,18 @@ data class CaptureConfig(
     val microphone: Boolean get() = audio == "microphone" || audio == "mixed"
     val hasAudio: Boolean get() = audio != "mute"
     val mime: String get() = if (codec == "hevc") "video/hevc" else "video/avc"
+    /** Full-screen recordings follow the display at start; saved preferences stay unchanged. */
+    internal fun atDisplayOrientation(displayWidth: Int, displayHeight: Int): CaptureConfig {
+        require(displayWidth > 0 && displayHeight > 0)
+        if (isRegion || liveRequested) return this
+        val portrait = displayHeight > displayWidth
+        return copy(
+            width = if (portrait) minOf(width, height) else maxOf(width, height),
+            height = if (portrait) maxOf(width, height) else minOf(width, height),
+            orientation = if (portrait) "portrait" else "landscape"
+        )
+    }
+
     fun map(): Map<String, Any?> = mapOf("width" to width,"height" to height,"fps" to fps,"bitrate" to bitrate,"codec" to codec,
         "audio" to audio,"micGain" to micGain,"internalGain" to internalGain,"noiseReduction" to noiseReduction,
         "countdown" to countdown,"durationSeconds" to durationSeconds,"orientation" to orientation,"mode" to mode,
