@@ -19,4 +19,6 @@
     <string name="p2_format" formatted="false">형식</string>
     <string name="p2_duration" formatted="false">길이</string>
     <string name="p2_dimensions" formatted="false">차원</string>
+    <string name="p2_play" formatted="false">미리 보기 Play Preview</string>
+    <string name="p2_pause" formatted="false">휴식 예보</string>
 </resources>

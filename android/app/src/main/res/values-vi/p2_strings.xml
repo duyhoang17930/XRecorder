@@ -19,4 +19,6 @@
     <string name="p2_format" formatted="false">Định dạng</string>
     <string name="p2_duration" formatted="false">Thời gian</string>
     <string name="p2_dimensions" formatted="false">Kích thước</string>
+    <string name="p2_play" formatted="false">Phát xem trước</string>
+    <string name="p2_pause" formatted="false">Tạm dừng xem trước</string>
 </resources>

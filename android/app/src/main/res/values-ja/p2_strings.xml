@@ -19,4 +19,6 @@
     <string name="p2_format" formatted="false">フォーマット</string>
     <string name="p2_duration" formatted="false">長さ</string>
     <string name="p2_dimensions" formatted="false">サイズ</string>
+    <string name="p2_play" formatted="false">プレビュープレイ</string>
+    <string name="p2_pause" formatted="false">休憩予報</string>
 </resources>

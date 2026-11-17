@@ -19,4 +19,6 @@
     <string name="p2_format" formatted="false">Formato</string>
     <string name="p2_duration" formatted="false">Duração</string>
     <string name="p2_dimensions" formatted="false">Dimensões</string>
+    <string name="p2_play" formatted="false">Jogo Previsão</string>
+    <string name="p2_pause" formatted="false">Previsão de Pausa</string>
 </resources>

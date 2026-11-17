@@ -19,4 +19,6 @@
     <string name="p2_format" formatted="false">格式</string>
     <string name="p2_duration" formatted="false">长度</string>
     <string name="p2_dimensions" formatted="false">尺寸</string>
+    <string name="p2_play" formatted="false">播放预览</string>
+    <string name="p2_pause" formatted="false">休息预览</string>
 </resources>

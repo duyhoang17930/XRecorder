@@ -19,4 +19,6 @@
     <string name="p2_format" formatted="false">फॉर्मेट</string>
     <string name="p2_duration" formatted="false">लंबाई</string>
     <string name="p2_dimensions" formatted="false">आयामों</string>
+    <string name="p2_play" formatted="false">Play प्रीव्यू</string>
+    <string name="p2_pause" formatted="false">प्रीमियम ब्रेक</string>
 </resources>

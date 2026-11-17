@@ -19,4 +19,6 @@
     <string name="p2_format" formatted="false">Format</string>
     <string name="p2_duration" formatted="false">Durasi</string>
     <string name="p2_dimensions" formatted="false">Dimensi</string>
+    <string name="p2_play" formatted="false">Mainkan Preview</string>
+    <string name="p2_pause" formatted="false">Perhentian Preview</string>
 </resources>

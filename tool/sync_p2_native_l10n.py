@@ -19,7 +19,8 @@ KEYS = {"p2_edit_video": "editVideo", "p2_edit_photo": "editPhoto",
         "p2_move_explanation": "theCopyWillBeVerifiedFirstThe",
         "p2_trash_confirm": "moveToTrash756188",
         "p2_size": "size", "p2_format": "format",
-        "p2_duration": "duration", "p2_dimensions": "dimensions"}
+        "p2_duration": "duration", "p2_dimensions": "dimensions",
+        "p2_play": "playPreview", "p2_pause": "pausePreview"}
 
 CAPTURE_LABELS = (
     'Recording', 'Paused', 'Saving', 'Pause', 'Resume', 'Stop', 'Screenshot saved', 'Video saved',
