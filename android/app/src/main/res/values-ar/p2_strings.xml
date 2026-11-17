@@ -21,4 +21,7 @@
     <string name="p2_dimensions" formatted="false">الأبعاد</string>
     <string name="p2_play" formatted="false">تشغيل المعاينة</string>
     <string name="p2_pause" formatted="false">إيقاف المعاينة مؤقتًا</string>
+    <string name="p2_choose_destination" formatted="false">اختيار الوجهة</string>
+    <string name="p2_copy_done" formatted="false">نسخة مصدقة وحفظها.</string>
+    <string name="p2_move_done" formatted="false">تم التحقق من التحرك وإكماله.</string>
 </resources>

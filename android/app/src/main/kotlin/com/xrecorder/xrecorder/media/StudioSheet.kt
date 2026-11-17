@@ -188,14 +188,36 @@ internal class StudioSheet(
             }
             clipToOutline = true
         }
-        sheet.addView(View(activity).apply {
-            background = GradientDrawable().apply {
-                cornerRadius = activity.dp(2).toFloat()
-                setColor(withAlpha(palette.muted, .5f))
+        // The handle is a real grip: drag the sheet down to dismiss it.
+        val grip = FrameLayout(activity).apply {
+            addView(View(activity).apply {
+                background = GradientDrawable().apply {
+                    cornerRadius = activity.dp(2).toFloat()
+                    setColor(withAlpha(palette.muted, .5f))
+                }
+            }, FrameLayout.LayoutParams(activity.dp(36), activity.dp(4), Gravity.CENTER))
+            var startY = 0f
+            setOnTouchListener { _, event ->
+                when (event.actionMasked) {
+                    android.view.MotionEvent.ACTION_DOWN -> { startY = event.rawY; true }
+                    android.view.MotionEvent.ACTION_MOVE -> {
+                        sheet.translationY = (event.rawY - startY).coerceAtLeast(0f); true
+                    }
+                    android.view.MotionEvent.ACTION_UP, android.view.MotionEvent.ACTION_CANCEL -> {
+                        if (sheet.translationY > sheet.height * .25f) {
+                            sheet.animate().translationY(sheet.height.toFloat()).setDuration(150)
+                                .withEndAction { dialog.dismiss() }.start()
+                        } else {
+                            sheet.animate().translationY(0f).setDuration(150).start()
+                        }
+                        true
+                    }
+                    else -> false
+                }
             }
-        }, LinearLayout.LayoutParams(activity.dp(36), activity.dp(4)).apply {
-            gravity = Gravity.CENTER_HORIZONTAL
-            setMargins(0, activity.dp(12), 0, activity.dp(16))
+        }
+        sheet.addView(grip, LinearLayout.LayoutParams(-1, activity.dp(32)).apply {
+            setMargins(0, activity.dp(4), 0, activity.dp(8))
         })
         sheet.addView(ScrollView(activity).apply {
             isVerticalScrollBarEnabled = false

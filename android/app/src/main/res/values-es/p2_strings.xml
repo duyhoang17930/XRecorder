@@ -21,4 +21,7 @@
     <string name="p2_dimensions" formatted="false">Dimensiones</string>
     <string name="p2_play" formatted="false">Juego previo</string>
     <string name="p2_pause" formatted="false">Previsiones de pausa</string>
+    <string name="p2_choose_destination" formatted="false">Elegir destino</string>
+    <string name="p2_copy_done" formatted="false">Copia verificada y salvada.</string>
+    <string name="p2_move_done" formatted="false">Movimiento verificado y completado.</string>
 </resources>

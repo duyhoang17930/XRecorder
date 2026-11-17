@@ -21,4 +21,7 @@
     <string name="p2_dimensions" formatted="false">尺寸</string>
     <string name="p2_play" formatted="false">播放预览</string>
     <string name="p2_pause" formatted="false">休息预览</string>
+    <string name="p2_choose_destination" formatted="false">选择目的地</string>
+    <string name="p2_copy_done" formatted="false">复制已验证和保存。</string>
+    <string name="p2_move_done" formatted="false">移动验证和完成。</string>
 </resources>

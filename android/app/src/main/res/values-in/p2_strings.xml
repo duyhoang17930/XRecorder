@@ -21,4 +21,7 @@
     <string name="p2_dimensions" formatted="false">Dimensi</string>
     <string name="p2_play" formatted="false">Mainkan Preview</string>
     <string name="p2_pause" formatted="false">Perhentian Preview</string>
+    <string name="p2_choose_destination" formatted="false">Pilih Destinasi</string>
+    <string name="p2_copy_done" formatted="false">Copy verified dan disimpan.</string>
+    <string name="p2_move_done" formatted="false">Pergerakan disahkan dan selesai.</string>
 </resources>

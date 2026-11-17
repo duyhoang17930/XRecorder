@@ -21,4 +21,7 @@
     <string name="p2_dimensions" formatted="false">サイズ</string>
     <string name="p2_play" formatted="false">プレビュープレイ</string>
     <string name="p2_pause" formatted="false">休憩予報</string>
+    <string name="p2_choose_destination" formatted="false">目的地を選択</string>
+    <string name="p2_copy_done" formatted="false">コピー確認および保存</string>
+    <string name="p2_move_done" formatted="false">移動確認および完了。</string>
 </resources>

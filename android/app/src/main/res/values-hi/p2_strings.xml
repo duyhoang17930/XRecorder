@@ -21,4 +21,7 @@
     <string name="p2_dimensions" formatted="false">आयामों</string>
     <string name="p2_play" formatted="false">Play प्रीव्यू</string>
     <string name="p2_pause" formatted="false">प्रीमियम ब्रेक</string>
+    <string name="p2_choose_destination" formatted="false">लक्ष्य चुनें</string>
+    <string name="p2_copy_done" formatted="false">कॉपी सत्यापित और बचाया।</string>
+    <string name="p2_move_done" formatted="false">स्थानांतरित किया गया और पूरा किया गया।</string>
 </resources>

@@ -21,4 +21,7 @@
     <string name="p2_dimensions" formatted="false">Dimensions</string>
     <string name="p2_play" formatted="false">Play preview</string>
     <string name="p2_pause" formatted="false">Pause preview</string>
+    <string name="p2_choose_destination" formatted="false">Choose destination</string>
+    <string name="p2_copy_done" formatted="false">Copy verified and saved.</string>
+    <string name="p2_move_done" formatted="false">Move verified and completed.</string>
 </resources>

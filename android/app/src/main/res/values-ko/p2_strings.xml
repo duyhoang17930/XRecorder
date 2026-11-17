@@ -21,4 +21,7 @@
     <string name="p2_dimensions" formatted="false">차원</string>
     <string name="p2_play" formatted="false">미리 보기 Play Preview</string>
     <string name="p2_pause" formatted="false">휴식 예보</string>
+    <string name="p2_choose_destination" formatted="false">목적지 선택</string>
+    <string name="p2_copy_done" formatted="false">복사 확인 및 저장.</string>
+    <string name="p2_move_done" formatted="false">이동 확인 및 완료.</string>
 </resources>

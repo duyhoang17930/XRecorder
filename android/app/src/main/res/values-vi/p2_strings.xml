@@ -21,4 +21,7 @@
     <string name="p2_dimensions" formatted="false">Kích thước</string>
     <string name="p2_play" formatted="false">Phát xem trước</string>
     <string name="p2_pause" formatted="false">Tạm dừng xem trước</string>
+    <string name="p2_choose_destination" formatted="false">Chọn nơi lưu</string>
+    <string name="p2_copy_done" formatted="false">Đã lưu và xác minh bản sao.</string>
+    <string name="p2_move_done" formatted="false">Đã xác minh và hoàn tất di chuyển.</string>
 </resources>

@@ -43,8 +43,10 @@ internal class VideoOptions(
                         "info" -> info()
                         "share" -> call("share") { dismissed() }
                         "copy" -> transfer(false)
-                        "move" -> confirm(R.string.p2_move_confirm, text(R.string.p2_move_explanation)) { transfer(true) }
-                        "trash" -> confirm(R.string.p2_trash_confirm, item["name"] as? String ?: "") {
+                        "move" -> confirm(R.string.p2_move_confirm, text(R.string.p2_move_explanation),
+                            R.string.p2_choose_destination) { transfer(true) }
+                        "trash" -> confirm(R.string.p2_trash_confirm, item["name"] as? String ?: "",
+                            R.string.p2_trash, destructive = true) {
                             call("trash") { changed(uri, true); dismissed() }
                         }
                     }
@@ -91,11 +93,15 @@ internal class VideoOptions(
         val size = Formatter.formatFileSize(activity, (item["size"] as? Number)?.toLong() ?: 0)
         val duration = (item["duration"] as? Number)?.toLong() ?: 0
         val seconds = duration / 1000
-        val time = String.format(java.util.Locale.getDefault(), "%d:%02d:%02d.%03d", seconds / 3600, seconds / 60 % 60, seconds % 60, duration % 1000)
+        val time = if (seconds >= 3600)
+            String.format(java.util.Locale.getDefault(), "%d:%02d:%02d", seconds / 3600, seconds / 60 % 60, seconds % 60)
+        else String.format(java.util.Locale.getDefault(), "%02d:%02d", seconds / 60, seconds % 60)
+        val mime = item["mime"] as? String
+        val format = mime?.substringAfter('/')?.uppercase()?.let { "$it · $mime" } ?: "—"
         StudioSheet(activity, palette).header(text(R.string.p2_info), null)
             .detail(text(R.string.p2_filename), item["name"] as? String ?: "—")
             .detail(text(R.string.p2_size), size)
-            .detail(text(R.string.p2_format), item["mime"] as? String ?: "—")
+            .detail(text(R.string.p2_format), format)
             .detail(text(R.string.p2_duration), time)
             .detail(text(R.string.p2_dimensions), "${item["width"] ?: "—"} × ${item["height"] ?: "—"}")
             .show(dismissed)
@@ -110,8 +116,10 @@ internal class VideoOptions(
             setSingleLine(true)
             filters = arrayOf(InputFilter.LengthFilter(120))
             hint = text(R.string.p2_filename)
-            setText(item["name"] as? String ?: "")
-            selectAll()
+            val name = item["name"] as? String ?: ""
+            setText(name)
+            val dot = name.lastIndexOf('.')
+            if (dot > 0) setSelection(0, dot) else selectAll()
         }
         val frame = android.widget.FrameLayout(activity).apply {
             setPadding(activity.dp(24), activity.dp(8), activity.dp(24), 0)
@@ -147,12 +155,23 @@ internal class VideoOptions(
         dialog.show()
     }
 
-    private fun confirm(title: Int, message: String, accepted: () -> Unit) {
+    private fun confirm(
+        title: Int,
+        message: String,
+        action: Int,
+        destructive: Boolean = false,
+        accepted: () -> Unit,
+    ) {
         var confirmed = false
-        AlertDialog.Builder(activity, studioDialogTheme(dark)).setTitle(text(title)).setMessage(message)
+        val dialog = AlertDialog.Builder(activity, studioDialogTheme(dark)).setTitle(text(title)).setMessage(message)
             .setNegativeButton(R.string.p2_cancel, null)
-            .setPositiveButton(android.R.string.ok) { _, _ -> confirmed = true; accepted() }
-            .setOnDismissListener { if (!confirmed) dismissed() }.showStudio(palette)
+            .setPositiveButton(action) { _, _ -> confirmed = true; accepted() }
+            .setOnDismissListener { if (!confirmed) dismissed() }.create()
+        styleStudio(dialog, palette)
+        if (destructive) dialog.onShown {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(palette.warning)
+        }
+        dialog.show()
     }
 
     private fun transfer(move: Boolean) {
@@ -162,9 +181,12 @@ internal class VideoOptions(
                 val data = result as? Map<*, *>
                 // An unverified move must leave playback and the original intact.
                 changed(uri, data?.get("moved") == true)
-                (data?.get("warning") as? String)?.let {
-                    Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
-                }
+                val warning = data?.get("warning") as? String
+                Toast.makeText(
+                    activity,
+                    warning ?: text(if (data?.get("moved") == true) R.string.p2_move_done else R.string.p2_copy_done),
+                    if (warning != null) Toast.LENGTH_LONG else Toast.LENGTH_SHORT,
+                ).show()
                 dismissed()
             }
         }

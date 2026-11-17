@@ -21,4 +21,7 @@
     <string name="p2_dimensions" formatted="false">Dimensions</string>
     <string name="p2_play" formatted="false">Jouer à prévisions</string>
     <string name="p2_pause" formatted="false">Prévisions de pause</string>
+    <string name="p2_choose_destination" formatted="false">Choisir la destination</string>
+    <string name="p2_copy_done" formatted="false">Copie vérifiée et sauvée.</string>
+    <string name="p2_move_done" formatted="false">Mouvement vérifié et achevé.</string>
 </resources>
