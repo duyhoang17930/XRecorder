@@ -560,10 +560,46 @@ class TranscriptionBridge(private val context: Context) {
     private fun render(job: Job, project: Map<*, *>, duration: Long, language: String) {
         val temporary = File(context.cacheDir, "${job.id}_speech.mp4")
         job.temporary = temporary
+        job.state = "running"
+        job.phase = "preparing edited audio"
+        // Probe sources off the main thread: clips recorded muted have no audio
+        // track and must become silence in the speech composition.
+        worker.execute {
+            persistOrWarn(job)
+            val silent =
+                try {
+                    EditorComposition.silentClips(context, project)
+                } catch (_: Exception) {
+                    emptySet()
+                }
+            val options = project["effects"] as? Map<*, *>
+            val clips = project["clips"] as? List<*> ?: emptyList<Any>()
+            val noAudio =
+                clips.indices.all {
+                    it in silent || (clips[it] as? Map<*, *>)?.get("isImage") == true
+                } &&
+                    (options?.get("audioTracks") as? List<*>).isNullOrEmpty() &&
+                    (options?.get("music") as? String).isNullOrEmpty()
+            if (noAudio) {
+                // Nothing audible to recognize; report no speech instead of failing.
+                job.segments = emptyList()
+                job.noSpeechDetected = true
+                completeAndPersist(job, "completed")
+            } else main.post { startRender(job, project, silent, duration, language, temporary) }
+        }
+    }
+
+    private fun startRender(
+        job: Job,
+        project: Map<*, *>,
+        silent: Set<Int>,
+        duration: Long,
+        language: String,
+        temporary: File,
+    ) {
+        if (job.cancelled) return
         try {
-            job.state = "running"
-            job.phase = "preparing edited audio"
-            val composition = EditorComposition.audioOnly(project)
+            val composition = EditorComposition.audioOnly(project, silent)
             job.transformer =
                 Transformer.Builder(context)
                     .setVideoMimeType(MimeTypes.VIDEO_H264)
@@ -605,7 +641,6 @@ class TranscriptionBridge(private val context: Context) {
                         },
                     )
                     .build()
-            worker.execute { persistOrWarn(job) }
             job.transformer!!.start(composition, temporary.path)
         } catch (e: Exception) {
             temporary.delete()

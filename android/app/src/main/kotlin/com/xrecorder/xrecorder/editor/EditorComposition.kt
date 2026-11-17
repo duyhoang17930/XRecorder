@@ -14,8 +14,41 @@ import com.google.common.collect.ImmutableList
 
 /** One validated composition definition serves both native preview and export. */
 object EditorComposition {
+    /**
+     * Indices of video clips whose source has no audio track (for example a muted recording).
+     * Media3 rejects an item with video removed and no audio ("no audio or video track to
+     * output"), so [audioOnly] substitutes silence of the same edited duration. Probe failures
+     * keep the clip so the original error is still reported.
+     */
+    fun silentClips(context: android.content.Context, project: Map<*, *>): Set<Int> =
+        (project["clips"] as List<*>)
+            .withIndex()
+            .filter { (_, value) ->
+                val clip = value as Map<*, *>
+                clip["isImage"] != true && !hasAudio(context, Uri.parse(clip["mediaId"] as String))
+            }
+            .map { it.index }
+            .toSet()
+
+    private fun hasAudio(context: android.content.Context, uri: Uri): Boolean {
+        val extractor = android.media.MediaExtractor()
+        return try {
+            extractor.setDataSource(context, uri, null)
+            (0 until extractor.trackCount).any {
+                extractor
+                    .getTrackFormat(it)
+                    .getString(android.media.MediaFormat.KEY_MIME)
+                    ?.startsWith("audio/") == true
+            }
+        } catch (_: Exception) {
+            true
+        } finally {
+            extractor.release()
+        }
+    }
+
     /** ASR consumes the identical edited audio without rendering video frames. */
-    fun audioOnly(project: Map<*, *>): Composition {
+    fun audioOnly(project: Map<*, *>, silent: Set<Int> = emptySet()): Composition {
         val source = build(project)
         val clips = project["clips"] as List<*>
         val speed = ((project["effects"] as? Map<*, *>)?.get("speed") as? Number)?.toDouble() ?: 1.0
@@ -26,7 +59,7 @@ object EditorComposition {
                             .setIsLooping(sequence.isLooping)
                     sequence.editedMediaItems.forEachIndexed { index, item ->
                         val clip = if (sequenceIndex == 0) clips[index] as Map<*, *> else null
-                        if (clip?.get("isImage") == true) {
+                        if (clip != null && (clip["isImage"] == true || index in silent)) {
                             val duration =
                                 (((clip["outMs"] as Number).toLong() -
                                         (clip["inMs"] as Number).toLong()) * 1000 / speed)
