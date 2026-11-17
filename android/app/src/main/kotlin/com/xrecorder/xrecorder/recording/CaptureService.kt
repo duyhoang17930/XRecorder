@@ -253,7 +253,8 @@ class CaptureService : Service() {
             video = VideoEncoder(descriptor!!,videoFile?.absolutePath ?: output!!.legacyPath,config.encoderName,config.width,config.height,config.bitrate,config.fps,config.mime,
                 onFirstFrame = { handler.post { markRecording() } },
                 onFailure = { handler.post { fail("The encoder failed. Choose a lower recording preset.") } },
-                encodedOutput = liveCapture?.video)
+                encodedOutput = liveCapture?.video,
+                maxDurationUs = config.durationSeconds.coerceAtLeast(0) * 1_000_000L)
             if (config.isRegion) {
                 val metrics = resources.displayMetrics
                 val sourceWidth = metrics.widthPixels

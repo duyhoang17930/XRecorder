@@ -14,7 +14,9 @@ class VideoEncoder @JvmOverloads constructor(
     descriptor: ParcelFileDescriptor, legacyPath: String?, encoderName: String,
     width: Int, height: Int, bitrate: Int, private val fps: Int, private val mime: String = "video/avc",
     private val onFirstFrame: () -> Unit, private val onFailure: () -> Unit,
-    private val encodedOutput: EncodedOutput? = null
+    private val encodedOutput: EncodedOutput? = null,
+    // Auto-stop limit in active (pause-excluded) output time; 0 = unlimited.
+    private val maxDurationUs: Long = 0L
 ) {
     companion object {
         // Translate encoder-relative PTS into the monotonic clock used by pause ranges.
@@ -102,18 +104,23 @@ class VideoEncoder @JvmOverloads constructor(
                         // Keep spacing above the MP4 track's timestamp quantization (often 90 kHz).
                         // Some encoders drain queued repeat frames across suspend/resume.
                         info.presentationTimeUs = maxOf(if(lastPts < 0) 0 else lastPts + 1000, info.presentationTimeUs - originPts - pausedBefore(captureTimeNs(info.presentationTimeUs, originPts, sourceStartNs)) / 1000)
-                        buffer.position(info.offset); buffer.limit(info.offset + info.size)
-                        muxer.writeSampleData(track, buffer, info)
-                        encodedOutput?.sample(buffer, info, sourceStartNs)
-                        if (lastPts < 0) onFirstFrame()
-                        lastPts = info.presentationTimeUs
+                        // The auto-stop timer runs on the main looper; a late stop (UI jank,
+                        // teardown latency) must not extend the file past the selected limit.
+                        if (maxDurationUs <= 0 || lastPts < 0 || info.presentationTimeUs < maxDurationUs) {
+                            buffer.position(info.offset); buffer.limit(info.offset + info.size)
+                            muxer.writeSampleData(track, buffer, info)
+                            encodedOutput?.sample(buffer, info, sourceStartNs)
+                            if (lastPts < 0) onFirstFrame()
+                            lastPts = info.presentationTimeUs
+                        }
                     }
                     val end = info.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0
                     codec.releaseOutputBuffer(index, false)
                     if (end) {
                         check(lastPts >= 0) { "No video frames were encoded" }
                         // Public MediaMuxer EOS semantics preserve the static tail of a recording.
-                        val duration = maxOf(lastPts + 1000000L / fps, (stopTimeNs - firstFrameNs - pausedBefore(stopTimeNs)) / 1000)
+                        val elapsed = maxOf(lastPts + 1000000L / fps, (stopTimeNs - firstFrameNs - pausedBefore(stopTimeNs)) / 1000)
+                        val duration = if (maxDurationUs > 0) maxOf(minOf(elapsed, maxDurationUs), lastPts + 1) else elapsed
                         durationUs = duration
                         val endInfo = MediaCodec.BufferInfo().apply { set(0, 0, duration, MediaCodec.BUFFER_FLAG_END_OF_STREAM) }
                         muxer.writeSampleData(track, ByteBuffer.allocate(0), endInfo)
