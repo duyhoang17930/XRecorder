@@ -356,6 +356,7 @@
   "removeAttachment": "Supprimer les attachements",
   "removeClipFromProject": "Supprimer le clip du projet",
   "removeDownloadedModel": "Supprimer le modèle téléchargé",
+  "confirmRemoveSpeechModel": "Supprimer ce modèle vocal de 3HRecorder ? Vous pourrez l’importer à nouveau plus tard.",
   "removeMusic": "Supprimer la musique",
   "rename": "Nom de renom",
   "renameMedia": "Médias renommés",

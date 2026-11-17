@@ -22,8 +22,8 @@ void main() {
     await (FontLoader(
       'Manrope',
     )..addFont(rootBundle.load('assets/fonts/Manrope.ttf'))).load();
-    await (FontLoader('packages/lucide_flutter/LucideIcons')..addFont(
-          rootBundle.load('packages/lucide_flutter/assets/lucide.ttf'),
+    await (FontLoader('packages/iconsax_flutter/FlutterIconsax')..addFont(
+          rootBundle.load('packages/iconsax_flutter/fonts/FlutterIconsax.ttf'),
         ))
         .load();
   });

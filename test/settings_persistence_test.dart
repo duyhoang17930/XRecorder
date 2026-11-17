@@ -18,6 +18,30 @@ class MemoryStore implements SettingsStore {
 }
 
 void main() {
+  test(
+    'speech model selection persists, validates and resets safely',
+    () async {
+      final store = MemoryStore();
+      final first = SettingsController(store: store);
+      await first.restore();
+      first.setSpeechModel('tiny');
+      first.setSpeechModel('../unknown');
+      await first.flushed;
+      expect(first.preferredSpeechModel, 'tiny');
+      expect(jsonDecode(store.document!)['values']['speechModel'], 'tiny');
+      first.dispose();
+
+      final restored = SettingsController(store: store);
+      await restored.restore();
+      expect(restored.preferredSpeechModel, 'tiny');
+      restored.reset();
+      await restored.flushed;
+      expect(restored.preferredSpeechModel, 'base');
+      expect(jsonDecode(store.document!)['values']['speechModel'], 'base');
+      restored.dispose();
+    },
+  );
+
   test('preferences survive new controller and reset is durable', () async {
     final store = MemoryStore();
     final first = SettingsController(store: store);

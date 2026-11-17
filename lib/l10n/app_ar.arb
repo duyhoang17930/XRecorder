@@ -356,6 +356,7 @@
   "removeAttachment": "إزالة الارتباط",
   "removeClipFromProject": "إزالة الكليب من المشروع",
   "removeDownloadedModel": "إزالة النموذج الذي تم تنزيله",
+  "confirmRemoveSpeechModel": "هل تريد إزالة نموذج الكلام هذا من 3HRecorder؟ يمكنك استيراده مرة أخرى لاحقًا.",
   "removeMusic": "إزالة الموسيقى",
   "rename": "الاسم",
   "renameMedia": "الاسم الإعلامي",

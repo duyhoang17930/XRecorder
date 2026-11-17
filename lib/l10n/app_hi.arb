@@ -356,6 +356,7 @@
   "removeAttachment": "एडवेंचर हटाएं",
   "removeClipFromProject": "परियोजना से क्लिप हटाएं",
   "removeDownloadedModel": "डाउनलोड किए गए मॉडल को हटा दें",
+  "confirmRemoveSpeechModel": "क्या इस स्पीच मॉडल को 3HRecorder से हटाएँ? आप इसे बाद में फिर से आयात कर सकते हैं।",
   "removeMusic": "संगीत हटाएँ",
   "rename": "नाम",
   "renameMedia": "मीडिया का नाम",

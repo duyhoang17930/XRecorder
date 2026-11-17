@@ -1425,6 +1425,7 @@
     "description": "P2/P3 interface copy. Origin: lib/features/editor/editor_screen.dart. Keep product names, technical identifiers and units intact."
   },
   "removeDownloadedModel": "Remove downloaded model",
+  "confirmRemoveSpeechModel": "Remove this speech model from 3HRecorder? You can import it again later.",
   "@removeDownloadedModel": {
     "description": "P2/P3 interface copy. Origin: lib/features/editor/transcription_dialog.dart. Keep product names, technical identifiers and units intact."
   },

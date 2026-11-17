@@ -356,6 +356,7 @@
   "removeAttachment": "Bỏ tệp đính kèm",
   "removeClipFromProject": "Xóa clip từ dự án",
   "removeDownloadedModel": "Xóa mô hình đã tải",
+  "confirmRemoveSpeechModel": "Xóa mô hình nhận dạng giọng nói này khỏi 3HRecorder? Bạn có thể nhập lại sau.",
   "removeMusic": "Xóa nhạc nền",
   "rename": "Đổi tên",
   "renameMedia": "Đổi tên tệp",

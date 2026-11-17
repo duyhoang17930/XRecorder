@@ -1,9 +1,7 @@
 import 'package:xrecorder/l10n/localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../theme/colors.dart';
 import '../../theme/spacing.dart';
-import '../../theme/typography.dart';
 
 class ChoiceGroup extends StatelessWidget {
   const ChoiceGroup({
@@ -39,13 +37,6 @@ class ChoiceGroup extends StatelessWidget {
                 child: ChoiceChip(
                   label: Text(optionLabelBuilder?.call(option) ?? option),
                   selected: value == option,
-                  labelStyle: AppTypography.bodySmall.copyWith(
-                    color: disabledOptions.contains(option)
-                        ? context.studioColors.disabled
-                        : value == option
-                        ? context.studioColors.primary
-                        : context.studioColors.text,
-                  ),
                   onSelected: disabledOptions.contains(option)
                       ? null
                       : (_) => onChanged(option),
