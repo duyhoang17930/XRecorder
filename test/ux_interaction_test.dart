@@ -185,14 +185,14 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Cancel'), findsOneWidget);
       expect(find.text('Studio fixture 30.mp4'), findsNothing);
-      final choose = tester.widget<ChoiceChip>(
+      final choose = tester.widget<ButtonStyleButton>(
         find.descendant(
           of: find.byType(Dialog),
-          matching: find.widgetWithText(ChoiceChip, 'Choose folder'),
+          matching: buttonWithText('Choose folder'),
         ),
       );
-      choose.onSelected!(true);
-      choose.onSelected!(true);
+      choose.onPressed!();
+      choose.onPressed!();
       await tester.pump();
       expect(catalog.folderRequests, 1);
       catalog.folder.complete(null);
@@ -439,7 +439,7 @@ void main() {
     await tester.pump();
     await settleImage(tester);
     for (final save in [false, true]) {
-      final rename = find.widgetWithText(TextButton, 'Rename');
+      final rename = find.widgetWithText(ListTile, 'Rename');
       await tester.ensureVisible(rename);
       await tester.tap(rename);
       await tester.pump();
@@ -493,3 +493,10 @@ void main() {
     },
   );
 }
+
+/// Any Material button (Text/Filled/Outlined, including `.icon` variants)
+/// whose label contains [text]; tests should not depend on button emphasis.
+Finder buttonWithText(String text) => find.ancestor(
+  of: find.text(text),
+  matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
+);

@@ -72,18 +72,20 @@ void main() {
     GoRouter.of(tester.element(find.text('Video library')))
         .push('/media/${Uri.encodeComponent(catalog.items.single.id)}');
     await tester.pumpAndSettle();
-    final button = tester.widget<TextButton>(
-      find.widgetWithText(TextButton, 'Rename'),
+    final button = tester.widget<ListTile>(
+      find.widgetWithText(ListTile, 'Rename'),
     );
-    button.onPressed!();
-    button.onPressed!();
+    button.onTap!();
+    button.onTap!();
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.text('Rename media'), findsOneWidget);
     await tester.tap(find.text('Cancel'));
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
-    await tester.tap(find.widgetWithText(TextButton, 'Rename'));
+    await tester.ensureVisible(find.widgetWithText(ListTile, 'Rename'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(ListTile, 'Rename'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.text('Rename media'), findsOneWidget);

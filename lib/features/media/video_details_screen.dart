@@ -221,10 +221,12 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
             if (busy && (ModalRoute.of(context)?.isCurrent ?? true))
               const LinearProgressIndicator(),
             SectionTitle(context.l10n.preview),
+            // One primary action, then secondary actions of equal weight —
+            // the same hierarchy as the home page's record card.
             StudioCard(
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: AppSpacing.sm,
                 children: [
                   FilledButton.icon(
                     onPressed: busy
@@ -241,29 +243,53 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                     icon: const Icon(AppIcons.play),
                     label: Text(context.l10n.preview),
                   ),
-                  TextButton.icon(
-                    onPressed: busy
-                        ? null
-                        : () => run(() async {
-                            await actions.share(item.uri);
-                          }, purpose: UserOperation.share),
-                    icon: const Icon(AppIcons.share),
-                    label: Text(context.l10n.share),
+                  Row(
+                    spacing: AppSpacing.sm,
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: busy
+                              ? null
+                              : () => run(() async {
+                                  await actions.share(item.uri);
+                                }, purpose: UserOperation.share),
+                          icon: const Icon(
+                            AppIcons.share,
+                            size: AppIconSize.medium,
+                          ),
+                          label: Text(context.l10n.share),
+                        ),
+                      ),
+                      if (item.kind == MediaKind.video &&
+                          item.duration != null &&
+                          item.duration! >= const Duration(milliseconds: 200))
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: busy
+                                ? null
+                                : () => run(() => editVideo(item)),
+                            icon: const Icon(
+                              AppIcons.edit,
+                              size: AppIconSize.medium,
+                            ),
+                            label: Text(
+                              context.l10n.editVideo,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
-                  if (item.kind == MediaKind.video &&
-                      item.duration != null &&
-                      item.duration! >= const Duration(milliseconds: 200))
-                    OutlinedButton.icon(
-                      onPressed: busy ? null : () => run(() => editVideo(item)),
-                      icon: const Icon(AppIcons.edit),
-                      label: Text(context.l10n.editVideo),
-                    ),
                 ],
               ),
             ),
             if (item.kind == MediaKind.image) ...[
               SectionTitle(context.l10n.edit),
               OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(AppSize.button),
+                ),
                 onPressed: busy
                     ? null
                     : () => context.push(
@@ -279,35 +305,32 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                     item.duration! < const Duration(milliseconds: 200)))
               Text(context.l10n.chooseAPlayableVideoOfAtLeast),
             SectionTitle(context.l10n.fileManagement),
+            // Settings-style rows (icon tile + chevron) instead of a loose
+            // wrap of link-like buttons.
             StudioCard(
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
+              padding: const EdgeInsets.symmetric(vertical: AppSpacing.xxs),
+              child: Column(
                 children: [
                   if (item.owned)
-                    TextButton.icon(
-                      onPressed: busy
+                    SettingsRow(
+                      context.l10n.rename,
+                      icon: AppIcons.rename,
+                      onTap: busy
                           ? null
                           : () => run(
                               () => rename(item),
                               purpose: UserOperation.rename,
                             ),
-                      icon: const Icon(AppIcons.rename),
-                      label: Text(context.l10n.rename),
                     ),
-                  TextButton.icon(
-                    onPressed: busy
-                        ? null
-                        : () => run(() => transfer(item, false)),
-                    icon: const Icon(AppIcons.folder),
-                    label: Text(context.l10n.copyToFolder),
+                  SettingsRow(
+                    context.l10n.copyToFolder,
+                    icon: AppIcons.folder,
+                    onTap: busy ? null : () => run(() => transfer(item, false)),
                   ),
-                  TextButton.icon(
-                    onPressed: busy
-                        ? null
-                        : () => run(() => transfer(item, true)),
-                    icon: const Icon(AppIcons.folderOpen),
-                    label: Text(context.l10n.moveToFolder),
+                  SettingsRow(
+                    context.l10n.moveToFolder,
+                    icon: AppIcons.folderOpen,
+                    onTap: busy ? null : () => run(() => transfer(item, true)),
                   ),
                 ],
               ),

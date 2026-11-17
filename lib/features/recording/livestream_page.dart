@@ -397,21 +397,36 @@ class _LivestreamPageState extends State<LivestreamPage>
                           context.message(
                             'Saving stores the destination encrypted on this device. Nothing starts automatically.',
                           ),
+                          style: AppTypography.bodySmall.copyWith(
+                            color: context.studioColors.muted,
+                          ),
                         ),
+                        const SizedBox(height: 12),
                         Wrap(
                           spacing: 12,
                           runSpacing: 8,
                           children: [
-                            OutlinedButton(
+                            OutlinedButton.icon(
                               onPressed: busy || _loadFailed
                                   ? null
                                   : _saveDestination,
-                              child: Text(context.message('Save destination')),
+                              icon: const Icon(
+                                AppIcons.save,
+                                size: AppIconSize.medium,
+                              ),
+                              label: Text(context.message('Save destination')),
                             ),
                             if (_hasSaved || _loadFailed)
-                              TextButton(
+                              TextButton.icon(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: context.studioColors.warning,
+                                ),
                                 onPressed: busy ? null : _forgetDestination,
-                                child: Text(
+                                icon: const Icon(
+                                  AppIcons.trash,
+                                  size: AppIconSize.medium,
+                                ),
+                                label: Text(
                                   context.message('Forget destination'),
                                 ),
                               ),
@@ -424,13 +439,60 @@ class _LivestreamPageState extends State<LivestreamPage>
                         ),
                         if (_storeBusy) const LinearProgressIndicator(),
                         if (_destinationNotice != null)
-                          Semantics(
-                            liveRegion: true,
-                            child: Text(context.message(_destinationNotice!)),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Semantics(
+                              liveRegion: true,
+                              child: Text(
+                                context.message(_destinationNotice!),
+                                style: AppTypography.bodySmall.copyWith(
+                                  color: context.studioColors.cyan,
+                                ),
+                              ),
+                            ),
                           ),
                         const SizedBox(height: 24),
                       ],
-                      Semantics(liveRegion: true, child: Text(_label(context))),
+                      // Live status reads as a status card, like the home
+                      // page's recorder card, not loose body text.
+                      StudioCard(
+                        child: Row(
+                          children: [
+                            StudioIconTile(
+                              icon: AppIcons.livestream,
+                              size: 40,
+                              iconSize: AppIconSize.medium,
+                              color: ownsSession
+                                  ? context.studioColors.primary
+                                  : context.studioColors.muted,
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Semantics(
+                                    liveRegion: true,
+                                    child: Text(
+                                      _label(context),
+                                      style: AppTypography.bodyEmphasis,
+                                    ),
+                                  ),
+                                  if (ownsSession &&
+                                      _status['sentBytes'] is num)
+                                    Text(
+                                      '${context.fileSize((_status['sentBytes'] as num).toInt())} · ${((_status['bitrate'] as num?)?.toInt() ?? 0) ~/ 1000} kbps',
+                                      style: AppTypography.bodySmall.copyWith(
+                                        color: context.studioColors.muted,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
                       if (capture.error != null && ownsSession)
                         Text(
                           context.message(
@@ -439,10 +501,6 @@ class _LivestreamPageState extends State<LivestreamPage>
                               operation: UserOperation.captureControl,
                             ).text,
                           ),
-                        ),
-                      if (ownsSession && _status['sentBytes'] is num)
-                        Text(
-                          '${context.fileSize((_status['sentBytes'] as num).toInt())} · ${((_status['bitrate'] as num?)?.toInt() ?? 0) ~/ 1000} kbps',
                         ),
                       if (!h264)
                         Text(

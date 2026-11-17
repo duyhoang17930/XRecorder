@@ -123,8 +123,13 @@ const destination = {
 };
 
 Future<void> pressVisible(WidgetTester tester, String text) async {
+  // Dismiss the keyboard first, as a person would: a focused field keeps
+  // scrolling its caret back on screen, away from [target].
+  FocusManager.instance.primaryFocus?.unfocus();
+  await tester.pump();
   final target = find.text(text).last;
   await tester.ensureVisible(target);
+  await tester.pump(const Duration(seconds: 1));
   await tester.tap(target);
   await tester.pump();
 }
@@ -256,7 +261,7 @@ void main() {
       await showSavedLive(tester, service);
       await tester.pumpAndSettle();
       expect(service.saved, destination);
-      final save = find.widgetWithText(OutlinedButton, 'Save destination');
+      final save = buttonWithText('Save destination');
       expect(tester.widget<OutlinedButton>(save).onPressed, isNull);
       for (final pair in [
         ('live-server', 'rtmps://other.example/live'),
@@ -311,9 +316,7 @@ void main() {
       );
       await pressVisible(tester, 'Forget destination');
       await tester.pump(const Duration(milliseconds: 300));
-      await tester.tap(
-        find.widgetWithText(TextButton, 'Forget destination').last,
-      );
+      await tester.tap(buttonWithText('Forget destination').last);
       await tester.pumpAndSettle();
       expect(service.forgets, 1);
       expect(service.saved, isNull);
@@ -434,3 +437,10 @@ void main() {
     );
   }
 }
+
+/// Any Material button (Text/Filled/Outlined, including `.icon` variants)
+/// whose label contains [text]; tests should not depend on button emphasis.
+Finder buttonWithText(String text) => find.ancestor(
+  of: find.text(text),
+  matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
+);
