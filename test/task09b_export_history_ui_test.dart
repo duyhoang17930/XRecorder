@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:xrecorder/core/widgets/studio_widgets.dart' show StudioCard;
 import 'package:xrecorder/features/editor/export_screen.dart';
 import 'package:xrecorder/features/editor/project_repository.dart';
 
@@ -52,14 +53,14 @@ void main() {
             expect(find.text('QA cancelled 0'), findsOneWidget);
             final card = find.ancestor(
               of: find.text('QA cancelled 0'),
-              matching: find.byType(Card),
+              matching: find.byType(StudioCard),
             );
             final retry = find.descendant(
               of: card,
-              matching: find.widgetWithText(TextButton, 'Retry export'),
+              matching: buttonWithText('Retry export'),
             );
             await tester.ensureVisible(retry);
-            final button = tester.widget<TextButton>(retry);
+            final button = tester.widget<ButtonStyleButton>(retry);
             button.onPressed!();
             button.onPressed!();
             await tester.pumpAndSettle();
@@ -82,3 +83,10 @@ void main() {
     );
   }
 }
+
+/// Any Material button (Text/Filled/Outlined, including `.icon` variants)
+/// whose label contains [text]; tests should not depend on button emphasis.
+Finder buttonWithText(String text) => find.ancestor(
+  of: find.text(text),
+  matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
+);

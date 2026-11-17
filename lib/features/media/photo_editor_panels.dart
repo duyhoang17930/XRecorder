@@ -35,18 +35,49 @@ Future<String?> choosePhotoTool(
         children: [
           StudioSheetHeader(title: title, icon: icon),
           for (final (id, label) in tools)
-            ListTile(
-              title: Text(label),
-              selected: id == selected,
-              selectedTileColor: selectedTileColor,
-              trailing: id == selected ? const Icon(AppIcons.selected) : null,
-              onTap: () => Navigator.pop(context, id),
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.xxs),
+              child: ListTile(
+                contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                  AppSpacing.xs,
+                  0,
+                  AppSpacing.sm,
+                  0,
+                ),
+                minTileHeight: 56,
+                leading: StudioIconTile(
+                  icon: _photoToolIcon(id),
+                  size: 40,
+                  iconSize: AppIconSize.medium,
+                  color: id == selected ? null : context.studioColors.text,
+                  backgroundColor: id == selected
+                      ? null
+                      : context.studioColors.elevated,
+                ),
+                title: Text(label, style: AppTypography.bodyEmphasis),
+                selected: id == selected,
+                selectedTileColor:
+                    selectedTileColor ??
+                    context.studioColors.primary.withValues(alpha: .10),
+                trailing: id == selected ? const Icon(AppIcons.selected) : null,
+                onTap: () => Navigator.pop(context, id),
+              ),
             ),
         ],
       ),
     ),
   ),
 );
+
+IconData _photoToolIcon(String id) => switch (id) {
+  'Pen' => AppIcons.pen,
+  'Eraser' => AppIcons.eraser,
+  'Text' => AppIcons.text,
+  'Rectangle' || 'Circle' || 'Arrow' => AppIcons.shapes,
+  'crop' => AppIcons.crop,
+  'transform' => AppIcons.rotate,
+  _ => AppIcons.sticker,
+};
 
 Future<Color?> choosePhotoInk(
   BuildContext context,

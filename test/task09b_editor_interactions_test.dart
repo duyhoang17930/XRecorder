@@ -9,7 +9,6 @@ import 'package:xrecorder/features/editor/layers_editor.dart';
 import 'package:xrecorder/features/editor/project_effects.dart';
 import 'package:xrecorder/features/editor/subtitle_editor.dart';
 import 'package:xrecorder/features/editor/subtitles.dart';
-import 'package:xrecorder/l10n/localization.dart';
 
 import 'fixtures/interaction_probe.dart';
 
@@ -108,8 +107,11 @@ void registerEditorInteractionTests({InteractionProbe? evidence}) {
     await tester.tap(finder);
     await tester.pumpAndSettle();
     await click(tester, option);
-    final value = (tester.state(finder) as FormFieldState).value as Object;
-    expect(tester.element(finder).effectValue(value), option);
+    // The dropdown now shows the chosen option's formatted label.
+    expect(
+      find.descendant(of: finder, matching: find.text(option)),
+      findsOneWidget,
+    );
   }
 
   Future<void> step(
@@ -408,17 +410,17 @@ void registerEditorInteractionTests({InteractionProbe? evidence}) {
           }, durationMs: 10000),
         );
         for (final row in [
-          ('Playback speed (audio pitch also changes)', '2', 'speed', 2.0),
-          ('Original audio gain (0 mutes)', '0.5', 'volume', .5),
-          ('Audio pitch (applies to all clip audio)', '1.25', 'pitch', 1.25),
+          ('Playback speed (audio pitch also changes)', '2×', 'speed', 2.0),
+          ('Original audio gain (0 mutes)', '50%', 'volume', .5),
+          ('Audio pitch (applies to all clip audio)', '1.25×', 'pitch', 1.25),
           ('Original audio voice effect', 'Robot voice', 'voice', 'robot'),
           ('Original audio fade in (milliseconds)', '250', 'fadeInMs', 250),
           ('Original audio fade out (milliseconds)', '500', 'fadeOutMs', 500),
-          ('Output height / compression', '480', 'height', 480),
-          ('Target output FPS (variable)', '24', 'fps', 24),
+          ('Output height / compression', '480p', 'height', 480),
+          ('Target output FPS (variable)', '24 FPS', 'fps', 24),
           (
             'Target video bitrate (bits/s; 0 = automatic)',
-            '1,000,000',
+            '1 Mbps',
             'bitrate',
             1000000,
           ),
@@ -427,9 +429,9 @@ void registerEditorInteractionTests({InteractionProbe? evidence}) {
           ('Subtitle text size', 'Large', 'subtitleSize', 'large'),
           ('Subtitle background', 'None', 'subtitleBackground', 'none'),
           ('Subtitle position', 'Top', 'subtitlePosition', 'top'),
-          ('Export format', 'gif', 'format', 'gif'),
-          ('GIF frames per second', '5', 'gifFps', 5),
-          ('GIF longest edge (pixels)', '160', 'gifEdge', 160),
+          ('Export format', 'GIF', 'format', 'gif'),
+          ('GIF frames per second', '5 FPS', 'gifFps', 5),
+          ('GIF longest edge (pixels)', '160 px', 'gifEdge', 160),
           ('GIF repeat count (0 = forever)', '2', 'gifRepeats', 2),
         ]) {
           await step(

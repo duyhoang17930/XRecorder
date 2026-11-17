@@ -60,8 +60,8 @@ void main() {
         });
     await tester.pumpWidget(const MaterialApp(home: ExportScreen()));
     await tester.pumpAndSettle();
-    final retry = tester.widget<TextButton>(
-      find.widgetWithText(TextButton, 'Retry export'),
+    final retry = tester.widget<ButtonStyleButton>(
+      buttonWithText('Retry export'),
     );
     retry.onPressed!();
     retry.onPressed!();
@@ -72,3 +72,10 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 }
+
+/// Any Material button (Text/Filled/Outlined, including `.icon` variants)
+/// whose label contains [text]; tests should not depend on button emphasis.
+Finder buttonWithText(String text) => find.ancestor(
+  of: find.text(text),
+  matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
+);

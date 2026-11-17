@@ -168,11 +168,18 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
           ),
         ],
       ),
-      SectionTitle(context.l10n.savedDrafts),
-      TextButton.icon(
-        onPressed: () => context.push('/exports'),
-        icon: const Icon(AppIcons.export),
-        label: Text(context.l10n.exportQueue),
+      SectionTitle(
+        context.l10n.savedDrafts,
+        padding: const EdgeInsets.only(
+          top: AppSpacing.lg,
+          bottom: AppSpacing.sm,
+        ),
+        // Same soft pill as the home page's sort/filter controls.
+        trailing: ActionChip(
+          avatar: const Icon(AppIcons.export, size: AppIconSize.small),
+          label: Text(context.l10n.exportQueue),
+          onPressed: () => context.push('/exports'),
+        ),
       ),
       FutureBuilder<List<EditProject>>(
         future: projects,
@@ -228,8 +235,19 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
                   child: StudioCard(
                     padding: EdgeInsets.zero,
                     child: ListTile(
+                      contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                        AppSpacing.md,
+                        AppSpacing.xs,
+                        AppSpacing.xs,
+                        AppSpacing.xs,
+                      ),
                       leading: const StudioIconTile(icon: AppIcons.videos),
-                      title: Text(project.title),
+                      title: Text(
+                        project.title,
+                        style: AppTypography.bodyEmphasis,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                       subtitle: Text(
                         context.l10n.projectClipSummary(
                           context.displayValue(project.clips.length),
@@ -242,7 +260,8 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
                         ),
                       ),
                       onTap: () => open(project.id),
-                      trailing: Wrap(
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
                             tooltip: context.l10n.duplicateDraft,
@@ -270,7 +289,11 @@ class _EditingHubScreenState extends State<EditingHubScreen> {
                                           Navigator.pop(context, false),
                                       child: Text(context.l10n.cancel),
                                     ),
-                                    TextButton(
+                                    FilledButton(
+                                      style: FilledButton.styleFrom(
+                                        backgroundColor:
+                                            context.studioColors.warning,
+                                      ),
                                       onPressed: () =>
                                           Navigator.pop(context, true),
                                       child: Text(context.l10n.deleteDraft),

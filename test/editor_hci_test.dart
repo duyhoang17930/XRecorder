@@ -332,7 +332,7 @@ void main() {
     await tester.enterText(find.byType(TextField), 'UI06 text');
     tester.testTextInput.hide();
     await tester.pumpAndSettle();
-    final apply = find.widgetWithText(TextButton, 'Apply');
+    final apply = buttonWithText('Apply');
     await tester.ensureVisible(apply);
     await tester.tap(apply);
     await tester.pumpAndSettle();
@@ -521,7 +521,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(key('effect-speed'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('2').last);
+      await tester.tap(find.text('2×').last);
       await tester.pumpAndSettle();
       await tester.tap(find.text('Cancel'));
       await tester.pumpAndSettle();
@@ -531,7 +531,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(key('effect-speed'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('2').last);
+      await tester.tap(find.text('2×').last);
       await tester.pumpAndSettle();
       await tester.tap(find.text('Apply to project'));
       await tester.pumpAndSettle();
@@ -639,3 +639,10 @@ void main() {
     }
   }
 }
+
+/// Any Material button (Text/Filled/Outlined, including `.icon` variants)
+/// whose label contains [text]; tests should not depend on button emphasis.
+Finder buttonWithText(String text) => find.ancestor(
+  of: find.text(text),
+  matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
+);

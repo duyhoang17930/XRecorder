@@ -146,18 +146,50 @@ class _EffectsScreenState extends State<_EffectsScreen> {
         items: {...options, values[key]!}
             .toList()
             .map(
-              (v) => DropdownMenuItem(
-                value: v,
-                child: Text(
-                  v == 0 && (key == 'height' || key == 'aspect')
-                      ? context.l10n.originalDimensions
-                      : context.effectValue(v),
-                ),
-              ),
+              (v) =>
+                  DropdownMenuItem(value: v, child: Text(_optionLabel(key, v))),
             )
             .toList(),
         onChanged: (v) => select(key, v!),
       );
+
+  /// Raw stored values ("1", "0", "1.777…", "4000000") are unreadable in a
+  /// picker; show the unit people expect while keeping the stored value.
+  String _optionLabel(String key, Object v) {
+    final n = v is num ? v : null;
+    if (n == 0 && (key == 'height' || key == 'aspect')) {
+      return context.l10n.originalDimensions;
+    }
+    if (n != null) {
+      String number(num x) => context.displayValue(
+        x == x.roundToDouble() ? x.round() : context.decimal(x, digits: 2),
+      );
+      switch (key) {
+        case 'speed' || 'pitch':
+          return '${number(n)}×';
+        case 'aspect':
+          return switch (n.toDouble()) {
+            1.0 => '1:1',
+            final r when (r - 16 / 9).abs() < .001 => '16:9',
+            final r when (r - 9 / 16).abs() < .001 => '9:16',
+            _ => number(n),
+          };
+        case 'height':
+          return '${number(n)}p';
+        case 'fps' || 'gifFps':
+          return '${number(n)} FPS';
+        case 'bitrate':
+          return n == 0 ? context.l10n.auto : '${number(n / 1000000)} Mbps';
+        case 'volume' || 'musicVolume':
+          return '${number((n * 100).round())}%';
+        case 'gifEdge':
+          return '${number(n)} px';
+      }
+    }
+    if (key == 'format' && v is String) return v.toUpperCase();
+    return context.effectValue(v);
+  }
+
   Future<void> _music() async {
     if (pickingMusic) return;
     setState(() => pickingMusic = true);
@@ -426,26 +458,44 @@ class _EffectsScreenState extends State<_EffectsScreen> {
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.sm),
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.md,
+            AppSpacing.xs,
+            AppSpacing.md,
+            AppSpacing.sm,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: AppSpacing.xs,
             children: [
               if (validationError != null)
                 Text(
                   context.message(validationError!),
                   style: TextStyle(color: context.studioColors.warning),
                 ),
-              Wrap(
-                alignment: WrapAlignment.end,
+              Row(
                 spacing: AppSpacing.sm,
                 children: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: Text(context.l10n.cancel),
+                  Expanded(
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        minimumSize: const Size(0, AppSize.button),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      child: Text(context.l10n.cancel),
+                    ),
                   ),
-                  FilledButton(
-                    onPressed: pickingMusic ? null : apply,
-                    child: Text(context.l10n.applyToProject),
+                  Expanded(
+                    flex: 2,
+                    child: FilledButton(
+                      onPressed: pickingMusic ? null : apply,
+                      child: Text(
+                        context.l10n.applyToProject,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ),
                 ],
               ),

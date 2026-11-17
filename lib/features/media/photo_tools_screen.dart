@@ -715,59 +715,71 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
       child: Row(
         children: [
           Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  button(
-                    context.l10n.editorCrop,
-                    AppIcons.crop,
-                    panel == 'crop',
-                    () => _selectPanel('crop'),
-                    'photo-tool-crop',
-                  ),
-                  button(
-                    context.l10n.drawing,
-                    AppIcons.pen,
-                    panel == 'draw' && (tool == 'Pen' || tool == 'Eraser'),
-                    () => _tool('Pen'),
-                    'photo-tool-pen',
-                  ),
-                  button(
-                    context.l10n.editorShapes,
-                    AppIcons.shapes,
-                    panel == 'draw' && shapes,
-                    _shapes,
-                    'photo-tool-shapes',
-                  ),
-                  button(
-                    context.message('Text'),
-                    AppIcons.text,
-                    panel == 'draw' && tool == 'Text',
-                    () => _tool('Text'),
-                    'photo-tool-text',
-                  ),
-                  button(
-                    context.l10n.sticker,
-                    AppIcons.sticker,
-                    panel == 'draw' && _photoStickerTypes.contains(tool),
-                    _stickers,
-                    'photo-tool-sticker',
-                  ),
-                  button(
-                    context.l10n.editorTransform,
-                    AppIcons.rotate,
-                    panel == 'transform',
-                    () => _selectPanel('transform'),
-                    'photo-tool-transform',
-                  ),
-                ],
+            child: StudioFadeBorder(
+              radius: AppRadius.feature,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.all(AppSpacing.xxs),
+                child: Row(
+                  children: [
+                    button(
+                      context.l10n.editorCrop,
+                      AppIcons.crop,
+                      panel == 'crop',
+                      () => _selectPanel('crop'),
+                      'photo-tool-crop',
+                    ),
+                    button(
+                      context.l10n.drawing,
+                      AppIcons.pen,
+                      panel == 'draw' && (tool == 'Pen' || tool == 'Eraser'),
+                      () => _tool('Pen'),
+                      'photo-tool-pen',
+                    ),
+                    button(
+                      context.l10n.editorShapes,
+                      AppIcons.shapes,
+                      panel == 'draw' && shapes,
+                      _shapes,
+                      'photo-tool-shapes',
+                    ),
+                    button(
+                      context.message('Text'),
+                      AppIcons.text,
+                      panel == 'draw' && tool == 'Text',
+                      () => _tool('Text'),
+                      'photo-tool-text',
+                    ),
+                    button(
+                      context.l10n.sticker,
+                      AppIcons.sticker,
+                      panel == 'draw' && _photoStickerTypes.contains(tool),
+                      _stickers,
+                      'photo-tool-sticker',
+                    ),
+                    button(
+                      context.l10n.editorTransform,
+                      AppIcons.rotate,
+                      panel == 'transform',
+                      () => _selectPanel('transform'),
+                      'photo-tool-transform',
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-          IconButton(
+          const SizedBox(width: AppSpacing.xs),
+          IconButton.filledTonal(
             tooltip: context.l10n.editorAllTools,
             onPressed: saving ? null : _allTools,
+            style: IconButton.styleFrom(
+              minimumSize: const Size.square(AppSize.touchTarget),
+              foregroundColor: context.studioColors.primary,
+              backgroundColor: context.studioColors.primary.withValues(
+                alpha: .12,
+              ),
+            ),
             icon: const Icon(AppIcons.tools),
           ),
         ],
@@ -795,16 +807,19 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
         label: semanticLabel,
         child: Directionality(
           textDirection: TextDirection.ltr,
-          child: RangeSlider(
-            key: ValueKey(
-              isHorizontal ? 'photo-crop-horizontal' : 'photo-crop-vertical',
-            ),
-            values: value,
-            onChangeStart: saving ? null : (_) => remember(),
-            onChanged: saving ? null : (v) => _crop(v, isHorizontal),
-            semanticFormatterCallback: context.spokenValue(
-              (strings, value) => strings.accessibilityValue40(value),
-              multiplier: 100,
+          child: SliderTheme(
+            data: editorSliderTheme(context),
+            child: RangeSlider(
+              key: ValueKey(
+                isHorizontal ? 'photo-crop-horizontal' : 'photo-crop-vertical',
+              ),
+              values: value,
+              onChangeStart: saving ? null : (_) => remember(),
+              onChanged: saving ? null : (v) => _crop(v, isHorizontal),
+              semanticFormatterCallback: context.spokenValue(
+                (strings, value) => strings.accessibilityValue40(value),
+                multiplier: 100,
+              ),
             ),
           ),
         ),
@@ -872,7 +887,7 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
           vertical,
           false,
         ),
-        TextButton(
+        TextButton.icon(
           onPressed: saving
               ? null
               : () => setState(() {
@@ -880,7 +895,8 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                   horizontal = const RangeValues(0, 1);
                   vertical = const RangeValues(0, 1);
                 }),
-          child: Text(context.l10n.resetCrop),
+          icon: const Icon(AppIcons.reset, size: AppIconSize.medium),
+          label: Text(context.l10n.resetCrop),
         ),
       ] else if (panel == 'transform') ...[
         Wrap(
@@ -935,7 +951,13 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
         ),
       ] else if (tool == 'Eraser') ...[
         _drawingTools(),
-        Text(context.l10n.photoDragToErase),
+        const SizedBox(height: AppSpacing.xs),
+        Text(
+          context.l10n.photoDragToErase,
+          style: AppTypography.bodySmall.copyWith(
+            color: context.studioColors.muted,
+          ),
+        ),
       ] else ...[
         if (!compact || tool != 'Text')
           Semantics(
@@ -976,16 +998,26 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
           ),
           ValueListenableBuilder<TextEditingValue>(
             valueListenable: label,
-            builder: (context, value, _) => TextButton(
-              onPressed: saving || value.text.trim().isEmpty
-                  ? null
-                  : _applyText,
-              child: Text(context.l10n.editorApply),
+            builder: (context, value, _) => Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: FilledButton.tonalIcon(
+                onPressed: saving || value.text.trim().isEmpty
+                    ? null
+                    : _applyText,
+                icon: const Icon(AppIcons.check, size: AppIconSize.medium),
+                label: Text(context.l10n.editorApply),
+              ),
             ),
           ),
         ] else if (_photoStickerTypes.contains(tool)) ...[
-          Text(context.l10n.photoDragSticker),
+          Text(
+            context.l10n.photoDragSticker,
+            style: AppTypography.bodySmall.copyWith(
+              color: context.studioColors.muted,
+            ),
+          ),
         ] else ...[
+          const SizedBox(height: AppSpacing.xs),
           Wrap(
             alignment: WrapAlignment.spaceBetween,
             spacing: AppSpacing.xs,
@@ -993,6 +1025,9 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
             children: [
               Text(context.l10n.strokeWidth, style: AppTypography.bodyEmphasis),
               Text(
+                style: AppTypography.bodySmall.copyWith(
+                  color: context.studioColors.muted,
+                ),
                 context.l10n.pixelCount(
                   context.displayValue(
                     math.max(2, (strokeWidth * source.width).round()),
@@ -1005,22 +1040,27 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
             label: context.l10n.strokeWidth,
             child: Directionality(
               textDirection: TextDirection.ltr,
-              child: Slider(
-                key: const ValueKey('photo-stroke-width'),
-                value: strokeWidth,
-                min: .002,
-                max: .02,
-                onChanged: saving
-                    ? null
-                    : (value) {
-                        if (!value.isFinite) return;
-                        setState(() {
-                          // Slider._lerp(1) can round .02 above the valid maximum.
-                          strokeWidth = value.clamp(.002, .02);
-                        });
-                      },
-                semanticFormatterCallback: (v) => context.l10n.pixelCount(
-                  context.displayValue(math.max(2, (v * source.width).round())),
+              child: SliderTheme(
+                data: editorSliderTheme(context),
+                child: Slider(
+                  key: const ValueKey('photo-stroke-width'),
+                  value: strokeWidth,
+                  min: .002,
+                  max: .02,
+                  onChanged: saving
+                      ? null
+                      : (value) {
+                          if (!value.isFinite) return;
+                          setState(() {
+                            // Slider._lerp(1) can round .02 above the valid maximum.
+                            strokeWidth = value.clamp(.002, .02);
+                          });
+                        },
+                  semanticFormatterCallback: (v) => context.l10n.pixelCount(
+                    context.displayValue(
+                      math.max(2, (v * source.width).round()),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -1183,12 +1223,13 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
       child: LayoutBuilder(
         builder: (context, box) {
           final toolHeight = math.max(
-            64.0,
-            MediaQuery.textScalerOf(context).scale(14) * 1.5 + 48,
+            72.0,
+            MediaQuery.textScalerOf(context).scale(14) * 1.5 + 56,
           );
           final controls = SingleChildScrollView(
             key: ValueKey('photo-controls-$panel-$tool'),
             primary: false,
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
             child: _contextualControls(source, compact: box.maxHeight < 140),
           );
           final landscape = box.maxWidth >= 600 && box.maxWidth > box.maxHeight;
@@ -1240,6 +1281,7 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
                 constraints: BoxConstraints(maxHeight: panelHeight),
                 child: controls,
               ),
+              const SizedBox(height: AppSpacing.xs),
               _toolbar(toolHeight),
             ],
           );

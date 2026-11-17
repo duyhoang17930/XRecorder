@@ -136,16 +136,168 @@ class _ExportScreenState extends State<ExportScreen>
     super.dispose();
   }
 
+  Widget _job(BuildContext context, Map job) {
+    final c = context.studioColors;
+    final state = job['state'] as String?;
+    final active = ['queued', 'running', 'finalizing'].contains(state);
+    final (IconData icon, Color tint) = switch (state) {
+      'completed' => (AppIcons.ready, c.cyan),
+      'failed' => (AppIcons.warning, c.warning),
+      'cancelled' => (AppIcons.close, c.muted),
+      _ => (AppIcons.processing, c.primary),
+    };
+    final status = context.message(switch (state) {
+      'queued' => 'Waiting',
+      'running' => 'Exporting',
+      'finalizing' => 'Saving…',
+      'completed' => 'Saved',
+      'failed' => 'Could not export',
+      'cancelled' => 'Cancelled',
+      _ => 'Processing',
+    });
+    final pending = pendingCommands.contains(job['id']);
+    final muted = AppTypography.bodySmall.copyWith(color: c.muted);
+    return StudioCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: AppSpacing.sm,
+        children: [
+          Row(
+            children: [
+              StudioIconTile(
+                icon: icon,
+                color: tint,
+                size: 40,
+                iconSize: AppIconSize.medium,
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      job['project']['title'] as String? ??
+                          context.l10n.videoProject,
+                      style: AppTypography.bodyEmphasis,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      // A failed or cancelled job's last progress value is
+                      // not meaningful ("Could not export · 100%").
+                      active || state == 'completed'
+                          ? context.l10n.operationProgress(
+                              status,
+                              context.displayValue(job['progress']),
+                            )
+                          : status,
+                      style: AppTypography.bodySmall.copyWith(color: tint),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          if (state == 'running')
+            LinearProgressIndicator(
+              value: (job['progress'] as num).toDouble() / 100,
+              minHeight: 6,
+              borderRadius: const BorderRadius.all(Radius.circular(3)),
+            ),
+          if (state == 'finalizing')
+            const LinearProgressIndicator(
+              minHeight: 6,
+              borderRadius: BorderRadius.all(Radius.circular(3)),
+            ),
+          if (job['error'] != null)
+            Text(
+              context.message(
+                UserMessages.failure(
+                  job['error'],
+                  operation: UserOperation.export,
+                ).text,
+              ),
+              style: muted,
+            ),
+          if (job['warning'] is String)
+            Text(context.message(job['warning'] as String), style: muted),
+          if (state == 'completed' && (job['outputBytes'] as num? ?? 0) > 0)
+            Text(
+              context.l10n.savedFileSize(
+                context.displayValue(
+                  context.fileSize((job['outputBytes'] as num).toInt()),
+                ),
+              ),
+              style: muted,
+            ),
+          if (['queued', 'running'].contains(state))
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: OutlinedButton.icon(
+                onPressed: pending
+                    ? null
+                    : () => command('exportCancel', job['id'] as String),
+                icon: const Icon(AppIcons.close, size: AppIconSize.medium),
+                label: Text(context.l10n.cancelExport),
+              ),
+            ),
+          if (['failed', 'cancelled'].contains(state))
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: FilledButton.tonalIcon(
+                onPressed: pending
+                    ? null
+                    : () => command('exportRetry', job['id'] as String),
+                icon: const Icon(AppIcons.refresh, size: AppIconSize.medium),
+                label: Text(context.l10n.retryExport),
+              ),
+            ),
+          if (state == 'completed')
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: FilledButton.tonalIcon(
+                onPressed: () => context.push(
+                  '/media/${Uri.encodeComponent(job['uri'] as String)}',
+                ),
+                icon: const Icon(AppIcons.open, size: AppIconSize.medium),
+                label: Text(context.l10n.openSavedMedia),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: Text(context.l10n.exports)),
     body: ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.md,
+        AppSpacing.xs,
+        AppSpacing.md,
+        AppSpacing.lg,
+      ),
       children: [
-        Text(context.l10n.keepTheAppOpenWhileExportingInterrupted),
-        if (error != null) Text(context.message(error!)),
+        Text(
+          context.l10n.keepTheAppOpenWhileExportingInterrupted,
+          style: AppTypography.bodySmall.copyWith(
+            color: context.studioColors.muted,
+          ),
+        ),
+        if (error != null)
+          Padding(
+            padding: const EdgeInsets.only(top: AppSpacing.xs),
+            child: Text(
+              context.message(error!),
+              style: TextStyle(color: context.studioColors.warning),
+            ),
+          ),
         for (final notice in jobs.where((j) => j['type'] == 'notice'))
-          Text(context.message(notice['message'] as String)),
+          Padding(
+            padding: const EdgeInsets.only(top: AppSpacing.xs),
+            child: Text(context.message(notice['message'] as String)),
+          ),
         if (jobs.isEmpty)
           StudioEmptyState(
             title: context.l10n.noExportsYet,
@@ -155,84 +307,7 @@ class _ExportScreenState extends State<ExportScreen>
         for (final job in jobs.reversed.where((j) => j['type'] != 'notice'))
           Padding(
             padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.md),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      job['project']['title'] as String? ??
-                          context.l10n.videoProject,
-                    ),
-                    Text(
-                      context.l10n.operationProgress(
-                        context.message(switch (job['state']) {
-                          'queued' => 'Waiting',
-                          'running' => 'Exporting',
-                          'finalizing' => 'Saving…',
-                          'completed' => 'Saved',
-                          'failed' => 'Could not export',
-                          'cancelled' => 'Cancelled',
-                          _ => 'Processing',
-                        }),
-                        context.displayValue(job['progress']),
-                      ),
-                    ),
-                    if (job['state'] == 'running')
-                      LinearProgressIndicator(
-                        value: (job['progress'] as num).toDouble() / 100,
-                      ),
-                    if (job['state'] == 'finalizing')
-                      const LinearProgressIndicator(),
-                    if (job['error'] != null)
-                      Text(
-                        context.message(
-                          UserMessages.failure(
-                            job['error'],
-                            operation: UserOperation.export,
-                          ).text,
-                        ),
-                      ),
-                    if (job['warning'] is String)
-                      Text(context.message(job['warning'] as String)),
-                    if (job['state'] == 'completed' &&
-                        (job['outputBytes'] as num? ?? 0) > 0)
-                      Text(
-                        context.l10n.savedFileSize(
-                          context.displayValue(
-                            context.fileSize(
-                              (job['outputBytes'] as num).toInt(),
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (['queued', 'running'].contains(job['state']))
-                      TextButton(
-                        onPressed: pendingCommands.contains(job['id'])
-                            ? null
-                            : () =>
-                                  command('exportCancel', job['id'] as String),
-                        child: Text(context.l10n.cancelExport),
-                      ),
-                    if (['failed', 'cancelled'].contains(job['state']))
-                      TextButton(
-                        onPressed: pendingCommands.contains(job['id'])
-                            ? null
-                            : () => command('exportRetry', job['id'] as String),
-                        child: Text(context.l10n.retryExport),
-                      ),
-                    if (job['state'] == 'completed')
-                      TextButton(
-                        onPressed: () => context.push(
-                          '/media/${Uri.encodeComponent(job['uri'] as String)}',
-                        ),
-                        child: Text(context.l10n.openSavedMedia),
-                      ),
-                  ],
-                ),
-              ),
-            ),
+            child: _job(context, job),
           ),
       ],
     ),

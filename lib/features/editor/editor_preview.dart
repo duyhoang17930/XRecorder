@@ -270,7 +270,16 @@ class EditorPreviewState extends State<EditorPreview>
     );
     return Column(
       children: [
-        if (widget.fitViewport) Expanded(child: surface) else surface,
+        if (widget.fitViewport)
+          Expanded(
+            // Rounded like the app's cards instead of a hard black slab.
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(AppRadius.card),
+              child: surface,
+            ),
+          )
+        else
+          surface,
         if (error != null)
           Text(
             context.message(

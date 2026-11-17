@@ -388,9 +388,12 @@ class _EditorScreenState extends State<EditorScreen> {
                                   context.l10n.editACopyOriginalsStayUnchanged,
                               icon: AppIcons.videos,
                             ),
-                            TextButton.icon(
+                            FilledButton.icon(
                               onPressed: pickingMedia ? null : add,
-                              icon: const Icon(AppIcons.create),
+                              icon: const Icon(
+                                AppIcons.create,
+                                size: AppIconSize.medium,
+                              ),
                               label: Text(context.l10n.addClip),
                             ),
                           ],
@@ -399,6 +402,7 @@ class _EditorScreenState extends State<EditorScreen> {
                     ),
               status: Column(
                 children: [
+                  const SizedBox(height: AppSpacing.xs),
                   Text(
                     context.message(
                       model.saveError != null
@@ -410,7 +414,11 @@ class _EditorScreenState extends State<EditorScreen> {
                           ? context.l10n.savingDraft
                           : context.l10n.savedOriginalsUnchanged,
                     ),
-                    style: Theme.of(context).textTheme.labelSmall,
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: model.saveError != null
+                          ? context.studioColors.warning
+                          : context.studioColors.muted,
+                    ),
                   ),
                   if (model.saveError != null)
                     TextButton(
@@ -441,7 +449,7 @@ class _EditorScreenState extends State<EditorScreen> {
                       Expanded(
                         child: Text(
                           context.l10n.timeline,
-                          style: Theme.of(context).textTheme.titleSmall,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
                       IconButton(
@@ -553,212 +561,293 @@ class _EditorScreenState extends State<EditorScreen> {
               ),
               contextual: clip == null || panel == null
                   ? null
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                panel == 'edit'
-                                    ? context.l10n.edit
-                                    : context.l10n.editorTransform,
-                              ),
-                            ),
-                            IconButton(
-                              tooltip: context.l10n.close,
-                              onPressed: () => setState(() => panel = null),
-                              icon: const Icon(AppIcons.close),
-                            ),
-                          ],
+                  : Padding(
+                      padding: const EdgeInsets.only(top: AppSpacing.xs),
+                      child: StudioCard(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                          AppSpacing.md,
+                          AppSpacing.xxs,
+                          AppSpacing.xxs,
+                          AppSpacing.md,
                         ),
-                        if (panel == 'edit') ...[
-                          Tooltip(
-                            message: clip.title,
-                            child: Text(
-                              context.l10n.selectedClipName(clip.title),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  panel == 'edit'
+                                      ? AppIcons.split
+                                      : AppIcons.crop,
+                                  size: AppIconSize.medium,
+                                  color: context.studioColors.primary,
+                                ),
+                                const SizedBox(width: AppSpacing.xs),
+                                Expanded(
+                                  child: Text(
+                                    panel == 'edit'
+                                        ? context.l10n.edit
+                                        : context.l10n.editorTransform,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium,
+                                  ),
+                                ),
+                                IconButton(
+                                  tooltip: context.l10n.close,
+                                  onPressed: () => setState(() => panel = null),
+                                  icon: const Icon(AppIcons.close),
+                                ),
+                              ],
                             ),
-                          ),
-                          Text(
-                            context.l10n.trimTimeRange(
-                              context.displayValue(
-                                context.decimal(
-                                  clip.inPoint.inMilliseconds / 1000,
-                                  digits: 1,
+                            if (panel == 'edit') ...[
+                              Tooltip(
+                                message: clip.title,
+                                child: Text(
+                                  context.l10n.selectedClipName(clip.title),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTypography.bodyEmphasis,
                                 ),
                               ),
-                              context.displayValue(
-                                context.decimal(
-                                  clip.outPoint.inMilliseconds / 1000,
-                                  digits: 1,
-                                ),
-                              ),
-                            ),
-                            style: Theme.of(context).textTheme.labelSmall,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton.icon(
-                                onPressed: () =>
-                                    changeClips(() => model.split(position)),
-                                icon: const Icon(AppIcons.split),
-                                label: Text(context.l10n.split),
-                              ),
-                              PopupMenuButton<String>(
-                                tooltip: context.l10n.clipOptions,
-                                onSelected: clipOption,
-                                icon: const Icon(AppIcons.more),
-                                itemBuilder: (_) => [
-                                  PopupMenuItem(
-                                    value: 'duplicate',
-                                    child: Text(context.l10n.duplicateClip),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 'earlier',
-                                    enabled: selected > 0,
-                                    child: Text(context.l10n.moveEarlier),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 'later',
-                                    enabled:
-                                        selected < project.clips.length - 1,
-                                    child: Text(context.l10n.moveLater),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 'relink',
-                                    enabled: !pickingMedia,
-                                    child: Text(context.l10n.replaceSource),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 'remove',
-                                    child: Text(
-                                      context.l10n.removeClipFromProject,
+                              Text(
+                                context.l10n.trimTimeRange(
+                                  context.displayValue(
+                                    context.decimal(
+                                      clip.inPoint.inMilliseconds / 1000,
+                                      digits: 1,
                                     ),
+                                  ),
+                                  context.displayValue(
+                                    context.decimal(
+                                      clip.outPoint.inMilliseconds / 1000,
+                                      digits: 1,
+                                    ),
+                                  ),
+                                ),
+                                style: Theme.of(context).textTheme.labelSmall
+                                    ?.copyWith(
+                                      color: context.studioColors.muted,
+                                    ),
+                              ),
+                              const SizedBox(height: AppSpacing.sm),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  FilledButton.tonalIcon(
+                                    onPressed: () => changeClips(
+                                      () => model.split(position),
+                                    ),
+                                    icon: const Icon(
+                                      AppIcons.split,
+                                      size: AppIconSize.medium,
+                                    ),
+                                    label: Text(context.l10n.split),
+                                  ),
+                                  PopupMenuButton<String>(
+                                    tooltip: context.l10n.clipOptions,
+                                    onSelected: clipOption,
+                                    icon: const Icon(AppIcons.more),
+                                    itemBuilder: (_) => [
+                                      PopupMenuItem(
+                                        value: 'duplicate',
+                                        child: Text(context.l10n.duplicateClip),
+                                      ),
+                                      PopupMenuItem(
+                                        value: 'earlier',
+                                        enabled: selected > 0,
+                                        child: Text(context.l10n.moveEarlier),
+                                      ),
+                                      PopupMenuItem(
+                                        value: 'later',
+                                        enabled:
+                                            selected < project.clips.length - 1,
+                                        child: Text(context.l10n.moveLater),
+                                      ),
+                                      PopupMenuItem(
+                                        value: 'relink',
+                                        enabled: !pickingMedia,
+                                        child: Text(context.l10n.replaceSource),
+                                      ),
+                                      PopupMenuItem(
+                                        value: 'remove',
+                                        child: Text(
+                                          context.l10n.removeClipFromProject,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                             ],
-                          ),
-                        ],
-                        if (panel == 'transform') ...[
-                          TextButton.icon(
-                            onPressed: () => model.update(
-                              selected,
-                              clip.copyWith(
-                                rotation: (clip.rotation + 90) % 360,
-                              ),
-                            ),
-                            icon: const Icon(AppIcons.rotate),
-                            label: Text(
-                              context.l10n.rotationValue(
-                                context.displayValue(clip.rotation),
-                              ),
-                            ),
-                          ),
-                          Wrap(
-                            children: [
-                              TextButton(
-                                onPressed: () => model.update(
-                                  selected,
-                                  clip.copyWith(flipH: !clip.flipH),
-                                ),
-                                child: Text(
-                                  context.l10n.flipHorizontalState(
-                                    clip.flipH ? ' · ${context.l10n.on}' : '',
-                                  ),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () => model.update(
-                                  selected,
-                                  clip.copyWith(flipV: !clip.flipV),
-                                ),
-                                child: Text(
-                                  context.l10n.flipVerticalState(
-                                    clip.flipV ? ' · ${context.l10n.on}' : '',
-                                  ),
-                                ),
-                              ),
-                              if (clip.isImage)
-                                for (final seconds in [2, 5, 10])
-                                  TextButton(
+                            if (panel == 'transform') ...[
+                              const SizedBox(height: AppSpacing.xxs),
+                              Wrap(
+                                spacing: AppSpacing.xs,
+                                runSpacing: AppSpacing.xs,
+                                children: [
+                                  OutlinedButton.icon(
                                     onPressed: () => model.update(
                                       selected,
                                       clip.copyWith(
-                                        inPoint: Duration.zero,
-                                        outPoint: Duration(seconds: seconds),
-                                        sourceDuration: Duration(
-                                          seconds: seconds,
-                                        ),
+                                        rotation: (clip.rotation + 90) % 360,
                                       ),
                                     ),
-                                    child: Text(
-                                      context.l10n.photoDuration(
-                                        context.displayValue(seconds),
+                                    icon: const Icon(
+                                      AppIcons.rotate,
+                                      size: AppIconSize.medium,
+                                    ),
+                                    label: Text(
+                                      context.l10n.rotationValue(
+                                        context.displayValue(clip.rotation),
                                       ),
                                     ),
                                   ),
+                                  ChoiceChip(
+                                    avatar: const Icon(
+                                      AppIcons.flipHorizontal,
+                                      size: AppIconSize.small,
+                                    ),
+                                    selected: clip.flipH,
+                                    onSelected: (_) => model.update(
+                                      selected,
+                                      clip.copyWith(flipH: !clip.flipH),
+                                    ),
+                                    label: Text(
+                                      context.l10n.flipHorizontalState(
+                                        clip.flipH
+                                            ? ' · ${context.l10n.on}'
+                                            : '',
+                                      ),
+                                    ),
+                                  ),
+                                  ChoiceChip(
+                                    avatar: const Icon(
+                                      AppIcons.flipVertical,
+                                      size: AppIconSize.small,
+                                    ),
+                                    selected: clip.flipV,
+                                    onSelected: (_) => model.update(
+                                      selected,
+                                      clip.copyWith(flipV: !clip.flipV),
+                                    ),
+                                    label: Text(
+                                      context.l10n.flipVerticalState(
+                                        clip.flipV
+                                            ? ' · ${context.l10n.on}'
+                                            : '',
+                                      ),
+                                    ),
+                                  ),
+                                  if (clip.isImage)
+                                    for (final seconds in [2, 5, 10])
+                                      ChoiceChip(
+                                        selected:
+                                            clip.outPoint ==
+                                            Duration(seconds: seconds),
+                                        onSelected: (_) => model.update(
+                                          selected,
+                                          clip.copyWith(
+                                            inPoint: Duration.zero,
+                                            outPoint: Duration(
+                                              seconds: seconds,
+                                            ),
+                                            sourceDuration: Duration(
+                                              seconds: seconds,
+                                            ),
+                                          ),
+                                        ),
+                                        label: Text(
+                                          context.l10n.photoDuration(
+                                            context.displayValue(seconds),
+                                          ),
+                                        ),
+                                      ),
+                                ],
+                              ),
+                              const SizedBox(height: AppSpacing.md),
+                              Text(
+                                context.l10n.cropLeftRight,
+                                style: AppTypography.bodySmall.copyWith(
+                                  color: context.studioColors.muted,
+                                ),
+                              ),
+                              _EditRange(
+                                label: context.l10n.cropLeftAndRight,
+                                key: ValueKey(
+                                  'horizontal-$selected-${clip.cropLeft}-${clip.cropRight}',
+                                ),
+                                value: RangeValues(
+                                  clip.cropLeft,
+                                  clip.cropRight,
+                                ),
+                                max: 1,
+                                minimum: .02,
+                                onCommit: (v) => act(
+                                  () => model.update(
+                                    selected,
+                                    clip.copyWith(
+                                      cropLeft: v.start,
+                                      cropRight: v.end,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                context.l10n.cropTopBottom,
+                                style: AppTypography.bodySmall.copyWith(
+                                  color: context.studioColors.muted,
+                                ),
+                              ),
+                              _EditRange(
+                                label: context.l10n.cropTopAndBottom,
+                                key: ValueKey(
+                                  'vertical-$selected-${clip.cropTop}-${clip.cropBottom}',
+                                ),
+                                value: RangeValues(
+                                  clip.cropTop,
+                                  clip.cropBottom,
+                                ),
+                                max: 1,
+                                minimum: .02,
+                                onCommit: (v) => act(
+                                  () => model.update(
+                                    selected,
+                                    clip.copyWith(
+                                      cropTop: v.start,
+                                      cropBottom: v.end,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional.centerStart,
+                                child: TextButton.icon(
+                                  onPressed: () => model.update(
+                                    selected,
+                                    clip.copyWith(
+                                      cropLeft: 0,
+                                      cropTop: 0,
+                                      cropRight: 1,
+                                      cropBottom: 1,
+                                      rotation: 0,
+                                      flipH: false,
+                                      flipV: false,
+                                    ),
+                                  ),
+                                  icon: const Icon(
+                                    AppIcons.reset,
+                                    size: AppIconSize.medium,
+                                  ),
+                                  label: Text(context.l10n.resetCropRotation),
+                                ),
+                              ),
                             ],
-                          ),
-                          Text(context.l10n.cropLeftRight),
-                          _EditRange(
-                            label: context.l10n.cropLeftAndRight,
-                            key: ValueKey(
-                              'horizontal-$selected-${clip.cropLeft}-${clip.cropRight}',
-                            ),
-                            value: RangeValues(clip.cropLeft, clip.cropRight),
-                            max: 1,
-                            minimum: .02,
-                            onCommit: (v) => act(
-                              () => model.update(
-                                selected,
-                                clip.copyWith(
-                                  cropLeft: v.start,
-                                  cropRight: v.end,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Text(context.l10n.cropTopBottom),
-                          _EditRange(
-                            label: context.l10n.cropTopAndBottom,
-                            key: ValueKey(
-                              'vertical-$selected-${clip.cropTop}-${clip.cropBottom}',
-                            ),
-                            value: RangeValues(clip.cropTop, clip.cropBottom),
-                            max: 1,
-                            minimum: .02,
-                            onCommit: (v) => act(
-                              () => model.update(
-                                selected,
-                                clip.copyWith(
-                                  cropTop: v.start,
-                                  cropBottom: v.end,
-                                ),
-                              ),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () => model.update(
-                              selected,
-                              clip.copyWith(
-                                cropLeft: 0,
-                                cropTop: 0,
-                                cropRight: 1,
-                                cropBottom: 1,
-                                rotation: 0,
-                                flipH: false,
-                                flipV: false,
-                              ),
-                            ),
-                            child: Text(context.l10n.resetCropRotation),
-                          ),
-                        ],
-                      ],
+                          ],
+                        ),
+                      ),
                     ),
             ),
           ),
@@ -792,16 +881,19 @@ class _EditRangeState extends State<_EditRange> {
     label: widget.label,
     child: Directionality(
       textDirection: TextDirection.ltr,
-      child: RangeSlider(
-        values: value,
-        max: widget.max,
-        onChanged: (v) {
-          if (v.end - v.start >= widget.minimum) setState(() => value = v);
-        },
-        onChangeEnd: (_) => widget.onCommit(value),
-        semanticFormatterCallback: context.spokenValue(
-          (strings, value) => strings.accessibilityValue40(value),
-          multiplier: 100,
+      child: SliderTheme(
+        data: editorSliderTheme(context),
+        child: RangeSlider(
+          values: value,
+          max: widget.max,
+          onChanged: (v) {
+            if (v.end - v.start >= widget.minimum) setState(() => value = v);
+          },
+          onChangeEnd: (_) => widget.onCommit(value),
+          semanticFormatterCallback: context.spokenValue(
+            (strings, value) => strings.accessibilityValue40(value),
+            multiplier: 100,
+          ),
         ),
       ),
     ),

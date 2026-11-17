@@ -39,10 +39,11 @@ class VideoEditorWorkspace extends StatelessWidget {
   Widget build(BuildContext context) => SafeArea(
     bottom: true,
     child: Padding(
+      // Same 16dp gutter as the home page.
       padding: const EdgeInsets.fromLTRB(
-        AppSpacing.sm,
+        AppSpacing.md,
         AppSpacing.xs,
-        AppSpacing.sm,
+        AppSpacing.md,
         0,
       ),
       child: LayoutBuilder(
@@ -158,11 +159,11 @@ class EditorExportAction extends StatelessWidget {
             style: FilledButton.styleFrom(
               minimumSize: const Size(0, 40),
               tapTargetSize: MaterialTapTargetSize.padded,
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             ),
           );
     return Padding(
-      padding: const EdgeInsetsDirectional.only(end: AppSpacing.xs),
+      padding: const EdgeInsetsDirectional.only(end: AppSpacing.md),
       child: action,
     );
   }

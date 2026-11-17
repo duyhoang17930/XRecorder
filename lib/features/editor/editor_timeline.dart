@@ -69,7 +69,7 @@ class EditorTimeline extends StatelessWidget {
                   child: Material(
                     color: context.studioColors.elevated,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppRadius.control),
+                      borderRadius: BorderRadius.circular(AppRadius.card),
                       side: BorderSide(
                         color: selected == i
                             ? context.studioColors.primary
@@ -123,15 +123,29 @@ class EditorTimeline extends StatelessWidget {
                               },
                             ),
                           ),
-                          Text(
-                            context.l10n.clipDurationLabel(
-                              context.displayValue(i + 1),
-                              context.displayValue(
-                                context.decimal(durationMs / 1000, digits: 1),
-                              ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                              AppSpacing.xs,
+                              AppSpacing.xxs,
+                              AppSpacing.xs,
+                              0,
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                            child: Text(
+                              context.l10n.clipDurationLabel(
+                                context.displayValue(i + 1),
+                                context.displayValue(
+                                  context.decimal(durationMs / 1000, digits: 1),
+                                ),
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.labelMedium
+                                  ?.copyWith(
+                                    color: selected == i
+                                        ? context.studioColors.text
+                                        : context.studioColors.muted,
+                                  ),
+                            ),
                           ),
                           if (selected == i)
                             _TimelineTrim(
