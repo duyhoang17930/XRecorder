@@ -89,9 +89,22 @@ class StudioDialog extends StatelessWidget {
             style: AppTypography.body.copyWith(
               color: context.studioColors.muted,
             ),
-            child: content!,
+            // Rows inside a dialog align with its text and fields rather than
+            // adding a second 16dp inset on top of the dialog's own padding.
+            child: ListTileTheme.merge(
+              contentPadding: EdgeInsets.zero,
+              horizontalTitleGap: AppSpacing.sm,
+              child: content!,
+            ),
           ),
     contentPadding: contentPadding,
+    actionsPadding: const EdgeInsets.fromLTRB(
+      AppSpacing.lg,
+      AppSpacing.xs,
+      AppSpacing.lg,
+      AppSpacing.lg,
+    ),
+    actionsOverflowButtonSpacing: AppSpacing.xs,
     actions: actions,
   );
 }
