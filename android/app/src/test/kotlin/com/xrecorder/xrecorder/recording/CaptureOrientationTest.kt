@@ -34,4 +34,18 @@ class CaptureOrientationTest {
         assertSame(region, region.atDisplayOrientation(1268, 2756))
         assertSame(live, live.atDisplayOrientation(1268, 2756))
     }
+
+    @Test fun tallPhoneGetsAScreenShapedCanvasInsteadOfSideBars() {
+        val preset = CaptureConfig(width = 1080, height = 1920, orientation = "portrait")
+        assertEquals(listOf(preset.copy(width = 1080, height = 2400), preset.copy(width = 864, height = 1920)),
+            preset.displayShapedCandidates(1080, 2400))
+        val landscape = CaptureConfig(width = 1920, height = 1080, orientation = "landscape")
+        assertEquals(landscape.copy(width = 2400, height = 1080), landscape.displayShapedCandidates(2400, 1080).first())
+    }
+
+    @Test fun sixteenByNineDisplayKeepsThePresetAndRegionLiveAreUntouched() {
+        assertEquals(emptyList<CaptureConfig>(), CaptureConfig(width = 720, height = 1280).displayShapedCandidates(1080, 1920))
+        assertEquals(emptyList<CaptureConfig>(), CaptureConfig(cropX = 0, cropY = 0, cropWidth = 640, cropHeight = 480).displayShapedCandidates(1080, 2400))
+        assertEquals(emptyList<CaptureConfig>(), CaptureConfig(liveRequested = true).displayShapedCandidates(1080, 2400))
+    }
 }

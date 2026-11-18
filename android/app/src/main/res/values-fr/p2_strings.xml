@@ -24,4 +24,6 @@
     <string name="p2_choose_destination" formatted="false">Choisir la destination</string>
     <string name="p2_copy_done" formatted="false">Copie vérifiée et sauvée.</string>
     <string name="p2_move_done" formatted="false">Mouvement vérifié et achevé.</string>
+    <string name="p2_fill_screen" formatted="false">Remplir l\'écran</string>
+    <string name="p2_fit_screen" formatted="false">Adapter à l\'écran</string>
 </resources>

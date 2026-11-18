@@ -24,4 +24,6 @@
     <string name="p2_choose_destination" formatted="false">Chọn nơi lưu</string>
     <string name="p2_copy_done" formatted="false">Đã lưu và xác minh bản sao.</string>
     <string name="p2_move_done" formatted="false">Đã xác minh và hoàn tất di chuyển.</string>
+    <string name="p2_fill_screen" formatted="false">Lấp đầy màn hình</string>
+    <string name="p2_fit_screen" formatted="false">Vừa màn hình</string>
 </resources>

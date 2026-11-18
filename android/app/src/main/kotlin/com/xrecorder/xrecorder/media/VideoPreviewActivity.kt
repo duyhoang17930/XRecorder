@@ -13,7 +13,7 @@ import android.os.Looper
 import android.provider.OpenableColumns
 import android.view.Gravity
 import android.view.View
-import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -21,6 +21,10 @@ import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.VideoView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.xrecorder.xrecorder.R
 
 /**
@@ -43,10 +47,27 @@ class VideoPreviewActivity : Activity() {
     private lateinit var elapsed: TextView
     private lateinit var total: TextView
     private lateinit var seek: SeekBar
+    private lateinit var systemBars: WindowInsetsControllerCompat
     private var position = 0
     private var optionsOpen = false
     private var controlsVisible = true
     private var seeking = false
+    // Fill crops the edges so the video covers the whole screen (this also
+    // hides the side bars baked into older 16:9 recordings of a taller phone).
+    // Null until the user picks: then only near-screen-shaped videos fill, so
+    // a landscape clip on a portrait screen is not cropped to a sliver.
+    private var userFill: Boolean? = null
+    private val fill: Boolean get() = userFill ?: run {
+        val parent = video.parent as? View
+        if (videoWidth <= 0 || videoHeight <= 0 || parent == null || parent.width <= 0 || parent.height <= 0) true
+        else {
+            val ratio = (videoWidth.toFloat() / videoHeight) / (parent.width.toFloat() / parent.height)
+            maxOf(ratio, 1 / ratio) <= 1.35f
+        }
+    }
+    private var videoWidth = 0
+    private var videoHeight = 0
+    private lateinit var scaleButton: ImageButton
 
     private val hideControls = Runnable { if (video.isPlaying && !seeking && !optionsOpen) setControls(false) }
     private val progress = object : Runnable {
@@ -73,6 +94,7 @@ class VideoPreviewActivity : Activity() {
             setBackgroundColor(Color.BLACK)
             addView(video, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
         }
+        root.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> sizeVideo() }
         // Taps anywhere outside the controls toggle them, like other players.
         root.setOnClickListener { setControls(!controlsVisible) }
 
@@ -94,6 +116,10 @@ class VideoPreviewActivity : Activity() {
         topBar.addView(title, LinearLayout.LayoutParams(0, -2, 1f).apply {
             marginStart = dp(12); marginEnd = dp(12)
         })
+        scaleButton = circleButton(R.drawable.ic_lucide_minimize, getString(R.string.p2_fit_screen)).apply {
+            setOnClickListener { userFill = !fill; sizeVideo(); scheduleHide() }
+        }
+        topBar.addView(scaleButton, LinearLayout.LayoutParams(dp(48), dp(48)).apply { marginEnd = dp(8) })
         topBar.addView(more, LinearLayout.LayoutParams(dp(48), dp(48)))
         root.addView(topBar, FrameLayout.LayoutParams(-1, -2, Gravity.TOP))
 
@@ -154,23 +180,35 @@ class VideoPreviewActivity : Activity() {
         })
         root.addView(bottomBar, FrameLayout.LayoutParams(-1, -2, Gravity.BOTTOM))
 
-        root.setOnApplyWindowInsetsListener { _, insets ->
-            @Suppress("DEPRECATION")
-            val safe = if (Build.VERSION.SDK_INT >= 30)
-                insets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout()).let {
-                    intArrayOf(it.left, it.top, it.right, it.bottom)
-                }
-            else intArrayOf(insets.systemWindowInsetLeft, insets.systemWindowInsetTop,
-                insets.systemWindowInsetRight, insets.systemWindowInsetBottom)
-            topBar.setPadding(safe[0] + dp(12), safe[1] + dp(8), safe[2] + dp(12), dp(24))
-            bottomBar.setPadding(safe[0] + dp(8), dp(24), safe[2] + dp(8), safe[3] + dp(16))
+        // Pad by the bars' size even while they are hidden, so the overlay
+        // does not jump when immersive mode toggles with the controls.
+        ViewCompat.setOnApplyWindowInsetsListener(root) { _, insets ->
+            val bars = insets.getInsetsIgnoringVisibility(WindowInsetsCompat.Type.systemBars())
+            val cutout = insets.getInsets(WindowInsetsCompat.Type.displayCutout())
+            val left = maxOf(bars.left, cutout.left); val right = maxOf(bars.right, cutout.right)
+            topBar.setPadding(left + dp(12), maxOf(bars.top, cutout.top) + dp(8), right + dp(12), dp(24))
+            bottomBar.setPadding(left + dp(8), dp(24), right + dp(8), maxOf(bars.bottom, cutout.bottom) + dp(16))
             insets
         }
         setContentView(root)
+        // Draw the video under the status/navigation bars and the cutout so a
+        // phone-shaped recording fills the whole screen.
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        if (Build.VERSION.SDK_INT >= 28) window.attributes = window.attributes.apply {
+            layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+        }
+        systemBars = WindowCompat.getInsetsController(window, root).apply {
+            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
         root.requestApplyInsets()
 
-        video.setOnPreparedListener {
+        video.setOnPreparedListener { player ->
             if (isFinishing || isDestroyed) return@setOnPreparedListener
+            // Keep the last real size: a transient 0x0 report must not drop fill.
+            if (player.videoWidth > 0 && player.videoHeight > 0) {
+                videoWidth = player.videoWidth; videoHeight = player.videoHeight
+            }
+            sizeVideo()
             seek.max = video.duration.coerceAtLeast(0)
             total.text = clock(video.duration)
             video.seekTo(position)
@@ -210,6 +248,22 @@ class VideoPreviewActivity : Activity() {
         ).show(intent.data!!)
     }
 
+    /** Sizes the view to the video's aspect: covering the screen (fill) or inside it (fit). */
+    private fun sizeVideo() {
+        scaleButton.setImageResource(if (fill) R.drawable.ic_lucide_minimize else R.drawable.ic_lucide_maximize)
+        scaleButton.contentDescription = getString(if (fill) R.string.p2_fit_screen else R.string.p2_fill_screen)
+        val parent = video.parent as? View ?: return
+        val (w, h) = if (videoWidth > 0 && videoHeight > 0 && parent.width > 0 && parent.height > 0) {
+            val scaleX = parent.width.toFloat() / videoWidth; val scaleY = parent.height.toFloat() / videoHeight
+            val scale = if (fill) maxOf(scaleX, scaleY) else minOf(scaleX, scaleY)
+            Math.round(videoWidth * scale) to Math.round(videoHeight * scale)
+        } else -1 to -1
+        val params = video.layoutParams as FrameLayout.LayoutParams
+        if (params.width == w && params.height == h) return
+        // Post: this can run from inside a layout pass.
+        video.post { video.layoutParams = FrameLayout.LayoutParams(w, h, Gravity.CENTER) }
+    }
+
     private fun togglePlayback() {
         if (video.isPlaying) video.pause() else video.start()
         updatePlayIcon()
@@ -225,6 +279,9 @@ class VideoPreviewActivity : Activity() {
 
     private fun setControls(visible: Boolean) {
         controlsVisible = visible
+        // Bars follow the controls: hidden while watching, back with a tap.
+        if (visible) systemBars.show(WindowInsetsCompat.Type.systemBars())
+        else systemBars.hide(WindowInsetsCompat.Type.systemBars())
         for (view in listOf(topBar, center, bottomBar)) {
             view.animate().cancel()
             if (visible) {

@@ -308,14 +308,7 @@ class QuickActionTile extends StatelessWidget {
                   radius: AppRadius.pill,
                 ),
                 const SizedBox(width: AppSpacing.sm),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: AppTypography.bodyEmphasis.copyWith(
-                      color: enabled ? c.text : c.muted,
-                    ),
-                  ),
-                ),
+                Expanded(child: _QuickActionLabel(title, enabled ? c.text : c.muted)),
                 Icon(
                   AppIcons.chevronRight,
                   size: AppIconSize.small,
@@ -326,6 +319,31 @@ class QuickActionTile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Never breaks inside a word: a single-word label ("Screenshot") shrinks to
+/// fit its narrow half-width tile, while multi-word labels wrap between words.
+class _QuickActionLabel extends StatelessWidget {
+  const _QuickActionLabel(this.title, this.color);
+  final String title;
+  final Color color;
+  @override
+  Widget build(BuildContext context) {
+    final style = AppTypography.bodyEmphasis.copyWith(color: color);
+    if (title.trim().contains(RegExp(r'\s'))) {
+      return Text(
+        title,
+        style: style,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      );
+    }
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      alignment: AlignmentDirectional.centerStart,
+      child: Text(title, style: style, maxLines: 1, softWrap: false),
     );
   }
 }

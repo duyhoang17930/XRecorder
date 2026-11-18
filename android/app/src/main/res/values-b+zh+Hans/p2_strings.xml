@@ -24,4 +24,6 @@
     <string name="p2_choose_destination" formatted="false">选择目的地</string>
     <string name="p2_copy_done" formatted="false">复制已验证和保存。</string>
     <string name="p2_move_done" formatted="false">移动验证和完成。</string>
+    <string name="p2_fill_screen" formatted="false">填满屏幕</string>
+    <string name="p2_fit_screen" formatted="false">适应屏幕</string>
 </resources>

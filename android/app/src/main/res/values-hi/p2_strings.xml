@@ -24,4 +24,6 @@
     <string name="p2_choose_destination" formatted="false">लक्ष्य चुनें</string>
     <string name="p2_copy_done" formatted="false">कॉपी सत्यापित और बचाया।</string>
     <string name="p2_move_done" formatted="false">स्थानांतरित किया गया और पूरा किया गया।</string>
+    <string name="p2_fill_screen" formatted="false">स्क्रीन भरें</string>
+    <string name="p2_fit_screen" formatted="false">स्क्रीन में फ़िट करें</string>
 </resources>

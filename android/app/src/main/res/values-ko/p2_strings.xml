@@ -24,4 +24,6 @@
     <string name="p2_choose_destination" formatted="false">목적지 선택</string>
     <string name="p2_copy_done" formatted="false">복사 확인 및 저장.</string>
     <string name="p2_move_done" formatted="false">이동 확인 및 완료.</string>
+    <string name="p2_fill_screen" formatted="false">화면 채우기</string>
+    <string name="p2_fit_screen" formatted="false">화면에 맞추기</string>
 </resources>

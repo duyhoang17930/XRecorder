@@ -24,4 +24,6 @@
     <string name="p2_choose_destination" formatted="false">目的地を選択</string>
     <string name="p2_copy_done" formatted="false">コピー確認および保存</string>
     <string name="p2_move_done" formatted="false">移動確認および完了。</string>
+    <string name="p2_fill_screen" formatted="false">画面いっぱいに表示</string>
+    <string name="p2_fit_screen" formatted="false">画面に合わせる</string>
 </resources>

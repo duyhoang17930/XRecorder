@@ -44,6 +44,30 @@ data class CaptureConfig(
         )
     }
 
+    /**
+     * Encoder canvases shaped like the physical display, best first. The 16:9
+     * presets letterbox a taller phone screen (e.g. 20:9) with black side bars
+     * baked into the video, so keep the preset's short edge and stretch the
+     * long edge to the display's aspect; failing that, keep the preset's long
+     * edge and shrink the short edge. Callers fall back to the preset itself
+     * when the encoder accepts neither.
+     */
+    internal fun displayShapedCandidates(displayWidth: Int, displayHeight: Int): List<CaptureConfig> {
+        require(displayWidth > 0 && displayHeight > 0)
+        if (isRegion || liveRequested) return emptyList()
+        val displayLong = maxOf(displayWidth, displayHeight); val displayShort = minOf(displayWidth, displayHeight)
+        val presetLong = maxOf(width, height); val presetShort = minOf(width, height)
+        fun even(value: Double) = (value / 2).toInt() * 2
+        val sizes = listOf(
+            presetShort to minOf(displayLong, even(presetShort.toDouble() * displayLong / displayShort)),
+            even(presetLong.toDouble() * displayShort / displayLong) to presetLong
+        )
+        val portrait = displayHeight > displayWidth
+        return sizes.filter { (short, long) -> short >= 160 && long >= 160 && !(short == presetShort && long == presetLong) }
+            .distinct()
+            .map { (short, long) -> copy(width = if (portrait) short else long, height = if (portrait) long else short) }
+    }
+
     fun map(): Map<String, Any?> = mapOf("width" to width,"height" to height,"fps" to fps,"bitrate" to bitrate,"codec" to codec,
         "audio" to audio,"micGain" to micGain,"internalGain" to internalGain,"noiseReduction" to noiseReduction,
         "countdown" to countdown,"durationSeconds" to durationSeconds,"orientation" to orientation,"mode" to mode,

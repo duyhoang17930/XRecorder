@@ -226,9 +226,14 @@ class CaptureService : Service() {
         if (!CaptureState.screenshot) {
             val metrics = resources.displayMetrics
             val oriented = config.atDisplayOrientation(metrics.widthPixels, metrics.heightPixels)
+            val real = realDisplaySize()
             try {
-                // Validate the transposed size against the encoder before opening any output.
-                CaptureState.config = if (oriented.width != config.width || oriented.height != config.height) {
+                // Prefer a canvas shaped like the screen so the video has no
+                // black side bars; validate every size against the encoder
+                // before opening any output.
+                CaptureState.config = oriented.displayShapedCandidates(real.x, real.y).firstNotNullOfOrNull {
+                    runCatching { CaptureConfig.from(this, it.map()) }.getOrNull()
+                } ?: if (oriented.width != config.width || oriented.height != config.height) {
                     CaptureConfig.from(this, oriented.map())
                 } else oriented
                 CaptureState.width = config.width
@@ -351,6 +356,15 @@ class CaptureService : Service() {
         } catch (_: Exception) { fail("Screenshot capture is unavailable.") }
         catch (_: OutOfMemoryError) { fail("Not enough memory for the screenshot.") }
     }
+    /** Whole physical display in its current rotation; that is what the mirror captures. */
+    private fun realDisplaySize(): android.graphics.Point {
+        val metrics = resources.displayMetrics
+        val fallback = android.graphics.Point(metrics.widthPixels, metrics.heightPixels)
+        return runCatching {
+            val display = getSystemService(DisplayManager::class.java).getDisplay(android.view.Display.DEFAULT_DISPLAY)
+            android.graphics.Point().also { @Suppress("DEPRECATION") display.getRealSize(it) }
+        }.getOrNull()?.takeIf { it.x > 0 && it.y > 0 } ?: fallback
+    }
     private fun markRecording() {
         if (ending || sessionId != CaptureState.id || CaptureState.state != "starting") return
         if (config.hasAudio && audio?.startTimeNs == 0L) { handler.postDelayed({ markRecording() },50); return }
@@ -358,6 +372,13 @@ class CaptureService : Service() {
         CaptureState.transition("recording"); handler.post(tick)
         if (config.shakeToStop) {
             registerShakeSensor()
+        }
+        // With overlay permission granted, the floating bubble is the way back
+        // to the controls once the user leaves the app, so show it from the
+        // start; the notification's "Hide controls" still turns it off.
+        if (!CaptureState.screenshot && !controlsUnavailable && android.provider.Settings.canDrawOverlays(this)) {
+            controlsAcceptedInVideo = true
+            updateControls()
         }
         getSystemService(NotificationManager::class.java).notify(NOTIFICATION,notification(true))
     }
