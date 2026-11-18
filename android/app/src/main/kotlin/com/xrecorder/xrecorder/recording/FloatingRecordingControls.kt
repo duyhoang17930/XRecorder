@@ -19,7 +19,6 @@ import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.PopupMenu
 import com.xrecorder.xrecorder.R
 import kotlin.math.abs
 
@@ -125,18 +124,20 @@ internal class FloatingRecordingControls(
         clearDrawing(); render(state, elapsed)
     }
     private val styleButton = button("Drawing color and width", R.drawable.ic_lucide_palette) {
-        val menu = PopupMenu(context, styleButtonAnchor())
+        val current = drawingState()
         val colors = listOf("Orange" to DrawingStrokeEngine.DEFAULT_COLOR, "Red" to Color.RED,
             "White" to Color.WHITE, "Blue" to Color.BLUE)
-        colors.forEachIndexed { index, (label, _) -> menu.menu.add(0, index, index, CaptureText.text(context, label)) }
         val widths = listOf(4f, 8f, 16f, 32f)
-        widths.forEachIndexed { index, width -> menu.menu.add(1, 10 + index, 10 + index, "${width.toInt()} px") }
-        menu.setOnMenuItemClickListener { item ->
-            if (item.groupId == 0) setDrawingStyle(colors[item.itemId].second, null)
-            else setDrawingStyle(null, widths[item.itemId - 10])
-            true
-        }
-        menu.show()
+        FloatingMenu(context).show(styleButtonAnchor(), listOf(
+            FloatingMenu.Section(CaptureText.text(context, "Color"), colors.map { (label, color) ->
+                FloatingMenu.Item(CaptureText.text(context, label), selected = current?.currentColor == color, swatch = color) {
+                    setDrawingStyle(color, null)
+                }
+            }),
+            FloatingMenu.Section(CaptureText.text(context, "Stroke width"), widths.map { width ->
+                FloatingMenu.Item("${width.toInt()} px", selected = current?.currentWidth == width) { setDrawingStyle(null, width) }
+            }),
+        ))
     }
     private fun styleButtonAnchor(): View = styleButton
     private val cameraButton = button("Facecam options", R.drawable.ic_lucide_camera) {

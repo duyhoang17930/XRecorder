@@ -850,5 +850,7 @@
   "floatingControlsSettingsError": "تعذر فتح إعدادات النوافذ العائمة في Android.",
   "floatingControlsExpandHint": "توسيع عناصر التحكم العائمة",
   "floatingControlsCollapseHint": "انقر لطي عناصر التحكم العائمة",
-  "floatingControlsMoveHint": "اسحب عناصر التحكم العائمة لنقلها"
+  "floatingControlsMoveHint": "اسحب عناصر التحكم العائمة لنقلها",
+  "fillScreen": "ملء الشاشة",
+  "fitToScreen": "ملاءمة الشاشة"
 }

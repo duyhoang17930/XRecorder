@@ -850,5 +850,7 @@
   "floatingControlsSettingsError": "Android 오버레이 설정을 열 수 없습니다.",
   "floatingControlsExpandHint": "플로팅 컨트롤 펼치기",
   "floatingControlsCollapseHint": "탭하여 플로팅 컨트롤 접기",
-  "floatingControlsMoveHint": "드래그하여 플로팅 컨트롤 이동"
+  "floatingControlsMoveHint": "드래그하여 플로팅 컨트롤 이동",
+  "fillScreen": "화면 채우기",
+  "fitToScreen": "화면에 맞추기"
 }

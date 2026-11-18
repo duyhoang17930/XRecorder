@@ -3723,5 +3723,9 @@
   "floatingControlsMoveHint": "Drag floating controls to move",
   "@floatingControlsMoveHint": {
     "description": "Screen-reader hint for dragging recording controls."
-  }
+  },
+  "fillScreen": "Fill screen",
+  "fitToScreen": "Fit to screen",
+  "@fillScreen": {"description": "Video player: scale the video to cover the whole screen."},
+  "@fitToScreen": {"description": "Video player: show the whole video inside the screen."}
 }

@@ -31,4 +31,10 @@
     <string name="capture_label_28" formatted="false">Expand floating controls</string>
     <string name="capture_label_29" formatted="false">Tap to collapse floating controls</string>
     <string name="capture_label_30" formatted="false">Drag floating controls to move</string>
+    <string name="capture_label_31" formatted="false">Facecam</string>
+    <string name="capture_label_32" formatted="false">Off</string>
+    <string name="capture_label_33" formatted="false">Size</string>
+    <string name="capture_label_34" formatted="false">Color filter</string>
+    <string name="capture_label_35" formatted="false">Color</string>
+    <string name="capture_label_36" formatted="false">Stroke width</string>
 </resources>

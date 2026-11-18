@@ -728,28 +728,37 @@ class CaptureService : Service() {
     private fun showFacecamOptions(anchor: android.view.View) {
         if (ending) return
         val camera = facecam ?: return
-        val menu = android.widget.PopupMenu(this, anchor)
-        val options = mutableListOf<Pair<String, () -> Boolean>>()
-        options += "Switch camera" to { switchFacecamCamera() }
-        options += "Small camera" to { setFacecamScale(.75f) }
-        options += "Normal camera" to { setFacecamScale(1f) }
-        options += "Large camera" to { setFacecamScale(1.5f) }
-        options += "No camera effect" to { setFacecamEffect(FacecamGeometry.EFFECT_OFF) }
-        if (camera.supportsEffect(FacecamGeometry.EFFECT_MONO)) {
-            options += "Grayscale camera" to { setFacecamEffect(FacecamGeometry.EFFECT_MONO) }
+        fun t(label: String) = CaptureText.text(this, label)
+        fun run(action: () -> Boolean) {
+            if (!action()) android.widget.Toast.makeText(this, t("Not supported by this device or the selected mode"), android.widget.Toast.LENGTH_SHORT).show()
         }
-        if (camera.supportsEffect(FacecamGeometry.EFFECT_SEPIA)) {
-            options += "Sepia camera" to { setFacecamEffect(FacecamGeometry.EFFECT_SEPIA) }
-        }
-        options.forEachIndexed { index, option ->
-            menu.menu.add(0, index, index, CaptureText.text(this, option.first))
-        }
-        menu.setOnMenuItemClickListener { item ->
-            val success = options.getOrNull(item.itemId)?.second?.invoke() ?: false
-            if (!success) android.widget.Toast.makeText(this, CaptureText.text(this, "Not supported by this device or the selected mode"), android.widget.Toast.LENGTH_SHORT).show()
-            true
-        }
-        menu.show()
+        val sizes = listOf("Small camera" to .75f, "Normal camera" to 1f, "Large camera" to 1.5f)
+        val effects = listOf(
+            "No camera effect" to FacecamGeometry.EFFECT_OFF,
+            "Grayscale camera" to FacecamGeometry.EFFECT_MONO,
+            "Sepia camera" to FacecamGeometry.EFFECT_SEPIA,
+        ).filter { it.second == FacecamGeometry.EFFECT_OFF || camera.supportsEffect(it.second) }
+        FloatingMenu(this).show(anchor, listOf(
+            FloatingMenu.Section(t("Facecam"), listOf(
+                FloatingMenu.Item(t("Switch camera"), icon = com.xrecorder.xrecorder.R.drawable.ic_lucide_camera) { run { switchFacecamCamera() } },
+                FloatingMenu.Item(t("Off"), destructive = true) { run { turnOffFacecam() } },
+            )),
+            FloatingMenu.Section(t("Size"), sizes.map { (label, scale) ->
+                FloatingMenu.Item(t(label), selected = kotlin.math.abs(camera.currentScale - scale) < .01f) { run { setFacecamScale(scale) } }
+            }),
+            FloatingMenu.Section(t("Color filter"), effects.map { (label, effect) ->
+                FloatingMenu.Item(t(label), selected = camera.currentEffect == effect) { run { setFacecamEffect(effect) } }
+            }),
+        ))
+    }
+    /** Ends the facecam for the rest of this recording; the screen keeps recording. */
+    fun turnOffFacecam(): Boolean {
+        if (ending) return false
+        val camera = facecam ?: return false
+        facecam = null
+        runCatching { camera.close() }
+        controls?.setCameraOptions(null)
+        return true
     }
     fun switchFacecamCamera(): Boolean = runCatching { facecam?.switchCamera() ?: false }.getOrDefault(false)
     fun setFacecamEffect(effect: Int): Boolean = facecam?.setEffect(effect) ?: false

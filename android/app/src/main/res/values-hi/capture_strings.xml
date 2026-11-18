@@ -31,4 +31,10 @@
     <string name="capture_label_28" formatted="false">फ्लोटिंग नियंत्रण फैलाएं</string>
     <string name="capture_label_29" formatted="false">फ्लोटिंग नियंत्रण समेटने के लिए टैप करें</string>
     <string name="capture_label_30" formatted="false">फ्लोटिंग नियंत्रण खिसकाने के लिए खींचें</string>
+    <string name="capture_label_31" formatted="false">फेसकैम</string>
+    <string name="capture_label_32" formatted="false">बंद करें</string>
+    <string name="capture_label_33" formatted="false">आकार</string>
+    <string name="capture_label_34" formatted="false">रंग फ़िल्टर</string>
+    <string name="capture_label_35" formatted="false">रंग</string>
+    <string name="capture_label_36" formatted="false">रेखा की मोटाई</string>
 </resources>

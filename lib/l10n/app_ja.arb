@@ -850,5 +850,7 @@
   "floatingControlsSettingsError": "Androidのオーバーレイ設定を開けませんでした。",
   "floatingControlsExpandHint": "フローティングコントロールを展開",
   "floatingControlsCollapseHint": "タップしてフローティングコントロールを折りたたむ",
-  "floatingControlsMoveHint": "ドラッグしてフローティングコントロールを移動"
+  "floatingControlsMoveHint": "ドラッグしてフローティングコントロールを移動",
+  "fillScreen": "画面いっぱいに表示",
+  "fitToScreen": "画面に合わせる"
 }

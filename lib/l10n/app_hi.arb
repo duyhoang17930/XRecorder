@@ -850,5 +850,7 @@
   "floatingControlsSettingsError": "Android ओवरले सेटिंग नहीं खुल सकीं।",
   "floatingControlsExpandHint": "फ्लोटिंग नियंत्रण फैलाएं",
   "floatingControlsCollapseHint": "फ्लोटिंग नियंत्रण समेटने के लिए टैप करें",
-  "floatingControlsMoveHint": "फ्लोटिंग नियंत्रण खिसकाने के लिए खींचें"
+  "floatingControlsMoveHint": "फ्लोटिंग नियंत्रण खिसकाने के लिए खींचें",
+  "fillScreen": "स्क्रीन भरें",
+  "fitToScreen": "स्क्रीन में फ़िट करें"
 }

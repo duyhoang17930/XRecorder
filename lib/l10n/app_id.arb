@@ -850,5 +850,7 @@
   "floatingControlsSettingsError": "Setelan overlay Android tidak dapat dibuka.",
   "floatingControlsExpandHint": "Perluas kontrol mengambang",
   "floatingControlsCollapseHint": "Ketuk untuk menciutkan kontrol mengambang",
-  "floatingControlsMoveHint": "Seret kontrol mengambang untuk memindahkannya"
+  "floatingControlsMoveHint": "Seret kontrol mengambang untuk memindahkannya",
+  "fillScreen": "Penuhi layar",
+  "fitToScreen": "Sesuaikan layar"
 }

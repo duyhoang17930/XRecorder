@@ -850,5 +850,7 @@
   "floatingControlsSettingsError": "Không thể mở phần cài đặt quyền hiển thị trên ứng dụng khác của Android.",
   "floatingControlsExpandHint": "Mở rộng điều khiển nổi",
   "floatingControlsCollapseHint": "Chạm để thu gọn điều khiển nổi",
-  "floatingControlsMoveHint": "Kéo điều khiển nổi để di chuyển"
+  "floatingControlsMoveHint": "Kéo điều khiển nổi để di chuyển",
+  "fillScreen": "Lấp đầy màn hình",
+  "fitToScreen": "Vừa màn hình"
 }

@@ -31,4 +31,10 @@
     <string name="capture_label_28" formatted="false">Schwebende Steuerelemente ausklappen</string>
     <string name="capture_label_29" formatted="false">Tippe, um die schwebenden Steuerelemente einzuklappen</string>
     <string name="capture_label_30" formatted="false">Ziehe die schwebenden Steuerelemente zum Verschieben</string>
+    <string name="capture_label_31" formatted="false">Frontkamera</string>
+    <string name="capture_label_32" formatted="false">Offen</string>
+    <string name="capture_label_33" formatted="false">Größe</string>
+    <string name="capture_label_34" formatted="false">Farbfilter</string>
+    <string name="capture_label_35" formatted="false">Farbe</string>
+    <string name="capture_label_36" formatted="false">Strichstärke</string>
 </resources>

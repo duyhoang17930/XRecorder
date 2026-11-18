@@ -23,7 +23,8 @@ KEYS = {"p2_edit_video": "editVideo", "p2_edit_photo": "editPhoto",
         "p2_play": "playPreview", "p2_pause": "pausePreview",
         "p2_choose_destination": "chooseDestination",
         "p2_copy_done": "copyVerifiedAndSaved",
-        "p2_move_done": "moveVerifiedAndCompleted"}
+        "p2_move_done": "moveVerifiedAndCompleted",
+        "p2_fill_screen": "fillScreen", "p2_fit_screen": "fitToScreen"}
 
 CAPTURE_LABELS = (
     'Recording', 'Paused', 'Saving', 'Pause', 'Resume', 'Stop', 'Screenshot saved', 'Video saved',
@@ -33,6 +34,7 @@ CAPTURE_LABELS = (
     'Not supported by this device or the selected mode',
     'Expand floating controls', 'Tap to collapse floating controls',
     'Drag floating controls to move',
+    'Facecam', 'Off', 'Size', 'Color filter', 'Color', 'Stroke width',
 )
 
 

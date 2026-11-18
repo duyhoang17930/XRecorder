@@ -850,5 +850,7 @@
   "floatingControlsSettingsError": "Não foi possível abrir as configurações de sobreposição do Android.",
   "floatingControlsExpandHint": "Expandir controles flutuantes",
   "floatingControlsCollapseHint": "Toque para recolher os controles flutuantes",
-  "floatingControlsMoveHint": "Arraste os controles flutuantes para movê-los"
+  "floatingControlsMoveHint": "Arraste os controles flutuantes para movê-los",
+  "fillScreen": "Preencher a tela",
+  "fitToScreen": "Ajustar à tela"
 }

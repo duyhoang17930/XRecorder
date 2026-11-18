@@ -850,5 +850,7 @@
   "floatingControlsSettingsError": "Die Android-Einstellungen für die Anzeige über anderen Apps konnten nicht geöffnet werden.",
   "floatingControlsExpandHint": "Schwebende Steuerelemente ausklappen",
   "floatingControlsCollapseHint": "Tippe, um die schwebenden Steuerelemente einzuklappen",
-  "floatingControlsMoveHint": "Ziehe die schwebenden Steuerelemente zum Verschieben"
+  "floatingControlsMoveHint": "Ziehe die schwebenden Steuerelemente zum Verschieben",
+  "fillScreen": "Bildschirm füllen",
+  "fitToScreen": "An Bildschirm anpassen"
 }

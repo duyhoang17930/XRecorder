@@ -38,6 +38,12 @@ internal object CaptureText {
         "Expand floating controls" to R.string.capture_label_28,
         "Tap to collapse floating controls" to R.string.capture_label_29,
         "Drag floating controls to move" to R.string.capture_label_30,
+        "Facecam" to R.string.capture_label_31,
+        "Off" to R.string.capture_label_32,
+        "Size" to R.string.capture_label_33,
+        "Color filter" to R.string.capture_label_34,
+        "Color" to R.string.capture_label_35,
+        "Stroke width" to R.string.capture_label_36,
     )
     private val aliases = mapOf(
         "Pause recording" to "Pause", "Resume recording" to "Resume", "Stop recording" to "Stop",

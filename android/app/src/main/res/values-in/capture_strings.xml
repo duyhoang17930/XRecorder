@@ -31,4 +31,10 @@
     <string name="capture_label_28" formatted="false">Perluas kontrol mengambang</string>
     <string name="capture_label_29" formatted="false">Ketuk untuk menciutkan kontrol mengambang</string>
     <string name="capture_label_30" formatted="false">Seret kontrol mengambang untuk memindahkannya</string>
+    <string name="capture_label_31" formatted="false">Kamera wajah</string>
+    <string name="capture_label_32" formatted="false">Hentikan</string>
+    <string name="capture_label_33" formatted="false">Ukuran</string>
+    <string name="capture_label_34" formatted="false">Filter warna</string>
+    <string name="capture_label_35" formatted="false">Warna</string>
+    <string name="capture_label_36" formatted="false">Ketebalan garis</string>
 </resources>

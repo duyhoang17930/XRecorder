@@ -850,5 +850,7 @@
   "floatingControlsSettingsError": "Impossible d’ouvrir les paramètres de superposition Android.",
   "floatingControlsExpandHint": "Développer les commandes flottantes",
   "floatingControlsCollapseHint": "Touchez pour réduire les commandes flottantes",
-  "floatingControlsMoveHint": "Faites glisser les commandes flottantes pour les déplacer"
+  "floatingControlsMoveHint": "Faites glisser les commandes flottantes pour les déplacer",
+  "fillScreen": "Remplir l''écran",
+  "fitToScreen": "Adapter à l''écran"
 }
