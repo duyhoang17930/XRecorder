@@ -852,5 +852,7 @@
   "floatingControlsCollapseHint": "탭하여 플로팅 컨트롤 접기",
   "floatingControlsMoveHint": "드래그하여 플로팅 컨트롤 이동",
   "fillScreen": "화면 채우기",
-  "fitToScreen": "화면에 맞추기"
+  "fitToScreen": "화면에 맞추기",
+  "facecamFilterInvert": "색 반전",
+  "facecamFilterCool": "차갑게"
 }

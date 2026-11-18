@@ -37,4 +37,7 @@
     <string name="capture_label_34" formatted="false">Color filter</string>
     <string name="capture_label_35" formatted="false">Color</string>
     <string name="capture_label_36" formatted="false">Stroke width</string>
+    <string name="capture_label_37" formatted="false">On</string>
+    <string name="capture_label_38" formatted="false">Invert</string>
+    <string name="capture_label_39" formatted="false">Cool</string>
 </resources>

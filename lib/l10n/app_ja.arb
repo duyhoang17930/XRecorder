@@ -852,5 +852,7 @@
   "floatingControlsCollapseHint": "タップしてフローティングコントロールを折りたたむ",
   "floatingControlsMoveHint": "ドラッグしてフローティングコントロールを移動",
   "fillScreen": "画面いっぱいに表示",
-  "fitToScreen": "画面に合わせる"
+  "fitToScreen": "画面に合わせる",
+  "facecamFilterInvert": "色反転",
+  "facecamFilterCool": "クール"
 }

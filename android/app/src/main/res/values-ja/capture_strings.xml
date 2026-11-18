@@ -37,4 +37,7 @@
     <string name="capture_label_34" formatted="false">色フィルター</string>
     <string name="capture_label_35" formatted="false">色</string>
     <string name="capture_label_36" formatted="false">線の太さ</string>
+    <string name="capture_label_37" formatted="false">で →</string>
+    <string name="capture_label_38" formatted="false">色反転</string>
+    <string name="capture_label_39" formatted="false">クール</string>
 </resources>

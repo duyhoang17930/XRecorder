@@ -37,4 +37,7 @@
     <string name="capture_label_34" formatted="false">Bộ lọc màu</string>
     <string name="capture_label_35" formatted="false">Màu</string>
     <string name="capture_label_36" formatted="false">Độ dày nét</string>
+    <string name="capture_label_37" formatted="false">Bật</string>
+    <string name="capture_label_38" formatted="false">Đảo màu</string>
+    <string name="capture_label_39" formatted="false">Lạnh</string>
 </resources>

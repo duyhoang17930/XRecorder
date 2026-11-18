@@ -852,5 +852,7 @@
   "floatingControlsCollapseHint": "Ketuk untuk menciutkan kontrol mengambang",
   "floatingControlsMoveHint": "Seret kontrol mengambang untuk memindahkannya",
   "fillScreen": "Penuhi layar",
-  "fitToScreen": "Sesuaikan layar"
+  "fitToScreen": "Sesuaikan layar",
+  "facecamFilterInvert": "Balik warna",
+  "facecamFilterCool": "Sejuk"
 }

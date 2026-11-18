@@ -37,4 +37,7 @@
     <string name="capture_label_34" formatted="false">تصفية الألوان</string>
     <string name="capture_label_35" formatted="false">اللون</string>
     <string name="capture_label_36" formatted="false">سمك الخط</string>
+    <string name="capture_label_37" formatted="false">على</string>
+    <string name="capture_label_38" formatted="false">عكس الألوان</string>
+    <string name="capture_label_39" formatted="false">بارد</string>
 </resources>

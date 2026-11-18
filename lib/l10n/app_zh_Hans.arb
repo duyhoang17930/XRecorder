@@ -852,5 +852,7 @@
   "floatingControlsCollapseHint": "点按以收起悬浮控制",
   "floatingControlsMoveHint": "拖动悬浮控制以移动",
   "fillScreen": "填满屏幕",
-  "fitToScreen": "适应屏幕"
+  "fitToScreen": "适应屏幕",
+  "facecamFilterInvert": "反色",
+  "facecamFilterCool": "冷色"
 }

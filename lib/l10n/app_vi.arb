@@ -852,5 +852,7 @@
   "floatingControlsCollapseHint": "Chạm để thu gọn điều khiển nổi",
   "floatingControlsMoveHint": "Kéo điều khiển nổi để di chuyển",
   "fillScreen": "Lấp đầy màn hình",
-  "fitToScreen": "Vừa màn hình"
+  "fitToScreen": "Vừa màn hình",
+  "facecamFilterInvert": "Đảo màu",
+  "facecamFilterCool": "Lạnh"
 }

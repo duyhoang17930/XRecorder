@@ -37,4 +37,7 @@
     <string name="capture_label_34" formatted="false">颜色过滤器</string>
     <string name="capture_label_35" formatted="false">颜色</string>
     <string name="capture_label_36" formatted="false">线条粗细</string>
+    <string name="capture_label_37" formatted="false">在</string>
+    <string name="capture_label_38" formatted="false">反色</string>
+    <string name="capture_label_39" formatted="false">冷色</string>
 </resources>

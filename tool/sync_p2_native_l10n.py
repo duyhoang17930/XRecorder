@@ -34,7 +34,7 @@ CAPTURE_LABELS = (
     'Not supported by this device or the selected mode',
     'Expand floating controls', 'Tap to collapse floating controls',
     'Drag floating controls to move',
-    'Facecam', 'Off', 'Size', 'Color filter', 'Color', 'Stroke width',
+    'Facecam', 'Off', 'Size', 'Color filter', 'Color', 'Stroke width', 'On', 'Invert', 'Cool',
 )
 
 

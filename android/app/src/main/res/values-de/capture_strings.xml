@@ -37,4 +37,7 @@
     <string name="capture_label_34" formatted="false">Farbfilter</string>
     <string name="capture_label_35" formatted="false">Farbe</string>
     <string name="capture_label_36" formatted="false">Strichstärke</string>
+    <string name="capture_label_37" formatted="false">auf</string>
+    <string name="capture_label_38" formatted="false">Invertieren</string>
+    <string name="capture_label_39" formatted="false">Kühl</string>
 </resources>

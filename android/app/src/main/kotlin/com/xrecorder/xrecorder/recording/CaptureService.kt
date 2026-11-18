@@ -218,7 +218,7 @@ class CaptureService : Service() {
                 resources.displayMetrics.heightPixels != config.regionSourceHeight)) {
             fail("The screen size changed. Select the capture region again."); return
         }
-        if (config.facecam && facecam?.ready != true) {
+        if (config.facecam && facecamOff == null && facecam?.ready != true) {
             if(cameraWaitStart==0L) cameraWaitStart=SystemClock.elapsedRealtime()
             if(SystemClock.elapsedRealtime()-cameraWaitStart>10000) { fail("No camera frames arrived. Disable facecam and retry."); return }
             handler.postDelayed({startEncoder()},100); return
@@ -494,7 +494,7 @@ class CaptureService : Service() {
                     undoDrawing = { undoDrawing() },
                     clearDrawing = { clearDrawing() },
                     setDrawingStyle = { color, width -> setDrawingStyle(color, width) },
-                    cameraOptions = if (facecam == null) null else { anchor -> showFacecamOptions(anchor) }
+                    cameraOptions = if (facecam == null && facecamOff == null) null else { anchor -> showFacecamOptions(anchor) }
                 )
             }
             controls?.render(CaptureState.state, CaptureState.elapsedActiveMs)
@@ -727,17 +727,26 @@ class CaptureService : Service() {
     }
     private fun showFacecamOptions(anchor: android.view.View) {
         if (ending) return
-        val camera = facecam ?: return
         fun t(label: String) = CaptureText.text(this, label)
         fun run(action: () -> Boolean) {
             if (!action()) android.widget.Toast.makeText(this, t("Not supported by this device or the selected mode"), android.widget.Toast.LENGTH_SHORT).show()
+        }
+        val camera = facecam
+        if (camera == null) {
+            if (facecamOff == null) return
+            FloatingMenu(this).show(anchor, listOf(FloatingMenu.Section(t("Facecam"), listOf(
+                FloatingMenu.Item(t("On"), icon = com.xrecorder.xrecorder.R.drawable.ic_lucide_camera) { run { turnOnFacecam() } },
+            ))))
+            return
         }
         val sizes = listOf("Small camera" to .75f, "Normal camera" to 1f, "Large camera" to 1.5f)
         val effects = listOf(
             "No camera effect" to FacecamGeometry.EFFECT_OFF,
             "Grayscale camera" to FacecamGeometry.EFFECT_MONO,
             "Sepia camera" to FacecamGeometry.EFFECT_SEPIA,
-        ).filter { it.second == FacecamGeometry.EFFECT_OFF || camera.supportsEffect(it.second) }
+            "Cool" to FacecamGeometry.EFFECT_AQUA,
+            "Invert" to FacecamGeometry.EFFECT_NEGATIVE,
+        ).filter { camera.supportsEffect(it.second) }
         FloatingMenu(this).show(anchor, listOf(
             FloatingMenu.Section(t("Facecam"), listOf(
                 FloatingMenu.Item(t("Switch camera"), icon = com.xrecorder.xrecorder.R.drawable.ic_lucide_camera) { run { switchFacecamCamera() } },
@@ -751,14 +760,29 @@ class CaptureService : Service() {
             }),
         ))
     }
-    /** Ends the facecam for the rest of this recording; the screen keeps recording. */
+    /** Lens, size and filter of a facecam the user turned off, so turning it back on restores them. */
+    private data class FacecamSnapshot(val lensFacing: Int, val scale: Float, val effect: Int)
+    private var facecamOff: FacecamSnapshot? = null
+    /** Closes the facecam; the screen keeps recording and the menu can turn it back on. */
     fun turnOffFacecam(): Boolean {
         if (ending) return false
         val camera = facecam ?: return false
+        facecamOff = FacecamSnapshot(camera.currentLensFacing, camera.currentScale, camera.currentEffect)
         facecam = null
         runCatching { camera.close() }
-        controls?.setCameraOptions(null)
         return true
+    }
+    fun turnOnFacecam(): Boolean {
+        if (ending || facecam != null) return false
+        val previous = facecamOff ?: return false
+        return runCatching {
+            val camera = FacecamOverlay(this) { onFacecamUnavailable() }
+            camera.restore(previous.lensFacing, previous.scale, previous.effect)
+            facecam = camera
+            facecamOff = null
+            camera.show()
+            true
+        }.getOrDefault(false)
     }
     fun switchFacecamCamera(): Boolean = runCatching { facecam?.switchCamera() ?: false }.getOrDefault(false)
     fun setFacecamEffect(effect: Int): Boolean = facecam?.setEffect(effect) ?: false

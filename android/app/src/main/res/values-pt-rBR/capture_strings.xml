@@ -37,4 +37,7 @@
     <string name="capture_label_34" formatted="false">Filtros de cores</string>
     <string name="capture_label_35" formatted="false">Cor</string>
     <string name="capture_label_36" formatted="false">Espessura do traço</string>
+    <string name="capture_label_37" formatted="false">em</string>
+    <string name="capture_label_38" formatted="false">Inverter</string>
+    <string name="capture_label_39" formatted="false">Frio</string>
 </resources>

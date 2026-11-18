@@ -2,7 +2,10 @@ package com.xrecorder.xrecorder.recording
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.Matrix
+import android.graphics.Paint
 import android.graphics.Outline
 import android.graphics.PixelFormat
 import android.graphics.SurfaceTexture
@@ -54,7 +57,6 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
     private var sensorOrientation = 0
     private var previewWidth = 640
     private var previewHeight = 480
-    @Volatile private var supportedEffects = setOf(FacecamGeometry.EFFECT_OFF)
     private var baseWidth = dp(FacecamGeometry.DEFAULT_WIDTH_DP)
     private var baseHeight = dp(FacecamGeometry.DEFAULT_HEIGHT_DP)
     private var cornerRadius = dp(FacecamGeometry.DEFAULT_CORNER_RADIUS_DP).toFloat()
@@ -148,8 +150,6 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         }
 
         val info = cameras.getCameraCharacteristics(cameraId)
-        supportedEffects = (info.get(CameraCharacteristics.CONTROL_AVAILABLE_EFFECTS) ?: intArrayOf(0)).toSet()
-        if (currentEffect !in supportedEffects) currentEffect = FacecamGeometry.EFFECT_OFF
         sensorOrientation = info.get(CameraCharacteristics.SENSOR_ORIENTATION) ?: 0
         val map = info.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
         val sizes = map?.getOutputSizes(SurfaceTexture::class.java) ?: emptyArray()
@@ -208,9 +208,6 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
             val request = cam.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW).apply {
                 addTarget(surf)
                 set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
-                if (currentEffect != FacecamGeometry.EFFECT_OFF) {
-                    set(CaptureRequest.CONTROL_EFFECT_MODE, currentEffect)
-                }
             }.build()
             sess.setRepeatingRequest(request, null, cameraHandler)
             streamingConfigured = true
@@ -253,18 +250,68 @@ class FacecamOverlay(private val context: Context, private val failed: () -> Uni
         return true
     }
 
+    /**
+     * Filters are drawn on the preview layer rather than requested from the
+     * camera: many front cameras report no CONTROL_EFFECT_MODE support, and
+     * the screen recording captures the overlay exactly as it is drawn.
+     */
     fun setEffect(effect: Int): Boolean {
-        if (closed || !ready) return false
+        if (closed) return false
         val validated = FacecamGeometry.validateEffect(effect)
-        if (validated != effect || effect !in supportedEffects) return false
+        if (validated != effect || effect !in SUPPORTED_EFFECTS) return false
         currentEffect = validated
-        cameraHandler.post {
-            applyRepeatingRequest()
-        }
+        main.post { applyEffect() }
         return true
     }
 
-    fun supportsEffect(effect: Int): Boolean = effect in supportedEffects
+    private fun applyEffect() {
+        if (closed) return
+        val matrix = effectMatrix(currentEffect)
+        texture.setLayerPaint(matrix?.let { Paint().apply { colorFilter = ColorMatrixColorFilter(it) } })
+    }
+
+    fun supportsEffect(effect: Int): Boolean = effect in SUPPORTED_EFFECTS
+
+    /** Restores a previous camera's lens, size and filter before [show]. */
+    fun restore(lensFacing: Int, scale: Float, effect: Int) {
+        currentLensFacing = lensFacing
+        setScale(scale)
+        setEffect(effect)
+    }
+
+    companion object {
+        val SUPPORTED_EFFECTS = setOf(
+            FacecamGeometry.EFFECT_OFF, FacecamGeometry.EFFECT_MONO, FacecamGeometry.EFFECT_SEPIA,
+            FacecamGeometry.EFFECT_NEGATIVE, FacecamGeometry.EFFECT_AQUA,
+        )
+
+        internal fun effectMatrix(effect: Int): ColorMatrix? = when (effect) {
+            FacecamGeometry.EFFECT_MONO -> ColorMatrix().apply { setSaturation(0f) }
+            FacecamGeometry.EFFECT_SEPIA -> ColorMatrix(floatArrayOf(
+                .393f, .769f, .189f, 0f, 0f,
+                .349f, .686f, .168f, 0f, 0f,
+                .272f, .534f, .131f, 0f, 0f,
+                0f, 0f, 0f, 1f, 0f,
+            ))
+            FacecamGeometry.EFFECT_NEGATIVE -> ColorMatrix(floatArrayOf(
+                -1f, 0f, 0f, 0f, 255f,
+                0f, -1f, 0f, 0f, 255f,
+                0f, 0f, -1f, 0f, 255f,
+                0f, 0f, 0f, 1f, 0f,
+            ))
+            // Cool, slightly desaturated tint.
+            FacecamGeometry.EFFECT_AQUA -> ColorMatrix().apply {
+                setSaturation(.6f)
+                postConcat(ColorMatrix(floatArrayOf(
+                    .85f, 0f, 0f, 0f, 0f,
+                    0f, 1f, 0f, 0f, 10f,
+                    0f, 0f, 1.15f, 0f, 25f,
+                    0f, 0f, 0f, 1f, 0f,
+                )))
+            }
+            else -> null
+        }
+    }
 
     fun setScale(scale: Float) {
         if (closed) return

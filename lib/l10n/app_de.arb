@@ -852,5 +852,7 @@
   "floatingControlsCollapseHint": "Tippe, um die schwebenden Steuerelemente einzuklappen",
   "floatingControlsMoveHint": "Ziehe die schwebenden Steuerelemente zum Verschieben",
   "fillScreen": "Bildschirm füllen",
-  "fitToScreen": "An Bildschirm anpassen"
+  "fitToScreen": "An Bildschirm anpassen",
+  "facecamFilterInvert": "Invertieren",
+  "facecamFilterCool": "Kühl"
 }

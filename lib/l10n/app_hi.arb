@@ -852,5 +852,7 @@
   "floatingControlsCollapseHint": "फ्लोटिंग नियंत्रण समेटने के लिए टैप करें",
   "floatingControlsMoveHint": "फ्लोटिंग नियंत्रण खिसकाने के लिए खींचें",
   "fillScreen": "स्क्रीन भरें",
-  "fitToScreen": "स्क्रीन में फ़िट करें"
+  "fitToScreen": "स्क्रीन में फ़िट करें",
+  "facecamFilterInvert": "उलटे रंग",
+  "facecamFilterCool": "ठंडा"
 }

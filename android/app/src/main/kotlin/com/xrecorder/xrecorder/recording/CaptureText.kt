@@ -44,6 +44,9 @@ internal object CaptureText {
         "Color filter" to R.string.capture_label_34,
         "Color" to R.string.capture_label_35,
         "Stroke width" to R.string.capture_label_36,
+        "On" to R.string.capture_label_37,
+        "Invert" to R.string.capture_label_38,
+        "Cool" to R.string.capture_label_39,
     )
     private val aliases = mapOf(
         "Pause recording" to "Pause", "Resume recording" to "Resume", "Stop recording" to "Stop",

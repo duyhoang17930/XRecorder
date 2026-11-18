@@ -852,5 +852,7 @@
   "floatingControlsCollapseHint": "Toca para contraer los controles flotantes",
   "floatingControlsMoveHint": "Arrastra los controles flotantes para moverlos",
   "fillScreen": "Llenar pantalla",
-  "fitToScreen": "Ajustar a la pantalla"
+  "fitToScreen": "Ajustar a la pantalla",
+  "facecamFilterInvert": "Invertir",
+  "facecamFilterCool": "Frío"
 }
