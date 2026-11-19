@@ -854,5 +854,20 @@
   "fillScreen": "Lấp đầy màn hình",
   "fitToScreen": "Vừa màn hình",
   "facecamFilterInvert": "Đảo màu",
-  "facecamFilterCool": "Lạnh"
+  "facecamFilterCool": "Lạnh",
+  "subtitleFont": "Phông chữ phụ đề",
+  "subtitleFontSans": "Không chân",
+  "subtitleFontSerif": "Có chân",
+  "subtitleFontMono": "Đơn cách",
+  "subtitleFontBold": "Đậm",
+  "subtitleTextStyle": "Kiểu chữ",
+  "subtitleTapToEdit": "Chạm vào một dòng để sửa chữ và thời gian.",
+  "subtitleNewLine": "Dòng mới",
+  "speechElapsed": "Đã chạy {time}",
+  "speechRunInBackground": "Chạy nền",
+  "speechContinuesInBackground": "Phụ đề vẫn đang được xử lý ở chế độ nền. Mở lại Phụ đề để xem kết quả.",
+  "previewUpdating": "Đang cập nhật bản xem trước…",
+  "editsSavedToDrafts": "Đã lưu chỉnh sửa vào Bản nháp",
+  "saveAndLeave": "Lưu và thoát",
+  "photoSaved": "Đã lưu ảnh"
 }

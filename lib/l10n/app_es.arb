@@ -854,5 +854,20 @@
   "fillScreen": "Llenar pantalla",
   "fitToScreen": "Ajustar a la pantalla",
   "facecamFilterInvert": "Invertir",
-  "facecamFilterCool": "Frío"
+  "facecamFilterCool": "Frío",
+  "subtitleFont": "Fuente de subtítulos",
+  "subtitleFontSans": "Sans serif",
+  "subtitleFontSerif": "Serif",
+  "subtitleFontMono": "Monoespaciada",
+  "subtitleFontBold": "Negrita",
+  "subtitleTextStyle": "Estilo de texto",
+  "subtitleTapToEdit": "Toca una línea para editar su texto y tiempo.",
+  "subtitleNewLine": "Nueva línea",
+  "speechElapsed": "Transcurrido {time}",
+  "speechRunInBackground": "Ejecutar en segundo plano",
+  "speechContinuesInBackground": "Los subtítulos se siguen procesando en segundo plano. Vuelve a abrir Subtítulos para revisarlos.",
+  "previewUpdating": "Actualizando vista previa…",
+  "editsSavedToDrafts": "Cambios guardados en Borradores",
+  "saveAndLeave": "Guardar y salir",
+  "photoSaved": "Foto guardada"
 }

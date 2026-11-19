@@ -35,6 +35,9 @@ class EditorPreviewState extends State<EditorPreview>
   Timer? timer;
   String? error;
   bool playing = false, polling = false;
+
+  /// A composition is being (re)built natively, e.g. after adding subtitles.
+  bool loading = false;
   int generation = 0;
   double aspectRatio = 16 / 9;
   Duration? _lastPosition;
@@ -89,6 +92,7 @@ class EditorPreviewState extends State<EditorPreview>
     final previous = _loadTail;
     final completion = Completer<void>();
     _loadTail = completion.future;
+    if (mounted && !loading) setState(() => loading = true);
     try {
       // Native load waits for its previous playback graph to drain. Serialize
       // requests and skip superseded pending edits so a quick slider gesture
@@ -108,6 +112,11 @@ class EditorPreviewState extends State<EditorPreview>
       }
     } finally {
       completion.complete();
+      // Only the newest load clears the indicator; a superseded one returns
+      // early while its replacement is still preparing.
+      if (mounted && revision == generation && loading) {
+        setState(() => loading = false);
+      }
     }
   }
 
@@ -232,37 +241,36 @@ class EditorPreviewState extends State<EditorPreview>
           ),
           child: AspectRatio(
             aspectRatio: aspectRatio,
-            // Media3's SurfaceView needs composition in the Android hierarchy.
-            // Its video surface can be attached after platform-view creation;
-            // do not rely on texture-mode detection before that attachment.
-            child: PlatformViewLink(
-              viewType: 'com.xrecorder/editor_preview',
-              surfaceFactory: (context, controller) => AndroidViewSurface(
-                controller: controller as AndroidViewController,
-                hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-                gestureRecognizers: const {},
-              ),
-              onCreatePlatformView: (params) {
-                return PlatformViewsService.initExpensiveAndroidView(
-                    id: params.id,
-                    viewType: 'com.xrecorder/editor_preview',
-                    layoutDirection: TextDirection.ltr,
-                  )
-                  ..addOnPlatformViewCreatedListener(
-                    params.onPlatformViewCreated,
-                  )
-                  ..addOnPlatformViewCreatedListener((id) {
-                    _loadedDocument = null;
-                    channel = MethodChannel('com.xrecorder/editor_preview/$id');
-                    load();
-                    timer?.cancel();
-                    timer = Timer.periodic(
-                      const Duration(milliseconds: 250),
-                      (_) => poll(),
-                    );
-                  })
-                  ..create();
-              },
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                _platformView(),
+                if (loading)
+                  ColoredBox(
+                    color: Colors.black54,
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        spacing: AppSpacing.xs,
+                        children: [
+                          const SizedBox.square(
+                            dimension: 28,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            context.l10n.previewUpdating,
+                            style: AppTypography.bodySmall.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ),
         ),
@@ -293,4 +301,37 @@ class EditorPreviewState extends State<EditorPreview>
       ],
     );
   }
+
+  // Media3's SurfaceView needs composition in the Android hierarchy.
+  // Its video surface can be attached after platform-view creation;
+  // do not rely on texture-mode detection before that attachment.
+  Widget _platformView() => PlatformViewLink(
+              viewType: 'com.xrecorder/editor_preview',
+              surfaceFactory: (context, controller) => AndroidViewSurface(
+                controller: controller as AndroidViewController,
+                hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+                gestureRecognizers: const {},
+              ),
+              onCreatePlatformView: (params) {
+                return PlatformViewsService.initExpensiveAndroidView(
+                    id: params.id,
+                    viewType: 'com.xrecorder/editor_preview',
+                    layoutDirection: TextDirection.ltr,
+                  )
+                  ..addOnPlatformViewCreatedListener(
+                    params.onPlatformViewCreated,
+                  )
+                  ..addOnPlatformViewCreatedListener((id) {
+                    _loadedDocument = null;
+                    channel = MethodChannel('com.xrecorder/editor_preview/$id');
+                    load();
+                    timer?.cancel();
+                    timer = Timer.periodic(
+                      const Duration(milliseconds: 250),
+                      (_) => poll(),
+                    );
+                  })
+                  ..create();
+              },
+            );
 }

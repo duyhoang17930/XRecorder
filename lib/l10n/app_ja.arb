@@ -854,5 +854,20 @@
   "fillScreen": "画面いっぱいに表示",
   "fitToScreen": "画面に合わせる",
   "facecamFilterInvert": "色反転",
-  "facecamFilterCool": "クール"
+  "facecamFilterCool": "クール",
+  "subtitleFont": "字幕フォント",
+  "subtitleFontSans": "ゴシック",
+  "subtitleFontSerif": "明朝",
+  "subtitleFontMono": "等幅",
+  "subtitleFontBold": "太字",
+  "subtitleTextStyle": "文字スタイル",
+  "subtitleTapToEdit": "行をタップすると文字とタイミングを編集できます。",
+  "subtitleNewLine": "新しい行",
+  "speechElapsed": "経過 {time}",
+  "speechRunInBackground": "バックグラウンドで実行",
+  "speechContinuesInBackground": "字幕はバックグラウンドで処理中です。もう一度字幕を開いて確認してください。",
+  "previewUpdating": "プレビューを更新中…",
+  "editsSavedToDrafts": "編集内容を下書きに保存しました",
+  "saveAndLeave": "保存して終了",
+  "photoSaved": "写真を保存しました"
 }

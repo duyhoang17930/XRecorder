@@ -121,10 +121,7 @@ class _EffectsScreenState extends State<_EffectsScreen> {
     'fadeOutMs': 0,
     'voice': 'none',
     'noiseReduction': false,
-    'subtitleColor': 'white',
-    'subtitleSize': 'normal',
-    'subtitleBackground': 'dark',
-    'subtitlePosition': 'bottom',
+    ...subtitleStyleDefaults,
     ...widget.current,
   };
   late final text = TextEditingController(
@@ -348,20 +345,14 @@ class _EffectsScreenState extends State<_EffectsScreen> {
     ],
     2 => [
       Text(context.l10n.editorSubtitleHint),
-      choice('subtitleColor', context.l10n.subtitleColor, ['white', 'yellow']),
-      choice('subtitleSize', context.l10n.subtitleTextSize, [
-        'small',
-        'normal',
-        'large',
-      ]),
-      choice('subtitleBackground', context.l10n.subtitleBackground, [
-        'dark',
-        'none',
-      ]),
-      choice('subtitlePosition', context.l10n.subtitlePosition, [
-        'bottom',
-        'top',
-      ]),
+      for (final (key, label) in [
+        ('subtitleColor', context.l10n.subtitleColor),
+        ('subtitleSize', context.l10n.subtitleTextSize),
+        ('subtitleFont', context.l10n.subtitleFont),
+        ('subtitleBackground', context.l10n.subtitleBackground),
+        ('subtitlePosition', context.l10n.subtitlePosition),
+      ])
+        choice(key, label, subtitleStyleOptions[key]!),
     ],
     3 => [
       OutlinedButton.icon(

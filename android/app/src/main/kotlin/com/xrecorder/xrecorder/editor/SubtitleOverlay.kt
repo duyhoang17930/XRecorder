@@ -15,11 +15,25 @@ class SubtitleOverlay(
         when (options["subtitleColor"] ?: "white") {
             "white" -> Color.WHITE
             "yellow" -> Color.YELLOW
+            "red" -> 0xFFFF5252.toInt()
+            "green" -> 0xFF69F0AE.toInt()
+            "cyan" -> 0xFF18FFFF.toInt()
+            "blue" -> 0xFF448AFF.toInt()
+            "black" -> Color.BLACK
             else -> error("Unsupported subtitle color")
+        }
+    private val typeface =
+        when (options["subtitleFont"] ?: "sans") {
+            "sans" -> Typeface.SANS_SERIF
+            "serif" -> Typeface.SERIF
+            "mono" -> Typeface.MONOSPACE
+            "bold" -> Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD)
+            else -> error("Unsupported subtitle font")
         }
     private val background =
         when (options["subtitleBackground"] ?: "dark") {
             "dark" -> 0xCC000000.toInt()
+            "light" -> 0xCCFFFFFF.toInt()
             "none" -> Color.TRANSPARENT
             else -> error("Unsupported subtitle background")
         }
@@ -39,7 +53,9 @@ class SubtitleOverlay(
     private val paint =
         TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
             this.color = this@SubtitleOverlay.color
-            setShadowLayer(2f, 0f, 1f, Color.BLACK)
+            typeface = this@SubtitleOverlay.typeface
+            // Black text needs a light halo to stay readable without a box.
+            setShadowLayer(2f, 0f, 1f, if (this.color == Color.BLACK) Color.WHITE else Color.BLACK)
         }
     private val fill = Paint().apply { color = background }
     private var previous: String? = null

@@ -41,6 +41,20 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
   bool busy = false, polling = false;
   TranscriptionJob? job;
   Timer? timer;
+
+  /// When the current operation started, for the elapsed-time readout.
+  DateTime? _since;
+
+  /// Recognition runs natively, so the dialog may close without stopping it;
+  /// reopening Subtitles restores the job. Model installs stay attached.
+  bool get canRunInBackground =>
+      !_restoring &&
+      !busy &&
+      jobId != null &&
+      !jobId!.startsWith('model_') &&
+      job?.type != 'model' &&
+      job?.phase != 'saving job history' &&
+      active;
   bool get active =>
       _restoring ||
       busy ||
@@ -84,6 +98,10 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
       if (!mounted || matching.isEmpty || jobId != null) return;
       setState(() {
         final restored = matching.first;
+        final created = (restored['createdAt'] as num?)?.toInt();
+        _since = created == null || created <= 0
+            ? DateTime.now()
+            : DateTime.fromMillisecondsSinceEpoch(created);
         allowUncertainSpeech = restored['allowUncertainSpeech'] == true;
         jobId = restored['id'] as String;
         if (['tiny', 'base', 'small-q5_1'].contains(restored['model'])) {
@@ -241,6 +259,7 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
       setState(() {
         jobId = id;
         job = null;
+        _since = DateTime.now();
       });
       timer?.cancel();
       timer = Timer.periodic(const Duration(milliseconds: 500), (_) => poll());
@@ -319,8 +338,29 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
   @override
   void dispose() {
     timer?.cancel();
-    if (active && jobId != null) unawaited(service.cancel(jobId!));
+    if (active && jobId != null && !canRunInBackground) {
+      unawaited(service.cancel(jobId!));
+    }
     super.dispose();
+  }
+
+  // The PopScope callback tells people where to find the result.
+  void runInBackground() => Navigator.pop(context);
+
+  String _clock(Duration value) {
+    final s = value.inSeconds.clamp(0, 359999);
+    final mm = (s ~/ 60 % 60).toString().padLeft(2, '0'),
+        ss = (s % 60).toString().padLeft(2, '0');
+    return s >= 3600 ? '${s ~/ 3600}:$mm:$ss' : '${s ~/ 60}:$ss';
+  }
+
+  /// Live while running; the native total once the job has finished.
+  String? get elapsedText {
+    if (active && _since != null) {
+      return _clock(DateTime.now().difference(_since!));
+    }
+    final done = job?.elapsedMs ?? 0;
+    return done > 0 ? _clock(Duration(milliseconds: done)) : null;
   }
 
   @override
@@ -329,7 +369,12 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
       (v) => v['id'] == model && v['installed'] == true,
     );
     return PopScope(
-      canPop: !active,
+      canPop: !active || canRunInBackground,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop && active) {
+          showNotice(context, context.l10n.speechContinuesInBackground);
+        }
+      },
       child: StudioDialog(
         title: Text(context.l10n.offlineAutomaticSubtitles),
         content: SizedBox(
@@ -446,6 +491,17 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
                     ),
                   ],
                 ),
+              if (job == null && busy && !_restoring) ...[
+                // The start request (audio probing, model checks) can take a
+                // moment before the first progress snapshot arrives.
+                const SizedBox(height: AppSpacing.xxs),
+                LinearProgressIndicator(
+                  minHeight: 6,
+                  borderRadius: const BorderRadius.all(Radius.circular(3)),
+                  semanticsLabel: context.l10n.speechOperationProgress,
+                ),
+                Text(context.l10n.processing),
+              ],
               if (job != null) ...[
                 const SizedBox(height: AppSpacing.xxs),
                 LinearProgressIndicator(
@@ -454,11 +510,29 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
                   borderRadius: const BorderRadius.all(Radius.circular(3)),
                   semanticsLabel: context.l10n.speechOperationProgress,
                 ),
-                Text(
-                  context.l10n.operationProgress(
-                    speechPhaseText(context.l10n, job!),
-                    context.displayValue((job!.progress * 100).round()),
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        context.l10n.operationProgress(
+                          speechPhaseText(context.l10n, job!),
+                          context.displayValue((job!.progress * 100).round()),
+                        ),
+                        style: AppTypography.bodyEmphasis.copyWith(
+                          color: context.studioColors.text,
+                        ),
+                      ),
+                    ),
+                    if (elapsedText case final String elapsed)
+                      Text(
+                        context.l10n.speechElapsed(elapsed),
+                        textDirection: TextDirection.ltr,
+                        style: AppTypography.bodySmall.copyWith(
+                          color: context.studioColors.muted,
+                          fontFeatures: const [FontFeature.tabularFigures()],
+                        ),
+                      ),
+                  ],
                 ),
               ],
               if (error != null)
@@ -515,10 +589,16 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
           ),
         ),
         actions: [
-          TextButton(
-            onPressed: active ? null : () => Navigator.pop(context),
-            child: Text(context.l10n.close),
-          ),
+          if (canRunInBackground)
+            TextButton(
+              onPressed: runInBackground,
+              child: Text(context.l10n.speechRunInBackground),
+            )
+          else
+            TextButton(
+              onPressed: active ? null : () => Navigator.pop(context),
+              child: Text(context.l10n.close),
+            ),
           if (active)
             TextButton(
               onPressed:

@@ -28,6 +28,7 @@ class _ExportScreenState extends State<ExportScreen>
   String? _document;
   final pendingCommands = <String>{};
   final notifiedUris = <String>{};
+  final watchedIds = <String>{};
   bool get active => jobs.any(
     (job) => ['queued', 'running', 'finalizing'].contains(job['state']),
   );
@@ -81,6 +82,10 @@ class _ExportScreenState extends State<ExportScreen>
           error = null;
         });
         for (final job in jobs) {
+          final id = job['id'];
+          if (['queued', 'running', 'finalizing'].contains(job['state'])) {
+            if (id is String) watchedIds.add(id);
+          }
           if (job['state'] == 'completed' &&
               job['uri'] is String &&
               notifiedUris.add(job['uri'] as String)) {
@@ -88,6 +93,14 @@ class _ExportScreenState extends State<ExportScreen>
                 .getInheritedWidgetOfExactType<MediaScope>()
                 ?.repository
                 .refresh();
+            // Confirm only exports seen running here, not old history rows.
+            if (watchedIds.remove(id)) {
+              showNotice(
+                context,
+                context.message('Saved'),
+                kind: NoticeKind.success,
+              );
+            }
           }
         }
       }

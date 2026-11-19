@@ -329,7 +329,17 @@ class EditorTool extends StatelessWidget {
                       : context.studioColors.text,
                 ),
                 const SizedBox(height: 4),
-                Text(label, style: Theme.of(context).textTheme.labelMedium),
+                Text(
+                  label,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: onPressed == null
+                        ? context.studioColors.muted
+                        : selected
+                        ? context.studioColors.primary
+                        : context.studioColors.text,
+                    fontWeight: selected ? FontWeight.w600 : null,
+                  ),
+                ),
               ],
             ),
           ),

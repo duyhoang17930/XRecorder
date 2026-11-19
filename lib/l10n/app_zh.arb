@@ -854,5 +854,20 @@
   "fillScreen": "填满屏幕",
   "fitToScreen": "适应屏幕",
   "facecamFilterInvert": "反色",
-  "facecamFilterCool": "冷色"
+  "facecamFilterCool": "冷色",
+  "subtitleFont": "字幕字体",
+  "subtitleFontSans": "无衬线",
+  "subtitleFontSerif": "衬线",
+  "subtitleFontMono": "等宽",
+  "subtitleFontBold": "粗体",
+  "subtitleTextStyle": "文字样式",
+  "subtitleTapToEdit": "点按一行即可编辑文字和时间。",
+  "subtitleNewLine": "新行",
+  "speechElapsed": "已用时 {time}",
+  "speechRunInBackground": "在后台运行",
+  "speechContinuesInBackground": "字幕仍在后台处理。再次打开字幕即可查看。",
+  "previewUpdating": "正在更新预览…",
+  "editsSavedToDrafts": "编辑内容已保存到草稿",
+  "saveAndLeave": "保存并离开",
+  "photoSaved": "照片已保存"
 }

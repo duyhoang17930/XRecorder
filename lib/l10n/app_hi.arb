@@ -854,5 +854,20 @@
   "fillScreen": "स्क्रीन भरें",
   "fitToScreen": "स्क्रीन में फ़िट करें",
   "facecamFilterInvert": "उलटे रंग",
-  "facecamFilterCool": "ठंडा"
+  "facecamFilterCool": "ठंडा",
+  "subtitleFont": "उपशीर्षक फ़ॉन्ट",
+  "subtitleFontSans": "सैन्स सेरिफ़",
+  "subtitleFontSerif": "सेरिफ़",
+  "subtitleFontMono": "मोनोस्पेस",
+  "subtitleFontBold": "बोल्ड",
+  "subtitleTextStyle": "टेक्स्ट शैली",
+  "subtitleTapToEdit": "टेक्स्ट और समय बदलने के लिए किसी पंक्ति पर टैप करें।",
+  "subtitleNewLine": "नई पंक्ति",
+  "speechElapsed": "बीता समय {time}",
+  "speechRunInBackground": "पृष्ठभूमि में चलाएँ",
+  "speechContinuesInBackground": "उपशीर्षक पृष्ठभूमि में प्रोसेस हो रहे हैं। समीक्षा के लिए उपशीर्षक फिर से खोलें।",
+  "previewUpdating": "पूर्वावलोकन अपडेट हो रहा है…",
+  "editsSavedToDrafts": "बदलाव ड्राफ़्ट में सहेजे गए",
+  "saveAndLeave": "सहेजें और बाहर निकलें",
+  "photoSaved": "फ़ोटो सहेजी गई"
 }

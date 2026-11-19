@@ -854,5 +854,20 @@
   "fillScreen": "ملء الشاشة",
   "fitToScreen": "ملاءمة الشاشة",
   "facecamFilterInvert": "عكس الألوان",
-  "facecamFilterCool": "بارد"
+  "facecamFilterCool": "بارد",
+  "subtitleFont": "خط الترجمة",
+  "subtitleFontSans": "بدون حواف",
+  "subtitleFontSerif": "بحواف",
+  "subtitleFontMono": "أحادي المسافة",
+  "subtitleFontBold": "عريض",
+  "subtitleTextStyle": "نمط النص",
+  "subtitleTapToEdit": "اضغط على سطر لتعديل نصه وتوقيته.",
+  "subtitleNewLine": "سطر جديد",
+  "speechElapsed": "المنقضي {time}",
+  "speechRunInBackground": "التشغيل في الخلفية",
+  "speechContinuesInBackground": "تستمر معالجة الترجمة في الخلفية. افتح الترجمة مرة أخرى لمراجعتها.",
+  "previewUpdating": "جارٍ تحديث المعاينة…",
+  "editsSavedToDrafts": "تم حفظ التعديلات في المسودات",
+  "saveAndLeave": "حفظ ومغادرة",
+  "photoSaved": "تم حفظ الصورة"
 }

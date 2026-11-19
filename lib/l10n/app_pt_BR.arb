@@ -854,5 +854,20 @@
   "fillScreen": "Preencher a tela",
   "fitToScreen": "Ajustar à tela",
   "facecamFilterInvert": "Inverter",
-  "facecamFilterCool": "Frio"
+  "facecamFilterCool": "Frio",
+  "subtitleFont": "Fonte da legenda",
+  "subtitleFontSans": "Sem serifa",
+  "subtitleFontSerif": "Com serifa",
+  "subtitleFontMono": "Monoespaçada",
+  "subtitleFontBold": "Negrito",
+  "subtitleTextStyle": "Estilo do texto",
+  "subtitleTapToEdit": "Toque em uma linha para editar o texto e o tempo.",
+  "subtitleNewLine": "Nova linha",
+  "speechElapsed": "Decorrido {time}",
+  "speechRunInBackground": "Executar em segundo plano",
+  "speechContinuesInBackground": "As legendas continuam sendo processadas em segundo plano. Abra Legendas novamente para revisá-las.",
+  "previewUpdating": "Atualizando prévia…",
+  "editsSavedToDrafts": "Edições salvas em Rascunhos",
+  "saveAndLeave": "Salvar e sair",
+  "photoSaved": "Foto salva"
 }

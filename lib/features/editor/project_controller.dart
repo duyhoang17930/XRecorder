@@ -16,6 +16,9 @@ class ProjectController extends ChangeNotifier {
   bool _disposed = false;
   String? saveError;
   bool saving = false;
+
+  /// Whether this session changed the draft (drives the "saved" notice on exit).
+  bool edited = false;
   bool get canUndo => _undo.isNotEmpty;
   bool get canRedo => _redo.isNotEmpty;
   void _notify() {
@@ -24,6 +27,7 @@ class ProjectController extends ChangeNotifier {
 
   void _save() {
     _queued = project;
+    edited = true;
     saving = true;
     saveError = null;
     if (!_draining) {

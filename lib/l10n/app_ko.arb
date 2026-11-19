@@ -854,5 +854,20 @@
   "fillScreen": "화면 채우기",
   "fitToScreen": "화면에 맞추기",
   "facecamFilterInvert": "색 반전",
-  "facecamFilterCool": "차갑게"
+  "facecamFilterCool": "차갑게",
+  "subtitleFont": "자막 글꼴",
+  "subtitleFontSans": "산세리프",
+  "subtitleFontSerif": "세리프",
+  "subtitleFontMono": "고정폭",
+  "subtitleFontBold": "굵게",
+  "subtitleTextStyle": "텍스트 스타일",
+  "subtitleTapToEdit": "줄을 탭하여 텍스트와 시간을 편집하세요.",
+  "subtitleNewLine": "새 줄",
+  "speechElapsed": "경과 {time}",
+  "speechRunInBackground": "백그라운드에서 실행",
+  "speechContinuesInBackground": "자막이 백그라운드에서 계속 처리됩니다. 자막을 다시 열어 확인하세요.",
+  "previewUpdating": "미리보기 업데이트 중…",
+  "editsSavedToDrafts": "편집 내용이 임시 저장함에 저장됨",
+  "saveAndLeave": "저장하고 나가기",
+  "photoSaved": "사진 저장됨"
 }

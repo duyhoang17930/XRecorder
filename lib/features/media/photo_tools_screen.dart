@@ -291,27 +291,37 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
     if (leaving || saving) return;
     leaving = true;
     try {
-      final discard =
-          !(dirty || turns != 0 || flipH || flipV) ||
-          await showStudioDialog<bool>(
-                context: context,
-                builder: (dialog) => StudioDialog(
-                  title: Text(dialog.l10n.discardPhotoEdits),
-                  content: Text(dialog.l10n.yourOriginalPhotoIsUnchangedSaveA),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(dialog, false),
-                      child: Text(dialog.l10n.keepEditing),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(dialog, true),
-                      child: Text(dialog.l10n.discardEdits),
-                    ),
-                  ],
-                ),
-              ) ==
-              true;
-      if (!mounted || !discard) return;
+      final choice = !(dirty || turns != 0 || flipH || flipV)
+          ? 'discard'
+          : await showStudioDialog<String>(
+              context: context,
+              builder: (dialog) => StudioDialog(
+                title: Text(dialog.l10n.discardPhotoEdits),
+                content: Text(dialog.l10n.yourOriginalPhotoIsUnchangedSaveA),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(dialog, 'keep'),
+                    child: Text(dialog.l10n.keepEditing),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pop(dialog, 'discard'),
+                    child: Text(dialog.l10n.discardEdits),
+                  ),
+                  FilledButton(
+                    onPressed: () => Navigator.pop(dialog, 'save'),
+                    child: Text(dialog.l10n.saveAndLeave),
+                  ),
+                ],
+              ),
+            );
+      if (!mounted) return;
+      if (choice == 'save') {
+        // Saving opens the new copy in place of this editor.
+        leaving = false;
+        await save();
+        return;
+      }
+      if (choice != 'discard') return;
       setState(() => allowLeave = true);
       await WidgetsBinding.instance.endOfFrame;
       if (mounted) {
@@ -509,6 +519,7 @@ class _PhotoToolsScreenState extends State<PhotoToolsScreen> {
       if (uri == null) throw StateError('No image was saved');
       if (mounted) {
         setState(() => allowLeave = true);
+        showNotice(context, context.l10n.photoSaved, kind: NoticeKind.success);
         MediaScope.of(context).refresh();
         context.pushReplacement('/media/${Uri.encodeComponent(uri)}');
       }

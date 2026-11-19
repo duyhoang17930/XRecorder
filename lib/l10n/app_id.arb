@@ -854,5 +854,20 @@
   "fillScreen": "Penuhi layar",
   "fitToScreen": "Sesuaikan layar",
   "facecamFilterInvert": "Balik warna",
-  "facecamFilterCool": "Sejuk"
+  "facecamFilterCool": "Sejuk",
+  "subtitleFont": "Font subtitle",
+  "subtitleFontSans": "Sans serif",
+  "subtitleFontSerif": "Serif",
+  "subtitleFontMono": "Monospace",
+  "subtitleFontBold": "Tebal",
+  "subtitleTextStyle": "Gaya teks",
+  "subtitleTapToEdit": "Ketuk baris untuk mengedit teks dan waktunya.",
+  "subtitleNewLine": "Baris baru",
+  "speechElapsed": "Berjalan {time}",
+  "speechRunInBackground": "Jalankan di latar belakang",
+  "speechContinuesInBackground": "Subtitle terus diproses di latar belakang. Buka Subtitle lagi untuk meninjaunya.",
+  "previewUpdating": "Memperbarui pratinjau…",
+  "editsSavedToDrafts": "Editan disimpan ke Draf",
+  "saveAndLeave": "Simpan dan keluar",
+  "photoSaved": "Foto disimpan"
 }

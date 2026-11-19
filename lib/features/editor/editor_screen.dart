@@ -36,7 +36,37 @@ class _EditorScreenState extends State<EditorScreen> {
   final timelineScroll = ScrollController();
   String? panel;
   bool exporting = false, pickingMedia = false;
-  bool leaving = false, allowLeave = false;
+  bool leaving = false, allowLeave = false, _savedNoticeShown = false;
+
+  /// Dialog-based tool currently open, so its button stays lit meanwhile.
+  String? openTool;
+
+  /// Tell people their edits were kept; the editor saves drafts silently.
+  void notifySaved() {
+    final model = controller;
+    if (_savedNoticeShown ||
+        model == null ||
+        !model.edited ||
+        model.saveError != null) {
+      return;
+    }
+    _savedNoticeShown = true;
+    showNotice(
+      context,
+      context.l10n.editsSavedToDrafts,
+      kind: NoticeKind.success,
+    );
+  }
+
+  Future<T?> withTool<T>(String tool, Future<T?> Function() open) async {
+    setState(() => openTool = tool);
+    try {
+      return await open();
+    } finally {
+      if (mounted) setState(() => openTool = null);
+    }
+  }
+
   Future<void> leave() async {
     if (panel != null) {
       setState(() => panel = null);
@@ -73,6 +103,7 @@ class _EditorScreenState extends State<EditorScreen> {
       setState(() => allowLeave = true);
       await WidgetsBinding.instance.endOfFrame;
       if (mounted) {
+        notifySaved();
         if (context.canPop()) {
           context.pop();
         } else {
@@ -240,15 +271,20 @@ class _EditorScreenState extends State<EditorScreen> {
     }
   }
 
+  static const _sectionTools = ['effects', 'audio', 'style', 'text', 'quality'];
+
   Future<void> effects([int section = 0]) async {
     await preview.currentState?.command('pause');
     if (!mounted) return;
     final model = controller!;
-    final next = await editProjectEffects(
-      context,
-      model.project.effects,
-      durationMs: model.project.duration.inMilliseconds,
-      initialSection: section,
+    final next = await withTool(
+      _sectionTools[section],
+      () => editProjectEffects(
+        context,
+        model.project.effects,
+        durationMs: model.project.duration.inMilliseconds,
+        initialSection: section,
+      ),
     );
     if (next != null && mounted) {
       model.change(model.project.copyWith(effects: next));
@@ -260,18 +296,26 @@ class _EditorScreenState extends State<EditorScreen> {
       await preview.currentState?.command('pause');
       if (!mounted) return;
       final model = controller!;
-      final next = await editSubtitles(
-        context,
-        SubtitleTrack.decode(
-          model.project.effects['subtitles'],
-          model.project.duration.inMilliseconds,
+      final next = await withTool(
+        'subtitles',
+        () => editSubtitlesAndStyle(
+          context,
+          SubtitleTrack.decode(
+            model.project.effects['subtitles'],
+            model.project.duration.inMilliseconds,
+          ),
+          project: model.project,
+          style: subtitleStyleOf(model.project.effects),
         ),
-        project: model.project,
       );
       if (mounted && next != null) {
         model.change(
           model.project.copyWith(
-            effects: {...model.project.effects, 'subtitles': next.toJson()},
+            effects: {
+              ...model.project.effects,
+              ...next.style,
+              'subtitles': next.track.toJson(),
+            },
           ),
         );
       }
@@ -334,7 +378,11 @@ class _EditorScreenState extends State<EditorScreen> {
               panel == null &&
               (allowLeave || (!model.saving && model.saveError == null)),
           onPopInvokedWithResult: (didPop, _) {
-            if (!didPop) leave();
+            if (didPop) {
+              notifySaved();
+            } else {
+              leave();
+            }
           },
           child: Scaffold(
             appBar: AppBar(
@@ -508,21 +556,25 @@ class _EditorScreenState extends State<EditorScreen> {
                   EditorTool(
                     label: context.l10n.editorAudio,
                     icon: AppIcons.microphone,
+                    selected: openTool == 'audio',
                     onPressed: () => effects(1),
                   ),
                   EditorTool(
                     label: context.message('Text'),
                     icon: AppIcons.text,
+                    selected: openTool == 'text',
                     onPressed: () => effects(3),
                   ),
                   EditorTool(
                     label: context.l10n.subtitles,
                     icon: AppIcons.captions,
+                    selected: openTool == 'subtitles',
                     onPressed: project.clips.isEmpty ? null : subtitles,
                   ),
                   EditorTool(
                     label: context.l10n.effects,
                     icon: AppIcons.edit,
+                    selected: openTool == 'effects',
                     onPressed: () => effects(),
                   ),
                   EditorTool(
@@ -536,6 +588,7 @@ class _EditorScreenState extends State<EditorScreen> {
                   EditorTool(
                     label: context.l10n.editorExportQuality,
                     icon: AppIcons.settings,
+                    selected: openTool == 'quality',
                     onPressed: () => effects(4),
                   ),
                 ],

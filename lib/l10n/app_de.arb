@@ -854,5 +854,20 @@
   "fillScreen": "Bildschirm füllen",
   "fitToScreen": "An Bildschirm anpassen",
   "facecamFilterInvert": "Invertieren",
-  "facecamFilterCool": "Kühl"
+  "facecamFilterCool": "Kühl",
+  "subtitleFont": "Untertitel-Schriftart",
+  "subtitleFontSans": "Serifenlos",
+  "subtitleFontSerif": "Serif",
+  "subtitleFontMono": "Monospace",
+  "subtitleFontBold": "Fett",
+  "subtitleTextStyle": "Textstil",
+  "subtitleTapToEdit": "Tippe auf eine Zeile, um Text und Zeit zu bearbeiten.",
+  "subtitleNewLine": "Neue Zeile",
+  "speechElapsed": "Vergangen {time}",
+  "speechRunInBackground": "Im Hintergrund ausführen",
+  "speechContinuesInBackground": "Untertitel werden im Hintergrund weiter verarbeitet. Öffne Untertitel erneut, um sie zu prüfen.",
+  "previewUpdating": "Vorschau wird aktualisiert…",
+  "editsSavedToDrafts": "Änderungen in Entwürfen gespeichert",
+  "saveAndLeave": "Speichern und verlassen",
+  "photoSaved": "Foto gespeichert"
 }

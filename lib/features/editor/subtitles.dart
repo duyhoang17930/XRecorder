@@ -1,5 +1,30 @@
 import 'package:characters/characters.dart';
 
+/// Burn-in style choices. Must match the values `SubtitleOverlay.kt` accepts.
+const subtitleStyleOptions = <String, List<String>>{
+  'subtitleColor': ['white', 'yellow', 'red', 'green', 'cyan', 'blue', 'black'],
+  'subtitleSize': ['small', 'normal', 'large'],
+  'subtitleFont': ['sans', 'serif', 'mono', 'bold'],
+  'subtitleBackground': ['dark', 'light', 'none'],
+  'subtitlePosition': ['bottom', 'top'],
+};
+
+const subtitleStyleDefaults = <String, Object>{
+  'subtitleColor': 'white',
+  'subtitleSize': 'normal',
+  'subtitleFont': 'sans',
+  'subtitleBackground': 'dark',
+  'subtitlePosition': 'bottom',
+};
+
+/// The style keys of [effects], with defaults for missing or unknown values.
+Map<String, Object> subtitleStyleOf(Map<String, Object> effects) => {
+  for (final entry in subtitleStyleDefaults.entries)
+    entry.key: subtitleStyleOptions[entry.key]!.contains(effects[entry.key])
+        ? effects[entry.key]!
+        : entry.value,
+};
+
 class SubtitleCue {
   SubtitleCue({
     required this.startMs,
