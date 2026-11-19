@@ -413,6 +413,12 @@ class CaptureService : Service() {
         if (spec.alertOnce) {
             builder.setOnlyAlertOnce(true)
         }
+        if (!CaptureState.screenshot && CaptureState.state in listOf("stopping", "finalizing")) {
+            val progress = CaptureState.saveProgress
+            val percent = (progress * 100).toInt()
+            builder.setProgress(100, percent.coerceAtLeast(0), progress < 0)
+            if (progress >= 0) builder.setSubText("$percent%")
+        }
         for (action in spec.actions) {
             val pendingIntent = PendingIntent.getService(
                 this,
@@ -549,6 +555,7 @@ class CaptureService : Service() {
             release(); cleanupPartial(); CaptureState.transition("idle"); stopForeground(STOP_FOREGROUND_REMOVE); stopSelf(); return
         }
         if (CaptureState.state == "recording") CaptureState.elapsed += SystemClock.elapsedRealtime() - CaptureState.activeStart
+        CaptureState.saveProgress = -1.0
         CaptureState.transition("stopping")
         updateControls()
         getSystemService(NotificationManager::class.java).notify(NOTIFICATION, notification(false))
@@ -573,9 +580,14 @@ class CaptureService : Service() {
                     val audioOffsetUs = (input.startTimeNs-videoStartNs)/1000
                     CaptureJournal.finalizedStreams(durationUs, audioOffsetUs)
                     descriptor?.close(); descriptor = output!!.open()
-                    RecordingMuxer.combine(videoFile!!,audioFile!!,output!!,descriptor!!,audioOffsetUs,durationUs)
+                    reportSaveProgress(0.0)
+                    // Writing the combined file dominates save time; map it to 0..95%.
+                    RecordingMuxer.combine(videoFile!!,audioFile!!,output!!,descriptor!!,audioOffsetUs,durationUs) {
+                        reportSaveProgress(it * .95)
+                    }
                     audio = null
                 }
+                reportSaveProgress(.97)
                 val metadata = MediaMetadataRetriever()
                 try {
                     metadata.setDataSource(descriptor!!.fileDescriptor)
@@ -594,6 +606,7 @@ class CaptureService : Service() {
                         format.getInteger(MediaFormat.KEY_WIDTH) == config.width &&
                         format.getInteger(MediaFormat.KEY_HEIGHT) == config.height) { "Output does not match the recording configuration" }
                 } finally { tracks.release() }
+                reportSaveProgress(.99)
                 saved = output!!.commit().toString()
             } catch (_: Exception) {
                 runCatching { region?.close() }
@@ -615,6 +628,16 @@ class CaptureService : Service() {
                 stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
             }
         },"recording-finalizer").start()
+    }
+    /** Called from the finalizer thread; Flutter events and notifications go via main. */
+    private fun reportSaveProgress(value: Double) {
+        CaptureState.saveProgress = value.coerceIn(0.0, 1.0)
+        handler.post {
+            if (CaptureState.state != "finalizing") return@post
+            CaptureState.emit()
+            updateControls()
+            getSystemService(NotificationManager::class.java).notify(NOTIFICATION, notification(false))
+        }
     }
     private fun retainPartial() {
         output?.retain()

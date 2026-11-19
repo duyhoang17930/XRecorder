@@ -10,7 +10,16 @@ import java.io.File
 import java.nio.ByteBuffer
 
 object RecordingMuxer {
-    fun combine(video: File, audio: File, output: MediaOutput, descriptor: ParcelFileDescriptor, audioOffsetUs: Long, durationUs: Long) {
+    /**
+     * Rewrites every encoded sample of both streams into the published MP4, so
+     * the time this takes grows with the recording length (a 30-minute capture
+     * is a multi-GB copy). [onProgress] receives 0..1 in whole-percent steps.
+     */
+    fun combine(
+        video: File, audio: File, output: MediaOutput, descriptor: ParcelFileDescriptor,
+        audioOffsetUs: Long, durationUs: Long, onProgress: ((Double) -> Unit)? = null,
+    ) {
+        var reportedPercent = -1
         val videoReader = MediaExtractor(); val audioReader = MediaExtractor()
         var muxer: MediaMuxer? = null; var muxing = false
         try {
@@ -47,6 +56,11 @@ object RecordingMuxer {
                 info.set(0,count,pts,reader.sampleFlags and MediaCodec.BUFFER_FLAG_KEY_FRAME)
                 writer.writeSampleData(if (isVideo) vTrack else aTrack,data,info)
                 if (isVideo) lastVideo=pts else lastAudio=pts
+                if (onProgress != null && durationUs > 0) {
+                    // Samples are interleaved in time order, so pts tracks progress.
+                    val percent = (pts * 100 / durationUs).toInt().coerceIn(0, 100)
+                    if (percent != reportedPercent) { reportedPercent = percent; onProgress(percent / 100.0) }
+                }
                 reader.advance()
             }
             require(lastVideo >= 0 && lastAudio >= 0) { "An audio/video track is empty" }

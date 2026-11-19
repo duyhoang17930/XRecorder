@@ -321,7 +321,12 @@ internal class FloatingRecordingControls(
         }
         val active = overlayState.isInteractive
         val paused = overlayState.isPaused
-        val timerText = if (active) compactTime(elapsedMs) else ""
+        val saving = CaptureState.saveProgress
+        val timerText = when {
+            active -> compactTime(elapsedMs)
+            value in listOf("stopping", "finalizing") && saving >= 0 -> "${(saving * 100).toInt()}%"
+            else -> ""
+        }
         if (timer.text.toString() != timerText) timer.text = timerText
         val accessibleStatus = when {
             paused -> "Paused"

@@ -49,9 +49,39 @@ void main() {
         expect(service.resumeCalls, 1);
         expect(find.text('Recording'), findsOneWidget);
         await tester.tap(find.byTooltip('Stop'));
-        await tester.pumpAndSettle();
+        // Saving shows an animated progress bar, so frames never settle here.
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 300));
         expect(service.stopCalls, 1);
         expect(find.text('Processing'), findsOneWidget);
+        expect(
+          tester
+              .widget<LinearProgressIndicator>(
+                find.byType(LinearProgressIndicator),
+              )
+              .value,
+          isNull,
+        );
+        // Native snapshots and events both carry the latest save progress.
+        service.current = RecordingSession(
+          id: 'test',
+          state: RecordingState.finalizing,
+          configSnapshot: const RecordingSettings(),
+          elapsedActive: Duration.zero,
+          saveProgress: .42,
+        );
+        service.events.add(service.current!);
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 300));
+        expect(find.text('42%'), findsOneWidget);
+        expect(
+          tester
+              .widget<LinearProgressIndicator>(
+                find.byType(LinearProgressIndicator),
+              )
+              .value,
+          .42,
+        );
         service.events.add(
           service.make(
             RecordingState.completed,

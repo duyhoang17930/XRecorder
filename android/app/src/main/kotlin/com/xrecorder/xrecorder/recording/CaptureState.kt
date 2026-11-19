@@ -19,11 +19,14 @@ object CaptureState : EventChannel.StreamHandler {
     var countdownRemaining = 0
     var width = 0
     var height = 0
+    /** 0..1 while the finished streams are written to the gallery; -1 when unknown. */
+    @Volatile var saveProgress = -1.0
     val elapsedActiveMs: Long get() = FloatingControlGeometry.elapsedMs(state, elapsed, activeStart, SystemClock.elapsedRealtime())
     val busy: Boolean get() = state in setOf("awaitingPermission", "countdown", "starting", "recording", "paused", "stopping", "finalizing")
     fun snapshot(): Map<String, Any?> = mapOf("id" to id, "state" to state, "startedAt" to startedAt,
         "elapsedMs" to elapsedActiveMs,
         "outputUri" to output, "error" to error, "screenshot" to screenshot, "width" to width, "height" to height, "fps" to config.fps, "bitrate" to config.bitrate, "config" to config.map(), "countdownRemaining" to countdownRemaining,
+        "saveProgress" to saveProgress,
         "live" to com.xrecorder.xrecorder.live.LiveCaptureState.snapshotFor(id, config.liveRequested, state))
     @JvmOverloads fun prepare(settings: CaptureConfig, isScreenshot: Boolean = screenshot) =
         prepareInternal(settings, isScreenshot, null)
@@ -34,7 +37,7 @@ object CaptureState : EventChannel.StreamHandler {
         CaptureJournal.beforeNewSession()
         config = settings; screenshot = isScreenshot; width = settings.width; height = settings.height
         countdownRemaining = settings.countdown; id = UUID.randomUUID().toString()
-        elapsed = 0; startedAt = 0; output = null; error = null
+        elapsed = 0; startedAt = 0; output = null; error = null; saveProgress = -1.0
         com.xrecorder.xrecorder.live.LiveCaptureState.prepare(id, liveEndpoint)
         transition("awaitingPermission")
     }

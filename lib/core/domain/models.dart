@@ -126,9 +126,13 @@ class RecordingSession {
     this.error,
     this.countdownRemaining = Duration.zero,
     this.screenshot = false,
+    this.saveProgress,
   });
   final String id;
   final RecordingState state;
+
+  /// 0..1 while a stopped recording is written to the gallery; null if unknown.
+  final double? saveProgress;
   final RecordingSettings configSnapshot;
   final DateTime? startedAt;
   final Duration elapsedActive;

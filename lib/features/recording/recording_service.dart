@@ -92,6 +92,10 @@ class AndroidRecordingService
       countdownRemaining: Duration(
         seconds: (data['countdownRemaining'] as num?)?.toInt() ?? 0,
       ),
+      saveProgress: switch (data['saveProgress']) {
+        final num p when p >= 0 && p <= 1 => p.toDouble(),
+        _ => null,
+      },
       outputUri: data['outputUri'] is String
           ? Uri.parse(data['outputUri'] as String)
           : null,
@@ -451,6 +455,10 @@ class CaptureController extends ChangeNotifier with WidgetsBindingObserver {
       session?.screenshot,
       session?.elapsedActive.inSeconds,
       session?.countdownRemaining.inSeconds,
+      // Whole percent, matching the native throttle.
+      session?.saveProgress == null
+          ? null
+          : (session!.saveProgress! * 100).round(),
       busy,
       _commandInFlight,
       error,
@@ -880,6 +888,12 @@ class CaptureStatusBar extends StatelessWidget {
     final failure = controller.error ?? session.error?.message;
     final recording = session.state == RecordingState.recording;
     final hasTimer = canPause;
+    // Long recordings take a while to write out after Stop; show how far along.
+    final saving =
+        !session.screenshot &&
+        (session.state == RecordingState.stopping ||
+            session.state == RecordingState.finalizing);
+    final saveProgress = saving ? session.saveProgress : null;
     final statusColor =
         failure != null || session.state == RecordingState.failed
         ? context.studioColors.warning
@@ -986,6 +1000,13 @@ class CaptureStatusBar extends StatelessWidget {
                 '${session.elapsedActive.inSeconds} seconds elapsed',
           ),
         ],
+        if (saveProgress != null) ...[
+          const SizedBox(width: AppSpacing.xs),
+          Text(
+            '${(saveProgress * 100).round()}%',
+            style: AppTypography.timecode,
+          ),
+        ],
       ],
     );
     final controls = Row(
@@ -1081,6 +1102,21 @@ class CaptureStatusBar extends StatelessWidget {
                         Expanded(child: statusAndTime),
                         controls,
                       ],
+                    ),
+                  if (saving)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: AppSpacing.xxs,
+                        bottom: AppSpacing.xs,
+                      ),
+                      child: LinearProgressIndicator(
+                        value: saveProgress,
+                        minHeight: 6,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(3),
+                        ),
+                        semanticsLabel: context.message('Processing'),
+                      ),
                     ),
                   if (failureDetails case final Widget details) details,
                 ],
