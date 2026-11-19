@@ -14,17 +14,24 @@ import 'speech_language_dialog.dart';
 import 'transcription_presentation.dart';
 import '../settings/settings_controller.dart';
 
+/// [onRunInBackground] lets a caller that is itself a dialog explain the
+/// background job inline; a snackbar would be hidden beneath that dialog.
 Future<SubtitleTrack?> generateSubtitles(
   BuildContext context,
-  EditProject project,
-) => showStudioDialog(
+  EditProject project, {
+  VoidCallback? onRunInBackground,
+}) => showStudioDialog(
   context: context,
-  builder: (_) => _TranscriptionDialog(project: project),
+  builder: (_) => _TranscriptionDialog(
+    project: project,
+    onRunInBackground: onRunInBackground,
+  ),
 );
 
 class _TranscriptionDialog extends StatefulWidget {
-  const _TranscriptionDialog({required this.project});
+  const _TranscriptionDialog({required this.project, this.onRunInBackground});
   final EditProject project;
+  final VoidCallback? onRunInBackground;
   @override
   State<_TranscriptionDialog> createState() => _TranscriptionDialogState();
 }
@@ -372,7 +379,11 @@ class _TranscriptionDialogState extends State<_TranscriptionDialog> {
       canPop: !active || canRunInBackground,
       onPopInvokedWithResult: (didPop, _) {
         if (didPop && active) {
-          showNotice(context, context.l10n.speechContinuesInBackground);
+          if (widget.onRunInBackground case final VoidCallback notify) {
+            notify();
+          } else {
+            showNotice(context, context.l10n.speechContinuesInBackground);
+          }
         }
       },
       child: StudioDialog(

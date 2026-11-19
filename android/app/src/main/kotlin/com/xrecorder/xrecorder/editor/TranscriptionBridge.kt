@@ -46,6 +46,11 @@ class TranscriptionBridge(private val context: Context) {
         @Volatile var elapsedMs = 0L
         @Volatile var modelLoadMs = 0L
         @Volatile var inferenceMs = 0L
+        var durationMs = 0L
+        // Whisper reports progress once per 30 s audio window; remember when the
+        // last report changed so polling can ease toward the next window.
+        var lastNativeProgress = -1
+        var lastNativeAt = 0L
         var handle = 0L
         var transformer: Transformer? = null
         var temporary: File? = null
@@ -405,7 +410,7 @@ class TranscriptionBridge(private val context: Context) {
                             job.progress =
                                 maxOf(
                                     job.progress,
-                                    .25 + .74 * WhisperNative.progress(job.handle) / 100.0,
+                                    .25 + .74 * recognitionPercent(job, WhisperNative.progress(job.handle)) / 100.0,
                                 )
                         }
                     }
@@ -513,6 +518,7 @@ class TranscriptionBridge(private val context: Context) {
                     val uri = Uri.parse(value["audioUri"] as String)
                     require(uri.scheme == "content") { "Choose audio from the media picker." }
                     val job = Job(id, "speech", selected.id)
+                    job.durationMs = duration
                     job.language = language
                     job.allowUncertainSpeech = value["allowUncertainSpeech"] as? Boolean ?: false
                     val project = value["project"] as? Map<*, *>
@@ -749,6 +755,28 @@ class TranscriptionBridge(private val context: Context) {
                 completeAndPersist(job, "completed")
             } else persistOrWarn(job)
         }
+    }
+
+    /**
+     * Native progress only moves at each 30 s window, so a short clip would sit
+     * at 0 % until it finishes. Between reports, ease toward (never reach) the
+     * next window boundary so the bar keeps moving without overstating work.
+     * Called under the job lock.
+     */
+    private fun recognitionPercent(job: Job, native: Int): Double {
+        val now = System.currentTimeMillis()
+        if (native != job.lastNativeProgress) {
+            job.lastNativeProgress = native
+            job.lastNativeAt = now
+        }
+        if (job.phase != "recognizing on device" || native >= 100) return native.toDouble()
+        val windowPercent =
+            if (job.durationMs > 0) 30000.0 * 100 / job.durationMs else 100.0
+        val next = minOf(100.0, native + windowPercent)
+        val waited = (now - job.lastNativeAt).coerceAtLeast(0)
+        // ~63 % of the way after 8 s, capped at 90 % of the gap.
+        val eased = .9 * (1 - kotlin.math.exp(-waited / 8000.0))
+        return native + (next - native) * eased
     }
 
     /** Called under the job lock, before releasing the native handle. */

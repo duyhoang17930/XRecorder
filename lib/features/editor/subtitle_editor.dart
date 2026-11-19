@@ -79,6 +79,9 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
   final textFocus = FocusNode();
   int? selected;
   String? error;
+
+  /// Recognition was sent to the background from this dialog.
+  bool recognizingInBackground = false;
   @override
   void dispose() {
     text.dispose();
@@ -430,25 +433,67 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
             FilledButton.tonalIcon(
               icon: const Icon(AppIcons.captions, size: AppIconSize.medium),
               onPressed: () async {
+                setState(() => recognizingInBackground = false);
                 final generated = await generateSubtitles(
                   context,
                   widget.project!,
+                  onRunInBackground: () {
+                    if (mounted) {
+                      setState(() => recognizingInBackground = true);
+                    }
+                  },
                 );
                 if (mounted && generated != null) {
                   setState(() {
                     cues = generated.cues.toList();
                     selected = null;
+                    recognizingInBackground = false;
                   });
                 }
               },
               label: Text(context.l10n.generateOfflineSubtitles),
             ),
-          if (cues.isNotEmpty) ...[
-            Text(
-              context.l10n.subtitleTapToEdit,
-              style: AppTypography.bodySmall.copyWith(
-                color: context.studioColors.muted,
+          if (recognizingInBackground)
+            Semantics(
+              liveRegion: true,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: AppSpacing.xs,
+                children: [
+                  Icon(
+                    AppIcons.processing,
+                    size: AppIconSize.small,
+                    color: context.studioColors.primary,
+                  ),
+                  Expanded(
+                    child: Text(
+                      context.l10n.speechContinuesInBackground,
+                      style: AppTypography.bodySmall.copyWith(
+                        color: context.studioColors.text,
+                      ),
+                    ),
+                  ),
+                ],
               ),
+            ),
+          if (cues.isNotEmpty) ...[
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    context.l10n.subtitleTapToEdit,
+                    style: AppTypography.bodySmall.copyWith(
+                      color: context.studioColors.muted,
+                    ),
+                  ),
+                ),
+                if (selected != null)
+                  TextButton.icon(
+                    onPressed: newLine,
+                    icon: const Icon(AppIcons.create, size: AppIconSize.small),
+                    label: Text(context.l10n.subtitleNewLine),
+                  ),
+              ],
             ),
             _cueList(context),
           ],
@@ -495,27 +540,15 @@ class _SubtitleEditorState extends State<_SubtitleEditor> {
               context.message(error!),
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
-          Row(
-            spacing: AppSpacing.xs,
-            children: [
-              Expanded(
-                child: FilledButton.tonal(
-                  onPressed: commitCue,
-                  child: Text(
-                    selected == null
-                        ? context.l10n.addSubtitle
-                        : context.l10n.updateSubtitle,
-                  ),
-                ),
-              ),
-              if (selected != null)
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: newLine,
-                    child: Text(context.l10n.subtitleNewLine),
-                  ),
-                ),
-            ],
+          // Full width: "Update subtitle" wraps in a half-width button at
+          // larger system font sizes.
+          FilledButton.tonal(
+            onPressed: commitCue,
+            child: Text(
+              selected == null
+                  ? context.l10n.addSubtitle
+                  : context.l10n.updateSubtitle,
+            ),
           ),
           if (selected != null)
             Row(
