@@ -213,7 +213,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 borderRadius: BorderRadius.circular(AppRadius.feature),
                 child: ColoredBox(
                   color: context.studioColors.elevated,
-                  child: MediaThumbnail(item: item),
+                  child: MediaThumbnail(item: item, large: true),
                 ),
               ),
             ),

@@ -29,6 +29,13 @@ abstract final class AppTheme {
           // Material's chip defaults colour a selected chip's icon with this;
           // it must read on the solid primary selected pill.
           onSecondaryContainer: c.primaryForeground,
+          // Tonal buttons and selected segments paint onSecondaryContainer on
+          // this. The seed's dark container put near-black text on dark brown,
+          // so enabled tonal buttons looked disabled. A softer brand tint keeps
+          // them distinct from solid filled buttons and clearly tappable.
+          secondaryContainer: brightness == Brightness.dark
+              ? Color.lerp(c.primary, Colors.white, .35)
+              : Color.lerp(c.primary, Colors.black, .08),
           surface: c.surface,
           onSurface: c.text,
           onSurfaceVariant: c.muted,

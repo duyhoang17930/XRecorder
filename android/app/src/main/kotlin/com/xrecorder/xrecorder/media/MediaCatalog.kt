@@ -452,7 +452,16 @@ class MediaCatalog(private val activity: Activity) :
                                 call.argument<String>("folder"),
                             )
                         "find" -> describe(Uri.parse(call.argument<String>("id") ?: ""))
-                        "thumbnail" -> thumbnail(Uri.parse(call.argument<String>("uri") ?: ""))
+                        "thumbnail" -> {
+                            // Detail heroes span the screen; grid tiles keep 320x240.
+                            val edge = call.argument<Number>("maxEdge")?.toInt()
+                            require(edge == null || edge in 320..1600) { "Invalid thumbnail size" }
+                            thumbnail(
+                                Uri.parse(call.argument<String>("uri") ?: ""),
+                                width = edge ?: 320,
+                                height = edge ?: 240,
+                            )
+                        }
                         "thumbnailAt" ->
                             thumbnail(
                                 Uri.parse(call.argument<String>("uri") ?: ""),
@@ -984,7 +993,13 @@ class MediaCatalog(private val activity: Activity) :
         return fields
     }
 
-    private fun thumbnail(uri: Uri, timeUs: Long? = null): ByteArray {
+    private fun thumbnail(
+        uri: Uri,
+        timeUs: Long? = null,
+        width: Int = 320,
+        height: Int = 240,
+    ): ByteArray {
+        val large = width > 320
         checkUri(uri)
         val mime = resolver.getType(uri) ?: throw java.io.FileNotFoundException()
         var bitmap: Bitmap? = null
@@ -993,7 +1008,7 @@ class MediaCatalog(private val activity: Activity) :
         // matches the image preview.
         if (mime != "image/gif" && Build.VERSION.SDK_INT >= 29 && timeUs == null) {
             try {
-                bitmap = resolver.loadThumbnail(uri, Size(320, 240), null)
+                bitmap = resolver.loadThumbnail(uri, Size(width, height), null)
             } catch (_: java.io.IOException) {}
         }
         if (bitmap == null) {
@@ -1006,7 +1021,7 @@ class MediaCatalog(private val activity: Activity) :
                         else MediaMetadataRetriever.OPTION_CLOSEST
                     bitmap =
                         if (Build.VERSION.SDK_INT >= 27)
-                            retriever.getScaledFrameAtTime(timeUs ?: 0, option, 320, 240)
+                            retriever.getScaledFrameAtTime(timeUs ?: 0, option, width, height)
                         else retriever.getFrameAtTime(timeUs ?: 0, option)
                 } finally {
                     retriever.release()
@@ -1015,9 +1030,10 @@ class MediaCatalog(private val activity: Activity) :
                 val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
                 resolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, options) }
                 options.inSampleSize = 1
+                val limit = maxOf(640, width * 2)
                 while (
-                    options.outWidth / options.inSampleSize > 640 ||
-                        options.outHeight / options.inSampleSize > 640
+                    options.outWidth / options.inSampleSize > limit ||
+                        options.outHeight / options.inSampleSize > limit
                 ) options.inSampleSize *= 2
                 options.inJustDecodeBounds = false
                 bitmap =
@@ -1027,7 +1043,8 @@ class MediaCatalog(private val activity: Activity) :
             }
         }
         val decoded = bitmap ?: throw java.io.IOException()
-        val ratio = minOf(1.0, 320.0 / decoded.width, 240.0 / decoded.height)
+        val ratio =
+            minOf(1.0, width.toDouble() / decoded.width, height.toDouble() / decoded.height)
         val scaled =
             Bitmap.createScaledBitmap(
                 decoded,
@@ -1037,7 +1054,7 @@ class MediaCatalog(private val activity: Activity) :
             )
         try {
             return ByteArrayOutputStream().use { out ->
-                scaled.compress(Bitmap.CompressFormat.JPEG, 80, out)
+                scaled.compress(Bitmap.CompressFormat.JPEG, if (large) 88 else 80, out)
                 out.toByteArray()
             }
         } finally {

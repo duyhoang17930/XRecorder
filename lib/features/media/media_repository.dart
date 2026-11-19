@@ -140,6 +140,14 @@ class AndroidMediaRepository
   Future<Uint8List> thumbnail(Uri uri) async =>
       await _call<Uint8List>('thumbnail', {'uri': uri.toString()}) ??
       Uint8List(0);
+
+  /// Screen-width still for detail pages; grid thumbnails stay 320x240.
+  Future<Uint8List> poster(Uri uri) async =>
+      await _call<Uint8List>('thumbnail', {
+        'uri': uri.toString(),
+        'maxEdge': 1280,
+      }) ??
+      Uint8List(0);
   @override
   Future<Map<String, int>> storage() async =>
       (await _call<Map<Object?, Object?>>('storage') ?? {}).map(
@@ -180,13 +188,21 @@ class MediaScope extends InheritedWidget {
   final ThumbnailCache? thumbnails;
   static Object thumbnailKey(MediaItem item) =>
       (item.uri, item.modifiedAt, item.sizeBytes, item.revision);
-  static Future<Uint8List> thumbnail(BuildContext context, MediaItem item) {
+  static Future<Uint8List> thumbnail(
+    BuildContext context,
+    MediaItem item, {
+    bool large = false,
+  }) {
     final scope = context.dependOnInheritedWidgetOfExactType<MediaScope>()!;
-    return scope.thumbnails?.load(
-          thumbnailKey(item),
-          () => scope.repository.thumbnail(item.uri),
-        ) ??
-        scope.repository.thumbnail(item.uri);
+    final repository = scope.repository;
+    // Only the native catalog can render a larger still; other catalogs
+    // (tests, fixtures) serve their regular thumbnail.
+    final poster = large && repository is AndroidMediaRepository;
+    Future<Uint8List> read() => poster
+        ? repository.poster(item.uri)
+        : repository.thumbnail(item.uri);
+    final key = poster ? ('poster', thumbnailKey(item)) : thumbnailKey(item);
+    return scope.thumbnails?.load(key, read) ?? read();
   }
 
   static CatalogRepository of(BuildContext context) =>

@@ -921,8 +921,11 @@ class _MediaSortOption extends StatelessWidget {
 }
 
 class MediaThumbnail extends StatefulWidget {
-  const MediaThumbnail({super.key, required this.item});
+  const MediaThumbnail({super.key, required this.item, this.large = false});
   final MediaItem item;
+
+  /// Full-width heroes (media details) need a sharper still than grid tiles.
+  final bool large;
   @override
   State<MediaThumbnail> createState() => _MediaThumbnailState();
 }
@@ -931,7 +934,11 @@ class _MediaThumbnailState extends State<MediaThumbnail> {
   Future<ThumbnailImage>? _image;
   CatalogRepository? _repository;
   Future<ThumbnailImage> _loadImage() =>
-      MediaScope.thumbnail(context, widget.item).then(ThumbnailImage.new);
+      MediaScope.thumbnail(
+        context,
+        widget.item,
+        large: widget.large,
+      ).then(ThumbnailImage.new);
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -967,13 +974,16 @@ class _MediaThumbnailState extends State<MediaThumbnail> {
           final ratio = MediaQuery.devicePixelRatioOf(context);
           final compact = constraints.maxWidth <= AppSize.thumbnailWidth;
           final scale = compact && ratio > 2 ? 2.0 : ratio;
+          final cap = widget.large ? 1280 : 320;
           final width = constraints.maxWidth.isFinite
-              ? (constraints.maxWidth * scale).ceil().clamp(1, 320)
-              : 320;
+              ? (constraints.maxWidth * scale).ceil().clamp(1, cap)
+              : cap;
           return Image(
             image: ResizeImage.resizeIfNeeded(width, null, snapshot.data!),
             fit: BoxFit.cover,
-            filterQuality: FilterQuality.low,
+            filterQuality: widget.large
+                ? FilterQuality.medium
+                : FilterQuality.low,
             gaplessPlayback: true,
             errorBuilder: (_, _, _) => const Icon(AppIcons.imageUnavailable),
           );
